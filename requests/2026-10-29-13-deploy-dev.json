@@ -1,0 +1,7 @@
+{
+ "id": "2026-10-29-13-deploy-dev",
+ "kind": "bundle_deploy",
+ "target": "dev",
+ "params": {"stop_on_failure": false},
+ "note": "Deploy the approved day 40 contract change (contracts/approved_changes.yaml), which the pipeline reads from the synced files."
+}

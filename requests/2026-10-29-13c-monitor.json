@@ -1,0 +1,8 @@
+{
+ "id": "2026-10-29-13c-monitor",
+ "kind": "bundle_run",
+ "target": "dev",
+ "job": "monitor",
+ "params": {"export_from": "/Volumes/workspace/friction_dev_raw/exports/monitor", "stop_on_failure": false},
+ "note": "The monitor after the replay: the alerts on drop 387 must be gone. The drift of mcc_fraud_rate is expected to remain."
+}
