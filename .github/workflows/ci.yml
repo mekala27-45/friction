@@ -1,0 +1,94 @@
+# Every push: lint, types, tests (Spark through a local Spark Connect session), the portable
+# pipeline over the fixture slice, the gates, and the workspace checks (bundle validate and
+# Terraform plan, which read the workspace secrets and never write).
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      FRICTION_ALLOW_TEST_SALT: "1"
+      PYTHONHASHSEED: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: uv sync --frozen --extra spark
+      - name: Lint
+        run: |
+          uv run ruff check .
+          uv run ruff format --check .
+      - name: Types
+        run: uv run mypy
+      - name: Tests with coverage
+        run: uv run pytest --cov --cov-report=term -p no:warnings
+      - name: The portable pipeline over the fixture slice
+        run: |
+          uv run python scripts/run_portable.py --landing data/fixtures/landing --out data/lake/fixture
+          uv run python scripts/run_features.py --lake data/lake/fixture
+      - name: Gates
+        run: |
+          uv run python scripts/check_no_em_dash.py
+          uv run python scripts/check_vocabulary.py
+          uv run python scripts/check_statement.py
+          uv run python scripts/check_tokens.py
+          uv run python scripts/check_registration.py
+          uv run python scripts/check_contracts.py
+          uv run python scripts/scan_for_planted_identifiers.py
+          node scripts/validate_palette.js --config web/src/theme/palette.json
+      - name: Claim gate
+        if: hashFiles('results/manifest.json') != ''
+        run: uv run python scripts/check_published_numbers.py
+
+  workspace-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+      DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+      PG_CONN_STR: ${{ secrets.TF_STATE_CONN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: databricks/setup-cli@main
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+      - name: Terraform fmt and validate
+        working-directory: infra/terraform
+        run: |
+          terraform fmt -check -recursive
+          terraform init -backend=false -input=false
+          terraform validate
+      - name: Bundle validate
+        if: env.DATABRICKS_TOKEN != ''
+        run: databricks bundle validate -t dev
+      - name: Terraform plan
+        if: env.DATABRICKS_TOKEN != '' && env.PG_CONN_STR != ''
+        working-directory: infra/terraform
+        run: |
+          terraform init -input=false -reconfigure
+          terraform plan -input=false -no-color -var-file=env/dev.tfvars -lock=false | tee plan.txt
+      - uses: actions/upload-artifact@v4
+        if: always() && hashFiles('infra/terraform/plan.txt') != ''
+        with:
+          name: terraform-plan
+          path: infra/terraform/plan.txt

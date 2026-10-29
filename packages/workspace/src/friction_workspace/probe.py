@@ -147,7 +147,6 @@ def run(out_path: Path) -> dict[str, Any]:
     findings["apps_list"] = _attempt(lambda: len(list(w.apps.list())))
     findings["registered_models_list"] = _attempt(lambda: len(list(w.registered_models.list(max_results=5))))
     findings["experiments_list"] = _attempt(lambda: len(list(w.experiments.list_experiments(max_results=5))))
-    findings["delta_sharing_shares"] = _attempt(lambda: len(list(w.shares.list())))
 
     # Clean up everything the probe made.
     cleanup: list[str] = []

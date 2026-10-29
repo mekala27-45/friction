@@ -8,12 +8,13 @@ so the floor has a frontier like any model, and the rule that fired names its re
 from __future__ import annotations
 
 import math
-from collections.abc import Sequence
+from collections.abc import Callable, Sequence
 
 import numpy as np
 import numpy.typing as npt
 from friction_features import logins, payments
 
+Row = Sequence[float] | npt.NDArray[np.float64]
 PAY = {name: i for i, name in enumerate(payments.FEATURES)}
 LOG = {name: i for i, name in enumerate(logins.FEATURES)}
 
@@ -32,7 +33,7 @@ LOGIN_RULES: tuple[tuple[str, float, str], ...] = (
 )
 
 
-def payment_fired(row: Sequence[float]) -> list[str]:
+def payment_fired(row: Row) -> list[str]:
     fired = []
     if row[PAY["cnt_1h"]] >= 3:
         fired.append("P03")
@@ -48,7 +49,7 @@ def payment_fired(row: Sequence[float]) -> list[str]:
     return fired
 
 
-def login_fired(row: Sequence[float]) -> list[str]:
+def login_fired(row: Row) -> list[str]:
     if row[LOG["n_success_prior"]] == 0:
         return []
     fired = []
@@ -62,18 +63,18 @@ def login_fired(row: Sequence[float]) -> list[str]:
 
 
 def _score(
-    rows: npt.NDArray[np.float64], fired: object, rules: tuple[tuple[str, float, str], ...]
+    rows: npt.NDArray[np.float64], fired: Callable[[Row], list[str]], rules: tuple[tuple[str, float, str], ...]
 ) -> npt.NDArray[np.float64]:
     points = {code: pts for code, pts, _ in rules}
     out = np.empty(len(rows), dtype=np.float64)
     for i, row in enumerate(rows):
-        out[i] = sum(points[c] for c in fired(row))  # type: ignore[operator]
-    # A tiny tie breaker from the amount keeps the frontier from having only five points; it
-    # cannot move a transaction across a whole point.
+        out[i] = float(sum(points[c] for c in fired(row)))
     return out
 
 
 def payment_scores(rows: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
+    # A tiny tie breaker from the amount spreads the floor's few score levels into a frontier; it
+    # can never move a transaction across a whole point.
     s = _score(rows, payment_fired, PAYMENT_RULES)
     return s + 1e-6 * np.clip(rows[:, PAY["amount_usd"]], 0, 10_000) / 10_000
 
