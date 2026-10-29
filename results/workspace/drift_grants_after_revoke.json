@@ -1,0 +1,16 @@
+{
+ "columns": [
+  "Principal",
+  "ActionType",
+  "ObjectType",
+  "ObjectKey"
+ ],
+ "rows": [
+  [
+   "account users",
+   "USE SCHEMA",
+   "SCHEMA",
+   "workspace.friction_dev_gold"
+  ]
+ ]
+}

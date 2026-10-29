@@ -1,0 +1,1060 @@
+{
+ "tags": [
+  [
+   "cards_history",
+   "account_ref",
+   "internal"
+  ],
+  [
+   "cards_history",
+   "card_generation",
+   "internal"
+  ],
+  [
+   "cards_history",
+   "status",
+   "internal"
+  ],
+  [
+   "cards_history",
+   "credit_limit_cents",
+   "internal"
+  ],
+  [
+   "cards_history",
+   "currency",
+   "public"
+  ],
+  [
+   "cards_history",
+   "__START_AT",
+   "internal"
+  ],
+  [
+   "cards_history",
+   "__END_AT",
+   "internal"
+  ],
+  [
+   "cdc_cards_bronze",
+   "account_ref",
+   "internal"
+  ],
+  [
+   "cdc_cards_bronze",
+   "user",
+   "restricted"
+  ],
+  [
+   "cdc_cards_bronze",
+   "card",
+   "internal"
+  ],
+  [
+   "cdc_cards_bronze",
+   "op",
+   "internal"
+  ],
+  [
+   "cdc_cards_bronze",
+   "seq",
+   "internal"
+  ],
+  [
+   "cdc_cards_bronze",
+   "changed_at",
+   "internal"
+  ],
+  [
+   "cdc_cards_bronze",
+   "emitted_at",
+   "internal"
+  ],
+  [
+   "cdc_cards_bronze",
+   "card_generation",
+   "internal"
+  ],
+  [
+   "cdc_cards_bronze",
+   "status",
+   "internal"
+  ],
+  [
+   "cdc_cards_bronze",
+   "credit_limit_cents",
+   "internal"
+  ],
+  [
+   "cdc_cards_bronze",
+   "currency",
+   "internal"
+  ],
+  [
+   "cdc_cards_bronze",
+   "_rescued_data",
+   "internal"
+  ],
+  [
+   "cdc_cards_bronze",
+   "source_file",
+   "internal"
+  ],
+  [
+   "cdc_cards_bronze",
+   "file_modified_at",
+   "internal"
+  ],
+  [
+   "cdc_cards_bronze",
+   "drop_id",
+   "internal"
+  ],
+  [
+   "cdc_cards_bronze",
+   "ingested_at",
+   "internal"
+  ],
+  [
+   "labels_logins_bronze",
+   "label_ref",
+   "internal"
+  ],
+  [
+   "labels_logins_bronze",
+   "event_ref",
+   "internal"
+  ],
+  [
+   "labels_logins_bronze",
+   "desk",
+   "internal"
+  ],
+  [
+   "labels_logins_bronze",
+   "is_fraud",
+   "internal"
+  ],
+  [
+   "labels_logins_bronze",
+   "event_ts",
+   "internal"
+  ],
+  [
+   "labels_logins_bronze",
+   "reported_at",
+   "internal"
+  ],
+  [
+   "labels_logins_bronze",
+   "seq",
+   "internal"
+  ],
+  [
+   "labels_logins_bronze",
+   "source",
+   "internal"
+  ],
+  [
+   "labels_logins_bronze",
+   "_rescued_data",
+   "internal"
+  ],
+  [
+   "labels_logins_bronze",
+   "source_file",
+   "internal"
+  ],
+  [
+   "labels_logins_bronze",
+   "file_modified_at",
+   "internal"
+  ],
+  [
+   "labels_logins_bronze",
+   "drop_id",
+   "internal"
+  ],
+  [
+   "labels_logins_bronze",
+   "ingested_at",
+   "internal"
+  ],
+  [
+   "labels_logins_history",
+   "event_ref",
+   "internal"
+  ],
+  [
+   "labels_logins_history",
+   "is_fraud",
+   "internal"
+  ],
+  [
+   "labels_logins_history",
+   "event_ts",
+   "internal"
+  ],
+  [
+   "labels_logins_history",
+   "source",
+   "internal"
+  ],
+  [
+   "labels_logins_history",
+   "__START_AT",
+   "internal"
+  ],
+  [
+   "labels_logins_history",
+   "__END_AT",
+   "internal"
+  ],
+  [
+   "labels_payments_bronze",
+   "label_ref",
+   "internal"
+  ],
+  [
+   "labels_payments_bronze",
+   "event_ref",
+   "internal"
+  ],
+  [
+   "labels_payments_bronze",
+   "desk",
+   "internal"
+  ],
+  [
+   "labels_payments_bronze",
+   "is_fraud",
+   "internal"
+  ],
+  [
+   "labels_payments_bronze",
+   "event_ts",
+   "internal"
+  ],
+  [
+   "labels_payments_bronze",
+   "reported_at",
+   "internal"
+  ],
+  [
+   "labels_payments_bronze",
+   "seq",
+   "internal"
+  ],
+  [
+   "labels_payments_bronze",
+   "source",
+   "internal"
+  ],
+  [
+   "labels_payments_bronze",
+   "_rescued_data",
+   "internal"
+  ],
+  [
+   "labels_payments_bronze",
+   "source_file",
+   "internal"
+  ],
+  [
+   "labels_payments_bronze",
+   "file_modified_at",
+   "internal"
+  ],
+  [
+   "labels_payments_bronze",
+   "drop_id",
+   "internal"
+  ],
+  [
+   "labels_payments_bronze",
+   "ingested_at",
+   "internal"
+  ],
+  [
+   "labels_payments_history",
+   "event_ref",
+   "internal"
+  ],
+  [
+   "labels_payments_history",
+   "is_fraud",
+   "internal"
+  ],
+  [
+   "labels_payments_history",
+   "event_ts",
+   "internal"
+  ],
+  [
+   "labels_payments_history",
+   "source",
+   "internal"
+  ],
+  [
+   "labels_payments_history",
+   "__START_AT",
+   "internal"
+  ],
+  [
+   "labels_payments_history",
+   "__END_AT",
+   "internal"
+  ],
+  [
+   "login_account_stats",
+   "user_key",
+   "restricted"
+  ],
+  [
+   "login_account_stats",
+   "attempts",
+   "internal"
+  ],
+  [
+   "login_account_stats",
+   "successes",
+   "internal"
+  ],
+  [
+   "login_account_stats",
+   "unknown_account",
+   "internal"
+  ],
+  [
+   "logins_bronze",
+   "login_index",
+   "internal"
+  ],
+  [
+   "logins_bronze",
+   "login_timestamp",
+   "internal"
+  ],
+  [
+   "logins_bronze",
+   "user_id",
+   "restricted"
+  ],
+  [
+   "logins_bronze",
+   "rtt_ms",
+   "internal"
+  ],
+  [
+   "logins_bronze",
+   "ip_address",
+   "restricted"
+  ],
+  [
+   "logins_bronze",
+   "country",
+   "internal"
+  ],
+  [
+   "logins_bronze",
+   "region",
+   "internal"
+  ],
+  [
+   "logins_bronze",
+   "city",
+   "internal"
+  ],
+  [
+   "logins_bronze",
+   "asn",
+   "internal"
+  ],
+  [
+   "logins_bronze",
+   "user_agent",
+   "restricted"
+  ],
+  [
+   "logins_bronze",
+   "browser",
+   "internal"
+  ],
+  [
+   "logins_bronze",
+   "os",
+   "internal"
+  ],
+  [
+   "logins_bronze",
+   "device_type",
+   "internal"
+  ],
+  [
+   "logins_bronze",
+   "login_successful",
+   "internal"
+  ],
+  [
+   "logins_bronze",
+   "is_attack_ip",
+   "internal"
+  ],
+  [
+   "logins_bronze",
+   "_rescued_data",
+   "internal"
+  ],
+  [
+   "logins_bronze",
+   "source_file",
+   "internal"
+  ],
+  [
+   "logins_bronze",
+   "file_modified_at",
+   "internal"
+  ],
+  [
+   "logins_bronze",
+   "drop_id",
+   "internal"
+  ],
+  [
+   "logins_bronze",
+   "ingested_at",
+   "internal"
+  ],
+  [
+   "logins_silver",
+   "login_ref",
+   "internal"
+  ],
+  [
+   "logins_silver",
+   "user_key",
+   "restricted"
+  ],
+  [
+   "logins_silver",
+   "event_ts",
+   "internal"
+  ],
+  [
+   "logins_silver",
+   "event_date",
+   "internal"
+  ],
+  [
+   "logins_silver",
+   "rtt_ms",
+   "internal"
+  ],
+  [
+   "logins_silver",
+   "ip_key",
+   "restricted"
+  ],
+  [
+   "logins_silver",
+   "ip_prefix16",
+   "sensitive"
+  ],
+  [
+   "logins_silver",
+   "country",
+   "sensitive"
+  ],
+  [
+   "logins_silver",
+   "region",
+   "sensitive"
+  ],
+  [
+   "logins_silver",
+   "city",
+   "sensitive"
+  ],
+  [
+   "logins_silver",
+   "asn",
+   "sensitive"
+  ],
+  [
+   "logins_silver",
+   "ua_key",
+   "restricted"
+  ],
+  [
+   "logins_silver",
+   "browser",
+   "internal"
+  ],
+  [
+   "logins_silver",
+   "browser_family",
+   "internal"
+  ],
+  [
+   "logins_silver",
+   "os",
+   "internal"
+  ],
+  [
+   "logins_silver",
+   "device_type",
+   "internal"
+  ],
+  [
+   "logins_silver",
+   "success",
+   "internal"
+  ],
+  [
+   "logins_silver",
+   "is_attack_ip",
+   "internal"
+  ],
+  [
+   "logins_silver",
+   "flag_asn_unrealistic",
+   "internal"
+  ],
+  [
+   "logins_silver",
+   "flag_ip_private",
+   "internal"
+  ],
+  [
+   "logins_silver",
+   "drop_id",
+   "internal"
+  ],
+  [
+   "logins_silver",
+   "drop_end",
+   "internal"
+  ],
+  [
+   "logins_silver",
+   "source_file",
+   "internal"
+  ],
+  [
+   "logins_silver",
+   "ingested_at",
+   "internal"
+  ],
+  [
+   "logins_silver",
+   "payload",
+   "internal"
+  ],
+  [
+   "logins_silver",
+   "unknown_account",
+   "internal"
+  ],
+  [
+   "mcc_fraud_rates",
+   "mcc",
+   "public"
+  ],
+  [
+   "mcc_fraud_rates",
+   "month_start",
+   "internal"
+  ],
+  [
+   "mcc_fraud_rates",
+   "n_window",
+   "internal"
+  ],
+  [
+   "mcc_fraud_rates",
+   "frauds_known",
+   "internal"
+  ],
+  [
+   "mcc_fraud_rates",
+   "rate",
+   "internal"
+  ],
+  [
+   "payments_bronze",
+   "txn_ref",
+   "internal"
+  ],
+  [
+   "payments_bronze",
+   "user",
+   "restricted"
+  ],
+  [
+   "payments_bronze",
+   "card",
+   "internal"
+  ],
+  [
+   "payments_bronze",
+   "year",
+   "internal"
+  ],
+  [
+   "payments_bronze",
+   "month",
+   "internal"
+  ],
+  [
+   "payments_bronze",
+   "day",
+   "internal"
+  ],
+  [
+   "payments_bronze",
+   "time",
+   "internal"
+  ],
+  [
+   "payments_bronze",
+   "amount",
+   "internal"
+  ],
+  [
+   "payments_bronze",
+   "use_chip",
+   "internal"
+  ],
+  [
+   "payments_bronze",
+   "merchant_name",
+   "internal"
+  ],
+  [
+   "payments_bronze",
+   "merchant_city",
+   "internal"
+  ],
+  [
+   "payments_bronze",
+   "merchant_state",
+   "internal"
+  ],
+  [
+   "payments_bronze",
+   "zip",
+   "internal"
+  ],
+  [
+   "payments_bronze",
+   "mcc",
+   "internal"
+  ],
+  [
+   "payments_bronze",
+   "errors",
+   "internal"
+  ],
+  [
+   "payments_bronze",
+   "_rescued_data",
+   "internal"
+  ],
+  [
+   "payments_bronze",
+   "source_file",
+   "internal"
+  ],
+  [
+   "payments_bronze",
+   "file_modified_at",
+   "internal"
+  ],
+  [
+   "payments_bronze",
+   "drop_id",
+   "internal"
+  ],
+  [
+   "payments_bronze",
+   "ingested_at",
+   "internal"
+  ],
+  [
+   "payments_silver",
+   "txn_ref",
+   "internal"
+  ],
+  [
+   "payments_silver",
+   "account_key",
+   "restricted"
+  ],
+  [
+   "payments_silver",
+   "user_key",
+   "restricted"
+  ],
+  [
+   "payments_silver",
+   "card_slot",
+   "internal"
+  ],
+  [
+   "payments_silver",
+   "account_ref",
+   "internal"
+  ],
+  [
+   "payments_silver",
+   "event_ts",
+   "internal"
+  ],
+  [
+   "payments_silver",
+   "event_date",
+   "internal"
+  ],
+  [
+   "payments_silver",
+   "amount_cents",
+   "internal"
+  ],
+  [
+   "payments_silver",
+   "currency",
+   "public"
+  ],
+  [
+   "payments_silver",
+   "channel",
+   "internal"
+  ],
+  [
+   "payments_silver",
+   "merchant_key",
+   "internal"
+  ],
+  [
+   "payments_silver",
+   "merchant_city",
+   "internal"
+  ],
+  [
+   "payments_silver",
+   "merchant_state",
+   "internal"
+  ],
+  [
+   "payments_silver",
+   "merchant_country",
+   "internal"
+  ],
+  [
+   "payments_silver",
+   "zip5",
+   "sensitive"
+  ],
+  [
+   "payments_silver",
+   "mcc",
+   "public"
+  ],
+  [
+   "payments_silver",
+   "errors",
+   "internal"
+  ],
+  [
+   "payments_silver",
+   "drop_id",
+   "internal"
+  ],
+  [
+   "payments_silver",
+   "drop_end",
+   "internal"
+  ],
+  [
+   "payments_silver",
+   "source_file",
+   "internal"
+  ],
+  [
+   "payments_silver",
+   "ingested_at",
+   "internal"
+  ],
+  [
+   "payments_silver",
+   "location",
+   "internal"
+  ],
+  [
+   "payments_silver",
+   "foreign",
+   "internal"
+  ],
+  [
+   "payments_silver",
+   "has_error",
+   "internal"
+  ],
+  [
+   "payments_silver",
+   "is_refund",
+   "internal"
+  ],
+  [
+   "payments_silver",
+   "payload",
+   "internal"
+  ],
+  [
+   "quarantine",
+   "desk",
+   "internal"
+  ],
+  [
+   "quarantine",
+   "event_ref",
+   "internal"
+  ],
+  [
+   "quarantine",
+   "rule",
+   "internal"
+  ],
+  [
+   "quarantine",
+   "drop_id",
+   "internal"
+  ],
+  [
+   "quarantine",
+   "source_file",
+   "internal"
+  ],
+  [
+   "quarantine",
+   "payload",
+   "internal"
+  ],
+  [
+   "quarantine",
+   "rescued",
+   "internal"
+  ]
+ ],
+ "views": [
+  "workspace.friction_dev_gold.v_logins_silver",
+  "workspace.friction_dev_gold.v_payments_silver"
+ ],
+ "read": {
+  "entitled": {
+   "n": 31267738,
+   "visible": 31267738
+  },
+  "withdrawn": {
+   "n": 31267738,
+   "visible": 0
+  }
+ },
+ "row_filter": {
+  "view": "workspace.friction_dev_gold.v_logins_silver",
+  "rows_by_horizon_days": {
+   "0": 31267738,
+   "30": 28913247
+  }
+ },
+ "lineage": [
+  {
+   "source": "workspace.friction_dev_bronze.cdc_cards_bronze",
+   "target": "workspace.friction_dev_cdc.cards_history",
+   "events": 4
+  },
+  {
+   "source": "workspace.friction_dev_bronze.labels_logins_bronze",
+   "target": "workspace.friction_dev_cdc.labels_logins_history",
+   "events": 4
+  },
+  {
+   "source": "workspace.friction_dev_bronze.labels_payments_bronze",
+   "target": "workspace.friction_dev_cdc.labels_payments_history",
+   "events": 4
+  },
+  {
+   "source": "workspace.friction_dev_bronze.logins_bronze",
+   "target": "workspace.friction_dev_silver.login_account_stats",
+   "events": 4
+  },
+  {
+   "source": "workspace.friction_dev_bronze.logins_bronze",
+   "target": "workspace.friction_dev_silver.logins_silver",
+   "events": 4
+  },
+  {
+   "source": "workspace.friction_dev_bronze.logins_bronze",
+   "target": "workspace.friction_dev_silver.quarantine",
+   "events": 4
+  },
+  {
+   "source": "workspace.friction_dev_bronze.payments_bronze",
+   "target": "workspace.friction_dev_silver.payments_silver",
+   "events": 4
+  },
+  {
+   "source": "workspace.friction_dev_bronze.payments_bronze",
+   "target": "workspace.friction_dev_silver.quarantine",
+   "events": 4
+  },
+  {
+   "source": "workspace.friction_dev_cdc.cards_history",
+   "target": "workspace.friction_dev_gold.payments_issue_age",
+   "events": 4
+  },
+  {
+   "source": "workspace.friction_dev_cdc.labels_payments_history",
+   "target": "workspace.friction_dev_gold.known_frauds",
+   "events": 4
+  },
+  {
+   "source": "workspace.friction_dev_gold.debit_counts",
+   "target": "workspace.friction_dev_gold.mcc_fraud_rates",
+   "events": 4
+  },
+  {
+   "source": "workspace.friction_dev_gold.known_frauds",
+   "target": "workspace.friction_dev_gold.mcc_fraud_rates",
+   "events": 4
+  },
+  {
+   "source": "workspace.friction_dev_gold.login_feature_inputs",
+   "target": "workspace.friction_dev_gold.logins_ip_features",
+   "events": 2
+  },
+  {
+   "source": "workspace.friction_dev_gold.login_feature_inputs",
+   "target": "workspace.friction_dev_gold.logins_user_features",
+   "events": 2
+  },
+  {
+   "source": "workspace.friction_dev_gold.logins_ip_features",
+   "target": "workspace.friction_dev_gold.logins_features",
+   "events": 2
+  },
+  {
+   "source": "workspace.friction_dev_gold.logins_user_features",
+   "target": "workspace.friction_dev_gold.logins_features",
+   "events": 2
+  },
+  {
+   "source": "workspace.friction_dev_gold.mcc_fraud_rates",
+   "target": "workspace.friction_dev_gold.payment_feature_inputs",
+   "events": 4
+  },
+  {
+   "source": "workspace.friction_dev_gold.payment_feature_inputs",
+   "target": "workspace.friction_dev_gold.payments_features",
+   "events": 4
+  },
+  {
+   "source": "workspace.friction_dev_gold.payments_issue_age",
+   "target": "workspace.friction_dev_gold.payment_feature_inputs",
+   "events": 4
+  },
+  {
+   "source": "workspace.friction_dev_ops.entitlements",
+   "target": "workspace.friction_dev_gold.v_logins_silver",
+   "events": 3
+  },
+  {
+   "source": "workspace.friction_dev_ops.entitlements",
+   "target": "workspace.friction_dev_gold.v_payments_silver",
+   "events": 1
+  },
+  {
+   "source": "workspace.friction_dev_silver.login_account_stats",
+   "target": "workspace.friction_dev_silver.login_account_stats",
+   "events": 1
+  },
+  {
+   "source": "workspace.friction_dev_silver.login_account_stats",
+   "target": "workspace.friction_dev_silver.logins_silver",
+   "events": 4
+  },
+  {
+   "source": "workspace.friction_dev_silver.login_account_stats",
+   "target": "workspace.friction_dev_silver.quarantine",
+   "events": 4
+  },
+  {
+   "source": "workspace.friction_dev_silver.logins_silver",
+   "target": "workspace.friction_dev_cdc.labels_logins_history",
+   "events": 4
+  },
+  {
+   "source": "workspace.friction_dev_silver.logins_silver",
+   "target": "workspace.friction_dev_gold.login_feature_inputs",
+   "events": 4
+  },
+  {
+   "source": "workspace.friction_dev_silver.logins_silver",
+   "target": "workspace.friction_dev_gold.v_logins_silver",
+   "events": 3
+  },
+  {
+   "source": "workspace.friction_dev_silver.payments_silver",
+   "target": "workspace.friction_dev_cdc.labels_payments_history",
+   "events": 4
+  },
+  {
+   "source": "workspace.friction_dev_silver.payments_silver",
+   "target": "workspace.friction_dev_gold.debit_counts",
+   "events": 4
+  },
+  {
+   "source": "workspace.friction_dev_silver.payments_silver",
+   "target": "workspace.friction_dev_gold.known_frauds",
+   "events": 4
+  },
+  {
+   "source": "workspace.friction_dev_silver.payments_silver",
+   "target": "workspace.friction_dev_gold.payment_feature_inputs",
+   "events": 4
+  },
+  {
+   "source": "workspace.friction_dev_silver.payments_silver",
+   "target": "workspace.friction_dev_gold.payments_issue_age",
+   "events": 4
+  },
+  {
+   "source": "workspace.friction_dev_silver.payments_silver",
+   "target": "workspace.friction_dev_gold.v_payments_silver",
+   "events": 1
+  }
+ ],
+ "scan": {
+  "v_logins_silver.ip_key": 0,
+  "v_logins_silver.ua_key": 0,
+  "v_logins_silver.user_key": 0,
+  "v_logins_silver.city": 0,
+  "v_payments_silver.account_key": 0,
+  "v_payments_silver.user_key": 0,
+  "v_payments_silver.merchant_key": 0
+ },
+ "grants": [
+  {
+   "Principal": "account users",
+   "ActionType": "SELECT",
+   "ObjectType": "SCHEMA",
+   "ObjectKey": "workspace.friction_dev_gold"
+  },
+  {
+   "Principal": "account users",
+   "ActionType": "USE SCHEMA",
+   "ObjectType": "SCHEMA",
+   "ObjectKey": "workspace.friction_dev_gold"
+  }
+ ]
+}

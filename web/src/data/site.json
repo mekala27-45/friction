@@ -3761,9 +3761,9 @@
     ],
     [
      "8",
-     "not done",
+     "done",
      "Governance: tags, masks, the row filter, grants, lineage, the scan; the planted drift caught by the plan",
-     "the probe found masks and functions allowed (results/workspace_probe.json); nothing applied"
+     "results/workspace/governance.json (tags, masks, the row filter, grants, lineage, the scan); results/workspace/drift_terraform_plan.txt (the revoked grant caught as one change)"
     ],
     [
      "9",
@@ -3811,7 +3811,7 @@
      "16",
      "done",
      "Performance experiments and the compute ledger published",
-     "results/performance.json (Actions runner, full data), results/compute_ledger.json (wall seconds per request; workspace usage from the billing table not read yet)"
+     "results/performance.json (Actions runner, full data), results/compute_ledger.json (wall seconds per request; with workspace usage from system.billing.usage)"
     ],
     [
      "17",
@@ -4596,6 +4596,137 @@
    ],
    "source": "evaluation"
   },
+  "incident.after.quarantine": {
+   "align": [
+    "left",
+    "right"
+   ],
+   "columns": [
+    "Rule",
+    "Rows"
+   ],
+   "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
+   "rows": [
+    [
+     "P_FUTURE",
+     "487"
+    ],
+    [
+     "P_KEY_CONFLICT",
+     "2,929"
+    ],
+    [
+     "P_REJECTED_FILE",
+     "2,929"
+    ]
+   ],
+   "source": "local"
+  },
+  "incident.alerts": {
+   "align": [
+    "left",
+    "left",
+    "left",
+    "left"
+   ],
+   "columns": [
+    "Severity",
+    "Check",
+    "Scope",
+    "Note"
+   ],
+   "origin": "jobs/monitor.py in the workspace (request 2026-10-29-12g-monitor)",
+   "rows": [
+    [
+     "serious",
+     "expectation_rate",
+     "payments/0387_2020-01-07/P_FUTURE",
+     "487 rows quarantined"
+    ],
+    [
+     "serious",
+     "expectation_rate",
+     "payments/0387_2020-01-07/P_MCC",
+     "2920 rows quarantined"
+    ],
+    [
+     "serious",
+     "expectation_rate",
+     "payments/0387_2020-01-07/P_RESCUED",
+     "2920 rows quarantined"
+    ],
+    [
+     "critical",
+     "completeness",
+     "payments/0387_2020-01-07",
+     "3407 delivered rows did not reach silver"
+    ],
+    [
+     "critical",
+     "clock",
+     "payments/0387_2020-01-07/payments_2020-01-07_part2.csv.gz",
+     "events stamped after their drop closed"
+    ]
+   ],
+   "source": "workspace"
+  },
+  "incident.before.quarantine": {
+   "align": [
+    "left",
+    "right"
+   ],
+   "columns": [
+    "Rule",
+    "Rows"
+   ],
+   "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
+   "rows": [
+    [
+     "P_FUTURE",
+     "487"
+    ],
+    [
+     "P_MCC",
+     "2,920"
+    ],
+    [
+     "P_RESCUED",
+     "2,920"
+    ]
+   ],
+   "source": "local"
+  },
+  "incident.timeline": {
+   "align": [
+    "left",
+    "left",
+    "right"
+   ],
+   "columns": [
+    "When (UTC)",
+    "What",
+    "Seconds"
+   ],
+   "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
+   "rows": [
+    [
+     "2026-10-29 22:12:59",
+     "workspace monitor raised the alerts; the issue opened",
+     "not applicable"
+    ],
+    [
+     "2026-10-29T22:18:45Z",
+     "pipeline run over the drops around day 40, contract as it was",
+     "36.8"
+    ],
+    [
+     "2026-10-29T22:19:24Z",
+     "replay of the same drops with the approved change and the redelivery",
+     "39.0"
+    ]
+   ],
+   "source": "local"
+  },
   "lake.local.quarantine": {
    "align": [
     "left",
@@ -4868,9 +4999,9 @@
   }
  },
  "values": {
-  "build.commits": "73",
-  "checklist.done": "9",
-  "checklist.missing": "5, 6, 8, 10, 12, 13, 15, 17, 18",
+  "build.commits": "77",
+  "checklist.done": "10",
+  "checklist.missing": "5, 6, 10, 12, 13, 15, 17, 18",
   "data.rba.asn_unrealistic": "1,457,824",
   "data.rba.attack_ip": "3,096,977",
   "data.rba.digest": "ca1d974e97ae",
@@ -5077,6 +5208,19 @@
   "eval.payments.test.frauds": "786",
   "eval.payments.test.users": "3,897",
   "eval.source": "open source",
+  "incident.after.completeness": "100.00%",
+  "incident.after.rows": "5,849",
+  "incident.after.usd": "$275,274.70",
+  "incident.before.completeness": "70.20%",
+  "incident.before.rows": "2,442",
+  "incident.before.usd": "$109,455.08",
+  "incident.delayed_rows": "3,407",
+  "incident.delayed_usd": "$165,819.62",
+  "incident.drop": "0387_2020-01-07",
+  "incident.drop_matches_truth": "yes",
+  "incident.other_drops_unchanged": "yes",
+  "incident.truth_rows": "5,849",
+  "incident.truth_usd": "$275,274.70",
   "lake.local.cards_history.rows": "31,504",
   "lake.local.cdc_cards_bronze.rows": "33,254",
   "lake.local.labels_logins_bronze.rows": "141",
@@ -5093,6 +5237,9 @@
   "lake.local.payments_silver.rows": "24,383,185",
   "lake.local.quarantine.rows": "8,161",
   "lake.local.quarantine_rows": "8,161",
+  "monitor.alerts": "16",
+  "monitor.drift_features": "device_type, mcc_fraud_rate",
+  "monitor.issue": "GitHub issue 1",
   "parity.local.logins.compared": "286",
   "parity.local.logins.equal": "286",
   "parity.local.logins.worst": "0.0000",

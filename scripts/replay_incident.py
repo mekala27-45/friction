@@ -6,8 +6,9 @@ Runs the portable pipeline twice over the payments drops around replay day 40 (t
 from the fixture slice, which is enough for the pipeline to run): once with the contract as it was,
 once with the approved change (the renamed column read back out of rescued data, the clock shifted
 part rejected) and the corrected redelivery landed. Reports, for the incident drop, the quarantine
-by rule, completeness, the clock check, and the gold totals for the day against the corrected source,
-and the digests of everything else, which must not move. Writes results/incident.json.
+by rule, completeness, the clock check, and the silver totals of the rows that arrived in the drop
+against the corrected source, and the digest of every row from every other drop, which must not
+move. Writes results/incident.json.
 """
 
 from __future__ import annotations
@@ -81,17 +82,23 @@ def summarize(spark: Any, out: Path) -> dict[str, Any]:
     wh = out / "spark-warehouse"
     read = lambda n: spark.read.parquet(str(wh / n))  # noqa: E731
     silver, bronze, quarantine = read("payments_silver"), read("payments_bronze"), read("quarantine")
+    # Rows that arrived in the incident drop (its redelivery included) against everything else. A
+    # day's events also arrive late in later drops, so the comparison is by drop, not by date.
+    from_drop = F.col("drop_id").startswith(DROP[:5])
+    drop = silver.where(from_drop)
+    totals = drop.agg(F.count(F.lit(1)).alias("rows"), F.sum("amount_cents").alias("amount_cents")).collect()[0]
+    other = silver.where(~from_drop)
     day = silver.where(F.col("event_date") == F.lit(DAY))
-    totals = day.agg(F.count(F.lit(1)).alias("rows"), F.sum("amount_cents").alias("amount_cents")).collect()[0]
-    other = silver.where(F.col("event_date") != F.lit(DAY))
+    dated = day.agg(F.count(F.lit(1)).alias("rows"), F.sum("amount_cents").alias("amount_cents")).collect()[0]
     q = quarantine.where((F.col("desk") == "payments") & (F.col("drop_id") == DROP))
     return {
-        "day_totals": {"rows": int(totals["rows"]), "amount_cents": int(totals["amount_cents"] or 0)},
+        "drop_totals": {"rows": int(totals["rows"]), "amount_cents": int(totals["amount_cents"] or 0)},
+        "day_totals": {"rows": int(dated["rows"]), "amount_cents": int(dated["amount_cents"] or 0)},
         "quarantine": {r["rule"]: int(r["count"]) for r in q.groupBy("rule").count().collect()},
         "completeness": [r for r in monitor.completeness(silver, bronze, "txn_ref", "txn_ref") if r["drop_id"] == DROP],
         "clock": [r for r in monitor.clock(quarantine, bronze, "payments", "P_FUTURE") if r["drop_id"] == DROP],
-        "digest_other_days": digests.table_digest(other)["digest"],
-        "digest_day": digests.table_digest(day)["digest"],
+        "digest_other_drops": digests.table_digest(other)["digest"],
+        "digest_drop": digests.table_digest(drop)["digest"],
     }
 
 
@@ -127,14 +134,14 @@ def main() -> int:
         "approved_change": approved["active"]["payments"],
         "timeline": timeline,
     }
-    result["other_days_unchanged"] = result["before"]["digest_other_days"] == result["after"]["digest_other_days"]
-    result["day_matches_truth"] = result["after"]["day_totals"] == result["truth"]
+    result["other_drops_unchanged"] = result["before"]["digest_other_drops"] == result["after"]["digest_other_drops"]
+    result["drop_matches_truth"] = result["after"]["drop_totals"] == result["truth"]
     (ROOT / "results" / "incident.json").write_text(
         json.dumps(result, indent=1, sort_keys=True) + "\n", encoding="utf-8"
     )
-    print(json.dumps({k: result[k] for k in ("truth", "other_days_unchanged", "day_matches_truth")}, indent=1))
-    print(json.dumps(result["before"]["day_totals"]), json.dumps(result["after"]["day_totals"]))
-    return 0 if result["day_matches_truth"] and result["other_days_unchanged"] else 1
+    print(json.dumps({k: result[k] for k in ("truth", "other_drops_unchanged", "drop_matches_truth")}, indent=1))
+    print(json.dumps(result["before"]["drop_totals"]), json.dumps(result["after"]["drop_totals"]))
+    return 0 if result["drop_matches_truth"] and result["other_drops_unchanged"] else 1
 
 
 if __name__ == "__main__":

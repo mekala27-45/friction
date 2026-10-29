@@ -126,7 +126,7 @@ jobs:
         run: |
           cd results-branch
           for f in $(git diff --name-only HEAD~1 HEAD 2>/dev/null | grep '/alerts.json$' || true); do
-            id=$(basename "$(dirname "$f")")
+            id=$(echo "$f" | sed -E 's#^runs/([^/]+)/.*#\1#')
             body=$(python3 -c "import json,sys; rows=json.load(open(sys.argv[1])); print('\n'.join('- ' + r['severity'] + ' ' + r['check'] + ' ' + r['scope'] + ': ' + r['note'] for r in rows))" "$f")
             [ -z "$body" ] && continue
             gh issue create --repo "$GITHUB_REPOSITORY" --title "monitor: ${id}" \

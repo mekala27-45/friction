@@ -82,6 +82,42 @@
    "promoted_at": "2026-10-29T21:21:15+00:00"
   },
   {
+   "file": "results/workspace/billing.json",
+   "sha256": "db8a1f0b3191032c202c4fa8d2bc40f599f66e5a83552a70b4425638dcaf8688",
+   "request": "2026-10-29-12k-billing",
+   "github_run_id": "40958240161",
+   "commit": "6c8790c3b4762bd78b0efd93a3d06fd67ceb503c",
+   "ran_at": "2026-10-29T22:13:19+00:00",
+   "promoted_at": "2026-10-29T22:14:45+00:00"
+  },
+  {
+   "file": "results/workspace/drift_grants_after_revoke.json",
+   "sha256": "a82dc8a666b22d07f3978de2cd4c2d724ad644c25595bb81453734dd36cd3698",
+   "request": "2026-10-29-12h-plant-drift",
+   "github_run_id": "40958240161",
+   "commit": "6c8790c3b4762bd78b0efd93a3d06fd67ceb503c",
+   "ran_at": "2026-10-29T22:13:07+00:00",
+   "promoted_at": "2026-10-29T22:14:44+00:00"
+  },
+  {
+   "file": "results/workspace/drift_terraform_apply.txt",
+   "sha256": "8424200ed81c2c653780a7988dc71beb3d7775d8ba1c7bfc33893d1ffd54b7f6",
+   "request": "2026-10-29-12j-terraform-apply-drift",
+   "github_run_id": "40958240161",
+   "commit": "6c8790c3b4762bd78b0efd93a3d06fd67ceb503c",
+   "ran_at": "2026-10-29T22:13:13+00:00",
+   "promoted_at": "2026-10-29T22:14:45+00:00"
+  },
+  {
+   "file": "results/workspace/drift_terraform_plan.txt",
+   "sha256": "769e8ea8a2c58f0edd025210e668853731479dc108a8c70bfdd7e590c09244a4",
+   "request": "2026-10-29-12i-terraform-plan-drift",
+   "github_run_id": "40958240161",
+   "commit": "6c8790c3b4762bd78b0efd93a3d06fd67ceb503c",
+   "ran_at": "2026-10-29T22:13:11+00:00",
+   "promoted_at": "2026-10-29T22:14:45+00:00"
+  },
+  {
    "file": "results/workspace/fetch_status_on_runner.json",
    "sha256": "aba925ed7e21b01e4b12789b32928ccf902fcb6527aacdece25d0965e5befca6",
    "request": "2026-10-29-04b-upload-sources",
@@ -136,6 +172,15 @@
    "promoted_at": "2026-10-29T21:21:15+00:00"
   },
   {
+   "file": "results/workspace/governance.json",
+   "sha256": "94ad3b6cd963a6ae532d749964e759e12f43a6cfd73860a8526943541d106efa",
+   "request": "2026-10-29-12f-governance",
+   "github_run_id": "40958240161",
+   "commit": "6c8790c3b4762bd78b0efd93a3d06fd67ceb503c",
+   "ran_at": "2026-10-29T22:04:24+00:00",
+   "promoted_at": "2026-10-29T22:14:44+00:00"
+  },
+  {
    "file": "results/workspace/integration.json",
    "sha256": "b85984ed3ce6a9ddb31c8ef51134d11a321acbdcce89655e3cb4ab0d2c88541e",
    "request": "2026-10-29-12d-integration",
@@ -152,6 +197,28 @@
    "commit": "c48f3cd4ff9885ab26c25b75a039b4d0d10aa070",
    "ran_at": "2026-10-29T21:16:28+00:00",
    "promoted_at": "2026-10-29T21:21:15+00:00"
+  },
+  {
+   "file": "results/workspace/monitor_alerts.json",
+   "sha256": "ed808e3f3ef641a8d643ff0c626d72b25c9c39c789c5088932c7401a2ef028c4",
+   "request": "2026-10-29-12g-monitor",
+   "github_run_id": "40958240161",
+   "commit": "6c8790c3b4762bd78b0efd93a3d06fd67ceb503c",
+   "ran_at": "2026-10-29T22:12:59+00:00",
+   "promoted_at": "2026-10-29T22:15:04+00:00",
+   "request_status": "failed",
+   "failed_because": "the monitor fails its task when an alert fires; the day 40 drops were in the backfill"
+  },
+  {
+   "file": "results/workspace/monitor_report.json",
+   "sha256": "f243066a3a3987822074931f21ec9e98f1f9fa8d55cd4d2ccc7994d244a62620",
+   "request": "2026-10-29-12g-monitor",
+   "github_run_id": "40958240161",
+   "commit": "6c8790c3b4762bd78b0efd93a3d06fd67ceb503c",
+   "ran_at": "2026-10-29T22:12:59+00:00",
+   "promoted_at": "2026-10-29T22:15:04+00:00",
+   "request_status": "failed",
+   "failed_because": "the monitor fails its task when an alert fires; the day 40 drops were in the backfill"
   },
   {
    "file": "results/workspace/replay_lock_on_runner.json",

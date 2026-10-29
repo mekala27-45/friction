@@ -1,11 +1,18 @@
 # Contract changes approved by review. Each entry names the DECISIONS.md entry that approved it.
 # "active" is what the pipelines read: renames read a column back out of rescued data, and
-# rejected files are quarantined whole. Empty until the day 40 incident is handled.
+# rejected files are quarantined whole.
 active:
   payments:
-    renames: {}
-    rejected_files: []
+    renames:
+      merchant_category: mcc
+    rejected_files:
+      - payments_2020-01-07_part2.csv.gz
   logins:
     renames: {}
     rejected_files: []
-history: []
+history:
+  - date: "2026-10-29"
+    desk: payments
+    change: "rename merchant_category to mcc; reject payments_2020-01-07_part2.csv.gz (clock shifted six hours); land the corrected redelivery"
+    approved_by: "DECISIONS.md, 2026-10-29 The day 40 contract change"
+    issue: "GitHub issue 1, opened by the workspace workflow from request 2026-10-29-12g-monitor"

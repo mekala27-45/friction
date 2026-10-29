@@ -268,3 +268,18 @@ The histories hold successful sign ins only, as the evaluation paper does (Wiefl
 Sections 11.1 and 12.1). The model is not refit after reading the test months; the result is
 published as it came out, the login desk serves its floor, and the naive attacker's country draw
 is the first thing to change in a version two, registered before any test month is read again.
+
+## 2026-10-29 The day 40 contract change
+
+The workspace monitor (request 2026-10-29-12g-monitor, Actions run 40958240161) raised four
+alerts on drop 0387_2020-01-07 and the workflow opened GitHub issue 1. The event counts and the
+quarantine identified three faults in the day's delivery: the previous day's file resent under a
+new name (deduplicated by natural key, nothing lost); part one of the day with the mcc column
+renamed merchant_category (2,920 rows in rescued data, quarantined by P_RESCUED and P_MCC); and
+part two with every timestamp six hours ahead (487 rows caught by P_FUTURE, completeness 0.702).
+Approved: read merchant_category back as mcc, reject payments_2020-01-07_part2.csv.gz whole, and
+land the corrected redelivery the source sent for part two. Nothing in bronze is edited; the
+change is contracts/approved_changes.yaml and the replay is a backfill of drop 387 with the
+redelivery. The same monitor run flagged drift in mcc_fraud_rate across the 2019 months against
+the training months (PSI near 2.8); that is the label calendar of TabFormer, not the incident,
+and it is recorded in the postmortem, not fixed here.

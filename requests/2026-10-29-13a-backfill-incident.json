@@ -1,0 +1,12 @@
+{
+ "id": "2026-10-29-13a-backfill-incident",
+ "kind": "bundle_run",
+ "target": "dev",
+ "job": "backfill",
+ "params": {
+  "job_params": {"desk": "payments", "from": "387", "through": "387", "redelivery": "true", "tag": "incident"},
+  "export_from": "/Volumes/workspace/friction_dev_raw/exports/incident",
+  "stop_on_failure": false
+ },
+ "note": "The runbook's replay: drop 387 with the corrected redelivery, the pipeline under the approved change, the features and the export."
+}

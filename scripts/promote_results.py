@@ -31,9 +31,11 @@ def _show(path: str) -> bytes:
     return subprocess.run(["git", "show", f"{BRANCH}:{path}"], cwd=ROOT, check=True, capture_output=True).stdout
 
 
-def promote(request_id: str, name: str, dest: str) -> dict[str, str]:
+def promote(request_id: str, name: str, dest: str, failed_because: str | None = None) -> dict[str, str]:
+    """failed_because promotes evidence from a request whose failure was its expected outcome (the
+    monitor fails its task on a breach); the reason is kept in the provenance entry."""
     done = json.loads(_show(f"runs/{request_id}/done.json"))
-    if done.get("status") != "succeeded":
+    if done.get("status") != "succeeded" and not failed_because:
         raise ValueError(f"{request_id} did not succeed; nothing from it is promoted")
     expected = done["files"].get(name)
     if expected is None:
@@ -53,6 +55,9 @@ def promote(request_id: str, name: str, dest: str) -> dict[str, str]:
         "ran_at": str(done.get("finished_at")),
         "promoted_at": datetime.now(UTC).isoformat(timespec="seconds"),
     }
+    if done.get("status") != "succeeded":
+        entry["request_status"] = str(done.get("status"))
+        entry["failed_because"] = str(failed_because)
     record = json.loads(PROVENANCE.read_text(encoding="utf-8")) if PROVENANCE.exists() else {"promoted": []}
     record["promoted"] = [e for e in record["promoted"] if e["file"] != entry["file"]] + [entry]
     record["promoted"].sort(key=lambda e: e["file"])
@@ -65,8 +70,9 @@ def main() -> int:
     parser.add_argument("request_id")
     parser.add_argument("name")
     parser.add_argument("dest")
+    parser.add_argument("--failed-because", help="promote from a request whose failure was the expected outcome")
     args = parser.parse_args()
-    entry = promote(args.request_id, args.name, args.dest)
+    entry = promote(args.request_id, args.name, args.dest, args.failed_because)
     print(f"promoted {entry['file']} from {args.request_id} (run {entry['github_run_id']})")
     return 0
 
