@@ -81,12 +81,18 @@ jobs:
             "$HAS_SALT" "$HAS_TF" "$HAS_DB" "$GITHUB_RUN_ID" > results-branch/secrets_present.json
           cat results-branch/secrets_present.json
 
+      # Java for the open source engine: a portable request runs it here, with the workspace salt.
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
       - uses: astral-sh/setup-uv@v6
         with:
           python-version: "3.12"
 
       - name: Install
-        run: uv sync --frozen --extra workspace --no-dev
+        run: uv sync --frozen --extra workspace --extra spark --no-dev
 
       - uses: databricks/setup-cli@main
 
