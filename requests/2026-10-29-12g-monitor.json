@@ -1,0 +1,8 @@
+{
+ "id": "2026-10-29-12g-monitor",
+ "kind": "bundle_run",
+ "target": "dev",
+ "job": "monitor",
+ "params": {"export_from": "/Volumes/workspace/friction_dev_raw/exports/monitor", "stop_on_failure": false},
+ "note": "Retry of 2026-10-29-10b-monitor, which failed on a nested generator before it wrote anything. A breach is expected from the day 40 drops; its alerts open an issue."
+}

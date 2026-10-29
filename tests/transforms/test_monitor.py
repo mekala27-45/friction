@@ -93,3 +93,8 @@ def test_feature_drift_is_zero_on_the_reference_and_positive_on_a_shift(spark) -
     drift = monitor.feature_drift(features, events, "txn_ref", ["amount_z"], ("2019-01-01", "2019-02-01"), bins=5)
     by_month = {r["month"]: r["psi"] for r in drift}
     assert by_month["2019-01"] < 1e-9 and by_month["2019-02"] > 0.25
+
+
+def test_months_of_a_split() -> None:
+    assert monitor.months("2019-01-01", "2019-05-01") == ["2019-01", "2019-02", "2019-03", "2019-04"]
+    assert monitor.months("2019-11-15", "2020-02-02") == ["2019-11", "2019-12", "2020-01", "2020-02"]

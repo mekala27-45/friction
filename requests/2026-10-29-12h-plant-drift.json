@@ -1,0 +1,7 @@
+{
+ "id": "2026-10-29-12h-plant-drift",
+ "kind": "sql",
+ "target": "dev",
+ "params": {"file": "sql/plant_drift.sql", "vars": {"catalog": "workspace"}, "stop_on_failure": false},
+ "note": "Plant drift: revoke by hand a grant terraform manages."
+}

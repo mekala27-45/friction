@@ -9,6 +9,7 @@ workflow opens a GitHub issue with the rows, the run id and the runbook link.
 from __future__ import annotations
 
 import math
+from datetime import date, timedelta
 from typing import Any
 
 from pyspark.sql import DataFrame
@@ -27,6 +28,17 @@ def _alert(check: str, scope: str, value: float, threshold: float, severity: str
         "note": note,
         "runbook": RUNBOOK,
     }
+
+
+def months(start: str, end: str) -> list[str]:
+    """yyyy-MM of every month from start up to the day before end, the months a split scores."""
+    y, m = int(start[:4]), int(start[5:7])
+    last = date.fromisoformat(end[:10]) - timedelta(days=1)
+    out = []
+    while (y, m) <= (last.year, last.month):
+        out.append(f"{y:04d}-{m:02d}")
+        y, m = (y + 1, 1) if m == 12 else (y, m + 1)
+    return out
 
 
 def psi_from_counts(expected: list[float], actual: list[float]) -> float:

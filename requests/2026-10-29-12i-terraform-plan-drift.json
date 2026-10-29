@@ -1,0 +1,7 @@
+{
+ "id": "2026-10-29-12i-terraform-plan-drift",
+ "kind": "terraform_plan",
+ "target": "dev",
+ "params": {"var_file": "env/dev.tfvars", "stop_on_failure": false},
+ "note": "The plan after the planted drift: it must show the revoked grant as a change."
+}

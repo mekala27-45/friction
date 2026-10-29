@@ -10,6 +10,8 @@ contract tags. Writes the evidence to the exports volume for the repository.
 from __future__ import annotations
 
 import json
+import os
+import shutil
 from pathlib import Path
 
 import _boot
@@ -35,10 +37,16 @@ spark.sql(
     f"CASE WHEN EXISTS (SELECT 1 FROM {ops}.entitlements e WHERE e.principal = current_user() AND e.restricted) "
     "THEN v ELSE NULL END"
 )
+# The replay clock: the latest event landed, per desk. The row filter hides what is newer than the
+# reader's horizon on that clock, since the wall clock is years past synthetic 2020 data.
+spark.sql(
+    f"CREATE OR REPLACE TABLE {ops}.replay_clock AS SELECT 'payments' AS desk, max(event_ts) AS now "
+    f"FROM {silver}.payments_silver UNION ALL SELECT 'logins', max(event_ts) FROM {silver}.logins_silver"
+)
 spark.sql(
     f"CREATE OR REPLACE FUNCTION {ops}.past_horizon(ts TIMESTAMP) RETURNS BOOLEAN RETURN "
-    f"ts <= current_timestamp() - make_interval(0, 0, 0, coalesce((SELECT max(horizon_days) FROM {ops}.entitlements "
-    "e WHERE e.principal = current_user()), 90))"
+    f"ts <= (SELECT max(now) FROM {ops}.replay_clock) - make_interval(0, 0, 0, coalesce((SELECT max(horizon_days) "
+    f"FROM {ops}.entitlements e WHERE e.principal = current_user()), 90))"
 )
 
 root = Path(args.root)
@@ -83,12 +91,46 @@ try:
 finally:
     spark.sql(f"UPDATE {ops}.entitlements SET restricted = true WHERE principal = current_user()")
 evidence["read"] = {"entitled": unmasked, "withdrawn": masked}
+
+# The row filter: rows a reader sees at a horizon of 0 and of 30 days on the replay clock.
+rows_at = {}
+try:
+    for days in (0, 30):
+        spark.sql(f"UPDATE {ops}.entitlements SET horizon_days = {days} WHERE principal = current_user()")
+        rows_at[str(days)] = spark.sql(f"SELECT count(*) AS n FROM {view}").collect()[0]["n"]
+finally:
+    spark.sql(f"UPDATE {ops}.entitlements SET horizon_days = 0 WHERE principal = current_user()")
+evidence["row_filter"] = {"view": view, "rows_by_horizon_days": rows_at}
+
+# Lineage the platform recorded for this environment's tables, names only.
+try:
+    edges = spark.sql(
+        "SELECT source_table_full_name AS source, target_table_full_name AS target, count(*) AS events "
+        "FROM system.access.table_lineage WHERE target_table_full_name LIKE "
+        f"'{args.catalog}.{args.prefix}_%' AND source_table_full_name IS NOT NULL GROUP BY 1, 2 ORDER BY 1, 2"
+    ).collect()
+    evidence["lineage"] = [r.asDict() for r in edges]
+except Exception as exc:
+    evidence["lineage"] = {"error": f"{type(exc).__name__}: {str(exc)[:200]}"}
+
+# The scan: what a reader of the masked views can see that looks like a raw identifier.
+ipv4 = r"^([0-9]{1,3}\\.){3}[0-9]{1,3}$"
+scan = {}
+for name, cols in (("v_logins_silver", ("ip_key", "ua_key", "user_key", "city")), ("v_payments_silver",
+                   ("account_key", "user_key", "merchant_key"))):  # fmt: skip
+    for c in cols:
+        q = (f"SELECT count(*) AS n FROM {gold}.{name} WHERE {c} RLIKE '{ipv4}' "
+             f"OR {c} RLIKE '^[0-9]{{13,19}}$'")  # fmt: skip
+        scan[f"{name}.{c}"] = spark.sql(q).collect()[0]["n"]
+evidence["scan"] = scan
 evidence["grants"] = [r.asDict() for r in spark.sql(f"SHOW GRANTS ON SCHEMA {gold}").collect()]
 
 out = f"{_boot.volume(args, 'exports')}/{args.export}/governance.json"
-spark.createDataFrame([(json.dumps(evidence, default=str),)], "doc string").coalesce(1).write.mode("overwrite").text(
-    out
-)
+os.makedirs(os.path.dirname(out), exist_ok=True)
+if os.path.isdir(out):  # an earlier run wrote a Spark text folder under this name
+    shutil.rmtree(out)
+with open(out, "w", encoding="utf-8") as fh:
+    json.dump(evidence, fh, indent=1, default=str)
 ledger.write(
     inputs={"contracts": len(evidence["tags"])}, outputs=evidence["read"], rows_in=0, rows_out=0, status="succeeded"
 )  # type: ignore[arg-type]

@@ -7,6 +7,7 @@ for each breach from alerts.json) and fails the task when any alert fires.
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 
 import _boot
@@ -30,11 +31,7 @@ for desk, key, src_key, names, feats in (
 ):
     p = plan["desks"][desk]["splits"]
     for split in ("validation", "test"):
-        rows = spark.sql(
-            f"SELECT date_format(explode(sequence(to_date('{p[split]['start']}'), to_date('{p[split]['end']}') - 1, "
-            "interval 1 month)), 'yyyy-MM') AS m"
-        ).collect()
-        scored |= {r["m"] for r in rows}
+        scored |= set(monitor.months(str(p[split]["start"]), str(p[split]["end"])))
     silver = spark.read.table(_boot.fq(args, "silver", f"{desk}_silver"))
     bronze = spark.read.table(_boot.fq(args, "bronze", f"{desk}_bronze"))
     quarantine = spark.read.table(_boot.fq(args, "silver", "quarantine"))
@@ -55,10 +52,11 @@ report["label_maturity"] = monitor.label_maturity(
 )
 alerts = monitor.alerts(report, cfg, scored)
 base = f"{_boot.volume(args, 'exports')}/{args.export}"
+# Plain files on the volume, not a Spark text folder: the workflow reads alerts.json by name.
+os.makedirs(base, exist_ok=True)
 for name, doc in (("report.json", report), ("alerts.json", alerts)):
-    spark.createDataFrame([(json.dumps(doc, default=str),)], "doc string").coalesce(1).write.mode("overwrite").text(
-        f"{base}/{name}"
-    )
+    with open(f"{base}/{name}", "w", encoding="utf-8") as fh:
+        json.dump(doc, fh, indent=1, default=str)
 status = "failed" if alerts else "succeeded"
 ledger.write(
     inputs={"thresholds": cfg}, outputs={"alerts": len(alerts)}, rows_in=0, rows_out=len(alerts), status=status

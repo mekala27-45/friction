@@ -132,6 +132,11 @@ class TestIdentifierScan:
         assert scan.find_card_numbers("id-4111111111111111-x") == []
         assert scan.find_card_numbers("4111111111111111") == ["4111111111111111"]
 
+    def test_epoch_milliseconds_are_not_card_numbers(self) -> None:
+        assert scan.luhn_valid("1602750302558")
+        assert scan.find_card_numbers('"last_success_ms": 1602750302558') == []
+        assert scan.find_card_numbers("4222222222222") == ["4222222222222"]
+
     def test_refuses_nothing(self, tmp_path: Path) -> None:
         with pytest.raises(ValueError, match="no files"):
             scan.check(tmp_path, [], planted=set())

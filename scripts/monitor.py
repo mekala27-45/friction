@@ -45,11 +45,7 @@ def main() -> int:
         p = plan["desks"][desk]["splits"]
         train = (p["train"]["start"], p["train"]["end"])
         for split in ("validation", "test"):
-            months = spark.sql(
-                f"SELECT explode(sequence(to_date('{p[split]['start']}'), to_date('{p[split]['end']}') - 1, "
-                "interval 1 month)) AS m"
-            ).collect()
-            scored |= {r["m"].strftime("%Y-%m") for r in months}
+            scored |= set(monitor.months(str(p[split]["start"]), str(p[split]["end"])))
         silver, bronze = read(f"{desk}_silver"), read(f"{desk}_bronze")
         quarantine = read("quarantine")
         d = {
