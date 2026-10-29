@@ -23,6 +23,7 @@ from typing import Any
 
 from friction_core.hashing import sha256_file
 
+from friction_workspace.neon import neon_endpoint
 from friction_workspace.requests import Request, pending
 
 ROOT = Path(__file__).resolve().parents[4]
@@ -131,6 +132,9 @@ def handle(request: Request, out: Path, log: Path) -> dict[str, Any]:
     if request.kind in {"terraform_plan", "terraform_apply"}:
         tf = ROOT / "infra" / "terraform"
         env = {"TF_IN_AUTOMATION": "1"}
+        conn = os.environ.get("TF_STATE_CONN") or os.environ.get("PG_CONN_STR")
+        if conn:
+            env["PG_CONN_STR"] = neon_endpoint(conn)
         _sh(["terraform", "init", "-input=false"], log, cwd=tf, env=env)
         varfile = ["-var-file", str(request.params.get("var_file", "env/dev.tfvars"))]
         _sh(

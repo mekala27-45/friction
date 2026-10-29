@@ -102,6 +102,9 @@ jobs:
         if: env.DATABRICKS_TOKEN != '' && env.PG_CONN_STR != ''
         working-directory: infra/terraform
         run: |
+          PG_CONN_STR="$(PYTHONPATH="$GITHUB_WORKSPACE/packages/workspace/src" python3 -m friction_workspace.neon)"
+          echo "::add-mask::$PG_CONN_STR"
+          export PG_CONN_STR
           terraform init -input=false -reconfigure
           terraform plan -input=false -no-color -var-file=env/dev.tfvars -lock=false | tee plan.txt
       - uses: actions/upload-artifact@v4
