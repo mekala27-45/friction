@@ -1,0 +1,6 @@
+{
+ "id": "2026-10-29-07c-deploy-dev",
+ "kind": "bundle_deploy",
+ "target": "dev",
+ "note": "Deploy the unknown account bar of 100,000 attempts and the state machine groups that fit the 1 GB UDF cap."
+}
