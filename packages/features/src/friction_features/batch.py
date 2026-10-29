@@ -23,6 +23,14 @@ LOGIN_INPUT = (
 )  # fmt: skip
 
 
+def _frame(key: str, refs: np.ndarray, values: np.ndarray, names: tuple[str, ...]) -> pd.DataFrame:
+    """The output from one preallocated block of doubles: about 8 bytes a feature, where a list of
+    Python floats costs about 32. Serverless caps Python UDF memory at 1 GB."""
+    out = pd.DataFrame(values, columns=list(names), copy=False)
+    out.insert(0, key, refs)
+    return out
+
+
 def payments_schema() -> str:
     return "txn_ref long, " + ", ".join(f"{f} double" for f in payments.FEATURES)
 
@@ -37,24 +45,26 @@ def ip_schema() -> str:
 
 def payments_partition(pdf: pd.DataFrame) -> pd.DataFrame:
     pdf = pdf.sort_values(["account_key", "event_ts_s", "txn_ref"], kind="mergesort")
-    rows: list[list[float]] = []
     refs = pdf["txn_ref"].to_numpy(np.int64)
+    out = np.empty((len(pdf), len(payments.FEATURES)), dtype=np.float64)
     state = payments.CardState()
     current: str | None = None
-    for acc, ts, ref, amt, merch, mcc, ch, loc, foreign, err, dsi, rate in zip(
-        pdf["account_key"].tolist(),
-        pdf["event_ts_s"].tolist(),
-        refs.tolist(),
-        pdf["amount_cents"].tolist(),
-        pdf["merchant_key"].tolist(),
-        pdf["mcc"].tolist(),
-        pdf["channel"].tolist(),
-        pdf["location"].tolist(),
-        pdf["foreign"].tolist(),
-        pdf["has_error"].tolist(),
-        pdf["days_since_issue"].tolist(),
-        pdf["mcc_fraud_rate"].tolist(),
-        strict=True,
+    for i, (acc, ts, ref, amt, merch, mcc, ch, loc, foreign, err, dsi, rate) in enumerate(
+        zip(
+            pdf["account_key"].tolist(),
+            pdf["event_ts_s"].tolist(),
+            refs.tolist(),
+            pdf["amount_cents"].tolist(),
+            pdf["merchant_key"].tolist(),
+            pdf["mcc"].tolist(),
+            pdf["channel"].tolist(),
+            pdf["location"].tolist(),
+            pdf["foreign"].tolist(),
+            pdf["has_error"].tolist(),
+            pdf["days_since_issue"].tolist(),
+            pdf["mcc_fraud_rate"].tolist(),
+            strict=True,
+        )
     ):
         if acc != current:
             state = payments.CardState()
@@ -63,11 +73,9 @@ def payments_partition(pdf: pd.DataFrame) -> pd.DataFrame:
             int(ts), int(ref), int(amt), str(merch), int(mcc), int(ch), str(loc or ""), bool(foreign),
             bool(err), float(dsi), float(rate),
         )  # fmt: skip
-        rows.append(state.features(ev))
+        out[i] = state.features(ev)
         state.update(ev)
-    out = pd.DataFrame(rows, columns=list(payments.FEATURES), dtype=np.float64)
-    out.insert(0, "txn_ref", refs)
-    return out
+    return _frame("txn_ref", refs, out, payments.FEATURES)
 
 
 def logins_partition(pdf: pd.DataFrame) -> pd.DataFrame:
@@ -75,7 +83,7 @@ def logins_partition(pdf: pd.DataFrame) -> pd.DataFrame:
     refs = pdf["login_ref"].to_numpy(np.int64)
     value_cols = [pdf[f"v_{lvl}"].fillna("").astype(str).tolist() for lvl in logins.LEVELS]
     rtts = pdf["rtt_ms"].tolist()
-    rows: list[list[float]] = []
+    out = np.empty((len(pdf), len(logins.FEATURES)), dtype=np.float64)
     state = logins.UserState()
     current: str | None = None
     for i, (user, ts, ref, ok, synth) in enumerate(
@@ -97,31 +105,29 @@ def logins_partition(pdf: pd.DataFrame) -> pd.DataFrame:
             None if rtt is None or (isinstance(rtt, float) and np.isnan(rtt)) else float(rtt),
             bool(ok), bool(synth),
         )  # fmt: skip
-        rows.append(state.features(ev))
+        out[i] = state.features(ev)
         state.update(ev)
-    out = pd.DataFrame(rows, columns=list(logins.FEATURES), dtype=np.float64)
-    out.insert(0, "login_ref", refs)
-    return out
+    return _frame("login_ref", refs, out, logins.FEATURES)
 
 
 def ip_partition(pdf: pd.DataFrame) -> pd.DataFrame:
     pdf = pdf.sort_values(["ip_key", "event_ts_ms", "login_ref"], kind="mergesort")
     refs = pdf["login_ref"].to_numpy(np.int64)
-    rows: list[list[float]] = []
+    out = np.empty((len(pdf), len(logins.IP_FEATURES)), dtype=np.float64)
     state = logins.IpState()
     current: str | None = None
-    for ip, ts, ok, synth in zip(
-        pdf["ip_key"].tolist(),
-        pdf["event_ts_ms"].tolist(),
-        pdf["success"].tolist(),
-        pdf["synthetic"].tolist(),
-        strict=True,
+    for i, (ip, ts, ok, synth) in enumerate(
+        zip(
+            pdf["ip_key"].tolist(),
+            pdf["event_ts_ms"].tolist(),
+            pdf["success"].tolist(),
+            pdf["synthetic"].tolist(),
+            strict=True,
+        )
     ):
         if ip != current:
             state = logins.IpState()
             current = ip
-        rows.append(state.features(int(ts)))
+        out[i] = state.features(int(ts))
         state.update(int(ts), bool(ok), bool(synth))
-    out = pd.DataFrame(rows, columns=list(logins.IP_FEATURES), dtype=np.float64)
-    out.insert(0, "login_ref", refs)
-    return out
+    return _frame("login_ref", refs, out, logins.IP_FEATURES)
