@@ -174,6 +174,12 @@ def handle(request: Request, out: Path, log: Path) -> dict[str, Any]:
                     if drop[:4].isdigit() and int(start) <= int(drop[:4]) <= int(through):
                         _sh(["databricks", "fs", "cp", "-r", f"dbfs:{outbox}/{feed}/drops/{drop}",
                              str(landing / feed / "drops" / drop)], log)  # fmt: skip
+        if request.params.get("redelivery"):
+            # Corrected redeliveries land beside the drop they correct, as jobs/land.py lands them.
+            listing = _sh(["databricks", "fs", "ls", f"dbfs:{outbox}/payments/redelivery"], log)
+            for drop in sorted(n.strip().rstrip("/") for n in listing.split() if n.strip()):
+                _sh(["databricks", "fs", "cp", "-r", f"dbfs:{outbox}/payments/redelivery/{drop}",
+                     str(landing / "payments" / "drops" / f"{drop}_redelivery")], log)  # fmt: skip
         started = time.monotonic()
         memory = str(request.params.get("memory", "4g"))
         spark_env = {"SPARK_DRIVER_MEMORY": memory}

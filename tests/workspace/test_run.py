@@ -152,3 +152,15 @@ def test_a_failed_job_still_exports_its_evidence(monkeypatch: pytest.MonkeyPatch
     lines = [" ".join(c) for c, _ in shell.calls]
     assert any("dbfs:/Volumes/x/exports/monitor" in line for line in lines)
     assert json.loads((out / "2026-01-01-02-export" / "done.json").read_text())["status"] == "succeeded"
+
+
+def test_portable_lands_the_redelivery_beside_its_drop(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    shell = FakeShell()
+    monkeypatch.setattr(run, "_sh", shell)
+    req, out = tmp_path / "requests", tmp_path / "runs"
+    params = {"outbox_volume": "/Volumes/x/outbox", "drops": {"payments": "all"}, "redelivery": True}
+    _request(req, "2026-01-01-01-portable", "portable", params=params)
+    assert _main(monkeypatch, req, out) == 0
+    copies = [c for c, _ in shell.calls if c[:3] == ["databricks", "fs", "cp"]]
+    pairs = {(c[4], Path(c[5]).name) for c in copies if "/redelivery/" in c[4]}
+    assert ("dbfs:/Volumes/x/outbox/payments/redelivery/0001_1991-01", "0001_1991-01_redelivery") in pairs

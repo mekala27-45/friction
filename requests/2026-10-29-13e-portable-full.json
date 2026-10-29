@@ -1,0 +1,12 @@
+{
+ "id": "2026-10-29-13e-portable-full",
+ "kind": "portable",
+ "target": "dev",
+ "params": {
+  "outbox_volume": "/Volumes/workspace/friction_dev_raw/outbox",
+  "drops": {"payments": "all", "logins": "all"},
+  "memory": "10g",
+  "redelivery": true
+ },
+ "note": "The open source run over every drop with the approved day 40 change and the redelivery, for the reconcile against the workspace after its replay."
+}

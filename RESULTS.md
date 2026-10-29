@@ -7,7 +7,7 @@ fails CI. Source of each block in its first line.
 
 ## The definition of done
 
-10 of eighteen lines done.
+11 of eighteen lines done.
 
 | Step | Status | Line | Evidence |
 |---:|---|---|---|
@@ -16,7 +16,7 @@ fails CI. Source of each block in its first line.
 | 3 | done | The portable pipeline on open source Spark 4.2 with local tests and the full local run | results/workspace/full_open_source.json: every drop on open source Spark, on the Actions runner (the build machine has 2 cores and 19 GB of disk); tests/transforms |
 | 4 | done | Terraform with state in Neon, the bundle, the workspace workflow, the results branch, reviewed promotion | requests/ and the results branch; terraform state in Neon (request 03c); results/provenance.json |
 | 5 | not done | The Lakeflow pipeline deployed to dev and run; the reconcile against the local run | the first month is equal on all nine tables (results/reconcile_first_month.json); over every row 8 of 9 are equal and the card age feature differs (results/reconcile_full.json) |
-| 6 | not done | Jobs with retries and the run ledger; idempotency, order and late label tests in the workspace | results/workspace/integration.json: re-landing, shuffled delivery and a repeat backfill leave every table identical; the out of order label test and the run ledger summary have not been read yet |
+| 6 | done | Jobs with retries and the run ledger; idempotency, order and late label tests in the workspace | results/workspace/integration.json and integration_labels.json (every table digest identical after re-landing, shuffled delivery, a repeat backfill and out of order labels); retries in databricks.yml; results/workspace/run_ledger.json |
 | 7 | done | Every row of both sources backfilled in the workspace | results/workspace/full_export.json: 24,383,185 payments and 31,267,738 logins in silver |
 | 8 | done | Governance: tags, masks, the row filter, grants, lineage, the scan; the planted drift caught by the plan | results/workspace/governance.json (tags, masks, the row filter, grants, lineage, the scan); results/workspace/drift_terraform_plan.txt (the revoked grant caught as one change) |
 | 9 | done | Point in time features with the leakage test; training sets as of a cut with the two clocks test | tests/features/test_point_in_time.py; tests/transforms/test_training.py |

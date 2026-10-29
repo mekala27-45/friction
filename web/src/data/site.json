@@ -3749,9 +3749,9 @@
     ],
     [
      "6",
-     "not done",
+     "done",
      "Jobs with retries and the run ledger; idempotency, order and late label tests in the workspace",
-     "results/workspace/integration.json: re-landing, shuffled delivery and a repeat backfill leave every table identical; the out of order label test and the run ledger summary have not been read yet"
+     "results/workspace/integration.json and integration_labels.json (every table digest identical after re-landing, shuffled delivery, a repeat backfill and out of order labels); retries in databricks.yml; results/workspace/run_ledger.json"
     ],
     [
      "7",
@@ -4999,9 +4999,9 @@
   }
  },
  "values": {
-  "build.commits": "77",
-  "checklist.done": "10",
-  "checklist.missing": "5, 6, 10, 12, 13, 15, 17, 18",
+  "build.commits": "78",
+  "checklist.done": "11",
+  "checklist.missing": "5, 10, 12, 13, 15, 17, 18",
   "data.rba.asn_unrealistic": "1,457,824",
   "data.rba.attack_ip": "3,096,977",
   "data.rba.digest": "ca1d974e97ae",
