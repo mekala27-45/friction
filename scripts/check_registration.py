@@ -23,24 +23,33 @@ import yaml
 from friction_core.hashing import sha256_json
 
 PLAN = Path("evaluation/plan.yaml")
+HYPOTHESES = Path("evaluation/hypotheses.yaml")
 LOCK = Path("evaluation/plan.lock")
 
 
+def digest(root: Path, path: Path = PLAN) -> str:
+    return sha256_json(yaml.safe_load((root / path).read_text(encoding="utf-8")))
+
+
 def plan_digest(root: Path) -> str:
-    return sha256_json(yaml.safe_load((root / PLAN).read_text(encoding="utf-8")))
+    return digest(root, PLAN)
 
 
 def check(root: Path) -> str:
     if not (root / LOCK).exists():
         raise ValueError("evaluation/plan.lock does not exist")
     lock = json.loads((root / LOCK).read_text(encoding="utf-8"))
-    digest = plan_digest(root)
-    if lock["sha256"] != digest:
-        raise ValueError(f"evaluation/plan.yaml hashes to {digest[:12]}, the lock says {lock['sha256'][:12]}")
     decisions = (root / "DECISIONS.md").read_text(encoding="utf-8")
-    if digest not in decisions:
-        raise ValueError("no DECISIONS.md entry names the locked plan hash")
-    return digest
+    entries = [(PLAN, lock["sha256"])]
+    if "hypotheses" in lock:
+        entries.append((HYPOTHESES, lock["hypotheses"]["sha256"]))
+    for path, locked in entries:
+        got = digest(root, path)
+        if got != locked:
+            raise ValueError(f"{path} hashes to {got[:12]}, the lock says {locked[:12]}")
+        if got not in decisions:
+            raise ValueError(f"no DECISIONS.md entry names the locked hash of {path}")
+    return str(lock["sha256"])
 
 
 def main() -> int:
@@ -48,9 +57,14 @@ def main() -> int:
     parser.add_argument("--lock", action="store_true")
     args = parser.parse_args()
     if args.lock:
-        digest = plan_digest(ROOT)
-        (ROOT / LOCK).write_text(json.dumps({"sha256": digest, "file": str(PLAN)}, indent=1) + "\n", encoding="utf-8")
-        print(digest)
+        lock = json.loads((ROOT / LOCK).read_text(encoding="utf-8")) if (ROOT / LOCK).exists() else {}
+        # A registered plan keeps its hash; --lock only adds what was not registered yet.
+        lock.setdefault("sha256", plan_digest(ROOT))
+        lock.setdefault("file", str(PLAN))
+        if (ROOT / HYPOTHESES).exists():
+            lock.setdefault("hypotheses", {"sha256": digest(ROOT, HYPOTHESES), "file": str(HYPOTHESES)})
+        (ROOT / LOCK).write_text(json.dumps(lock, indent=1) + "\n", encoding="utf-8")
+        print(json.dumps(lock))
         return 0
     print(f"registration gate: the plan is registered as {check(ROOT)[:12]}")
     return 0

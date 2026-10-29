@@ -132,7 +132,7 @@ def test_business_key_conflict_quarantines_both(spark) -> None:  # type: ignore[
 
 def _bronze_login(**over: str) -> dict[str, str | None]:
     row: dict[str, str | None] = {
-        "login_index": "5", "login_timestamp": "2020-06-01 10:00:00.123", "user_id": "-4324475583306591935",
+        "login_index": "5", "login_timestamp": "2020-06-01 10:00:00.123", "user_id": "1234",
         "rtt_ms": "", "ip_address": "81.167.144.58", "country": "NO", "region": "-", "city": "-", "asn": "29695",
         "user_agent": "Mozilla/5.0", "browser": "Chrome Mobile 46.0.2490", "os": "Android 4.1", "device_type": "mobile",
         "login_successful": "True", "is_attack_ip": "False", "_rescued_data": None,
@@ -153,8 +153,28 @@ def _logins(spark, rows):  # type: ignore[no-untyped-def]
         f"`{c}` string" if c not in {"file_modified_at", "ingested_at"} else f"`{c}` timestamp" for c in cols
     )
     df = spark.createDataFrame([tuple(r[c] for c in cols) for r in rows], schema)
-    s, q = silver.logins_split(silver.logins_checked(df, F.lit("salt")))
+    s, q = silver.logins_split(silver.logins_checked(df, F.lit("salt")), silver.login_account_stats(df, F.lit("salt")))
     return s.toPandas(), q.toPandas()
+
+
+def test_unknown_account_flag(spark) -> None:  # type: ignore[no-untyped-def]
+    from friction_transforms import silver
+    from friction_transforms.bronze import LOGIN_TEXT
+    from pyspark.sql import functions as F
+
+    cols = [*LOGIN_TEXT, "_rescued_data", "source_file", "file_modified_at", "drop_id", "ingested_at"]
+    schema = ", ".join(
+        f"`{c}` string" if c not in {"file_modified_at", "ingested_at"} else f"`{c}` timestamp" for c in cols
+    )
+    rows = [_bronze_login(login_index=str(i), user_id="7", login_successful="False") for i in range(5)]
+    rows += [_bronze_login(login_index="9", user_id="8", login_successful="True")]
+    df = spark.createDataFrame([tuple(r[c] for c in cols) for r in rows], schema)
+    stats = silver.login_account_stats(df, F.lit("salt"), attempts=3, share=0.1).toPandas()
+    assert sorted(stats["unknown_account"].tolist()) == [False, True]
+    s, _ = silver.logins_split(
+        silver.logins_checked(df, F.lit("salt")), silver.login_account_stats(df, F.lit("salt"), 3)
+    )
+    assert int(s.where(F.col("unknown_account")).count()) == 5
 
 
 def test_login_typing_and_flags(spark) -> None:  # type: ignore[no-untyped-def]
@@ -239,11 +259,11 @@ def test_issue_age_reads_the_generation_in_effect(spark) -> None:  # type: ignor
     from friction_transforms import gold
 
     silver = spark.createDataFrame(
-        [(1, 100, pd.Timestamp("2019-03-10")), (2, 100, pd.Timestamp("2019-05-10"))],
+        [(1, 100, pd.Timestamp("2019-03-10").to_pydatetime()), (2, 100, pd.Timestamp("2019-05-10").to_pydatetime())],
         "txn_ref long, account_ref long, event_ts timestamp",
     )
     issues = spark.createDataFrame(
-        [(100, 0, pd.Timestamp("2019-01-01")), (100, 1, pd.Timestamp("2019-05-01"))],
+        [(100, 0, pd.Timestamp("2019-01-01").to_pydatetime()), (100, 1, pd.Timestamp("2019-05-01").to_pydatetime())],
         "account_ref long, card_generation long, issued_at timestamp",
     )
     got = {r["txn_ref"]: r["days_since_issue"] for r in gold.issue_age(silver, issues).collect()}
@@ -258,8 +278,8 @@ def test_known_frauds_respects_the_system_time_clock(spark) -> None:  # type: ig
         "txn_ref long, mcc int, event_date date, is_refund boolean",
     )
     hist = spark.createDataFrame(
-        [(1, True, {"reported_at": pd.Timestamp("2019-01-31 12:00"), "seq": 1}, None),
-         (2, True, {"reported_at": pd.Timestamp("2019-02-01 00:00:01"), "seq": 2}, None)],
+        [(1, True, {"reported_at": pd.Timestamp("2019-01-31 12:00").to_pydatetime(), "seq": 1}, None),
+         (2, True, {"reported_at": pd.Timestamp("2019-02-01 00:00:01").to_pydatetime(), "seq": 2}, None)],
         "event_ref long, is_fraud boolean, __START_AT struct<reported_at:timestamp,seq:bigint>, "
         "__END_AT struct<reported_at:timestamp,seq:bigint>",
     )  # fmt: skip
