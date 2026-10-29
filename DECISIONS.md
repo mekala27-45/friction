@@ -209,3 +209,12 @@ for the same image (render.yaml, Dockerfile.render). Source: Vercel, Container R
 `spark-pipelines run` starts its own Spark Connect server with `--remote local`, which is one thread.
 The first full local run took that default; scripts/run_portable.py now passes
 `--remote local[<cores>]`.
+
+## 2026-10-29 Reason codes for the highest scores only
+
+LightGBM's exact TreeSHAP measured about a millisecond per row on the build machine, and the scored
+sets hold millions of rows. Scoring now runs in two passes: every row gets every model's score, then
+the rows at or above each model's top five percent (payments) or fifteen percent (logins) get reason
+codes. At the registered budgets a model flags about one percent of good payments and ten percent of
+good sign ins, so every step up and decline falls inside; the coverage gate checks it on test, and
+the API computes codes for every event it flags.

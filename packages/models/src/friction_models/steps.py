@@ -159,7 +159,8 @@ def _codes(contrib: np.ndarray, names: list[str], mapping: dict[str, str]) -> li
     return [",".join(top_codes(row, names, mapping)) for row in contrib]
 
 
-def score_payments(pdf: pd.DataFrame, folder: Path, mapping: dict[str, str]) -> pd.DataFrame:
+def score_payments(pdf: pd.DataFrame, folder: Path) -> pd.DataFrame:
+    """Scores of every model, and the floor's codes (the rules that fired)."""
     x = pdf[PAY_FEATURES].to_numpy(np.float64)
     logistic = Logistic.from_dict(json.loads((folder / "payments_logistic.json").read_text(encoding="utf-8")))
     gbm = Gbm.from_text((folder / "payments_lightgbm.txt").read_text(encoding="utf-8"))
@@ -169,29 +170,71 @@ def score_payments(pdf: pd.DataFrame, folder: Path, mapping: dict[str, str]) -> 
     out["score_floor"] = floors.payment_scores(x)
     out["codes_floor"] = [",".join(floors.payment_fired(r)) for r in x]
     out["score_logistic"] = logistic.predict(x)
-    out["codes_logistic"] = _codes(logistic.contributions(x), PAY_FEATURES, mapping)
     out["score_lightgbm"] = gbm.predict(x)
-    out["codes_lightgbm"] = _codes(gbm.contributions(x), PAY_FEATURES, mapping)
     return out
 
 
-def score_logins(pdf: pd.DataFrame, folder: Path, mapping: dict[str, str]) -> pd.DataFrame:
+def code_payments(pdf: pd.DataFrame, folder: Path, mapping: dict[str, str], cut: dict[str, float]) -> pd.DataFrame:
+    """Reason codes for the rows at or above each model's cutoff; empty below it."""
+    x = pdf[PAY_FEATURES].to_numpy(np.float64)
+    out = pdf[["txn_ref"]].copy()
+    models: dict[str, Logistic | Gbm] = {
+        "logistic": Logistic.from_dict(json.loads((folder / "payments_logistic.json").read_text(encoding="utf-8"))),
+        "lightgbm": Gbm.from_text((folder / "payments_lightgbm.txt").read_text(encoding="utf-8")),
+    }
+    for name, model in models.items():
+        codes = [""] * len(pdf)
+        rows = np.nonzero(pdf[f"score_{name}"].to_numpy(np.float64) >= cut[name])[0]
+        if len(rows):
+            for i, c in zip(rows, _codes(model.contributions(x[rows]), PAY_FEATURES, mapping), strict=True):
+                codes[i] = c
+        out[f"codes_{name}"] = codes
+    return out
+
+
+def score_logins(pdf: pd.DataFrame, folder: Path) -> pd.DataFrame:
+    """Scores of every model, the floor's codes, and the columns the hypotheses and the RBA comparison read."""
     freeman = Freeman.from_json((folder / "logins_freeman.json").read_text(encoding="utf-8"))
     values = list(zip(*[pdf[f"v_{lvl}"].astype(str) for lvl in login_features.LEVELS], strict=True))
     feats = pdf[list(login_features.FEATURES)].to_numpy(np.float64)
     out = pdf[
         ["login_ref", "user_key", "event_ts", "success", "is_attack_ip", "synthetic", "attacker_model", "label"]
     ].copy()
+    out["n_success_prior"] = pdf["n_success_prior"].astype("int64")
+    for lvl in ("ip", "asn", "country", "city", "device"):
+        out[f"new_{lvl}"] = pdf[f"{lvl}_count"].to_numpy(np.float64) == 0
     out["score_floor"] = floors.login_scores(feats)
     out["codes_floor"] = [",".join(floors.login_fired(r)) for r in feats]
     out["score_freeman"] = freeman.scores(values, feats)
-    contrib = np.array([freeman.contributions(v, f) for v, f in zip(values, feats, strict=True)], dtype=np.float64)
-    out["codes_freeman"] = _codes(contrib.reshape(len(values), len(CODE_FEATURES)), CODE_FEATURES, mapping)
+    for name, cols in (("lightgbm", LOGIN_FEATURES), ("lightgbm_rep", LOGIN_FEATURES_REP)):
+        model = Gbm.from_text((folder / f"logins_{name}.txt").read_text(encoding="utf-8"))
+        out[f"score_{name}"] = model.predict(pdf[cols].astype(float).to_numpy(np.float64))
+    return out
+
+
+def code_logins(pdf: pd.DataFrame, folder: Path, mapping: dict[str, str], cut: dict[str, float]) -> pd.DataFrame:
+    out = pdf[["login_ref"]].copy()
+    freeman = Freeman.from_json((folder / "logins_freeman.json").read_text(encoding="utf-8"))
+    values = list(zip(*[pdf[f"v_{lvl}"].astype(str) for lvl in login_features.LEVELS], strict=True))
+    feats = pdf[list(login_features.FEATURES)].to_numpy(np.float64)
+    codes = [""] * len(pdf)
+    rows = np.nonzero(pdf["score_freeman"].to_numpy(np.float64) >= cut["freeman"])[0]
+    if len(rows):
+        contrib = np.array([freeman.contributions(values[i], feats[i]) for i in rows], dtype=np.float64)
+        for i, c in zip(
+            rows, _codes(contrib.reshape(len(rows), len(CODE_FEATURES)), CODE_FEATURES, mapping), strict=True
+        ):
+            codes[i] = c
+    out["codes_freeman"] = codes
     for name, cols in (("lightgbm", LOGIN_FEATURES), ("lightgbm_rep", LOGIN_FEATURES_REP)):
         model = Gbm.from_text((folder / f"logins_{name}.txt").read_text(encoding="utf-8"))
         x = pdf[cols].astype(float).to_numpy(np.float64)
-        out[f"score_{name}"] = model.predict(x)
-        out[f"codes_{name}"] = _codes(model.contributions(x), cols, mapping)
+        codes = [""] * len(pdf)
+        rows = np.nonzero(pdf[f"score_{name}"].to_numpy(np.float64) >= cut[name])[0]
+        if len(rows):
+            for i, c in zip(rows, _codes(model.contributions(x[rows]), cols, mapping), strict=True):
+                codes[i] = c
+        out[f"codes_{name}"] = codes
     return out
 
 
@@ -199,7 +242,23 @@ def score_logins(pdf: pd.DataFrame, folder: Path, mapping: dict[str, str]) -> pd
 HYPOTHESIS_COLUMNS = ("hour", "merchant_new", "foreign")
 
 
-def _scored_schema(desk: str) -> Any:
+# Exact TreeSHAP costs about a millisecond a row; reason codes are computed for the highest scores
+# of each model on each split, this share of them, which covers every step up and decline at the
+# registered budgets with room to spare (DECISIONS.md). The coverage gate checks it on test.
+CODE_SHARE = {"payments": 0.05, "logins": 0.15}
+CODED = {"payments": ("logistic", "lightgbm"), "logins": ("freeman", "lightgbm", "lightgbm_rep")}
+
+
+def _codes_schema(desk: str) -> Any:
+    from pyspark.sql import types as T
+
+    key = "txn_ref" if desk == "payments" else "login_ref"
+    fields = [T.StructField(key, T.LongType())]
+    fields += [T.StructField(f"codes_{m}", T.StringType()) for m in CODED[desk]]
+    return T.StructType(fields)
+
+
+def _scored_schema(desk: str, with_codes: bool = True) -> Any:
     from pyspark.sql import types as T
 
     S, D, L, B, TS = T.StringType(), T.DoubleType(), T.LongType(), T.BooleanType(), T.TimestampType()
@@ -214,7 +273,9 @@ def _scored_schema(desk: str) -> Any:
         fields += [(f"new_{lvl}", B) for lvl in ("ip", "asn", "country", "city", "device")]
         models = ("floor", "freeman", "lightgbm", "lightgbm_rep")
     for m in models:
-        fields += [(f"score_{m}", D), (f"codes_{m}", S)]
+        fields += [(f"score_{m}", D)]
+        if with_codes or m == "floor":
+            fields += [(f"codes_{m}", S)]
     return T.StructType([T.StructField(n, t) for n, t in fields])
 
 
@@ -233,23 +294,38 @@ def score_step(spark: Any, read: Read, plan: dict[str, Any], models: Path, out: 
     out.mkdir(parents=True, exist_ok=True)
     summary: dict[str, Any] = {}
 
-    def pay_fn(batches):  # type: ignore[no-untyped-def]
-        import tempfile
+    def with_models(fn: Callable[[pd.DataFrame, Path], pd.DataFrame]) -> Callable[[Any], Any]:
+        def run(batches):  # type: ignore[no-untyped-def]
+            import tempfile
 
-        with tempfile.TemporaryDirectory() as tmp:
-            for name, text in texts.items():
-                (Path(tmp) / name).write_text(text, encoding="utf-8")
-            for pdf in batches:
-                yield score_payments(pdf, Path(tmp), pay_map)
+            with tempfile.TemporaryDirectory() as tmp:
+                for name, text in texts.items():
+                    (Path(tmp) / name).write_text(text, encoding="utf-8")
+                for pdf in batches:
+                    yield fn(pdf, Path(tmp))
 
-    def log_fn(batches):  # type: ignore[no-untyped-def]
-        import tempfile
+        return run
 
-        with tempfile.TemporaryDirectory() as tmp:
-            for name, text in texts.items():
-                (Path(tmp) / name).write_text(text, encoding="utf-8")
-            for pdf in batches:
-                yield score_logins(pdf, Path(tmp), log_map)
+    def two_passes(desk: str, frame: Any, key: str, target: Path) -> Any:
+        """Scores for every row, then reason codes for the rows above each model's cutoff."""
+        scorer = score_payments if desk == "payments" else score_logins
+        coder = code_payments if desk == "payments" else code_logins
+        mapping = pay_map if desk == "payments" else log_map
+        tmp = target.parent / f"_{target.name}_scores"
+        frame.mapInPandas(with_models(scorer), _scored_schema(desk, with_codes=False)).write.mode("overwrite").parquet(
+            str(tmp)
+        )
+        scores = spark.read.parquet(str(tmp))
+        q = 1.0 - CODE_SHARE[desk]
+        cut = {m: float(scores.approxQuantile(f"score_{m}", [q], 0.0005)[0]) for m in CODED[desk]}
+        above = scores.where(" OR ".join(f"score_{m} >= {cut[m]!r}" for m in CODED[desk]))
+        need = frame.join(above.select(key, *[f"score_{m}" for m in CODED[desk]]), key)
+        codes = need.mapInPandas(with_models(lambda pdf, f: coder(pdf, f, mapping, cut)), _codes_schema(desk))
+        out_df = scores.join(codes, key, "left")
+        for m in CODED[desk]:
+            out_df = out_df.withColumn(f"codes_{m}", F.coalesce(F.col(f"codes_{m}"), F.lit("")))
+        summary[f"{desk}_{target.name}_code_cutoffs"] = cut
+        return out_df
 
     pay = plan["desks"]["payments"]
     for split in ("validation", "test"):
@@ -263,7 +339,8 @@ def score_step(spark: Any, read: Read, plan: dict[str, Any], models: Path, out: 
             s["end"],
             cut,
         )
-        scored = frame.mapInPandas(pay_fn, _scored_schema("payments"))
+        target = out / f"payments_{split}"
+        scored = two_passes("payments", frame, "txn_ref", target)
         if split == "test":
             asof = training.label_as_of(read("labels_payments_history"), pay["label_cuts"]["test_as_of"]).select(
                 F.col("event_ref").alias("txn_ref"), F.col("is_fraud").alias("label_as_of_end")
@@ -271,7 +348,6 @@ def score_step(spark: Any, read: Read, plan: dict[str, Any], models: Path, out: 
             scored = scored.join(asof, "txn_ref", "left").withColumn(
                 "label_as_of_end", F.coalesce(F.col("label_as_of_end"), F.lit(False))
             )
-        target = out / f"payments_{split}"
         scored.orderBy("txn_ref").coalesce(1).write.mode("overwrite").parquet(str(target))
         summary[f"payments_{split}"] = str(target)
     lg = plan["desks"]["logins"]
@@ -283,8 +359,8 @@ def score_step(spark: Any, read: Read, plan: dict[str, Any], models: Path, out: 
             read("logins_features"), read("logins_silver"), read("login_attacks"), read("labels_logins_history"),
             s["start"], s["end"], cut, purpose,
         )  # fmt: skip
-        scored = lset.mapInPandas(log_fn, _scored_schema("logins"))
         target = out / f"logins_{split}"
+        scored = two_passes("logins", lset, "login_ref", target)
         scored.orderBy("login_ref").coalesce(4).write.mode("overwrite").parquet(str(target))
         summary[f"logins_{split}"] = str(target)
     (out / "summary.json").write_text(json.dumps(summary, indent=1), encoding="utf-8")
