@@ -341,3 +341,13 @@ def test_reconcile_stats_at_every_grain(spark) -> None:  # type: ignore[no-untyp
     assert out["feature_sums"]["payments_features"] == {"rows": 2.0, "amount_z": 2.0}
     assert out["histories"]["labels_payments_history"]["rows"] == 1
     assert out["quarantine"] == [{"desk": "payments", "rule": "P_LATE", "count": 1}]
+
+
+def test_a_feed_with_no_drop_yet_is_an_empty_table(spark, tmp_path: Path) -> None:  # type: ignore[no-untyped-def]
+    from friction_transforms import reader
+    from friction_transforms.bronze import TEXT_COLUMNS
+
+    (tmp_path / "payments" / "drops").mkdir(parents=True)
+    df = reader.read_drops(spark, str(tmp_path / "labels_payments" / "drops"), "labels_payments")
+    assert df.columns == [*TEXT_COLUMNS["labels_payments"], "_rescued_data", "source_file", "file_modified_at"]
+    assert df.count() == 0

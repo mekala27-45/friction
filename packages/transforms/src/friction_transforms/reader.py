@@ -27,7 +27,8 @@ def _local_headers(path: str) -> dict[str, list[str]] | None:
 
     root = Path(path.removeprefix("file:"))
     if not root.is_dir():
-        return None
+        # landing/<feed>/drops under a local landing zone that holds no drop of this feed yet.
+        return {} if len(root.parents) > 1 and root.parents[1].is_dir() else None
     out: dict[str, list[str]] = {}
     for f in sorted(root.rglob("*.csv.gz")):
         with gzip.open(f, "rt", encoding="utf-8", newline="") as fh:
@@ -69,6 +70,11 @@ def _named(raw: DataFrame, header: list[str], expected: tuple[str, ...]) -> Data
 def read_drops(spark: SparkSession, path: str, feed: str) -> DataFrame:
     expected = TEXT_COLUMNS[feed]
     local = _local_headers(path)
+    if local == {}:
+        # A feed with no drop yet (the first payments label arrives in 1995) is an empty table,
+        # the way Auto Loader reads an empty folder. Built from range(0): no analysis in a flow.
+        text = [F.lit(None).cast("string").alias(c) for c in (*expected, "_rescued_data", "source_file")]
+        return spark.range(0).select(*text, F.lit(None).cast("timestamp").alias("file_modified_at"))
     if local is not None:
         # Each file's header is its first line, read on the driver without decompressing the rest.
         # Files that share a header are read together and mapped by name with plain column
