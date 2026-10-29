@@ -7,8 +7,9 @@ description: Write and verify a workspace backfill request for a range of drops 
 
 1. Find the drops: `data/replay.lock.json` lists every drop id per desk (`NNNN_YYYY-MM-DD`).
 2. Write `requests/<date>-<nn>-backfill-<desk>-<first>-<last>.json` with `kind: bundle_run`, the job
-   `backfill`, and parameters `desk`, `from_drop`, `to_drop`. One request per desk; ranges never overlap
-   a running request.
+   `backfill`, and `job_params` `desk`, `from` and `through` (drop sequence numbers, the first four
+   digits of the drop id) and a `tag` for the export folder. One request per desk; ranges never
+   overlap a running request.
 3. Commit and push. The workspace workflow runs pending requests in file name order and writes
    `runs/<request id>/` on the results branch.
 4. Verify from the run, not the job status:
