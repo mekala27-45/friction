@@ -1,0 +1,32 @@
+# Five questions an analyst would ask, written before any rate of fraud by any feature was computed,
+# each tested once on the validation months, the family corrected with Benjamini-Hochberg at q 0.05,
+# and each printed with its verdict whatever it is. The groups are pandas query expressions over the
+# scored validation set (packages/models/src/friction_models/steps.py, _scored_schema); the test is
+# one sided, a above b, with the cluster bootstrap of the plan over the desk's unit of resampling.
+payments:
+  H1:
+    question: online purchases between midnight and six carry more fraud per dollar than chip purchases
+    a: "channel == 2 and hour < 6"
+    b: "channel == 1"
+    measure: dollars
+  H2:
+    question: purchases on a card's first visit to a merchant are more often fraud than repeat visits
+    a: "merchant_new == 1"
+    b: "merchant_new == 0"
+    measure: count
+  H3:
+    question: purchases abroad are more often fraud than purchases at home
+    a: "foreign == 1"
+    b: "foreign == 0"
+    measure: count
+logins:
+  H4:
+    question: a successful sign in from a new network (ASN) is more often an attack than one from a new city on a known network
+    a: "success and n_success_prior > 0 and new_asn"
+    b: "success and n_success_prior > 0 and new_city and not new_asn"
+    measure: count
+  H5:
+    question: sign ins from addresses on the attacker list fail more often than others
+    a: "not synthetic and is_attack_ip"
+    b: "not synthetic and not is_attack_ip"
+    measure: failure

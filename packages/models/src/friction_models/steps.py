@@ -101,8 +101,8 @@ def train_step(
     x = pdf[PAY_FEATURES].to_numpy(np.float64)
     y = pdf["label"].to_numpy(bool).astype(int)
     w = pdf["weight"].to_numpy(np.float64)
-    logistic = Logistic.fit(x, y)
-    gbm = Gbm.fit(x, y, PAY_FEATURES, weight=w * np.where(y == 1, (w[y == 0].sum() / max(y.sum(), 1)), 1.0))
+    logistic = Logistic.fit(x, y, weight=w)
+    gbm = Gbm.fit(x, y, PAY_FEATURES, weight=w)
     (folder / "payments_logistic.json").write_text(json.dumps(logistic.to_dict()), encoding="utf-8")
     (folder / "payments_lightgbm.txt").write_text(gbm.to_text(), encoding="utf-8")
     summary["payments"] = {"rows": len(pdf), "positives": int(y.sum()), "start": start, "end": train["end"]}
@@ -112,10 +112,13 @@ def train_step(
     ltrain = lg["splits"]["train"]
     silver = read("logins_silver")
     ok = silver.where(
-        (F.col("event_ts") >= F.lit(ltrain["start"])) & (F.col("event_ts") < F.lit(ltrain["end"])) & F.col("success")
+        (F.col("event_ts") >= F.lit(ltrain["start"]))
+        & (F.col("event_ts") < F.lit(ltrain["end"]))
+        & F.col("success")
+        & ~F.col("unknown_account")
     )
     legit = int(ok.count())
-    users = int(silver.select("user_key").distinct().count())
+    users = int(silver.where(~F.col("unknown_account")).select("user_key").distinct().count())
     counts: dict[str, dict[str, int]] = {}
     distinct: dict[str, int] = {}
     for lvl, col in zip(login_features.LEVELS, training.LOGIN_VALUES, strict=True):
@@ -138,7 +141,7 @@ def train_step(
         lx = lpdf[cols].astype(float).to_numpy(np.float64)
         ly = lpdf["label"].to_numpy(bool).astype(int)
         lw = lpdf["weight"].to_numpy(np.float64)
-        model = Gbm.fit(lx, ly, cols, weight=lw * np.where(ly == 1, lw[ly == 0].sum() / max(ly.sum(), 1), 1.0))
+        model = Gbm.fit(lx, ly, cols, weight=lw)
         (folder / name).write_text(model.to_text(), encoding="utf-8")
     summary["logins"] = {
         "rows": len(lpdf),
@@ -161,6 +164,8 @@ def score_payments(pdf: pd.DataFrame, folder: Path, mapping: dict[str, str]) -> 
     logistic = Logistic.from_dict(json.loads((folder / "payments_logistic.json").read_text(encoding="utf-8")))
     gbm = Gbm.from_text((folder / "payments_lightgbm.txt").read_text(encoding="utf-8"))
     out = pdf[["txn_ref", "account_key", "event_ts", "amount_cents", "channel", "label", "labelled"]].copy()
+    for name in HYPOTHESIS_COLUMNS:
+        out[name] = pdf[name].astype(float)
     out["score_floor"] = floors.payment_scores(x)
     out["codes_floor"] = [",".join(floors.payment_fired(r)) for r in x]
     out["score_logistic"] = logistic.predict(x)
@@ -188,6 +193,10 @@ def score_logins(pdf: pd.DataFrame, folder: Path, mapping: dict[str, str]) -> pd
     return out
 
 
+# The payment features evaluation/hypotheses.yaml reads, carried into the scored sets.
+HYPOTHESIS_COLUMNS = ("hour", "merchant_new", "foreign")
+
+
 def _scored_schema(desk: str) -> Any:
     from pyspark.sql import types as T
 
@@ -195,10 +204,12 @@ def _scored_schema(desk: str) -> Any:
     if desk == "payments":
         fields = [("txn_ref", L), ("account_key", S), ("event_ts", TS), ("amount_cents", L)]
         fields += [("channel", T.IntegerType()), ("label", B), ("labelled", B)]
+        fields += [(name, D) for name in HYPOTHESIS_COLUMNS]
         models: tuple[str, ...] = ("floor", "logistic", "lightgbm")
     else:
         fields = [("login_ref", L), ("user_key", S), ("event_ts", TS), ("success", B), ("is_attack_ip", B),
-                  ("synthetic", B), ("attacker_model", S), ("label", B)]  # fmt: skip
+                  ("synthetic", B), ("attacker_model", S), ("label", B), ("n_success_prior", L)]  # fmt: skip
+        fields += [(f"new_{lvl}", B) for lvl in ("ip", "asn", "country", "city", "device")]
         models = ("floor", "freeman", "lightgbm", "lightgbm_rep")
     for m in models:
         fields += [(f"score_{m}", D), (f"codes_{m}", S)]
