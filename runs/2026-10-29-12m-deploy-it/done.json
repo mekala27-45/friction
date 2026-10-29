@@ -1,0 +1,24 @@
+{
+ "request": {
+  "id": "2026-10-29-12m-deploy-it",
+  "kind": "bundle_deploy",
+  "target": "it",
+  "job": null,
+  "params": {
+   "stop_on_failure": false
+  },
+  "note": "Redeploy the integration environment with the dedicated out of order label test."
+ },
+ "github_run_id": "40962813463",
+ "commit": "2b50b6ee36470fee2a385128c443f53bb5b74713",
+ "started_at": "2026-10-29T22:14:56+00:00",
+ "result": {
+  "deployed": "it"
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T22:16:04+00:00",
+ "files": {
+  "bundle_summary.json": "2f3fec7181f5ac7d7c43438acd82c9f608cb535643a84c75412e55d14f4993fb",
+  "run.log": "aa8268f2088ebdff6c957fada1302c438816244ebf2a03b2e3ad1075ae68bb8c"
+ }
+}

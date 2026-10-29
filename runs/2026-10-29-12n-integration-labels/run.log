@@ -1,0 +1,30 @@
+$ databricks bundle run -t it integration --var catalog_mode=prefix --params tests=labels
+landing cleared {}
+pipeline update {'full_refresh': True, 'update_id': 'fe416de5-8510-40c5-8e8a-7c9e2b9ef0d2', 'seconds': 197.7}
+landed feed {'feed': 'payments', 'drops': 4, 'low': 344, 'high': 347}
+landed feed {'feed': 'labels_payments', 'drops': 10, 'low': 345, 'high': 359}
+pipeline update {'full_refresh': False, 'update_id': 'eee11865-77ed-4356-a525-eb68fbd7ff7f', 'seconds': 152.1}
+landing cleared {}
+pipeline update {'full_refresh': True, 'update_id': '33e8536f-a352-47b8-a20f-0ed561aadf06', 'seconds': 121.9}
+landed feed {'feed': 'payments', 'drops': 4, 'low': 344, 'high': 347}
+landed feed {'feed': 'labels_payments', 'drops': 1, 'low': 354, 'high': 354}
+landed feed {'feed': 'labels_payments', 'drops': 1, 'low': 356, 'high': 356}
+landed feed {'feed': 'labels_payments', 'drops': 1, 'low': 357, 'high': 357}
+landed feed {'feed': 'labels_payments', 'drops': 1, 'low': 359, 'high': 359}
+pipeline update {'full_refresh': False, 'update_id': '67c9eea7-d355-4ebb-8bde-c269346d38d4', 'seconds': 152.2}
+landed feed {'feed': 'labels_payments', 'drops': 1, 'low': 345, 'high': 345}
+landed feed {'feed': 'labels_payments', 'drops': 1, 'low': 346, 'high': 346}
+landed feed {'feed': 'labels_payments', 'drops': 1, 'low': 347, 'high': 347}
+pipeline update {'full_refresh': False, 'update_id': '4fc7fd33-bea7-4739-83c4-79c69d820582', 'seconds': 152.1}
+landed feed {'feed': 'labels_payments', 'drops': 1, 'low': 349, 'high': 349}
+landed feed {'feed': 'labels_payments', 'drops': 1, 'low': 350, 'high': 350}
+landed feed {'feed': 'labels_payments', 'drops': 1, 'low': 351, 'high': 351}
+pipeline update {'full_refresh': False, 'update_id': '93ba25ef-3831-4fce-8489-6a333a756a32', 'seconds': 121.9}
+Run URL: https://dbc-13dc0ff6-cde4.cloud.databricks.com/jobs/1018322509009542/runs/1049288835750897?o=4481510155994981
+
+2026-10-29 22:16:05 "[dev mekalaajayk] friction-integration-it" RUNNING
+2026-10-29 22:32:09 "[dev mekalaajayk] friction-integration-it" TERMINATED SUCCESS
+[exit 0]
+$ databricks fs cp -r --overwrite dbfs:/Volumes/workspace/friction_it_raw/exports/integration results-branch/runs/2026-10-29-12n-integration-labels/export
+dbfs:/Volumes/workspace/friction_it_raw/exports/integration/integration.json -> results-branch/runs/2026-10-29-12n-integration-labels/export/integration.json
+[exit 0]

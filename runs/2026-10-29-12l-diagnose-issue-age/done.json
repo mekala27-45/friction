@@ -1,0 +1,44 @@
+{
+ "request": {
+  "id": "2026-10-29-12l-diagnose-issue-age",
+  "kind": "sql",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "file": "sql/diagnose_issue_age.sql",
+   "vars": {
+    "cdc": "workspace.friction_dev_cdc",
+    "silver": "workspace.friction_dev_silver",
+    "gold": "workspace.friction_dev_gold",
+    "ops": "workspace.friction_dev_ops"
+   },
+   "stop_on_failure": false
+  },
+  "note": "Retry of 2026-10-29-12a, whose second statement named a column the AUTO CDC target leaves out (op). Adds the run ledger summary."
+ },
+ "github_run_id": "40962813463",
+ "commit": "2b50b6ee36470fee2a385128c443f53bb5b74713",
+ "started_at": "2026-10-29T22:14:35+00:00",
+ "result": {
+  "saved": [
+   "history_types",
+   "history_sample",
+   "issue_times",
+   "silver_types",
+   "ages",
+   "account_match",
+   "run_ledger"
+  ]
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T22:14:56+00:00",
+ "files": {
+  "account_match.json": "36b994692a75e9d59542bb178af44ed5724fc1af4a2482330f14eab59da52827",
+  "ages.json": "0d00b7e020f7cd06aedc34efcfc4e02855a3948fc4f76477b3e31a3234034ecd",
+  "history_sample.json": "fda4c2fc0d2357afdef843937e14e5e96ad0f256bf57bac2af29126026b9ec43",
+  "history_types.json": "de7408837206b611bd9e7146238a6c9975e06bcdef68df3a4a2722779566cad6",
+  "issue_times.json": "64536cabec710066274a15edc0f1269d2b3eaebdf88f156ae50f98888d7f9235",
+  "run_ledger.json": "f0ae2fa0fd288857414f8d2ce060d74cbe2395525d124da5343943a4001c52d4",
+  "silver_types.json": "7211d20574139da1aaa1854a9260cef948eef1786a06ffeb6b086659a296dbd6"
+ }
+}

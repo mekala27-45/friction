@@ -1,0 +1,29 @@
+{
+ "request": {
+  "id": "2026-10-29-12n-integration-labels",
+  "kind": "bundle_run",
+  "target": "it",
+  "job": "integration",
+  "params": {
+   "job_params": {
+    "tests": "labels"
+   },
+   "export_from": "/Volumes/workspace/friction_it_raw/exports/integration",
+   "stop_on_failure": false
+  },
+  "note": "Labels out of order: the window's label drops at once against three groups delivered latest first, over the payment months they point back to. The history must match and must not be empty."
+ },
+ "github_run_id": "40962813463",
+ "commit": "2b50b6ee36470fee2a385128c443f53bb5b74713",
+ "started_at": "2026-10-29T22:16:04+00:00",
+ "result": {
+  "job": "integration",
+  "wall_seconds": 967.3
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T22:32:11+00:00",
+ "files": {
+  "export/integration.json": "2d4981b88e5022657f439c9eafaab5a0eaae537cb2afb69131e056c1a509ca23",
+  "run.log": "7c884a8dc6e8945d3cc89ac73b429033bb4ca0e9036c6cdef01bd91d670ffa04"
+ }
+}
