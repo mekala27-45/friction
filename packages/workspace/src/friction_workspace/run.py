@@ -27,14 +27,34 @@ from friction_workspace.neon import neon_endpoint
 from friction_workspace.requests import Request, pending
 
 ROOT = Path(__file__).resolve().parents[4]
+# The feeds that follow each desk's calendar, as jobs/land.py lands them.
+FEEDS = {"payments": ["payments", "labels_payments", "cdc_cards"], "logins": ["logins", "labels_logins"]}
+
+
+SECRET_ENV = ("DATABRICKS_TOKEN", "FRICTION_SALT", "TF_STATE_CONN", "PG_CONN_STR", "DATABASE_URL",
+              "FRICTION_REPLAY_KEY")  # fmt: skip
+
+
+def redact(text: str, env: dict[str, str]) -> str:
+    """Every secret value the runner holds, and the Neon form of the state string, out of a log.
+
+    The logs go to the results branch, which is public. A Spark error prints its plan, and the salt
+    is a literal in the plan, so redaction happens here and not only in GitHub's console masking.
+    """
+    values = {v for k in SECRET_ENV if len(v := env.get(k, "")) >= 8}
+    values |= {neon_endpoint(v) for v in set(values) if "://" in v}
+    for value in sorted(values, key=len, reverse=True):
+        text = text.replace(value, "<secret>")
+    return text
 
 
 def _sh(cmd: list[str], log: Path, *, cwd: Path = ROOT, env: dict[str, str] | None = None) -> str:
+    full = {**os.environ, **(env or {})}
     with log.open("a", encoding="utf-8") as handle:
-        handle.write(f"$ {shlex.join(cmd)}\n")
-        proc = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, env={**os.environ, **(env or {})})
-        handle.write(proc.stdout[-20000:])
-        handle.write(proc.stderr[-20000:])
+        handle.write(redact(f"$ {shlex.join(cmd)}\n", full))
+        proc = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, env=full)
+        handle.write(redact(proc.stdout[-20000:], full))
+        handle.write(redact(proc.stderr[-20000:], full))
         handle.write(f"[exit {proc.returncode}]\n")
     if proc.returncode != 0:
         raise RuntimeError(f"{cmd[0]} {cmd[1] if len(cmd) > 1 else ''} exited {proc.returncode}")
@@ -122,6 +142,26 @@ def handle(request: Request, out: Path, log: Path) -> dict[str, Any]:
         if exported:
             _sh(["databricks", "fs", "cp", "-r", "--overwrite", f"dbfs:{exported}", str(out / "export")], log)
         return {"job": request.job, "wall_seconds": round(time.monotonic() - started, 1)}
+    if request.kind == "portable":
+        # The open source engine over the same drops, on this runner, with the workspace salt: the
+        # reconcile then compares digests of salted tables exactly, which the build machine cannot.
+        outbox = str(request.params["outbox_volume"])
+        landing = ROOT / "data" / "work" / f"landing_{request.id}"
+        lake = ROOT / "data" / "lake" / request.id
+        for desk, (start, through) in sorted(request.params["drops"].items()):
+            for feed in FEEDS[desk]:
+                (landing / feed / "drops").mkdir(parents=True, exist_ok=True)
+                listing = _sh(["databricks", "fs", "ls", f"dbfs:{outbox}/{feed}/drops"], log)
+                for drop in sorted(n.strip().rstrip("/") for n in listing.split()):
+                    if drop[:4].isdigit() and int(start) <= int(drop[:4]) <= int(through):
+                        _sh(["databricks", "fs", "cp", "-r", f"dbfs:{outbox}/{feed}/drops/{drop}",
+                             str(landing / feed / "drops" / drop)], log)  # fmt: skip
+        started = time.monotonic()
+        _sh([sys.executable, "scripts/run_portable.py", "--landing", str(landing), "--out", str(lake)], log)
+        _sh([sys.executable, "scripts/run_features.py", "--lake", str(lake)], log)
+        _sh([sys.executable, "scripts/summarize_lake.py", "--lake", str(lake), "--engine", "local",
+             "--out", str(out / "summary.json")], log)  # fmt: skip
+        return {"drops": request.params["drops"], "wall_seconds": round(time.monotonic() - started, 1)}
     if request.kind == "export":
         source = str(request.params["from"])
         _sh(["databricks", "fs", "cp", "-r", "--overwrite", f"dbfs:{source}", str(out / "export")], log)
@@ -182,7 +222,7 @@ def main() -> int:
             record["status"] = "succeeded"
         except Exception as exc:
             record["status"] = "failed"
-            record["error"] = f"{type(exc).__name__}: {str(exc)[:500]}"
+            record["error"] = redact(f"{type(exc).__name__}: {str(exc)[:500]}", dict(os.environ))
             failures += 1
         record["finished_at"] = datetime.now(UTC).isoformat(timespec="seconds")
         record["files"] = {

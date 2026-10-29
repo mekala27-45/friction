@@ -26,6 +26,7 @@ Kind = Literal[
     "export",
     "terraform_plan",
     "terraform_apply",
+    "portable",
 ]
 
 
