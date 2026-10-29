@@ -55,9 +55,14 @@ RBA_FIRST = "2020-02-01"
 RBA_END = "2021-03-01"
 
 
+# A drop id is NNNN_YYYY-MM or NNNN_YYYY-MM-DD, and a redelivery adds _redelivery: its window is the
+# window of the drop it corrects.
+DROP_DATE = r"^\d{4}_(\d{4}-\d{2}(?:-\d{2})?)"
+
+
 def _drop_end(drop_id: Column) -> Column:
     """When a drop closes: the next day for a daily drop, the next month for a monthly one."""
-    label = F.regexp_extract(drop_id, r"^\d{4}_(.*)$", 1)
+    label = F.regexp_extract(drop_id, DROP_DATE, 1)
     is_day = F.length(label) == 10
     as_day = F.to_timestamp(F.date_add(F.to_date(label, "yyyy-MM-dd"), 1))
     as_month = F.to_timestamp(F.add_months(F.to_date(F.concat(label, F.lit("-01")), "yyyy-MM-dd"), 1))
@@ -135,7 +140,7 @@ def payments_checked(
         .withColumn("has_error", F.size("errors") > 0)
         .withColumn("is_refund", F.col("amount_cents") < 0)
     )
-    is_daily = F.length(F.regexp_extract("drop_id", r"^\d{4}_(.*)$", 1)) == 10
+    is_daily = F.length(F.regexp_extract("drop_id", DROP_DATE, 1)) == 10
     return typed.withColumn(
         "violations",
         _rules(
@@ -168,10 +173,13 @@ def _payload_hash(cols: tuple[str, ...]) -> Column:
 
 def payments_split(checked: DataFrame) -> tuple[DataFrame, DataFrame]:
     """Deduplicate exact repeats, quarantine conflicting repeats and rule breaks. Returns (silver, quarantine)."""
-    arrival = Window.partitionBy("txn_ref").orderBy("drop_id", "source_file")
+    # Rows of a rejected file never win a key: a corrected redelivery arrives after the file it
+    # replaces, and must not be read as a conflicting repeat of it.
+    rejected = F.array_contains("violations", "P_REJECTED_FILE")
+    arrival = Window.partitionBy("txn_ref").orderBy(rejected, "drop_id", "source_file")
     base = checked.withColumn("payload", _payload_hash(PAYMENT_PAYLOAD))
     first_payload = F.first("payload").over(arrival)
-    rank = F.row_number().over(arrival.orderBy("drop_id", "source_file", "payload"))
+    rank = F.row_number().over(arrival.orderBy(rejected, "drop_id", "source_file", "payload"))
     ranked = base.withColumn("_first", first_payload).withColumn("_rank", rank)
     # A later arrival with the payload of the first is a duplicate delivery: dropped, counted.
     deduped = ranked.where((F.col("_rank") == 1) | (F.col("payload") != F.col("_first")))
@@ -234,7 +242,7 @@ def logins_checked(
         F.col("ingested_at"),
         ip_ok.alias("_ip_ok"),
     )
-    is_daily = F.length(F.regexp_extract("drop_id", r"^\d{4}_(.*)$", 1)) == 10
+    is_daily = F.length(F.regexp_extract("drop_id", DROP_DATE, 1)) == 10
     return typed.withColumn(
         "violations",
         _rules(
@@ -286,10 +294,11 @@ def logins_split(checked: DataFrame, accounts: DataFrame) -> tuple[DataFrame, Da
     checked = checked.join(flags, "user_key", "left").withColumn(
         "unknown_account", F.coalesce(F.col("unknown_account"), F.lit(False))
     )
-    arrival = Window.partitionBy("login_ref").orderBy("drop_id", "source_file")
+    rejected = F.array_contains("violations", "L_REJECTED_FILE")
+    arrival = Window.partitionBy("login_ref").orderBy(rejected, "drop_id", "source_file")
     base = checked.withColumn("payload", _payload_hash(LOGIN_PAYLOAD))
     ranked = base.withColumn("_first", F.first("payload").over(arrival)).withColumn(
-        "_rank", F.row_number().over(arrival.orderBy("drop_id", "source_file", "payload"))
+        "_rank", F.row_number().over(arrival.orderBy(rejected, "drop_id", "source_file", "payload"))
     )
     deduped = ranked.where((F.col("_rank") == 1) | (F.col("payload") != F.col("_first")))
     conflict = F.when(F.col("_rank") > 1, F.array(F.lit("L_KEY_CONFLICT"))).otherwise(F.array())
