@@ -1,0 +1,681 @@
+$ databricks bundle validate -t dev --var catalog_mode=prefix
+Name: friction
+Target: dev
+Workspace:
+  User: mekalaajayk@gmail.com
+  Path: /Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev
+
+Found 4 warnings
+Warning: Pattern data/lake/** does not match any files
+  at sync.exclude[2]
+  in databricks.yml:47:7
+
+Warning: Pattern data/work/** does not match any files
+  at sync.exclude[3]
+  in databricks.yml:48:7
+
+Warning: Pattern data/raw/** does not match any files
+  at sync.exclude[0]
+  in databricks.yml:45:7
+
+Warning: Pattern data/landing/** does not match any files
+  at sync.exclude[1]
+  in databricks.yml:46:7
+
+[exit 0]
+$ databricks bundle deploy -t dev --auto-approve --var catalog_mode=prefix
+Uploading bundle files to /Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files...
+Updated jobs.integration
+Files: 964 uploaded, 0 deleted
+Resources: 0 created, 1 changed, 0 deleted, 7 unchanged
+[exit 0]
+$ databricks bundle summary -t dev -o json --var catalog_mode=prefix
+      {
+            "default": "1",
+            "name": "through"
+          },
+          {
+            "default": "1",
+            "name": "from"
+          }
+        ],
+        "queue": {
+          "enabled": true
+        },
+        "tags": {
+          "dev": "mekalaajayk"
+        },
+        "tasks": [
+          {
+            "depends_on": [
+              {
+                "task_key": "monitor"
+              }
+            ],
+            "environment_key": "default",
+            "run_if": "ALL_DONE",
+            "spark_python_task": {
+              "parameters": [
+                "--root",
+                "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files",
+                "--catalog",
+                "workspace",
+                "--prefix",
+                "friction_dev",
+                "--job",
+                "daily",
+                "--run-id",
+                "{{job.run_id}}",
+                "--tag",
+                "daily"
+              ],
+              "python_file": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files/jobs/export.py"
+            },
+            "task_key": "export"
+          },
+          {
+            "depends_on": [
+              {
+                "task_key": "pipeline_update"
+              }
+            ],
+            "environment_key": "default",
+            "max_retries": 1,
+            "spark_python_task": {
+              "parameters": [
+                "--root",
+                "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files",
+                "--catalog",
+                "workspace",
+                "--prefix",
+                "friction_dev",
+                "--job",
+                "daily",
+                "--run-id",
+                "{{job.run_id}}"
+              ],
+              "python_file": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files/jobs/features.py"
+            },
+            "task_key": "features"
+          },
+          {
+            "environment_key": "default",
+            "max_retries": 2,
+            "min_retry_interval_millis": 60000,
+            "spark_python_task": {
+              "parameters": [
+                "--root",
+                "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files",
+                "--catalog",
+                "workspace",
+                "--prefix",
+                "friction_dev",
+                "--job",
+                "daily",
+                "--run-id",
+                "{{job.run_id}}",
+                "--desk",
+                "{{job.parameters.desk}}",
+                "--through",
+                "{{job.parameters.through}}",
+                "--from",
+                "{{job.parameters.from}}"
+              ],
+              "python_file": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files/jobs/land.py"
+            },
+            "task_key": "land"
+          },
+          {
+            "depends_on": [
+              {
+                "task_key": "features"
+              }
+            ],
+            "environment_key": "default",
+            "spark_python_task": {
+              "parameters": [
+                "--root",
+                "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files",
+                "--catalog",
+                "workspace",
+                "--prefix",
+                "friction_dev",
+                "--job",
+                "daily",
+                "--run-id",
+                "{{job.run_id}}"
+              ],
+              "python_file": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files/jobs/monitor.py"
+            },
+            "task_key": "monitor"
+          },
+          {
+            "depends_on": [
+              {
+                "task_key": "land"
+              }
+            ],
+            "max_retries": 1,
+            "pipeline_task": {
+              "full_refresh": false,
+              "pipeline_id": "${resources.pipelines.friction.id}"
+            },
+            "task_key": "pipeline_update"
+          }
+        ],
+        "url": "https://dbc-13dc0ff6-cde4.cloud.databricks.com/jobs/26435571324360?w=4481510155994981"
+      },
+      "governance": {
+        "deployment": {
+          "kind": "BUNDLE",
+          "metadata_file_path": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/state/metadata.json"
+        },
+        "edit_mode": "UI_LOCKED",
+        "environments": [
+          {
+            "environment_key": "default",
+            "spec": {
+              "dependencies": [
+                "pyyaml",
+                "pydantic\u003e=2.10"
+              ],
+              "environment_version": "3"
+            }
+          }
+        ],
+        "format": "MULTI_TASK",
+        "id": "428801911603417",
+        "max_concurrent_runs": 1,
+        "name": "[dev mekalaajayk] friction-governance-dev",
+        "queue": {
+          "enabled": true
+        },
+        "tags": {
+          "dev": "mekalaajayk"
+        },
+        "tasks": [
+          {
+            "environment_key": "default",
+            "spark_python_task": {
+              "parameters": [
+                "--root",
+                "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files",
+                "--catalog",
+                "workspace",
+                "--prefix",
+                "friction_dev",
+                "--job",
+                "governance",
+                "--run-id",
+                "{{job.run_id}}"
+              ],
+              "python_file": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files/jobs/governance.py"
+            },
+            "task_key": "governance"
+          }
+        ],
+        "url": "https://dbc-13dc0ff6-cde4.cloud.databricks.com/jobs/428801911603417?w=4481510155994981"
+      },
+      "integration": {
+        "deployment": {
+          "kind": "BUNDLE",
+          "metadata_file_path": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/state/metadata.json"
+        },
+        "edit_mode": "UI_LOCKED",
+        "environments": [
+          {
+            "environment_key": "default",
+            "spec": {
+              "dependencies": [
+                "pyyaml",
+                "pydantic\u003e=2.10",
+                "databricks-sdk\u003e=0.40"
+              ],
+              "environment_version": "3"
+            }
+          }
+        ],
+        "format": "MULTI_TASK",
+        "id": "345697172409216",
+        "max_concurrent_runs": 1,
+        "name": "[dev mekalaajayk] friction-integration-dev",
+        "parameters": [
+          {
+            "default": "all",
+            "name": "tests"
+          }
+        ],
+        "queue": {
+          "enabled": true
+        },
+        "tags": {
+          "dev": "mekalaajayk"
+        },
+        "tasks": [
+          {
+            "environment_key": "default",
+            "spark_python_task": {
+              "parameters": [
+                "--root",
+                "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files",
+                "--catalog",
+                "workspace",
+                "--prefix",
+                "friction_dev",
+                "--job",
+                "integration",
+                "--run-id",
+                "{{job.run_id}}",
+                "--pipeline-id",
+                "${resources.pipelines.friction.id}",
+                "--source-outbox",
+                "/Volumes/workspace/friction_dev_raw/outbox",
+                "--tests",
+                "{{job.parameters.tests}}"
+              ],
+              "python_file": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files/jobs/integration.py"
+            },
+            "task_key": "integration"
+          }
+        ],
+        "url": "https://dbc-13dc0ff6-cde4.cloud.databricks.com/jobs/345697172409216?w=4481510155994981"
+      },
+      "land": {
+        "deployment": {
+          "kind": "BUNDLE",
+          "metadata_file_path": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/state/metadata.json"
+        },
+        "edit_mode": "UI_LOCKED",
+        "environments": [
+          {
+            "environment_key": "default",
+            "spec": {
+              "dependencies": [
+                "pyyaml",
+                "pydantic\u003e=2.10"
+              ],
+              "environment_version": "3"
+            }
+          }
+        ],
+        "format": "MULTI_TASK",
+        "id": "1607231240040",
+        "max_concurrent_runs": 1,
+        "name": "[dev mekalaajayk] friction-land-dev",
+        "parameters": [
+          {
+            "default": "payments",
+            "name": "desk"
+          },
+          {
+            "default": "1",
+            "name": "through"
+          },
+          {
+            "default": "1",
+            "name": "from"
+          }
+        ],
+        "queue": {
+          "enabled": true
+        },
+        "tags": {
+          "dev": "mekalaajayk"
+        },
+        "tasks": [
+          {
+            "environment_key": "default",
+            "spark_python_task": {
+              "parameters": [
+                "--root",
+                "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files",
+                "--catalog",
+                "workspace",
+                "--prefix",
+                "friction_dev",
+                "--job",
+                "land",
+                "--run-id",
+                "{{job.run_id}}",
+                "--desk",
+                "{{job.parameters.desk}}",
+                "--through",
+                "{{job.parameters.through}}",
+                "--from",
+                "{{job.parameters.from}}"
+              ],
+              "python_file": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files/jobs/land.py"
+            },
+            "task_key": "land"
+          }
+        ],
+        "url": "https://dbc-13dc0ff6-cde4.cloud.databricks.com/jobs/1607231240040?w=4481510155994981"
+      },
+      "models": {
+        "deployment": {
+          "kind": "BUNDLE",
+          "metadata_file_path": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/state/metadata.json"
+        },
+        "edit_mode": "UI_LOCKED",
+        "environments": [
+          {
+            "environment_key": "ml",
+            "spec": {
+              "dependencies": [
+                "pyyaml",
+                "pydantic\u003e=2.10",
+                "lightgbm==4.7.0",
+                "scikit-learn==1.9.1",
+                "scipy==1.18.1",
+                "mlflow-skinny\u003e=3.0"
+              ],
+              "environment_version": "3"
+            }
+          }
+        ],
+        "format": "MULTI_TASK",
+        "id": "792847569463071",
+        "max_concurrent_runs": 1,
+        "name": "[dev mekalaajayk] friction-models-dev",
+        "parameters": [
+          {
+            "default": "scored",
+            "name": "tag"
+          }
+        ],
+        "queue": {
+          "enabled": true
+        },
+        "tags": {
+          "dev": "mekalaajayk"
+        },
+        "tasks": [
+          {
+            "environment_key": "ml",
+            "spark_python_task": {
+              "parameters": [
+                "--root",
+                "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files",
+                "--catalog",
+                "workspace",
+                "--prefix",
+                "friction_dev",
+                "--job",
+                "models",
+                "--run-id",
+                "{{job.run_id}}"
+              ],
+              "python_file": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files/jobs/attacks.py"
+            },
+            "task_key": "attacks"
+          },
+          {
+            "depends_on": [
+              {
+                "task_key": "train"
+              }
+            ],
+            "environment_key": "ml",
+            "spark_python_task": {
+              "parameters": [
+                "--root",
+                "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files",
+                "--catalog",
+                "workspace",
+                "--prefix",
+                "friction_dev",
+                "--job",
+                "models",
+                "--run-id",
+                "{{job.run_id}}",
+                "--tag",
+                "{{job.parameters.tag}}"
+              ],
+              "python_file": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files/jobs/score.py"
+            },
+            "task_key": "evaluate"
+          },
+          {
+            "depends_on": [
+              {
+                "task_key": "attacks"
+              }
+            ],
+            "environment_key": "ml",
+            "spark_python_task": {
+              "parameters": [
+                "--root",
+                "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files",
+                "--catalog",
+                "workspace",
+                "--prefix",
+                "friction_dev",
+                "--job",
+                "models",
+                "--run-id",
+                "{{job.run_id}}"
+              ],
+              "python_file": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files/jobs/features.py"
+            },
+            "task_key": "features"
+          },
+          {
+            "depends_on": [
+              {
+                "task_key": "features"
+              }
+            ],
+            "environment_key": "ml",
+            "spark_python_task": {
+              "parameters": [
+                "--root",
+                "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files",
+                "--catalog",
+                "workspace",
+                "--prefix",
+                "friction_dev",
+                "--job",
+                "models",
+                "--run-id",
+                "{{job.run_id}}",
+                "--tag",
+                "default"
+              ],
+              "python_file": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files/jobs/train.py"
+            },
+            "task_key": "train"
+          }
+        ],
+        "url": "https://dbc-13dc0ff6-cde4.cloud.databricks.com/jobs/792847569463071?w=4481510155994981"
+      },
+      "monitor": {
+        "deployment": {
+          "kind": "BUNDLE",
+          "metadata_file_path": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/state/metadata.json"
+        },
+        "edit_mode": "UI_LOCKED",
+        "environments": [
+          {
+            "environment_key": "default",
+            "spec": {
+              "dependencies": [
+                "pyyaml",
+                "pydantic\u003e=2.10"
+              ],
+              "environment_version": "3"
+            }
+          }
+        ],
+        "format": "MULTI_TASK",
+        "id": "91393393400617",
+        "max_concurrent_runs": 1,
+        "name": "[dev mekalaajayk] friction-monitor-dev",
+        "queue": {
+          "enabled": true
+        },
+        "tags": {
+          "dev": "mekalaajayk"
+        },
+        "tasks": [
+          {
+            "environment_key": "default",
+            "spark_python_task": {
+              "parameters": [
+                "--root",
+                "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files",
+                "--catalog",
+                "workspace",
+                "--prefix",
+                "friction_dev",
+                "--job",
+                "monitor",
+                "--run-id",
+                "{{job.run_id}}"
+              ],
+              "python_file": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files/jobs/monitor.py"
+            },
+            "task_key": "monitor"
+          }
+        ],
+        "url": "https://dbc-13dc0ff6-cde4.cloud.databricks.com/jobs/91393393400617?w=4481510155994981"
+      }
+    },
+    "pipelines": {
+      "friction": {
+        "catalog": "workspace",
+        "channel": "CURRENT",
+        "configuration": {
+          "spark.friction.catalog": "workspace",
+          "spark.friction.landing": "/Volumes/workspace/friction_dev_raw/landing",
+          "spark.friction.prefix": "friction_dev",
+          "spark.friction.salt": "{{secrets/friction/salt}}",
+          "spark.friction.source_root": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files",
+          "spark.sql.session.timeZone": "UTC"
+        },
+        "continuous": false,
+        "deployment": {
+          "kind": "BUNDLE",
+          "metadata_file_path": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/state/metadata.json"
+        },
+        "development": true,
+        "edition": "ADVANCED",
+        "id": "a2f22aec-51e4-4a09-ac4e-d6b896b51a0e",
+        "libraries": [
+          {
+            "file": {
+              "path": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files/pipelines/lakeflow/bronze.py"
+            }
+          },
+          {
+            "file": {
+              "path": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files/pipelines/lakeflow/silver.py"
+            }
+          },
+          {
+            "file": {
+              "path": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files/pipelines/lakeflow/cdc.py"
+            }
+          },
+          {
+            "file": {
+              "path": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files/pipelines/lakeflow/gold.py"
+            }
+          }
+        ],
+        "name": "[dev mekalaajayk] friction-dev",
+        "photon": true,
+        "root_path": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files/pipelines/lakeflow",
+        "schema": "friction_dev_silver",
+        "serverless": true,
+        "tags": {
+          "dev": "mekalaajayk"
+        },
+        "url": "https://dbc-13dc0ff6-cde4.cloud.databricks.com/pipelines/a2f22aec-51e4-4a09-ac4e-d6b896b51a0e?w=4481510155994981"
+      }
+    }
+  },
+  "sync": {
+    "exclude": [
+      "data/raw/**",
+      "data/landing/**",
+      "data/lake/**",
+      "data/work/**",
+      "web/**",
+      ".venv/**",
+      "notebooks/**",
+      "results/**"
+    ],
+    "paths": [
+      "."
+    ]
+  },
+  "variables": {
+    "catalog": {
+      "default": "workspace",
+      "value": "workspace"
+    },
+    "catalog_mode": {
+      "default": "prefix",
+      "description": "catalog or prefix, read from the probe by the runner",
+      "value": "prefix"
+    },
+    "prefix": {
+      "default": "friction_dev",
+      "value": "friction_dev"
+    }
+  },
+  "workspace": {
+    "artifact_path": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/artifacts",
+    "current_user": {
+      "active": true,
+      "domain_friendly_name": "mekalaajayk",
+      "emails": [
+        {
+          "primary": true,
+          "type": "work",
+          "value": "mekalaajayk@gmail.com"
+        }
+      ],
+      "entitlements": [
+        {
+          "value": "allow-cluster-create"
+        },
+        {
+          "value": "allow-instance-pool-create"
+        }
+      ],
+      "groups": [
+        {
+          "$ref": "Groups/81341176956271",
+          "display": "users",
+          "type": "direct",
+          "value": "81341176956271"
+        },
+        {
+          "$ref": "Groups/2120929978224182",
+          "display": "users-clone-2026-08-07-1218-UTC (created by Databricks)",
+          "type": "direct",
+          "value": "2120929978224182"
+        },
+        {
+          "$ref": "Groups/81178298986955",
+          "display": "admins",
+          "type": "direct",
+          "value": "81178298986955"
+        }
+      ],
+      "id": "74147104844577",
+      "schemas": [
+        "urn:ietf:params:scim:schemas:core:2.0:User",
+        "urn:ietf:params:scim:schemas:extension:workspace:2.0:User"
+      ],
+      "short_name": "mekalaajayk",
+      "userName": "mekalaajayk@gmail.com"
+    },
+    "file_path": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files",
+    "resource_path": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/resources",
+    "root_path": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev",
+    "state_path": "/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/state"
+  }
+}
+[exit 0]

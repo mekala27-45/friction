@@ -1,0 +1,33 @@
+{
+ "request": {
+  "id": "2026-10-29-13a-backfill-incident",
+  "kind": "bundle_run",
+  "target": "dev",
+  "job": "backfill",
+  "params": {
+   "job_params": {
+    "desk": "payments",
+    "from": "387",
+    "through": "387",
+    "redelivery": "true",
+    "tag": "incident"
+   },
+   "export_from": "/Volumes/workspace/friction_dev_raw/exports/incident",
+   "stop_on_failure": false
+  },
+  "note": "The runbook's replay: drop 387 with the corrected redelivery, the pipeline under the approved change, the features and the export."
+ },
+ "github_run_id": "40965420995",
+ "commit": "d97f00d4951ded1536a882ee50e2e4f3d6dc018c",
+ "started_at": "2026-10-29T22:34:16+00:00",
+ "result": {
+  "job": "backfill",
+  "wall_seconds": 789.1
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T22:47:25+00:00",
+ "files": {
+  "export/export.json": "38c51f66f4ef92d6e590678c1ac2063303e7063aaeb514b5531a168e15309328",
+  "run.log": "9dba2906b043523fda8e93876b7d69da67e640186abde7383e58048943ff23d5"
+ }
+}

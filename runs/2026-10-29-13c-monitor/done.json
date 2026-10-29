@@ -1,0 +1,24 @@
+{
+ "request": {
+  "id": "2026-10-29-13c-monitor",
+  "kind": "bundle_run",
+  "target": "dev",
+  "job": "monitor",
+  "params": {
+   "export_from": "/Volumes/workspace/friction_dev_raw/exports/monitor",
+   "stop_on_failure": false
+  },
+  "note": "The monitor after the replay: the alerts on drop 387 must be gone. The drift of mcc_fraud_rate is expected to remain."
+ },
+ "github_run_id": "40965420995",
+ "commit": "d97f00d4951ded1536a882ee50e2e4f3d6dc018c",
+ "started_at": "2026-10-29T22:47:46+00:00",
+ "status": "failed",
+ "error": "RuntimeError: databricks bundle exited 1",
+ "finished_at": "2026-10-29T22:55:49+00:00",
+ "files": {
+  "export/alerts.json": "65b64b34e4c75eec2327132f1f59baa97cf0f7a9b3626018d5b351093ec1cbca",
+  "export/report.json": "8bd54f976add0c96e8a8a7b2c4cd0d4d6fcfe9740db5e9139fd2b36cfd9a9b84",
+  "run.log": "fd7e8d9cf912548132541fde879993aa627545e3a7b6ce33a1f8f1fb52a4b4d0"
+ }
+}

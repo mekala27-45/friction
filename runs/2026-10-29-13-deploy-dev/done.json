@@ -1,0 +1,24 @@
+{
+ "request": {
+  "id": "2026-10-29-13-deploy-dev",
+  "kind": "bundle_deploy",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "stop_on_failure": false
+  },
+  "note": "Deploy the approved day 40 contract change (contracts/approved_changes.yaml), which the pipeline reads from the synced files."
+ },
+ "github_run_id": "40965420995",
+ "commit": "d97f00d4951ded1536a882ee50e2e4f3d6dc018c",
+ "started_at": "2026-10-29T22:33:07+00:00",
+ "result": {
+  "deployed": "dev"
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T22:34:16+00:00",
+ "files": {
+  "bundle_summary.json": "db092850f2e4035fb0b67cc52559e4985a71906c7c62f2246feae44e2ca1c671",
+  "run.log": "489f6c8ba09c4d08171a745212f1a7fadee698008c77545f3d92cce41bc34bdb"
+ }
+}
