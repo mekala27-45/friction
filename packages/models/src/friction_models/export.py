@@ -39,6 +39,8 @@ def _rows(frame: pd.DataFrame) -> list[Any]:
 
 def _first(frame: pd.DataFrame, column: str) -> int:
     return int(frame[column].to_numpy()[0])
+
+
 MODEL_FILES = {
     ("payments", "logistic"): ("payments_logistic.json", "model.json"),
     ("payments", "lightgbm"): ("payments_lightgbm.txt", "model.txt"),

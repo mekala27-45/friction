@@ -1,0 +1,843 @@
+{
+ "as_of": "2026-10-29",
+ "values": {
+  "build.commits": {
+   "value": 14,
+   "fmt": "int",
+   "provenance": {
+    "origin": "git",
+    "population": "commits on main",
+    "source": "build",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "checklist.done": {
+   "value": 3,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/build_manifest.py",
+    "population": "lines done",
+    "source": "build",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "checklist.missing": {
+   "value": "1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 15, 16, 17, 18",
+   "fmt": "text",
+   "provenance": {
+    "origin": "scripts/build_manifest.py",
+    "population": "lines not done",
+    "source": "build",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "data.rba.asn_unrealistic": {
+   "value": 1457824,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/profile_sources.py over the staged RBA file",
+    "population": "rows with an ASN of 500,000 or more",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "data.rba.attack_ip": {
+   "value": 3096977,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/profile_sources.py over the staged RBA file",
+    "population": "rows from addresses on the attacker list",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "data.rba.digest": {
+   "value": "ca1d974e97ae",
+   "fmt": "text",
+   "provenance": {
+    "origin": "data/sources.lock.json",
+    "population": "the archive",
+    "source": "static",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "data.rba.ip_private": {
+   "value": 7291335,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/profile_sources.py over the staged RBA file",
+    "population": "rows with an address in 10.0.0.0/8",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "data.rba.rows": {
+   "value": 31269264,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/profile_sources.py over the staged RBA file",
+    "population": "every row of rba-dataset.csv",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "data.rba.rtt_missing_share": {
+   "value": 0.9591952340163811,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/profile_sources.py over the staged RBA file",
+    "population": "rows without a round trip time",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "data.rba.successes": {
+   "value": 12541442,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/profile_sources.py over the staged RBA file",
+    "population": "successful sign ins",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "data.rba.takeovers": {
+   "value": 141,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/profile_sources.py over the staged RBA file",
+    "population": "rows marked as account takeover",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "data.rba.users": {
+   "value": 4304857,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/profile_sources.py over the staged RBA file",
+    "population": "distinct user ids",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "data.tabformer.cards": {
+   "value": 6139,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/profile_sources.py over the staged TabFormer file",
+    "population": "distinct user and card pairs",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "data.tabformer.digest": {
+   "value": "e9f589a0958f",
+   "fmt": "text",
+   "provenance": {
+    "origin": "data/sources.lock.json",
+    "population": "the archive",
+    "source": "static",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "data.tabformer.rows": {
+   "value": 24386900,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/profile_sources.py over the staged TabFormer file",
+    "population": "every row of card_transaction.v1.csv",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "data.tabformer.users": {
+   "value": 2000,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/profile_sources.py over the staged TabFormer file",
+    "population": "distinct users",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "plan.hypotheses_sha256": {
+   "value": "2fa80e2d5af8",
+   "fmt": "text",
+   "provenance": {
+    "origin": "evaluation/plan.lock",
+    "population": "the hypotheses",
+    "source": "plan",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "plan.logins.decline_budget": {
+   "value": 0.001,
+   "fmt": "per1k1",
+   "provenance": {
+    "origin": "evaluation/plan.yaml",
+    "population": "good events",
+    "source": "plan",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "plan.logins.gap_1.end": {
+   "value": "2020-09-28",
+   "fmt": "text",
+   "provenance": {
+    "origin": "evaluation/plan.yaml",
+    "population": "gap_1",
+    "source": "plan",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "plan.logins.gap_1.start": {
+   "value": "2020-09-21",
+   "fmt": "text",
+   "provenance": {
+    "origin": "evaluation/plan.yaml",
+    "population": "gap_1",
+    "source": "plan",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "plan.logins.gap_2.end": {
+   "value": "2020-12-15",
+   "fmt": "text",
+   "provenance": {
+    "origin": "evaluation/plan.yaml",
+    "population": "gap_2",
+    "source": "plan",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "plan.logins.gap_2.start": {
+   "value": "2020-12-08",
+   "fmt": "text",
+   "provenance": {
+    "origin": "evaluation/plan.yaml",
+    "population": "gap_2",
+    "source": "plan",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "plan.logins.step_up_budget": {
+   "value": 0.1,
+   "fmt": "per1k1",
+   "provenance": {
+    "origin": "evaluation/plan.yaml",
+    "population": "good events",
+    "source": "plan",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "plan.logins.test.end": {
+   "value": "2021-03-01",
+   "fmt": "text",
+   "provenance": {
+    "origin": "evaluation/plan.yaml",
+    "population": "test",
+    "source": "plan",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "plan.logins.test.start": {
+   "value": "2020-12-15",
+   "fmt": "text",
+   "provenance": {
+    "origin": "evaluation/plan.yaml",
+    "population": "test",
+    "source": "plan",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "plan.logins.train.end": {
+   "value": "2020-09-21",
+   "fmt": "text",
+   "provenance": {
+    "origin": "evaluation/plan.yaml",
+    "population": "train",
+    "source": "plan",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "plan.logins.train.start": {
+   "value": "2020-02-03",
+   "fmt": "text",
+   "provenance": {
+    "origin": "evaluation/plan.yaml",
+    "population": "train",
+    "source": "plan",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "plan.logins.validation.end": {
+   "value": "2020-12-08",
+   "fmt": "text",
+   "provenance": {
+    "origin": "evaluation/plan.yaml",
+    "population": "validation",
+    "source": "plan",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "plan.logins.validation.start": {
+   "value": "2020-09-28",
+   "fmt": "text",
+   "provenance": {
+    "origin": "evaluation/plan.yaml",
+    "population": "validation",
+    "source": "plan",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "plan.payments.decline_budget": {
+   "value": 0.001,
+   "fmt": "per1k1",
+   "provenance": {
+    "origin": "evaluation/plan.yaml",
+    "population": "good events",
+    "source": "plan",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "plan.payments.gap_1.end": {
+   "value": "2019-01-01",
+   "fmt": "text",
+   "provenance": {
+    "origin": "evaluation/plan.yaml",
+    "population": "gap_1",
+    "source": "plan",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "plan.payments.gap_1.start": {
+   "value": "2018-11-01",
+   "fmt": "text",
+   "provenance": {
+    "origin": "evaluation/plan.yaml",
+    "population": "gap_1",
+    "source": "plan",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "plan.payments.gap_2.end": {
+   "value": "2019-07-01",
+   "fmt": "text",
+   "provenance": {
+    "origin": "evaluation/plan.yaml",
+    "population": "gap_2",
+    "source": "plan",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "plan.payments.gap_2.start": {
+   "value": "2019-05-01",
+   "fmt": "text",
+   "provenance": {
+    "origin": "evaluation/plan.yaml",
+    "population": "gap_2",
+    "source": "plan",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "plan.payments.step_up_budget": {
+   "value": 0.01,
+   "fmt": "per1k1",
+   "provenance": {
+    "origin": "evaluation/plan.yaml",
+    "population": "good events",
+    "source": "plan",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "plan.payments.test.end": {
+   "value": "2019-11-01",
+   "fmt": "text",
+   "provenance": {
+    "origin": "evaluation/plan.yaml",
+    "population": "test",
+    "source": "plan",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "plan.payments.test.start": {
+   "value": "2019-07-01",
+   "fmt": "text",
+   "provenance": {
+    "origin": "evaluation/plan.yaml",
+    "population": "test",
+    "source": "plan",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "plan.payments.train.end": {
+   "value": "2018-11-01",
+   "fmt": "text",
+   "provenance": {
+    "origin": "evaluation/plan.yaml",
+    "population": "train",
+    "source": "plan",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "plan.payments.train.start": {
+   "value": "2016-11-01",
+   "fmt": "text",
+   "provenance": {
+    "origin": "evaluation/plan.yaml",
+    "population": "train",
+    "source": "plan",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "plan.payments.validation.end": {
+   "value": "2019-05-01",
+   "fmt": "text",
+   "provenance": {
+    "origin": "evaluation/plan.yaml",
+    "population": "validation",
+    "source": "plan",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "plan.payments.validation.start": {
+   "value": "2019-01-01",
+   "fmt": "text",
+   "provenance": {
+    "origin": "evaluation/plan.yaml",
+    "population": "validation",
+    "source": "plan",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "plan.resamples": {
+   "value": 1000,
+   "fmt": "int",
+   "provenance": {
+    "origin": "evaluation/plan.yaml",
+    "population": "bootstrap resamples",
+    "source": "plan",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "plan.sha256": {
+   "value": "2ba61fcd4da0",
+   "fmt": "text",
+   "provenance": {
+    "origin": "evaluation/plan.lock",
+    "population": "the registered plan",
+    "source": "plan",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "replay.feeds.cdc_cards.rows": {
+   "value": 33254,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/replay.py, digests in data/replay.lock.json",
+    "population": "rows of the cdc_cards feed",
+    "source": "simulator",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "replay.feeds.labels_logins.rows": {
+   "value": 141,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/replay.py, digests in data/replay.lock.json",
+    "population": "rows of the labels_logins feed",
+    "source": "simulator",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "replay.feeds.labels_payments.rows": {
+   "value": 29512,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/replay.py, digests in data/replay.lock.json",
+    "population": "rows of the labels_payments feed",
+    "source": "simulator",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "replay.logins.drops": {
+   "value": 102,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/replay.py, digests in data/replay.lock.json",
+    "population": "drops of the logins desk",
+    "source": "simulator",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "replay.logins.rows": {
+   "value": 31269264,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/replay.py, digests in data/replay.lock.json",
+    "population": "rows the logins desk delivers",
+    "source": "simulator",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "replay.payments.drops": {
+   "value": 439,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/replay.py, digests in data/replay.lock.json",
+    "population": "drops of the payments desk",
+    "source": "simulator",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "replay.payments.rows": {
+   "value": 24386900,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/replay.py, digests in data/replay.lock.json",
+    "population": "rows the payments desk delivers",
+    "source": "simulator",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "static.statement": {
+   "value": "friction is a portfolio demonstration built on two published synthetic data sets (the IBM TabFormer card transactions, and the RBA login data set under CC BY 4.0) and a simulator with known truth. No real person, card or account appears in it, its numbers describe synthetic data, and it must not be used to decide anything about anyone. It runs on Databricks Free Edition, which is for non commercial use.",
+   "fmt": "text",
+   "provenance": {
+    "origin": "friction_core.statements",
+    "population": "every surface",
+    "source": "static",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  }
+ },
+ "tables": {
+  "checklist": {
+   "columns": [
+    "Step",
+    "Status",
+    "Line",
+    "Evidence"
+   ],
+   "formats": [
+    "int",
+    "text",
+    "text",
+    "text"
+   ],
+   "rows": [
+    [
+     1,
+     "not done",
+     "Both sources fetched with digests in Actions, profiled at full size, quarantine rules, contracts, provenance",
+     "fetched and profiled at full size on the build machine (results/profile); the Actions fetch waits on the workspace secrets"
+    ],
+    [
+     2,
+     "done",
+     "The replay splitter, the lateness rule, the simulator and the incident config, deterministic with digests",
+     "data/replay.lock.json; tests/simulator"
+    ],
+    [
+     3,
+     "not done",
+     "The portable pipeline on open source Spark 4.2 with local tests and the full local run",
+     "the full local run has not finished"
+    ],
+    [
+     4,
+     "not done",
+     "Terraform with state in Neon, the bundle, the workspace workflow, the results branch, reviewed promotion",
+     "written and validated in CI; apply waits on the Actions secrets FRICTION_SALT, TF_STATE_CONN and DATABASE_URL"
+    ],
+    [
+     5,
+     "not done",
+     "The Lakeflow pipeline deployed to dev and run; the reconcile against the local run",
+     "requests 03 to 07 are committed and wait on the same secrets"
+    ],
+    [
+     6,
+     "not done",
+     "Jobs with retries and the run ledger; idempotency, order and late label tests in the workspace",
+     "the jobs are defined in databricks.yml; their workspace tests have not run"
+    ],
+    [
+     7,
+     "not done",
+     "Every row of both sources backfilled in the workspace",
+     "nothing is backfilled in the workspace yet; the full local run holds every row"
+    ],
+    [
+     8,
+     "not done",
+     "Governance: tags, masks, the row filter, grants, lineage, the scan; the planted drift caught by the plan",
+     "the probe found masks and functions allowed (results/workspace_probe.json); nothing applied"
+    ],
+    [
+     9,
+     "done",
+     "Point in time features with the leakage test; training sets as of a cut with the two clocks test",
+     "tests/features/test_point_in_time.py; tests/transforms/test_training.py"
+    ],
+    [
+     10,
+     "not done",
+     "Floors and models on both desks registered in Unity Catalog; the plan hashed before any test month was scored",
+     "floors and models fit on the local run, plan hashed before scoring (DECISIONS.md); Unity Catalog registration waits on the workspace"
+    ],
+    [
+     11,
+     "not done",
+     "The frontier, operating points, intervals, Benjamini-Hochberg, interior tests, calibration, hypotheses, RBA comparison",
+     "no scored sets graded yet"
+    ],
+    [
+     12,
+     "not done",
+     "Reason codes, model cards, validation reports, promotion gates and the champion aliases",
+     "codes, gates and cards are in the repository; the champion alias waits on Unity Catalog"
+    ],
+    [
+     13,
+     "not done",
+     "The API live on Vercel with the online store and the decision log; parity exact against the live URL",
+     "the API runs and passes parity locally; Vercel and Neon are not connected yet"
+    ],
+    [
+     14,
+     "done",
+     "Persistence: independent connection, audit before response, shared transaction, out of process check",
+     "tests/api/test_api.py and tests/api/test_out_of_process.py against Postgres"
+    ],
+    [
+     15,
+     "not done",
+     "Monitoring with delayed label cohorts; the day 40 incident detected, handled by the runbook and written up",
+     "config/monitor.yaml and the incident plant exist; the monitor has not run"
+    ],
+    [
+     16,
+     "not done",
+     "Performance experiments and the compute ledger published",
+     "no performance experiment has run"
+    ],
+    [
+     17,
+     "not done",
+     "The site live on Pages; the live check; latency with the cold start; RESULTS, README, DECISIONS, notebooks, AGENTS",
+     "the site is not built yet"
+    ],
+    [
+     18,
+     "not done",
+     "Coverage, mypy, ruff, gates, skills valid, forty to sixty commits, the rederive, v0.1.0 after the commits",
+     "the tag waits on every line above"
+    ]
+   ],
+   "provenance": {
+    "origin": "scripts/build_manifest.py",
+    "population": "the definition of done",
+    "source": "build",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "workspace.probe": {
+   "columns": [
+    "Check",
+    "Result"
+   ],
+   "formats": [
+    "text",
+    "text"
+   ],
+   "rows": [
+    [
+     "apps_list",
+     "allowed"
+    ],
+    [
+     "catalog_create",
+     "refused"
+    ],
+    [
+     "catalogs_visible",
+     "allowed"
+    ],
+    [
+     "create_mask_function",
+     "allowed"
+    ],
+    [
+     "create_table",
+     "allowed"
+    ],
+    [
+     "delta_sharing_shares",
+     "refused"
+    ],
+    [
+     "experiments_list",
+     "allowed"
+    ],
+    [
+     "groups_list",
+     "allowed"
+    ],
+    [
+     "identity",
+     "allowed"
+    ],
+    [
+     "jobs_list",
+     "allowed"
+    ],
+    [
+     "liquid_clustering",
+     "allowed"
+    ],
+    [
+     "pipelines_list",
+     "allowed"
+    ],
+    [
+     "read:system.access.audit",
+     "allowed"
+    ],
+    [
+     "read:system.access.column_lineage",
+     "allowed"
+    ],
+    [
+     "read:system.access.table_lineage",
+     "allowed"
+    ],
+    [
+     "read:system.billing.list_prices",
+     "allowed"
+    ],
+    [
+     "read:system.billing.usage",
+     "allowed"
+    ],
+    [
+     "read:system.information_schema.tables",
+     "allowed"
+    ],
+    [
+     "read:system.lakeflow.jobs",
+     "allowed"
+    ],
+    [
+     "read:system.lakeflow.pipelines",
+     "allowed"
+    ],
+    [
+     "registered_models_list",
+     "allowed"
+    ],
+    [
+     "row_filter_function",
+     "allowed"
+    ],
+    [
+     "schema_create",
+     "allowed"
+    ],
+    [
+     "service_principals_list",
+     "allowed"
+    ],
+    [
+     "serving_endpoints_list",
+     "allowed"
+    ],
+    [
+     "set_column_mask",
+     "allowed"
+    ],
+    [
+     "set_row_filter",
+     "allowed"
+    ],
+    [
+     "set_tag",
+     "allowed"
+    ],
+    [
+     "sql_version",
+     "allowed"
+    ],
+    [
+     "volume_create",
+     "allowed"
+    ],
+    [
+     "warehouses",
+     "allowed"
+    ]
+   ],
+   "provenance": {
+    "origin": "requests/2026-10-29-probe.json",
+    "population": "what Free Edition allowed the API on 29 October 2026",
+    "source": "workspace",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  }
+ },
+ "figures": {}
+}

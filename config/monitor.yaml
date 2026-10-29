@@ -10,8 +10,9 @@ freshness:
   # Gold must reflect a drop within one daily run of its landing.
   max_runs_behind: 1
 completeness:
-  # Silver rows over source rows minus quarantine, per drop.
-  min_ratio: 1.0
+  # Per drop: distinct delivered rows that reach silver over distinct delivered rows. The objective
+  # is three nines; a drop below it pages, whatever rule kept the rows out.
+  min_ratio: 0.999
 clock:
   # Share of a file's events stamped after the drop it arrived in closes.
   max_future_share: 0.0
