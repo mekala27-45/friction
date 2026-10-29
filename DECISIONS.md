@@ -238,3 +238,16 @@ features task died on the 1 GB serverless cap for Python UDF code. At 100,000 th
 the same single account (the next largest has 70,028 attempts), and the first month flags it too.
 The partition functions were also rewritten to fill one block of doubles, and the groups went
 from 64 to 1,024; neither changes a feature.
+
+## 2026-10-29 The open source runs that must match the workspace run on the Actions runner
+
+The plan was for the build machine to run the full open source pipeline and reconcile it with the
+workspace. Two things moved it. The build machine never holds the production salt, so every salted
+table it writes differs from the workspace's by construction and only the unsalted grains could be
+compared. And this build machine has 2 cores, 8 GB and 19 GB of free disk: the login silver
+shuffle filled the disk twice. The Actions runner holds the salt as a secret and has 4 cores and
+16 GB, so a request of kind portable copies drops from the outbox volume and runs the same
+pipeline, features, models, grade and model export there. Every salted table can then be compared
+by digest: the first month matched on all nine exported tables, and over every row eight of nine
+matched (the card age feature differs and is being traced). The build machine keeps the fixture
+runs, the tests and the gates, with the public test salt.

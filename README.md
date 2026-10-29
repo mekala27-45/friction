@@ -1,10 +1,9 @@
 # friction
 
-**Not complete.** 3 of the eighteen mandatory lines of the definition of done are
-done; lines 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 15, 16, 17, 18 are not, and RESULTS.md says for each what exists and what it
-waits on. The Databricks workspace has run its probe and nothing else yet: the deploy, the backfill,
-governance and the Unity Catalog registration wait on three GitHub Actions secrets. Every graded number
-below comes from the open source Spark run of the same code on the build machine, and says so.
+**Not complete.** 7 of the eighteen mandatory lines of the definition of done are
+done; lines 5, 6, 8, 10, 11, 12, 13, 15, 16, 17, 18 are not, and RESULTS.md says for each what exists and what it
+waits on. Every number below says which engine produced it: the Lakeflow pipeline in the
+Databricks workspace, or open source Spark running the same code.
 
 > friction is a portfolio demonstration built on two published synthetic data sets (the IBM TabFormer card transactions, and the RBA login data set under CC BY 4.0) and a simulator with known truth. No real person, card or account appears in it, its numbers describe synthetic data, and it must not be used to decide anything about anyone. It runs on Databricks Free Edition, which is for non commercial use.
 
@@ -25,7 +24,8 @@ every result is a point on the frontier of capture against friction at that budg
   chargebacks with a lag, card lifecycle changes as a CDC feed, and the attacker models of the RBA papers.
 - **Two engines, one set of transforms.** packages/transforms runs in a Lakeflow pipeline on Databricks
   Free Edition (Auto Loader, expectations, AUTO CDC) and in open source Spark Declarative Pipelines on
-  the build machine. The two are reconciled at the desk, month, day and user bucket grains.
+  a GitHub Actions runner, both with the workspace salt. The two are compared by table digest and at the
+  desk, month, day and user bucket grains (scripts/reconcile.py).
 - **Features as of the event.** State machines in packages/features compute every feature from strictly
   earlier events; the API imports the same code, so online and offline agree by construction and parity
   checks it.
