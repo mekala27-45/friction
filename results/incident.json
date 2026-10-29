@@ -79,13 +79,13 @@
  "other_drops_unchanged": true,
  "timeline": [
   {
-   "at": "2026-10-29T22:18:45Z",
-   "seconds": 36.8,
+   "at": "2026-10-29T22:59:56Z",
+   "seconds": 37.4,
    "what": "pipeline run over the drops around day 40, contract as it was"
   },
   {
-   "at": "2026-10-29T22:19:24Z",
-   "seconds": 39.0,
+   "at": "2026-10-29T23:00:35Z",
+   "seconds": 38.9,
    "what": "replay of the same drops with the approved change and the redelivery"
   }
  ],

@@ -1,0 +1,7 @@
+{
+ "id": "2026-10-29-14b-incident-verify",
+ "kind": "sql",
+ "target": "dev",
+ "params": {"file": "sql/incident_verify.sql", "vars": {"silver": "workspace.friction_dev_silver"}, "stop_on_failure": false},
+ "note": "Verify again: the silver rows of drop 387 against the corrected source."
+}

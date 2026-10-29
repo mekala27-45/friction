@@ -54,8 +54,11 @@ def landing(base: Path, src: Path, fixture: Path, fixed: bool) -> Path:
         for f in sorted(d.iterdir()):
             (target / f.name).symlink_to(f.resolve())
         if fixed and d.name == DROP:
+            # As jobs/land.py lands it: its own drop folder, after the drop it corrects.
+            redelivered = drops / f"{DROP}_redelivery"
+            redelivered.mkdir()
             for f in sorted((src / "payments" / "redelivery" / DROP).iterdir()):
-                (target / f.name).symlink_to(f.resolve())
+                (redelivered / f.name).symlink_to(f.resolve())
     return out
 
 

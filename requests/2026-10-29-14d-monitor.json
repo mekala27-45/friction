@@ -1,0 +1,8 @@
+{
+ "id": "2026-10-29-14d-monitor",
+ "kind": "bundle_run",
+ "target": "dev",
+ "job": "monitor",
+ "params": {"export_from": "/Volumes/workspace/friction_dev_raw/exports/monitor", "stop_on_failure": false},
+ "note": "The monitor after the replay: no alert may remain on drop 387."
+}

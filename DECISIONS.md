@@ -283,3 +283,16 @@ change is contracts/approved_changes.yaml and the replay is a backfill of drop 3
 redelivery. The same monitor run flagged drift in mcc_fraud_rate across the 2019 months against
 the training months (PSI near 2.8); that is the label calendar of TabFormer, not the incident,
 and it is recorded in the postmortem, not fixed here.
+
+## 2026-10-29 Reversal: a rejected file's rows no longer win a key
+
+The first replay of drop 387 in the workspace (request 2026-10-29-13a) kept 2,920 rows of the 5,849
+the corrected source holds. Deduplication ranked the copies of a transaction by drop and file, so the
+rejected part two, which arrived first, held every part two key, and the corrected redelivery, which
+the land job puts in a drop folder of its own after the drop it corrects, was quarantined as a
+conflicting repeat. The local replay had passed because it placed the redelivery inside the same
+drop folder, where its file name sorted first. Two changes: rows of a rejected file rank after every
+accepted copy of their key, and a redelivery's drop id reads its date without the suffix, so it
+closes with the drop it corrects. The local replay now lands the redelivery as the land job does,
+and tests/transforms covers both. The first replay's count is kept in
+results/workspace/incident_drop_first_replay.json.

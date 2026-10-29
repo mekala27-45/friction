@@ -1,0 +1,12 @@
+{
+ "id": "2026-10-29-14a-backfill-incident",
+ "kind": "bundle_run",
+ "target": "dev",
+ "job": "backfill",
+ "params": {
+  "job_params": {"desk": "payments", "from": "387", "through": "387", "redelivery": "true", "tag": "incident"},
+  "export_from": "/Volumes/workspace/friction_dev_raw/exports/incident",
+  "stop_on_failure": false
+ },
+ "note": "Retry of 2026-10-29-13a. The workspace kept only part one: the rejected part two ranked first and the corrected redelivery, its own later drop, was quarantined as a key conflict."
+}
