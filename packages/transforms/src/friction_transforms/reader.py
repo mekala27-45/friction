@@ -18,7 +18,7 @@ from friction_transforms.bronze import TEXT_COLUMNS
 WIDTH = 24  # wide enough for every drop, with room for columns nobody expected
 
 
-def _local_headers(spark: SparkSession, path: str) -> DataFrame | None:
+def _local_headers(path: str) -> dict[str, list[str]] | None:
     """drop/file -> header columns for every file under a local path, or None for a remote one."""
     import csv
     import gzip
@@ -27,12 +27,11 @@ def _local_headers(spark: SparkSession, path: str) -> DataFrame | None:
     root = Path(path.removeprefix("file:"))
     if not root.is_dir():
         return None
-    rows = []
+    out: dict[str, list[str]] = {}
     for f in sorted(root.rglob("*.csv.gz")):
         with gzip.open(f, "rt", encoding="utf-8", newline="") as fh:
-            header = next(csv.reader(fh), [])
-        rows.append((f"{f.parent.name}/{f.name}", header))
-    return spark.createDataFrame(rows, "_rel string, _header array<string>")
+            out[f"{f.parent.name}/{f.name}"] = next(csv.reader(fh), [])
+    return out
 
 
 def read_drops(spark: SparkSession, path: str, feed: str) -> DataFrame:
@@ -52,12 +51,15 @@ def read_drops(spark: SparkSession, path: str, feed: str) -> DataFrame:
     values = F.array(*[F.col(f"_c{i}") for i in range(WIDTH)])
     rows = raw.withColumn("_values", values)
     first = expected[0]
-    local = _local_headers(spark, path)
+    local = _local_headers(path)
     if local is not None:
-        # The header of each file is its first line, read on the driver without decompressing the rest,
-        # and broadcast, so the rows are read once and never shuffled to meet their header.
+        # The header of each file is its first line, read on the driver without decompressing the
+        # rest and carried as a literal map, so the rows are read once and never shuffled or joined.
+        # A literal, not a DataFrame: a pipeline query function may not trigger analysis.
         rel = F.regexp_extract(F.col("source_file"), r"([^/]+/[^/]+)$", 1)
-        data = rows.where(F.col("_c0") != first).withColumn("_rel", rel).join(F.broadcast(local), "_rel", "left")
+        pairs = [x for k, v in local.items() for x in (F.lit(k), F.array(*[F.lit(c) for c in v]))]
+        lookup = F.create_map(*pairs) if pairs else F.create_map()
+        data = rows.where(F.col("_c0") != first).withColumn("_header", F.try_element_at(lookup, rel))
     else:
         headers = rows.where(F.col("_c0") == first).select(
             "source_file", F.filter("_values", lambda x: x.isNotNull()).alias("_header")
