@@ -246,17 +246,23 @@ def logins_features(user: DataFrame, ip: DataFrame) -> DataFrame:
 
 
 def features_step(
-    spark: Any, read: Callable[[str], DataFrame], write: Callable[[str, DataFrame], None]
+    spark: Any,
+    read: Callable[[str], DataFrame],
+    write: Callable[[str, DataFrame], None],
+    attacks: DataFrame | None = None,
 ) -> dict[str, int]:
     """Run the state machines over the materialized inputs and write the feature tables.
 
     The same function runs on the build machine (reading and writing Parquet) and in the workspace
     features task (reading and writing Delta), so both engines compute features with one code path.
+    Synthetic attacks, when given, are scored against each victim's state and never change it.
     Writes replace the tables whole, which is what makes a rerun leave them identical.
     """
     pay = payments_features(read("payment_feature_inputs"))
     write("payments_features", pay)
     inputs = read("login_feature_inputs")
+    if attacks is not None:
+        inputs = inputs.unionByName(login_inputs(attacks, has_synthetic=True))
     write("logins_user_features", logins_user_features(inputs))
     write("logins_ip_features", logins_ip_features(inputs))
     write("logins_features", logins_features(read("logins_user_features"), read("logins_ip_features")))

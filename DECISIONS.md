@@ -41,3 +41,83 @@ The specification wrote "(the IBM TabFormer card transactions and the RBA login 
 4.0)", which reads as if both carried CC BY 4.0. TabFormer's repository is Apache 2.0 and the data
 states no separate terms. The statement on every surface now reads "the IBM TabFormer card
 transactions, and the RBA login data set under CC BY 4.0".
+
+## 2026-10-29 The payments modeling window ends on 31 October 2019
+
+The first look (results/profile/tabformer.json) found that TabFormer marks no fraud from November
+2019 to the end of the file in February 2020, and none from January to October 2017. A test month
+with no fraud cannot grade a fraud model. The 36 month window is therefore 1 November 2016 to
+31 October 2019: 24 months to train, a two month gap, four months of validation, a two month gap,
+and July to October 2019 as test. The four months after it are the production period: replayed
+day by day (the final 92 days of the desk), scored and watched for drift, never graded. The test
+months' chargebacks arrive during that period, which is where label maturity is measured.
+The 2017 gap sits inside the training months and the training window interior test (12, 18 and
+24 months) shows what it does.
+
+## 2026-10-29 TabFormer has 2,000 users, not 20,000
+
+The paper describes 24 million transactions from 20,000 users. The released file has 2,000 users
+(0 to 1,999) and 6,139 card accounts. The cluster bootstrap resamples the card accounts; every page
+prints the measured counts.
+
+## 2026-10-29 The floors were written from the feature definitions, before label rates by feature
+
+The specification asks for the analyst's day one rules to be written before the data is opened.
+The first look had already opened the data (row counts, ranges and fraud by month), but no rate of
+fraud by any feature had been computed when packages/models/src/friction_models/floors.py was
+written and committed. That is the honest version of the rule here.
+
+## 2026-10-29 The state machines run beside the pipeline, not inside it
+
+Open source Spark Declarative Pipelines refuse any operation that analyses a plan inside a flow
+(ATTEMPT_ANALYSIS_IN_PIPELINE_QUERY_FUNCTION), and the Spark Connect planner analyses the input of a
+grouped map (applyInPandas) when the flow is defined. So both pipelines end at materialized feature
+inputs, and the features task of the jobs runs friction_transforms.gold.features_step over them,
+the same function on both engines. The specification's job order already had features as its own
+task after the pipeline update.
+
+## 2026-10-29 Freeman global tables keep IP addresses and browser strings seen at least three times
+
+The global proportion of an IP address or a full browser string needs a table with millions of
+rows, which the scoring API would have to carry. Values seen fewer than three times in the training
+months are treated as unseen, 1/(N+M), with N and M still the full totals; the smoothing of Freeman
+et al. (2016, Eq. 8, p. 4) gives a value seen once or twice a proportion within a factor of about
+two of that. The lakehouse and the API score with the same pruned model.
+
+## 2026-10-29 Attacker models, read from Wiefling et al. (2022)
+
+Page numbers are the running heads of the arXiv version (2206.15139); every attacker holds the
+victim's password (Section 5, p. 6:9).
+- Naive: half from a random address somewhere in the world with a random browser string, half from
+  the busiest attack address with the busiest attack browser string (p. 6:9). Addresses come from
+  the failed logins from known attack addresses, as in the paper.
+- VPN: knows the victim's country; an address in it from the failed attempts, and one of the most
+  popular browser strings of legitimate logins (p. 6:9).
+- Targeted: knows the victim's location, device and browser; an address in the victim's country
+  (its region when the attack data has one) and a browser string whose browser, operating system
+  and device type match the victim's usual ones (p. 6:9).
+The paper attacks each user at their last login (p. 6:19); this build attacks held out users at a
+keyed random time in the test months, because the test months are what is graded.
+
+## 2026-10-29 Freeman model as implemented
+
+Score as Eq. 7 of Freeman et al. (2016, p. 3) without the reputation term, smoothing as Eq. 8
+(p. 4) with M the number of distinct values seen (p. 9), hierarchies combined by linear
+interpolation (Eq. 11, p. 5) with the weights of Wiefling et al. (2022, Section 4): IP 0.6, ASN 0.3,
+country 0.1; browser string 0.53, browser 0.27, OS 0.19, device 0.01. A user with no successful
+login yet is scored with the user terms equal to the global ones.
+
+## 2026-10-29 Reason codes from LightGBM's own TreeSHAP
+
+LightGBM's ``pred_contrib`` computes the same exact TreeSHAP values as the shap package's
+TreeExplainer, without numba and the shap package in the scoring container. Logistic regression
+uses the coefficient times the standardized value.
+
+## 2026-10-29 The evaluation plan is registered
+
+evaluation/plan.yaml, sha256 2ba61fcd4da0fe0e6fa6a73e155e016b21c55eed3b5f8e850ed93c677deeb4e2,
+locked in evaluation/plan.lock before any test month of either desk was scored. Budgets: payments
+10 step ups and 1 decline per 1,000 good events; logins 100 re-authentications and 1 block per
+1,000 legitimate sign ins, chosen after reading the median re-authentication rates the RBA data set
+repository reproduces (about 0.2 to 0.6 per user at a true positive rate of 0.995 to 0.999 for a
+history of twelve logins).

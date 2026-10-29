@@ -27,8 +27,10 @@ def write(name: str, df) -> None:  # type: ignore[no-untyped-def]
     df.write.mode("overwrite").option("overwriteSchema", "true").saveAsTable(_boot.fq(args, "gold", name))
 
 
+attacks_table = _boot.fq(args, "gold", "login_attacks")
+attacks = spark.read.table(attacks_table) if spark.catalog.tableExists(attacks_table) else None
 try:
-    counts = gold.features_step(spark, read, write)
+    counts = gold.features_step(spark, read, write, attacks=attacks)
     rows_in = read("payment_feature_inputs").count() + read("login_feature_inputs").count()
     ledger.write(inputs=["payment_feature_inputs", "login_feature_inputs"], outputs=counts, rows_in=rows_in,
                  rows_out=sum(counts.values()), status="succeeded")  # fmt: skip
