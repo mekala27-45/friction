@@ -10,6 +10,8 @@ contract does not know go into ``_rescued_data`` as JSON, the way Auto Loader wr
 
 from __future__ import annotations
 
+from pathlib import Path
+
 from pyspark.sql import DataFrame, SparkSession
 from pyspark.sql import functions as F
 
@@ -22,7 +24,6 @@ def _local_headers(path: str) -> dict[str, list[str]] | None:
     """drop/file -> header columns for every file under a local path, or None for a remote one."""
     import csv
     import gzip
-    from pathlib import Path
 
     root = Path(path.removeprefix("file:"))
     if not root.is_dir():
@@ -34,37 +35,61 @@ def _local_headers(path: str) -> dict[str, list[str]] | None:
     return out
 
 
-def read_drops(spark: SparkSession, path: str, feed: str) -> DataFrame:
-    expected = TEXT_COLUMNS[feed]
+def _read(spark: SparkSession, paths: str | list[str]) -> DataFrame:
     schema = ", ".join(f"_c{i} STRING" for i in range(WIDTH))
-    raw = (
+    reader = (
         spark.read.format("csv")
         .option("header", "false")
         .option("multiLine", "false")
-        .option("recursiveFileLookup", "true")
         .option("pathGlobFilter", "*.csv.gz")
         .schema(schema)
-        .load(path)
-        .withColumn("source_file", F.col("_metadata.file_path"))
-        .withColumn("file_modified_at", F.col("_metadata.file_modification_time"))
     )
+    if isinstance(paths, str):
+        reader = reader.option("recursiveFileLookup", "true")
+    raw = reader.load(paths)
+    return raw.withColumn("source_file", F.col("_metadata.file_path")).withColumn(
+        "file_modified_at", F.col("_metadata.file_modification_time")
+    )
+
+
+def _named(raw: DataFrame, header: list[str], expected: tuple[str, ...]) -> DataFrame:
+    """One group of files that share a header: columns by name, the rest into rescued data."""
+    first = expected[0]
+    data = raw.where(F.col("_c0") != first)
+    pos = {name: i for i, name in enumerate(header) if i < WIDTH}
+    named = [(F.col(f"_c{pos[c]}") if c in pos else F.lit(None).cast("string")).alias(c) for c in expected]
+    extra = [(name, i) for name, i in pos.items() if name not in expected]
+    if extra:
+        rescued = F.to_json(F.create_map(*[x for name, i in extra for x in (F.lit(name), F.col(f"_c{i}"))]))
+    else:
+        rescued = F.lit(None).cast("string")
+    return data.select(*named, rescued.alias("_rescued_data"), "source_file", "file_modified_at")
+
+
+def read_drops(spark: SparkSession, path: str, feed: str) -> DataFrame:
+    expected = TEXT_COLUMNS[feed]
+    local = _local_headers(path)
+    if local is not None:
+        # Each file's header is its first line, read on the driver without decompressing the rest.
+        # Files that share a header are read together and mapped by name with plain column
+        # references, so every row is read once, with no join and no lookup per row.
+        root = Path(path.removeprefix("file:"))
+        groups: dict[tuple[str, ...], list[str]] = {}
+        for rel, header in sorted(local.items()):
+            groups.setdefault(tuple(header), []).append(str(root / rel))
+        parts = [_named(_read(spark, files), list(h), expected) for h, files in sorted(groups.items())]
+        out = parts[0]
+        for part in parts[1:]:
+            out = out.unionByName(part)
+        return out
+    raw = _read(spark, path)
     values = F.array(*[F.col(f"_c{i}") for i in range(WIDTH)])
     rows = raw.withColumn("_values", values)
     first = expected[0]
-    local = _local_headers(path)
-    if local is not None:
-        # The header of each file is its first line, read on the driver without decompressing the
-        # rest and carried as a literal map, so the rows are read once and never shuffled or joined.
-        # A literal, not a DataFrame: a pipeline query function may not trigger analysis.
-        rel = F.regexp_extract(F.col("source_file"), r"([^/]+/[^/]+)$", 1)
-        pairs = [x for k, v in local.items() for x in (F.lit(k), F.array(*[F.lit(c) for c in v]))]
-        lookup = F.create_map(*pairs) if pairs else F.create_map()
-        data = rows.where(F.col("_c0") != first).withColumn("_header", F.try_element_at(lookup, rel))
-    else:
-        headers = rows.where(F.col("_c0") == first).select(
-            "source_file", F.filter("_values", lambda x: x.isNotNull()).alias("_header")
-        )
-        data = rows.where(F.col("_c0") != first).join(F.broadcast(headers), "source_file", "left")
+    headers = rows.where(F.col("_c0") == first).select(
+        "source_file", F.filter("_values", lambda x: x.isNotNull()).alias("_header")
+    )
+    data = rows.where(F.col("_c0") != first).join(F.broadcast(headers), "source_file", "left")
     # Pairs of (name, value) for every header column the contract does not expect.
     zipped = F.arrays_zip(F.col("_header").alias("k"), F.slice("_values", 1, F.size("_header")).alias("v"))
     extra = F.filter(zipped, lambda p: ~p["k"].isin(*expected))
