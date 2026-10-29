@@ -64,7 +64,9 @@ class UserState:
             self.failed.popleft()
         seen = [float(c.get(v, 0)) for c, v in zip(self.counts, ev.values, strict=True)]
         distinct = [float(len(c)) for c in self.counts]
-        since = math.log1p((ev.ts_ms - self.last_success_ms) / 1000.0) if self.last_success_ms is not None else -1.0
+        since = (
+            math.log1p(max(0, ev.ts_ms - self.last_success_ms) / 1000.0) if self.last_success_ms is not None else -1.0
+        )
         if ev.rtt_ms is not None and ev.rtt_ms > 0 and self.n_rtt >= 3:
             std = math.sqrt(self.rtt_sq / (self.n_rtt - 1))
             rtt_z = (math.log(ev.rtt_ms) - self.rtt_mean) / std if std > 0 else 0.0

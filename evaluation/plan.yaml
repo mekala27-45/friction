@@ -1,0 +1,74 @@
+# The evaluation plan, registered before any test month was scored. Its SHA-256 over the canonical
+# JSON of this file is in evaluation/plan.lock and in DECISIONS.md; scripts/check_registration.py
+# fails CI if the file changes without a new dated entry naming the new hash. The test months of
+# either desk are scored only by the evaluate job, which refuses to run unless the lock matches.
+registered_at: "2026-10-29"
+desks:
+  payments:
+    # TabFormer marks no fraud after 31 October 2019 (results/profile/tabformer.json), so the
+    # 36 month modeling window ends there. Every earlier month still feeds the features.
+    window: {start: "2016-11-01", end: "2019-11-01"}
+    splits:
+      train: {start: "2016-11-01", end: "2018-11-01"}
+      gap_1: {start: "2018-11-01", end: "2019-01-01"}
+      validation: {start: "2019-01-01", end: "2019-05-01"}
+      gap_2: {start: "2019-05-01", end: "2019-07-01"}
+      test: {start: "2019-07-01", end: "2019-11-01"}
+    # Training reads labels as known at its cut; validation as known when test begins (the day a
+    # threshold chosen on it would go live); test is graded on labels as eventually reported, with
+    # the view as known at the end of the test months printed beside it.
+    label_cuts:
+      train: "2018-11-01T00:00:00"
+      validation: "2019-07-01T00:00:00"
+      test_as_of: "2019-11-01T00:00:00"
+    budget: {step_up_per_1000: 10, decline_per_1000: 1}
+    models: [floor, logistic, lightgbm]
+    unit_of_resampling: account_key
+  logins:
+    window: {start: "2020-02-03", end: "2021-03-01"}
+    splits:
+      train: {start: "2020-02-03", end: "2020-09-21"}
+      gap_1: {start: "2020-09-21", end: "2020-09-28"}
+      validation: {start: "2020-09-28", end: "2020-12-08"}
+      gap_2: {start: "2020-12-08", end: "2020-12-15"}
+      test: {start: "2020-12-15", end: "2021-03-01"}
+    label_cuts:
+      train: "2020-09-21T00:00:00"
+      validation: "2020-12-15T00:00:00"
+      test_as_of: "2021-03-01T00:00:00"
+    # Wiefling et al. (2022) report median re-authentication rates per user of about 0.2 to 0.6
+    # at a true positive rate of 0.995 to 0.999 for users with twelve logins (Fig. rq1-general in
+    # the data set repository). A desk that asks one legitimate sign in in ten to re-authenticate
+    # sits well below that; the block budget is one per thousand.
+    budget: {step_up_per_1000: 100, decline_per_1000: 1}
+    models: [floor, freeman, lightgbm]
+    unit_of_resampling: user_key
+    attackers:
+      models: [naive, vpn, targeted]
+      held_out_users: 20000
+      training_users: 20000
+    # The attack IP flag is close to a label; every login number is printed with and without it.
+    reputation_feature: is_attack_ip
+metrics:
+  headline: capture of fraud dollars at the registered budget (payments); capture of attacks at the registered budget (logins)
+  also: [capture by count, friction per 1,000 good, declines per 1,000 good, false positive rate, alert precision over labelled decisions and over all decisions]
+  threshold_free_last_columns: [roc_auc, average_precision]
+operating_point_rule: >
+  On validation, the lowest decline threshold whose good declines stay within the decline budget,
+  then the lowest step up threshold whose good step ups (online only on the payments desk) stay
+  within the step up budget. Both thresholds go to test unchanged.
+intervals: {method: cluster bootstrap over the unit of resampling, resamples: 1000, seed: 20261029, level: 0.95}
+multiple_comparisons: {method: benjamini-hochberg, q: 0.05, family: every model against the floor and every model against every other, per desk}
+interior:
+  budget: [half, registered, double]
+  lag_setting: [fast, default, slow]
+  bootstrap_seed: [20261029, 1, 2]
+  training_months: [12, 18, 24]
+gates:
+  dollar_capture_above_floor: the interval of the difference against the floor is clear of zero
+  friction_within_budget: test friction no more than the registered budget times 1.25
+  calibration_error: expected calibration error below 0.05
+  score_stability_psi: below 0.2 between validation and test
+  reason_code_coverage: every step up and decline carries at least one code
+  parity: the API and the lakehouse agree on every replayed decision
+  api_p99_ms: below 3000 warm

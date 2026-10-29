@@ -6,6 +6,7 @@ requires-python = ">=3.12,<3.13"
 license = "Apache-2.0"
 dependencies = [
   "friction-core",
+  "numpy>=2.0",
 ]
 
 [build-system]

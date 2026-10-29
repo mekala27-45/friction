@@ -1,0 +1,29 @@
+# Twelve codes per desk, in plain words, each with the features that map to it. A step up or a
+# decline carries the codes of its top three contributing features; the floor carries the codes of
+# the rules that fired (packages/models/src/friction_models/floors.py).
+payments:
+  P01: {says: the amount is far above what this card usually spends, features: [log_amount_to_median, amount_z, amount_usd]}
+  P02: {says: a refund or credit on the card, features: [is_refund]}
+  P03: {says: several purchases on this card within an hour, features: [cnt_1h, sum_1h_usd]}
+  P04: {says: unusual spending on this card over the last day, features: [cnt_24h, sum_24h_usd]}
+  P05: {says: unusual spending on this card over the last week, features: [cnt_7d, sum_7d_usd]}
+  P06: {says: purchases in quick succession, features: [log_secs_since_prev]}
+  P07: {says: first purchase at this merchant, features: [merchant_seen, merchant_new]}
+  P08: {says: first purchase in this state or country, features: [location_new, foreign]}
+  P09: {says: a merchant category new to this card or with recent fraud, features: [mcc_new, mcc_fraud_rate]}
+  P10: {says: a new card or one reissued recently, features: [days_since_issue, log_n_prior]}
+  P11: {says: an unusual time of day for this card, features: [hour, hour_share]}
+  P12: {says: a new channel for this card or recent card errors, features: [channel, channel_new, errors_24h]}
+logins:
+  L01: {says: first sign in from this IP address, features: [ip_count]}
+  L02: {says: first sign in from this country, features: [country_count]}
+  L03: {says: first sign in from this network, features: [asn_count]}
+  L04: {says: first sign in from this device, browser or operating system, features: [device_count, browser_count, os_count, device_type]}
+  L05: {says: first sign in with this exact browser string, features: [ua_count]}
+  L06: {says: first sign in from this region or city, features: [region_count, city_count]}
+  L07: {says: an account with little sign in history, features: [n_success_prior, ip_distinct, asn_distinct, country_distinct, region_distinct, city_distinct, ua_distinct, browser_distinct, os_distinct, device_distinct]}
+  L08: {says: a long time since the last successful sign in, features: [log_secs_since_success]}
+  L09: {says: recent failed sign ins on this account, features: [failed_1h_user]}
+  L10: {says: many sign ins or failures from this address in the last hour, features: [logins_1h_ip, failed_1h_ip]}
+  L11: {says: unusual network latency for this account, features: [rtt_z_user, rtt_missing]}
+  L12: {says: the address is on a known attacker list, features: [is_attack_ip]}

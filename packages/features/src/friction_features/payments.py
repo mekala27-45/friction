@@ -135,7 +135,7 @@ class CardState:
                 cnt += 1
                 total += a
             windows.extend((float(cnt), total))
-        since = math.log1p(ev.ts - self.last_ts) if self.last_ts is not None else -1.0
+        since = math.log1p(max(0, ev.ts - self.last_ts)) if self.last_ts is not None else -1.0
         seen = self.merchants.get(ev.merchant_key, 0)
         hour = (ev.ts // 3600) % 24
         near = self.hours[hour] + self.hours[(hour - 1) % 24] + self.hours[(hour + 1) % 24]
