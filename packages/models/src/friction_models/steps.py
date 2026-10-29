@@ -24,7 +24,7 @@ from pyspark.sql import DataFrame
 from pyspark.sql import functions as F
 
 from friction_models import floors
-from friction_models.freeman import MIN_COUNT, PRUNED, Freeman
+from friction_models.freeman import CODE_FEATURES, MIN_COUNT, PRUNED, Freeman
 from friction_models.learners import Gbm, Logistic
 
 Read = Callable[[str], DataFrame]
@@ -185,6 +185,8 @@ def score_logins(pdf: pd.DataFrame, folder: Path, mapping: dict[str, str]) -> pd
     out["score_floor"] = floors.login_scores(feats)
     out["codes_floor"] = [",".join(floors.login_fired(r)) for r in feats]
     out["score_freeman"] = freeman.scores(values, feats)
+    contrib = np.array([freeman.contributions(v, f) for v, f in zip(values, feats, strict=True)], dtype=np.float64)
+    out["codes_freeman"] = _codes(contrib.reshape(len(values), len(CODE_FEATURES)), CODE_FEATURES, mapping)
     for name, cols in (("lightgbm", LOGIN_FEATURES), ("lightgbm_rep", LOGIN_FEATURES_REP)):
         model = Gbm.from_text((folder / f"logins_{name}.txt").read_text(encoding="utf-8"))
         x = pdf[cols].astype(float).to_numpy(np.float64)

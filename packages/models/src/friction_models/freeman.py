@@ -51,6 +51,8 @@ def smoothed(count: float, total: float, distinct: float) -> float:
 
 MIN_COUNT = 3
 PRUNED = ("ip", "ua")
+# The feature each level's contribution is named by, so reason_codes.yaml maps it (L01, L03 ...).
+CODE_FEATURES = [f"{lvl}_count" for lvl, _ in (*IP_GROUP, *UA_GROUP)]
 
 
 @dataclass
@@ -111,6 +113,22 @@ class Freeman:
         p_attack = 1.0 / max(self.users, 1)
         p_legit = max(n_user, 1.0) / max(self.legit_logins, 1)
         return total + math.log(p_attack) - math.log(p_legit)
+
+    def contributions(self, values: tuple[str, ...], feats: npt.NDArray[np.float64] | list[float]) -> list[float]:
+        """One term per level, in CODE_FEATURES order: the level's weight times the log of its global
+        over its user proportion. Positive where the value is rarer for this user than for everyone;
+        the reason codes come from the largest of them."""
+        n_user = float(feats[F["n_success_prior"]])
+        out = []
+        for group in (IP_GROUP, UA_GROUP):
+            for lvl, w in group:
+                g = self._global(lvl, values[LEVEL[lvl]])
+                if n_user > 0:
+                    u = smoothed(float(feats[F[f"{lvl}_count"]]), n_user, float(feats[F[f"{lvl}_distinct"]]))
+                else:
+                    u = g
+                out.append(w * (math.log(g) - math.log(u)))
+        return out
 
     def scores(self, values: list[tuple[str, ...]], feats: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
         return np.array([self.log_score(v, f) for v, f in zip(values, feats, strict=True)], dtype=np.float64)
