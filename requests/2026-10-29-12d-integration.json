@@ -1,0 +1,8 @@
+{
+ "id": "2026-10-29-12d-integration",
+ "kind": "bundle_run",
+ "target": "it",
+ "job": "integration",
+ "params": {"export_from": "/Volumes/workspace/friction_it_raw/exports/integration", "stop_on_failure": false},
+ "note": "Re-landing a day, days delivered shuffled with late events first, a backfill over a processed range, labels out of order: every table digested after each."
+}

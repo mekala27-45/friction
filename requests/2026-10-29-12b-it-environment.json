@@ -1,0 +1,7 @@
+{
+ "id": "2026-10-29-12b-it-environment",
+ "kind": "sql",
+ "target": "it",
+ "params": {"file": "sql/integration_environment.sql", "vars": {"catalog": "workspace"}, "stop_on_failure": false},
+ "note": "Schemas and volumes for the integration job, under the friction_it prefix."
+}
