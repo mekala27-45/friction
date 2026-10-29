@@ -87,7 +87,8 @@ def main() -> int:
         store = Store(os.environ["FRICTION_TEST_DATABASE_URL"])
         store.migrate()
         bundles = {p.parent.name: Bundle.load(p.parent) for p in sorted(args.models.glob("*/bundle.json"))}
-        client = TestClient(create_app(store, bundles, key))
+        # Entered once: a TestClient used without its context starts an event loop per request.
+        client = TestClient(create_app(store, bundles, key)).__enter__()
 
         def post(path: str, body: Any, headers: dict[str, str]) -> Any:
             return client.post(path, json=body, headers=headers)

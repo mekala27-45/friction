@@ -13,6 +13,7 @@ touching what site visitors have scored.
 from __future__ import annotations
 
 import json
+import queue
 import uuid
 from collections.abc import Iterator
 from contextlib import contextmanager
@@ -20,6 +21,7 @@ from datetime import UTC, datetime
 from typing import Any
 
 import psycopg
+from psycopg.pq import TransactionStatus
 from psycopg.types.json import Jsonb
 
 DDL = """
@@ -99,11 +101,30 @@ class Tx:
 
 
 class Store:
-    def __init__(self, url: str) -> None:
-        self.url = url
+    """Connections are kept and reused, a few per process: opening one costs more than scoring."""
 
-    def connect(self) -> psycopg.Connection[Any]:
-        return psycopg.connect(self.url, autocommit=False)
+    def __init__(self, url: str, size: int = 4) -> None:
+        self.url = url
+        self.size = size
+        self._idle: queue.LifoQueue[psycopg.Connection[Any]] = queue.LifoQueue()
+
+    @contextmanager
+    def connect(self) -> Iterator[psycopg.Connection[Any]]:
+        try:
+            conn = self._idle.get_nowait()
+            if conn.closed:
+                conn = psycopg.connect(self.url, autocommit=False)
+        except queue.Empty:
+            conn = psycopg.connect(self.url, autocommit=False)
+        clean = False
+        try:
+            yield conn
+            clean = not conn.closed and conn.info.transaction_status == TransactionStatus.IDLE
+        finally:
+            if clean and self._idle.qsize() < self.size:
+                self._idle.put(conn)
+            else:
+                conn.close()
 
     def migrate(self) -> None:
         with self.connect() as conn:

@@ -30,6 +30,18 @@ def get(cores: int | None = None, memory: str = "4g", shuffle_partitions: int = 
     os.environ.setdefault("PYSPARK_DRIVER_PYTHON", sys.executable)
     os.environ.setdefault("SPARK_DRIVER_MEMORY", memory)
     n = cores or int(os.environ.get("FRICTION_SPARK_CORES", os.cpu_count() or 2))
+    if os.environ.get("FRICTION_SPARK_CLASSIC"):
+        # A classic session with no Connect server, for a second session beside the pipeline CLI,
+        # which holds the Connect port. The steps use no API that differs between the two.
+        classic = (
+            SparkSession.builder.master(f"local[{n}]")
+            .config("spark.sql.session.timeZone", "UTC")
+            .config("spark.sql.shuffle.partitions", str(shuffle_partitions))
+            .config("spark.sql.ansi.enabled", "true")
+            .config("spark.ui.enabled", "false")
+            .getOrCreate()
+        )
+        return classic
     spark = (
         SparkSession.builder.remote(f"local[{n}]")
         .config("spark.sql.session.timeZone", "UTC")

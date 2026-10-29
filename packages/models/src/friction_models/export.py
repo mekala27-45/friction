@@ -148,7 +148,7 @@ def _snapshots(history: DataFrame, key: str, fn: Callable[[pd.DataFrame], pd.Dat
 
 def payments_parity(read: Read, scored: Path, start: str, model: str, t: Thresholds) -> dict[str, Any]:
     inputs = read("payment_feature_inputs")
-    first = inputs.where(F.col("event_ts_s") >= F.unix_timestamp(F.lit(start)))
+    first = inputs.where(F.col("event_ts_s") >= F.unix_timestamp(F.to_timestamp(F.lit(start))))
     window = first.orderBy("event_ts_s", "txn_ref").limit(PARITY_EVENTS).toPandas()
     window = window.sort_values(["event_ts_s", "txn_ref"], kind="mergesort").reset_index(drop=True)
     t0, r0 = _first(window, "event_ts_s"), _first(window, "txn_ref")
