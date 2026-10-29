@@ -1,0 +1,36 @@
+# The published bar for the login desk, transcribed from RESULTS.md of the RBA data set repository
+# (release v1.0.0, digest in data/sources.lock.json; the file and its figures sit in data/raw/rba
+# after scripts/fetch_sources.py) before the login models were fit at full size.
+#
+# The repository reproduces Wiefling et al. (2022) on this data set and notes that its own
+# stratification may differ from the paper's. The comparison is context, not a pass or fail.
+source:
+  repository: https://github.com/das-group/rba-dataset
+  file: RESULTS.md
+  release: v1.0.0
+  transcribed: "2026-10-29"
+# Exact numbers from the table under "RTT as an IP address replacement (TPR: 0.999)". The risk
+# score relation is the median risk score of the attacker's logins over the median risk score of
+# the legitimate logins (Wiefling et al. 2022, Section 4).
+risk_score_relation:
+  tpr: 0.999
+  feature_set: ip_address
+  attackers: {targeted: 8.94, vpn: 5.05, naive: 8.48}
+  with_rtt_instead_of_ip:
+    rtt_1ms: {targeted: 7.75, vpn: 4.38, naive: 7.32}
+    rtt_5ms: {targeted: 7.58, vpn: 4.28, naive: 7.15}
+    rtt_10ms: {targeted: 7.37, vpn: 4.16, naive: 6.95}
+    rtt_50ms: {targeted: 6.33, vpn: 3.58, naive: 5.99}
+# Read from figure images/rq1-general.png (bottom row, median re-authentication rate per user) at
+# a login history of twelve, the dash dot rule in the figure. Read by locating each series colour
+# in the pixel column of that rule, with the axis mapped from its frame; precision is about 0.02.
+# The 0.970 series is hidden under the others for the naive and targeted attackers at that point.
+# The very targeted attacker is not modeled here.
+median_reauthentication_rate:
+  figure: images/rq1-general.png
+  login_history: 12
+  read_precision: 0.02
+  by_attacker:
+    naive: {"0.999": 0.56, "0.995": 0.24, "0.990": 0.17, "0.980": 0.09}
+    vpn: {"0.999": 0.62, "0.995": 0.31, "0.990": 0.26, "0.980": 0.19, "0.970": 0.16}
+    targeted: {"0.999": 0.69, "0.995": 0.38, "0.990": 0.31, "0.980": 0.17}

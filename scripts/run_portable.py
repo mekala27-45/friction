@@ -39,6 +39,7 @@ def main() -> int:
     parser.add_argument("--landing", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--memory", default="4g")
+    parser.add_argument("--partitions", type=int, default=16)
     args = parser.parse_args()
     out = args.out.resolve()
     if out.exists():
@@ -51,7 +52,7 @@ def main() -> int:
         "libraries": [{"glob": {"include": "transformations/**"}}],
         "configuration": {
             "spark.sql.session.timeZone": "UTC",
-            "spark.sql.shuffle.partitions": "16",
+            "spark.sql.shuffle.partitions": str(args.partitions),
             "spark.sql.ansi.enabled": "true",
         },
     }
@@ -66,6 +67,7 @@ def main() -> int:
         "PYSPARK_DRIVER_PYTHON": sys.executable,
         "SPARK_DRIVER_MEMORY": args.memory,
         "PYTHONPATH": str(ROOT),
+        "TZ": "UTC",
         "FRICTION_LANDING": str(args.landing.resolve()),
         "FRICTION_SALT": os.environ.get("FRICTION_SALT", TEST_SALT),
         "FRICTION_CONTRACT": contract_json(),
