@@ -1,0 +1,138 @@
+# Results
+
+{{ statement() }}
+
+Rendered from results/manifest.json by the claim gate; a number here that the manifest does not hold
+fails CI. Source of each block in its first line.
+
+## The definition of done
+
+{{ done() }} of eighteen lines done.
+
+{{ table("checklist") }}
+
+Stretch items (the sequence challenger, a workspace endpoint, the dashboard and Genie space, the
+readback warehouse, BI exports, hardening): not started, and not counted.
+
+## The sources
+
+{% if has("data.rba.rows") %}
+TabFormer: {{ v("data.tabformer.rows") }} transactions from {{ v("data.tabformer.users") }} users and
+{{ v("data.tabformer.cards") }} cards. RBA: {{ v("data.rba.rows") }} login attempts from
+{{ v("data.rba.users") }} user ids, {{ v("data.rba.successes") }} of them successful; round trip time
+missing on {{ v("data.rba.rtt_missing_share") }} of rows; {{ v("data.rba.takeovers") }} attempts marked as
+account takeovers.
+{% if has("data.rba.unknown_account_attempts") %}
+One account id holds {{ v("data.rba.unknown_account_attempts") }} attempts with
+{{ v("data.rba.unknown_account_successes") }} successes: the bucket the service files sign ins against
+unknown accounts under. It is flagged in silver by a rule on counts, never by its id (DECISIONS.md).
+{% endif %}
+{% endif %}
+
+{% if has("replay.payments.rows") %}
+The replay delivers {{ v("replay.payments.rows") }} payment rows in {{ v("replay.payments.drops") }} drops
+and {{ v("replay.logins.rows") }} login rows in {{ v("replay.logins.drops") }} drops; the simulated label
+feed carries {{ v("replay.feeds.labels_payments.rows") }} chargeback rows.
+{% endif %}
+
+{% if has("lake.local.tables") %}
+## The full local run
+
+Every table, its rows and its digest (the reconcile compares these with the workspace's).
+
+{{ table("lake.local.tables") }}
+
+Quarantine by rule:
+
+{{ table("lake.local.quarantine") }}
+{% endif %}
+
+{% if has("eval.payments.champion") %}
+## The payments desk
+
+Source: {{ v("eval.source") }} run. Test months {{ v("plan.payments.test.start") }} to
+{{ v("plan.payments.test.end") }}: {{ v("eval.payments.test.events") }} transactions,
+{{ v("eval.payments.test.frauds") }} frauds worth {{ v("eval.payments.test.fraud_usd") }}, resampled over
+{{ v("eval.payments.test.users") }} card accounts.
+
+{{ table("eval.payments.scorecard") }}
+
+Model against floor and model against model, dollar capture at the operating point:
+
+{{ table("eval.payments.comparisons") }}
+
+Promotion gates:
+
+{{ table("eval.payments.gates") }}
+
+The interior test on the budget: {{ v("eval.payments.interior.budget") }}.
+
+{{ table("eval.payments.interior_budget") }}
+
+Expected cost per 1,000 events at the assumptions in config/costs.yaml (each one an assumption): the
+cheapest is {{ v("eval.payments.cost.cheapest") }}; assumptions that change that when halved or doubled:
+{{ v("eval.payments.cost.flips") }}.
+
+{{ table("eval.payments.cost") }}
+
+## The login desk
+
+Test months {{ v("plan.logins.test.start") }} to {{ v("plan.logins.test.end") }}:
+{{ v("eval.logins.test.events") }} successful sign ins, {{ v("eval.logins.test.frauds") }} of them attacks,
+resampled over {{ v("eval.logins.test.users") }} users. Real takeovers in the test months:
+{{ v("eval.logins.attackers.takeover.count") }}, so the graded positives are the synthetic attackers.
+
+{{ table("eval.logins.scorecard") }}
+
+{{ table("eval.logins.comparisons") }}
+
+Capture by attacker model at each model's operating point:
+
+{{ table("eval.logins.attackers") }}
+
+Promotion gates:
+
+{{ table("eval.logins.gates") }}
+
+The interior test on the budget: {{ v("eval.logins.interior.budget") }}.
+
+{{ table("eval.logins.interior_budget") }}
+
+### Against the published RBA results
+
+Risk score relation of the Freeman reimplementation against the table in the data set repository:
+
+{{ table("eval.logins.rba_rsr") }}
+
+Median re-authentication rate per user, over {{ v("eval.logins.rba.users_in_band") }} users with ten
+to fourteen earlier successful sign ins, against values read from figure rq1-general at a history of
+twelve:
+
+{{ table("eval.logins.rba_reauth") }}
+
+## The hypotheses
+
+Registered in evaluation/hypotheses.yaml (hash {{ v("plan.hypotheses_sha256") }}), each tested once on
+validation, the five corrected together.
+
+{{ table("eval.hypotheses") }}
+{% endif %}
+
+{% if has("workspace.probe") %}
+## What Free Edition allowed
+
+{{ table("workspace.probe") }}
+{% endif %}
+
+## Limitations
+
+- The graded numbers come from the local open source Spark run until the workspace runs; the two engines
+  run the same transforms, but the tokens differ because the build machine never holds the production
+  salt, so the attacker victims and the user bucket grain differ between them.
+- The payment labels are simulated chargebacks on TabFormer's fraud flag, with a lag drawn from a
+  lognormal. TabFormer marks no fraud in two stretches of its calendar (DECISIONS.md names them); the
+  modeling window ends before the second.
+- No real takeover falls in the login test months, so the login desk is graded on synthetic attackers
+  built from the paper's definitions, which are not attackers.
+- The attack IP flag is close to a label; the LightGBM model with it is printed beside the one without.
+- The cost view multiplies probabilities by dollar assumptions that no bank supplied.

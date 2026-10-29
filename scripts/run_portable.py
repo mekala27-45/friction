@@ -40,6 +40,7 @@ def main() -> int:
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--memory", default="4g")
     parser.add_argument("--partitions", type=int, default=16)
+    parser.add_argument("--cores", type=int, default=os.cpu_count() or 2)
     args = parser.parse_args()
     out = args.out.resolve()
     if out.exists():
@@ -74,7 +75,16 @@ def main() -> int:
     }
     started = time.monotonic()
     proc = subprocess.run(
-        [str(venv_bin / "spark-pipelines"), "run", "--spec", str(spec_path), "--full-refresh-all"],
+        # The CLI's own default is --remote local, one thread; name the cores.
+        [
+            str(venv_bin / "spark-pipelines"),
+            "--remote",
+            f"local[{args.cores}]",
+            "run",
+            "--spec",
+            str(spec_path),
+            "--full-refresh-all",
+        ],
         cwd=out,
         env=env,
         capture_output=True,
