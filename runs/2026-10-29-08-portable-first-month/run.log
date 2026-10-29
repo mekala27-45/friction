@@ -1,0 +1,1457 @@
+$ databricks fs ls dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops
+0001_2020-02
+0002_2020-03
+0003_2020-04
+0004_2020-05
+0005_2020-06
+0006_2020-07
+0007_2020-08
+0008_2020-09
+0009_2020-10
+0010_2020-11
+0011_2020-11-29
+0012_2020-11-30
+0013_2020-12-01
+0014_2020-12-02
+0015_2020-12-03
+0016_2020-12-04
+0017_2020-12-05
+0018_2020-12-06
+0019_2020-12-07
+0020_2020-12-08
+0021_2020-12-09
+0022_2020-12-10
+0023_2020-12-11
+0024_2020-12-12
+0025_2020-12-13
+0026_2020-12-14
+0027_2020-12-15
+0028_2020-12-16
+0029_2020-12-17
+0030_2020-12-18
+0031_2020-12-19
+0032_2020-12-20
+0033_2020-12-21
+0034_2020-12-22
+0035_2020-12-23
+0036_2020-12-24
+0037_2020-12-25
+0038_2020-12-26
+0039_2020-12-27
+0040_2020-12-28
+0041_2020-12-29
+0042_2020-12-30
+0043_2020-12-31
+0044_2021-01-01
+0045_2021-01-02
+0046_2021-01-03
+0047_2021-01-04
+0048_2021-01-05
+0049_2021-01-06
+0050_2021-01-07
+0051_2021-01-08
+0052_2021-01-09
+0053_2021-01-10
+0054_2021-01-11
+0055_2021-01-12
+0056_2021-01-13
+0057_2021-01-14
+0058_2021-01-15
+0059_2021-01-16
+0060_2021-01-17
+0061_2021-01-18
+0062_2021-01-19
+0063_2021-01-20
+0064_2021-01-21
+0065_2021-01-22
+0066_2021-01-23
+0067_2021-01-24
+0068_2021-01-25
+0069_2021-01-26
+0070_2021-01-27
+0071_2021-01-28
+0072_2021-01-29
+0073_2021-01-30
+0074_2021-01-31
+0075_2021-02-01
+0076_2021-02-02
+0077_2021-02-03
+0078_2021-02-04
+0079_2021-02-05
+0080_2021-02-06
+0081_2021-02-07
+0082_2021-02-08
+0083_2021-02-09
+0084_2021-02-10
+0085_2021-02-11
+0086_2021-02-12
+0087_2021-02-13
+0088_2021-02-14
+0089_2021-02-15
+0090_2021-02-16
+0091_2021-02-17
+0092_2021-02-18
+0093_2021-02-19
+0094_2021-02-20
+0095_2021-02-21
+0096_2021-02-22
+0097_2021-02-23
+0098_2021-02-24
+0099_2021-02-25
+0100_2021-02-26
+0101_2021-02-27
+0102_2021-02-28
+[exit 0]
+$ databricks fs cp -r dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0001_2020-02 /home/runner/work/friction/friction/data/work/landing_2026-10-29-08-portable-first-month/logins/drops/0001_2020-02
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0001_2020-02/logins_2020-02.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-29-08-portable-first-month/logins/drops/0001_2020-02/logins_2020-02.csv.gz
+[exit 0]
+$ databricks fs ls dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_logins/drops
+0001_2020-02
+0002_2020-03
+0003_2020-04
+0004_2020-05
+0005_2020-06
+0006_2020-07
+0007_2020-08
+0008_2020-09
+0009_2020-10
+0010_2020-11
+0014_2020-12-02
+0016_2020-12-04
+0018_2020-12-06
+0020_2020-12-08
+[exit 0]
+$ databricks fs cp -r dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_logins/drops/0001_2020-02 /home/runner/work/friction/friction/data/work/landing_2026-10-29-08-portable-first-month/labels_logins/drops/0001_2020-02
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_logins/drops/0001_2020-02/labels_logins_2020-02.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-29-08-portable-first-month/labels_logins/drops/0001_2020-02/labels_logins_2020-02.csv.gz
+[exit 0]
+$ databricks fs ls dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops
+0001_1991-01
+0002_1991-02
+0003_1991-03
+0004_1991-04
+0005_1991-05
+0006_1991-06
+0007_1991-07
+0008_1991-08
+0009_1991-09
+0010_1991-10
+0011_1991-11
+0012_1991-12
+0013_1992-01
+0014_1992-02
+0015_1992-03
+0016_1992-04
+0017_1992-05
+0018_1992-06
+0019_1992-07
+0020_1992-08
+0021_1992-09
+0022_1992-10
+0023_1992-11
+0024_1992-12
+0025_1993-01
+0026_1993-02
+0027_1993-03
+0028_1993-04
+0029_1993-05
+0030_1993-06
+0031_1993-07
+0032_1993-08
+0033_1993-09
+0034_1993-10
+0035_1993-11
+0036_1993-12
+0037_1994-01
+0038_1994-02
+0039_1994-03
+0040_1994-04
+0041_1994-05
+0042_1994-06
+0043_1994-07
+0044_1994-08
+0045_1994-09
+0046_1994-10
+0047_1994-11
+0048_1994-12
+0049_1995-01
+0050_1995-02
+0051_1995-03
+0052_1995-04
+0053_1995-05
+0054_1995-06
+0055_1995-07
+0056_1995-08
+0057_1995-09
+0058_1995-10
+0059_1995-11
+0060_1995-12
+0061_1996-01
+0062_1996-02
+0063_1996-03
+0064_1996-04
+0065_1996-05
+0066_1996-06
+0067_1996-07
+0068_1996-08
+0069_1996-09
+0070_1996-10
+0071_1996-11
+0072_1996-12
+0073_1997-01
+0074_1997-02
+0075_1997-03
+0076_1997-04
+0077_1997-05
+0078_1997-06
+0079_1997-07
+0080_1997-08
+0081_1997-09
+0082_1997-10
+0083_1997-11
+0084_1997-12
+0085_1998-01
+0086_1998-02
+0087_1998-03
+0088_1998-04
+0089_1998-05
+0090_1998-06
+0091_1998-07
+0092_1998-08
+0093_1998-09
+0094_1998-10
+0095_1998-11
+0096_1998-12
+0097_1999-01
+0098_1999-02
+0099_1999-03
+0100_1999-04
+0101_1999-05
+0102_1999-06
+0103_1999-07
+0104_1999-08
+0105_1999-09
+0106_1999-10
+0107_1999-11
+0108_1999-12
+0109_2000-01
+0110_2000-02
+0111_2000-03
+0112_2000-04
+0113_2000-05
+0114_2000-06
+0115_2000-07
+0116_2000-08
+0117_2000-09
+0118_2000-10
+0119_2000-11
+0120_2000-12
+0121_2001-01
+0122_2001-02
+0123_2001-03
+0124_2001-04
+0125_2001-05
+0126_2001-06
+0127_2001-07
+0128_2001-08
+0129_2001-09
+0130_2001-10
+0131_2001-11
+0132_2001-12
+0133_2002-01
+0134_2002-02
+0135_2002-03
+0136_2002-04
+0137_2002-05
+0138_2002-06
+0139_2002-07
+0140_2002-08
+0141_2002-09
+0142_2002-10
+0143_2002-11
+0144_2002-12
+0145_2003-01
+0146_2003-02
+0147_2003-03
+0148_2003-04
+0149_2003-05
+0150_2003-06
+0151_2003-07
+0152_2003-08
+0153_2003-09
+0154_2003-10
+0155_2003-11
+0156_2003-12
+0157_2004-01
+0158_2004-02
+0159_2004-03
+0160_2004-04
+0161_2004-05
+0162_2004-06
+0163_2004-07
+0164_2004-08
+0165_2004-09
+0166_2004-10
+0167_2004-11
+0168_2004-12
+0169_2005-01
+0170_2005-02
+0171_2005-03
+0172_2005-04
+0173_2005-05
+0174_2005-06
+0175_2005-07
+0176_2005-08
+0177_2005-09
+0178_2005-10
+0179_2005-11
+0180_2005-12
+0181_2006-01
+0182_2006-02
+0183_2006-03
+0184_2006-04
+0185_2006-05
+0186_2006-06
+0187_2006-07
+0188_2006-08
+0189_2006-09
+0190_2006-10
+0191_2006-11
+0192_2006-12
+0193_2007-01
+0194_2007-02
+0195_2007-03
+0196_2007-04
+0197_2007-05
+0198_2007-06
+0199_2007-07
+0200_2007-08
+0201_2007-09
+0202_2007-10
+0203_2007-11
+0204_2007-12
+0205_2008-01
+0206_2008-02
+0207_2008-03
+0208_2008-04
+0209_2008-05
+0210_2008-06
+0211_2008-07
+0212_2008-08
+0213_2008-09
+0214_2008-10
+0215_2008-11
+0216_2008-12
+0217_2009-01
+0218_2009-02
+0219_2009-03
+0220_2009-04
+0221_2009-05
+0222_2009-06
+0223_2009-07
+0224_2009-08
+0225_2009-09
+0226_2009-10
+0227_2009-11
+0228_2009-12
+0229_2010-01
+0230_2010-02
+0231_2010-03
+0232_2010-04
+0233_2010-05
+0234_2010-06
+0235_2010-07
+0236_2010-08
+0237_2010-09
+0238_2010-10
+0239_2010-11
+0240_2010-12
+0241_2011-01
+0242_2011-02
+0243_2011-03
+0244_2011-04
+0245_2011-05
+0246_2011-06
+0247_2011-07
+0248_2011-08
+0249_2011-09
+0250_2011-10
+0251_2011-11
+0252_2011-12
+0253_2012-01
+0254_2012-02
+0255_2012-03
+0256_2012-04
+0257_2012-05
+0258_2012-06
+0259_2012-07
+0260_2012-08
+0261_2012-09
+0262_2012-10
+0263_2012-11
+0264_2012-12
+0265_2013-01
+0266_2013-02
+0267_2013-03
+0268_2013-04
+0269_2013-05
+0270_2013-06
+0271_2013-07
+0272_2013-08
+0273_2013-09
+0274_2013-10
+0275_2013-11
+0276_2013-12
+0277_2014-01
+0278_2014-02
+0279_2014-03
+0280_2014-04
+0281_2014-05
+0282_2014-06
+0283_2014-07
+0284_2014-08
+0285_2014-09
+0286_2014-10
+0287_2014-11
+0288_2014-12
+0289_2015-01
+0290_2015-02
+0291_2015-03
+0292_2015-04
+0293_2015-05
+0294_2015-06
+0295_2015-07
+0296_2015-08
+0297_2015-09
+0298_2015-10
+0299_2015-11
+0300_2015-12
+0301_2016-01
+0302_2016-02
+0303_2016-03
+0304_2016-04
+0305_2016-05
+0306_2016-06
+0307_2016-07
+0308_2016-08
+0309_2016-09
+0310_2016-10
+0311_2016-11
+0312_2016-12
+0313_2017-01
+0314_2017-02
+0315_2017-03
+0316_2017-04
+0317_2017-05
+0318_2017-06
+0319_2017-07
+0320_2017-08
+0321_2017-09
+0322_2017-10
+0323_2017-11
+0324_2017-12
+0325_2018-01
+0326_2018-02
+0327_2018-03
+0328_2018-04
+0329_2018-05
+0330_2018-06
+0331_2018-07
+0332_2018-08
+0333_2018-09
+0334_2018-10
+0335_2018-11
+0336_2018-12
+0337_2019-01
+0338_2019-02
+0339_2019-03
+0340_2019-04
+0341_2019-05
+0342_2019-06
+0343_2019-07
+0344_2019-08
+0345_2019-09
+0346_2019-10
+0347_2019-11
+0348_2019-11-29
+0349_2019-11-30
+0350_2019-12-01
+0351_2019-12-02
+0352_2019-12-03
+0353_2019-12-04
+0354_2019-12-05
+0355_2019-12-06
+0356_2019-12-07
+0357_2019-12-08
+0358_2019-12-09
+0359_2019-12-10
+0360_2019-12-11
+0361_2019-12-12
+0362_2019-12-13
+0363_2019-12-14
+0364_2019-12-15
+0365_2019-12-16
+0366_2019-12-17
+0367_2019-12-18
+0368_2019-12-19
+0369_2019-12-20
+0370_2019-12-21
+0371_2019-12-22
+0372_2019-12-23
+0373_2019-12-24
+0374_2019-12-25
+0375_2019-12-26
+0376_2019-12-27
+0377_2019-12-28
+0378_2019-12-29
+0379_2019-12-30
+0380_2019-12-31
+0381_2020-01-01
+0382_2020-01-02
+0383_2020-01-03
+0384_2020-01-04
+0385_2020-01-05
+0386_2020-01-06
+0387_2020-01-07
+0388_2020-01-08
+0389_2020-01-09
+0390_2020-01-10
+0391_2020-01-11
+0392_2020-01-12
+0393_2020-01-13
+0394_2020-01-14
+0395_2020-01-15
+0396_2020-01-16
+0397_2020-01-17
+0398_2020-01-18
+0399_2020-01-19
+0400_2020-01-20
+0401_2020-01-21
+0402_2020-01-22
+0403_2020-01-23
+0404_2020-01-24
+0405_2020-01-25
+0406_2020-01-26
+0407_2020-01-27
+0408_2020-01-28
+0409_2020-01-29
+0410_2020-01-30
+0411_2020-01-31
+0412_2020-02-01
+0413_2020-02-02
+0414_2020-02-03
+0415_2020-02-04
+0416_2020-02-05
+0417_2020-02-06
+0418_2020-02-07
+0419_2020-02-08
+0420_2020-02-09
+0421_2020-02-10
+0422_2020-02-11
+0423_2020-02-12
+0424_2020-02-13
+0425_2020-02-14
+0426_2020-02-15
+0427_2020-02-16
+0428_2020-02-17
+0429_2020-02-18
+0430_2020-02-19
+0431_2020-02-20
+0432_2020-02-21
+0433_2020-02-22
+0434_2020-02-23
+0435_2020-02-24
+0436_2020-02-25
+0437_2020-02-26
+0438_2020-02-27
+0439_2020-02-28
+[exit 0]
+$ databricks fs cp -r dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0001_1991-01 /home/runner/work/friction/friction/data/work/landing_2026-10-29-08-portable-first-month/payments/drops/0001_1991-01
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0001_1991-01/payments_1991-01.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-29-08-portable-first-month/payments/drops/0001_1991-01/payments_1991-01.csv.gz
+[exit 0]
+$ databricks fs ls dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops
+0054_1995-06
+0055_1995-07
+0067_1996-07
+0068_1996-08
+0069_1996-09
+0075_1997-03
+0077_1997-05
+0079_1997-07
+0080_1997-08
+0082_1997-10
+0083_1997-11
+0089_1998-05
+0090_1998-06
+0092_1998-08
+0093_1998-09
+0094_1998-10
+0095_1998-11
+0099_1999-03
+0100_1999-04
+0102_1999-06
+0103_1999-07
+0105_1999-09
+0107_1999-11
+0108_1999-12
+0109_2000-01
+0110_2000-02
+0111_2000-03
+0112_2000-04
+0113_2000-05
+0114_2000-06
+0115_2000-07
+0116_2000-08
+0117_2000-09
+0118_2000-10
+0119_2000-11
+0120_2000-12
+0121_2001-01
+0122_2001-02
+0123_2001-03
+0124_2001-04
+0125_2001-05
+0126_2001-06
+0127_2001-07
+0128_2001-08
+0129_2001-09
+0130_2001-10
+0131_2001-11
+0132_2001-12
+0133_2002-01
+0134_2002-02
+0135_2002-03
+0136_2002-04
+0137_2002-05
+0138_2002-06
+0139_2002-07
+0140_2002-08
+0141_2002-09
+0142_2002-10
+0143_2002-11
+0144_2002-12
+0145_2003-01
+0146_2003-02
+0147_2003-03
+0148_2003-04
+0149_2003-05
+0150_2003-06
+0151_2003-07
+0152_2003-08
+0154_2003-10
+0155_2003-11
+0156_2003-12
+0157_2004-01
+0158_2004-02
+0159_2004-03
+0160_2004-04
+0161_2004-05
+0162_2004-06
+0163_2004-07
+0164_2004-08
+0165_2004-09
+0166_2004-10
+0167_2004-11
+0168_2004-12
+0169_2005-01
+0170_2005-02
+0171_2005-03
+0172_2005-04
+0173_2005-05
+0174_2005-06
+0175_2005-07
+0176_2005-08
+0177_2005-09
+0178_2005-10
+0179_2005-11
+0180_2005-12
+0181_2006-01
+0182_2006-02
+0183_2006-03
+0184_2006-04
+0185_2006-05
+0186_2006-06
+0187_2006-07
+0188_2006-08
+0189_2006-09
+0190_2006-10
+0191_2006-11
+0192_2006-12
+0193_2007-01
+0194_2007-02
+0195_2007-03
+0196_2007-04
+0197_2007-05
+0198_2007-06
+0199_2007-07
+0200_2007-08
+0201_2007-09
+0202_2007-10
+0203_2007-11
+0204_2007-12
+0205_2008-01
+0206_2008-02
+0207_2008-03
+0208_2008-04
+0209_2008-05
+0210_2008-06
+0211_2008-07
+0212_2008-08
+0213_2008-09
+0214_2008-10
+0215_2008-11
+0216_2008-12
+0217_2009-01
+0218_2009-02
+0219_2009-03
+0220_2009-04
+0221_2009-05
+0222_2009-06
+0223_2009-07
+0224_2009-08
+0225_2009-09
+0226_2009-10
+0227_2009-11
+0228_2009-12
+0229_2010-01
+0230_2010-02
+0231_2010-03
+0232_2010-04
+0233_2010-05
+0234_2010-06
+0235_2010-07
+0236_2010-08
+0237_2010-09
+0238_2010-10
+0239_2010-11
+0240_2010-12
+0241_2011-01
+0242_2011-02
+0243_2011-03
+0244_2011-04
+0245_2011-05
+0246_2011-06
+0247_2011-07
+0248_2011-08
+0249_2011-09
+0250_2011-10
+0251_2011-11
+0252_2011-12
+0253_2012-01
+0254_2012-02
+0255_2012-03
+0256_2012-04
+0257_2012-05
+0258_2012-06
+0259_2012-07
+0260_2012-08
+0261_2012-09
+0262_2012-10
+0263_2012-11
+0264_2012-12
+0265_2013-01
+0266_2013-02
+0267_2013-03
+0268_2013-04
+0269_2013-05
+0270_2013-06
+0271_2013-07
+0272_2013-08
+0273_2013-09
+0274_2013-10
+0275_2013-11
+0276_2013-12
+0277_2014-01
+0278_2014-02
+0279_2014-03
+0280_2014-04
+0281_2014-05
+0282_2014-06
+0283_2014-07
+0284_2014-08
+0285_2014-09
+0286_2014-10
+0287_2014-11
+0288_2014-12
+0289_2015-01
+0290_2015-02
+0291_2015-03
+0292_2015-04
+0293_2015-05
+0294_2015-06
+0295_2015-07
+0296_2015-08
+0297_2015-09
+0298_2015-10
+0299_2015-11
+0300_2015-12
+0301_2016-01
+0302_2016-02
+0303_2016-03
+0304_2016-04
+0305_2016-05
+0306_2016-06
+0307_2016-07
+0308_2016-08
+0309_2016-09
+0310_2016-10
+0311_2016-11
+0312_2016-12
+0313_2017-01
+0314_2017-02
+0315_2017-03
+0316_2017-04
+0317_2017-05
+0318_2017-06
+0319_2017-07
+0320_2017-08
+0321_2017-09
+0322_2017-10
+0323_2017-11
+0324_2017-12
+0325_2018-01
+0326_2018-02
+0327_2018-03
+0328_2018-04
+0329_2018-05
+0330_2018-06
+0331_2018-07
+0332_2018-08
+0333_2018-09
+0334_2018-10
+0335_2018-11
+0336_2018-12
+0337_2019-01
+0338_2019-02
+0339_2019-03
+0340_2019-04
+0341_2019-05
+0342_2019-06
+0343_2019-07
+0344_2019-08
+0345_2019-09
+0346_2019-10
+0347_2019-11
+0349_2019-11-30
+0350_2019-12-01
+0351_2019-12-02
+0354_2019-12-05
+0356_2019-12-07
+0357_2019-12-08
+0359_2019-12-10
+0363_2019-12-14
+0364_2019-12-15
+0367_2019-12-18
+0370_2019-12-21
+0371_2019-12-22
+0376_2019-12-27
+0377_2019-12-28
+0379_2019-12-30
+0380_2019-12-31
+0386_2020-01-06
+0393_2020-01-13
+0395_2020-01-15
+0398_2020-01-18
+0411_2020-01-31
+0413_2020-02-02
+0416_2020-02-05
+0424_2020-02-13
+0425_2020-02-14
+0427_2020-02-16
+0428_2020-02-17
+0436_2020-02-25
+[exit 0]
+$ databricks fs ls dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops
+0001_1991-01
+0007_1991-07
+0011_1991-11
+0015_1992-03
+0022_1992-10
+0023_1992-11
+0024_1992-12
+0025_1993-01
+0026_1993-02
+0027_1993-03
+0028_1993-04
+0029_1993-05
+0030_1993-06
+0032_1993-08
+0033_1993-09
+0035_1993-11
+0038_1994-02
+0041_1994-05
+0043_1994-07
+0044_1994-08
+0047_1994-11
+0048_1994-12
+0050_1995-02
+0052_1995-04
+0053_1995-05
+0054_1995-06
+0055_1995-07
+0056_1995-08
+0057_1995-09
+0058_1995-10
+0059_1995-11
+0060_1995-12
+0061_1996-01
+0062_1996-02
+0063_1996-03
+0064_1996-04
+0065_1996-05
+0066_1996-06
+0067_1996-07
+0068_1996-08
+0069_1996-09
+0070_1996-10
+0071_1996-11
+0072_1996-12
+0073_1997-01
+0074_1997-02
+0075_1997-03
+0076_1997-04
+0077_1997-05
+0078_1997-06
+0079_1997-07
+0080_1997-08
+0081_1997-09
+0082_1997-10
+0083_1997-11
+0084_1997-12
+0085_1998-01
+0086_1998-02
+0087_1998-03
+0088_1998-04
+0089_1998-05
+0090_1998-06
+0091_1998-07
+0092_1998-08
+0093_1998-09
+0094_1998-10
+0095_1998-11
+0096_1998-12
+0097_1999-01
+0098_1999-02
+0099_1999-03
+0100_1999-04
+0101_1999-05
+0102_1999-06
+0103_1999-07
+0104_1999-08
+0105_1999-09
+0106_1999-10
+0107_1999-11
+0108_1999-12
+0109_2000-01
+0110_2000-02
+0111_2000-03
+0112_2000-04
+0113_2000-05
+0114_2000-06
+0115_2000-07
+0116_2000-08
+0117_2000-09
+0118_2000-10
+0119_2000-11
+0120_2000-12
+0121_2001-01
+0122_2001-02
+0123_2001-03
+0124_2001-04
+0125_2001-05
+0126_2001-06
+0127_2001-07
+0128_2001-08
+0129_2001-09
+0130_2001-10
+0131_2001-11
+0132_2001-12
+0133_2002-01
+0134_2002-02
+0135_2002-03
+0136_2002-04
+0137_2002-05
+0138_2002-06
+0139_2002-07
+0140_2002-08
+0141_2002-09
+0142_2002-10
+0143_2002-11
+0144_2002-12
+0145_2003-01
+0146_2003-02
+0147_2003-03
+0148_2003-04
+0149_2003-05
+0150_2003-06
+0151_2003-07
+0152_2003-08
+0153_2003-09
+0154_2003-10
+0155_2003-11
+0156_2003-12
+0157_2004-01
+0158_2004-02
+0159_2004-03
+0160_2004-04
+0161_2004-05
+0162_2004-06
+0163_2004-07
+0164_2004-08
+0165_2004-09
+0166_2004-10
+0167_2004-11
+0168_2004-12
+0169_2005-01
+0170_2005-02
+0171_2005-03
+0172_2005-04
+0173_2005-05
+0174_2005-06
+0175_2005-07
+0176_2005-08
+0177_2005-09
+0178_2005-10
+0179_2005-11
+0180_2005-12
+0181_2006-01
+0182_2006-02
+0183_2006-03
+0184_2006-04
+0185_2006-05
+0186_2006-06
+0187_2006-07
+0188_2006-08
+0189_2006-09
+0190_2006-10
+0191_2006-11
+0192_2006-12
+0193_2007-01
+0194_2007-02
+0195_2007-03
+0196_2007-04
+0197_2007-05
+0198_2007-06
+0199_2007-07
+0200_2007-08
+0201_2007-09
+0202_2007-10
+0203_2007-11
+0204_2007-12
+0205_2008-01
+0206_2008-02
+0207_2008-03
+0208_2008-04
+0209_2008-05
+0210_2008-06
+0211_2008-07
+0212_2008-08
+0213_2008-09
+0214_2008-10
+0215_2008-11
+0216_2008-12
+0217_2009-01
+0218_2009-02
+0219_2009-03
+0220_2009-04
+0221_2009-05
+0222_2009-06
+0223_2009-07
+0224_2009-08
+0225_2009-09
+0226_2009-10
+0227_2009-11
+0228_2009-12
+0229_2010-01
+0230_2010-02
+0231_2010-03
+0232_2010-04
+0233_2010-05
+0234_2010-06
+0235_2010-07
+0236_2010-08
+0237_2010-09
+0238_2010-10
+0239_2010-11
+0240_2010-12
+0241_2011-01
+0242_2011-02
+0243_2011-03
+0244_2011-04
+0245_2011-05
+0246_2011-06
+0247_2011-07
+0248_2011-08
+0249_2011-09
+0250_2011-10
+0251_2011-11
+0252_2011-12
+0253_2012-01
+0254_2012-02
+0255_2012-03
+0256_2012-04
+0257_2012-05
+0258_2012-06
+0259_2012-07
+0260_2012-08
+0261_2012-09
+0262_2012-10
+0263_2012-11
+0264_2012-12
+0265_2013-01
+0266_2013-02
+0267_2013-03
+0268_2013-04
+0269_2013-05
+0270_2013-06
+0271_2013-07
+0272_2013-08
+0273_2013-09
+0274_2013-10
+0275_2013-11
+0276_2013-12
+0277_2014-01
+0278_2014-02
+0279_2014-03
+0280_2014-04
+0281_2014-05
+0282_2014-06
+0283_2014-07
+0284_2014-08
+0285_2014-09
+0286_2014-10
+0287_2014-11
+0288_2014-12
+0289_2015-01
+0290_2015-02
+0291_2015-03
+0292_2015-04
+0293_2015-05
+0294_2015-06
+0295_2015-07
+0296_2015-08
+0297_2015-09
+0298_2015-10
+0299_2015-11
+0300_2015-12
+0301_2016-01
+0302_2016-02
+0303_2016-03
+0304_2016-04
+0305_2016-05
+0306_2016-06
+0307_2016-07
+0308_2016-08
+0309_2016-09
+0310_2016-10
+0311_2016-11
+0312_2016-12
+0313_2017-01
+0314_2017-02
+0315_2017-03
+0316_2017-04
+0317_2017-05
+0318_2017-06
+0319_2017-07
+0320_2017-08
+0321_2017-09
+0322_2017-10
+0323_2017-11
+0324_2017-12
+0325_2018-01
+0326_2018-02
+0327_2018-03
+0328_2018-04
+0329_2018-05
+0330_2018-06
+0331_2018-07
+0332_2018-08
+0333_2018-09
+0334_2018-10
+0335_2018-11
+0336_2018-12
+0337_2019-01
+0338_2019-02
+0339_2019-03
+0340_2019-04
+0341_2019-05
+0342_2019-06
+0343_2019-07
+0344_2019-08
+0345_2019-09
+0346_2019-10
+0347_2019-11
+0348_2019-11-29
+0349_2019-11-30
+0350_2019-12-01
+0351_2019-12-02
+0352_2019-12-03
+0353_2019-12-04
+0354_2019-12-05
+0355_2019-12-06
+0356_2019-12-07
+0357_2019-12-08
+0358_2019-12-09
+0359_2019-12-10
+0360_2019-12-11
+0361_2019-12-12
+0362_2019-12-13
+0363_2019-12-14
+0364_2019-12-15
+0365_2019-12-16
+0366_2019-12-17
+0367_2019-12-18
+0368_2019-12-19
+0369_2019-12-20
+0370_2019-12-21
+0371_2019-12-22
+0372_2019-12-23
+0373_2019-12-24
+0374_2019-12-25
+0375_2019-12-26
+0376_2019-12-27
+0377_2019-12-28
+0378_2019-12-29
+0379_2019-12-30
+0380_2019-12-31
+0381_2020-01-01
+0382_2020-01-02
+0383_2020-01-03
+0384_2020-01-04
+0385_2020-01-05
+0386_2020-01-06
+0387_2020-01-07
+0388_2020-01-08
+0389_2020-01-09
+0390_2020-01-10
+0391_2020-01-11
+0392_2020-01-12
+0393_2020-01-13
+0394_2020-01-14
+0395_2020-01-15
+0396_2020-01-16
+0397_2020-01-17
+0398_2020-01-18
+0399_2020-01-19
+0400_2020-01-20
+0401_2020-01-21
+0402_2020-01-22
+0403_2020-01-23
+0404_2020-01-24
+0405_2020-01-25
+0406_2020-01-26
+0407_2020-01-27
+0408_2020-01-28
+0409_2020-01-29
+0410_2020-01-30
+0411_2020-01-31
+0412_2020-02-01
+0413_2020-02-02
+0414_2020-02-03
+0415_2020-02-04
+0416_2020-02-05
+0417_2020-02-06
+0418_2020-02-07
+0419_2020-02-08
+0420_2020-02-09
+0421_2020-02-10
+0422_2020-02-11
+0423_2020-02-12
+0424_2020-02-13
+0425_2020-02-14
+0426_2020-02-15
+0427_2020-02-16
+0428_2020-02-17
+0429_2020-02-18
+0430_2020-02-19
+0431_2020-02-20
+0432_2020-02-21
+0433_2020-02-22
+0434_2020-02-23
+0435_2020-02-24
+0436_2020-02-25
+0437_2020-02-26
+0438_2020-02-27
+[exit 0]
+$ databricks fs cp -r dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0001_1991-01 /home/runner/work/friction/friction/data/work/landing_2026-10-29-08-portable-first-month/cdc_cards/drops/0001_1991-01
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0001_1991-01/cdc_cards_1991-01.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-29-08-portable-first-month/cdc_cards/drops/0001_1991-01/cdc_cards_1991-01.csv.gz
+[exit 0]
+$ /home/runner/work/friction/friction/.venv/bin/python scripts/run_portable.py --landing /home/runner/work/friction/friction/data/work/landing_2026-10-29-08-portable-first-month --out /home/runner/work/friction/friction/data/lake/2026-10-29-08-portable-first-month
+portable pipeline exited 0 after 67.7 s; log in /home/runner/work/friction/friction/data/lake/2026-10-29-08-portable-first-month/run.log
+[exit 0]
+$ /home/runner/work/friction/friction/.venv/bin/python scripts/run_features.py --lake /home/runner/work/friction/friction/data/lake/2026-10-29-08-portable-first-month
+features: {'payments_features': 55, 'logins_features': 2001941} in 26.0 s
+WARNING: Using incubator modules: jdk.incubator.vector
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/29 17:20:13 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+
+[Stage 3:>                                                          (0 + 1) / 1]
+
+                                                                                
+
+[Stage 5:>                                                          (0 + 4) / 4]
+
+[Stage 7:>                                                          (0 + 4) / 5]
+
+[Stage 7:===========>                                               (1 + 4) / 5]
+
+[Stage 7:===================================>                       (3 + 2) / 5]
+
+[Stage 7:===============================================>           (4 + 1) / 5]
+
+                                                                                
+
+[Stage 10:>                                                         (0 + 4) / 5]
+
+[Stage 10:=======================>                                  (2 + 3) / 5]
+
+[Stage 10:==============================================>           (4 + 1) / 5]
+
+                                                                                
+26/10/29 17:20:37 WARN SparkStringUtils: Truncated the string representation of a plan since it was too large. This behavior can be adjusted by setting 'spark.sql.debug.maxToStringFields'.
+
+[Stage 14:>                                                         (0 + 4) / 4]
+
+[Stage 14:==============>                                           (1 + 3) / 4]
+
+[Stage 14:===========================================>              (3 + 1) / 4]
+
+[Stage 17:>                                                         (0 + 4) / 5]
+
+[Stage 17:===========>                                              (1 + 4) / 5]
+
+[Stage 17:=======================>                                  (2 + 3) / 5]
+
+[Stage 17:==============================================>           (4 + 1) / 5]
+
+                                                                                
+[exit 0]
+$ /home/runner/work/friction/friction/.venv/bin/python scripts/summarize_lake.py --lake /home/runner/work/friction/friction/data/lake/2026-10-29-08-portable-first-month --engine local --out results-branch/runs/2026-10-29-08-portable-first-month/summary.json
+18)
+	at org.apache.spark.sql.errors.ExecutionErrors$.arithmeticOverflowError(ExecutionErrors.scala:264)
+	at org.apache.spark.sql.catalyst.util.MathUtils$.withOverflow(MathUtils.scala:97)
+	at org.apache.spark.sql.catalyst.util.MathUtils$.addExact(MathUtils.scala:37)
+	at org.apache.spark.sql.catalyst.util.MathUtils.addExact(MathUtils.scala)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregate_sum_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doConsume_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithoutKey_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:44)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:50)
+	at scala.collection.Iterator$$anon$9.hasNext(Iterator.scala:593)
+	at org.apache.spark.shuffle.sort.BypassMergeSortShuffleWriter.write(BypassMergeSortShuffleWriter.java:153)
+	at org.apache.spark.shuffle.ShuffleWriteProcessor.write(ShuffleWriteProcessor.scala:57)
+	at org.apache.spark.scheduler.ShuffleMapTask.runTask(ShuffleMapTask.scala:111)
+	at org.apache.spark.scheduler.ShuffleMapTask.runTask(ShuffleMapTask.scala:54)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:206)
+	at org.apache.spark.scheduler.Task.run(Task.scala:147)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:894)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:86)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:83)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:97)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:897)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+
+26/10/29 17:20:48 ERROR TaskSetManager: Task 0 in stage 1.0 failed 1 times; aborting job
+{"ts": "2026-10-29 17:20:48.490", "level": "ERROR", "logger": "SQLQueryContextLogger", "msg": "[ARITHMETIC_OVERFLOW] overflow. Use 'try_add' to tolerate overflow and return NULL instead. If necessary set \"spark.sql.ansi.enabled\" to \"false\" to bypass this error. SQLSTATE: 22003\n\nJVM stacktrace:\norg.apache.spark.SparkArithmeticException\n\tat org.apache.spark.sql.errors.ExecutionErrors.arithmeticOverflowError(ExecutionErrors.scala:144)\n\tat org.apache.spark.sql.errors.ExecutionErrors.arithmeticOverflowError$(ExecutionErrors.scala:118)\n\tat org.apache.spark.sql.errors.ExecutionErrors$.arithmeticOverflowError(ExecutionErrors.scala:264)\n\tat org.apache.spark.sql.catalyst.util.MathUtils$.withOverflow(MathUtils.scala:97)\n\tat org.apache.spark.sql.catalyst.util.MathUtils$.addExact(MathUtils.scala:37)\n\tat org.apache.spark.sql.catalyst.util.MathUtils.addExact(MathUtils.scala:-1)\n\tat org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregate_sum_0$(:-1)\n\tat org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doConsume_0$(:-1)\n\tat org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithoutKey_0$(:-1)\n\tat org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(:-1)\n\tat org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:44)\n\tat org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:50)\n\tat scala.collection.Iterator$$anon$9.hasNext(Iterator.scala:593)\n\tat org.apache.spark.shuffle.sort.BypassMergeSortShuffleWriter.write(BypassMergeSortShuffleWriter.java:153)\n\tat org.apache.spark.shuffle.ShuffleWriteProcessor.write(ShuffleWriteProcessor.scala:57)\n\tat org.apache.spark.scheduler.ShuffleMapTask.runTask(ShuffleMapTask.scala:111)\n\tat org.apache.spark.scheduler.ShuffleMapTask.runTask(ShuffleMapTask.scala:54)\n\tat org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:206)\n\tat org.apache.spark.scheduler.Task.run(Task.scala:147)\n\tat org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:894)\n\tat org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:86)\n\tat org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:83)\n\tat org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:97)\n\tat org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:897)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)\n\tat java.lang.Thread.run(Thread.java:1583)\n\tat org.apache.spark.util.Utils$.getTryWithCallerStacktrace(Utils.scala:1457)\n\tat org.apache.spark.util.LazyTry.get(LazyTry.scala:61)\n\tat org.apache.spark.sql.execution.SparkPlan.$anonfun$execute$1(SparkPlan.scala:201)\n\tat org.apache.spark.sql.execution.SparkPlan.$anonfun$executeQuery$1(SparkPlan.scala:269)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:169)\n\tat org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:266)\n\tat org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:197)\n\tat org.apache.spark.sql.connect.execution.SparkConnectPlanExecution.$anonfun$processAsArrowBatches$6(SparkConnectPlanExecution.scala:233)\n\tat org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId0$8(SQLExecution.scala:228)\n\tat org.apache.spark.sql.execution.SQLExecution$.withSessionTagsApplied(SQLExecution.scala:352)\n\tat org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId0$7(SQLExecution.scala:189)\n\tat org.apache.spark.JobArtifactSet$.withActiveJobArtifactState(JobArtifactSet.scala:94)\n\tat org.apache.spark.sql.artifact.ArtifactManager.$anonfun$withResources$1(ArtifactManager.scala:112)\n\tat org.apache.spark.util.Utils$.withContextClassLoader(Utils.scala:185)\n\tat org.apache.spark.sql.artifact.ArtifactManager.withClassLoaderIfNeeded(ArtifactManager.scala:102)\n\tat org.apache.spark.sql.artifact.ArtifactManager.withResources(ArtifactManager.scala:111)\n\tat org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId0$6(SQLExecution.scala:189)\n\tat org.apache.spark.sql.execution.SQLExecution$.withSQLConfPropagated(SQLExecution.scala:375)\n\tat org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId0$1(SQLExecution.scala:188)\n\tat org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:810)\n\tat org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId0(SQLExecution.scala:130)\n\tat org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:317)\n\tat org.apache.spark.sql.connect.execution.SparkConnectPlanExecution.processAsArrowBatches(SparkConnectPlanExecution.scala:232)\n\tat org.apache.spark.sql.connect.execution.SparkConnectPlanExecution.handlePlan(SparkConnectPlanExecution.scala:88)\n\tat org.apache.spark.sql.connect.execution.ExecuteThreadRunner.$anonfun$executeInternal$1(ExecuteThreadRunner.scala:231)\n\tat org.apache.spark.sql.connect.execution.ExecuteThreadRunner.$anonfun$executeInternal$1$adapted(ExecuteThreadRunner.scala:203)\n\tat org.apache.spark.sql.connect.service.SessionHolder.$anonfun$withSession$2(SessionHolder.scala:441)\n\tat org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:810)\n\tat org.apache.spark.sql.connect.service.SessionHolder.$anonfun$withSession$1(SessionHolder.scala:441)\n\tat org.apache.spark.JobArtifactSet$.withActiveJobArtifactState(JobArtifactSet.scala:94)\n\tat org.apache.spark.sql.artifact.ArtifactManager.$anonfun$withResources$1(ArtifactManager.scala:112)\n\tat org.apache.spark.util.Utils$.withContextClassLoader(Utils.scala:185)\n\tat org.apache.spark.sql.artifact.ArtifactManager.withClassLoaderIfNeeded(ArtifactManager.scala:102)\n\tat org.apache.spark.sql.artifact.ArtifactManager.withResources(ArtifactManager.scala:111)\n\tat org.apache.spark.sql.connect.service.SessionHolder.withSession(SessionHolder.scala:440)\n\tat org.apache.spark.sql.connect.execution.ExecuteThreadRunner.executeInternal(ExecuteThreadRunner.scala:203)\n\tat org.apache.spark.sql.connect.execution.ExecuteThreadRunner.org$apache$spark$sql$connect$execution$ExecuteThreadRunner$$execute(ExecuteThreadRunner.scala:127)\n\tat org.apache.spark.sql.connect.execution.ExecuteThreadRunner$ExecutionThread.run(ExecuteThreadRunner.scala:338)", "context": {"errorClass": "ARITHMETIC_OVERFLOW"}, "exception": {"class": "_MultiThreadedRendezvous", "msg": "<_MultiThreadedRendezvous of RPC that terminated with:\n\tstatus = StatusCode.INTERNAL\n\tdetails = \"[ARITHMETIC_OVERFLOW] overflow. Use 'try_add' to tolerate overflow and return NULL instead. If necessary set \"spark.sql.ansi.enabled\" to \"false\" to bypass this error. SQLSTATE: 22003\"\n\tdebug_error_string = \"INTERNAL:[ARITHMETIC_OVERFLOW] overflow. Use 'try_add' to tolerate overflow and return NULL instead. If necessary set \"spark.sql.ansi.enabled\" to \"false\" to bypass this error. SQLSTATE: 22003\"\n>", "stacktrace": [{"class": null, "method": "_execute_and_fetch_as_iterator", "file": "/home/runner/work/friction/friction/.venv/lib/python3.12/site-packages/pyspark/sql/connect/client/core.py", "line": "1705"}, {"class": null, "method": "__next__", "file": "<frozen _collections_abc>", "line": "356"}, {"class": null, "method": "send", "file": "/home/runner/work/friction/friction/.venv/lib/python3.12/site-packages/pyspark/sql/connect/client/reattach.py", "line": "145"}, {"class": null, "method": "_has_next", "file": "/home/runner/work/friction/friction/.venv/lib/python3.12/site-packages/pyspark/sql/connect/client/reattach.py", "line": "197"}, {"class": null, "method": "_has_next", "file": "/home/runner/work/friction/friction/.venv/lib/python3.12/site-packages/pyspark/sql/connect/client/reattach.py", "line": "169"}, {"class": null, "method": "_call_iter", "file": "/home/runner/work/friction/friction/.venv/lib/python3.12/site-packages/pyspark/sql/connect/client/reattach.py", "line": "292"}, {"class": null, "method": "_call_iter", "file": "/home/runner/work/friction/friction/.venv/lib/python3.12/site-packages/pyspark/sql/connect/client/reattach.py", "line": "264"}, {"class": null, "method": "<lambda>", "file": "/home/runner/work/friction/friction/.venv/lib/python3.12/site-packages/pyspark/sql/connect/client/reattach.py", "line": "170"}, {"class": null, "method": "__next__", "file": "/home/runner/work/friction/friction/.venv/lib/python3.12/site-packages/grpc/_channel.py", "line": "547"}, {"class": null, "method": "_next", "file": "/home/runner/work/friction/friction/.venv/lib/python3.12/site-packages/grpc/_channel.py", "line": "965"}]}}
+Traceback (most recent call last):
+  File "/home/runner/work/friction/friction/scripts/summarize_lake.py", line 75, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/runner/work/friction/friction/scripts/summarize_lake.py", line 47, in main
+    summary["tables"][name] = digests.table_digest(df)  # type: ignore[index]
+                              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/friction/friction/packages/transforms/src/friction_transforms/digests.py", line 39, in table_digest
+    ).collect()[0]
+      ^^^^^^^^^
+  File "/home/runner/work/friction/friction/.venv/lib/python3.12/site-packages/pyspark/sql/connect/dataframe.py", line 1954, in collect
+    table, schema = self._to_table()
+                    ^^^^^^^^^^^^^^^^
+  File "/home/runner/work/friction/friction/.venv/lib/python3.12/site-packages/pyspark/sql/connect/dataframe.py", line 1974, in _to_table
+    table, schema, self._execution_info = self._session.client.to_table(
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/friction/friction/.venv/lib/python3.12/site-packages/pyspark/sql/connect/client/core.py", line 1039, in to_table
+    table, schema, metrics, observed_metrics, _ = self._execute_and_fetch(req, observations)
+                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/friction/friction/.venv/lib/python3.12/site-packages/pyspark/sql/connect/client/core.py", line 1754, in _execute_and_fetch
+    for response in self._execute_and_fetch_as_iterator(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/friction/friction/.venv/lib/python3.12/site-packages/pyspark/sql/connect/client/core.py", line 1731, in _execute_and_fetch_as_iterator
+    self._handle_error(error)
+  File "/home/runner/work/friction/friction/.venv/lib/python3.12/site-packages/pyspark/sql/connect/client/core.py", line 2093, in _handle_error
+    self._handle_rpc_error(error)
+  File "/home/runner/work/friction/friction/.venv/lib/python3.12/site-packages/pyspark/sql/connect/client/core.py", line 2177, in _handle_rpc_error
+    raise convert_exception(
+pyspark.errors.exceptions.connect.ArithmeticException: [ARITHMETIC_OVERFLOW] overflow. Use 'try_add' to tolerate overflow and return NULL instead. If necessary set "spark.sql.ansi.enabled" to "false" to bypass this error. SQLSTATE: 22003
+
+JVM stacktrace:
+org.apache.spark.SparkArithmeticException
+	at org.apache.spark.sql.errors.ExecutionErrors.arithmeticOverflowError(ExecutionErrors.scala:144)
+	at org.apache.spark.sql.errors.ExecutionErrors.arithmeticOverflowError$(ExecutionErrors.scala:118)
+	at org.apache.spark.sql.errors.ExecutionErrors$.arithmeticOverflowError(ExecutionErrors.scala:264)
+	at org.apache.spark.sql.catalyst.util.MathUtils$.withOverflow(MathUtils.scala:97)
+	at org.apache.spark.sql.catalyst.util.MathUtils$.addExact(MathUtils.scala:37)
+	at org.apache.spark.sql.catalyst.util.MathUtils.addExact(MathUtils.scala:-1)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregate_sum_0$(:-1)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doConsume_0$(:-1)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithoutKey_0$(:-1)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(:-1)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:44)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:50)
+	at scala.collection.Iterator$$anon$9.hasNext(Iterator.scala:593)
+	at org.apache.spark.shuffle.sort.BypassMergeSortShuffleWriter.write(BypassMergeSortShuffleWriter.java:153)
+	at org.apache.spark.shuffle.ShuffleWriteProcessor.write(ShuffleWriteProcessor.scala:57)
+	at org.apache.spark.scheduler.ShuffleMapTask.runTask(ShuffleMapTask.scala:111)
+	at org.apache.spark.scheduler.ShuffleMapTask.runTask(ShuffleMapTask.scala:54)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:206)
+	at org.apache.spark.scheduler.Task.run(Task.scala:147)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:894)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:86)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:83)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:97)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:897)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.lang.Thread.run(Thread.java:1583)
+	at org.apache.spark.util.Utils$.getTryWithCallerStacktrace(Utils.scala:1457)
+	at org.apache.spark.util.LazyTry.get(LazyTry.scala:61)
+	at org.apache.spark.sql.execution.SparkPlan.$anonfun$execute$1(SparkPlan.scala:201)
+	at org.apache.spark.sql.execution.SparkPlan.$anonfun$executeQuery$1(SparkPlan.scala:269)
+	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:169)
+	at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:266)
+	at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:197)
+	at org.apache.spark.sql.connect.execution.SparkConnectPlanExecution.$anonfun$processAsArrowBatches$6(SparkConnectPlanExecution.scala:233)
+	at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId0$8(SQLExecution.scala:228)
+	at org.apache.spark.sql.execution.SQLExecution$.withSessionTagsApplied(SQLExecution.scala:352)
+	at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId0$7(SQLExecution.scala:189)
+	at org.apache.spark.JobArtifactSet$.withActiveJobArtifactState(JobArtifactSet.scala:94)
+	at org.apache.spark.sql.artifact.ArtifactManager.$anonfun$withResources$1(ArtifactManager.scala:112)
+	at org.apache.spark.util.Utils$.withContextClassLoader(Utils.scala:185)
+	at org.apache.spark.sql.artifact.ArtifactManager.withClassLoaderIfNeeded(ArtifactManager.scala:102)
+	at org.apache.spark.sql.artifact.ArtifactManager.withResources(ArtifactManager.scala:111)
+	at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId0$6(SQLExecution.scala:189)
+	at org.apache.spark.sql.execution.SQLExecution$.withSQLConfPropagated(SQLExecution.scala:375)
+	at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId0$1(SQLExecution.scala:188)
+	at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:810)
+	at org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId0(SQLExecution.scala:130)
+	at org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:317)
+	at org.apache.spark.sql.connect.execution.SparkConnectPlanExecution.processAsArrowBatches(SparkConnectPlanExecution.scala:232)
+	at org.apache.spark.sql.connect.execution.SparkConnectPlanExecution.handlePlan(SparkConnectPlanExecution.scala:88)
+	at org.apache.spark.sql.connect.execution.ExecuteThreadRunner.$anonfun$executeInternal$1(ExecuteThreadRunner.scala:231)
+	at org.apache.spark.sql.connect.execution.ExecuteThreadRunner.$anonfun$executeInternal$1$adapted(ExecuteThreadRunner.scala:203)
+	at org.apache.spark.sql.connect.service.SessionHolder.$anonfun$withSession$2(SessionHolder.scala:441)
+	at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:810)
+	at org.apache.spark.sql.connect.service.SessionHolder.$anonfun$withSession$1(SessionHolder.scala:441)
+	at org.apache.spark.JobArtifactSet$.withActiveJobArtifactState(JobArtifactSet.scala:94)
+	at org.apache.spark.sql.artifact.ArtifactManager.$anonfun$withResources$1(ArtifactManager.scala:112)
+	at org.apache.spark.util.Utils$.withContextClassLoader(Utils.scala:185)
+	at org.apache.spark.sql.artifact.ArtifactManager.withClassLoaderIfNeeded(ArtifactManager.scala:102)
+	at org.apache.spark.sql.artifact.ArtifactManager.withResources(ArtifactManager.scala:111)
+	at org.apache.spark.sql.connect.service.SessionHolder.withSession(SessionHolder.scala:440)
+	at org.apache.spark.sql.connect.execution.ExecuteThreadRunner.executeInternal(ExecuteThreadRunner.scala:203)
+	at org.apache.spark.sql.connect.execution.ExecuteThreadRunner.org$apache$spark$sql$connect$execution$ExecuteThreadRunner$$execute(ExecuteThreadRunner.scala:127)
+	at org.apache.spark.sql.connect.execution.ExecuteThreadRunner$ExecutionThread.run(ExecuteThreadRunner.scala:338)
+[exit 1]

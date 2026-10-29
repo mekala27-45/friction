@@ -1,0 +1,31 @@
+{
+ "request": {
+  "id": "2026-10-29-08-portable-first-month",
+  "kind": "portable",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "outbox_volume": "/Volumes/workspace/friction_dev_raw/outbox",
+   "drops": {
+    "payments": [
+     1,
+     1
+    ],
+    "logins": [
+     1,
+     1
+    ]
+   }
+  },
+  "note": "The open source engine over the drops of the first month request, with the workspace salt, for the two engine reconcile."
+ },
+ "github_run_id": "40917851413",
+ "commit": "92752ca4da23d8203402ef53f215b527e5d5e742",
+ "started_at": "2026-10-29T17:18:53+00:00",
+ "status": "failed",
+ "error": "RuntimeError: /home/runner/work/friction/friction/.venv/bin/python scripts/summarize_lake.py exited 1",
+ "finished_at": "2026-10-29T17:20:49+00:00",
+ "files": {
+  "run.log": "eba015ec6cb683a670a38ae88adb373e132aa8970cfd9b26be3e980be8765cea"
+ }
+}
