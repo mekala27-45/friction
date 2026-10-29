@@ -62,15 +62,15 @@
    },
    "histories": {
     "cards_history": {
-     "digest": "85:73bc927c04fdee17:0214b0cc1102d31f",
+     "digest": "85:a35f0261eaa81a4a:0e398a6092acc7d1",
      "rows": 85
     },
     "labels_logins_history": {
-     "digest": "141:3885c57fd4dfa602:0a65b0605248c9e9",
+     "digest": "141:14a63a5366b9253a:001c770fc5e4a0b3",
      "rows": 141
     },
     "labels_payments_history": {
-     "digest": "192:ddfcafcd789a823c:0ea32ad179b9bc78",
+     "digest": "192:ff0b635fcaf5bf8b:13df92e130a0458b",
      "rows": 192
     }
    },
@@ -50703,10 +50703,10 @@
     }
    ]
   },
-  "seconds": 19.6,
+  "seconds": 22.3,
   "tables": {
    "cards_history": {
-    "digest": "85:73bc927c04fdee17:0214b0cc1102d31f",
+    "digest": "85:a35f0261eaa81a4a:0e398a6092acc7d1",
     "rows": 85
    },
    "cdc_cards_bronze": {
@@ -50718,7 +50718,7 @@
     "rows": 141
    },
    "labels_logins_history": {
-    "digest": "141:3885c57fd4dfa602:0a65b0605248c9e9",
+    "digest": "141:14a63a5366b9253a:001c770fc5e4a0b3",
     "rows": 141
    },
    "labels_payments_bronze": {
@@ -50726,7 +50726,7 @@
     "rows": 203
    },
    "labels_payments_history": {
-    "digest": "192:ddfcafcd789a823c:0ea32ad179b9bc78",
+    "digest": "192:ff0b635fcaf5bf8b:13df92e130a0458b",
     "rows": 192
    },
    "login_account_stats": {

@@ -1,0 +1,11 @@
+{
+ "id": "2026-10-29-12a-diagnose-issue-age",
+ "kind": "sql",
+ "target": "dev",
+ "params": {
+  "file": "sql/diagnose_issue_age.sql",
+  "vars": {"cdc": "workspace.friction_dev_cdc", "silver": "workspace.friction_dev_silver", "gold": "workspace.friction_dev_gold"},
+  "stop_on_failure": false
+ },
+ "note": "Why the workspace's card age feature is -1 on nearly every payment: the full reconcile matched 8 of 9 tables and differed only there."
+}
