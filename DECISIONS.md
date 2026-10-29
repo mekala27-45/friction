@@ -218,3 +218,13 @@ the rows at or above each model's top five percent (payments) or fifteen percent
 codes. At the registered budgets a model flags about one percent of good payments and ten percent of
 good sign ins, so every step up and decline falls inside; the coverage gate checks it on test, and
 the API computes codes for every event it flags.
+
+## 2026-10-29 The replay lock is taken under the pinned pandas
+
+The first replay lock was written under pandas 3.1.0. pandas was later pinned below 3 for the
+Spark side, and 2.3.3 writes the reported_at column of the logins label files with nine fraction
+digits where 3.1.0 wrote six. The rows and the instants are the same and Spark parses both, but
+the bytes differ, so the workspace refused to upload drops that did not match the lock. The lock
+was regenerated under the pinned version; the fourteen logins label files are the only change.
+The runner now keeps the regenerated lock beside a refused upload, so the next mismatch shows
+which files moved.
