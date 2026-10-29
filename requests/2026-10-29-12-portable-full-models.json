@@ -1,0 +1,12 @@
+{
+ "id": "2026-10-29-12-portable-full-models",
+ "kind": "portable",
+ "target": "dev",
+ "params": {
+  "outbox_volume": "/Volumes/workspace/friction_dev_raw/outbox",
+  "drops": {"payments": "all", "logins": "all"},
+  "models": true,
+  "memory": "10g"
+ },
+ "note": "The open source engine over every drop with the workspace salt, then attacks, features, training, scoring, the grade, the served bundles and their parity sets. Only the small outputs leave the runner."
+}

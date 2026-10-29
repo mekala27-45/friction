@@ -163,10 +163,25 @@ def handle(request: Request, out: Path, log: Path) -> dict[str, Any]:
                         _sh(["databricks", "fs", "cp", "-r", f"dbfs:{outbox}/{feed}/drops/{drop}",
                              str(landing / feed / "drops" / drop)], log)  # fmt: skip
         started = time.monotonic()
-        _sh([sys.executable, "scripts/run_portable.py", "--landing", str(landing), "--out", str(lake)], log)
-        _sh([sys.executable, "scripts/run_features.py", "--lake", str(lake)], log)
+        memory = str(request.params.get("memory", "4g"))
+        spark_env = {"SPARK_DRIVER_MEMORY": memory}
+        portable = [sys.executable, "scripts/run_portable.py", "--landing", str(landing), "--out", str(lake)]
+        _sh([*portable, "--memory", memory], log)
+        _sh([sys.executable, "scripts/run_features.py", "--lake", str(lake)], log, env=spark_env)
         _sh([sys.executable, "scripts/summarize_lake.py", "--lake", str(lake), "--engine", "local",
-             "--out", str(out / "summary.json")], log)  # fmt: skip
+             "--out", str(out / "summary.json")], log, env=spark_env)  # fmt: skip
+        if request.params.get("models"):
+            # The model chain over the same lake: attacks, features, train, score, then the grade and
+            # the served bundles with their parity sets. Only small files leave the runner.
+            work = ROOT / "data" / "work" / "models" / request.id
+            _sh([sys.executable, "scripts/run_models.py", "--lake", str(lake), "--out", str(work)], log, env=spark_env)
+            _sh([sys.executable, "scripts/grade.py", "--scored", str(work / "scored"), "--source", "local",
+                 "--out", str(out / "evaluation.json")], log, env=spark_env)  # fmt: skip
+            _sh([sys.executable, "scripts/export_models.py", "--lake", str(lake), "--work", str(work),
+                 "--evaluation", str(out / "evaluation.json"), "--out", str(out)], log, env=spark_env)  # fmt: skip
+            for name in ("timings.json", "summary.json"):
+                if (work / name).exists():
+                    (out / f"models_{name}").write_bytes((work / name).read_bytes())
         return {"drops": request.params["drops"], "wall_seconds": round(time.monotonic() - started, 1)}
     if request.kind == "export":
         source = str(request.params["from"])
