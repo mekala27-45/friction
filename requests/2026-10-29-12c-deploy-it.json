@@ -1,0 +1,7 @@
+{
+ "id": "2026-10-29-12c-deploy-it",
+ "kind": "bundle_deploy",
+ "target": "it",
+ "params": {"stop_on_failure": false},
+ "note": "Deploy the bundle to the integration environment: its own pipeline and the integration job."
+}

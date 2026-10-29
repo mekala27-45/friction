@@ -33,7 +33,7 @@ Kind = Literal[
 class Request(StrictModel):
     id: str
     kind: Kind
-    target: Literal["dev", "prod"] = "dev"
+    target: Literal["dev", "it", "prod"] = "dev"
     job: str | None = None
     params: dict[str, Any] = Field(default_factory=dict)
     note: str

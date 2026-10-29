@@ -27,6 +27,12 @@ targets:
     default: true
     variables:
       prefix: friction_dev
+  # The integration job's own environment: it resets its tables between tests, so it has schemas
+  # and a pipeline of its own (jobs/integration.py refuses any other prefix).
+  it:
+    mode: development
+    variables:
+      prefix: friction_it
   prod:
     mode: production
     variables:
@@ -244,6 +250,27 @@ resources:
             dependencies:
               - pyyaml
               - pydantic>=2.10
+
+    integration:
+      name: friction-integration-${bundle.target}
+      max_concurrent_runs: 1
+      tasks:
+        - task_key: integration
+          environment_key: default
+          spark_python_task:
+            python_file: ./jobs/integration.py
+            parameters: ["--root", "${workspace.file_path}", "--catalog", "${var.catalog}", "--prefix", "${var.prefix}",
+                         "--job", "integration", "--run-id", "{{job.run_id}}",
+                         "--pipeline-id", "${resources.pipelines.friction.id}",
+                         "--source-outbox", "/Volumes/${var.catalog}/friction_dev_raw/outbox"]
+      environments:
+        - environment_key: default
+          spec:
+            environment_version: "3"
+            dependencies:
+              - pyyaml
+              - pydantic>=2.10
+              - databricks-sdk>=0.40
 
     models:
       name: friction-models-${bundle.target}
