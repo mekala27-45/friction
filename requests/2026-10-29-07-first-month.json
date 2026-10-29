@@ -1,0 +1,11 @@
+{
+ "id": "2026-10-29-07-first-month",
+ "kind": "bundle_run",
+ "target": "dev",
+ "job": "backfill",
+ "params": {
+  "job_params": {"desk": "payments", "through": "1", "from": "1", "tag": "first-month"},
+  "export_from": "/Volumes/workspace/friction_dev_raw/exports/first-month"
+ },
+ "note": "Land the first payments drop, run the pipeline over both desks, export digests and reconcile statistics."
+}

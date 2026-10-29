@@ -1,0 +1,7 @@
+{
+ "id": "2026-10-29-03-terraform-dev",
+ "kind": "terraform_apply",
+ "target": "dev",
+ "params": {"var_file": "env/dev.tfvars"},
+ "note": "Schemas with the friction_dev prefix, the outbox, landing and exports volumes, and the reader grants. State in Neon."
+}

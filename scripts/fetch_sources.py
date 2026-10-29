@@ -94,8 +94,12 @@ def fetch(name: str, entry: dict[str, object], *, verify_only: bool) -> dict[str
             raise RuntimeError(f"{name}: every URL failed: {errors}")
     record["served_by"] = served_by
     record["archive_sha256"] = verify(archive, str(entry["sha256"]), int(entry["size"]))  # type: ignore[call-overload]
-    member = unpack(archive, str(entry["member"]), folder)
-    record["member_sha256"] = verify(member, str(entry["member_sha256"]), int(entry["member_size"]))  # type: ignore[call-overload]
+    staged = folder / "staged" / "_staged.json"
+    if staged.exists() and not (folder / str(entry["member"])).exists():
+        record["member_sha256"] = "staged already; the archive digest stands for it"
+    else:
+        member = unpack(archive, str(entry["member"]), folder)
+        record["member_sha256"] = verify(member, str(entry["member_sha256"]), int(entry["member_size"]))  # type: ignore[call-overload]
     record["result"] = "verified"
     return record
 

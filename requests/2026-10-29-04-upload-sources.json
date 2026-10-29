@@ -1,0 +1,7 @@
+{
+ "id": "2026-10-29-04-upload-sources",
+ "kind": "upload_sources",
+ "target": "dev",
+ "params": {"outbox_volume": "/Volumes/workspace/friction_dev_raw/outbox"},
+ "note": "Fetch both sources, regenerate every drop and feed, refuse unless the digests equal data/replay.lock.json, upload to the outbox volume."
+}

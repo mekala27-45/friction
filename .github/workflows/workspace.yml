@@ -64,6 +64,22 @@ jobs:
           fi
           mkdir -p results-branch/runs
 
+      - name: Free disk for the source files
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL || true
+          df -h / | tail -1
+
+      - name: Which optional secrets are set (names only)
+        env:
+          HAS_SALT: ${{ secrets.FRICTION_SALT != '' }}
+          HAS_TF: ${{ secrets.TF_STATE_CONN != '' }}
+          HAS_DB: ${{ secrets.DATABASE_URL != '' }}
+        run: |
+          mkdir -p results-branch/runs
+          printf '{"FRICTION_SALT": %s, "TF_STATE_CONN": %s, "DATABASE_URL": %s, "checked_in_run": "%s"}\n' \
+            "$HAS_SALT" "$HAS_TF" "$HAS_DB" "$GITHUB_RUN_ID" > results-branch/secrets_present.json
+          cat results-branch/secrets_present.json
+
       - uses: astral-sh/setup-uv@v6
         with:
           python-version: "3.12"

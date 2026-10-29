@@ -18,6 +18,7 @@ from pydantic import Field
 
 Kind = Literal[
     "probe",
+    "secrets",
     "upload_sources",
     "bundle_deploy",
     "bundle_run",
