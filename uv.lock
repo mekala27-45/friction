@@ -678,9 +678,13 @@ source = { editable = "packages/models" }
 dependencies = [
     { name = "friction-core" },
     { name = "friction-features" },
+    { name = "friction-reasons" },
+    { name = "friction-simulator" },
+    { name = "friction-transforms" },
     { name = "lightgbm" },
     { name = "numpy" },
     { name = "pandas" },
+    { name = "pyyaml" },
     { name = "scikit-learn" },
 ]
 
@@ -688,9 +692,13 @@ dependencies = [
 requires-dist = [
     { name = "friction-core", editable = "packages/core" },
     { name = "friction-features", editable = "packages/features" },
+    { name = "friction-reasons", editable = "packages/reasons" },
+    { name = "friction-simulator", editable = "packages/simulator" },
+    { name = "friction-transforms", editable = "packages/transforms" },
     { name = "lightgbm", specifier = ">=4.6" },
     { name = "numpy", specifier = ">=2.0" },
     { name = "pandas", specifier = ">=2.2,<3" },
+    { name = "pyyaml", specifier = ">=6.0" },
     { name = "scikit-learn", specifier = ">=1.6" },
 ]
 
@@ -700,10 +708,14 @@ version = "0.1.0"
 source = { editable = "packages/policy" }
 dependencies = [
     { name = "friction-core" },
+    { name = "numpy" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "friction-core", editable = "packages/core" }]
+requires-dist = [
+    { name = "friction-core", editable = "packages/core" },
+    { name = "numpy", specifier = ">=2.0" },
+]
 
 [[package]]
 name = "friction-reasons"
@@ -711,12 +723,14 @@ version = "0.1.0"
 source = { editable = "packages/reasons" }
 dependencies = [
     { name = "friction-core" },
+    { name = "numpy" },
     { name = "pyyaml" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "friction-core", editable = "packages/core" },
+    { name = "numpy", specifier = ">=2.0" },
     { name = "pyyaml", specifier = ">=6.0" },
 ]
 

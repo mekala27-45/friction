@@ -1,4 +1,4 @@
-table: labels_bronze
+table: labels_logins_bronze
 owner: Ajay Mekala
 layer: bronze
 keys:

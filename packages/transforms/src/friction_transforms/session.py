@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import os
 import sys
+import time
 from typing import Any
 
 
@@ -21,6 +22,10 @@ def get(cores: int | None = None, memory: str = "4g", shuffle_partitions: int = 
         return active
     if os.environ.get("DATABRICKS_RUNTIME_VERSION"):
         return SparkSession.builder.getOrCreate()
+    # Every time in the build is UTC. Spark Connect hands timestamps back in the client's zone, so
+    # the client process runs in UTC too, whatever the machine is set to.
+    os.environ["TZ"] = "UTC"
+    time.tzset()
     os.environ.setdefault("PYSPARK_PYTHON", sys.executable)
     os.environ.setdefault("PYSPARK_DRIVER_PYTHON", sys.executable)
     os.environ.setdefault("SPARK_DRIVER_MEMORY", memory)

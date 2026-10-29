@@ -9,7 +9,7 @@ labels the bank knew at the start of the event's month, on the system time clock
 
 from __future__ import annotations
 
-from collections.abc import Callable
+from collections.abc import Callable, Sequence
 from typing import Any
 
 from friction_features import batch, logins, payments
@@ -20,7 +20,7 @@ from pyspark.sql import types as T
 BUCKETS = 64
 
 
-def _assume(df: DataFrame, fields: list[tuple[str, T.DataType]]) -> DataFrame:
+def _assume(df: DataFrame, fields: Sequence[tuple[str, T.DataType]]) -> DataFrame:
     """Tell a Spark Connect DataFrame its own schema so applyInPandas need not ask the server.
 
     applyInPandas reads the input's column names, and in a pipeline query function any request to
@@ -28,7 +28,7 @@ def _assume(df: DataFrame, fields: list[tuple[str, T.DataType]]) -> DataFrame:
     not exist yet. The schema here is the select just above it, so it cannot drift.
     """
     if hasattr(df, "_cached_schema"):
-        df._cached_schema = T.StructType([T.StructField(n, t) for n, t in fields])
+        setattr(df, "_cached_schema", T.StructType([T.StructField(n, t) for n, t in fields]))  # noqa: B010
     return df
 
 

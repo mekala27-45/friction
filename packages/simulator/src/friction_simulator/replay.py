@@ -264,7 +264,7 @@ def _write_incident_parts(
     part1 = chunk.filter(pa.array(keys % 2 == 0))
     part2 = chunk.filter(pa.array(keys % 2 == 1))
     renamed = part1.select(columns).rename_columns(
-        [rename.renamed_to if c == rename.column else c for c in columns]  # type: ignore[misc]
+        [str(rename.renamed_to) if c == rename.column else c for c in columns]
     )
     shifted = _shift_clock(part2, int(shift.hours or 0)).select(columns)
     for name, table in ((f"{desk}_{label}_part1.csv.gz", renamed), (f"{desk}_{label}_part2.csv.gz", shifted)):

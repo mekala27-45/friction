@@ -195,7 +195,7 @@ def _scored_schema(desk: str) -> Any:
     if desk == "payments":
         fields = [("txn_ref", L), ("account_key", S), ("event_ts", TS), ("amount_cents", L)]
         fields += [("channel", T.IntegerType()), ("label", B), ("labelled", B)]
-        models = ("floor", "logistic", "lightgbm")
+        models: tuple[str, ...] = ("floor", "logistic", "lightgbm")
     else:
         fields = [("login_ref", L), ("user_key", S), ("event_ts", TS), ("success", B), ("is_attack_ip", B),
                   ("synthetic", B), ("attacker_model", S), ("label", B)]  # fmt: skip

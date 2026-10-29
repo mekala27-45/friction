@@ -52,7 +52,7 @@ def generate(
     pool = ip_pool.sort_values(["n", "ip_key"], ascending=[False, True], kind="mergesort").reset_index(drop=True)
     by_country = {c: g.reset_index(drop=True) for c, g in pool.groupby("country", sort=True)}
     by_region = {k: g.reset_index(drop=True) for k, g in pool.groupby(["country", "region"], sort=True)}
-    countries = sorted(by_country)
+    countries = sorted(str(c) for c in by_country)
     a_uas = attack_uas.sort_values(["n", "ua_key"], ascending=[False, True], kind="mergesort").reset_index(drop=True)
     l_uas = legit_uas.sort_values(["n", "ua_key"], ascending=[False, True], kind="mergesort").reset_index(drop=True)
     top_legit = l_uas.head(5)
@@ -64,7 +64,7 @@ def generate(
         u_a = draws.uniform(keys, seed, purpose, model, "a")
         u_b = draws.uniform(keys, seed, purpose, model, "b")
         u_c = draws.uniform(keys, seed, purpose, model, "c")
-        for i, v in victims.iterrows():
+        for i, v in enumerate(victims.to_dict(orient="records")):
             if model == "naive":
                 if u_a[i] < 0.5:
                     country = countries[min(int(u_b[i] * len(countries)), len(countries) - 1)]
