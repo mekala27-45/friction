@@ -375,9 +375,7 @@ def test_history_digest_reads_the_validity_columns(spark) -> None:  # type: igno
 
 def test_a_redelivery_wins_over_the_file_it_replaces(spark) -> None:  # type: ignore[no-untyped-def]
     # The rejected part arrives first, shifted; the corrected redelivery lands later as its own drop.
-    bad = _bronze_payment(
-        time="16:15", source_file="/x/drops/0390_2019-12-31/payments_2019-12-31_part2.csv.gz"
-    )
+    bad = _bronze_payment(time="16:15", source_file="/x/drops/0390_2019-12-31/payments_2019-12-31_part2.csv.gz")
     fixed = _bronze_payment(
         source_file="/x/drops/0390_2019-12-31_redelivery/payments_2019-12-31_corrected.csv.gz",
         drop_id="0390_2019-12-31_redelivery",
