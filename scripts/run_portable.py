@@ -29,8 +29,8 @@ from friction_core.tokens import TEST_SALT
 CONTRACT = ROOT / "contracts" / "approved_changes.yaml"
 
 
-def contract_json() -> str:
-    data = yaml.safe_load(CONTRACT.read_text(encoding="utf-8")) if CONTRACT.exists() else {}
+def contract_json(path: Path = CONTRACT) -> str:
+    data = yaml.safe_load(path.read_text(encoding="utf-8")) if path.exists() else {}
     return json.dumps(data.get("active", {}) or {})
 
 
@@ -41,6 +41,7 @@ def main() -> int:
     parser.add_argument("--memory", default="4g")
     parser.add_argument("--partitions", type=int, default=16)
     parser.add_argument("--cores", type=int, default=os.cpu_count() or 2)
+    parser.add_argument("--contract", type=Path, default=CONTRACT, help="approved changes to apply")
     args = parser.parse_args()
     out = args.out.resolve()
     if out.exists():
@@ -71,7 +72,7 @@ def main() -> int:
         "TZ": "UTC",
         "FRICTION_LANDING": str(args.landing.resolve()),
         "FRICTION_SALT": os.environ.get("FRICTION_SALT", TEST_SALT),
-        "FRICTION_CONTRACT": contract_json(),
+        "FRICTION_CONTRACT": contract_json(args.contract),
     }
     started = time.monotonic()
     proc = subprocess.run(
