@@ -2,7 +2,7 @@
  "as_of": "2026-10-29",
  "values": {
   "build.commits": {
-   "value": 22,
+   "value": 34,
    "fmt": "int",
    "provenance": {
     "origin": "git",
@@ -666,7 +666,7 @@
      15,
      "not done",
      "Monitoring with delayed label cohorts; the day 40 incident detected, handled by the runbook and written up",
-     "config/monitor.yaml and the incident plant exist; the monitor has not run"
+     "config/monitor.yaml and the incident plant exist; the incident has not been replayed"
     ],
     [
      16,

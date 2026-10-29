@@ -53,7 +53,8 @@ def payments_set(
     )
 
 
-LOGIN_CONTEXT = ("login_ref", "user_key", "event_ts", "success", "is_attack_ip", "country", "device_type")
+# device_type is a feature too (its code); the raw value travels as v_device.
+LOGIN_CONTEXT = ("login_ref", "user_key", "event_ts", "success", "is_attack_ip", "country")
 LOGIN_VALUES = ("ip_key", "asn", "country", "region", "city", "ua_key", "browser", "os", "device_type")
 
 
@@ -97,7 +98,7 @@ def logins_set(
     if attacks is not None and purpose is not None:
         att = attacks.where(F.col("purpose") == purpose).select(
             "login_ref", "user_key", "event_ts", F.lit(True).alias("success"), F.lit(False).alias("is_attack_ip"),
-            "country", "device_type",
+            "country",
             *_values(),
             F.lit(True).alias("synthetic"), "attacker_model", F.lit(True).alias("label"), F.lit(True).alias("labelled"),
         )  # fmt: skip
