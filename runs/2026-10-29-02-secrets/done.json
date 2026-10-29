@@ -1,0 +1,17 @@
+{
+ "request": {
+  "id": "2026-10-29-02-secrets",
+  "kind": "secrets",
+  "target": "dev",
+  "job": null,
+  "params": {},
+  "note": "Create the friction secret scope and put the salt from the FRICTION_SALT Actions secret; the pipeline reads it as {{secrets/friction/salt}}."
+ },
+ "github_run_id": "40815286595",
+ "commit": "6709d44145d9ce3c72d5e7de3374d4a36ad12647",
+ "started_at": "2026-10-29T04:01:14+00:00",
+ "status": "failed",
+ "error": "ValueError: the FRICTION_SALT Actions secret is missing or shorter than 32 characters",
+ "finished_at": "2026-10-29T04:01:16+00:00",
+ "files": {}
+}
