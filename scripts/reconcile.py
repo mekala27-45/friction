@@ -80,7 +80,10 @@ def main() -> int:
     parser.add_argument("--local", type=Path, required=True)
     parser.add_argument("--out", type=Path, default=ROOT / "results" / "reconcile_first_month.json")
     args = parser.parse_args()
-    result = compare(json.loads(args.workspace.read_text()), json.loads(args.local.read_text()))
+    local = json.loads(args.local.read_text())
+    # summarize_lake.py files each engine's summary under its engine name.
+    local = local.get("local", local) if "tables" not in local else local
+    result = compare(json.loads(args.workspace.read_text()), local)
     result["inputs"] = {"workspace": str(args.workspace), "local": str(args.local)}
     args.out.write_text(json.dumps(result, indent=1, sort_keys=True) + "\n", encoding="utf-8")
     equal = sum(t["digest_equal"] for t in result["tables"].values())

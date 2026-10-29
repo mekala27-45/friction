@@ -1,6 +1,42 @@
 {
  "promoted": [
   {
+   "file": "results/workspace/fetch_status_on_runner.json",
+   "sha256": "aba925ed7e21b01e4b12789b32928ccf902fcb6527aacdece25d0965e5befca6",
+   "request": "2026-10-29-04b-upload-sources",
+   "github_run_id": "40915758090",
+   "commit": "9598aa02c0bb981038f2ee633d9d0f564f959bf3",
+   "ran_at": "2026-10-29T17:06:53+00:00",
+   "promoted_at": "2026-10-29T17:59:13+00:00"
+  },
+  {
+   "file": "results/workspace/first_month_export.json",
+   "sha256": "2f533c09fef420ebeab213481d1b7cccd105913166f2694cc7f408db58d447b9",
+   "request": "2026-10-29-07d-first-month",
+   "github_run_id": "40924251985",
+   "commit": "11ccc47894b7da80c3af55d4ba10f527a8c8f306",
+   "ran_at": "2026-10-29T17:55:15+00:00",
+   "promoted_at": "2026-10-29T17:59:13+00:00"
+  },
+  {
+   "file": "results/workspace/first_month_open_source.json",
+   "sha256": "d276f304dd349320e2eb2bec154b644695c43ab355e68edb800f405c61fc081e",
+   "request": "2026-10-29-08b-portable-first-month",
+   "github_run_id": "40924251985",
+   "commit": "11ccc47894b7da80c3af55d4ba10f527a8c8f306",
+   "ran_at": "2026-10-29T17:57:56+00:00",
+   "promoted_at": "2026-10-29T17:59:13+00:00"
+  },
+  {
+   "file": "results/workspace/replay_lock_on_runner.json",
+   "sha256": "51dda8943082c039c71534d828489a9774da44c0f0c5a6d6c3c48c5f583c2c66",
+   "request": "2026-10-29-04b-upload-sources",
+   "github_run_id": "40915758090",
+   "commit": "9598aa02c0bb981038f2ee633d9d0f564f959bf3",
+   "ran_at": "2026-10-29T17:06:53+00:00",
+   "promoted_at": "2026-10-29T17:59:13+00:00"
+  },
+  {
    "file": "results/workspace_probe.json",
    "sha256": "a0ce9a8a707f0b7664fddc6742d16562a12acd887218b1c542c090a9745ee948",
    "request": "2026-10-29-probe",

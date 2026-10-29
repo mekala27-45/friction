@@ -1,0 +1,100 @@
+{
+ "drift": false,
+ "inputs": {
+  "local": "results/workspace/first_month_open_source.json",
+  "workspace": "results/workspace/first_month_export.json"
+ },
+ "statistics": {
+  "feature_sums": {
+   "equal": true,
+   "first_difference": null
+  },
+  "histories": {
+   "equal": true,
+   "first_difference": null
+  },
+  "logins/day": {
+   "equal": true,
+   "first_difference": null
+  },
+  "logins/desk": {
+   "equal": true,
+   "first_difference": null
+  },
+  "logins/month": {
+   "equal": true,
+   "first_difference": null
+  },
+  "logins/user_bucket": {
+   "equal": true,
+   "first_difference": null
+  },
+  "payments/day": {
+   "equal": true,
+   "first_difference": null
+  },
+  "payments/desk": {
+   "equal": true,
+   "first_difference": null
+  },
+  "payments/month": {
+   "equal": true,
+   "first_difference": null
+  },
+  "payments/user_bucket": {
+   "equal": true,
+   "first_difference": null
+  },
+  "quarantine": {
+   "equal": true,
+   "first_difference": null
+  }
+ },
+ "tables": {
+  "cards_history": {
+   "digest_equal": true,
+   "rows_local": 4,
+   "rows_workspace": 4
+  },
+  "labels_logins_history": {
+   "digest_equal": true,
+   "rows_local": 10,
+   "rows_workspace": 10
+  },
+  "labels_payments_history": {
+   "digest_equal": true,
+   "rows_local": 0,
+   "rows_workspace": 0
+  },
+  "logins_features": {
+   "digest_equal": true,
+   "rows_local": 2001941,
+   "rows_workspace": 2001941
+  },
+  "logins_silver": {
+   "digest_equal": true,
+   "rows_local": 2001941,
+   "rows_workspace": 2001941
+  },
+  "mcc_fraud_rates": {
+   "digest_equal": true,
+   "rows_local": 18,
+   "rows_workspace": 18
+  },
+  "payments_features": {
+   "digest_equal": true,
+   "rows_local": 55,
+   "rows_workspace": 55
+  },
+  "payments_silver": {
+   "digest_equal": true,
+   "rows_local": 55,
+   "rows_workspace": 55
+  },
+  "quarantine": {
+   "digest_equal": true,
+   "rows_local": 104,
+   "rows_workspace": 104
+  }
+ }
+}
