@@ -72,12 +72,12 @@ resource "databricks_schema" "layer" {
 }
 
 resource "databricks_volume" "raw" {
-  for_each         = local.volumes
-  catalog_name     = var.catalog
-  schema_name      = databricks_schema.layer["raw"].name
-  name             = each.key
-  volume_type      = "MANAGED"
-  comment          = each.value
+  for_each     = local.volumes
+  catalog_name = var.catalog
+  schema_name  = databricks_schema.layer["raw"].name
+  name         = each.key
+  volume_type  = "MANAGED"
+  comment      = each.value
 }
 
 # The reader group may use gold and read through the masks; it never sees bronze.
