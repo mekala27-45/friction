@@ -1,0 +1,10 @@
+{
+ "id": "2026-10-29-11-portable-full",
+ "kind": "portable",
+ "target": "dev",
+ "params": {
+  "outbox_volume": "/Volumes/workspace/friction_dev_raw/outbox",
+  "drops": {"payments": "all", "logins": "all"}
+ },
+ "note": "The open source engine over every drop, with the workspace salt, for the full two engine reconcile."
+}
