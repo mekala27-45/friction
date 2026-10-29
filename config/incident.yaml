@@ -1,0 +1,17 @@
+# The planted incident on replay day 40 of the payments desk. The day's drop arrives as three files.
+desk: payments
+replay_day: 40
+faults:
+  - kind: resend
+    # The file of the previous day, delivered again under a new name, byte for byte.
+    of_day: 39
+    name_suffix: resend
+  - kind: renamed_column
+    # Part one of the day's extract: the upstream renamed one column.
+    column: mcc
+    renamed_to: merchant_category
+    part: 1
+  - kind: clock_shift
+    # Part two of the day's extract: every timestamp moved six hours forward.
+    hours: 6
+    part: 2

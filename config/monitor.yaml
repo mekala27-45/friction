@@ -1,0 +1,19 @@
+# Thresholds for the monitor task. A breach writes an ops.alerts row and fails the task.
+psi:
+  feature_warn: 0.10
+  feature_alert: 0.25
+  score_alert: 0.20
+expectations:
+  # Share of a drop's rows quarantined by any one rule.
+  rule_alert: 0.001
+freshness:
+  # Gold must reflect a drop within one daily run of its landing.
+  max_runs_behind: 1
+completeness:
+  # Silver rows over source rows minus quarantine, per drop.
+  min_ratio: 1.0
+clock:
+  # Share of a file's events stamped after the drop it arrived in closes.
+  max_future_share: 0.0
+label_maturity:
+  checkpoints_days: [30, 60, 90]

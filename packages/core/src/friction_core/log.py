@@ -12,7 +12,18 @@ from typing import Any
 import structlog
 
 FORBIDDEN_KEYS = frozenset(
-    {"ip", "ip_address", "user_id", "card", "card_number", "cvv", "user_agent", "token", "password", "address"}
+    {
+        "ip",
+        "ip_address",
+        "user_id",
+        "card",
+        "card_number",
+        "cvv",
+        "user_agent",
+        "token",
+        "password",
+        "address",
+    }
 )
 
 

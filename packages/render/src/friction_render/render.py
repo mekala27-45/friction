@@ -17,10 +17,10 @@ from dataclasses import dataclass
 from html import escape
 from pathlib import Path
 
-from jinja2 import Environment, FileSystemLoader, StrictUndefined
 from friction_core.formats import format_value
 from friction_core.manifest import Manifest
 from friction_core.statements import STATEMENT, statement_markdown
+from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
 
 @dataclass(frozen=True)

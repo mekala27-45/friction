@@ -1,0 +1,33 @@
+# The simulator, labeled as simulated wherever its output appears. Seeded; every draw is made over
+# rows sorted by their natural key, so the same file gives the same labels on any machine.
+seed: 20261029
+chargebacks:
+  # A fraud incident is a run of fraud on one card with no gap longer than this.
+  incident_gap_days: 7
+  # The lag from an incident's first fraud to the bank learning of it, in days.
+  settings:
+    default: {median_days: 21, sigma: 0.8, max_days: 120, never_reported: 0.05}
+    fast:    {median_days: 10, sigma: 0.6, max_days: 60,  never_reported: 0.03}
+    slow:    {median_days: 35, sigma: 1.0, max_days: 180, never_reported: 0.08}
+  # Friendly fraud: a share of good transactions get a chargeback claim that the bank reverses
+  # after investigation. This is what gives a label a second version on the system time clock.
+  false_claim_rate: 0.00003
+  reversal_days: {min: 10, max: 45}
+lifecycle:
+  issue_before_first_use_days: {min: 30, max: 400}
+  reissue_after_block_days: {min: 2, max: 7}
+  limit_changes_per_year: 0.3
+  credit_limit_usd: {min: 1000, max: 25000}
+  close_after_last_use_days: {min: 30, max: 120}
+  # Delivery faults in the CDC feed, on purpose.
+  share_out_of_order: 0.05
+  share_duplicated: 0.02
+takeovers:
+  # Account takeover labels arrive from incident response after a lag.
+  report_lag_days: {min: 1, max: 30}
+attackers:
+  # Generated for held out legitimate users in the test months only; see DECISIONS.md for the
+  # definition of each model and the page of the paper it came from.
+  users: 20000
+  attempts_per_user: 1
+  models: [naive, vpn, targeted]

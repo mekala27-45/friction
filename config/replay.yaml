@@ -1,0 +1,19 @@
+# How the replay splitter cuts each source into drops. Everything here is a stated choice, not a
+# measurement; scripts/replay.py reads it and data/replay.lock.json records what it produced.
+seed: 20261028
+desks:
+  payments:
+    source: tabformer
+    # One drop per calendar month for the history, then one drop per day for the final 92 days.
+    daily_days: 92
+    natural_key: txn_ref
+  logins:
+    source: rba
+    daily_days: 92
+    natural_key: login_index
+lateness:
+  # A stated share of events is moved into a later drop than the one its event time belongs to.
+  share_late: 0.02
+  # Of the late events, this share is one day late; the rest are uniform over 2 to max_days.
+  share_one_day: 0.8
+  max_days: 7
