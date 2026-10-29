@@ -1,0 +1,27 @@
+{
+ "request": {
+  "id": "2026-10-29-12a-diagnose-issue-age",
+  "kind": "sql",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "file": "sql/diagnose_issue_age.sql",
+   "vars": {
+    "cdc": "workspace.friction_dev_cdc",
+    "silver": "workspace.friction_dev_silver",
+    "gold": "workspace.friction_dev_gold"
+   },
+   "stop_on_failure": false
+  },
+  "note": "Why the workspace's card age feature is -1 on nearly every payment: the full reconcile matched 8 of 9 tables and differed only there."
+ },
+ "github_run_id": "40951998057",
+ "commit": "39b5914a4a4f4c939356dc07d77504d34b0c0023",
+ "started_at": "2026-10-29T21:18:30+00:00",
+ "status": "failed",
+ "error": "RuntimeError: statement failed: [UNRESOLVED_COLUMN.WITH_SUGGESTION] A column, variable, or function parameter with name `op` cannot be resolved. Did you mean one of the following? [`status`, `__END_AT`, `currency`, `__START_AT`, `account_ref`]. SQLSTATE: 42703; line 2 pos 37",
+ "finished_at": "2026-10-29T21:18:49+00:00",
+ "files": {
+  "history_types.json": "de7408837206b611bd9e7146238a6c9975e06bcdef68df3a4a2722779566cad6"
+ }
+}

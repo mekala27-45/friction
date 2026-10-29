@@ -1,0 +1,26 @@
+{
+ "request": {
+  "id": "2026-10-29-12d-integration",
+  "kind": "bundle_run",
+  "target": "it",
+  "job": "integration",
+  "params": {
+   "export_from": "/Volumes/workspace/friction_it_raw/exports/integration",
+   "stop_on_failure": false
+  },
+  "note": "Re-landing a day, days delivered shuffled with late events first, a backfill over a processed range, labels out of order: every table digested after each."
+ },
+ "github_run_id": "40951998057",
+ "commit": "39b5914a4a4f4c939356dc07d77504d34b0c0023",
+ "started_at": "2026-10-29T21:20:43+00:00",
+ "result": {
+  "job": "integration",
+  "wall_seconds": 2322.7
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T21:59:25+00:00",
+ "files": {
+  "export/integration.json": "b85984ed3ce6a9ddb31c8ef51134d11a321acbdcce89655e3cb4ab0d2c88541e",
+  "run.log": "68be85c0111cc3cdc713bad78363f64bf78bd0500a64dd8f796efd161cf8a77c"
+ }
+}

@@ -1,0 +1,24 @@
+{
+ "request": {
+  "id": "2026-10-29-12c-deploy-it",
+  "kind": "bundle_deploy",
+  "target": "it",
+  "job": null,
+  "params": {
+   "stop_on_failure": false
+  },
+  "note": "Deploy the bundle to the integration environment: its own pipeline and the integration job."
+ },
+ "github_run_id": "40951998057",
+ "commit": "39b5914a4a4f4c939356dc07d77504d34b0c0023",
+ "started_at": "2026-10-29T21:19:00+00:00",
+ "result": {
+  "deployed": "it"
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T21:20:43+00:00",
+ "files": {
+  "bundle_summary.json": "6e3ab3541623b018dcdf4fbc292a8f810e2d8e42f6f131fddf5eff21bff4856a",
+  "run.log": "215795069cd8be1de6c273d765a0a859a5ba5a8a75c9b0c5252d6888211da128"
+ }
+}

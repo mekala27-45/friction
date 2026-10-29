@@ -1,0 +1,18 @@
+{
+ "columns": [
+  "account_ref_type",
+  "generation_type",
+  "start_type",
+  "end_type",
+  "rows"
+ ],
+ "rows": [
+  [
+   "bigint",
+   "bigint",
+   "struct<changed_at:timestamp,seq:bigint>",
+   "struct<changed_at:timestamp,seq:bigint>",
+   "31504"
+  ]
+ ]
+}

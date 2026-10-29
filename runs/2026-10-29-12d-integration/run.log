@@ -1,0 +1,37 @@
+$ databricks bundle run -t it integration --var catalog_mode=prefix
+landing cleared {}
+pipeline update {'full_refresh': True, 'update_id': '0c963d39-c6a5-4166-862a-4b96861e5681', 'seconds': 212.9}
+landed {'day': 10, 'copied': 5, 'overwrite': False}
+pipeline update {'full_refresh': False, 'update_id': 'd9137ce9-85c1-4a97-a10d-58cb2d069d1d', 'seconds': 182.5}
+landed {'day': 10, 'copied': 0, 'overwrite': False}
+pipeline update {'full_refresh': False, 'update_id': '9b5359f2-3cd9-4242-9dc6-14726c030262', 'seconds': 121.8}
+landed {'day': 10, 'copied': 5, 'overwrite': True}
+pipeline update {'full_refresh': False, 'update_id': '44498619-7723-40ca-9d54-ae32c53afaa3', 'seconds': 106.7}
+landing cleared {}
+pipeline update {'full_refresh': True, 'update_id': '8f92bd7a-53ff-421c-b103-5dcdfb90d3a7', 'seconds': 137.0}
+landed {'day': 11, 'copied': 3, 'overwrite': False}
+pipeline update {'full_refresh': False, 'update_id': '01653edb-d8b3-4bfa-ae0a-f056437b06f4', 'seconds': 152.1}
+landed {'day': 12, 'copied': 4, 'overwrite': False}
+pipeline update {'full_refresh': False, 'update_id': '60baf67c-0425-42f2-8f84-a916291dde2f', 'seconds': 167.3}
+landed {'day': 13, 'copied': 3, 'overwrite': False}
+pipeline update {'full_refresh': False, 'update_id': 'a009cb44-3cf9-4cd6-8740-4580ee7c596f', 'seconds': 152.2}
+landing cleared {}
+pipeline update {'full_refresh': True, 'update_id': '7ab145af-8a43-42f2-93fd-c4648f1f73b5', 'seconds': 137.0}
+landed {'day': 13, 'copied': 3, 'overwrite': False}
+pipeline update {'full_refresh': False, 'update_id': '9bb3c859-16ab-40a7-89e9-cc62f44fa1ee', 'seconds': 152.3}
+landed {'day': 11, 'copied': 3, 'overwrite': False}
+pipeline update {'full_refresh': False, 'update_id': '1c12e39c-d9e6-4f27-9db1-9c714d121c55', 'seconds': 167.3}
+landed {'day': 12, 'copied': 4, 'overwrite': False}
+pipeline update {'full_refresh': False, 'update_id': '4b443cba-4918-482e-b239-81c77ef72ca1', 'seconds': 303.7}
+landed {'day': 11, 'copied': 0, 'overwrite': False}
+landed {'day': 12, 'copied': 0, 'overwrite': False}
+landed {'day': 13, 'copied': 0, 'overwrite': False}
+pipeline update {'full_refresh': False, 'update_id': '78cbfb2a-60c4-4e05-b3be-dc63b36647f0', 'seconds': 121.9}
+Run URL: https://dbc-13dc0ff6-cde4.cloud.databricks.com/jobs/1018322509009542/runs/515893742035319?o=4481510155994981
+
+2026-10-29 21:20:44 "[dev mekalaajayk] friction-integration-it" RUNNING
+2026-10-29 21:59:23 "[dev mekalaajayk] friction-integration-it" TERMINATED SUCCESS
+[exit 0]
+$ databricks fs cp -r --overwrite dbfs:/Volumes/workspace/friction_it_raw/exports/integration results-branch/runs/2026-10-29-12d-integration/export
+dbfs:/Volumes/workspace/friction_it_raw/exports/integration/integration.json -> results-branch/runs/2026-10-29-12d-integration/export/integration.json
+[exit 0]

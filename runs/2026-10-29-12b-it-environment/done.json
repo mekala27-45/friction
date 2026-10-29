@@ -1,0 +1,29 @@
+{
+ "request": {
+  "id": "2026-10-29-12b-it-environment",
+  "kind": "sql",
+  "target": "it",
+  "job": null,
+  "params": {
+   "file": "sql/integration_environment.sql",
+   "vars": {
+    "catalog": "workspace"
+   },
+   "stop_on_failure": false
+  },
+  "note": "Schemas and volumes for the integration job, under the friction_it prefix."
+ },
+ "github_run_id": "40951998057",
+ "commit": "39b5914a4a4f4c939356dc07d77504d34b0c0023",
+ "started_at": "2026-10-29T21:18:49+00:00",
+ "result": {
+  "saved": [
+   "it_schemas"
+  ]
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T21:19:00+00:00",
+ "files": {
+  "it_schemas.json": "c7be6ae890148cf3cecf8f55f8908eb384d8f49af92ba311287c5866d56bfaea"
+ }
+}

@@ -1,0 +1,28 @@
+{
+ "columns": [
+  "schema_name"
+ ],
+ "rows": [
+  [
+   "friction_it_bronze"
+  ],
+  [
+   "friction_it_cdc"
+  ],
+  [
+   "friction_it_gold"
+  ],
+  [
+   "friction_it_ml"
+  ],
+  [
+   "friction_it_ops"
+  ],
+  [
+   "friction_it_raw"
+  ],
+  [
+   "friction_it_silver"
+  ]
+ ]
+}
