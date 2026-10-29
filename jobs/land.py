@@ -30,6 +30,9 @@ outbox, landing = _boot.volume(args, "outbox"), _boot.volume(args, "landing")
 copied, skipped, files = 0, 0, []
 try:
     for feed in FEEDS[args.desk]:
+        # Every feed's folder exists from the first landing, so Auto Loader starts on an empty
+        # folder rather than a missing path; the first payments label drop is in 1995.
+        os.makedirs(f"{landing}/{feed}/drops", exist_ok=True)
         base = f"{outbox}/{feed}/drops"
         if not os.path.isdir(base):
             continue
