@@ -1,0 +1,29 @@
+{
+ "request": {
+  "id": "2026-10-29-10a-governance",
+  "kind": "bundle_run",
+  "target": "dev",
+  "job": "governance",
+  "params": {
+   "export_from": "/Volumes/workspace/friction_dev_raw/exports/governance",
+   "stop_on_failure": false
+  },
+  "note": "Tags from the contracts, the entitlements table, masks, the row filter, the masked and unmasked read, and the scan of what readers can see, over the backfilled tables."
+ },
+ "github_run_id": "40928231680",
+ "commit": "c48f3cd4ff9885ab26c25b75a039b4d0d10aa070",
+ "started_at": "2026-10-29T19:05:20+00:00",
+ "result": {
+  "job": "governance",
+  "wall_seconds": 138.2
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T19:07:38+00:00",
+ "files": {
+  "export/governance.json/_SUCCESS": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "export/governance.json/_committed_8220718883727248662": "467f02a8a05c29d991ab45acc3391b30abd1c3985fd07850b15d423ad8757823",
+  "export/governance.json/_started_8220718883727248662": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "export/governance.json/part-00000-tid-8220718883727248662-0f6735dc-31a6-4ed0-a8f8-92b11b496a2a-288-1-c000.txt": "1658b9c3672da7b5cc13374d9d270a1992b332eca67a5713a42d4a509c865b90",
+  "run.log": "022fdc4c2f1588086eb0510b8ee87cc8c525f233f112f3ac44296f13f573826f"
+ }
+}

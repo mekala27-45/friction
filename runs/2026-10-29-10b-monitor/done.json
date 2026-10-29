@@ -1,0 +1,22 @@
+{
+ "request": {
+  "id": "2026-10-29-10b-monitor",
+  "kind": "bundle_run",
+  "target": "dev",
+  "job": "monitor",
+  "params": {
+   "export_from": "/Volumes/workspace/friction_dev_raw/exports/monitor",
+   "stop_on_failure": false
+  },
+  "note": "Drift, expectation rates, completeness, the clock and label maturity over the backfilled tables. The day 40 drops are in the backfill, so a breach is expected; its alerts open an issue."
+ },
+ "github_run_id": "40928231680",
+ "commit": "c48f3cd4ff9885ab26c25b75a039b4d0d10aa070",
+ "started_at": "2026-10-29T19:07:38+00:00",
+ "status": "failed",
+ "error": "RuntimeError: databricks bundle exited 1",
+ "finished_at": "2026-10-29T19:08:52+00:00",
+ "files": {
+  "run.log": "b49a45a23a9891f78a21ffd3a52be5087927e0a07f2f69c2be416e679a57f2d6"
+ }
+}

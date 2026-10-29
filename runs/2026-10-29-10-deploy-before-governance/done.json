@@ -1,0 +1,22 @@
+{
+ "request": {
+  "id": "2026-10-29-10-deploy-before-governance",
+  "kind": "bundle_deploy",
+  "target": "dev",
+  "job": null,
+  "params": {},
+  "note": "Deploy the jobs as they stand before governance and the monitor run."
+ },
+ "github_run_id": "40928231680",
+ "commit": "c48f3cd4ff9885ab26c25b75a039b4d0d10aa070",
+ "started_at": "2026-10-29T19:04:17+00:00",
+ "result": {
+  "deployed": "dev"
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T19:05:20+00:00",
+ "files": {
+  "bundle_summary.json": "14dd2f66c085cb008e552249917d06442300333a12b87503fcfd2c7b32912cdc",
+  "run.log": "6d9162d0fd6791a4f9df876430e083a56e293f54764e53db16aa4672c98839e4"
+ }
+}
