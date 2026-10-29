@@ -1,0 +1,7 @@
+{
+ "id": "2026-10-29-04b-upload-sources",
+ "kind": "upload_sources",
+ "target": "dev",
+ "params": {"outbox_volume": "/Volumes/workspace/friction_dev_raw/outbox"},
+ "note": "Retry of 2026-10-29-04-upload-sources against the lock regenerated under the pinned pandas."
+}

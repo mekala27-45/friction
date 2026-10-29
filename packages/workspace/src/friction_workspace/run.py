@@ -81,12 +81,13 @@ def handle(request: Request, out: Path, log: Path) -> dict[str, Any]:
         _sh([sys.executable, "scripts/fetch_sources.py"], log)
         _sh([sys.executable, "scripts/stage_sources.py", "--drop-csv"], log)
         _sh([sys.executable, "scripts/replay.py", "--all"], log)
-        _sh(["git", "diff", "--exit-code", "--stat", "data/replay.lock.json"], log)
-        volume = str(request.params["outbox_volume"])
-        _sh(["databricks", "fs", "cp", "-r", "--overwrite", "data/landing", f"dbfs:{volume}"], log)
+        # Kept before the check, so a refused upload leaves the regenerated lock to compare.
         for name in ("data/replay.lock.json", "results/fetch_status.json"):
             target = out / Path(name).name
             target.write_bytes((ROOT / name).read_bytes())
+        _sh(["git", "diff", "--exit-code", "--stat", "data/replay.lock.json"], log)
+        volume = str(request.params["outbox_volume"])
+        _sh(["databricks", "fs", "cp", "-r", "--overwrite", "data/landing", f"dbfs:{volume}"], log)
         return {"uploaded_to": volume}
     if request.kind == "bundle_deploy":
         _sh(["databricks", "bundle", "validate", "-t", request.target, *_bundle_vars(request)], log)
