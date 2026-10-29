@@ -1,0 +1,8 @@
+{
+ "id": "2026-10-29-06-land-logins-month1",
+ "kind": "bundle_run",
+ "target": "dev",
+ "job": "land",
+ "params": {"job_params": {"desk": "logins", "through": "1", "from": "1"}},
+ "note": "Land the first logins drop (February 2020) and its takeover labels."
+}

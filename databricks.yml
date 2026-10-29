@@ -1,0 +1,157 @@
+# The bundle: one pipeline per environment and the jobs around it, deployed only from GitHub
+# Actions (the workspace workflow runs `databricks bundle deploy` from a committed request).
+#
+# Free Edition limits that shape this file (results/workspace_probe.json and the limitations page,
+# updated 18 Oct 2026): serverless only; one active pipeline per pipeline type, so dev and prod
+# updates never overlap and one pipeline holds both desks; at most five concurrent job tasks, so
+# no job here runs more than three tasks at once and max_concurrent_runs is 1 everywhere
+# (tests/workspace/test_bundle.py reads this file and counts); catalogs cannot be created by the
+# API, so environments are schema prefixes under the workspace catalog.
+bundle:
+  name: friction
+
+include: []
+
+variables:
+  catalog:
+    default: workspace
+  prefix:
+    default: friction_dev
+  catalog_mode:
+    description: catalog or prefix, read from the probe by the runner
+    default: prefix
+
+targets:
+  dev:
+    mode: development
+    default: true
+    variables:
+      prefix: friction_dev
+  prod:
+    mode: production
+    variables:
+      prefix: friction_prod
+    workspace:
+      root_path: /Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.name}/${bundle.target}
+
+sync:
+  exclude:
+    - data/raw/**
+    - data/landing/**
+    - data/lake/**
+    - data/work/**
+    - web/**
+    - .venv/**
+    - notebooks/**
+    - results/**
+
+resources:
+  pipelines:
+    friction:
+      name: friction-${bundle.target}
+      serverless: true
+      catalog: ${var.catalog}
+      schema: ${var.prefix}_silver
+      continuous: false
+      photon: true
+      root_path: ./pipelines/lakeflow
+      libraries:
+        - file:
+            path: ./pipelines/lakeflow/bronze.py
+        - file:
+            path: ./pipelines/lakeflow/silver.py
+        - file:
+            path: ./pipelines/lakeflow/cdc.py
+        - file:
+            path: ./pipelines/lakeflow/gold.py
+      configuration:
+        spark.friction.source_root: ${workspace.file_path}
+        spark.friction.catalog: ${var.catalog}
+        spark.friction.prefix: ${var.prefix}
+        spark.friction.landing: /Volumes/${var.catalog}/${var.prefix}_raw/landing
+        spark.friction.salt: "{{secrets/friction/salt}}"
+        spark.sql.session.timeZone: UTC
+
+  jobs:
+    land:
+      name: friction-land-${bundle.target}
+      max_concurrent_runs: 1
+      parameters:
+        - name: desk
+          default: payments
+        - name: through
+          default: "1"
+        - name: from
+          default: "1"
+      tasks:
+        - task_key: land
+          environment_key: default
+          spark_python_task:
+            python_file: ./jobs/land.py
+            parameters: ["--root", "${workspace.file_path}", "--catalog", "${var.catalog}", "--prefix", "${var.prefix}",
+                         "--job", "land", "--run-id", "{{job.run_id}}", "--desk", "{{job.parameters.desk}}",
+                         "--through", "{{job.parameters.through}}", "--from", "{{job.parameters.from}}"]
+      environments:
+        - environment_key: default
+          spec:
+            environment_version: "3"
+            dependencies:
+              - pyyaml
+              - pydantic>=2.10
+
+    backfill:
+      name: friction-backfill-${bundle.target}
+      max_concurrent_runs: 1
+      parameters:
+        - name: desk
+          default: payments
+        - name: through
+          default: "1"
+        - name: from
+          default: "1"
+        - name: tag
+          default: backfill
+      tasks:
+        - task_key: land
+          environment_key: default
+          spark_python_task:
+            python_file: ./jobs/land.py
+            parameters: ["--root", "${workspace.file_path}", "--catalog", "${var.catalog}", "--prefix", "${var.prefix}",
+                         "--job", "backfill", "--run-id", "{{job.run_id}}", "--desk", "{{job.parameters.desk}}",
+                         "--through", "{{job.parameters.through}}", "--from", "{{job.parameters.from}}"]
+          max_retries: 2
+          min_retry_interval_millis: 60000
+          retry_on_timeout: true
+        - task_key: pipeline_update
+          depends_on:
+            - task_key: land
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.friction.id}
+            full_refresh: false
+          max_retries: 1
+          min_retry_interval_millis: 120000
+        - task_key: features
+          depends_on:
+            - task_key: pipeline_update
+          environment_key: default
+          spark_python_task:
+            python_file: ./jobs/features.py
+            parameters: ["--root", "${workspace.file_path}", "--catalog", "${var.catalog}", "--prefix", "${var.prefix}",
+                         "--job", "backfill", "--run-id", "{{job.run_id}}"]
+          max_retries: 1
+          min_retry_interval_millis: 60000
+        - task_key: export
+          depends_on:
+            - task_key: features
+          environment_key: default
+          spark_python_task:
+            python_file: ./jobs/export.py
+            parameters: ["--root", "${workspace.file_path}", "--catalog", "${var.catalog}", "--prefix", "${var.prefix}",
+                         "--job", "backfill", "--run-id", "{{job.run_id}}", "--tag", "{{job.parameters.tag}}"]
+      environments:
+        - environment_key: default
+          spec:
+            environment_version: "3"
+            dependencies:
+              - pyyaml
+              - pydantic>=2.10

@@ -71,11 +71,14 @@ def stage(name: str) -> dict[str, object]:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--only", choices=list(SOURCES))
+    parser.add_argument("--drop-csv", action="store_true", help="delete each extracted CSV once staged (CI disk)")
     args = parser.parse_args()
     for name in SOURCES:
         if args.only and name != args.only:
             continue
         print(stage(name))
+        if args.drop_csv:
+            (raw_dir() / name / MEMBERS[name]).unlink(missing_ok=True)
     return 0
 
 

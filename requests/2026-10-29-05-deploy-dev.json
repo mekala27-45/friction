@@ -1,0 +1,6 @@
+{
+ "id": "2026-10-29-05-deploy-dev",
+ "kind": "bundle_deploy",
+ "target": "dev",
+ "note": "Deploy the bundle to dev: the pipeline and the land and backfill jobs."
+}

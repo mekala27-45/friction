@@ -62,10 +62,25 @@ def handle(request: Request, out: Path, log: Path) -> dict[str, Any]:
 
         findings = probe_run(out / "workspace_probe.json")
         return {"summary": findings["summary"]}
+    if request.kind == "secrets":
+        from databricks.sdk import WorkspaceClient
+
+        salt = os.environ.get("FRICTION_SALT", "")
+        if len(salt) < 32:
+            raise ValueError("the FRICTION_SALT Actions secret is missing or shorter than 32 characters")
+        w = WorkspaceClient()
+        scopes = {s.name for s in w.secrets.list_scopes()}
+        if "friction" not in scopes:
+            w.secrets.create_scope(scope="friction")
+        w.secrets.put_secret(scope="friction", key="salt", string_value=salt)
+        return {"scope": "friction", "keys": [k.key for k in w.secrets.list_secrets(scope="friction")]}
     if request.kind == "upload_sources":
+        # Regenerate the drops from the locked sources and refuse to upload unless every digest
+        # equals the one committed in data/replay.lock.json: Actions lands exactly what was locked.
         _sh([sys.executable, "scripts/fetch_sources.py"], log)
-        _sh([sys.executable, "scripts/stage_sources.py"], log)
+        _sh([sys.executable, "scripts/stage_sources.py", "--drop-csv"], log)
         _sh([sys.executable, "scripts/replay.py", "--all"], log)
+        _sh(["git", "diff", "--exit-code", "--stat", "data/replay.lock.json"], log)
         volume = str(request.params["outbox_volume"])
         _sh(["databricks", "fs", "cp", "-r", "--overwrite", "data/landing", f"dbfs:{volume}"], log)
         for name in ("data/replay.lock.json", "results/fetch_status.json"):
