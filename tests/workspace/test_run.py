@@ -125,3 +125,16 @@ def test_portable_copies_a_whole_feed_in_one_call(monkeypatch: pytest.MonkeyPatc
     copies = [c for c, _ in shell.calls if c[:3] == ["databricks", "fs", "cp"]]
     assert [c[4] for c in copies] == [f"dbfs:/Volumes/x/outbox/{f}/drops" for f in ("logins", "labels_logins")]
     assert not [c for c, _ in shell.calls if c[:3] == ["databricks", "fs", "ls"]]
+
+
+def test_portable_with_models_grades_and_exports(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    shell = FakeShell()
+    monkeypatch.setattr(run, "_sh", shell)
+    req, out = tmp_path / "requests", tmp_path / "runs"
+    _request(req, "2026-01-01-01-portable", "portable",
+             params={"outbox_volume": "/Volumes/x/outbox", "drops": {"logins": "all"}, "models": True})  # fmt: skip
+    assert _main(monkeypatch, req, out) == 0
+    scripts = [c[1] for c, _ in shell.calls if "python" in c[0]]
+    assert scripts[-3:] == ["scripts/run_models.py", "scripts/grade.py", "scripts/export_models.py"]
+    grade = next(c for c, _ in shell.calls if c[1:2] == ["scripts/grade.py"])
+    assert grade[grade.index("--out") + 1].endswith("2026-01-01-01-portable/evaluation.json")
