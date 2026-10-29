@@ -17,9 +17,9 @@ for _p in ("packages/core/src", "packages/transforms/src", "packages/features/sr
 
 import friction_features
 import yaml
-from pyspark import cloudpickle
+from friction_core.shipping import ship
 
-cloudpickle.register_pickle_by_value(friction_features)
+ship(friction_features)
 
 CATALOG = spark.conf.get("spark.friction.catalog")
 PREFIX = spark.conf.get("spark.friction.prefix")

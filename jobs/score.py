@@ -15,15 +15,20 @@ import _boot
 args = _boot.parse([("--tag", {"default": "scored"})])
 spark = _boot.session()
 
+import friction_core  # noqa: E402
 import friction_features  # noqa: E402
 import friction_models  # noqa: E402
+import friction_policy  # noqa: E402
 import friction_reasons  # noqa: E402
+import friction_simulator  # noqa: E402
+import friction_transforms  # noqa: E402
 import yaml  # noqa: E402
+from friction_core.shipping import ship  # noqa: E402
 from friction_models import steps  # noqa: E402
-from pyspark import cloudpickle  # noqa: E402
 
-for module in (friction_features, friction_models, friction_reasons):
-    cloudpickle.register_pickle_by_value(module)
+# Everything the scoring and coding functions reach, shipped by value to the workers.
+ship(friction_core, friction_features, friction_models, friction_policy, friction_reasons, friction_simulator,
+     friction_transforms)  # fmt: skip
 
 root = Path(args.root)
 plan_text = (root / "evaluation" / "plan.yaml").read_text(encoding="utf-8")

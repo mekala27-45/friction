@@ -1,0 +1,6 @@
+{
+ "id": "2026-10-29-05b-deploy-dev",
+ "kind": "bundle_deploy",
+ "target": "dev",
+ "note": "Redeploy with the land job that creates every feed folder and the features job that ships its packages without the workspace loader."
+}

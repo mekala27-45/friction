@@ -12,10 +12,10 @@ args = _boot.parse()
 spark = _boot.session()
 
 import friction_features  # noqa: E402
+from friction_core.shipping import ship  # noqa: E402
 from friction_transforms import gold  # noqa: E402
-from pyspark import cloudpickle  # noqa: E402
 
-cloudpickle.register_pickle_by_value(friction_features)
+ship(friction_features)
 ledger = _boot.Ledger(spark, args, "features")
 
 
