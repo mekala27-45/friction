@@ -1,0 +1,22 @@
+{
+ "request": {
+  "id": "2026-10-29-02b-secrets",
+  "kind": "secrets",
+  "target": "dev",
+  "job": null,
+  "params": {},
+  "note": "Retry of 2026-10-29-02-secrets, which failed because FRICTION_SALT was not yet an Actions secret."
+ },
+ "github_run_id": "40910420854",
+ "commit": "74163e10e8b5c3b88467a068ec07f6ad0c43ea15",
+ "started_at": "2026-10-29T16:21:20+00:00",
+ "result": {
+  "scope": "friction",
+  "keys": [
+   "salt"
+  ]
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T16:21:25+00:00",
+ "files": {}
+}
