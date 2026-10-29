@@ -1,0 +1,195 @@
+{
+ "status": "succeeded",
+ "tests": {
+  "labels_out_of_order": {
+   "label_drops": [
+    "0345_2019-09",
+    "0346_2019-10",
+    "0347_2019-11",
+    "0349_2019-11-30",
+    "0350_2019-12-01",
+    "0351_2019-12-02",
+    "0354_2019-12-05",
+    "0356_2019-12-07",
+    "0357_2019-12-08",
+    "0359_2019-12-10"
+   ],
+   "delivered": [
+    [
+     "0354_2019-12-05",
+     "0356_2019-12-07",
+     "0357_2019-12-08",
+     "0359_2019-12-10"
+    ],
+    [
+     "0345_2019-09",
+     "0346_2019-10",
+     "0347_2019-11"
+    ],
+    [
+     "0349_2019-11-30",
+     "0350_2019-12-01",
+     "0351_2019-12-02"
+    ]
+   ],
+   "history_rows": 534,
+   "differences": []
+  }
+ },
+ "log": [
+  {
+   "at": "2026-10-29T22:16:34Z",
+   "what": "landing cleared"
+  },
+  {
+   "at": "2026-10-29T22:19:52Z",
+   "what": "pipeline update",
+   "full_refresh": true,
+   "update_id": "fe416de5-8510-40c5-8e8a-7c9e2b9ef0d2",
+   "seconds": 197.7
+  },
+  {
+   "at": "2026-10-29T22:19:55Z",
+   "what": "landed feed",
+   "feed": "payments",
+   "drops": 4,
+   "low": 344,
+   "high": 347
+  },
+  {
+   "at": "2026-10-29T22:20:01Z",
+   "what": "landed feed",
+   "feed": "labels_payments",
+   "drops": 10,
+   "low": 345,
+   "high": 359
+  },
+  {
+   "at": "2026-10-29T22:22:33Z",
+   "what": "pipeline update",
+   "full_refresh": false,
+   "update_id": "eee11865-77ed-4356-a525-eb68fbd7ff7f",
+   "seconds": 152.1
+  },
+  {
+   "at": "2026-10-29T22:22:38Z",
+   "what": "landing cleared"
+  },
+  {
+   "at": "2026-10-29T22:24:40Z",
+   "what": "pipeline update",
+   "full_refresh": true,
+   "update_id": "33e8536f-a352-47b8-a20f-0ed561aadf06",
+   "seconds": 121.9
+  },
+  {
+   "at": "2026-10-29T22:24:43Z",
+   "what": "landed feed",
+   "feed": "payments",
+   "drops": 4,
+   "low": 344,
+   "high": 347
+  },
+  {
+   "at": "2026-10-29T22:24:43Z",
+   "what": "landed feed",
+   "feed": "labels_payments",
+   "drops": 1,
+   "low": 354,
+   "high": 354
+  },
+  {
+   "at": "2026-10-29T22:24:43Z",
+   "what": "landed feed",
+   "feed": "labels_payments",
+   "drops": 1,
+   "low": 356,
+   "high": 356
+  },
+  {
+   "at": "2026-10-29T22:24:44Z",
+   "what": "landed feed",
+   "feed": "labels_payments",
+   "drops": 1,
+   "low": 357,
+   "high": 357
+  },
+  {
+   "at": "2026-10-29T22:24:44Z",
+   "what": "landed feed",
+   "feed": "labels_payments",
+   "drops": 1,
+   "low": 359,
+   "high": 359
+  },
+  {
+   "at": "2026-10-29T22:27:17Z",
+   "what": "pipeline update",
+   "full_refresh": false,
+   "update_id": "67c9eea7-d355-4ebb-8bde-c269346d38d4",
+   "seconds": 152.2
+  },
+  {
+   "at": "2026-10-29T22:27:17Z",
+   "what": "landed feed",
+   "feed": "labels_payments",
+   "drops": 1,
+   "low": 345,
+   "high": 345
+  },
+  {
+   "at": "2026-10-29T22:27:18Z",
+   "what": "landed feed",
+   "feed": "labels_payments",
+   "drops": 1,
+   "low": 346,
+   "high": 346
+  },
+  {
+   "at": "2026-10-29T22:27:18Z",
+   "what": "landed feed",
+   "feed": "labels_payments",
+   "drops": 1,
+   "low": 347,
+   "high": 347
+  },
+  {
+   "at": "2026-10-29T22:29:50Z",
+   "what": "pipeline update",
+   "full_refresh": false,
+   "update_id": "4fc7fd33-bea7-4739-83c4-79c69d820582",
+   "seconds": 152.1
+  },
+  {
+   "at": "2026-10-29T22:29:51Z",
+   "what": "landed feed",
+   "feed": "labels_payments",
+   "drops": 1,
+   "low": 349,
+   "high": 349
+  },
+  {
+   "at": "2026-10-29T22:29:51Z",
+   "what": "landed feed",
+   "feed": "labels_payments",
+   "drops": 1,
+   "low": 350,
+   "high": 350
+  },
+  {
+   "at": "2026-10-29T22:29:52Z",
+   "what": "landed feed",
+   "feed": "labels_payments",
+   "drops": 1,
+   "low": 351,
+   "high": 351
+  },
+  {
+   "at": "2026-10-29T22:31:53Z",
+   "what": "pipeline update",
+   "full_refresh": false,
+   "update_id": "93ba25ef-3831-4fce-8489-6a333a756a32",
+   "seconds": 121.9
+  }
+ ]
+}

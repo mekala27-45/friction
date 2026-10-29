@@ -1,0 +1,7 @@
+{
+ "id": "2026-10-29-13d-diagnose-mv-refresh",
+ "kind": "sql",
+ "target": "dev",
+ "params": {"file": "sql/diagnose_mv_refresh.sql", "vars": {"gold": "workspace.friction_dev_gold"}, "stop_on_failure": false},
+ "note": "The card age view held 55 rows from the first month after the full backfill. The event log of its flow, and its row count after the day 40 replay update."
+}
