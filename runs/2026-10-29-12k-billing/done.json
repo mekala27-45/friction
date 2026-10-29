@@ -1,0 +1,27 @@
+{
+ "request": {
+  "id": "2026-10-29-12k-billing",
+  "kind": "sql",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "file": "sql/billing.sql",
+   "vars": {},
+   "stop_on_failure": false
+  },
+  "note": "Usage from system.billing.usage for the compute ledger."
+ },
+ "github_run_id": "40958240161",
+ "commit": "6c8790c3b4762bd78b0efd93a3d06fd67ceb503c",
+ "started_at": "2026-10-29T22:13:13+00:00",
+ "result": {
+  "saved": [
+   "billing"
+  ]
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T22:13:19+00:00",
+ "files": {
+  "billing.json": "db8a1f0b3191032c202c4fa8d2bc40f599f66e5a83552a70b4425638dcaf8688"
+ }
+}

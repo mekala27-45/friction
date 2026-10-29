@@ -1,0 +1,26 @@
+{
+ "request": {
+  "id": "2026-10-29-12j-terraform-apply-drift",
+  "kind": "terraform_apply",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "var_file": "env/dev.tfvars",
+   "stop_on_failure": false
+  },
+  "note": "Apply restores the grant the drift removed."
+ },
+ "github_run_id": "40958240161",
+ "commit": "6c8790c3b4762bd78b0efd93a3d06fd67ceb503c",
+ "started_at": "2026-10-29T22:13:11+00:00",
+ "result": {
+  "terraform": "terraform_apply"
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T22:13:13+00:00",
+ "files": {
+  "run.log": "7259f60e25c09689422781ab3ee4f763416ede6d7871154c21630cb70b9cef43",
+  "terraform_apply.txt": "8424200ed81c2c653780a7988dc71beb3d7775d8ba1c7bfc33893d1ffd54b7f6",
+  "terraform_plan.txt": "769e8ea8a2c58f0edd025210e668853731479dc108a8c70bfdd7e590c09244a4"
+ }
+}

@@ -1,0 +1,146 @@
+[
+ {
+  "check": "feature_psi",
+  "scope": "payments/mcc_fraud_rate/2019-01",
+  "value": 2.7855025797087536,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "feature_psi",
+  "scope": "payments/mcc_fraud_rate/2019-02",
+  "value": 2.7822488635267755,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "feature_psi",
+  "scope": "payments/mcc_fraud_rate/2019-03",
+  "value": 2.92216323966107,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "feature_psi",
+  "scope": "payments/mcc_fraud_rate/2019-04",
+  "value": 2.9335314476467302,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "feature_psi",
+  "scope": "payments/mcc_fraud_rate/2019-07",
+  "value": 2.819837701432062,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "feature_psi",
+  "scope": "payments/mcc_fraud_rate/2019-08",
+  "value": 2.8685708423235576,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "feature_psi",
+  "scope": "payments/mcc_fraud_rate/2019-09",
+  "value": 2.8694847124093776,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "feature_psi",
+  "scope": "payments/mcc_fraud_rate/2019-10",
+  "value": 2.941616970313166,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "expectation_rate",
+  "scope": "payments/0387_2020-01-07/P_FUTURE",
+  "value": 0.04260344676756189,
+  "threshold": 0.001,
+  "severity": "serious",
+  "note": "487 rows quarantined",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "expectation_rate",
+  "scope": "payments/0387_2020-01-07/P_MCC",
+  "value": 0.2554457177849707,
+  "threshold": 0.001,
+  "severity": "serious",
+  "note": "2920 rows quarantined",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "expectation_rate",
+  "scope": "payments/0387_2020-01-07/P_RESCUED",
+  "value": 0.2554457177849707,
+  "threshold": 0.001,
+  "severity": "serious",
+  "note": "2920 rows quarantined",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "completeness",
+  "scope": "payments/0387_2020-01-07",
+  "value": 0.7019508354474674,
+  "threshold": 0.999,
+  "severity": "critical",
+  "note": "3407 delivered rows did not reach silver",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "clock",
+  "scope": "payments/0387_2020-01-07/payments_2020-01-07_part2.csv.gz",
+  "value": 0.16626835097302833,
+  "threshold": 0.0,
+  "severity": "critical",
+  "note": "events stamped after their drop closed",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "feature_psi",
+  "scope": "logins/device_type/2020-11",
+  "value": 0.5812321851230325,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "feature_psi",
+  "scope": "logins/device_type/2020-12",
+  "value": 0.5464014355567084,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "feature_psi",
+  "scope": "logins/device_type/2021-01",
+  "value": 0.37247690532358974,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ }
+]

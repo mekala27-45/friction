@@ -1,0 +1,29 @@
+{
+ "request": {
+  "id": "2026-10-29-12h-plant-drift",
+  "kind": "sql",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "file": "sql/plant_drift.sql",
+   "vars": {
+    "catalog": "workspace"
+   },
+   "stop_on_failure": false
+  },
+  "note": "Plant drift: revoke by hand a grant terraform manages."
+ },
+ "github_run_id": "40958240161",
+ "commit": "6c8790c3b4762bd78b0efd93a3d06fd67ceb503c",
+ "started_at": "2026-10-29T22:12:59+00:00",
+ "result": {
+  "saved": [
+   "grants_after_revoke"
+  ]
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T22:13:07+00:00",
+ "files": {
+  "grants_after_revoke.json": "a82dc8a666b22d07f3978de2cd4c2d724ad644c25595bb81453734dd36cd3698"
+ }
+}

@@ -1,0 +1,24 @@
+{
+ "request": {
+  "id": "2026-10-29-12e-deploy-dev",
+  "kind": "bundle_deploy",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "stop_on_failure": false
+  },
+  "note": "Deploy the monitor that computes its months in Python and both jobs writing plain JSON files, and governance with the row filter, lineage and scan evidence."
+ },
+ "github_run_id": "40958240161",
+ "commit": "6c8790c3b4762bd78b0efd93a3d06fd67ceb503c",
+ "started_at": "2026-10-29T22:00:30+00:00",
+ "result": {
+  "deployed": "dev"
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T22:01:35+00:00",
+ "files": {
+  "bundle_summary.json": "b441613614d538ae88b47152cc3b93451591c969b080d80c7a38586b5732b6f0",
+  "run.log": "6af87051a89aa800fa0cf4c8bb5ea10ff6995e20f2eb4482a0b4e06a557a7163"
+ }
+}

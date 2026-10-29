@@ -1,0 +1,77 @@
+$ terraform init -input=false
+[0m[1mInitializing the backend...[0m
+[0m[32m
+Successfully configured the backend "pg"! Terraform will automatically
+use this backend unless the backend configuration changes.[0m
+
+[0m[1mInitializing provider plugins...[0m
+- Finding databricks/databricks versions matching "~> 1.90"...
+- Installing databricks/databricks v1.140.0...
+- Installed databricks/databricks v1.140.0 (self-signed, key ID [0m[1m92A95A66446BCE3F[0m)[0m
+Partner and community providers are signed by their developers.
+If you'd like to know more about provider signing, you can read about it here:
+https://developer.hashicorp.com/terraform/cli/plugins/signing
+
+Terraform has created a lock file [1m.terraform.lock.hcl[0m to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.[0m
+
+[0m[1m[32mTerraform has been successfully initialized![0m[32m[0m
+[exit 0]
+$ terraform plan -input=false -no-color -out plan.bin -var-file env/dev.tfvars
+databricks_schema.layer["ml"]: Refreshing state... [id=workspace.friction_dev_ml]
+databricks_schema.layer["bronze"]: Refreshing state... [id=workspace.friction_dev_bronze]
+databricks_schema.layer["ops"]: Refreshing state... [id=workspace.friction_dev_ops]
+databricks_schema.layer["silver"]: Refreshing state... [id=workspace.friction_dev_silver]
+databricks_schema.layer["raw"]: Refreshing state... [id=workspace.friction_dev_raw]
+databricks_schema.layer["cdc"]: Refreshing state... [id=workspace.friction_dev_cdc]
+databricks_schema.layer["gold"]: Refreshing state... [id=workspace.friction_dev_gold]
+databricks_grant.gold_use: Refreshing state... [id=schema/workspace.friction_dev_gold/account users]
+databricks_grant.silver_use: Refreshing state... [id=schema/workspace.friction_dev_silver/account users]
+databricks_volume.raw["exports"]: Refreshing state... [id=workspace.friction_dev_raw.exports]
+databricks_volume.raw["landing"]: Refreshing state... [id=workspace.friction_dev_raw.landing]
+databricks_volume.raw["outbox"]: Refreshing state... [id=workspace.friction_dev_raw.outbox]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  # databricks_grant.gold_use will be updated in-place
+  ~ resource "databricks_grant" "gold_use" {
+        id         = "schema/workspace.friction_dev_gold/account users"
+      ~ privileges = [
+          + "SELECT",
+            # (1 unchanged element hidden)
+        ]
+        # (2 unchanged attributes hidden)
+
+        # (1 unchanged block hidden)
+    }
+
+Plan: 0 to add, 1 to change, 0 to destroy.
+[exit 0]
+$ terraform show -no-color plan.bin
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  # databricks_grant.gold_use will be updated in-place
+  ~ resource "databricks_grant" "gold_use" {
+        id         = "schema/workspace.friction_dev_gold/account users"
+      ~ privileges = [
+          + "SELECT",
+            # (1 unchanged element hidden)
+        ]
+        # (2 unchanged attributes hidden)
+
+        # (1 unchanged block hidden)
+    }
+
+Plan: 0 to add, 1 to change, 0 to destroy.
+[exit 0]

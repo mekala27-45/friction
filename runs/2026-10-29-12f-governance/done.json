@@ -1,0 +1,26 @@
+{
+ "request": {
+  "id": "2026-10-29-12f-governance",
+  "kind": "bundle_run",
+  "target": "dev",
+  "job": "governance",
+  "params": {
+   "export_from": "/Volumes/workspace/friction_dev_raw/exports/governance",
+   "stop_on_failure": false
+  },
+  "note": "Governance again: tags, masks, the row filter on the replay clock, lineage and the scan of the masked views."
+ },
+ "github_run_id": "40958240161",
+ "commit": "6c8790c3b4762bd78b0efd93a3d06fd67ceb503c",
+ "started_at": "2026-10-29T22:01:35+00:00",
+ "result": {
+  "job": "governance",
+  "wall_seconds": 169.0
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T22:04:24+00:00",
+ "files": {
+  "export/governance.json": "94ad3b6cd963a6ae532d749964e759e12f43a6cfd73860a8526943541d106efa",
+  "run.log": "4870034a0080d0c117e090433860a45481625055cfebf0033b773886111caee4"
+ }
+}

@@ -1,0 +1,25 @@
+{
+ "request": {
+  "id": "2026-10-29-12i-terraform-plan-drift",
+  "kind": "terraform_plan",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "var_file": "env/dev.tfvars",
+   "stop_on_failure": false
+  },
+  "note": "The plan after the planted drift: it must show the revoked grant as a change."
+ },
+ "github_run_id": "40958240161",
+ "commit": "6c8790c3b4762bd78b0efd93a3d06fd67ceb503c",
+ "started_at": "2026-10-29T22:13:07+00:00",
+ "result": {
+  "terraform": "terraform_plan"
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T22:13:11+00:00",
+ "files": {
+  "run.log": "4729ce73350a613b6717467913890df2a25254452bf79e42f38158fa7491f708",
+  "terraform_plan.txt": "769e8ea8a2c58f0edd025210e668853731479dc108a8c70bfdd7e590c09244a4"
+ }
+}

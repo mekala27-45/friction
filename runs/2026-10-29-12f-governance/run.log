@@ -1,0 +1,10 @@
+$ databricks bundle run -t dev governance --var catalog_mode=prefix
+{"entitled": {"n": 31267738, "visible": 31267738}, "withdrawn": {"n": 31267738, "visible": 0}}
+Run URL: https://dbc-13dc0ff6-cde4.cloud.databricks.com/jobs/428801911603417/runs/390278473339008?o=4481510155994981
+
+2026-10-29 22:01:36 "[dev mekalaajayk] friction-governance-dev" RUNNING
+2026-10-29 22:04:22 "[dev mekalaajayk] friction-governance-dev" TERMINATED SUCCESS
+[exit 0]
+$ databricks fs cp -r --overwrite dbfs:/Volumes/workspace/friction_dev_raw/exports/governance results-branch/runs/2026-10-29-12f-governance/export
+dbfs:/Volumes/workspace/friction_dev_raw/exports/governance/governance.json -> results-branch/runs/2026-10-29-12f-governance/export/governance.json
+[exit 0]

@@ -1,0 +1,24 @@
+{
+ "request": {
+  "id": "2026-10-29-12g-monitor",
+  "kind": "bundle_run",
+  "target": "dev",
+  "job": "monitor",
+  "params": {
+   "export_from": "/Volumes/workspace/friction_dev_raw/exports/monitor",
+   "stop_on_failure": false
+  },
+  "note": "Retry of 2026-10-29-10b-monitor, which failed on a nested generator before it wrote anything. A breach is expected from the day 40 drops; its alerts open an issue."
+ },
+ "github_run_id": "40958240161",
+ "commit": "6c8790c3b4762bd78b0efd93a3d06fd67ceb503c",
+ "started_at": "2026-10-29T22:04:24+00:00",
+ "status": "failed",
+ "error": "RuntimeError: databricks bundle exited 1",
+ "finished_at": "2026-10-29T22:12:59+00:00",
+ "files": {
+  "export/alerts.json": "ed808e3f3ef641a8d643ff0c626d72b25c9c39c789c5088932c7401a2ef028c4",
+  "export/report.json": "f243066a3a3987822074931f21ec9e98f1f9fa8d55cd4d2ccc7994d244a62620",
+  "run.log": "bd34fdf79e6f7ebc662a45546f285df1a04eede39166d0b02c261acb397ece4c"
+ }
+}
