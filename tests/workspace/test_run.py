@@ -138,3 +138,17 @@ def test_portable_with_models_grades_and_exports(monkeypatch: pytest.MonkeyPatch
     assert scripts[-3:] == ["scripts/run_models.py", "scripts/grade.py", "scripts/export_models.py"]
     grade = next(c for c, _ in shell.calls if c[1:2] == ["scripts/grade.py"])
     assert grade[grade.index("--out") + 1].endswith("2026-01-01-01-portable/evaluation.json")
+
+
+def test_a_failed_job_still_exports_its_evidence(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    shell = FakeShell(fail_on="bundle run")
+    monkeypatch.setattr(run, "_sh", shell)
+    req, out = tmp_path / "requests", tmp_path / "runs"
+    params = {"export_from": "/Volumes/x/exports/monitor", "stop_on_failure": False}
+    _request(req, "2026-01-01-01-monitor", "bundle_run", job="monitor", params=params)
+    _request(req, "2026-01-01-02-export", "export", params={"from": "/Volumes/y"})
+    assert _main(monkeypatch, req, out) == 1
+    assert json.loads((out / "2026-01-01-01-monitor" / "done.json").read_text())["status"] == "failed"
+    lines = [" ".join(c) for c, _ in shell.calls]
+    assert any("dbfs:/Volumes/x/exports/monitor" in line for line in lines)
+    assert json.loads((out / "2026-01-01-02-export" / "done.json").read_text())["status"] == "succeeded"

@@ -137,10 +137,22 @@ def handle(request: Request, out: Path, log: Path) -> dict[str, Any]:
         if params:
             cmd += ["--params", ",".join(f"{k}={v}" for k, v in sorted(params.items()))]
         started = time.monotonic()
-        _sh(cmd, log)
+        failure: RuntimeError | None = None
+        try:
+            _sh(cmd, log)
+        except RuntimeError as exc:
+            failure = exc
         exported = request.params.get("export_from")
         if exported:
-            _sh(["databricks", "fs", "cp", "-r", "--overwrite", f"dbfs:{exported}", str(out / "export")], log)
+            # A failed job's evidence still comes back: the monitor fails its task on a breach, and
+            # the workflow opens an issue from the alerts it exported.
+            try:
+                _sh(["databricks", "fs", "cp", "-r", "--overwrite", f"dbfs:{exported}", str(out / "export")], log)
+            except RuntimeError:
+                if failure is None:
+                    raise
+        if failure is not None:
+            raise failure
         return {"job": request.job, "wall_seconds": round(time.monotonic() - started, 1)}
     if request.kind == "portable":
         # The open source engine over the same drops, on this runner, with the workspace salt: the

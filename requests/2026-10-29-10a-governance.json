@@ -1,0 +1,8 @@
+{
+ "id": "2026-10-29-10a-governance",
+ "kind": "bundle_run",
+ "target": "dev",
+ "job": "governance",
+ "params": {"export_from": "/Volumes/workspace/friction_dev_raw/exports/governance", "stop_on_failure": false},
+ "note": "Tags from the contracts, the entitlements table, masks, the row filter, the masked and unmasked read, and the scan of what readers can see, over the backfilled tables."
+}

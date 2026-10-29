@@ -1,0 +1,8 @@
+{
+ "id": "2026-10-29-10b-monitor",
+ "kind": "bundle_run",
+ "target": "dev",
+ "job": "monitor",
+ "params": {"export_from": "/Volumes/workspace/friction_dev_raw/exports/monitor", "stop_on_failure": false},
+ "note": "Drift, expectation rates, completeness, the clock and label maturity over the backfilled tables. The day 40 drops are in the backfill, so a breach is expected; its alerts open an issue."
+}
