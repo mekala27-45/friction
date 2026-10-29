@@ -1,0 +1,7 @@
+{
+ "id": "2026-10-29-03b-terraform-dev",
+ "kind": "terraform_apply",
+ "target": "dev",
+ "params": {"var_file": "env/dev.tfvars"},
+ "note": "Retry of 2026-10-29-03-terraform-dev, which failed at init: lib/pq sends no server name, so the Neon endpoint now travels in the connection options."
+}
