@@ -7,7 +7,7 @@ license = "Apache-2.0"
 dependencies = [
   "friction-core",
   "numpy>=2.0",
-  "pandas>=2.2",
+  "pandas>=2.2,<3",
   "pyarrow>=18.0",
   "duckdb>=1.2",
   "scipy>=1.14",

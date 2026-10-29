@@ -1,0 +1,112 @@
+table: payments_silver
+owner: Ajay Mekala
+layer: silver
+keys:
+- txn_ref
+freshness: within one daily run of the drop landing
+columns:
+- name: txn_ref
+  type: bigint
+  classification: internal
+  says: line number of the transaction in the locked TabFormer file
+- name: account_key
+  type: string
+  classification: restricted
+  says: salted token of user and card slot
+- name: user_key
+  type: string
+  classification: restricted
+  says: salted token of the user
+- name: card_slot
+  type: int
+  classification: internal
+  says: the card's slot for its user, 0 to 8
+- name: account_ref
+  type: bigint
+  classification: internal
+  says: user times 100 plus slot, the key of the card lifecycle feed
+- name: event_ts
+  type: timestamp
+  classification: internal
+  says: when the transaction happened; the source has no zone, treated as UTC
+- name: event_date
+  type: date
+  classification: internal
+  says: the day of event_ts
+- name: amount_cents
+  type: bigint
+  classification: internal
+  says: amount, negative for a refund
+  unit: cents of currency
+- name: currency
+  type: string
+  classification: public
+  says: ISO 4217 code; USD for every row
+- name: channel
+  type: int
+  classification: internal
+  says: 0 swipe, 1 chip, 2 online
+- name: merchant_key
+  type: string
+  classification: internal
+  says: token of the merchant number
+- name: merchant_city
+  type: string
+  classification: internal
+  says: trimmed
+- name: merchant_state
+  type: string
+  classification: internal
+  says: two letter state for US merchants, else null
+- name: merchant_country
+  type: string
+  classification: internal
+  says: US, a country name, or null online
+- name: zip5
+  type: string
+  classification: sensitive
+  says: merchant zip, five digits, leading zeros restored
+- name: mcc
+  type: int
+  classification: public
+  says: merchant category code
+- name: errors
+  type: array<string>
+  classification: internal
+  says: error codes on the transaction
+- name: drop_id
+  type: string
+  classification: internal
+  says: the drop that delivered it
+- name: drop_end
+  type: timestamp
+  classification: internal
+  says: when that drop closed
+- name: source_file
+  type: string
+  classification: internal
+  says: the file that delivered it
+- name: ingested_at
+  type: timestamp
+  classification: internal
+  says: when bronze read it
+- name: location
+  type: string
+  classification: internal
+  says: state, or country outside the US, or empty online
+- name: foreign
+  type: boolean
+  classification: internal
+  says: merchant outside the US
+- name: has_error
+  type: boolean
+  classification: internal
+  says: any error code
+- name: is_refund
+  type: boolean
+  classification: internal
+  says: amount below zero
+- name: payload
+  type: string
+  classification: internal
+  says: digest of the payload columns, for duplicate detection

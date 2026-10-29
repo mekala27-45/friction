@@ -1,0 +1,108 @@
+table: logins_silver
+owner: Ajay Mekala
+layer: silver
+keys:
+- login_ref
+freshness: within one daily run of the drop landing
+columns:
+- name: login_ref
+  type: bigint
+  classification: internal
+  says: the index column of the RBA file
+- name: user_key
+  type: string
+  classification: restricted
+  says: salted token of the user id
+- name: event_ts
+  type: timestamp
+  classification: internal
+  says: login time, millisecond precision
+- name: event_date
+  type: date
+  classification: internal
+  says: the day of event_ts
+- name: rtt_ms
+  type: double
+  classification: internal
+  says: server side round trip time
+  unit: milliseconds
+- name: ip_key
+  type: string
+  classification: restricted
+  says: salted token of the IP address
+- name: ip_prefix16
+  type: string
+  classification: sensitive
+  says: the /16 the address belongs to
+- name: country
+  type: string
+  classification: sensitive
+  says: country from the IP
+- name: region
+  type: string
+  classification: sensitive
+  says: region from the IP, null where the source wrote a dash
+- name: city
+  type: string
+  classification: sensitive
+  says: city from the IP, null where the source wrote a dash
+- name: asn
+  type: bigint
+  classification: sensitive
+  says: autonomous system number
+- name: ua_key
+  type: string
+  classification: restricted
+  says: salted token of the user agent string
+- name: browser
+  type: string
+  classification: internal
+  says: browser name and version
+- name: browser_family
+  type: string
+  classification: internal
+  says: browser name without version
+- name: os
+  type: string
+  classification: internal
+  says: operating system name and version
+- name: device_type
+  type: string
+  classification: internal
+  says: mobile, desktop, tablet, bot or unknown
+- name: success
+  type: boolean
+  classification: internal
+  says: the login succeeded
+- name: is_attack_ip
+  type: boolean
+  classification: internal
+  says: the IP is on a known attacker list; an external reputation feed
+- name: flag_asn_unrealistic
+  type: boolean
+  classification: internal
+  says: ASN of 500,000 or more, assigned during synthesis
+- name: flag_ip_private
+  type: boolean
+  classification: internal
+  says: address in 10.0.0.0/8, assigned during synthesis
+- name: drop_id
+  type: string
+  classification: internal
+  says: the drop that delivered it
+- name: drop_end
+  type: timestamp
+  classification: internal
+  says: when that drop closed
+- name: source_file
+  type: string
+  classification: internal
+  says: the file that delivered it
+- name: ingested_at
+  type: timestamp
+  classification: internal
+  says: when bronze read it
+- name: payload
+  type: string
+  classification: internal
+  says: digest of the payload columns

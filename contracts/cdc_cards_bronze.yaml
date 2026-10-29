@@ -1,0 +1,73 @@
+table: cdc_cards_bronze
+owner: Ajay Mekala
+layer: bronze
+keys:
+- account_ref
+- seq
+- source_file
+freshness: appends each drop as it lands
+columns:
+- name: account_ref
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: user
+  type: string
+  classification: restricted
+  says: as delivered, text
+- name: card
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: op
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: seq
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: changed_at
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: emitted_at
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: card_generation
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: status
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: credit_limit_cents
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: currency
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: _rescued_data
+  type: string
+  classification: internal
+  says: columns the contract did not expect, as JSON
+- name: source_file
+  type: string
+  classification: internal
+  says: path of the file the row came from
+- name: file_modified_at
+  type: timestamp
+  classification: internal
+  says: modification time of that file
+- name: drop_id
+  type: string
+  classification: internal
+  says: the drop, read from the path
+- name: ingested_at
+  type: timestamp
+  classification: internal
+  says: when bronze read the row

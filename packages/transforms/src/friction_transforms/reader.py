@@ -46,6 +46,10 @@ def read_drops(spark: SparkSession, path: str, feed: str) -> DataFrame:
         F.size(extra) > 0,
         F.to_json(F.map_from_entries(F.transform(extra, lambda p: F.struct(p["k"], p["v"])))),
     )
-    # array_position returns 0 when the file has no such column; try_element_at gives null for it.
-    named = [F.try_element_at("_values", F.array_position("_header", c).cast("int")).alias(c) for c in expected]
+    # array_position gives 0 when the file has no such column, and element_at(.., 0) is an error even
+    # in its try_ form, so the lookup is guarded.
+    named = []
+    for c in expected:
+        pos = F.array_position("_header", c).cast("int")
+        named.append(F.when(pos > 0, F.element_at("_values", pos)).alias(c))
     return data.select(*named, rescued.alias("_rescued_data"), "source_file", "file_modified_at")

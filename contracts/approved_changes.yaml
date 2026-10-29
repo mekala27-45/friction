@@ -1,0 +1,11 @@
+# Contract changes approved by review. Each entry names the DECISIONS.md entry that approved it.
+# "active" is what the pipelines read: renames read a column back out of rescued data, and
+# rejected files are quarantined whole. Empty until the day 40 incident is handled.
+active:
+  payments:
+    renames: {}
+    rejected_files: []
+  logins:
+    renames: {}
+    rejected_files: []
+history: []

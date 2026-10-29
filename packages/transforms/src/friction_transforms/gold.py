@@ -9,11 +9,39 @@ labels the bank knew at the start of the event's month, on the system time clock
 
 from __future__ import annotations
 
-from friction_features import batch
+from collections.abc import Callable
+from typing import Any
+
+from friction_features import batch, logins, payments
 from pyspark.sql import DataFrame, Window
 from pyspark.sql import functions as F
+from pyspark.sql import types as T
 
 BUCKETS = 64
+
+
+def _assume(df: DataFrame, fields: list[tuple[str, T.DataType]]) -> DataFrame:
+    """Tell a Spark Connect DataFrame its own schema so applyInPandas need not ask the server.
+
+    applyInPandas reads the input's column names, and in a pipeline query function any request to
+    analyse a plan is refused (ATTEMPT_ANALYSIS_IN_PIPELINE_QUERY_FUNCTION), because the inputs do
+    not exist yet. The schema here is the select just above it, so it cannot drift.
+    """
+    if hasattr(df, "_cached_schema"):
+        df._cached_schema = T.StructType([T.StructField(n, t) for n, t in fields])
+    return df
+
+
+def _out(key: str, names: tuple[str, ...]) -> T.StructType:
+    return T.StructType([T.StructField(key, T.LongType()), *[T.StructField(n, T.DoubleType()) for n in names]])
+
+
+S, L, INT, D, B = T.StringType(), T.LongType(), T.IntegerType(), T.DoubleType(), T.BooleanType()
+PAYMENT_INPUT = [
+    ("account_key", S), ("txn_ref", L), ("event_ts_s", L), ("amount_cents", L), ("merchant_key", S), ("mcc", INT),
+    ("channel", INT), ("location", S), ("foreign", B), ("has_error", B), ("days_since_issue", D),
+    ("mcc_fraud_rate", D), ("_bucket", INT),
+]  # fmt: skip
 # A merchant category's rate is shrunk toward the overall rate as if it had this many more events.
 MCC_PRIOR_EVENTS = 2000
 MCC_WINDOW_MONTHS = 12
@@ -26,15 +54,18 @@ def card_issue_times(cards_history: DataFrame) -> DataFrame:
     )
 
 
-def with_issue_age(silver: DataFrame, issues: DataFrame) -> DataFrame:
-    """Days from the issue of the card generation in effect at the event to the event, or -1."""
+def issue_age(silver: DataFrame, issues: DataFrame) -> DataFrame:
+    """txn_ref, days_since_issue: days from the issue of the generation in effect, or -1.
+
+    Events and issue times are unioned on a fixed set of columns and ordered per account; each event
+    takes the last issue at or before it. A pipeline graph analyses a flow before its inputs exist,
+    so a flow here reads each input once and names every column it unions; the result joins back to
+    silver in the next dataset.
+    """
     ev = silver.select(
-        "txn_ref",
-        "account_ref",
-        F.col("event_ts").alias("_t"),
-        F.lit(1).alias("_k"),
+        "txn_ref", "account_ref", F.col("event_ts").alias("_t"), F.lit(1).alias("_k"),
         F.lit(None).cast("timestamp").alias("_iss"),
-    )
+    )  # fmt: skip
     iss = issues.select(
         F.lit(None).cast("bigint").alias("txn_ref"),
         "account_ref",
@@ -43,7 +74,7 @@ def with_issue_age(silver: DataFrame, issues: DataFrame) -> DataFrame:
         F.col("issued_at").alias("_iss"),
     )
     w = Window.partitionBy("account_ref").orderBy("_t", "_k").rowsBetween(Window.unboundedPreceding, Window.currentRow)
-    asof = (
+    return (
         ev.unionByName(iss)
         .withColumn("_last", F.last("_iss", ignorenulls=True).over(w))
         .where(F.col("_k") == 1)
@@ -54,70 +85,73 @@ def with_issue_age(silver: DataFrame, issues: DataFrame) -> DataFrame:
             ),
         )
     )
-    return silver.join(asof, "txn_ref", "left")
 
 
-def mcc_rates(silver: DataFrame, label_history: DataFrame) -> DataFrame:
-    """mcc, month_start, n, frauds_known, rate: as of the first instant of each month."""
-    debits = silver.where(~F.col("is_refund")).withColumn("month", F.trunc("event_date", "month"))
-    counts = debits.groupBy("mcc", "month").agg(F.count("*").alias("n"))
-    months = debits.select("month").distinct()
-    mccs = debits.select("mcc").distinct()
-    grid = months.crossJoin(mccs)
-    by_mcc = (
-        Window.partitionBy("mcc")
-        .orderBy(F.col("month").cast("timestamp").cast("long"))
-        .rangeBetween(-MCC_WINDOW_MONTHS * 31 * 86400, -1)
+def enrich(silver: DataFrame, ages: DataFrame, rates: DataFrame) -> DataFrame:
+    """Silver payments with the two as of inputs joined on (no drop or fillna: see issue_age)."""
+    r = rates.select(F.col("mcc").alias("_r_mcc"), F.col("month_start").alias("_r_month"), F.col("rate").alias("_rate"))
+    on = (F.col("mcc") == F.col("_r_mcc")) & (F.trunc("event_date", "month") == F.col("_r_month"))
+    out = silver.join(ages, "txn_ref", "left").join(r, on, "left")
+    return out.withColumn("mcc_fraud_rate", F.coalesce(F.col("_rate"), F.lit(0.0))).withColumn(
+        "days_since_issue", F.coalesce(F.col("days_since_issue"), F.lit(-1.0))
     )
-    rolled = (
-        grid.join(counts, ["mcc", "month"], "left")
-        .fillna(0, subset=["n"])
-        .withColumn("n_window", F.sum("n").over(by_mcc))
+
+
+def debit_counts(silver: DataFrame) -> DataFrame:
+    """mcc, month, n and the rolling count of the twelve months before the month."""
+    counts = (
+        silver.where(~F.col("is_refund"))
+        .groupBy("mcc", F.trunc("event_date", "month").alias("month"))
+        .agg(F.count(F.lit(1)).alias("n"))
     )
-    # Labels in effect at the month start (system time), for events in the trailing window.
-    fraud_versions = (
-        label_history.where(F.col("is_fraud"))
-        .select(
-            F.col("event_ref").alias("txn_ref"),
-            F.col("__START_AT.reported_at").alias("known_from"),
-            F.col("__END_AT.reported_at").alias("known_to"),
+    months = F.months_between(F.col("month"), F.lit("1970-01-01")).cast("long")
+    by_mcc = Window.partitionBy("mcc").orderBy(months).rangeBetween(-MCC_WINDOW_MONTHS, -1)
+    return counts.withColumn("n_window", F.coalesce(F.sum("n").over(by_mcc), F.lit(0)))
+
+
+def known_frauds(label_history: DataFrame, silver: DataFrame) -> DataFrame:
+    """mcc, month_start, frauds_known: frauds in the twelve months before, known at month start."""
+    versions = label_history.where(F.col("is_fraud")).select(
+        F.col("event_ref").alias("txn_ref"),
+        F.col("__START_AT.reported_at").alias("known_from"),
+        F.col("__END_AT.reported_at").alias("known_to"),
+    )
+    events = silver.where(~F.col("is_refund")).select(
+        "txn_ref", "mcc", F.trunc("event_date", "month").alias("event_month")
+    )
+    asof = F.explode(
+        F.sequence(
+            F.add_months("event_month", 1), F.add_months("event_month", MCC_WINDOW_MONTHS), F.expr("interval 1 month")
         )
-        .join(debits.select("txn_ref", "mcc", F.col("month").alias("event_month")), "txn_ref")
-    )
-    known = (
-        fraud_versions.crossJoin(months.withColumnRenamed("month", "asof"))
-        .where(
-            (F.col("known_from") < F.col("asof").cast("timestamp"))
-            & (F.col("known_to").isNull() | (F.col("known_to") >= F.col("asof").cast("timestamp")))
-            & (F.col("event_month") < F.col("asof"))
-            & (F.col("event_month") >= F.add_months("asof", -MCC_WINDOW_MONTHS))
-        )
-        .groupBy("mcc", F.col("asof").alias("month"))
-        .agg(F.countDistinct("txn_ref").alias("frauds_known"))
-    )
-    joined = rolled.join(known, ["mcc", "month"], "left").fillna(0, subset=["frauds_known"])
-    overall = joined.groupBy("month").agg(
-        (F.sum("frauds_known") / F.greatest(F.sum("n_window"), F.lit(1))).alias("overall")
     )
     return (
-        joined.join(overall, "month")
-        .withColumn(
-            "rate",
-            (F.col("frauds_known") + MCC_PRIOR_EVENTS * F.col("overall")) / (F.col("n_window") + MCC_PRIOR_EVENTS),
+        versions.join(events, "txn_ref")
+        .select("txn_ref", "mcc", "known_from", "known_to", asof.alias("month_start"))
+        .where(
+            (F.col("known_from") < F.col("month_start").cast("timestamp"))
+            & (F.col("known_to").isNull() | (F.col("known_to") >= F.col("month_start").cast("timestamp")))
         )
-        .select("mcc", F.col("month").alias("month_start"), "n_window", "frauds_known", "rate")
+        .groupBy("mcc", "month_start")
+        .agg(F.countDistinct("txn_ref").alias("frauds_known"))
     )
 
 
-def with_mcc_rate(silver: DataFrame, rates: DataFrame) -> DataFrame:
-    r = rates.select("mcc", F.col("month_start").alias("_m"), F.col("rate").alias("mcc_fraud_rate"))
-    out = silver.withColumn("_m", F.trunc("event_date", "month")).join(r, ["mcc", "_m"], "left").drop("_m")
-    return out.fillna(0.0, subset=["mcc_fraud_rate"])
+def mcc_rates(counts: DataFrame, known: DataFrame) -> DataFrame:
+    """mcc, month_start, n_window, frauds_known, rate, shrunk toward the month's overall rate."""
+    joined = counts.select("mcc", F.col("month").alias("month_start"), "n_window").join(
+        known, ["mcc", "month_start"], "left"
+    )
+    joined = joined.withColumn("frauds_known", F.coalesce(F.col("frauds_known"), F.lit(0)))
+    month = Window.partitionBy("month_start")
+    overall = F.sum("frauds_known").over(month) / F.greatest(F.sum("n_window").over(month), F.lit(1))
+    return joined.withColumn(
+        "rate", (F.col("frauds_known") + MCC_PRIOR_EVENTS * overall) / (F.col("n_window") + MCC_PRIOR_EVENTS)
+    ).select("mcc", "month_start", "n_window", "frauds_known", "rate")
 
 
-def payments_features(enriched: DataFrame) -> DataFrame:
-    """enriched: silver payments with days_since_issue and mcc_fraud_rate. One row per txn_ref."""
-    inputs = enriched.select(
+def payment_inputs(enriched: DataFrame) -> DataFrame:
+    """The columns the payments state machine reads, with the bucket it is grouped by."""
+    return enriched.select(
         "account_key",
         "txn_ref",
         F.unix_timestamp("event_ts").alias("event_ts_s"),
@@ -132,7 +166,20 @@ def payments_features(enriched: DataFrame) -> DataFrame:
         "mcc_fraud_rate",
         F.pmod(F.hash("account_key"), F.lit(BUCKETS)).alias("_bucket"),
     )
-    return inputs.groupBy("_bucket").applyInPandas(batch.payments_partition, batch.payments_schema())
+
+
+def payments_features(inputs: DataFrame) -> DataFrame:
+    """inputs: payment_inputs(), materialized. Runs as a job task, outside the pipeline graph.
+
+    A pipeline query function cannot use applyInPandas: the planner analyses a grouped map's input
+    when the flow is defined, before the input table exists. So the pipeline materializes the
+    inputs, and the features task runs the state machine over them with an ordinary session.
+    """
+    return (
+        _assume(inputs, PAYMENT_INPUT)
+        .groupBy("_bucket")
+        .applyInPandas(batch.payments_partition, _out("txn_ref", payments.FEATURES))
+    )
 
 
 LEVEL_COLUMNS = {
@@ -148,9 +195,12 @@ LEVEL_COLUMNS = {
 }
 
 
-def login_inputs(logins: DataFrame) -> DataFrame:
-    """logins: silver logins, optionally with synthetic attacks (synthetic = true) unioned in."""
-    synthetic = F.col("synthetic") if "synthetic" in logins.columns else F.lit(False)
+def login_inputs(logins: DataFrame, *, has_synthetic: bool = False) -> DataFrame:
+    """logins: silver logins, or silver with synthetic attacks (synthetic = true) unioned in.
+
+    Materialized by the pipeline; the user and IP passes run as a job task (see payments_features).
+    """
+    synthetic = F.col("synthetic") if has_synthetic else F.lit(False)
     return logins.select(
         "user_key",
         "ip_key",
@@ -163,16 +213,51 @@ def login_inputs(logins: DataFrame) -> DataFrame:
     )
 
 
-def logins_features(inputs: DataFrame) -> DataFrame:
-    user = (
-        inputs.withColumn("_bucket", F.pmod(F.hash("user_key"), F.lit(BUCKETS)))
+LOGIN_INPUT = [
+    ("user_key", S), ("ip_key", S), ("login_ref", L), ("event_ts_ms", L),
+    *[(f"v_{lvl}", S) for lvl in LEVEL_COLUMNS], ("rtt_ms", D), ("success", B), ("synthetic", B),
+]  # fmt: skip
+
+
+def logins_user_features(inputs: DataFrame) -> DataFrame:
+    bucketed = inputs.withColumn("_bucket", F.pmod(F.hash("user_key"), F.lit(BUCKETS)))
+    return (
+        _assume(bucketed, [*LOGIN_INPUT, ("_bucket", INT)])
         .groupBy("_bucket")
-        .applyInPandas(batch.logins_partition, batch.logins_schema())
+        .applyInPandas(batch.logins_partition, _out("login_ref", logins.FEATURES))
     )
-    ip = (
-        inputs.select("ip_key", "login_ref", "event_ts_ms", "success", "synthetic")
-        .withColumn("_bucket", F.pmod(F.hash("ip_key"), F.lit(BUCKETS)))
+
+
+def logins_ip_features(inputs: DataFrame) -> DataFrame:
+    bucketed = inputs.select("ip_key", "login_ref", "event_ts_ms", "success", "synthetic").withColumn(
+        "_bucket", F.pmod(F.hash("ip_key"), F.lit(BUCKETS))
+    )
+    fields = [("ip_key", S), ("login_ref", L), ("event_ts_ms", L), ("success", B), ("synthetic", B), ("_bucket", INT)]
+    return (
+        _assume(bucketed, fields)
         .groupBy("_bucket")
-        .applyInPandas(batch.ip_partition, batch.ip_schema())
+        .applyInPandas(batch.ip_partition, _out("login_ref", logins.IP_FEATURES))
     )
+
+
+def logins_features(user: DataFrame, ip: DataFrame) -> DataFrame:
+    """The two passes joined on the login. Each pass is its own dataset in a pipeline."""
     return user.join(ip, "login_ref")
+
+
+def features_step(
+    spark: Any, read: Callable[[str], DataFrame], write: Callable[[str, DataFrame], None]
+) -> dict[str, int]:
+    """Run the state machines over the materialized inputs and write the feature tables.
+
+    The same function runs on the build machine (reading and writing Parquet) and in the workspace
+    features task (reading and writing Delta), so both engines compute features with one code path.
+    Writes replace the tables whole, which is what makes a rerun leave them identical.
+    """
+    pay = payments_features(read("payment_feature_inputs"))
+    write("payments_features", pay)
+    inputs = read("login_feature_inputs")
+    write("logins_user_features", logins_user_features(inputs))
+    write("logins_ip_features", logins_ip_features(inputs))
+    write("logins_features", logins_features(read("logins_user_features"), read("logins_ip_features")))
+    return {name: read(name).count() for name in ("payments_features", "logins_features")}

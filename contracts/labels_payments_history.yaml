@@ -1,0 +1,32 @@
+table: labels_payments_history
+owner: Ajay Mekala
+layer: cdc
+keys:
+- event_ref
+- __START_AT
+freshness: with silver
+columns:
+- name: event_ref
+  type: bigint
+  classification: internal
+  says: the transaction reference or login index
+- name: is_fraud
+  type: boolean
+  classification: internal
+  says: fraud as known on the system time clock
+- name: event_ts
+  type: timestamp
+  classification: internal
+  says: 'valid time: when the event happened'
+- name: source
+  type: string
+  classification: internal
+  says: chargeback, claim, reversal or incident_response
+- name: __START_AT
+  type: struct<reported_at:timestamp,seq:bigint>
+  classification: internal
+  says: 'system time: when the bank learned this version'
+- name: __END_AT
+  type: struct<reported_at:timestamp,seq:bigint>
+  classification: internal
+  says: 'system time: when the next version replaced it, null if current'

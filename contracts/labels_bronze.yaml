@@ -1,0 +1,60 @@
+table: labels_bronze
+owner: Ajay Mekala
+layer: bronze
+keys:
+- label_ref
+- source_file
+freshness: appends each drop as it lands
+columns:
+- name: label_ref
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: event_ref
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: desk
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: is_fraud
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: event_ts
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: reported_at
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: seq
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: source
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: _rescued_data
+  type: string
+  classification: internal
+  says: columns the contract did not expect, as JSON
+- name: source_file
+  type: string
+  classification: internal
+  says: path of the file the row came from
+- name: file_modified_at
+  type: timestamp
+  classification: internal
+  says: modification time of that file
+- name: drop_id
+  type: string
+  classification: internal
+  says: the drop, read from the path
+- name: ingested_at
+  type: timestamp
+  classification: internal
+  says: when bronze read the row

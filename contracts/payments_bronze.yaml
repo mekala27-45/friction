@@ -1,0 +1,88 @@
+table: payments_bronze
+owner: Ajay Mekala
+layer: bronze
+keys:
+- txn_ref
+- source_file
+freshness: appends each drop as it lands
+columns:
+- name: txn_ref
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: user
+  type: string
+  classification: restricted
+  says: as delivered, text
+- name: card
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: year
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: month
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: day
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: time
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: amount
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: use_chip
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: merchant_name
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: merchant_city
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: merchant_state
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: zip
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: mcc
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: errors
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: _rescued_data
+  type: string
+  classification: internal
+  says: columns the contract did not expect, as JSON
+- name: source_file
+  type: string
+  classification: internal
+  says: path of the file the row came from
+- name: file_modified_at
+  type: timestamp
+  classification: internal
+  says: modification time of that file
+- name: drop_id
+  type: string
+  classification: internal
+  says: the drop, read from the path
+- name: ingested_at
+  type: timestamp
+  classification: internal
+  says: when bronze read the row

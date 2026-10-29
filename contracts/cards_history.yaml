@@ -1,0 +1,37 @@
+table: cards_history
+owner: Ajay Mekala
+layer: cdc
+keys:
+- account_ref
+- __START_AT
+freshness: with silver
+columns:
+- name: account_ref
+  type: bigint
+  classification: internal
+  says: user times 100 plus slot
+- name: card_generation
+  type: bigint
+  classification: internal
+  says: 0 at issue, +1 at each reissue
+- name: status
+  type: string
+  classification: internal
+  says: active, blocked or closed
+- name: credit_limit_cents
+  type: bigint
+  classification: internal
+  says: credit limit
+  unit: cents of currency
+- name: currency
+  type: string
+  classification: public
+  says: USD
+- name: __START_AT
+  type: struct<changed_at:timestamp,seq:bigint>
+  classification: internal
+  says: when the version took effect, with its sequence
+- name: __END_AT
+  type: struct<changed_at:timestamp,seq:bigint>
+  classification: internal
+  says: when the next version took effect, null if open

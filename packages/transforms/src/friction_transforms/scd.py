@@ -39,12 +39,18 @@ def scd2(
         .withColumn("_payload", _payload(tracked))
         .withColumn("_is_delete", F.col(op_col) == delete_value)
     )
-    base = base.dropDuplicates([*keys, *order, "_payload", op_col])
     arrival_cols = arrival or order
+    # An exact repeat (same key, order, payload and operation) is dropped, keeping the first arrival.
+    # A window rather than dropDuplicates(subset): the planner resolves a subset against the input
+    # when a pipeline flow is defined, before the input exists.
+    exact = Window.partitionBy(*keys, *order, "_payload", op_col).orderBy(*arrival_cols)
+    base = base.withColumn("_dup", F.row_number().over(exact)).where(F.col("_dup") == 1)
     same_seq = Window.partitionBy(*keys, *order).orderBy(*arrival_cols, "_payload")
     ranked = base.withColumn("_n", F.row_number().over(same_seq))
-    conflicts = ranked.where(F.col("_n") > 1).drop("_n", "_seq", "_is_delete")
-    clean = ranked.where(F.col("_n") == 1).drop("_n")
+    # Helper columns stay on the intermediate frames; every output names its columns. (drop() makes
+    # Spark Connect ask for the schema, which a pipeline refuses before the inputs exist.)
+    conflicts = ranked.where(F.col("_n") > 1)
+    clean = ranked.where(F.col("_n") == 1)
     by_key = Window.partitionBy(*keys).orderBy(*order)
     clean = (
         clean.withColumn("_next", F.lead("_seq").over(by_key))
