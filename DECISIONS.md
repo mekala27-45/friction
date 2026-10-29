@@ -158,3 +158,54 @@ evaluation/hypotheses.yaml, sha256 2fa80e2d5af8ecb9c6256355daf59cadc6faf63533b91
 added to evaluation/plan.lock before any rate of fraud by feature was computed and before any
 validation month was scored. The plan hash is unchanged. The groups are written as expressions over
 the scored validation set, so the test that runs is the one that was registered.
+
+## 2026-10-29 Sampling weights, not class balancing (reverses the class weights of commit 07e85c5)
+
+The first training step weighted positives up to balance the classes, as the specification's "class
+weights on training only" suggests. That made every predicted probability several times too high,
+and the expected cost view and the calibration gate both read the probability as a probability.
+Reversed: negatives are sampled down to 1,500,000 by a keyed draw and carry the inverse of their
+sampling rate as a weight; positives carry one. The weights are used on training only, which is the
+part of the instruction that matters, and the models stay calibrated.
+
+## 2026-10-29 The unknown account is a flag, not a user (reverses treating every id as a person)
+
+Until the full size profile, the pipeline treated every user id as a person, which is what the
+fixture slice could show. The profile found one id with 14,025,899 attempts. Reversed: see "The
+unknown account bucket" above.
+
+## 2026-10-29 The API writes SQL through psycopg, not SQLModel and Alembic
+
+The specification names SQLModel and Alembic. The API has four tables and one transaction shape (lock
+the state rows, write state and decision, commit), and the persistence tests are about that
+transaction. Plain psycopg with explicit SQL shows it line by line; the schema is idempotent DDL run at
+start (packages/api/src/friction_api/store.py). Alembic would add a migration history for a schema
+that has had one version.
+
+## 2026-10-29 Postgres for tests is a CI service container, not testcontainers
+
+The CI runner has no Docker in Docker by default and the local build machine has Postgres 16. The
+tests read FRICTION_TEST_DATABASE_URL and skip by name without it; scripts/check_test_dependencies.py
+fails CI if Postgres, Java or pyspark is missing there, so CI cannot pass by skipping.
+
+## 2026-10-29 The API accepts restricted values tokenized at the edge
+
+A login event carries an IP address. The repository, the site and the parity set may not hold one, so
+the API accepts the salted tokens (ip_key, ua_key, user_key) that an upstream tokenizer would produce,
+and also the raw values, which it tokenizes in memory and never stores. The parity replay and the
+replay page send tokens.
+
+## 2026-10-29 The serving image installs the scoring path only
+
+The Vercel container installs numpy, scipy, LightGBM, FastAPI, uvicorn, psycopg, pydantic, PyYAML and
+structlog at the versions in uv.lock, and copies the six packages the API imports from their sources.
+No pandas, Spark or DuckDB goes in. tests/api/test_serving_image.py checks the pins against the lock and
+that no module on the path imports a heavy package at import time. Render is the named fallback host
+for the same image (render.yaml, Dockerfile.render). Source: Vercel, Container Runtime, updated 7 July
+2026: a root Dockerfile.vercel selects the container preset, port 80 by default, beta on all plans.
+
+## 2026-10-29 The pipelines CLI runs on one thread unless told otherwise
+
+`spark-pipelines run` starts its own Spark Connect server with `--remote local`, which is one thread.
+The first full local run took that default; scripts/run_portable.py now passes
+`--remote local[<cores>]`.
