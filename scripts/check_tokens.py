@@ -35,10 +35,16 @@ def find_tokens(text: str) -> list[str]:
 
 
 def check(root: Path, files: list[Path] | None = None) -> int:
-    targets = files if files is not None else [
-        p for p in repo_files(root) if not any(part in SKIP_PARTS for part in p.relative_to(root).parts)
+    targets = (
+        files
+        if files is not None
+        else [
+            p for p in repo_files(root) if not any(part in SKIP_PARTS for part in p.relative_to(root).parts)
+        ]
+    )
+    targets = [
+        p for p in targets if p.name != Path(__file__).name and (is_text(p) or p.suffix in {".log", ""})
     ]
-    targets = [p for p in targets if p.name != Path(__file__).name and (is_text(p) or p.suffix in {".log", ""})]
     if not targets:
         raise ValueError("the token gate found no files to scan")
     problems: list[str] = []

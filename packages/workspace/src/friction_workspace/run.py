@@ -1,0 +1,183 @@
+"""Run the pending workspace requests. Called by .github/workflows/workspace.yml, never elsewhere.
+
+    python -m friction_workspace.run --requests requests --out results-branch/runs
+
+Each request writes into runs/<request id>/: what it produced, a log, and done.json with the run
+id, the commit it ran from, timings and the digest of every file it wrote. A failed request still
+writes done.json with status failed and the error, so the next push does not run it again by
+accident; a new request with a new id asks for a retry.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import shlex
+import subprocess
+import sys
+import time
+from datetime import UTC, datetime
+from pathlib import Path
+from typing import Any
+
+from friction_core.hashing import sha256_file
+
+from friction_workspace.requests import Request, pending
+
+ROOT = Path(__file__).resolve().parents[4]
+
+
+def _sh(cmd: list[str], log: Path, *, cwd: Path = ROOT, env: dict[str, str] | None = None) -> str:
+    with log.open("a", encoding="utf-8") as handle:
+        handle.write(f"$ {shlex.join(cmd)}\n")
+        proc = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, env={**os.environ, **(env or {})})
+        handle.write(proc.stdout[-20000:])
+        handle.write(proc.stderr[-20000:])
+        handle.write(f"[exit {proc.returncode}]\n")
+    if proc.returncode != 0:
+        raise RuntimeError(f"{cmd[0]} {cmd[1] if len(cmd) > 1 else ''} exited {proc.returncode}")
+    return proc.stdout
+
+
+def _probe_vars() -> dict[str, str]:
+    probe = ROOT / "results" / "workspace_probe.json"
+    if not probe.exists():
+        return {}
+    summary = json.loads(probe.read_text(encoding="utf-8")).get("summary", {})
+    return {"catalog_mode": "catalog" if summary.get("catalog_per_environment") else "prefix"}
+
+
+def _bundle_vars(request: Request) -> list[str]:
+    values = {**_probe_vars(), **{k: str(v) for k, v in request.params.get("vars", {}).items()}}
+    out: list[str] = []
+    for key, value in sorted(values.items()):
+        out.extend(["--var", f"{key}={value}"])
+    return out
+
+
+def handle(request: Request, out: Path, log: Path) -> dict[str, Any]:
+    if request.kind == "probe":
+        from friction_workspace.probe import run as probe_run
+
+        findings = probe_run(out / "workspace_probe.json")
+        return {"summary": findings["summary"]}
+    if request.kind == "upload_sources":
+        _sh([sys.executable, "scripts/fetch_sources.py"], log)
+        _sh([sys.executable, "scripts/stage_sources.py"], log)
+        _sh([sys.executable, "scripts/replay.py", "--all"], log)
+        volume = str(request.params["outbox_volume"])
+        _sh(["databricks", "fs", "cp", "-r", "--overwrite", "data/landing", f"dbfs:{volume}"], log)
+        for name in ("data/replay.lock.json", "results/fetch_status.json"):
+            target = out / Path(name).name
+            target.write_bytes((ROOT / name).read_bytes())
+        return {"uploaded_to": volume}
+    if request.kind == "bundle_deploy":
+        _sh(["databricks", "bundle", "validate", "-t", request.target, *_bundle_vars(request)], log)
+        _sh(
+            [
+                "databricks",
+                "bundle",
+                "deploy",
+                "-t",
+                request.target,
+                "--auto-approve",
+                *_bundle_vars(request),
+            ],
+            log,
+        )
+        summary = _sh(
+            ["databricks", "bundle", "summary", "-t", request.target, "-o", "json", *_bundle_vars(request)],
+            log,
+        )
+        (out / "bundle_summary.json").write_text(summary, encoding="utf-8")
+        return {"deployed": request.target}
+    if request.kind == "bundle_run":
+        if not request.job:
+            raise ValueError("a bundle_run request names a job")
+        cmd = ["databricks", "bundle", "run", "-t", request.target, request.job, *_bundle_vars(request)]
+        params = request.params.get("job_params", {})
+        if params:
+            cmd += ["--params", ",".join(f"{k}={v}" for k, v in sorted(params.items()))]
+        started = time.monotonic()
+        _sh(cmd, log)
+        exported = request.params.get("export_from")
+        if exported:
+            _sh(["databricks", "fs", "cp", "-r", "--overwrite", f"dbfs:{exported}", str(out / "export")], log)
+        return {"job": request.job, "wall_seconds": round(time.monotonic() - started, 1)}
+    if request.kind == "export":
+        source = str(request.params["from"])
+        _sh(["databricks", "fs", "cp", "-r", "--overwrite", f"dbfs:{source}", str(out / "export")], log)
+        return {"exported": source}
+    if request.kind == "sql":
+        from friction_workspace.sql import run_file
+
+        return run_file(ROOT / str(request.params["file"]), out, request.params.get("vars", {}))
+    if request.kind in {"terraform_plan", "terraform_apply"}:
+        tf = ROOT / "infra" / "terraform"
+        env = {"TF_IN_AUTOMATION": "1"}
+        _sh(["terraform", "init", "-input=false"], log, cwd=tf, env=env)
+        varfile = ["-var-file", str(request.params.get("var_file", "env/dev.tfvars"))]
+        _sh(
+            ["terraform", "plan", "-input=false", "-no-color", "-out", "plan.bin", *varfile],
+            log,
+            cwd=tf,
+            env=env,
+        )
+        plan_text = _sh(["terraform", "show", "-no-color", "plan.bin"], log, cwd=tf, env=env)
+        (out / "terraform_plan.txt").write_text(plan_text, encoding="utf-8")
+        if request.kind == "terraform_apply":
+            applied = _sh(
+                ["terraform", "apply", "-input=false", "-no-color", "plan.bin"], log, cwd=tf, env=env
+            )
+            (out / "terraform_apply.txt").write_text(applied, encoding="utf-8")
+        return {"terraform": request.kind}
+    raise ValueError(f"unknown request kind {request.kind}")
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--requests", type=Path, default=ROOT / "requests")
+    parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--only", help="run one request id even if it has a record")
+    args = parser.parse_args()
+    todo = pending(args.requests, args.out)
+    if args.only:
+        todo = [r for r in todo if r.id == args.only]
+    if not todo:
+        print("no pending requests")
+        return 0
+    failures = 0
+    for request in todo:
+        out = args.out / request.id
+        out.mkdir(parents=True, exist_ok=True)
+        log = out / "run.log"
+        started = datetime.now(UTC)
+        record: dict[str, Any] = {
+            "request": request.model_dump(),
+            "github_run_id": os.environ.get("GITHUB_RUN_ID"),
+            "commit": os.environ.get("GITHUB_SHA"),
+            "started_at": started.isoformat(timespec="seconds"),
+        }
+        try:
+            record["result"] = handle(request, out, log)
+            record["status"] = "succeeded"
+        except Exception as exc:
+            record["status"] = "failed"
+            record["error"] = f"{type(exc).__name__}: {str(exc)[:500]}"
+            failures += 1
+        record["finished_at"] = datetime.now(UTC).isoformat(timespec="seconds")
+        record["files"] = {
+            str(p.relative_to(out)): sha256_file(p)
+            for p in sorted(out.rglob("*"))
+            if p.is_file() and p.name != "done.json"
+        }
+        (out / "done.json").write_text(json.dumps(record, indent=1, default=str) + "\n", encoding="utf-8")
+        print(f"{request.id}: {record['status']}")
+        if record["status"] == "failed" and request.params.get("stop_on_failure", True):
+            break
+    return 1 if failures else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

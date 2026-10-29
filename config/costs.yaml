@@ -1,0 +1,16 @@
+# The cost parameters for the expected cost view. Each one is an assumption, labeled as such on
+# every page that uses it, with a sensitivity table beside it.
+currency: USD
+assumptions:
+  # A missed fraud costs the issuer the amount plus handling.
+  fraud_loss_multiplier: 1.0
+  chargeback_handling_usd: 25
+  # A step up of a good customer costs a little and loses a few purchases.
+  step_up_cost_usd: 0.50
+  step_up_abandon_rate: 0.03
+  # A decline of a good customer loses the sale margin and some of the relationship.
+  decline_margin_rate: 0.02
+  decline_attrition_usd: 15
+  # Re-authentication of a legitimate login on the login desk.
+  reauth_cost_usd: 0.20
+  takeover_loss_usd: 400

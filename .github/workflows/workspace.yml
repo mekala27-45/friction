@@ -1,0 +1,101 @@
+# The only machine that touches the workspace. It runs every committed request under requests/
+# that has no record on the results branch, writes what each produced to runs/<id>/ on that
+# branch, and pushes. The build machine reviews the branch and promotes results into main with a
+# provenance file (scripts/promote_results.py). Nothing here prints a secret, and the token scan
+# in CI fails on anything that looks like one in a tracked file.
+name: workspace
+
+on:
+  push:
+    branches: [main]
+    paths: ["requests/**"]
+  workflow_dispatch:
+    inputs:
+      only:
+        description: "Run one request id again, even if it has a record"
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: workspace
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    env:
+      DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+      DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+      FRICTION_SALT: ${{ secrets.FRICTION_SALT }}
+      TF_STATE_CONN: ${{ secrets.TF_STATE_CONN }}
+      PG_CONN_STR: ${{ secrets.TF_STATE_CONN }}
+      PYTHONHASHSEED: "0"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: The workspace secrets are set
+        run: |
+          missing=""
+          [ -n "$DATABRICKS_HOST" ] || missing="$missing DATABRICKS_HOST"
+          [ -n "$DATABRICKS_TOKEN" ] || missing="$missing DATABRICKS_TOKEN"
+          if [ -n "$missing" ]; then
+            echo "::error::missing Actions secrets:$missing"
+            exit 1
+          fi
+          case "$DATABRICKS_HOST" in
+            https://*) ;;
+            *) echo "::error::DATABRICKS_HOST must start with https://"; exit 1 ;;
+          esac
+
+      - name: Results branch as a worktree
+        run: |
+          git config user.name "friction-workspace"
+          git config user.email "friction-workspace@users.noreply.github.com"
+          if git ls-remote --exit-code --heads origin results >/dev/null; then
+            git fetch --depth 1 origin results:results
+            git worktree add results-branch results
+          else
+            git worktree add --orphan -b results results-branch
+          fi
+          mkdir -p results-branch/runs
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: uv sync --frozen --extra workspace --no-dev
+
+      - uses: databricks/setup-cli@main
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+
+      - name: Run pending requests
+        id: requests
+        run: |
+          set +e
+          uv run --no-sync python -m friction_workspace.run --out results-branch/runs ${{ inputs.only && format('--only {0}', inputs.only) || '' }}
+          echo "status=$?" >> "$GITHUB_OUTPUT"
+
+      - name: Push the results branch
+        if: always()
+        run: |
+          cd results-branch
+          git add -A
+          if git diff --cached --quiet; then
+            echo "nothing new on the results branch"
+          else
+            git commit -q -m "results: requests run in ${GITHUB_RUN_ID} from ${GITHUB_SHA::7}"
+            git push origin results
+          fi
+
+      - name: Fail if a request failed
+        if: steps.requests.outputs.status != '0'
+        run: exit 1

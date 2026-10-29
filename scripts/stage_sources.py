@@ -37,11 +37,15 @@ def stage(name: str) -> dict[str, object]:
     reader = pacsv.open_csv(
         source,
         read_options=pacsv.ReadOptions(block_size=64 << 20),
-        convert_options=pacsv.ConvertOptions(column_types={c: pa.string() for c in columns}, strings_can_be_null=False),
+        convert_options=pacsv.ConvertOptions(
+            column_types={c: pa.string() for c in columns}, strings_can_be_null=False
+        ),
     )
     names = [columns[c] for c in reader.schema.names]
     if set(reader.schema.names) != set(columns):
-        raise ValueError(f"{name}: the header {reader.schema.names} is not the one this build was written for")
+        raise ValueError(
+            f"{name}: the header {reader.schema.names} is not the one this build was written for"
+        )
     row = 0
     part = 0
     writer: pq.ParquetWriter | None = None
