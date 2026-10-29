@@ -1,0 +1,527 @@
+$ terraform init -input=false
+[0m[1mInitializing the backend...[0m
+[0m[32m
+Successfully configured the backend "pg"! Terraform will automatically
+use this backend unless the backend configuration changes.[0m
+
+[0m[1mInitializing provider plugins...[0m
+- Finding databricks/databricks versions matching "~> 1.90"...
+- Installing databricks/databricks v1.140.0...
+- Installed databricks/databricks v1.140.0 (self-signed, key ID [0m[1m92A95A66446BCE3F[0m)[0m
+Partner and community providers are signed by their developers.
+If you'd like to know more about provider signing, you can read about it here:
+https://developer.hashicorp.com/terraform/cli/plugins/signing
+
+Terraform has created a lock file [1m.terraform.lock.hcl[0m to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.[0m
+
+[0m[1m[32mTerraform has been successfully initialized![0m[32m[0m
+[exit 0]
+$ terraform plan -input=false -no-color -out plan.bin -var-file env/dev.tfvars
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # databricks_grant.gold_use will be created
+  + resource "databricks_grant" "gold_use" {
+      + id         = (known after apply)
+      + principal  = "users"
+      + privileges = [
+          + "SELECT",
+          + "USE_SCHEMA",
+        ]
+      + schema     = "workspace.friction_dev_gold"
+
+      + provider_config (known after apply)
+    }
+
+  # databricks_grant.silver_use will be created
+  + resource "databricks_grant" "silver_use" {
+      + id         = (known after apply)
+      + principal  = "users"
+      + privileges = [
+          + "SELECT",
+          + "USE_SCHEMA",
+        ]
+      + schema     = "workspace.friction_dev_silver"
+
+      + provider_config (known after apply)
+    }
+
+  # databricks_schema.layer["bronze"] will be created
+  + resource "databricks_schema" "layer" {
+      + catalog_name                   = "workspace"
+      + comment                        = "Every drop as it landed, text, with its file; restricted columns masked"
+      + enable_predictive_optimization = (known after apply)
+      + force_destroy                  = false
+      + id                             = (known after apply)
+      + metastore_id                   = (known after apply)
+      + name                           = "friction_dev_bronze"
+      + owner                          = (known after apply)
+      + properties                     = {
+          + "environment" = "dev"
+          + "layer"       = "bronze"
+          + "project"     = "friction"
+        }
+      + schema_id                      = (known after apply)
+
+      + provider_config (known after apply)
+    }
+
+  # databricks_schema.layer["cdc"] will be created
+  + resource "databricks_schema" "layer" {
+      + catalog_name                   = "workspace"
+      + comment                        = "Card and label history as SCD type 2, labels on two clocks"
+      + enable_predictive_optimization = (known after apply)
+      + force_destroy                  = false
+      + id                             = (known after apply)
+      + metastore_id                   = (known after apply)
+      + name                           = "friction_dev_cdc"
+      + owner                          = (known after apply)
+      + properties                     = {
+          + "environment" = "dev"
+          + "layer"       = "cdc"
+          + "project"     = "friction"
+        }
+      + schema_id                      = (known after apply)
+
+      + provider_config (known after apply)
+    }
+
+  # databricks_schema.layer["gold"] will be created
+  + resource "databricks_schema" "layer" {
+      + catalog_name                   = "workspace"
+      + comment                        = "Point in time features, training sets, scores, decisions and metrics"
+      + enable_predictive_optimization = (known after apply)
+      + force_destroy                  = false
+      + id                             = (known after apply)
+      + metastore_id                   = (known after apply)
+      + name                           = "friction_dev_gold"
+      + owner                          = (known after apply)
+      + properties                     = {
+          + "environment" = "dev"
+          + "layer"       = "gold"
+          + "project"     = "friction"
+        }
+      + schema_id                      = (known after apply)
+
+      + provider_config (known after apply)
+    }
+
+  # databricks_schema.layer["ml"] will be created
+  + resource "databricks_schema" "layer" {
+      + catalog_name                   = "workspace"
+      + comment                        = "Models in Unity Catalog with champion and challenger aliases"
+      + enable_predictive_optimization = (known after apply)
+      + force_destroy                  = false
+      + id                             = (known after apply)
+      + metastore_id                   = (known after apply)
+      + name                           = "friction_dev_ml"
+      + owner                          = (known after apply)
+      + properties                     = {
+          + "environment" = "dev"
+          + "layer"       = "ml"
+          + "project"     = "friction"
+        }
+      + schema_id                      = (known after apply)
+
+      + provider_config (known after apply)
+    }
+
+  # databricks_schema.layer["ops"] will be created
+  + resource "databricks_schema" "layer" {
+      + catalog_name                   = "workspace"
+      + comment                        = "Run ledger, SLOs, drift, alerts, the compute ledger and entitlements"
+      + enable_predictive_optimization = (known after apply)
+      + force_destroy                  = false
+      + id                             = (known after apply)
+      + metastore_id                   = (known after apply)
+      + name                           = "friction_dev_ops"
+      + owner                          = (known after apply)
+      + properties                     = {
+          + "environment" = "dev"
+          + "layer"       = "ops"
+          + "project"     = "friction"
+        }
+      + schema_id                      = (known after apply)
+
+      + provider_config (known after apply)
+    }
+
+  # databricks_schema.layer["raw"] will be created
+  + resource "databricks_schema" "layer" {
+      + catalog_name                   = "workspace"
+      + comment                        = "Volumes only: the outbox upstream writes to, the landing zone, and exports"
+      + enable_predictive_optimization = (known after apply)
+      + force_destroy                  = false
+      + id                             = (known after apply)
+      + metastore_id                   = (known after apply)
+      + name                           = "friction_dev_raw"
+      + owner                          = (known after apply)
+      + properties                     = {
+          + "environment" = "dev"
+          + "layer"       = "raw"
+          + "project"     = "friction"
+        }
+      + schema_id                      = (known after apply)
+
+      + provider_config (known after apply)
+    }
+
+  # databricks_schema.layer["silver"] will be created
+  + resource "databricks_schema" "layer" {
+      + catalog_name                   = "workspace"
+      + comment                        = "Typed, conformed, deduplicated; the quarantine beside it"
+      + enable_predictive_optimization = (known after apply)
+      + force_destroy                  = false
+      + id                             = (known after apply)
+      + metastore_id                   = (known after apply)
+      + name                           = "friction_dev_silver"
+      + owner                          = (known after apply)
+      + properties                     = {
+          + "environment" = "dev"
+          + "layer"       = "silver"
+          + "project"     = "friction"
+        }
+      + schema_id                      = (known after apply)
+
+      + provider_config (known after apply)
+    }
+
+  # databricks_volume.raw["exports"] will be created
+  + resource "databricks_volume" "raw" {
+      + catalog_name = "workspace"
+      + comment      = "Scored sets and results the repository grades"
+      + id           = (known after apply)
+      + name         = "exports"
+      + owner        = (known after apply)
+      + schema_name  = "friction_dev_raw"
+      + volume_path  = (known after apply)
+      + volume_type  = "MANAGED"
+
+      + provider_config (known after apply)
+    }
+
+  # databricks_volume.raw["landing"] will be created
+  + resource "databricks_volume" "raw" {
+      + catalog_name = "workspace"
+      + comment      = "The landing zone Auto Loader reads"
+      + id           = (known after apply)
+      + name         = "landing"
+      + owner        = (known after apply)
+      + schema_name  = "friction_dev_raw"
+      + volume_path  = (known after apply)
+      + volume_type  = "MANAGED"
+
+      + provider_config (known after apply)
+    }
+
+  # databricks_volume.raw["outbox"] will be created
+  + resource "databricks_volume" "raw" {
+      + catalog_name = "workspace"
+      + comment      = "What upstream delivers, before it lands"
+      + id           = (known after apply)
+      + name         = "outbox"
+      + owner        = (known after apply)
+      + schema_name  = "friction_dev_raw"
+      + volume_path  = (known after apply)
+      + volume_type  = "MANAGED"
+
+      + provider_config (known after apply)
+    }
+
+Plan: 12 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + schemas = {
+      + bronze = "friction_dev_bronze"
+      + cdc    = "friction_dev_cdc"
+      + gold   = "friction_dev_gold"
+      + ml     = "friction_dev_ml"
+      + ops    = "friction_dev_ops"
+      + raw    = "friction_dev_raw"
+      + silver = "friction_dev_silver"
+    }
+  + volumes = {
+      + exports = "/Volumes/workspace/friction_dev_raw/exports"
+      + landing = "/Volumes/workspace/friction_dev_raw/landing"
+      + outbox  = "/Volumes/workspace/friction_dev_raw/outbox"
+    }
+[exit 0]
+$ terraform show -no-color plan.bin
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # databricks_grant.gold_use will be created
+  + resource "databricks_grant" "gold_use" {
+      + id         = (known after apply)
+      + principal  = "users"
+      + privileges = [
+          + "SELECT",
+          + "USE_SCHEMA",
+        ]
+      + schema     = "workspace.friction_dev_gold"
+
+      + provider_config (known after apply)
+    }
+
+  # databricks_grant.silver_use will be created
+  + resource "databricks_grant" "silver_use" {
+      + id         = (known after apply)
+      + principal  = "users"
+      + privileges = [
+          + "SELECT",
+          + "USE_SCHEMA",
+        ]
+      + schema     = "workspace.friction_dev_silver"
+
+      + provider_config (known after apply)
+    }
+
+  # databricks_schema.layer["bronze"] will be created
+  + resource "databricks_schema" "layer" {
+      + catalog_name                   = "workspace"
+      + comment                        = "Every drop as it landed, text, with its file; restricted columns masked"
+      + enable_predictive_optimization = (known after apply)
+      + force_destroy                  = false
+      + id                             = (known after apply)
+      + metastore_id                   = (known after apply)
+      + name                           = "friction_dev_bronze"
+      + owner                          = (known after apply)
+      + properties                     = {
+          + "environment" = "dev"
+          + "layer"       = "bronze"
+          + "project"     = "friction"
+        }
+      + schema_id                      = (known after apply)
+
+      + provider_config (known after apply)
+    }
+
+  # databricks_schema.layer["cdc"] will be created
+  + resource "databricks_schema" "layer" {
+      + catalog_name                   = "workspace"
+      + comment                        = "Card and label history as SCD type 2, labels on two clocks"
+      + enable_predictive_optimization = (known after apply)
+      + force_destroy                  = false
+      + id                             = (known after apply)
+      + metastore_id                   = (known after apply)
+      + name                           = "friction_dev_cdc"
+      + owner                          = (known after apply)
+      + properties                     = {
+          + "environment" = "dev"
+          + "layer"       = "cdc"
+          + "project"     = "friction"
+        }
+      + schema_id                      = (known after apply)
+
+      + provider_config (known after apply)
+    }
+
+  # databricks_schema.layer["gold"] will be created
+  + resource "databricks_schema" "layer" {
+      + catalog_name                   = "workspace"
+      + comment                        = "Point in time features, training sets, scores, decisions and metrics"
+      + enable_predictive_optimization = (known after apply)
+      + force_destroy                  = false
+      + id                             = (known after apply)
+      + metastore_id                   = (known after apply)
+      + name                           = "friction_dev_gold"
+      + owner                          = (known after apply)
+      + properties                     = {
+          + "environment" = "dev"
+          + "layer"       = "gold"
+          + "project"     = "friction"
+        }
+      + schema_id                      = (known after apply)
+
+      + provider_config (known after apply)
+    }
+
+  # databricks_schema.layer["ml"] will be created
+  + resource "databricks_schema" "layer" {
+      + catalog_name                   = "workspace"
+      + comment                        = "Models in Unity Catalog with champion and challenger aliases"
+      + enable_predictive_optimization = (known after apply)
+      + force_destroy                  = false
+      + id                             = (known after apply)
+      + metastore_id                   = (known after apply)
+      + name                           = "friction_dev_ml"
+      + owner                          = (known after apply)
+      + properties                     = {
+          + "environment" = "dev"
+          + "layer"       = "ml"
+          + "project"     = "friction"
+        }
+      + schema_id                      = (known after apply)
+
+      + provider_config (known after apply)
+    }
+
+  # databricks_schema.layer["ops"] will be created
+  + resource "databricks_schema" "layer" {
+      + catalog_name                   = "workspace"
+      + comment                        = "Run ledger, SLOs, drift, alerts, the compute ledger and entitlements"
+      + enable_predictive_optimization = (known after apply)
+      + force_destroy                  = false
+      + id                             = (known after apply)
+      + metastore_id                   = (known after apply)
+      + name                           = "friction_dev_ops"
+      + owner                          = (known after apply)
+      + properties                     = {
+          + "environment" = "dev"
+          + "layer"       = "ops"
+          + "project"     = "friction"
+        }
+      + schema_id                      = (known after apply)
+
+      + provider_config (known after apply)
+    }
+
+  # databricks_schema.layer["raw"] will be created
+  + resource "databricks_schema" "layer" {
+      + catalog_name                   = "workspace"
+      + comment                        = "Volumes only: the outbox upstream writes to, the landing zone, and exports"
+      + enable_predictive_optimization = (known after apply)
+      + force_destroy                  = false
+      + id                             = (known after apply)
+      + metastore_id                   = (known after apply)
+      + name                           = "friction_dev_raw"
+      + owner                          = (known after apply)
+      + properties                     = {
+          + "environment" = "dev"
+          + "layer"       = "raw"
+          + "project"     = "friction"
+        }
+      + schema_id                      = (known after apply)
+
+      + provider_config (known after apply)
+    }
+
+  # databricks_schema.layer["silver"] will be created
+  + resource "databricks_schema" "layer" {
+      + catalog_name                   = "workspace"
+      + comment                        = "Typed, conformed, deduplicated; the quarantine beside it"
+      + enable_predictive_optimization = (known after apply)
+      + force_destroy                  = false
+      + id                             = (known after apply)
+      + metastore_id                   = (known after apply)
+      + name                           = "friction_dev_silver"
+      + owner                          = (known after apply)
+      + properties                     = {
+          + "environment" = "dev"
+          + "layer"       = "silver"
+          + "project"     = "friction"
+        }
+      + schema_id                      = (known after apply)
+
+      + provider_config (known after apply)
+    }
+
+  # databricks_volume.raw["exports"] will be created
+  + resource "databricks_volume" "raw" {
+      + catalog_name = "workspace"
+      + comment      = "Scored sets and results the repository grades"
+      + id           = (known after apply)
+      + name         = "exports"
+      + owner        = (known after apply)
+      + schema_name  = "friction_dev_raw"
+      + volume_path  = (known after apply)
+      + volume_type  = "MANAGED"
+
+      + provider_config (known after apply)
+    }
+
+  # databricks_volume.raw["landing"] will be created
+  + resource "databricks_volume" "raw" {
+      + catalog_name = "workspace"
+      + comment      = "The landing zone Auto Loader reads"
+      + id           = (known after apply)
+      + name         = "landing"
+      + owner        = (known after apply)
+      + schema_name  = "friction_dev_raw"
+      + volume_path  = (known after apply)
+      + volume_type  = "MANAGED"
+
+      + provider_config (known after apply)
+    }
+
+  # databricks_volume.raw["outbox"] will be created
+  + resource "databricks_volume" "raw" {
+      + catalog_name = "workspace"
+      + comment      = "What upstream delivers, before it lands"
+      + id           = (known after apply)
+      + name         = "outbox"
+      + owner        = (known after apply)
+      + schema_name  = "friction_dev_raw"
+      + volume_path  = (known after apply)
+      + volume_type  = "MANAGED"
+
+      + provider_config (known after apply)
+    }
+
+Plan: 12 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + schemas = {
+      + bronze = "friction_dev_bronze"
+      + cdc    = "friction_dev_cdc"
+      + gold   = "friction_dev_gold"
+      + ml     = "friction_dev_ml"
+      + ops    = "friction_dev_ops"
+      + raw    = "friction_dev_raw"
+      + silver = "friction_dev_silver"
+    }
+  + volumes = {
+      + exports = "/Volumes/workspace/friction_dev_raw/exports"
+      + landing = "/Volumes/workspace/friction_dev_raw/landing"
+      + outbox  = "/Volumes/workspace/friction_dev_raw/outbox"
+    }
+[exit 0]
+$ terraform apply -input=false -no-color plan.bin
+databricks_schema.layer["ml"]: Creating...
+databricks_schema.layer["bronze"]: Creating...
+databricks_schema.layer["cdc"]: Creating...
+databricks_schema.layer["ops"]: Creating...
+databricks_schema.layer["raw"]: Creating...
+databricks_schema.layer["gold"]: Creating...
+databricks_schema.layer["silver"]: Creating...
+databricks_schema.layer["bronze"]: Creation complete after 1s [id=workspace.friction_dev_bronze]
+databricks_schema.layer["ml"]: Creation complete after 1s [id=workspace.friction_dev_ml]
+databricks_schema.layer["cdc"]: Creation complete after 1s [id=workspace.friction_dev_cdc]
+databricks_schema.layer["raw"]: Creation complete after 1s [id=workspace.friction_dev_raw]
+databricks_volume.raw["landing"]: Creating...
+databricks_volume.raw["outbox"]: Creating...
+databricks_volume.raw["exports"]: Creating...
+databricks_schema.layer["ops"]: Creation complete after 1s [id=workspace.friction_dev_ops]
+databricks_schema.layer["silver"]: Creation complete after 1s [id=workspace.friction_dev_silver]
+databricks_grant.silver_use: Creating...
+databricks_schema.layer["gold"]: Creation complete after 1s [id=workspace.friction_dev_gold]
+databricks_grant.gold_use: Creating...
+databricks_volume.raw["landing"]: Creation complete after 0s [id=workspace.friction_dev_raw.landing]
+databricks_volume.raw["outbox"]: Creation complete after 1s [id=workspace.friction_dev_raw.outbox]
+databricks_volume.raw["exports"]: Creation complete after 1s [id=workspace.friction_dev_raw.exports]
+
+Error: cannot create grant: Could not find principal with name users.
+
+  with databricks_grant.gold_use,
+  on main.tf line 84, in resource "databricks_grant" "gold_use":
+  84: resource "databricks_grant" "gold_use" {
+
+
+Error: cannot create grant: Could not find principal with name users.
+
+  with databricks_grant.silver_use,
+  on main.tf line 90, in resource "databricks_grant" "silver_use":
+  90: resource "databricks_grant" "silver_use" {
+
+[exit 1]

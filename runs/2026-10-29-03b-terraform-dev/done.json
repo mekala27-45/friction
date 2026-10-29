@@ -1,0 +1,22 @@
+{
+ "request": {
+  "id": "2026-10-29-03b-terraform-dev",
+  "kind": "terraform_apply",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "var_file": "env/dev.tfvars"
+  },
+  "note": "Retry of 2026-10-29-03-terraform-dev, which failed at init: lib/pq sends no server name, so the Neon endpoint now travels in the connection options."
+ },
+ "github_run_id": "40912489943",
+ "commit": "caa538bf9a1962002b35f279fc22de6c27fad44f",
+ "started_at": "2026-10-29T16:33:39+00:00",
+ "status": "failed",
+ "error": "RuntimeError: terraform apply exited 1",
+ "finished_at": "2026-10-29T16:33:43+00:00",
+ "files": {
+  "run.log": "4e68d70549650c079513e7c60213c478fb363d7322447ab04c4ada554f552642",
+  "terraform_plan.txt": "27718d86554d08edfceadf0e3e0ae6ad4ea3df424c87ec1183777355695cec80"
+ }
+}
