@@ -13,13 +13,6 @@ import pytest
 pytestmark = pytest.mark.spark
 
 
-@pytest.fixture(scope="module")
-def spark():  # type: ignore[no-untyped-def]
-    from friction_transforms import session
-
-    return session.get(cores=2, shuffle_partitions=4)
-
-
 def _bronze_payment(**over: str) -> dict[str, str | None]:
     row: dict[str, str | None] = {
         "txn_ref": "1", "user": "7", "card": "0", "year": "2019", "month": "12", "day": "30", "time": "10:15",
