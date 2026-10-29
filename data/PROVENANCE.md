@@ -1,5 +1,7 @@
 # Provenance
 
+> friction is a portfolio demonstration built on two published synthetic data sets (the IBM TabFormer card transactions, and the RBA login data set under CC BY 4.0) and a simulator with known truth. No real person, card or account appears in it, its numbers describe synthetic data, and it must not be used to decide anything about anyone. It runs on Databricks Free Edition, which is for non commercial use.
+
 Two published synthetic data sets and a simulator. No real person, card or account.
 
 ## IBM TabFormer card transactions

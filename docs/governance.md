@@ -1,5 +1,7 @@
 # Governance
 
+> friction is a portfolio demonstration built on two published synthetic data sets (the IBM TabFormer card transactions, and the RBA login data set under CC BY 4.0) and a simulator with known truth. No real person, card or account appears in it, its numbers describe synthetic data, and it must not be used to decide anything about anyone. It runs on Databricks Free Edition, which is for non commercial use.
+
 **Classification.** Every column in contracts/ carries a class: internal, sensitive or restricted.
 Restricted values (user, card, address and browser string identifiers) never leave bronze in clear:
 silver holds salted tokens, with the salt in a workspace secret scope. Sensitive values (country,
