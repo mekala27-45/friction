@@ -162,6 +162,8 @@ def profile_tabformer(spark: Any) -> dict[str, Any]:
     out["refunds_marked_fraud"] = spark.sql(
         "SELECT count(*) FROM tfp WHERE amount_dec < 0 AND is_fraud = 'Yes'"
     ).collect()[0][0]
+    # The strangest rows leave out the address, the browser string and the user id: the profile is
+    # committed, and the repository holds no raw address (scripts/scan_for_planted_identifiers.py).
     out["strangest"] = _rows(
         spark.sql(
             """
@@ -268,22 +270,24 @@ def profile_rba(spark: Any) -> dict[str, Any]:
         )
         """
     ).collect()[0][0]
+    # The strangest rows leave out the address, the browser string and the user id: the profile is
+    # committed, and the repository holds no raw address (scripts/scan_for_planted_identifiers.py).
     out["strangest"] = _rows(
         spark.sql(
             """
-            (SELECT 'largest round trip time' AS why, * EXCEPT (ts, rtt, asn_n) FROM rbap ORDER BY rtt DESC NULLS LAST, source_row LIMIT 2)
+            (SELECT 'largest round trip time' AS why, * EXCEPT (ts, rtt, asn_n, ip_address, user_agent, user_id) FROM rbap ORDER BY rtt DESC NULLS LAST, source_row LIMIT 2)
             UNION ALL
-            (SELECT 'smallest round trip time', * EXCEPT (ts, rtt, asn_n) FROM rbap WHERE rtt IS NOT NULL ORDER BY rtt, source_row LIMIT 1)
+            (SELECT 'smallest round trip time', * EXCEPT (ts, rtt, asn_n, ip_address, user_agent, user_id) FROM rbap WHERE rtt IS NOT NULL ORDER BY rtt, source_row LIMIT 1)
             UNION ALL
-            (SELECT 'empty device type', * EXCEPT (ts, rtt, asn_n) FROM rbap WHERE device_type = '' ORDER BY source_row LIMIT 2)
+            (SELECT 'empty device type', * EXCEPT (ts, rtt, asn_n, ip_address, user_agent, user_id) FROM rbap WHERE device_type = '' ORDER BY source_row LIMIT 2)
             UNION ALL
-            (SELECT 'unrealistic ASN', * EXCEPT (ts, rtt, asn_n) FROM rbap WHERE asn_n >= 500000 ORDER BY source_row LIMIT 1)
+            (SELECT 'unrealistic ASN', * EXCEPT (ts, rtt, asn_n, ip_address, user_agent, user_id) FROM rbap WHERE asn_n >= 500000 ORDER BY source_row LIMIT 1)
             UNION ALL
-            (SELECT 'account takeover', * EXCEPT (ts, rtt, asn_n) FROM rbap WHERE is_account_takeover = 'True' ORDER BY source_row LIMIT 2)
+            (SELECT 'account takeover', * EXCEPT (ts, rtt, asn_n, ip_address, user_agent, user_id) FROM rbap WHERE is_account_takeover = 'True' ORDER BY source_row LIMIT 2)
             UNION ALL
-            (SELECT 'bot device', * EXCEPT (ts, rtt, asn_n) FROM rbap WHERE device_type = 'bot' ORDER BY source_row LIMIT 1)
+            (SELECT 'bot device', * EXCEPT (ts, rtt, asn_n, ip_address, user_agent, user_id) FROM rbap WHERE device_type = 'bot' ORDER BY source_row LIMIT 1)
             UNION ALL
-            (SELECT 'last row of the file', * EXCEPT (ts, rtt, asn_n) FROM rbap ORDER BY source_row DESC LIMIT 1)
+            (SELECT 'last row of the file', * EXCEPT (ts, rtt, asn_n, ip_address, user_agent, user_id) FROM rbap ORDER BY source_row DESC LIMIT 1)
             """
         )
     )
