@@ -20,8 +20,13 @@ METADATA = frozenset(
 PRIME = 2305843009213693951  # 2**61 - 1
 
 
+# The validity of a version in an SCD type 2 history is content: when a card generation or a label
+# took effect is what the as of features read.
+VALIDITY = frozenset({"__START_AT", "__END_AT"})
+
+
 def content_columns(df: DataFrame) -> list[str]:
-    return sorted(c for c in df.columns if c not in METADATA and not c.startswith("_"))
+    return sorted(c for c in df.columns if c in VALIDITY or (c not in METADATA and not c.startswith("_")))
 
 
 def _row_hash(df: DataFrame, cols: list[str]) -> Column:

@@ -359,3 +359,15 @@ def test_digest_sums_many_rows_without_overflow(spark) -> None:  # type: ignore[
     df = spark.range(5000).selectExpr("id as k", "cast(id * 7 as string) as v")
     got = table_digest(df)
     assert got["rows"] == 5000 and got == table_digest(df.orderBy(df.k.desc()))
+
+
+def test_history_digest_reads_the_validity_columns(spark) -> None:  # type: ignore[no-untyped-def]
+    from datetime import datetime
+
+    from friction_transforms.digests import content_columns, table_digest
+
+    schema = "k long, __START_AT struct<changed_at: timestamp>, _rescued_data string"
+    a = spark.createDataFrame([(1, (datetime(2020, 1, 1),), None)], schema)
+    b = spark.createDataFrame([(1, (datetime(2020, 1, 2),), None)], schema)
+    assert content_columns(a) == ["__START_AT", "k"]
+    assert table_digest(a) != table_digest(b)
