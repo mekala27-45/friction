@@ -51,14 +51,16 @@ jobs:
           uv run ruff format --check .
       - name: Types
         run: uv run mypy
-      - name: Tests with coverage
-        run: uv run pytest --cov --cov-report=term -p no:warnings
-      - name: Every dependency the tests skip on was present
-        run: uv run python scripts/check_test_dependencies.py
       - name: The portable pipeline over the fixture slice
         run: |
           uv run python scripts/run_portable.py --landing data/fixtures/landing --out data/lake/fixture
           uv run python scripts/run_features.py --lake data/lake/fixture
+      - name: Tests with coverage
+        run: uv run pytest --cov --cov-report=term -p no:warnings
+      - name: Notebooks, each with its dead end
+        run: uv run pytest --nbmake notebooks -p no:warnings
+      - name: Every dependency the tests skip on was present
+        run: uv run python scripts/check_test_dependencies.py
       - name: Gates
         run: |
           uv run python scripts/check_no_em_dash.py
