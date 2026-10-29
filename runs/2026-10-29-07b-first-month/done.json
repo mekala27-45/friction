@@ -1,0 +1,27 @@
+{
+ "request": {
+  "id": "2026-10-29-07b-first-month",
+  "kind": "bundle_run",
+  "target": "dev",
+  "job": "backfill",
+  "params": {
+   "job_params": {
+    "desk": "payments",
+    "through": "1",
+    "from": "1",
+    "tag": "first-month"
+   },
+   "export_from": "/Volumes/workspace/friction_dev_raw/exports/first-month"
+  },
+  "note": "Retry of 2026-10-29-07-first-month. Land and the pipeline update succeeded; the features task failed unpickling its state machines (ModuleNotFoundError: dbruntime)."
+ },
+ "github_run_id": "40920811613",
+ "commit": "b47371c62749cefed3f63bac238c62b27438fc6e",
+ "started_at": "2026-10-29T17:26:28+00:00",
+ "status": "failed",
+ "error": "RuntimeError: databricks bundle exited 1",
+ "finished_at": "2026-10-29T17:33:06+00:00",
+ "files": {
+  "run.log": "b2cb4c2733c112e3d44bf7bd34aebaf38630d15c42f84b240ac08658ba7af047"
+ }
+}

@@ -1,0 +1,22 @@
+{
+ "request": {
+  "id": "2026-10-29-07a-deploy-dev",
+  "kind": "bundle_deploy",
+  "target": "dev",
+  "job": null,
+  "params": {},
+  "note": "Deploy the table digest that sums in a decimal, so the export of the first month does not overflow."
+ },
+ "github_run_id": "40920811613",
+ "commit": "b47371c62749cefed3f63bac238c62b27438fc6e",
+ "started_at": "2026-10-29T17:26:23+00:00",
+ "result": {
+  "deployed": "dev"
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T17:26:28+00:00",
+ "files": {
+  "bundle_summary.json": "7389602f94617e41b726359c668b7b12b5955ba4ebc6b5eca057d8c639c3295c",
+  "run.log": "308a49fa168c991308c058d245b484780da6217cbd1770d099a5867a8a71805e"
+ }
+}
