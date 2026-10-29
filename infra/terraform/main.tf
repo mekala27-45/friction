@@ -37,8 +37,8 @@ variable "catalog" {
 
 variable "reader_group" {
   type        = string
-  default     = "users"
-  description = "The group that reads gold through masks and the row filter"
+  default     = "account users"
+  description = "The account level group that reads gold through masks and the row filter; Unity Catalog grants take account principals only, so the workspace group users is refused"
 }
 
 locals {
