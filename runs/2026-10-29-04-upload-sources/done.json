@@ -1,0 +1,21 @@
+{
+ "request": {
+  "id": "2026-10-29-04-upload-sources",
+  "kind": "upload_sources",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "outbox_volume": "/Volumes/workspace/friction_dev_raw/outbox"
+  },
+  "note": "Fetch both sources, regenerate every drop and feed, refuse unless the digests equal data/replay.lock.json, upload to the outbox volume."
+ },
+ "github_run_id": "40912996608",
+ "commit": "6ff272ff49bf13029f81eb458419cee36ddd2fd8",
+ "started_at": "2026-10-29T16:36:33+00:00",
+ "status": "failed",
+ "error": "RuntimeError: git diff exited 1",
+ "finished_at": "2026-10-29T16:43:00+00:00",
+ "files": {
+  "run.log": "6b928bd0afe27f07d0ce9d03230c812d458e2916f22fb2c85a303ade353412ff"
+ }
+}

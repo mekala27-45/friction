@@ -1,0 +1,23 @@
+databricks_grant.gold_use: Creating...
+databricks_grant.silver_use: Creating...
+databricks_grant.silver_use: Creation complete after 0s [id=schema/workspace.friction_dev_silver/account users]
+databricks_grant.gold_use: Creation complete after 0s [id=schema/workspace.friction_dev_gold/account users]
+
+Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+schemas = {
+  "bronze" = "friction_dev_bronze"
+  "cdc" = "friction_dev_cdc"
+  "gold" = "friction_dev_gold"
+  "ml" = "friction_dev_ml"
+  "ops" = "friction_dev_ops"
+  "raw" = "friction_dev_raw"
+  "silver" = "friction_dev_silver"
+}
+volumes = {
+  "exports" = "/Volumes/workspace/friction_dev_raw/exports"
+  "landing" = "/Volumes/workspace/friction_dev_raw/landing"
+  "outbox" = "/Volumes/workspace/friction_dev_raw/outbox"
+}

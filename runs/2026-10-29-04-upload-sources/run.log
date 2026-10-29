@@ -1,0 +1,19 @@
+$ /home/runner/work/friction/friction/.venv/bin/python scripts/fetch_sources.py
+tabformer: verified (https://media.githubusercontent.com/media/IBM/TabFormer/main/data/credit_card/transactions.tgz)
+rba: verified (https://github.com/das-group/rba-dataset/releases/download/v1.0.0/rba-dataset.zip)
+[exit 0]
+$ /home/runner/work/friction/friction/.venv/bin/python scripts/stage_sources.py --drop-csv
+{'source': 'tabformer', 'rows': 24386900, 'files': 6}
+{'source': 'rba', 'rows': 31269264, 'files': 8}
+[exit 0]
+$ /home/runner/work/friction/friction/.venv/bin/python scripts/replay.py --all
+payments: 24386900 rows in 439 drops, 91 s
+logins: 31269264 rows in 102 drops, 157 s
+feeds: 8 s
+/home/runner/work/friction/friction/scripts/replay.py:94: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  data_end = pd.Timestamp(pay["last_day"]) + pd.Timedelta(days=1)
+[exit 0]
+$ git diff --exit-code --stat data/replay.lock.json
+ data/replay.lock.json | 28 ++++++++++++++--------------
+ 1 file changed, 14 insertions(+), 14 deletions(-)
+[exit 1]

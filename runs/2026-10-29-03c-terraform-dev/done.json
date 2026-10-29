@@ -1,0 +1,25 @@
+{
+ "request": {
+  "id": "2026-10-29-03c-terraform-dev",
+  "kind": "terraform_apply",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "var_file": "env/dev.tfvars"
+  },
+  "note": "Retry of 2026-10-29-03b-terraform-dev. The schemas and volumes were created; the two grants failed because the workspace group users is not an account principal. The reader group is now account users."
+ },
+ "github_run_id": "40912996608",
+ "commit": "6ff272ff49bf13029f81eb458419cee36ddd2fd8",
+ "started_at": "2026-10-29T16:36:28+00:00",
+ "result": {
+  "terraform": "terraform_apply"
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T16:36:33+00:00",
+ "files": {
+  "run.log": "344b0dd7440f81934969783a00757bf0bde99ac547f4cf67a635bf7982001e97",
+  "terraform_apply.txt": "e416315d98e12ec494082b393291233314763550674778b5a587d3d2005f3a12",
+  "terraform_plan.txt": "3a0c95d04665cdf7b9e3a3ddca05cd7e146d2a6b531267cdb0450006aaea811f"
+ }
+}
