@@ -1,0 +1,32 @@
+{
+ "_note": "What the two sources were when this build fetched them. Every fetch is held to these digests. The archive digest is the one that matters for a fetch; the member digest is what the staging step checks before it reads a row.",
+ "tabformer": {
+  "title": "IBM TabFormer synthetic credit card transactions",
+  "archive": "transactions.tgz",
+  "urls": [
+   "https://media.githubusercontent.com/media/IBM/TabFormer/main/data/credit_card/transactions.tgz",
+   "https://ibm.box.com/v/tabformer-data"
+  ],
+  "lfs_pointer": {"oid": "sha256:e9f589a0958f40d60f81b1a2e8428db86e00c05755caf44fb055827976c0efa2", "size": 278576638},
+  "sha256": "e9f589a0958f40d60f81b1a2e8428db86e00c05755caf44fb055827976c0efa2",
+  "size": 278576638,
+  "member": "card_transaction.v1.csv",
+  "member_sha256": "68c438319cf27614d5564b7b520814036f0d7e087b3a17d8c15081848e0f02de",
+  "member_size": 2354626737,
+  "licence": "Apache-2.0 (repository); the data carries no separate terms, treated as research use"
+ },
+ "rba": {
+  "title": "Login Data Set for Risk-Based Authentication (das-group)",
+  "archive": "rba-dataset.zip",
+  "urls": [
+   "https://github.com/das-group/rba-dataset/releases/download/v1.0.0/rba-dataset.zip"
+  ],
+  "release": "v1.0.0",
+  "sha256": "ca1d974e97aebfb30878a613f4ca5c793860a98ba2acb5185c9bc610d7432a33",
+  "size": 1093700330,
+  "member": "rba-dataset.csv",
+  "member_sha256": "001f3589595821519b53428aee656b4458e43d8f5b4b9beb6ec2bed8f2209067",
+  "member_size": 9052907531,
+  "licence": "CC-BY-4.0; cite Wiefling et al., ACM TOPS 2022, doi 10.1145/3546069"
+ }
+}

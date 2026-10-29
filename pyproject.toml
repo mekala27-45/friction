@@ -1,0 +1,115 @@
+[project]
+name = "friction"
+version = "0.1.0"
+description = "A fraud and identity risk lakehouse on Databricks Free Edition, graded on what it costs good customers"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = "Apache-2.0"
+authors = [{ name = "Ajay Mekala" }]
+dependencies = [
+  "friction-core",
+  "friction-transforms",
+  "friction-features",
+  "friction-simulator",
+  "friction-models",
+  "friction-evaluation",
+  "friction-policy",
+  "friction-reasons",
+  "friction-api",
+  "friction-render",
+  "friction-workspace",
+  "typer>=0.15",
+]
+
+[project.optional-dependencies]
+# Local Spark through a Spark Connect session, the same client the serverless workspace speaks.
+spark = [
+  "pyspark[connect,pipelines]>=4.2.1,<4.3",
+]
+# Only GitHub Actions installs this; it is the one machine that holds the workspace token.
+workspace = [
+  "databricks-sdk>=0.157",
+]
+
+[dependency-groups]
+dev = [
+  "pytest>=8.3",
+  "pytest-cov>=6.0",
+  "hypothesis>=6.120",
+  "ruff>=0.11",
+  "mypy>=1.15",
+  "types-PyYAML",
+  "pandas-stubs",
+  "chispa>=0.10",
+  "nbmake>=1.5",
+  "nbformat>=5.10",
+  "nbconvert>=7.16",
+  "ipykernel>=6.29",
+  "matplotlib>=3.9",
+  "skills-ref>=0.1",
+]
+
+[tool.uv]
+default-groups = ["dev"]
+
+[tool.uv.workspace]
+members = ["packages/*"]
+
+[tool.uv.sources]
+friction-core = { workspace = true }
+friction-transforms = { workspace = true }
+friction-features = { workspace = true }
+friction-simulator = { workspace = true }
+friction-models = { workspace = true }
+friction-evaluation = { workspace = true }
+friction-policy = { workspace = true }
+friction-reasons = { workspace = true }
+friction-api = { workspace = true }
+friction-render = { workspace = true }
+friction-workspace = { workspace = true }
+
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["scripts"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+extend-exclude = ["web", "notebooks", "data"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF", "N", "W"]
+ignore = ["RUF001", "RUF002", "RUF003", "N818", "N803", "N806"]
+
+[tool.ruff.lint.per-file-ignores]
+"scripts/*" = ["E402"]
+"tests/*" = ["E402"]
+"pipelines/*" = ["E402"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+packages = ["friction_core", "friction_transforms", "friction_features", "friction_simulator", "friction_models", "friction_evaluation", "friction_policy", "friction_reasons", "friction_api", "friction_render", "friction_workspace"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+  "spark: needs pyspark and a JVM for a local Spark Connect session",
+  "postgres: needs DATABASE_URL pointing at a Postgres",
+  "browser: needs Playwright and a browser",
+  "loadtest: needs a running server",
+  "fullsize: reads the full source files from data/raw",
+]
+addopts = "-q"
+
+[tool.coverage.run]
+source = ["packages"]
+omit = ["*/tests/*"]
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = false
