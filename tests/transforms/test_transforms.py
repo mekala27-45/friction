@@ -308,3 +308,36 @@ def test_reader_rescues_a_renamed_column(spark, tmp_path: Path) -> None:  # type
     }
     assert rows["1"]["mcc"] == "a" and rows["1"]["_rescued_data"] is None
     assert rows["2"]["mcc"] is None and json.loads(rows["2"]["_rescued_data"]) == {"merchant_category": "b"}
+
+
+def test_reconcile_stats_at_every_grain(spark) -> None:  # type: ignore[no-untyped-def]
+    from datetime import date
+
+    from friction_transforms.digests import reconcile_stats
+
+    pay = spark.createDataFrame(
+        [(1, "a1", date(2019, 3, 1), 500, False), (2, "a1", date(2019, 3, 2), -500, True)],
+        "txn_ref bigint, account_key string, event_date date, amount_cents bigint, is_refund boolean",
+    )
+    log = spark.createDataFrame(
+        [(7, "u1", date(2020, 2, 3), True, False)],
+        "login_ref bigint, user_key string, event_date date, success boolean, is_attack_ip boolean",
+    )
+    feats = spark.createDataFrame([(1, 0.5), (2, 1.5)], "txn_ref bigint, amount_z double")
+    hist = spark.createDataFrame([(1, True)], "event_ref bigint, is_fraud boolean")
+    quarantine = spark.createDataFrame([("payments", "P_LATE")], "desk string, rule string")
+    out = reconcile_stats(
+        {
+            "payments_silver": pay,
+            "logins_silver": log,
+            "payments_features": feats,
+            "labels_payments_history": hist,
+            "quarantine": quarantine,
+        }
+    )
+    assert out["payments"]["desk"] == [{"desk": "payments", "rows": 2, "keys": 2, "amount_cents": 0, "refunds": 1}]
+    assert [r["day"] for r in out["payments"]["day"]] == ["2019-03-01", "2019-03-02"]
+    assert out["logins"]["month"][0]["successes"] == 1
+    assert out["feature_sums"]["payments_features"] == {"rows": 2.0, "amount_z": 2.0}
+    assert out["histories"]["labels_payments_history"]["rows"] == 1
+    assert out["quarantine"] == [{"desk": "payments", "rule": "P_LATE", "count": 1}]
