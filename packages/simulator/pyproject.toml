@@ -1,0 +1,19 @@
+[project]
+name = "friction-simulator"
+version = "0.1.0"
+description = "Chargeback lag, the card lifecycle CDC feed, lateness, the replay splitter and the RBA attackers"
+requires-python = ">=3.12,<3.13"
+license = "Apache-2.0"
+dependencies = [
+  "friction-core",
+  "numpy>=2.0",
+  "pandas>=2.2",
+  "pyarrow>=18.0",
+]
+
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/friction_simulator"]

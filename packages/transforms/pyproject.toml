@@ -1,0 +1,16 @@
+[project]
+name = "friction-transforms"
+version = "0.1.0"
+description = "Pure DataFrame functions for bronze, silver, CDC and gold, and the plain SCD2 reference"
+requires-python = ">=3.12,<3.13"
+license = "Apache-2.0"
+dependencies = [
+  "friction-core",
+]
+
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/friction_transforms"]

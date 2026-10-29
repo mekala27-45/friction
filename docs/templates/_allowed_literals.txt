@@ -1,0 +1,41 @@
+# Literals a template may type outside an expression. Everything else comes from the manifest.
+# Versions and identifiers, not results.
+Spark 4.2
+Spark 4.1
+SR 11-7
+SCD type 2
+SCD2
+Apache 2.0
+CC BY 4.0
+ICASSP 2021
+ACM TOPS 2022
+NDSS 2016
+(2016)
+(2019)
+(2021)
+(2022)
+10.1145/3546069
+10.14722/ndss.2016.23240
+2011.01843
+1910.03033
+2206.15139
+10.0.0.0/8
+/16
+v0.1.0
+3.12
+1,000
+per 1,000
+1e-9
+day 40
+Day 3
+Day 9
+Day 12
+Day 13
+Day 15
+Day 16
+Day 17
+p50
+p99
+01
+02
+03
