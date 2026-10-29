@@ -1,0 +1,25 @@
+$ databricks bundle validate -t dev --var catalog_mode=prefix
+Name: friction
+Target: dev
+Workspace:
+  User: mekalaajayk@gmail.com
+  Path: /Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev
+
+Found 4 warnings
+Warning: Pattern data/lake/** does not match any files
+  at sync.exclude[2]
+  in databricks.yml:41:7
+
+Warning: Pattern data/work/** does not match any files
+  at sync.exclude[3]
+  in databricks.yml:42:7
+
+Warning: Pattern data/raw/** does not match any files
+  at sync.exclude[0]
+  in databricks.yml:39:7
+
+Warning: Pattern data/landing/** does not match any files
+  at sync.exclude[1]
+  in databricks.yml:40:7
+
+[exit 0]
