@@ -1,0 +1,31 @@
+{
+ "request": {
+  "id": "2026-10-29-07d-first-month",
+  "kind": "bundle_run",
+  "target": "dev",
+  "job": "backfill",
+  "params": {
+   "job_params": {
+    "desk": "payments",
+    "through": "1",
+    "from": "1",
+    "tag": "first-month"
+   },
+   "export_from": "/Volumes/workspace/friction_dev_raw/exports/first-month"
+  },
+  "note": "Retry of 2026-10-29-07b-first-month, whose features task ran out of memory on the unflagged unknown account bucket (720,476 attempts in the first month)."
+ },
+ "github_run_id": "40924251985",
+ "commit": "11ccc47894b7da80c3af55d4ba10f527a8c8f306",
+ "started_at": "2026-10-29T17:48:03+00:00",
+ "result": {
+  "job": "backfill",
+  "wall_seconds": 432.0
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T17:55:15+00:00",
+ "files": {
+  "export/export.json": "2f533c09fef420ebeab213481d1b7cccd105913166f2694cc7f408db58d447b9",
+  "run.log": "be69a1911cabdf673d926b94720ae28a3f8308fa699f4a1877779ca862e83c83"
+ }
+}

@@ -1,0 +1,44 @@
+{
+ "request": {
+  "id": "2026-10-29-08b-portable-first-month",
+  "kind": "portable",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "outbox_volume": "/Volumes/workspace/friction_dev_raw/outbox",
+   "drops": {
+    "payments": [
+     1,
+     1
+    ],
+    "logins": [
+     1,
+     1
+    ]
+   }
+  },
+  "note": "Retry of 2026-10-29-08-portable-first-month. The pipeline and features ran; the summary overflowed a 64 bit sum in the table digest."
+ },
+ "github_run_id": "40924251985",
+ "commit": "11ccc47894b7da80c3af55d4ba10f527a8c8f306",
+ "started_at": "2026-10-29T17:55:15+00:00",
+ "result": {
+  "drops": {
+   "payments": [
+    1,
+    1
+   ],
+   "logins": [
+    1,
+    1
+   ]
+  },
+  "wall_seconds": 152.8
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T17:57:56+00:00",
+ "files": {
+  "run.log": "fb757f6ce132d24d73b103ba49a8a8f67a9cf5540c781a10f849ce45a4348afe",
+  "summary.json": "d276f304dd349320e2eb2bec154b644695c43ab355e68edb800f405c61fc081e"
+ }
+}
