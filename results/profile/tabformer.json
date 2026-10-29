@@ -1,0 +1,960 @@
+{
+ "source": "tabformer",
+ "rows": 24386900,
+ "empties": {
+  "user": 0,
+  "card": 0,
+  "year": 0,
+  "month": 0,
+  "day": 0,
+  "time": 0,
+  "amount": 0,
+  "use_chip": 0,
+  "merchant_name": 0,
+  "merchant_city": 0,
+  "merchant_state": 2720821,
+  "zip": 2878135,
+  "mcc": 0,
+  "errors": 23998469,
+  "is_fraud": 0
+ },
+ "distinct_approx": {
+  "user": 2009,
+  "card": 9,
+  "year": 30,
+  "month": 12,
+  "day": 31,
+  "time": 1443,
+  "amount": 99309,
+  "use_chip": 3,
+  "merchant_name": 99866,
+  "merchant_city": 13531,
+  "merchant_state": 223,
+  "zip": 27278,
+  "mcc": 109,
+  "errors": 24,
+  "is_fraud": 2
+ },
+ "exact": {
+  "users": 2000,
+  "cards": 6139,
+  "year_min": 1991,
+  "year_max": 2020,
+  "mcc_min": 1711,
+  "mcc_max": 9402,
+  "card_slot_min": 0,
+  "card_slot_max": 8
+ },
+ "amounts": {
+  "unparsed": 0,
+  "negative": 1244683,
+  "zero": 20213,
+  "min": "-500.00",
+  "max": "12390.50",
+  "median": "30.13",
+  "p99": "316.23"
+ },
+ "time": {
+  "unparsed": 0,
+  "first": "1991-01-02 02:10:00",
+  "last": "2020-02-28 18:58:00"
+ },
+ "use_chip": [
+  {
+   "use_chip": "Swipe Transaction",
+   "n": 15386082
+  },
+  {
+   "use_chip": "Chip Transaction",
+   "n": 6287598
+  },
+  {
+   "use_chip": "Online Transaction",
+   "n": 2713220
+  }
+ ],
+ "is_fraud": [
+  {
+   "is_fraud": "No",
+   "n": 24357143
+  },
+  {
+   "is_fraud": "Yes",
+   "n": 29757
+  }
+ ],
+ "errors": [
+  {
+   "errors": "",
+   "n": 23998469
+  },
+  {
+   "errors": "Insufficient Balance,",
+   "n": 242783
+  },
+  {
+   "errors": "Bad PIN,",
+   "n": 58918
+  },
+  {
+   "errors": "Technical Glitch,",
+   "n": 48157
+  },
+  {
+   "errors": "Bad Card Number,",
+   "n": 13321
+  },
+  {
+   "errors": "Bad CVV,",
+   "n": 10740
+  },
+  {
+   "errors": "Bad Expiration,",
+   "n": 10716
+  },
+  {
+   "errors": "Bad Zipcode,",
+   "n": 2079
+  },
+  {
+   "errors": "Bad PIN,Insufficient Balance,",
+   "n": 581
+  },
+  {
+   "errors": "Insufficient Balance,Technical Glitch,",
+   "n": 457
+  },
+  {
+   "errors": "Bad PIN,Technical Glitch,",
+   "n": 128
+  },
+  {
+   "errors": "Bad Card Number,Insufficient Balance,",
+   "n": 122
+  },
+  {
+   "errors": "Bad CVV,Insufficient Balance,",
+   "n": 89
+  },
+  {
+   "errors": "Bad Expiration,Insufficient Balance,",
+   "n": 78
+  },
+  {
+   "errors": "Bad Card Number,Bad CVV,",
+   "n": 60
+  },
+  {
+   "errors": "Bad Card Number,Bad Expiration,",
+   "n": 54
+  },
+  {
+   "errors": "Bad Expiration,Bad CVV,",
+   "n": 47
+  },
+  {
+   "errors": "Bad Expiration,Technical Glitch,",
+   "n": 32
+  },
+  {
+   "errors": "Bad Card Number,Technical Glitch,",
+   "n": 25
+  },
+  {
+   "errors": "Bad CVV,Technical Glitch,",
+   "n": 21
+  },
+  {
+   "errors": "Bad Zipcode,Insufficient Balance,",
+   "n": 13
+  },
+  {
+   "errors": "Bad Zipcode,Technical Glitch,",
+   "n": 7
+  },
+  {
+   "errors": "Bad Card Number,Bad Expiration,Insufficient Balance,",
+   "n": 2
+  },
+  {
+   "errors": "Bad Card Number,Bad Expiration,Technical Glitch,",
+   "n": 1
+  }
+ ],
+ "merchant_state_online": [
+  {
+   "use_chip": "Online Transaction",
+   "merchant_city": " ONLINE",
+   "state_empty": true,
+   "zip_empty": true,
+   "n": 2713220
+  }
+ ],
+ "state_values": 224,
+ "non_us_states": [
+  {
+   "merchant_state": "Mexico",
+   "n": 47152
+  },
+  {
+   "merchant_state": "Canada",
+   "n": 20148
+  },
+  {
+   "merchant_state": "Italy",
+   "n": 8730
+  },
+  {
+   "merchant_state": "United Kingdom",
+   "n": 8055
+  },
+  {
+   "merchant_state": "France",
+   "n": 5311
+  },
+  {
+   "merchant_state": "Germany",
+   "n": 5263
+  },
+  {
+   "merchant_state": "China",
+   "n": 4996
+  },
+  {
+   "merchant_state": "Japan",
+   "n": 3955
+  },
+  {
+   "merchant_state": "India",
+   "n": 3482
+  },
+  {
+   "merchant_state": "Spain",
+   "n": 3203
+  },
+  {
+   "merchant_state": "Dominican Republic",
+   "n": 2754
+  },
+  {
+   "merchant_state": "Netherlands",
+   "n": 2616
+  },
+  {
+   "merchant_state": "Jamaica",
+   "n": 2184
+  },
+  {
+   "merchant_state": "South Korea",
+   "n": 2178
+  },
+  {
+   "merchant_state": "Switzerland",
+   "n": 1947
+  }
+ ],
+ "zip_shapes": [
+  {
+   "shape": "float text",
+   "n": 21508765
+  },
+  {
+   "shape": "empty",
+   "n": 2878135
+  }
+ ],
+ "fraud_by_year": [
+  {
+   "year": "1991",
+   "n": 1585,
+   "fraud": 0,
+   "rate": 0.0
+  },
+  {
+   "year": "1992",
+   "n": 5134,
+   "fraud": 0,
+   "rate": 0.0
+  },
+  {
+   "year": "1993",
+   "n": 8378,
+   "fraud": 0,
+   "rate": 0.0
+  },
+  {
+   "year": "1994",
+   "n": 14316,
+   "fraud": 0,
+   "rate": 0.0
+  },
+  {
+   "year": "1995",
+   "n": 20928,
+   "fraud": 0,
+   "rate": 0.0
+  },
+  {
+   "year": "1996",
+   "n": 29945,
+   "fraud": 10,
+   "rate": 0.000334
+  },
+  {
+   "year": "1997",
+   "n": 49753,
+   "fraud": 32,
+   "rate": 0.000643
+  },
+  {
+   "year": "1998",
+   "n": 78345,
+   "fraud": 32,
+   "rate": 0.000408
+  },
+  {
+   "year": "1999",
+   "n": 118250,
+   "fraud": 24,
+   "rate": 0.000203
+  },
+  {
+   "year": "2000",
+   "n": 177729,
+   "fraud": 171,
+   "rate": 0.000962
+  },
+  {
+   "year": "2001",
+   "n": 257998,
+   "fraud": 354,
+   "rate": 0.001372
+  },
+  {
+   "year": "2002",
+   "n": 350732,
+   "fraud": 139,
+   "rate": 0.000396
+  },
+  {
+   "year": "2003",
+   "n": 466408,
+   "fraud": 311,
+   "rate": 0.000667
+  },
+  {
+   "year": "2004",
+   "n": 597003,
+   "fraud": 620,
+   "rate": 0.001039
+  },
+  {
+   "year": "2005",
+   "n": 746653,
+   "fraud": 229,
+   "rate": 0.000307
+  },
+  {
+   "year": "2006",
+   "n": 908793,
+   "fraud": 1118,
+   "rate": 0.00123
+  },
+  {
+   "year": "2007",
+   "n": 1064483,
+   "fraud": 1881,
+   "rate": 0.001767
+  },
+  {
+   "year": "2008",
+   "n": 1223460,
+   "fraud": 3710,
+   "rate": 0.003032
+  },
+  {
+   "year": "2009",
+   "n": 1355434,
+   "fraud": 1140,
+   "rate": 0.000841
+  },
+  {
+   "year": "2010",
+   "n": 1491225,
+   "fraud": 3835,
+   "rate": 0.002572
+  },
+  {
+   "year": "2011",
+   "n": 1570551,
+   "fraud": 55,
+   "rate": 3.5e-05
+  },
+  {
+   "year": "2012",
+   "n": 1610829,
+   "fraud": 1333,
+   "rate": 0.000828
+  },
+  {
+   "year": "2013",
+   "n": 1650917,
+   "fraud": 2018,
+   "rate": 0.001222
+  },
+  {
+   "year": "2014",
+   "n": 1672343,
+   "fraud": 1052,
+   "rate": 0.000629
+  },
+  {
+   "year": "2015",
+   "n": 1701371,
+   "fraud": 3281,
+   "rate": 0.001928
+  },
+  {
+   "year": "2016",
+   "n": 1708924,
+   "fraud": 3579,
+   "rate": 0.002094
+  },
+  {
+   "year": "2017",
+   "n": 1723360,
+   "fraud": 255,
+   "rate": 0.000148
+  },
+  {
+   "year": "2018",
+   "n": 1721615,
+   "fraud": 2491,
+   "rate": 0.001447
+  },
+  {
+   "year": "2019",
+   "n": 1723938,
+   "fraud": 2087,
+   "rate": 0.001211
+  },
+  {
+   "year": "2020",
+   "n": 336500,
+   "fraud": 0,
+   "rate": 0.0
+  }
+ ],
+ "fraud_by_month_last_48": [
+  {
+   "month": "2020-02",
+   "n": 165769,
+   "fraud": 0,
+   "fraud_usd": "0.00"
+  },
+  {
+   "month": "2020-01",
+   "n": 170731,
+   "fraud": 0,
+   "fraud_usd": "0.00"
+  },
+  {
+   "month": "2019-12",
+   "n": 146579,
+   "fraud": 0,
+   "fraud_usd": "0.00"
+  },
+  {
+   "month": "2019-11",
+   "n": 141946,
+   "fraud": 0,
+   "fraud_usd": "0.00"
+  },
+  {
+   "month": "2019-10",
+   "n": 145074,
+   "fraud": 275,
+   "fraud_usd": "25527.26"
+  },
+  {
+   "month": "2019-09",
+   "n": 141744,
+   "fraud": 142,
+   "fraud_usd": "11915.02"
+  },
+  {
+   "month": "2019-08",
+   "n": 147139,
+   "fraud": 247,
+   "fraud_usd": "19239.44"
+  },
+  {
+   "month": "2019-07",
+   "n": 146599,
+   "fraud": 156,
+   "fraud_usd": "8689.95"
+  },
+  {
+   "month": "2019-06",
+   "n": 142399,
+   "fraud": 215,
+   "fraud_usd": "16088.84"
+  },
+  {
+   "month": "2019-05",
+   "n": 145648,
+   "fraud": 260,
+   "fraud_usd": "24476.54"
+  },
+  {
+   "month": "2019-04",
+   "n": 141409,
+   "fraud": 218,
+   "fraud_usd": "17952.99"
+  },
+  {
+   "month": "2019-03",
+   "n": 147202,
+   "fraud": 215,
+   "fraud_usd": "15439.81"
+  },
+  {
+   "month": "2019-02",
+   "n": 132102,
+   "fraud": 156,
+   "fraud_usd": "12434.30"
+  },
+  {
+   "month": "2019-01",
+   "n": 146097,
+   "fraud": 203,
+   "fraud_usd": "13990.71"
+  },
+  {
+   "month": "2018-12",
+   "n": 146263,
+   "fraud": 229,
+   "fraud_usd": "20807.01"
+  },
+  {
+   "month": "2018-11",
+   "n": 141843,
+   "fraud": 300,
+   "fraud_usd": "21959.78"
+  },
+  {
+   "month": "2018-10",
+   "n": 145473,
+   "fraud": 181,
+   "fraud_usd": "14704.44"
+  },
+  {
+   "month": "2018-09",
+   "n": 141557,
+   "fraud": 262,
+   "fraud_usd": "19630.48"
+  },
+  {
+   "month": "2018-08",
+   "n": 146983,
+   "fraud": 216,
+   "fraud_usd": "15944.12"
+  },
+  {
+   "month": "2018-07",
+   "n": 146638,
+   "fraud": 156,
+   "fraud_usd": "12283.02"
+  },
+  {
+   "month": "2018-06",
+   "n": 141827,
+   "fraud": 154,
+   "fraud_usd": "11888.77"
+  },
+  {
+   "month": "2018-05",
+   "n": 145438,
+   "fraud": 167,
+   "fraud_usd": "14438.04"
+  },
+  {
+   "month": "2018-04",
+   "n": 141688,
+   "fraud": 269,
+   "fraud_usd": "19439.23"
+  },
+  {
+   "month": "2018-03",
+   "n": 146272,
+   "fraud": 229,
+   "fraud_usd": "16649.67"
+  },
+  {
+   "month": "2018-02",
+   "n": 131276,
+   "fraud": 183,
+   "fraud_usd": "16213.55"
+  },
+  {
+   "month": "2018-01",
+   "n": 146357,
+   "fraud": 145,
+   "fraud_usd": "13837.34"
+  },
+  {
+   "month": "2017-12",
+   "n": 146239,
+   "fraud": 197,
+   "fraud_usd": "17524.62"
+  },
+  {
+   "month": "2017-11",
+   "n": 142150,
+   "fraud": 58,
+   "fraud_usd": "4587.47"
+  },
+  {
+   "month": "2017-10",
+   "n": 145560,
+   "fraud": 0,
+   "fraud_usd": "0.00"
+  },
+  {
+   "month": "2017-09",
+   "n": 141863,
+   "fraud": 0,
+   "fraud_usd": "0.00"
+  },
+  {
+   "month": "2017-08",
+   "n": 146623,
+   "fraud": 0,
+   "fraud_usd": "0.00"
+  },
+  {
+   "month": "2017-07",
+   "n": 146659,
+   "fraud": 0,
+   "fraud_usd": "0.00"
+  },
+  {
+   "month": "2017-06",
+   "n": 142631,
+   "fraud": 0,
+   "fraud_usd": "0.00"
+  },
+  {
+   "month": "2017-05",
+   "n": 146541,
+   "fraud": 0,
+   "fraud_usd": "0.00"
+  },
+  {
+   "month": "2017-04",
+   "n": 141815,
+   "fraud": 0,
+   "fraud_usd": "0.00"
+  },
+  {
+   "month": "2017-03",
+   "n": 145754,
+   "fraud": 0,
+   "fraud_usd": "0.00"
+  },
+  {
+   "month": "2017-02",
+   "n": 131865,
+   "fraud": 0,
+   "fraud_usd": "0.00"
+  },
+  {
+   "month": "2017-01",
+   "n": 145660,
+   "fraud": 0,
+   "fraud_usd": "0.00"
+  },
+  {
+   "month": "2016-12",
+   "n": 144942,
+   "fraud": 174,
+   "fraud_usd": "23552.20"
+  },
+  {
+   "month": "2016-11",
+   "n": 141364,
+   "fraud": 306,
+   "fraud_usd": "45111.39"
+  },
+  {
+   "month": "2016-10",
+   "n": 145162,
+   "fraud": 231,
+   "fraud_usd": "29663.36"
+  },
+  {
+   "month": "2016-09",
+   "n": 140056,
+   "fraud": 322,
+   "fraud_usd": "40232.88"
+  },
+  {
+   "month": "2016-08",
+   "n": 145353,
+   "fraud": 316,
+   "fraud_usd": "37669.97"
+  },
+  {
+   "month": "2016-07",
+   "n": 145180,
+   "fraud": 264,
+   "fraud_usd": "32918.45"
+  },
+  {
+   "month": "2016-06",
+   "n": 141530,
+   "fraud": 264,
+   "fraud_usd": "32070.82"
+  },
+  {
+   "month": "2016-05",
+   "n": 145431,
+   "fraud": 327,
+   "fraud_usd": "39383.05"
+  },
+  {
+   "month": "2016-04",
+   "n": 139128,
+   "fraud": 312,
+   "fraud_usd": "42044.15"
+  },
+  {
+   "month": "2016-03",
+   "n": 144685,
+   "fraud": 319,
+   "fraud_usd": "42148.92"
+  }
+ ],
+ "natural_key_duplicates": {
+  "keys_repeated": 220,
+  "rows_in_repeats": 440,
+  "keys_with_different_payloads": 154
+ },
+ "same_card_same_minute": {
+  "minutes": 140357,
+  "rows": 282367
+ },
+ "refunds_marked_fraud": 1125,
+ "strangest": [
+  {
+   "why": "largest refund",
+   "source_row": 26580,
+   "user": "1",
+   "card": "2",
+   "year": "2020",
+   "month": "1",
+   "day": "6",
+   "time": "17:46",
+   "amount": "$-500.00",
+   "use_chip": "Swipe Transaction",
+   "merchant_name": "-1007477596717646975",
+   "merchant_city": "Anchorage",
+   "merchant_state": "AK",
+   "zip": "99504.0",
+   "mcc": "3780",
+   "errors": "",
+   "is_fraud": "No"
+  },
+  {
+   "why": "largest refund",
+   "source_row": 51168,
+   "user": "2",
+   "card": "1",
+   "year": "2009",
+   "month": "11",
+   "day": "27",
+   "time": "10:44",
+   "amount": "$-500.00",
+   "use_chip": "Swipe Transaction",
+   "merchant_name": "-6161792371494728879",
+   "merchant_city": "Pirtleville",
+   "merchant_state": "AZ",
+   "zip": "85626.0",
+   "mcc": "3389",
+   "errors": "",
+   "is_fraud": "No"
+  },
+  {
+   "why": "largest amount",
+   "source_row": 8181108,
+   "user": "693",
+   "card": "3",
+   "year": "2004",
+   "month": "1",
+   "day": "17",
+   "time": "06:57",
+   "amount": "$12390.50",
+   "use_chip": "Online Transaction",
+   "merchant_name": "-7421991366943579652",
+   "merchant_city": " ONLINE",
+   "merchant_state": "",
+   "zip": "",
+   "mcc": "4411",
+   "errors": "",
+   "is_fraud": "No"
+  },
+  {
+   "why": "largest amount",
+   "source_row": 78437,
+   "user": "3",
+   "card": "3",
+   "year": "2010",
+   "month": "9",
+   "day": "22",
+   "time": "06:37",
+   "amount": "$6820.20",
+   "use_chip": "Swipe Transaction",
+   "merchant_name": "-2910169010079677451",
+   "merchant_city": "Staten Island",
+   "merchant_state": "NY",
+   "zip": "10302.0",
+   "mcc": "5712",
+   "errors": "",
+   "is_fraud": "No"
+  },
+  {
+   "why": "most error codes",
+   "source_row": 297641,
+   "user": "22",
+   "card": "0",
+   "year": "2004",
+   "month": "8",
+   "day": "1",
+   "time": "14:07",
+   "amount": "$27.63",
+   "use_chip": "Online Transaction",
+   "merchant_name": "-2088492411650162548",
+   "merchant_city": " ONLINE",
+   "merchant_state": "",
+   "zip": "",
+   "mcc": "4784",
+   "errors": "Bad Card Number,Bad Expiration,Technical Glitch,",
+   "is_fraud": "No"
+  },
+  {
+   "why": "most error codes",
+   "source_row": 13394370,
+   "user": "1097",
+   "card": "2",
+   "year": "2006",
+   "month": "1",
+   "day": "9",
+   "time": "12:55",
+   "amount": "$153.52",
+   "use_chip": "Online Transaction",
+   "merchant_name": "4241336128694185533",
+   "merchant_city": " ONLINE",
+   "merchant_state": "",
+   "zip": "",
+   "mcc": "4814",
+   "errors": "Bad Card Number,Bad Expiration,Insufficient Balance,",
+   "is_fraud": "No"
+  },
+  {
+   "why": "first row of the file",
+   "source_row": 0,
+   "user": "0",
+   "card": "0",
+   "year": "2002",
+   "month": "9",
+   "day": "1",
+   "time": "06:21",
+   "amount": "$134.09",
+   "use_chip": "Swipe Transaction",
+   "merchant_name": "3527213246127876953",
+   "merchant_city": "La Verne",
+   "merchant_state": "CA",
+   "zip": "91750.0",
+   "mcc": "5300",
+   "errors": "",
+   "is_fraud": "No"
+  },
+  {
+   "why": "last row of the file",
+   "source_row": 24386899,
+   "user": "1999",
+   "card": "1",
+   "year": "2020",
+   "month": "2",
+   "day": "28",
+   "time": "23:10",
+   "amount": "$45.13",
+   "use_chip": "Chip Transaction",
+   "merchant_name": "4751695835751691036",
+   "merchant_city": "Merrimack",
+   "merchant_state": "NH",
+   "zip": "3054.0",
+   "mcc": "5814",
+   "errors": "",
+   "is_fraud": "No"
+  },
+  {
+   "why": "fraud refund",
+   "source_row": 4112,
+   "user": "0",
+   "card": "0",
+   "year": "2015",
+   "month": "11",
+   "day": "20",
+   "time": "07:42",
+   "amount": "$-473.00",
+   "use_chip": "Online Transaction",
+   "merchant_name": "-8566951830324093739",
+   "merchant_city": " ONLINE",
+   "merchant_state": "",
+   "zip": "",
+   "mcc": "3640",
+   "errors": "",
+   "is_fraud": "Yes"
+  },
+  {
+   "why": "zero amount",
+   "source_row": 101613,
+   "user": "5",
+   "card": "0",
+   "year": "2003",
+   "month": "11",
+   "day": "27",
+   "time": "16:39",
+   "amount": "$0.00",
+   "use_chip": "Swipe Transaction",
+   "merchant_name": "-4282466774399734331",
+   "merchant_city": "Cedarburg",
+   "merchant_state": "WI",
+   "zip": "53012.0",
+   "mcc": "4829",
+   "errors": "",
+   "is_fraud": "No"
+  },
+  {
+   "why": "foreign merchant",
+   "source_row": 407,
+   "user": "0",
+   "card": "0",
+   "year": "2003",
+   "month": "2",
+   "day": "24",
+   "time": "13:02",
+   "amount": "$7.52",
+   "use_chip": "Swipe Transaction",
+   "merchant_name": "-727612092139916043",
+   "merchant_city": "Zurich",
+   "merchant_state": "Switzerland",
+   "zip": "",
+   "mcc": "5411",
+   "errors": "",
+   "is_fraud": "No"
+  }
+ ],
+ "seconds": 316.9
+}

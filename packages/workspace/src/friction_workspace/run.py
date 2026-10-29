@@ -127,9 +127,7 @@ def handle(request: Request, out: Path, log: Path) -> dict[str, Any]:
         plan_text = _sh(["terraform", "show", "-no-color", "plan.bin"], log, cwd=tf, env=env)
         (out / "terraform_plan.txt").write_text(plan_text, encoding="utf-8")
         if request.kind == "terraform_apply":
-            applied = _sh(
-                ["terraform", "apply", "-input=false", "-no-color", "plan.bin"], log, cwd=tf, env=env
-            )
+            applied = _sh(["terraform", "apply", "-input=false", "-no-color", "plan.bin"], log, cwd=tf, env=env)
             (out / "terraform_apply.txt").write_text(applied, encoding="utf-8")
         return {"terraform": request.kind}
     raise ValueError(f"unknown request kind {request.kind}")

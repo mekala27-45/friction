@@ -92,9 +92,7 @@ def profile_tabformer(spark: Any) -> dict[str, Any]:
     )[0]
     out["use_chip"] = _rows(spark.sql("SELECT use_chip, count(*) AS n FROM tf GROUP BY 1 ORDER BY 2 DESC"))
     out["is_fraud"] = _rows(spark.sql("SELECT is_fraud, count(*) AS n FROM tf GROUP BY 1 ORDER BY 2 DESC"))
-    out["errors"] = _rows(
-        spark.sql("SELECT errors, count(*) AS n FROM tf GROUP BY 1 ORDER BY 2 DESC LIMIT 30")
-    )
+    out["errors"] = _rows(spark.sql("SELECT errors, count(*) AS n FROM tf GROUP BY 1 ORDER BY 2 DESC LIMIT 30"))
     out["merchant_state_online"] = _rows(
         spark.sql(
             """
@@ -240,9 +238,7 @@ def profile_rba(spark: Any) -> dict[str, Any]:
             """
         )
     )
-    out["device_types"] = _rows(
-        spark.sql("SELECT device_type, count(*) AS n FROM rba GROUP BY 1 ORDER BY 2 DESC")
-    )
+    out["device_types"] = _rows(spark.sql("SELECT device_type, count(*) AS n FROM rba GROUP BY 1 ORDER BY 2 DESC"))
     out["countries_top"] = _rows(
         spark.sql("SELECT country, count(*) AS n FROM rba GROUP BY 1 ORDER BY 2 DESC LIMIT 12")
     )

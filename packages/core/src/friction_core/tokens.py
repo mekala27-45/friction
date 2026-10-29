@@ -1,16 +1,17 @@
 """Salted tokens and the reductions used by the column masks.
 
-A restricted value (a user id in clear, a card key, an IP address, a user agent string) never
-leaves bronze in clear. It becomes an HMAC-SHA256 token keyed by FRICTION_SALT, the same function
-in the pipeline, the API and the tests, so the online store and the lakehouse agree on keys
-without either holding the clear value. The masks reduce an IP to its /16 and a user agent to its
+A restricted value (a user id in clear, a card account, an IP address, a user agent string) never
+leaves bronze in clear. It becomes a salted SHA-256 token, ``sha256(salt:kind:value)``, written so
+Spark SQL can compute the same thing with ``sha2(concat(...), 256)``: the pipeline, the API and the
+tests share one definition, so the online store and the lakehouse agree on keys without either
+holding the clear value. The salt is secret and the input has a fixed prefix, so a plain salted
+hash serves here; nothing relies on it being a MAC. The masks reduce an IP to its /16 and a user agent to its
 family; those reductions live here too so the SQL and the Python agree.
 """
 
 from __future__ import annotations
 
 import hashlib
-import hmac
 import ipaddress
 import os
 import re
@@ -29,10 +30,19 @@ def salt() -> str:
 
 
 def token(kind: str, value: str | int, key: str | None = None) -> str:
-    """A 20 hex character token for a value of a kind. The kind keeps a user id and a card id apart."""
-    material = f"{kind}:{value}".encode()
-    digest = hmac.new((key or salt()).encode(), material, hashlib.sha256).hexdigest()
-    return f"{kind[0]}{digest[:19]}"
+    """A 20 character token: the kind's first letter and 19 hex digits. Matches token_sql()."""
+    material = f"{key or salt()}:{kind}:{value}".encode()
+    return f"{kind[0]}{hashlib.sha256(material).hexdigest()[:19]}"
+
+
+def token_sql(kind: str, column: str, salt_expr: str) -> str:
+    """The same token as a Spark SQL expression over a column, with the salt as an expression."""
+    return f"concat('{kind[0]}', substr(sha2(concat({salt_expr}, ':{kind}:', {column}), 256), 1, 19))"
+
+
+# Merchants are not people. Their keys use a fixed public salt so every environment agrees and the
+# 19 digit merchant numbers of the source (which can pass Luhn by chance) never reach silver.
+MERCHANT_SALT = "friction-merchants"
 
 
 def ip_prefix16(ip: str | None) -> str | None:

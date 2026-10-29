@@ -67,9 +67,7 @@ def run(out_path: Path) -> dict[str, Any]:
     catalog_ok = findings["catalog_create"]["status"] == "allowed"
     base_catalog = probe_catalog if catalog_ok else "workspace"
     schema = f"{PROBE_PREFIX}_{suffix}"
-    findings["schema_create"] = _attempt(
-        lambda: w.schemas.create(name=schema, catalog_name=base_catalog).full_name
-    )
+    findings["schema_create"] = _attempt(lambda: w.schemas.create(name=schema, catalog_name=base_catalog).full_name)
 
     from databricks.sdk.service.catalog import VolumeType
 
@@ -122,9 +120,7 @@ def run(out_path: Path) -> dict[str, Any]:
             "CASE WHEN is_account_group_member('none') THEN ip ELSE 'masked' END"
         )
     )
-    findings["set_column_mask"] = _attempt(
-        sql(f"ALTER TABLE {fq}.probe_t ALTER COLUMN ip SET MASK {fq}.mask_ip")
-    )
+    findings["set_column_mask"] = _attempt(sql(f"ALTER TABLE {fq}.probe_t ALTER COLUMN ip SET MASK {fq}.mask_ip"))
     findings["set_tag"] = _attempt(
         sql(f"ALTER TABLE {fq}.probe_t ALTER COLUMN ip SET TAGS ('classification' = 'restricted')")
     )
@@ -163,9 +159,7 @@ def run(out_path: Path) -> dict[str, Any]:
         cleanup.append(f"drop catalog {probe_catalog}: {result['status']}")
     findings["cleanup"] = cleanup
 
-    allowed = {
-        k: v.get("status") == "allowed" for k, v in findings.items() if isinstance(v, dict) and "status" in v
-    }
+    allowed = {k: v.get("status") == "allowed" for k, v in findings.items() if isinstance(v, dict) and "status" in v}
     findings["summary"] = {
         "catalog_per_environment": allowed.get("catalog_create", False),
         "masks": allowed.get("set_column_mask", False),

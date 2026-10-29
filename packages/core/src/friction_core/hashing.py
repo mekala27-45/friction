@@ -14,9 +14,7 @@ from typing import Any
 
 def canonical_json(value: Any) -> str:
     """JSON with sorted keys, no spaces and no NaN, the form every digest is taken over."""
-    return json.dumps(
-        value, sort_keys=True, separators=(",", ":"), ensure_ascii=True, allow_nan=False, default=str
-    )
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=True, allow_nan=False, default=str)
 
 
 def sha256_text(text: str) -> str:
