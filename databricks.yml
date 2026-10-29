@@ -254,6 +254,9 @@ resources:
     integration:
       name: friction-integration-${bundle.target}
       max_concurrent_runs: 1
+      parameters:
+        - name: tests
+          default: all
       tasks:
         - task_key: integration
           environment_key: default
@@ -262,7 +265,8 @@ resources:
             parameters: ["--root", "${workspace.file_path}", "--catalog", "${var.catalog}", "--prefix", "${var.prefix}",
                          "--job", "integration", "--run-id", "{{job.run_id}}",
                          "--pipeline-id", "${resources.pipelines.friction.id}",
-                         "--source-outbox", "/Volumes/${var.catalog}/friction_dev_raw/outbox"]
+                         "--source-outbox", "/Volumes/${var.catalog}/friction_dev_raw/outbox",
+                         "--tests", "{{job.parameters.tests}}"]
       environments:
         - environment_key: default
           spec:

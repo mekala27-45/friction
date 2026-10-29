@@ -1,0 +1,8 @@
+{
+ "id": "2026-10-29-12n-integration-labels",
+ "kind": "bundle_run",
+ "target": "it",
+ "job": "integration",
+ "params": {"job_params": {"tests": "labels"}, "export_from": "/Volumes/workspace/friction_it_raw/exports/integration", "stop_on_failure": false},
+ "note": "Labels out of order: the window's label drops at once against three groups delivered latest first, over the payment months they point back to. The history must match and must not be empty."
+}

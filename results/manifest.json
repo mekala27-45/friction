@@ -2,7 +2,7 @@
  "as_of": "2026-10-29",
  "values": {
   "build.commits": {
-   "value": 71,
+   "value": 73,
    "fmt": "int",
    "provenance": {
     "origin": "git",
@@ -2977,7 +2977,7 @@
      6,
      "not done",
      "Jobs with retries and the run ledger; idempotency, order and late label tests in the workspace",
-     "the jobs are defined in databricks.yml; their workspace tests have not run"
+     "results/workspace/integration.json: re-landing, shuffled delivery and a repeat backfill leave every table identical; the out of order label test and the run ledger summary have not been read yet"
     ],
     [
      7,

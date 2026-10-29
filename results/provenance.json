@@ -136,6 +136,15 @@
    "promoted_at": "2026-10-29T21:21:15+00:00"
   },
   {
+   "file": "results/workspace/integration.json",
+   "sha256": "b85984ed3ce6a9ddb31c8ef51134d11a321acbdcce89655e3cb4ab0d2c88541e",
+   "request": "2026-10-29-12d-integration",
+   "github_run_id": "40951998057",
+   "commit": "39b5914a4a4f4c939356dc07d77504d34b0c0023",
+   "ran_at": "2026-10-29T21:59:25+00:00",
+   "promoted_at": "2026-10-29T22:02:31+00:00"
+  },
+  {
    "file": "results/workspace/models_timings_runner.json",
    "sha256": "c09d30d88ec33304e70a52541d831cf00a81c5de6d43af36277404b1358491e3",
    "request": "2026-10-29-12-portable-full-models",

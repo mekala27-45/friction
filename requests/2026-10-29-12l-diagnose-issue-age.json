@@ -1,0 +1,11 @@
+{
+ "id": "2026-10-29-12l-diagnose-issue-age",
+ "kind": "sql",
+ "target": "dev",
+ "params": {
+  "file": "sql/diagnose_issue_age.sql",
+  "vars": {"cdc": "workspace.friction_dev_cdc", "silver": "workspace.friction_dev_silver", "gold": "workspace.friction_dev_gold", "ops": "workspace.friction_dev_ops"},
+  "stop_on_failure": false
+ },
+ "note": "Retry of 2026-10-29-12a, whose second statement named a column the AUTO CDC target leaves out (op). Adds the run ledger summary."
+}
