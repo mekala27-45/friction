@@ -414,43 +414,63 @@ def workspace(b: Builder) -> None:
 
 def incident(b: Builder) -> None:
     inc = _load("results/incident.json")
-    mon = _load("results/monitor.json")
-    if not inc:
+    if not inc or "drop_totals" not in inc.get("after", {}):
         return
-    o = "scripts/replay_incident.py over the drops around replay day 40"
+    o = "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)"
     b.v("incident.drop", inc["drop"], "text", o, "the incident drop", "local")
-    b.v("incident.truth_rows", inc["truth"]["rows"], "int", o, "rows of the day in the corrected redelivery", "local")
-    b.v("incident.truth_usd", inc["truth"]["amount_cents"] / 100, "usd2", o, "dollars of the day", "local")
+    b.v("incident.truth_rows", inc["truth"]["rows"], "int", o, "rows in the corrected redelivery", "local")
+    b.v("incident.truth_usd", inc["truth"]["amount_cents"] / 100, "usd2", o, "dollars in the redelivery", "local")
     for side in ("before", "after"):
         s = inc[side]
-        b.v(
-            f"incident.{side}.rows",
-            s["day_totals"]["rows"],
-            "int",
-            o,
-            f"silver rows of the day, {side} the fix",
-            "local",
-        )
-        b.v(f"incident.{side}.usd", s["day_totals"]["amount_cents"] / 100, "usd2", o, f"dollars, {side}", "local")
+        b.v(f"incident.{side}.rows", s["drop_totals"]["rows"], "int", o, f"silver rows from the drop, {side}", "local")
+        b.v(f"incident.{side}.usd", s["drop_totals"]["amount_cents"] / 100, "usd2", o, f"dollars, {side}", "local")
         comp = s["completeness"][0]["ratio"] if s["completeness"] else None
         b.v(f"incident.{side}.completeness", comp, "pct2", o, f"completeness of the drop, {side}", "local")
         b.m.table(f"incident.{side}.quarantine", ["Rule", "Rows"], ["text", "int"], sorted(s["quarantine"].items()),
                   origin=o, population=f"quarantined rows of the drop, {side} the fix", source="local")  # fmt: skip
-    b.v("incident.other_days_unchanged", "yes" if inc["other_days_unchanged"] else "no", "text", o,
-        "digests of every other day equal before and after", "local")  # fmt: skip
-    b.v("incident.day_matches_truth", "yes" if inc["day_matches_truth"] else "no", "text", o,
-        "the day's totals equal the corrected source", "local")  # fmt: skip
-    b.m.table("incident.timeline", ["When (UTC)", "What", "Seconds"], ["text", "text", "float1"],
-              [[r["at"], r["what"], r["seconds"]] for r in inc["timeline"]], origin=o,
-              population="the runs of the replay", source="local")  # fmt: skip
-    if mon:
-        rows = [[a["severity"], a["check"], a["scope"], a["note"]] for a in mon["alerts"] if inc["drop"] in a["scope"]]
+    delayed = inc["truth"]["rows"] - inc["before"]["drop_totals"]["rows"]
+    delayed_usd = (inc["truth"]["amount_cents"] - inc["before"]["drop_totals"]["amount_cents"]) / 100
+    b.v("incident.delayed_rows", delayed, "int", o, "transactions held out of silver until the replay", "local")
+    b.v("incident.delayed_usd", delayed_usd, "usd2", o, "dollars of decisions delayed", "local")
+    b.v("incident.other_drops_unchanged", "yes" if inc["other_drops_unchanged"] else "no", "text", o,
+        "digest of every row from every other drop equal before and after", "local")  # fmt: skip
+    b.v("incident.drop_matches_truth", "yes" if inc["drop_matches_truth"] else "no", "text", o,
+        "the drop's silver totals equal the corrected source", "local")  # fmt: skip
+    timeline = [[r["at"], r["what"], r["seconds"]] for r in inc["timeline"]]
+    prov = {e["file"]: e for e in (_load("results/provenance.json") or {}).get("promoted", [])}
+    for rel, what in (
+        ("results/workspace/monitor_alerts.json", "workspace monitor raised the alerts; the issue opened"),
+        ("results/workspace/incident_drop.json", "workspace replay of drop 387 with the redelivery verified"),
+        ("results/workspace/monitor_after_alerts.json", "workspace monitor after the replay"),
+    ):  # fmt: skip
+        if rel in prov:
+            timeline.append([prov[rel]["ran_at"][:19].replace("T", " "), what, None])
+    timeline.sort(key=lambda r: str(r[0]))
+    b.m.table("incident.timeline", ["When (UTC)", "What", "Seconds"], ["text", "text", "float1"], timeline,
+              origin=o, population="the runs that found and fixed the incident", source="local")  # fmt: skip
+    alerts = _load("results/workspace/monitor_alerts.json")
+    if alerts:
+        rows = [[a["severity"], a["check"], a["scope"], a["note"]] for a in alerts if inc["drop"] in a["scope"]]
         b.m.table("incident.alerts", ["Severity", "Check", "Scope", "Note"], ["text"] * 4, rows,
-                  origin="scripts/monitor.py over the full local run", population="alerts on the incident drop",
-                  source="local")  # fmt: skip
-        b.v(
-            "monitor.alerts", len(mon["alerts"]), "int", "scripts/monitor.py", "alerts over the full local run", "local"
-        )
+                  origin="jobs/monitor.py in the workspace (request 2026-10-29-12g-monitor)",
+                  population="alerts on the incident drop", source="workspace")  # fmt: skip
+        b.v("monitor.alerts", len(alerts), "int", "jobs/monitor.py", "alerts over the backfill", "workspace")
+        drift = sorted({a["scope"].split("/")[1] for a in alerts if a["check"] == "feature_psi"})
+        b.v("monitor.drift_features", ", ".join(drift) or "none", "text", "jobs/monitor.py",
+            "features drifting against the training months", "workspace")  # fmt: skip
+    issue = _load("results/workspace/monitor_issue.json")
+    if issue:
+        b.v("monitor.issue", f"GitHub issue {issue['number']}", "text", "gh api, issues", "the issue the workflow "
+            "opened from the monitor's alerts", "workspace")  # fmt: skip
+    ws = _load("results/workspace/incident_drop.json")
+    if ws and ws.get("rows"):
+        r = ws["rows"][0]
+        b.v("incident.workspace.rows", int(r[0]), "int", "sql/incident_verify.sql", "silver rows from drop 387 in "
+            "the workspace after the replay", "workspace")  # fmt: skip
+        b.v("incident.workspace.usd", int(r[1]) / 100, "usd2", "sql/incident_verify.sql", "their dollars", "workspace")
+        match = int(r[0]) == inc["truth"]["rows"] and int(r[1]) == inc["truth"]["amount_cents"]
+        b.v("incident.workspace.matches", "yes" if match else "no", "text", "sql/incident_verify.sql",
+            "the workspace's drop equals the corrected source", "workspace")  # fmt: skip
 
 
 def live(b: Builder) -> None:
@@ -599,13 +619,17 @@ def checklist(b: Builder, ev: dict[str, Any] | None) -> None:
     )
     status[14] = ("done", "tests/api/test_api.py and tests/api/test_out_of_process.py against Postgres")
     inc = _load("results/incident.json") or {}
+    ws_inc = _load("results/workspace/incident_drop.json") or {}
+    ws_ok = bool(ws_inc.get("rows")) and int(ws_inc["rows"][0][0]) == inc.get("truth", {}).get("rows")
     if (
-        inc.get("day_matches_truth")
-        and exists("results/monitor.json")
+        inc.get("drop_matches_truth")
+        and inc.get("other_drops_unchanged")
+        and ws_ok
+        and exists("results/workspace/monitor_alerts.json")
         and exists("docs/incidents/2026-10-29-day-40.md")
     ):
-        status[15] = ("done", "results/monitor.json, results/incident.json, docs/incidents/2026-10-29-day-40.md "
-                      "(build machine; the workspace issue step waits on the workspace)")  # fmt: skip
+        status[15] = ("done", "results/workspace/monitor_alerts.json (GitHub issue 1), results/incident.json, "
+                      "results/workspace/incident_drop.json, docs/incidents/2026-10-29-day-40.md")  # fmt: skip
     else:
         status[15] = (
             "not done",

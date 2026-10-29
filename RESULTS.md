@@ -26,7 +26,7 @@ fails CI. Source of each block in its first line.
 | 13 | not done | The API live on Vercel with the online store and the decision log; parity exact against the live URL | the API runs and passes parity locally; Vercel and Neon are not connected yet |
 | 14 | done | Persistence: independent connection, audit before response, shared transaction, out of process check | tests/api/test_api.py and tests/api/test_out_of_process.py against Postgres |
 | 15 | not done | Monitoring with delayed label cohorts; the day 40 incident detected, handled by the runbook and written up | config/monitor.yaml and the incident plant exist; the incident has not been replayed |
-| 16 | done | Performance experiments and the compute ledger published | results/performance.json (Actions runner, full data), results/compute_ledger.json (wall seconds per request; workspace usage from the billing table not read yet) |
+| 16 | done | Performance experiments and the compute ledger published | results/performance.json (Actions runner, full data), results/compute_ledger.json (wall seconds per request; with workspace usage from system.billing.usage) |
 | 17 | not done | The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS | the site is not built yet |
 | 18 | not done | Coverage, mypy, ruff, gates, skills valid, forty to sixty commits, the rederive, v0.1.0 after the commits | the tag waits on every line above |
 

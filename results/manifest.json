@@ -2,7 +2,7 @@
  "as_of": "2026-10-29",
  "values": {
   "build.commits": {
-   "value": 73,
+   "value": 75,
    "fmt": "int",
    "provenance": {
     "origin": "git",
@@ -2300,6 +2300,149 @@
     "note": null
    }
   },
+  "incident.after.completeness": {
+   "value": 1.0,
+   "fmt": "pct2",
+   "provenance": {
+    "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
+    "population": "completeness of the drop, after",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "incident.after.rows": {
+   "value": 5849,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
+    "population": "silver rows from the drop, after",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "incident.after.usd": {
+   "value": 275274.7,
+   "fmt": "usd2",
+   "provenance": {
+    "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
+    "population": "dollars, after",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "incident.before.completeness": {
+   "value": 0.7019508354474674,
+   "fmt": "pct2",
+   "provenance": {
+    "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
+    "population": "completeness of the drop, before",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "incident.before.rows": {
+   "value": 2442,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
+    "population": "silver rows from the drop, before",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "incident.before.usd": {
+   "value": 109455.08,
+   "fmt": "usd2",
+   "provenance": {
+    "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
+    "population": "dollars, before",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "incident.delayed_rows": {
+   "value": 3407,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
+    "population": "transactions held out of silver until the replay",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "incident.delayed_usd": {
+   "value": 165819.62,
+   "fmt": "usd2",
+   "provenance": {
+    "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
+    "population": "dollars of decisions delayed",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "incident.drop": {
+   "value": "0387_2020-01-07",
+   "fmt": "text",
+   "provenance": {
+    "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
+    "population": "the incident drop",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "incident.drop_matches_truth": {
+   "value": "yes",
+   "fmt": "text",
+   "provenance": {
+    "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
+    "population": "the drop's silver totals equal the corrected source",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "incident.other_drops_unchanged": {
+   "value": "yes",
+   "fmt": "text",
+   "provenance": {
+    "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
+    "population": "digest of every row from every other drop equal before and after",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "incident.truth_rows": {
+   "value": 5849,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
+    "population": "rows in the corrected redelivery",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "incident.truth_usd": {
+   "value": 275274.7,
+   "fmt": "usd2",
+   "provenance": {
+    "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
+    "population": "dollars in the redelivery",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
   "lake.local.cards_history.rows": {
    "value": 31504,
    "fmt": "int",
@@ -2472,6 +2615,39 @@
     "origin": "scripts/summarize_lake.py over the full open source run",
     "population": "rule violations in quarantine",
     "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "monitor.alerts": {
+   "value": 16,
+   "fmt": "int",
+   "provenance": {
+    "origin": "jobs/monitor.py",
+    "population": "alerts over the backfill",
+    "source": "workspace",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "monitor.drift_features": {
+   "value": "device_type, mcc_fraud_rate",
+   "fmt": "text",
+   "provenance": {
+    "origin": "jobs/monitor.py",
+    "population": "features drifting against the training months",
+    "source": "workspace",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "monitor.issue": {
+   "value": "GitHub issue 1",
+   "fmt": "text",
+   "provenance": {
+    "origin": "gh api, issues",
+    "population": "the issue the workflow opened from the monitor's alerts",
+    "source": "workspace",
     "as_of": "2026-10-29",
     "note": null
    }
@@ -3037,7 +3213,7 @@
      16,
      "done",
      "Performance experiments and the compute ledger published",
-     "results/performance.json (Actions runner, full data), results/compute_ledger.json (wall seconds per request; workspace usage from the billing table not read yet)"
+     "results/performance.json (Actions runner, full data), results/compute_ledger.json (wall seconds per request; with workspace usage from system.billing.usage)"
     ],
     [
      17,
@@ -3894,6 +4070,157 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test months at the operating point chosen on validation",
     "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "incident.after.quarantine": {
+   "columns": [
+    "Rule",
+    "Rows"
+   ],
+   "formats": [
+    "text",
+    "int"
+   ],
+   "rows": [
+    [
+     "P_FUTURE",
+     487
+    ],
+    [
+     "P_KEY_CONFLICT",
+     2929
+    ],
+    [
+     "P_REJECTED_FILE",
+     2929
+    ]
+   ],
+   "provenance": {
+    "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
+    "population": "quarantined rows of the drop, after the fix",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "incident.alerts": {
+   "columns": [
+    "Severity",
+    "Check",
+    "Scope",
+    "Note"
+   ],
+   "formats": [
+    "text",
+    "text",
+    "text",
+    "text"
+   ],
+   "rows": [
+    [
+     "serious",
+     "expectation_rate",
+     "payments/0387_2020-01-07/P_FUTURE",
+     "487 rows quarantined"
+    ],
+    [
+     "serious",
+     "expectation_rate",
+     "payments/0387_2020-01-07/P_MCC",
+     "2920 rows quarantined"
+    ],
+    [
+     "serious",
+     "expectation_rate",
+     "payments/0387_2020-01-07/P_RESCUED",
+     "2920 rows quarantined"
+    ],
+    [
+     "critical",
+     "completeness",
+     "payments/0387_2020-01-07",
+     "3407 delivered rows did not reach silver"
+    ],
+    [
+     "critical",
+     "clock",
+     "payments/0387_2020-01-07/payments_2020-01-07_part2.csv.gz",
+     "events stamped after their drop closed"
+    ]
+   ],
+   "provenance": {
+    "origin": "jobs/monitor.py in the workspace (request 2026-10-29-12g-monitor)",
+    "population": "alerts on the incident drop",
+    "source": "workspace",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "incident.before.quarantine": {
+   "columns": [
+    "Rule",
+    "Rows"
+   ],
+   "formats": [
+    "text",
+    "int"
+   ],
+   "rows": [
+    [
+     "P_FUTURE",
+     487
+    ],
+    [
+     "P_MCC",
+     2920
+    ],
+    [
+     "P_RESCUED",
+     2920
+    ]
+   ],
+   "provenance": {
+    "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
+    "population": "quarantined rows of the drop, before the fix",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "incident.timeline": {
+   "columns": [
+    "When (UTC)",
+    "What",
+    "Seconds"
+   ],
+   "formats": [
+    "text",
+    "text",
+    "float1"
+   ],
+   "rows": [
+    [
+     "2026-10-29 22:12:59",
+     "workspace monitor raised the alerts; the issue opened",
+     null
+    ],
+    [
+     "2026-10-29T22:18:45Z",
+     "pipeline run over the drops around day 40, contract as it was",
+     36.8
+    ],
+    [
+     "2026-10-29T22:19:24Z",
+     "replay of the same drops with the approved change and the redelivery",
+     39.0
+    ]
+   ],
+   "provenance": {
+    "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
+    "population": "the runs that found and fixed the incident",
+    "source": "local",
     "as_of": "2026-10-29",
     "note": null
    }

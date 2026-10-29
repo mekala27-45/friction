@@ -1,0 +1,96 @@
+{
+ "after": {
+  "clock": [
+   {
+    "drop_id": "0387_2020-01-07",
+    "file": "payments_2020-01-07_part2.csv.gz",
+    "rows": 487,
+    "share": 0.16626835097302833
+   }
+  ],
+  "completeness": [
+   {
+    "delivered": 11431,
+    "drop_id": "0387_2020-01-07",
+    "kept": 11431,
+    "ratio": 1.0
+   }
+  ],
+  "day_totals": {
+   "amount_cents": 27803510,
+   "rows": 5855
+  },
+  "digest_drop": "5849:3cf57893749f9732:196408deee0a1487",
+  "digest_other_drops": "76274:d176560e099e794e:0f461d2ecdef3768",
+  "drop_totals": {
+   "amount_cents": 27527470,
+   "rows": 5849
+  },
+  "quarantine": {
+   "P_FUTURE": 487,
+   "P_KEY_CONFLICT": 2929,
+   "P_REJECTED_FILE": 2929
+  }
+ },
+ "approved_change": {
+  "rejected_files": [
+   "payments_2020-01-07_part2.csv.gz"
+  ],
+  "renames": {
+   "merchant_category": "mcc"
+  }
+ },
+ "before": {
+  "clock": [
+   {
+    "drop_id": "0387_2020-01-07",
+    "file": "payments_2020-01-07_part2.csv.gz",
+    "rows": 487,
+    "share": 0.16626835097302833
+   }
+  ],
+  "completeness": [
+   {
+    "delivered": 11431,
+    "drop_id": "0387_2020-01-07",
+    "kept": 8024,
+    "ratio": 0.7019508354474674
+   }
+  ],
+  "day_totals": {
+   "amount_cents": 11534765,
+   "rows": 2515
+  },
+  "digest_drop": "2442:732ce7e0dc63370a:0090afe741eeaaad",
+  "digest_other_drops": "76274:d176560e099e794e:0f461d2ecdef3768",
+  "drop_totals": {
+   "amount_cents": 10945508,
+   "rows": 2442
+  },
+  "quarantine": {
+   "P_FUTURE": 487,
+   "P_MCC": 2920,
+   "P_RESCUED": 2920
+  }
+ },
+ "day": "2020-01-07",
+ "drop": "0387_2020-01-07",
+ "drop_matches_truth": true,
+ "other_drops_unchanged": true,
+ "timeline": [
+  {
+   "at": "2026-10-29T22:18:45Z",
+   "seconds": 36.8,
+   "what": "pipeline run over the drops around day 40, contract as it was"
+  },
+  {
+   "at": "2026-10-29T22:19:24Z",
+   "seconds": 39.0,
+   "what": "replay of the same drops with the approved change and the redelivery"
+  }
+ ],
+ "truth": {
+  "amount_cents": 27527470,
+  "rows": 5849
+ }
+}
