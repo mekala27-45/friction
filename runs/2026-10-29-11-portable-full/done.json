@@ -1,0 +1,32 @@
+{
+ "request": {
+  "id": "2026-10-29-11-portable-full",
+  "kind": "portable",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "outbox_volume": "/Volumes/workspace/friction_dev_raw/outbox",
+   "drops": {
+    "payments": "all",
+    "logins": "all"
+   }
+  },
+  "note": "The open source engine over every drop, with the workspace salt, for the full two engine reconcile."
+ },
+ "github_run_id": "40926791442",
+ "commit": "bf4c4daea8ce551aa34f5d3a06c470fff8f6e546",
+ "started_at": "2026-10-29T18:31:17+00:00",
+ "result": {
+  "drops": {
+   "payments": "all",
+   "logins": "all"
+  },
+  "wall_seconds": 1521.5
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T19:02:42+00:00",
+ "files": {
+  "run.log": "3f3ae6359a75a9a8ae03737226b4ec907b96fba1fc33e3f377a6bc8f48e1ea6c",
+  "summary.json": "4735ad59af2c25ec27ec6a010dd2cfdd89c006e1776dacd0d61aaab96f7e9cfb"
+ }
+}

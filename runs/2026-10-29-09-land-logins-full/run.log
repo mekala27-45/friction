@@ -1,0 +1,7 @@
+$ databricks bundle run -t dev land --var catalog_mode=prefix --params desk=logins,from=2,through=102
+landed 114 files, 0 already there, through drop 102
+Run URL: https://dbc-13dc0ff6-cde4.cloud.databricks.com/jobs/1607231240040/runs/818966852842162?o=4481510155994981
+
+2026-10-29 18:03:25 "[dev mekalaajayk] friction-land-dev" RUNNING
+2026-10-29 18:05:29 "[dev mekalaajayk] friction-land-dev" TERMINATED SUCCESS
+[exit 0]

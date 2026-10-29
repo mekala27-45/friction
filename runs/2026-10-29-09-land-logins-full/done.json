@@ -1,0 +1,28 @@
+{
+ "request": {
+  "id": "2026-10-29-09-land-logins-full",
+  "kind": "bundle_run",
+  "target": "dev",
+  "job": "land",
+  "params": {
+   "job_params": {
+    "desk": "logins",
+    "from": "2",
+    "through": "102"
+   }
+  },
+  "note": "Land every remaining logins drop and its takeover labels (March 2020 to the last replay day)."
+ },
+ "github_run_id": "40926791442",
+ "commit": "bf4c4daea8ce551aa34f5d3a06c470fff8f6e546",
+ "started_at": "2026-10-29T18:03:23+00:00",
+ "result": {
+  "job": "land",
+  "wall_seconds": 125.9
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T18:05:29+00:00",
+ "files": {
+  "run.log": "747aabe00fe28e69fc985a54443cb20efd35af80b6169e6396b44bdb706feeb5"
+ }
+}

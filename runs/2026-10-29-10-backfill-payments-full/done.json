@@ -1,0 +1,31 @@
+{
+ "request": {
+  "id": "2026-10-29-10-backfill-payments-full",
+  "kind": "bundle_run",
+  "target": "dev",
+  "job": "backfill",
+  "params": {
+   "job_params": {
+    "desk": "payments",
+    "from": "2",
+    "through": "439",
+    "tag": "full"
+   },
+   "export_from": "/Volumes/workspace/friction_dev_raw/exports/full"
+  },
+  "note": "Land every remaining payments drop, labels and card feed, run the pipeline over both desks, the features, and export digests and reconcile statistics for every row."
+ },
+ "github_run_id": "40926791442",
+ "commit": "bf4c4daea8ce551aa34f5d3a06c470fff8f6e546",
+ "started_at": "2026-10-29T18:05:29+00:00",
+ "result": {
+  "job": "backfill",
+  "wall_seconds": 1547.3
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T18:31:17+00:00",
+ "files": {
+  "export/export.json": "8375f54e1e679e309b4bc2f773b94d5d99d8bd69e1c21f3ecedade74b9fb4d8a",
+  "run.log": "be4c514e55bf77329eafbcba4c376c533e5f0b06fba5bd10474eb77ed7ec7176"
+ }
+}
