@@ -1,0 +1,11 @@
+{
+ "id": "2026-10-29-07d-first-month",
+ "kind": "bundle_run",
+ "target": "dev",
+ "job": "backfill",
+ "params": {
+  "job_params": {"desk": "payments", "through": "1", "from": "1", "tag": "first-month"},
+  "export_from": "/Volumes/workspace/friction_dev_raw/exports/first-month"
+ },
+ "note": "Retry of 2026-10-29-07b-first-month, whose features task ran out of memory on the unflagged unknown account bucket (720,476 attempts in the first month)."
+}

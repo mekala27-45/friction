@@ -35,8 +35,10 @@ LOGIN_SILVER = (*tuple(c for c in LOGIN_TYPED if c != "_rescued_data"), "payload
 # The first look found one account id holding 14,025,899 attempts (45 percent of the file) with four
 # successes: the bucket the service files sign ins against unknown accounts under. An account with
 # more attempts than this and almost no successes is that bucket; its rows stay in silver, flagged,
-# and the user state machine treats each of them as a stranger.
-UNKNOWN_ACCOUNT_ATTEMPTS = 1_000_000
+# and the user state machine treats each of them as a stranger. The bar holds on any landed range:
+# the bucket has 720,476 attempts in the first month alone, and the next largest account in the
+# whole file has 70,028.
+UNKNOWN_ACCOUNT_ATTEMPTS = 100_000
 UNKNOWN_ACCOUNT_SUCCESS_SHARE = 0.001
 
 CHANNEL = F.create_map(

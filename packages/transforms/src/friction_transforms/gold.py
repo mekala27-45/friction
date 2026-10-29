@@ -17,7 +17,10 @@ from pyspark.sql import DataFrame, Window
 from pyspark.sql import functions as F
 from pyspark.sql import types as T
 
-BUCKETS = 64
+# Groups for the state machines. Serverless caps Python UDF memory at 1 GB, and a group arrives as
+# one pandas frame, so 31 million logins go in 1,024 groups of about 30,000 rows, not 64 of 490,000.
+# The count changes no feature: the state resets at each entity inside a group.
+BUCKETS = 1024
 
 
 def _assume(df: DataFrame, fields: Sequence[tuple[str, T.DataType]]) -> DataFrame:

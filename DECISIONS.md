@@ -144,7 +144,7 @@ distinct addresses and 1,650,627 attempts from attack addresses. The next larges
 person. Read as an account it would put fourteen million rows through one user state machine and
 make "new to this user" meaningless for it.
 
-The rule is data driven, not an id: an account with more than 1,000,000 attempts delivered and
+The rule is data driven, not an id: an account with more than 100,000 attempts delivered and
 fewer than one success per thousand is flagged `unknown_account` in silver
 (silver.login_account_stats). Its attempts stay in silver and feed the IP state machine, which is
 where they say something; to the user state machine each one is a stranger with no history. They
@@ -228,3 +228,13 @@ the bytes differ, so the workspace refused to upload drops that did not match th
 was regenerated under the pinned version; the fourteen logins label files are the only change.
 The runner now keeps the regenerated lock beside a refused upload, so the next mismatch shows
 which files moved.
+
+## 2026-10-29 The unknown account bar is 100,000 attempts, so it holds on one month
+
+The first bar was 1,000,000 attempts, set against the whole file. The workspace lands month by
+month, and in the first month the bucket has 720,476 attempts and one success, under that bar. It
+went through the user state machine as one account, one pandas frame of 720,476 rows, and the
+features task died on the 1 GB serverless cap for Python UDF code. At 100,000 the full file flags
+the same single account (the next largest has 70,028 attempts), and the first month flags it too.
+The partition functions were also rewritten to fill one block of doubles, and the groups went
+from 64 to 1,024; neither changes a feature.
