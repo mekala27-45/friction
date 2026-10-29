@@ -17,6 +17,22 @@ from pyspark.sql import functions as F
 
 from friction_transforms.keys import merchant_key_sql, token_col
 
+# Every output names its columns: drop() would make Spark Connect ask the server for the schema,
+# which a pipeline refuses while it defines a flow (its inputs do not exist yet).
+PAYMENT_TYPED = (
+    "txn_ref", "account_key", "user_key", "card_slot", "account_ref", "event_ts", "event_date", "amount_cents",
+    "currency", "channel", "merchant_key", "merchant_city", "merchant_state", "merchant_country", "zip5", "mcc",
+    "errors", "_rescued_data", "drop_id", "drop_end", "source_file", "ingested_at", "location", "foreign",
+    "has_error", "is_refund",
+)  # fmt: skip
+PAYMENT_SILVER = (*tuple(c for c in PAYMENT_TYPED if c != "_rescued_data"), "payload")
+LOGIN_TYPED = (
+    "login_ref", "user_key", "event_ts", "event_date", "rtt_ms", "ip_key", "ip_prefix16", "country", "region",
+    "city", "asn", "ua_key", "browser", "browser_family", "os", "device_type", "success", "is_attack_ip",
+    "flag_asn_unrealistic", "flag_ip_private", "_rescued_data", "drop_id", "drop_end", "source_file", "ingested_at",
+)  # fmt: skip
+LOGIN_SILVER = (*tuple(c for c in LOGIN_TYPED if c != "_rescued_data"), "payload")
+
 CHANNEL = F.create_map(
     F.lit("Swipe Transaction"),
     F.lit(0),
@@ -72,14 +88,14 @@ def payments_checked(
     month = F.lpad(F.col("month"), 2, "0")
     day = F.lpad(F.col("day"), 2, "0")
     ts = F.try_to_timestamp(F.concat_ws(" ", F.concat_ws("-", "year", month, day), "time"), F.lit("yyyy-MM-dd HH:mm"))
-    amount = F.try_cast(F.regexp_replace("amount", r"[$,]", ""), "decimal(12,2)")
+    amount = F.regexp_replace("amount", r"[$,]", "").try_cast("decimal(12,2)")
     state = F.trim(F.col("merchant_state"))
     typed = bronze.select(
-        F.try_cast("txn_ref", "bigint").alias("txn_ref"),
+        F.col("txn_ref").try_cast("bigint").alias("txn_ref"),
         token_col("account", F.concat_ws(":", "user", "card"), salt).alias("account_key"),
         token_col("user", F.col("user"), salt).alias("user_key"),
-        F.try_cast("card", "int").alias("card_slot"),
-        (F.try_cast("user", "bigint") * 100 + F.try_cast("card", "bigint")).alias("account_ref"),
+        F.col("card").try_cast("int").alias("card_slot"),
+        (F.col("user").try_cast("bigint") * 100 + F.col("card").try_cast("bigint")).alias("account_ref"),
         ts.alias("event_ts"),
         F.to_date(ts).alias("event_date"),
         (amount * 100).cast("bigint").alias("amount_cents"),
@@ -93,9 +109,9 @@ def payments_checked(
         .otherwise(state)
         .alias("merchant_country"),
         F.when(F.col("zip") == "", F.lit(None))
-        .otherwise(F.lpad(F.try_cast(F.try_cast("zip", "double"), "int").cast("string"), 5, "0"))
+        .otherwise(F.lpad(F.col("zip").try_cast("double").try_cast("int").cast("string"), 5, "0"))
         .alias("zip5"),
-        F.try_cast("mcc", "int").alias("mcc"),
+        F.col("mcc").try_cast("int").alias("mcc"),
         F.filter(F.split(F.coalesce("errors", F.lit("")), ","), lambda x: x != "").alias("errors"),
         F.col("_rescued_data"),
         F.col("_rescued_left"),
@@ -128,7 +144,7 @@ def payments_checked(
                 is_daily & (F.datediff(F.to_date("drop_end"), F.col("event_date")) > WATERMARK_DAYS + 1),
             ),
         ),
-    ).drop("_rescued_left", "_rejected")
+    ).select(*PAYMENT_TYPED, "violations")
 
 
 PAYMENT_PAYLOAD = (
@@ -162,8 +178,8 @@ def payments_split(checked: DataFrame) -> tuple[DataFrame, DataFrame]:
             F.col("account_key").isNotNull() & F.col("event_ts").isNotNull() & business,
             F.array_union("violations", F.array(F.lit("P_BUSINESS_KEY"))),
         ).otherwise(F.col("violations")),
-    ).drop("_first", "_rank")
-    silver = deduped.where(F.size("violations") == 0).drop("violations", "_rescued_data")
+    )
+    silver = deduped.where(F.size("violations") == 0).select(*PAYMENT_SILVER)
     quarantine = deduped.where(F.size("violations") > 0)
     return silver, quarantine
 
@@ -181,17 +197,17 @@ def logins_checked(
     prefix = F.when(ip_ok, F.concat(octets[0], F.lit("."), octets[1], F.lit(".0.0/16")))
     browser = F.col("browser")
     typed = bronze.select(
-        F.try_cast("login_index", "bigint").alias("login_ref"),
+        F.col("login_index").try_cast("bigint").alias("login_ref"),
         token_col("user", F.col("user_id"), salt).alias("user_key"),
         ts.alias("event_ts"),
         F.to_date(ts).alias("event_date"),
-        F.try_cast("rtt_ms", "double").alias("rtt_ms"),
+        F.col("rtt_ms").try_cast("double").alias("rtt_ms"),
         token_col("ip", F.col("ip_address"), salt).alias("ip_key"),
         prefix.alias("ip_prefix16"),
         F.col("country"),
         F.when(F.col("region") == "-", F.lit(None)).otherwise(F.col("region")).alias("region"),
         F.when(F.col("city") == "-", F.lit(None)).otherwise(F.col("city")).alias("city"),
-        F.try_cast("asn", "bigint").alias("asn"),
+        F.col("asn").try_cast("bigint").alias("asn"),
         token_col("ua", F.col("user_agent"), salt).alias("ua_key"),
         browser.alias("browser"),
         F.regexp_extract(browser, r"^([A-Za-z][A-Za-z .]*?)(?:\s+\d.*)?$", 1).alias("browser_family"),
@@ -199,7 +215,7 @@ def logins_checked(
         F.col("device_type"),
         (F.col("login_successful") == "True").alias("success"),
         (F.col("is_attack_ip") == "True").alias("is_attack_ip"),
-        (F.try_cast("asn", "bigint") >= 500000).alias("flag_asn_unrealistic"),
+        (F.col("asn").try_cast("bigint") >= 500000).alias("flag_asn_unrealistic"),
         F.col("ip_address").startswith("10.").alias("flag_ip_private"),
         F.col("_rescued_data"),
         F.col("_rescued_left"),
@@ -227,7 +243,7 @@ def logins_checked(
                 is_daily & (F.datediff(F.to_date("drop_end"), F.col("event_date")) > WATERMARK_DAYS + 1),
             ),
         ),
-    ).drop("_ip_ok", "_rescued_left", "_rejected")
+    ).select(*LOGIN_TYPED, "violations")
 
 
 LOGIN_PAYLOAD = (
@@ -244,8 +260,8 @@ def logins_split(checked: DataFrame) -> tuple[DataFrame, DataFrame]:
     )
     deduped = ranked.where((F.col("_rank") == 1) | (F.col("payload") != F.col("_first")))
     conflict = F.when(F.col("_rank") > 1, F.array(F.lit("L_KEY_CONFLICT"))).otherwise(F.array())
-    deduped = deduped.withColumn("violations", F.array_union("violations", conflict)).drop("_first", "_rank")
-    silver = deduped.where(F.size("violations") == 0).drop("violations", "_rescued_data")
+    deduped = deduped.withColumn("violations", F.array_union("violations", conflict))
+    silver = deduped.where(F.size("violations") == 0).select(*LOGIN_SILVER)
     quarantine = deduped.where(F.size("violations") > 0)
     return silver, quarantine
 
@@ -260,4 +276,57 @@ def quarantine_rows(quarantine: DataFrame, desk: str, key: str) -> DataFrame:
         F.col("source_file"),
         F.col("payload"),
         F.col("_rescued_data").alias("rescued"),
+    )
+
+
+LABEL_COLUMNS = (
+    "label_ref", "event_ref", "desk", "is_fraud", "event_ts", "reported_at", "seq", "source", "drop_id", "source_file",
+)  # fmt: skip
+
+
+def labels_typed(bronze: DataFrame) -> DataFrame:
+    return bronze.select(
+        F.col("label_ref").try_cast("bigint").alias("label_ref"),
+        F.col("event_ref").try_cast("bigint").alias("event_ref"),
+        F.col("desk"),
+        (F.lower(F.col("is_fraud")) == "true").alias("is_fraud"),
+        F.try_to_timestamp(F.col("event_ts")).alias("event_ts"),
+        F.try_to_timestamp(F.col("reported_at")).alias("reported_at"),
+        F.col("seq").try_cast("bigint").alias("seq"),
+        F.col("source"),
+        F.col("drop_id"),
+        F.col("source_file"),
+    )
+
+
+def labels_checked(labels: DataFrame, events: DataFrame, key: str, *, has_refunds: bool) -> DataFrame:
+    """Attach the label rules. events: the desk's silver with its key and, for payments, is_refund."""
+    refund = F.col("is_refund") if has_refunds else F.lit(False)
+    known = events.select(F.col(key).alias("event_ref"), refund.alias("_refund"), F.lit(True).alias("_exists"))
+    joined = labels.join(known, "event_ref", "left")
+    return joined.withColumn(
+        "violations",
+        _rules(
+            ("B_NO_EVENT", F.col("_exists").isNull()),
+            (
+                "B_REFUND",
+                F.coalesce(F.col("_refund"), F.lit(False)) & F.col("is_fraud") & (F.col("source") == "chargeback"),
+            ),
+        ),
+    ).select(*LABEL_COLUMNS, "violations")
+
+
+def cdc_typed(bronze: DataFrame) -> DataFrame:
+    return bronze.select(
+        F.col("account_ref").try_cast("bigint").alias("account_ref"),
+        F.col("op"),
+        F.col("seq").try_cast("bigint").alias("seq"),
+        F.try_to_timestamp(F.col("changed_at")).alias("changed_at"),
+        F.try_to_timestamp(F.col("emitted_at")).alias("emitted_at"),
+        F.col("card_generation").try_cast("bigint").alias("card_generation"),
+        F.col("status"),
+        F.col("credit_limit_cents").try_cast("bigint").alias("credit_limit_cents"),
+        F.col("currency"),
+        F.col("drop_id"),
+        F.col("source_file"),
     )

@@ -1,0 +1,43 @@
+# Every rule a row can break, where it came from, and what happens. "first look" means the rule
+# exists because the full size profile of the real file found the defect (results/profile/).
+# Each rule has a test in tests/transforms/test_quarantine_rules.py.
+payments:
+  P_KEY:            {action: quarantine, origin: specification, says: the transaction reference does not parse}
+  P_TIME:           {action: quarantine, origin: specification, says: the date and time do not make a timestamp}
+  P_AMOUNT:         {action: quarantine, origin: specification, says: the amount does not parse}
+  P_MCC:            {action: quarantine, origin: specification, says: the merchant category code is missing or outside 0001 to 9999}
+  P_CHANNEL:        {action: quarantine, origin: specification, says: the channel is not swipe, chip or online}
+  P_RESCUED:        {action: quarantine, origin: specification, says: the row carries columns the contract does not know}
+  P_REJECTED_FILE:  {action: quarantine, origin: runbook, says: the file was rejected by an approved contract change}
+  P_FUTURE:         {action: quarantine, origin: specification, says: the event time is after the drop closed}
+  P_LATE:           {action: quarantine, origin: specification, says: a daily drop carries an event more than eight days old}
+  P_KEY_CONFLICT:   {action: quarantine, origin: specification, says: a reference arrived again with a different payload; the later arrival}
+  P_BUSINESS_KEY:   {action: quarantine, origin: first look, says: two transactions share card, minute, amount and merchant but differ in payload (154 keys, 308 rows in the file)}
+logins:
+  L_KEY:            {action: quarantine, origin: specification, says: the login index does not parse}
+  L_TIME:           {action: quarantine, origin: specification, says: the login timestamp does not parse}
+  L_SPAN:           {action: quarantine, origin: specification, says: the timestamp is outside February 2020 to February 2021}
+  L_IP:             {action: quarantine, origin: specification, says: the IP address does not parse as IPv4}
+  L_UA:             {action: quarantine, origin: first look, says: the user agent did not parse, so the device type is empty (the data set README counts 1,526)}
+  L_RESCUED:        {action: quarantine, origin: specification, says: the row carries columns the contract does not know}
+  L_REJECTED_FILE:  {action: quarantine, origin: runbook, says: the file was rejected by an approved contract change}
+  L_FUTURE:         {action: quarantine, origin: specification, says: the event time is after the drop closed}
+  L_LATE:           {action: quarantine, origin: specification, says: a daily drop carries an event more than eight days old}
+  L_KEY_CONFLICT:   {action: quarantine, origin: specification, says: an index arrived again with a different payload; the later arrival}
+labels:
+  B_REFUND:         {action: quarantine, origin: first look, says: a chargeback on a credit; TabFormer marks 1,125 refunds as fraud}
+  B_NO_EVENT:       {action: quarantine, origin: specification, says: a label for an event that does not exist in silver}
+cdc:
+  C_SEQ_CONFLICT:   {action: quarantine, origin: specification, says: a record repeats a key and sequence with a different payload}
+# What the first look found that is repaired or flagged rather than quarantined.
+repairs:
+  zip_float_text:     {origin: first look, says: zip codes are float text with leading zeros lost (91750.0, 3054.0); silver parses and pads to five digits}
+  city_leading_space: {origin: first look, says: online merchants have the city ' ONLINE' with a leading space; silver trims}
+  state_holds_country: {origin: first look, says: merchant_state holds a country name for foreign merchants (224 distinct values); silver splits state and country}
+  errors_trailing_comma: {origin: first look, says: the errors field is a list with a trailing comma; silver makes it an array}
+  minute_ties:        {origin: first look, says: 140,357 card minutes hold two or more transactions; ordering breaks ties by the transaction reference}
+  no_time_zone:       {origin: first look, says: timestamps carry no zone; the build treats them as UTC and says so}
+flags:
+  asn_unrealistic:    {origin: RBA README, says: ASNs of 500,000 and above were assigned during synthesis; kept, flagged, counted}
+  ip_private:         {origin: RBA README, says: addresses in 10.0.0.0/8 were assigned during synthesis; kept, flagged, counted}
+  label_gaps:         {origin: first look, says: TabFormer marks no fraud from January to October 2017 or after October 2019; see DECISIONS.md}

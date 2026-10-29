@@ -1,0 +1,29 @@
+table: mcc_fraud_rates
+owner: Ajay Mekala
+layer: gold
+keys:
+- mcc
+- month_start
+freshness: monthly
+columns:
+- name: mcc
+  type: int
+  classification: public
+  says: merchant category code
+- name: month_start
+  type: date
+  classification: internal
+  says: 'the as of instant: the first moment of the month'
+- name: n_window
+  type: bigint
+  classification: internal
+  says: debits in the twelve months before
+- name: frauds_known
+  type: bigint
+  classification: internal
+  says: of those, frauds the bank knew of at month start
+- name: rate
+  type: double
+  classification: internal
+  says: shrunk fraud rate
+  unit: frauds per debit

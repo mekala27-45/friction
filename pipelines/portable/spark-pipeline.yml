@@ -1,0 +1,12 @@
+# The portable pipeline: the same transforms as the workspace, wired with open source Spark
+# Declarative Pipelines only (materialized views and temporary views, no expectations and no AUTO
+# CDC). scripts/run_portable.py fills the paths and runs `spark-pipelines run` with this spec.
+name: friction_portable
+storage: ${FRICTION_STORAGE}
+libraries:
+  - glob:
+      include: transformations/**
+# FRICTION_LANDING, FRICTION_SALT and FRICTION_CONTRACT come from the environment.
+configuration:
+  spark.sql.session.timeZone: UTC
+  spark.sql.shuffle.partitions: "16"

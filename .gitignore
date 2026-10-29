@@ -28,3 +28,4 @@ data/work/
 infra/terraform/.terraform/
 infra/terraform/*.tfstate*
 infra/terraform/.terraform.lock.hcl.bak
+__pycache__/

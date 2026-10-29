@@ -1,0 +1,38 @@
+table: quarantine
+owner: Ajay Mekala
+layer: silver
+keys:
+- desk
+- event_ref
+- rule
+- source_file
+freshness: with silver
+columns:
+- name: desk
+  type: string
+  classification: internal
+  says: payments, logins, labels or cdc
+- name: event_ref
+  type: bigint
+  classification: internal
+  says: the natural key of the row
+- name: rule
+  type: string
+  classification: internal
+  says: the rule code, see quarantine_rules.yaml
+- name: drop_id
+  type: string
+  classification: internal
+  says: the drop
+- name: source_file
+  type: string
+  classification: internal
+  says: the file
+- name: payload
+  type: string
+  classification: internal
+  says: digest of the payload
+- name: rescued
+  type: string
+  classification: internal
+  says: rescued columns as JSON, if any

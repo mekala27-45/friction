@@ -264,7 +264,7 @@ def profile_rba(spark: Any) -> dict[str, Any]:
     out["out_of_order_rows"] = spark.sql(
         """
         SELECT count_if(ts < prev) FROM (
-          SELECT ts, lag(ts) OVER (ORDER BY source_row) AS prev FROM rbap
+          SELECT ts, lag(ts) OVER (PARTITION BY floor(source_row / 1000000) ORDER BY source_row) AS prev FROM rbap
         )
         """
     ).collect()[0][0]

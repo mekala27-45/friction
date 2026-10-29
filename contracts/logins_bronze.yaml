@@ -1,0 +1,88 @@
+table: logins_bronze
+owner: Ajay Mekala
+layer: bronze
+keys:
+- login_index
+- source_file
+freshness: appends each drop as it lands
+columns:
+- name: login_index
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: login_timestamp
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: user_id
+  type: string
+  classification: restricted
+  says: as delivered, text
+- name: rtt_ms
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: ip_address
+  type: string
+  classification: restricted
+  says: as delivered, text
+- name: country
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: region
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: city
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: asn
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: user_agent
+  type: string
+  classification: restricted
+  says: as delivered, text
+- name: browser
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: os
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: device_type
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: login_successful
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: is_attack_ip
+  type: string
+  classification: internal
+  says: as delivered, text
+- name: _rescued_data
+  type: string
+  classification: internal
+  says: columns the contract did not expect, as JSON
+- name: source_file
+  type: string
+  classification: internal
+  says: path of the file the row came from
+- name: file_modified_at
+  type: timestamp
+  classification: internal
+  says: modification time of that file
+- name: drop_id
+  type: string
+  classification: internal
+  says: the drop, read from the path
+- name: ingested_at
+  type: timestamp
+  classification: internal
+  says: when bronze read the row
