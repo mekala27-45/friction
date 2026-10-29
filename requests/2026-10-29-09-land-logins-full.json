@@ -1,0 +1,8 @@
+{
+ "id": "2026-10-29-09-land-logins-full",
+ "kind": "bundle_run",
+ "target": "dev",
+ "job": "land",
+ "params": {"job_params": {"desk": "logins", "from": "2", "through": "102"}},
+ "note": "Land every remaining logins drop and its takeover labels (March 2020 to the last replay day)."
+}

@@ -148,9 +148,15 @@ def handle(request: Request, out: Path, log: Path) -> dict[str, Any]:
         outbox = str(request.params["outbox_volume"])
         landing = ROOT / "data" / "work" / f"landing_{request.id}"
         lake = ROOT / "data" / "lake" / request.id
-        for desk, (start, through) in sorted(request.params["drops"].items()):
+        for desk, span in sorted(request.params["drops"].items()):
             for feed in FEEDS[desk]:
                 (landing / feed / "drops").mkdir(parents=True, exist_ok=True)
+                if span == "all":
+                    # Every drop of the feed in one recursive copy, not one call per drop.
+                    _sh(["databricks", "fs", "cp", "-r", f"dbfs:{outbox}/{feed}/drops", str(landing / feed / "drops")],
+                        log)  # fmt: skip
+                    continue
+                start, through = span
                 listing = _sh(["databricks", "fs", "ls", f"dbfs:{outbox}/{feed}/drops"], log)
                 for drop in sorted(n.strip().rstrip("/") for n in listing.split()):
                     if drop[:4].isdigit() and int(start) <= int(drop[:4]) <= int(through):

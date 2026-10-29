@@ -1,0 +1,11 @@
+{
+ "id": "2026-10-29-10-backfill-payments-full",
+ "kind": "bundle_run",
+ "target": "dev",
+ "job": "backfill",
+ "params": {
+  "job_params": {"desk": "payments", "from": "2", "through": "439", "tag": "full"},
+  "export_from": "/Volumes/workspace/friction_dev_raw/exports/full"
+ },
+ "note": "Land every remaining payments drop, labels and card feed, run the pipeline over both desks, the features, and export digests and reconcile statistics for every row."
+}

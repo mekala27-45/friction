@@ -113,3 +113,15 @@ def test_the_real_shell_redacts_what_it_logs(monkeypatch: pytest.MonkeyPatch, tm
     assert "k" * 32 not in text and "<secret>" in text and "[exit 0]" in text
     with pytest.raises(RuntimeError):
         run._sh(["python3", "-c", "raise SystemExit(3)"], log)
+
+
+def test_portable_copies_a_whole_feed_in_one_call(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    shell = FakeShell()
+    monkeypatch.setattr(run, "_sh", shell)
+    req, out = tmp_path / "requests", tmp_path / "runs"
+    _request(req, "2026-01-01-01-portable", "portable",
+             params={"outbox_volume": "/Volumes/x/outbox", "drops": {"logins": "all"}})  # fmt: skip
+    assert _main(monkeypatch, req, out) == 0
+    copies = [c for c, _ in shell.calls if c[:3] == ["databricks", "fs", "cp"]]
+    assert [c[4] for c in copies] == [f"dbfs:/Volumes/x/outbox/{f}/drops" for f in ("logins", "labels_logins")]
+    assert not [c for c, _ in shell.calls if c[:3] == ["databricks", "fs", "ls"]]
