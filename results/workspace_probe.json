@@ -1,0 +1,220 @@
+{
+ "apps_list": {
+  "detail": 0,
+  "seconds": 0.08,
+  "status": "allowed"
+ },
+ "catalog_create": {
+  "error": "InvalidState",
+  "message": "Metastore storage root URL does not exist. Default Storage is enabled in your account. You can use the UI to create a new catalog using Default Storage, or please provide a storage location for the catalog (for example 'CREATE CATALOG myCatalog MANAGED LOCATION '<location-path>').",
+  "seconds": 0.21,
+  "status": "refused"
+ },
+ "catalogs_visible": {
+  "detail": [
+   "samples",
+   "system",
+   "workspace"
+  ],
+  "seconds": 0.43,
+  "status": "allowed"
+ },
+ "cleanup": [
+  "DROP SCHEMA IF EXISTS workspace.friction_probe_90e2a2 CASCADE: allowed"
+ ],
+ "create_mask_function": {
+  "detail": {
+   "rows": 0
+  },
+  "seconds": 1.07,
+  "status": "allowed"
+ },
+ "create_table": {
+  "detail": {
+   "rows": 0
+  },
+  "seconds": 4.93,
+  "status": "allowed"
+ },
+ "delta_sharing_shares": {
+  "error": "AttributeError",
+  "message": "'SharesAPI' object has no attribute 'list'",
+  "seconds": 0.0,
+  "status": "refused"
+ },
+ "experiments_list": {
+  "detail": 0,
+  "seconds": 0.08,
+  "status": "allowed"
+ },
+ "groups_list": {
+  "detail": 3,
+  "seconds": 0.53,
+  "status": "allowed"
+ },
+ "identity": {
+  "detail": {
+   "identity": "present",
+   "kind": "user"
+  },
+  "seconds": 0.6,
+  "status": "allowed"
+ },
+ "jobs_list": {
+  "detail": 0,
+  "seconds": 0.1,
+  "status": "allowed"
+ },
+ "liquid_clustering": {
+  "detail": {
+   "rows": 0
+  },
+  "seconds": 2.14,
+  "status": "allowed"
+ },
+ "pipelines_list": {
+  "detail": 0,
+  "seconds": 0.06,
+  "status": "allowed"
+ },
+ "probed_at": "2026-10-29T03:01:37+00:00",
+ "read:system.access.audit": {
+  "detail": {
+   "rows": 1
+  },
+  "seconds": 4.83,
+  "status": "allowed"
+ },
+ "read:system.access.column_lineage": {
+  "detail": {
+   "rows": 1
+  },
+  "seconds": 4.94,
+  "status": "allowed"
+ },
+ "read:system.access.table_lineage": {
+  "detail": {
+   "rows": 1
+  },
+  "seconds": 4.95,
+  "status": "allowed"
+ },
+ "read:system.billing.list_prices": {
+  "detail": {
+   "rows": 1
+  },
+  "seconds": 3.78,
+  "status": "allowed"
+ },
+ "read:system.billing.usage": {
+  "detail": {
+   "rows": 1
+  },
+  "seconds": 4.7,
+  "status": "allowed"
+ },
+ "read:system.information_schema.tables": {
+  "detail": {
+   "rows": 1
+  },
+  "seconds": 1.17,
+  "status": "allowed"
+ },
+ "read:system.lakeflow.jobs": {
+  "detail": {
+   "rows": 0
+  },
+  "seconds": 2.04,
+  "status": "allowed"
+ },
+ "read:system.lakeflow.pipelines": {
+  "detail": {
+   "rows": 0
+  },
+  "seconds": 4.74,
+  "status": "allowed"
+ },
+ "registered_models_list": {
+  "detail": 0,
+  "seconds": 1.13,
+  "status": "allowed"
+ },
+ "row_filter_function": {
+  "detail": {
+   "rows": 0
+  },
+  "seconds": 0.72,
+  "status": "allowed"
+ },
+ "schema_create": {
+  "detail": "workspace.friction_probe_90e2a2",
+  "seconds": 0.21,
+  "status": "allowed"
+ },
+ "service_principals_list": {
+  "detail": 0,
+  "seconds": 0.35,
+  "status": "allowed"
+ },
+ "serving_endpoints_list": {
+  "detail": 12,
+  "seconds": 0.17,
+  "status": "allowed"
+ },
+ "set_column_mask": {
+  "detail": {
+   "rows": 0
+  },
+  "seconds": 1.36,
+  "status": "allowed"
+ },
+ "set_row_filter": {
+  "detail": {
+   "rows": 0
+  },
+  "seconds": 0.82,
+  "status": "allowed"
+ },
+ "set_tag": {
+  "detail": {
+   "rows": 0
+  },
+  "seconds": 0.71,
+  "status": "allowed"
+ },
+ "sql_version": {
+  "detail": {
+   "rows": 1
+  },
+  "seconds": 9.66,
+  "status": "allowed"
+ },
+ "summary": {
+  "billing_system_table": true,
+  "catalog_per_environment": false,
+  "groups": true,
+  "lineage_system_table": true,
+  "masks": true,
+  "row_filter": true,
+  "serving": true,
+  "sql_warehouse": true,
+  "tags": true
+ },
+ "volume_create": {
+  "detail": "workspace.friction_probe_90e2a2.landing",
+  "seconds": 0.62,
+  "status": "allowed"
+ },
+ "warehouses": {
+  "detail": [
+   {
+    "id": "af12645754a2c33a",
+    "serverless": true,
+    "size": "2X-Small",
+    "state": "State.STOPPED"
+   }
+  ],
+  "seconds": 0.14,
+  "status": "allowed"
+ }
+}

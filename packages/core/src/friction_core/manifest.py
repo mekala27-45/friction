@@ -94,8 +94,7 @@ class Manifest(StrictModel):
         head = "| " + " | ".join(t.columns) + " |"
         rule = "|" + "|".join("---:" if f != "text" else "---" for f in t.formats) + "|"
         body = [
-            "| " + " | ".join(format_value(v, f) for v, f in zip(row, t.formats, strict=True)) + " |"
-            for row in t.rows
+            "| " + " | ".join(format_value(v, f) for v, f in zip(row, t.formats, strict=True)) + " |" for row in t.rows
         ]
         return "\n".join([head, rule, *body])
 
@@ -134,9 +133,7 @@ class ManifestBuilder:
             raise ValueError(f"{key} is not a finite number")
         if key in self._values:
             raise KeyError(f"{key} was written twice")
-        self._values[key] = Value(
-            value=value, fmt=fmt, provenance=self._prov(origin, population, source, note)
-        )
+        self._values[key] = Value(value=value, fmt=fmt, provenance=self._prov(origin, population, source, note))
 
     def table(
         self,

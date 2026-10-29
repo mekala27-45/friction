@@ -7,6 +7,7 @@ license = "Apache-2.0"
 dependencies = [
   "friction-core",
   "numpy>=2.0",
+  "pandas>=2.2",
 ]
 
 [build-system]

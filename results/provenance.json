@@ -1,0 +1,13 @@
+{
+ "promoted": [
+  {
+   "file": "results/workspace_probe.json",
+   "sha256": "a0ce9a8a707f0b7664fddc6742d16562a12acd887218b1c542c090a9745ee948",
+   "request": "2026-10-29-probe",
+   "github_run_id": "40809751055",
+   "commit": "dc8373b3d08cc08468bea9849803a06b51a14d61",
+   "ran_at": "2026-10-29T03:02:35+00:00",
+   "promoted_at": "2026-10-29T03:04:01+00:00"
+  }
+ ]
+}

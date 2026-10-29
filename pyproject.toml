@@ -76,13 +76,14 @@ build-backend = "hatchling.build"
 packages = ["scripts"]
 
 [tool.ruff]
-line-length = 110
+line-length = 120
 target-version = "py312"
 extend-exclude = ["web", "notebooks", "data"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP", "SIM", "RUF", "N", "W"]
-ignore = ["RUF001", "RUF002", "RUF003", "N818", "N803", "N806"]
+# N812: F for pyspark.sql.functions is the convention every Spark reader expects.
+ignore = ["RUF001", "RUF002", "RUF003", "N818", "N803", "N806", "N812"]
 
 [tool.ruff.lint.per-file-ignores]
 "scripts/*" = ["E402"]

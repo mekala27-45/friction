@@ -8,9 +8,7 @@ from pydantic import BaseModel, ConfigDict
 class StrictModel(BaseModel):
     """Frozen, no extra fields, validated on assignment. The default for anything that crosses a boundary."""
 
-    model_config = ConfigDict(
-        extra="forbid", frozen=True, validate_assignment=True, str_strip_whitespace=False
-    )
+    model_config = ConfigDict(extra="forbid", frozen=True, validate_assignment=True, str_strip_whitespace=False)
 
 
 class MutableStrictModel(BaseModel):

@@ -103,11 +103,7 @@ def text_of(path: Path) -> str:
             column = table.column(name)
             if pa.types.is_string(column.type) or pa.types.is_large_string(column.type):
                 parts.extend(str(v) for v in pc.unique(column.drop_null()).to_pylist())
-            elif (
-                pa.types.is_integer(column.type)
-                and pa.types.is_int64(column.type)
-                and not name.endswith("_ns")
-            ):
+            elif pa.types.is_integer(column.type) and pa.types.is_int64(column.type) and not name.endswith("_ns"):
                 values = pc.unique(column.drop_null()).to_pylist()
                 parts.extend(str(v) for v in values if abs(v) >= 10**12)
         return "\n".join(parts)
