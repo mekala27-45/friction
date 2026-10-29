@@ -1,0 +1,6 @@
+{
+ "id": "2026-10-29-10-deploy-before-governance",
+ "kind": "bundle_deploy",
+ "target": "dev",
+ "note": "Deploy the jobs as they stand before governance and the monitor run."
+}
