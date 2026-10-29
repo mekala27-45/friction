@@ -560,8 +560,24 @@ def checklist(b: Builder, ev: dict[str, Any] | None) -> None:
         else ("done", "results/parity.json")
     )
     status[14] = ("done", "tests/api/test_api.py and tests/api/test_out_of_process.py against Postgres")
-    status[15] = ("not done", "config/monitor.yaml and the incident plant exist; the monitor has not run")
-    status[16] = ("not done", "no performance experiment has run")
+    inc = _load("results/incident.json") or {}
+    if (
+        inc.get("day_matches_truth")
+        and exists("results/monitor.json")
+        and exists("docs/incidents/2026-10-29-day-40.md")
+    ):
+        status[15] = ("done", "results/monitor.json, results/incident.json, docs/incidents/2026-10-29-day-40.md "
+                      "(build machine; the workspace issue step waits on the workspace)")  # fmt: skip
+    else:
+        status[15] = (
+            "not done",
+            "config/monitor.yaml and the incident plant exist; the incident has not been replayed",
+        )
+    if exists("results/performance.json") and exists("results/compute_ledger.json"):
+        status[16] = ("done", "results/performance.json, results/compute_ledger.json (build machine timings; "
+                      "workspace DBUs wait on the workspace)")  # fmt: skip
+    else:
+        status[16] = ("not done", "no performance experiment has run")
     status[17] = ("not done", "the site is not built yet")
     status[18] = ("not done", "the tag waits on every line above")
     del probe

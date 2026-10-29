@@ -55,6 +55,9 @@ def main() -> int:
         print(json.dumps(steps.score_step(spark, read, plan, args.out / "models", args.out / "scored", ROOT), indent=1))
         timings["score"] = round(time.monotonic() - t, 1)
     print(timings)
+    args.out.mkdir(parents=True, exist_ok=True)
+    prior = json.loads((args.out / "timings.json").read_text()) if (args.out / "timings.json").exists() else {}
+    (args.out / "timings.json").write_text(json.dumps({**prior, **timings}, indent=1) + "\n", encoding="utf-8")
     return 0
 
 
