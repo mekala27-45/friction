@@ -1,0 +1,6 @@
+{
+ "id": "2026-10-29-07a-deploy-dev",
+ "kind": "bundle_deploy",
+ "target": "dev",
+ "note": "Deploy the table digest that sums in a decimal, so the export of the first month does not overflow."
+}

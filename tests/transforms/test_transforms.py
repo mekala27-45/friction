@@ -351,3 +351,11 @@ def test_a_feed_with_no_drop_yet_is_an_empty_table(spark, tmp_path: Path) -> Non
     df = reader.read_drops(spark, str(tmp_path / "labels_payments" / "drops"), "labels_payments")
     assert df.columns == [*TEXT_COLUMNS["labels_payments"], "_rescued_data", "source_file", "file_modified_at"]
     assert df.count() == 0
+
+
+def test_digest_sums_many_rows_without_overflow(spark) -> None:  # type: ignore[no-untyped-def]
+    from friction_transforms.digests import table_digest
+
+    df = spark.range(5000).selectExpr("id as k", "cast(id * 7 as string) as v")
+    got = table_digest(df)
+    assert got["rows"] == 5000 and got == table_digest(df.orderBy(df.k.desc()))

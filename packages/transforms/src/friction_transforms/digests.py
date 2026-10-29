@@ -35,7 +35,9 @@ def table_digest(df: DataFrame, cols: list[str] | None = None) -> dict[str, Any]
     row = df.agg(
         F.count(F.lit(1)).alias("rows"),
         F.bit_xor(h).alias("xor"),
-        F.sum(F.pmod(h, F.lit(PRIME))).alias("sum"),
+        # Each term is below 2**61, so a 64 bit sum overflows after a few rows; 38 digits hold
+        # the sum of every row either source has, and the remainder is taken in Python.
+        F.sum(F.pmod(h, F.lit(PRIME)).cast("decimal(38,0)")).alias("sum"),
     ).collect()[0]
     total = int(row["sum"] or 0) % PRIME
     return {

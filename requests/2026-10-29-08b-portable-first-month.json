@@ -1,0 +1,10 @@
+{
+ "id": "2026-10-29-08b-portable-first-month",
+ "kind": "portable",
+ "target": "dev",
+ "params": {
+  "outbox_volume": "/Volumes/workspace/friction_dev_raw/outbox",
+  "drops": {"payments": [1, 1], "logins": [1, 1]}
+ },
+ "note": "Retry of 2026-10-29-08-portable-first-month. The pipeline and features ran; the summary overflowed a 64 bit sum in the table digest."
+}
