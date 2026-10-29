@@ -164,3 +164,50 @@ def test_portable_lands_the_redelivery_beside_its_drop(monkeypatch: pytest.Monke
     copies = [c for c, _ in shell.calls if c[:3] == ["databricks", "fs", "cp"]]
     pairs = {(c[4], Path(c[5]).name) for c in copies if "/redelivery/" in c[4]}
     assert ("dbfs:/Volumes/x/outbox/payments/redelivery/0001_1991-01", "0001_1991-01_redelivery") in pairs
+
+
+def test_pipeline_refresh_selects_tables_and_waits(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    states = iter(["RUNNING", "COMPLETED"])
+
+    def shell(cmd: list[str], log: Path, *, cwd: Path = run.ROOT, env: dict[str, str] | None = None) -> str:
+        if cmd[:3] == ["databricks", "bundle", "summary"]:
+            return json.dumps({"resources": {"pipelines": {"friction": {"id": "p1"}}}})
+        if cmd[:3] == ["databricks", "pipelines", "start-update"]:
+            assert json.loads(cmd[5]) == {"full_refresh_selection": ["a.b.c"]}
+            return json.dumps({"update_id": "u1"})
+        return json.dumps({"update": {"state": next(states)}})
+
+    monkeypatch.setattr(run, "_sh", shell)
+    req, out = tmp_path / "requests", tmp_path / "runs"
+    _request(req, "2026-01-01-01-refresh", "pipeline_refresh", params={"tables": ["a.b.c"], "poll_seconds": 0})
+    assert _main(monkeypatch, req, out) == 0
+    done = json.loads((out / "2026-01-01-01-refresh" / "done.json").read_text())
+    assert done["result"]["update_id"] == "u1" and done["status"] == "succeeded"
+
+
+def test_model_alias_promotes_and_demotes(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    import sys
+    import types
+
+    class Alias:
+        def __init__(self, name: str, version: int) -> None:
+            self.alias_name, self.version_num = name, version
+
+    state = {"champion": 2}
+
+    class Models:
+        def get(self, name: str, include_aliases: bool = False) -> object:
+            return types.SimpleNamespace(aliases=[Alias(k, v) for k, v in state.items()])
+
+        def set_alias(self, full_name: str, alias: str, version_num: int) -> None:
+            state[alias] = version_num
+
+    fake = types.ModuleType("databricks.sdk")
+    fake.WorkspaceClient = lambda: types.SimpleNamespace(registered_models=Models())  # type: ignore[attr-defined]
+    monkeypatch.setitem(sys.modules, "databricks.sdk", fake)
+    req, out = tmp_path / "requests", tmp_path / "runs"
+    _request(req, "2026-01-01-01-promote", "model_alias", params={"model": "w.ml.payments_lightgbm", "version": 3})
+    assert _main(monkeypatch, req, out) == 0
+    result = json.loads((out / "2026-01-01-01-promote" / "done.json").read_text())["result"]
+    assert result["aliases_before"] == {"champion": 2}
+    assert result["aliases_after"] == {"champion": 3, "challenger": 2}

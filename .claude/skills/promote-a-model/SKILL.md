@@ -11,8 +11,9 @@ description: Promote a model to champion through the gates, a committed request,
    zero; friction within the budget times 1.25; expected calibration error under 0.05; PSI between
    validation and test under 0.2; reason code coverage of every step up and decline; parity exact
    against the API (`results/parity.json`); p99 latency under the bound.
-3. Commit `requests/<date>-<nn>-promote-<desk>-<model>.json` with `kind: sql` that sets the alias
-   `champion` on the model version in Unity Catalog and moves the old champion to `challenger`.
+3. Commit `requests/<date>-<nn>-promote-<desk>-<model>.json` with `kind: model_alias`, the model's
+   full Unity Catalog name and the version the train job registered (its summary.json): the runner
+   sets `champion` on that version through the API and moves the old champion to `challenger`.
 4. Export the bundle (`scripts/export_models.py`), rerun parity locally and against the live URL.
 5. Rebuild the manifest; the model card and the validation report render from it and refuse to render
    with a section missing.

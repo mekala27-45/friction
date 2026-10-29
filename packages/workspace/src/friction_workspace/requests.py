@@ -27,6 +27,8 @@ Kind = Literal[
     "terraform_plan",
     "terraform_apply",
     "portable",
+    "pipeline_refresh",
+    "model_alias",
 ]
 
 

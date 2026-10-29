@@ -204,6 +204,45 @@ def handle(request: Request, out: Path, log: Path) -> dict[str, Any]:
             _sh([sys.executable, "scripts/perf_experiments.py", "--lake", str(lake), "--out",
                  str(out / "performance.json")], log, env=spark_env)  # fmt: skip
         return {"drops": request.params["drops"], "wall_seconds": round(time.monotonic() - started, 1)}
+    if request.kind == "pipeline_refresh":
+        # A full refresh of named tables only, through the pipelines API, waited on to the end.
+        summary = json.loads(_sh(["databricks", "bundle", "summary", "-t", request.target, "-o", "json",
+                                  *_bundle_vars(request)], log))  # fmt: skip
+        pipeline = summary["resources"]["pipelines"]["friction"]["id"]
+        body = json.dumps({"full_refresh_selection": list(request.params["tables"])})
+        started = json.loads(_sh(["databricks", "pipelines", "start-update", pipeline, "--json", body, "-o", "json"],
+                                 log))  # fmt: skip
+        update_id = started["update_id"]
+        began = time.monotonic()
+        while True:
+            info = json.loads(_sh(["databricks", "pipelines", "get-update", pipeline, update_id, "-o", "json"], log))
+            state = (info.get("update") or {}).get("state", "UNKNOWN")
+            if state == "COMPLETED":
+                break
+            if state in ("FAILED", "CANCELED"):
+                raise RuntimeError(f"pipeline update {update_id} ended {state}")
+            time.sleep(int(request.params.get("poll_seconds", 20)))
+        return {"update_id": update_id, "tables": request.params["tables"],
+                "wall_seconds": round(time.monotonic() - began, 1)}  # fmt: skip
+    if request.kind == "model_alias":
+        # Unity Catalog aliases are set through the API: champion on the promoted version, and the
+        # previous champion, if any, back to challenger.
+        from databricks.sdk import WorkspaceClient
+
+        w = WorkspaceClient()
+        name, version = str(request.params["model"]), int(request.params["version"])
+        alias = str(request.params.get("alias", "champion"))
+        before = {
+            a.alias_name: a.version_num for a in (w.registered_models.get(name, include_aliases=True).aliases or [])
+        }
+        previous = before.get(alias)
+        w.registered_models.set_alias(full_name=name, alias=alias, version_num=version)
+        if alias == "champion" and previous and previous != version:
+            w.registered_models.set_alias(full_name=name, alias="challenger", version_num=previous)
+        after = {
+            a.alias_name: a.version_num for a in (w.registered_models.get(name, include_aliases=True).aliases or [])
+        }
+        return {"model": name, "aliases_before": before, "aliases_after": after}
     if request.kind == "export":
         source = str(request.params["from"])
         _sh(["databricks", "fs", "cp", "-r", "--overwrite", f"dbfs:{source}", str(out / "export")], log)
