@@ -1,0 +1,11 @@
+# Only the scoring path and the exported bundles reach the image.
+*
+!packages/api/requirements-serving.txt
+!packages/core/src/
+!packages/features/src/
+!packages/models/src/
+!packages/policy/src/
+!packages/reasons/src/
+!packages/api/src/
+!results/models/
+**/__pycache__

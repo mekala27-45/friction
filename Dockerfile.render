@@ -1,0 +1,32 @@
+# The same scoring API for Render, the fallback host named in docs/serving.md. Render sets PORT.
+FROM python:3.12-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PYTHONPATH=/app/src \
+    FRICTION_MODELS=/app/models \
+    PORT=80
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+COPY packages/api/requirements-serving.txt /app/requirements.txt
+RUN pip install -r /app/requirements.txt \
+    && find /usr/local/lib/python3.12 -name "tests" -type d -prune -exec rm -rf {} + \
+    && find /usr/local/lib/python3.12 -name "*.pyc" -delete
+
+COPY packages/core/src/friction_core /app/src/friction_core
+COPY packages/features/src/friction_features /app/src/friction_features
+COPY packages/models/src/friction_models /app/src/friction_models
+COPY packages/policy/src/friction_policy /app/src/friction_policy
+COPY packages/reasons/src/friction_reasons /app/src/friction_reasons
+COPY packages/api/src/friction_api /app/src/friction_api
+COPY results/models /app/models
+
+RUN useradd --create-home --uid 10001 friction
+USER friction
+EXPOSE 80
+CMD ["sh", "-c", "uvicorn friction_api.main:app --host 0.0.0.0 --port ${PORT} --proxy-headers --forwarded-allow-ips='*'"]

@@ -1,0 +1,17 @@
+# The fallback host for the scoring API: the same image as Vercel, free web service.
+services:
+  - type: web
+    name: friction-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile.render
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: FRICTION_REPLAY_KEY
+        sync: false
+      - key: FRICTION_CLIENT_KEY
+        sync: false
+      - key: FRICTION_CORS_ORIGINS
+        value: https://mekala27-45.github.io
