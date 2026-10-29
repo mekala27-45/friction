@@ -29,7 +29,14 @@ def _logins() -> tuple[DataFrame, DataFrame]:
         CONTRACT.get("logins", {}).get("renames", {}),
         tuple(CONTRACT.get("logins", {}).get("rejected_files", [])),
     )
-    return silver.logins_split(checked)
+    return silver.logins_split(checked, spark.read.table("login_account_stats"))  # noqa: F821
+
+
+@dp.materialized_view(
+    name="login_account_stats", comment="Attempts and successes per account, and the unknown account flag"
+)
+def login_account_stats() -> DataFrame:
+    return silver.login_account_stats(spark.read.table("logins_bronze"), SALT)  # noqa: F821
 
 
 @dp.materialized_view(name="payments_silver", comment="Typed, conformed, deduplicated card transactions")

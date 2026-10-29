@@ -51,14 +51,25 @@ def payments_silver():  # type: ignore[no-untyped-def]
     return silver.payments_split(spark.read.table("payments_checked"))[0]
 
 
+@dp.materialized_view(name=fq("silver", "login_account_stats"), comment="Attempts and successes per account")
+def login_account_stats():  # type: ignore[no-untyped-def]
+    return silver.login_account_stats(spark.read.table(fq("bronze", "logins_bronze")), SALT)
+
+
 @dp.materialized_view(name=fq("silver", "logins_silver"), comment="Typed, conformed, deduplicated login attempts")
 @dp.expect_or_fail("has_key", "login_ref IS NOT NULL")
+@dp.expect("known_account", "NOT unknown_account")
 def logins_silver():  # type: ignore[no-untyped-def]
-    return silver.logins_split(spark.read.table("logins_checked"))[0]
+    return silver.logins_split(
+        spark.read.table("logins_checked"), spark.read.table(fq("silver", "login_account_stats"))
+    )[0]
 
 
 @dp.materialized_view(name=fq("silver", "quarantine"), comment="Every row a rule refused, one row per rule")
 def quarantine():  # type: ignore[no-untyped-def]
     p = silver.quarantine_rows(silver.payments_split(spark.read.table("payments_checked"))[1], "payments", "txn_ref")
-    lg = silver.quarantine_rows(silver.logins_split(spark.read.table("logins_checked"))[1], "logins", "login_ref")
+    accounts = spark.read.table(fq("silver", "login_account_stats"))
+    lg = silver.quarantine_rows(
+        silver.logins_split(spark.read.table("logins_checked"), accounts)[1], "logins", "login_ref"
+    )
     return p.unionByName(lg)

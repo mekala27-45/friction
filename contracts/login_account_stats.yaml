@@ -1,0 +1,23 @@
+table: login_account_stats
+owner: Ajay Mekala
+layer: silver
+keys:
+- user_key
+freshness: within one daily run of the drop landing
+columns:
+- name: user_key
+  type: string
+  classification: restricted
+  says: salted token of the user id
+- name: attempts
+  type: bigint
+  classification: internal
+  says: attempts delivered for the account, duplicates included
+- name: successes
+  type: bigint
+  classification: internal
+  says: successful attempts among them
+- name: unknown_account
+  type: boolean
+  classification: internal
+  says: more than 1,000,000 attempts with fewer than one success per thousand

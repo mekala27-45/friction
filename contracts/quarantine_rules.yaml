@@ -40,4 +40,5 @@ repairs:
 flags:
   asn_unrealistic:    {origin: RBA README, says: ASNs of 500,000 and above were assigned during synthesis; kept, flagged, counted}
   ip_private:         {origin: RBA README, says: addresses in 10.0.0.0/8 were assigned during synthesis; kept, flagged, counted}
+  unknown_account:    {origin: first look, says: one account holds 14,025,899 attempts with four successes; kept, flagged, its attempts are strangers to the user state machine and never graded}
   label_gaps:         {origin: first look, says: TabFormer marks no fraud from January to October 2017 or after October 2019; see DECISIONS.md}

@@ -201,8 +201,12 @@ def login_inputs(logins: DataFrame, *, has_synthetic: bool = False) -> DataFrame
     Materialized by the pipeline; the user and IP passes run as a job task (see payments_features).
     """
     synthetic = F.col("synthetic") if has_synthetic else F.lit(False)
+    # Every attempt in the unknown account bucket is a stranger to the user state machine; the IP
+    # state machine still counts it, which is where those attempts tell you something.
+    unknown = F.lit(False) if has_synthetic else F.col("unknown_account")
+    user_key = F.when(unknown, F.concat(F.lit("z"), F.col("login_ref").cast("string"))).otherwise(F.col("user_key"))
     return logins.select(
-        "user_key",
+        user_key.alias("user_key"),
         "ip_key",
         F.col("login_ref"),
         (F.unix_timestamp("event_ts") * 1000 + F.date_format("event_ts", "SSS").cast("long")).alias("event_ts_ms"),

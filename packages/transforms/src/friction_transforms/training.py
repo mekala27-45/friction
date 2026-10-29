@@ -80,7 +80,8 @@ def logins_set(
     Freeman model reads travel with the row, as v_ip, v_asn and so on.
     """
     window = (F.col("event_ts") >= F.lit(start)) & (F.col("event_ts") < F.lit(end))
-    real = logins.where(window).select(
+    # The unknown account bucket is nobody's account: never graded, never a victim (DECISIONS.md).
+    real = logins.where(window & ~F.col("unknown_account")).select(
         *LOGIN_CONTEXT,
         *[
             F.coalesce(F.col(c).cast("string"), F.lit("")).alias(f"v_{lvl}")
@@ -119,7 +120,7 @@ def mode_by_user(df: DataFrame, column: str) -> DataFrame:
 
 def victim_profiles(logins: DataFrame, before: str) -> DataFrame:
     """user_key and the user's usual country, region, browser, OS, device and browser string."""
-    ok = logins.where(F.col("success") & (F.col("event_ts") < F.lit(before)))
+    ok = logins.where(F.col("success") & ~F.col("unknown_account") & (F.col("event_ts") < F.lit(before)))
     out = mode_by_user(ok, "country")
     for c in ("region", "browser", "os", "device_type", "ua_key"):
         out = out.join(mode_by_user(ok, c), "user_key")
@@ -132,7 +133,7 @@ def victim_profiles(logins: DataFrame, before: str) -> DataFrame:
 
 def active_users(logins: DataFrame, start: str, end: str) -> DataFrame:
     window = (F.col("event_ts") >= F.lit(start)) & (F.col("event_ts") < F.lit(end))
-    return logins.where(window & F.col("success")).select("user_key").distinct()
+    return logins.where(window & F.col("success") & ~F.col("unknown_account")).select("user_key").distinct()
 
 
 def ip_pool(logins: DataFrame, start: str, end: str, per_country: int = 200) -> DataFrame:

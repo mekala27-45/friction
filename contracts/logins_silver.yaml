@@ -106,3 +106,7 @@ columns:
   type: string
   classification: internal
   says: digest of the payload columns
+- name: unknown_account
+  type: boolean
+  classification: internal
+  says: the account is the bucket that holds sign ins against unknown accounts (DECISIONS.md)

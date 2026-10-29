@@ -31,7 +31,13 @@ LOGIN_TYPED = (
     "city", "asn", "ua_key", "browser", "browser_family", "os", "device_type", "success", "is_attack_ip",
     "flag_asn_unrealistic", "flag_ip_private", "_rescued_data", "drop_id", "drop_end", "source_file", "ingested_at",
 )  # fmt: skip
-LOGIN_SILVER = (*tuple(c for c in LOGIN_TYPED if c != "_rescued_data"), "payload")
+LOGIN_SILVER = (*tuple(c for c in LOGIN_TYPED if c != "_rescued_data"), "payload", "unknown_account")
+# The first look found one account id holding 14,025,899 attempts (45 percent of the file) with four
+# successes: the bucket the service files sign ins against unknown accounts under. An account with
+# more attempts than this and almost no successes is that bucket; its rows stay in silver, flagged,
+# and the user state machine treats each of them as a stranger.
+UNKNOWN_ACCOUNT_ATTEMPTS = 1_000_000
+UNKNOWN_ACCOUNT_SUCCESS_SHARE = 0.001
 
 CHANNEL = F.create_map(
     F.lit("Swipe Transaction"),
@@ -252,7 +258,32 @@ LOGIN_PAYLOAD = (
 )  # fmt: skip
 
 
-def logins_split(checked: DataFrame) -> tuple[DataFrame, DataFrame]:
+def login_account_stats(
+    bronze: DataFrame,
+    salt: Column,
+    attempts: int = UNKNOWN_ACCOUNT_ATTEMPTS,
+    share: float = UNKNOWN_ACCOUNT_SUCCESS_SHARE,
+) -> DataFrame:
+    """user_key, attempts, successes over every attempt delivered, and the unknown account flag."""
+    return (
+        bronze.groupBy(token_col("user", F.col("user_id"), salt).alias("user_key"))
+        .agg(
+            F.count(F.lit(1)).alias("attempts"),
+            F.count_if(F.col("login_successful") == "True").alias("successes"),
+        )
+        .withColumn(
+            "unknown_account",
+            (F.col("attempts") > F.lit(attempts)) & (F.col("successes") < F.col("attempts") * F.lit(share)),
+        )
+    )
+
+
+def logins_split(checked: DataFrame, accounts: DataFrame) -> tuple[DataFrame, DataFrame]:
+    """accounts: login_account_stats(). Silver carries its unknown account flag."""
+    flags = accounts.select("user_key", "unknown_account")
+    checked = checked.join(flags, "user_key", "left").withColumn(
+        "unknown_account", F.coalesce(F.col("unknown_account"), F.lit(False))
+    )
     arrival = Window.partitionBy("login_ref").orderBy("drop_id", "source_file")
     base = checked.withColumn("payload", _payload_hash(LOGIN_PAYLOAD))
     ranked = base.withColumn("_first", F.first("payload").over(arrival)).withColumn(

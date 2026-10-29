@@ -121,3 +121,40 @@ locked in evaluation/plan.lock before any test month of either desk was scored. 
 1,000 legitimate sign ins, chosen after reading the median re-authentication rates the RBA data set
 repository reproduces (about 0.2 to 0.6 per user at a true positive rate of 0.995 to 0.999 for a
 history of twelve logins).
+
+## 2026-10-29 What the first look at the RBA file found
+
+results/profile/rba.json, over all 31,269,264 rows:
+- 4,304,857 distinct user ids. The README says more than 3.3 million users; 3,304,501 of them have
+  at least one successful sign in, which is probably the number it meant.
+- RTT is missing on 29,993,329 rows (96 percent). The feature `rtt_missing` carries that, and the
+  user RTT z score is computed over the rows that have one.
+- 7,291,335 addresses fall in 10.0.0.0/8 and 1,457,824 rows carry an ASN of 500,000 or more; the
+  README says both were assigned during synthesis. Kept, flagged, counted (quarantine_rules.yaml).
+- 141 attempts are marked as takeovers, all between February and November 2020. None falls in the
+  registered test months (15 December 2020 to 28 February 2021), so the login test grades the
+  synthetic attackers only, and the real takeovers are reported on validation with their count
+  printed beside every rate. The plan was registered before this was looked at and is not changed.
+
+## 2026-10-29 The unknown account bucket
+
+One user id holds 14,025,899 attempts, 45 percent of the file, with four successes, 2,047,733
+distinct addresses and 1,650,627 attempts from attack addresses. The next largest account has
+70,028 attempts. It is the bucket the service files sign ins against unknown accounts under, not a
+person. Read as an account it would put fourteen million rows through one user state machine and
+make "new to this user" meaningless for it.
+
+The rule is data driven, not an id: an account with more than 1,000,000 attempts delivered and
+fewer than one success per thousand is flagged `unknown_account` in silver
+(silver.login_account_stats). Its attempts stay in silver and feed the IP state machine, which is
+where they say something; to the user state machine each one is a stranger with no history. They
+are never graded, never chosen as a victim of a synthetic attack, and not counted as users. The
+Lakeflow pipeline counts them with an expectation, `known_account`, so the event log shows the
+number on every update.
+
+## 2026-10-29 The hypotheses are registered beside the plan
+
+evaluation/hypotheses.yaml, sha256 2fa80e2d5af8ecb9c6256355daf59cadc6faf63533b9159a213c5af86772aab8,
+added to evaluation/plan.lock before any rate of fraud by feature was computed and before any
+validation month was scored. The plan hash is unchanged. The groups are written as expressions over
+the scored validation set, so the test that runs is the one that was registered.
