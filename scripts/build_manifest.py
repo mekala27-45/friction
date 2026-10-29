@@ -118,11 +118,13 @@ def sources(b: Builder) -> None:
 
 
 def lake(b: Builder) -> None:
-    rec = _load("results/reconcile.json")
+    # The full open source run happens on the Actions runner with the workspace salt (request kind
+    # portable); its summary is promoted to results/workspace/full_open_source.json.
+    rec = _load("results/workspace/full_open_source.json") or _load("results/reconcile.json")
     if not rec or "local" not in rec:
         return
     loc = rec["local"]
-    o = "scripts/summarize_lake.py over the full local run"
+    o = "scripts/summarize_lake.py over the full open source run"
     rows = []
     for name, d in sorted(loc["tables"].items()):
         b.v(f"lake.local.{name}.rows", d["rows"], "int", o, f"rows of {name}", "local")
@@ -505,39 +507,57 @@ def checklist(b: Builder, ev: dict[str, Any] | None) -> None:
     status: dict[int, tuple[str, str]] = {}
     exists = lambda rel: (ROOT / rel).exists()  # noqa: E731
     probe = _load("results/workspace_probe.json") or {}
-    workspace_ran = exists("results/workspace/first-month.json")
+    rec_first = _load("results/reconcile_first_month.json") or {}
+    rec_full = _load("results/reconcile_full.json") or {}
+    full_export = _load("results/workspace/full_export.json") or {}
     status[1] = (
         (
-            "not done",
-            "fetched and profiled at full size on the build machine (results/profile); the Actions "
-            "fetch waits on the workspace secrets",
+            "done",
+            "results/workspace/fetch_status_on_runner.json (fetched and verified in Actions), results/profile, "
+            "contracts/, data/PROVENANCE.md",
         )
-        if not exists("results/workspace/sources.json")
-        else ("done", "results/workspace/sources.json")
+        if exists("results/workspace/fetch_status_on_runner.json") and exists("results/profile")
+        else (
+            "not done",
+            "fetched and profiled at full size on the build machine (results/profile); the Actions fetch has not run",
+        )
     )
-    status[2] = ("done", "data/replay.lock.json; tests/simulator")
-    rec = _load("results/reconcile.json") or {}
+    status[2] = ("done", "data/replay.lock.json, equal to the lock regenerated in Actions; tests/simulator")
     status[3] = (
-        ("done", "results/reconcile.json (local full run); tests/transforms")
-        if "local" in rec
-        else ("not done", "the full local run has not finished")
+        (
+            "done",
+            "results/workspace/full_open_source.json: every drop on open source Spark, on the Actions runner "
+            "(the build machine has 2 cores and 19 GB of disk); tests/transforms",
+        )
+        if exists("results/workspace/full_open_source.json")
+        else ("not done", "the full open source run has not finished")
     )
     status[4] = (
-        (
-            "not done",
-            "written and validated in CI; apply waits on the Actions secrets FRICTION_SALT, "
-            "TF_STATE_CONN and DATABASE_URL",
-        )
-        if not workspace_ran
-        else ("done", "results/workspace")
+        ("done", "requests/ and the results branch; terraform state in Neon (request 03c); results/provenance.json")
+        if exists("results/provenance.json") and exists("results/workspace")
+        else ("not done", "terraform has not been applied from Actions")
     )
-    status[5] = (
-        ("not done", "requests 03 to 07 are committed and wait on the same secrets")
-        if not workspace_ran
-        else ("done", "results/workspace/first-month.json")
-    )
+    if rec_full and not rec_full.get("drift"):
+        status[5] = ("done", "results/reconcile_first_month.json and results/reconcile_full.json: every exported "
+                             "table equal by digest across the engines")  # fmt: skip
+    elif rec_first and not rec_first.get("drift"):
+        equal = sum(t["digest_equal"] for t in rec_full.get("tables", {}).values())
+        status[5] = ("not done", f"the first month is equal on all nine tables (results/reconcile_first_month.json); "
+                                 f"over every row {equal} of {len(rec_full.get('tables', {}))} are equal and the "
+                                 "card age feature differs (results/reconcile_full.json)")  # fmt: skip
+    else:
+        status[5] = ("not done", "the pipeline has not been reconciled against the open source run")
     status[6] = ("not done", "the jobs are defined in databricks.yml; their workspace tests have not run")
-    status[7] = ("not done", "nothing is backfilled in the workspace yet; the full local run holds every row")
+    rows_full = {k: v["rows"] for k, v in full_export.get("digests", {}).items()}
+    status[7] = (
+        (
+            "done",
+            f"results/workspace/full_export.json: {rows_full.get('payments_silver', 0):,} payments and "
+            f"{rows_full.get('logins_silver', 0):,} logins in silver",
+        )
+        if rows_full
+        else ("not done", "nothing is backfilled in the workspace yet")
+    )
     status[8] = (
         "not done",
         "the probe found masks and functions allowed (results/workspace_probe.json); nothing applied",

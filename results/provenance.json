@@ -28,6 +28,24 @@
    "promoted_at": "2026-10-29T17:59:13+00:00"
   },
   {
+   "file": "results/workspace/full_export.json",
+   "sha256": "8375f54e1e679e309b4bc2f773b94d5d99d8bd69e1c21f3ecedade74b9fb4d8a",
+   "request": "2026-10-29-10-backfill-payments-full",
+   "github_run_id": "40926791442",
+   "commit": "bf4c4daea8ce551aa34f5d3a06c470fff8f6e546",
+   "ran_at": "2026-10-29T18:31:17+00:00",
+   "promoted_at": "2026-10-29T19:06:49+00:00"
+  },
+  {
+   "file": "results/workspace/full_open_source.json",
+   "sha256": "4735ad59af2c25ec27ec6a010dd2cfdd89c006e1776dacd0d61aaab96f7e9cfb",
+   "request": "2026-10-29-11-portable-full",
+   "github_run_id": "40926791442",
+   "commit": "bf4c4daea8ce551aa34f5d3a06c470fff8f6e546",
+   "ran_at": "2026-10-29T19:02:42+00:00",
+   "promoted_at": "2026-10-29T19:06:49+00:00"
+  },
+  {
    "file": "results/workspace/replay_lock_on_runner.json",
    "sha256": "51dda8943082c039c71534d828489a9774da44c0f0c5a6d6c3c48c5f583c2c66",
    "request": "2026-10-29-04b-upload-sources",

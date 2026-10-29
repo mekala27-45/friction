@@ -7,17 +7,17 @@ fails CI. Source of each block in its first line.
 
 ## The definition of done
 
-3 of eighteen lines done.
+7 of eighteen lines done.
 
 | Step | Status | Line | Evidence |
 |---:|---|---|---|
-| 1 | not done | Both sources fetched with digests in Actions, profiled at full size, quarantine rules, contracts, provenance | fetched and profiled at full size on the build machine (results/profile); the Actions fetch waits on the workspace secrets |
-| 2 | done | The replay splitter, the lateness rule, the simulator and the incident config, deterministic with digests | data/replay.lock.json; tests/simulator |
-| 3 | not done | The portable pipeline on open source Spark 4.2 with local tests and the full local run | the full local run has not finished |
-| 4 | not done | Terraform with state in Neon, the bundle, the workspace workflow, the results branch, reviewed promotion | written and validated in CI; apply waits on the Actions secrets FRICTION_SALT, TF_STATE_CONN and DATABASE_URL |
-| 5 | not done | The Lakeflow pipeline deployed to dev and run; the reconcile against the local run | requests 03 to 07 are committed and wait on the same secrets |
+| 1 | done | Both sources fetched with digests in Actions, profiled at full size, quarantine rules, contracts, provenance | results/workspace/fetch_status_on_runner.json (fetched and verified in Actions), results/profile, contracts/, data/PROVENANCE.md |
+| 2 | done | The replay splitter, the lateness rule, the simulator and the incident config, deterministic with digests | data/replay.lock.json, equal to the lock regenerated in Actions; tests/simulator |
+| 3 | done | The portable pipeline on open source Spark 4.2 with local tests and the full local run | results/workspace/full_open_source.json: every drop on open source Spark, on the Actions runner (the build machine has 2 cores and 19 GB of disk); tests/transforms |
+| 4 | done | Terraform with state in Neon, the bundle, the workspace workflow, the results branch, reviewed promotion | requests/ and the results branch; terraform state in Neon (request 03c); results/provenance.json |
+| 5 | not done | The Lakeflow pipeline deployed to dev and run; the reconcile against the local run | the first month is equal on all nine tables (results/reconcile_first_month.json); over every row 8 of 9 are equal and the card age feature differs (results/reconcile_full.json) |
 | 6 | not done | Jobs with retries and the run ledger; idempotency, order and late label tests in the workspace | the jobs are defined in databricks.yml; their workspace tests have not run |
-| 7 | not done | Every row of both sources backfilled in the workspace | nothing is backfilled in the workspace yet; the full local run holds every row |
+| 7 | done | Every row of both sources backfilled in the workspace | results/workspace/full_export.json: 24,383,185 payments and 31,267,738 logins in silver |
 | 8 | not done | Governance: tags, masks, the row filter, grants, lineage, the scan; the planted drift caught by the plan | the probe found masks and functions allowed (results/workspace_probe.json); nothing applied |
 | 9 | done | Point in time features with the leakage test; training sets as of a cut with the two clocks test | tests/features/test_point_in_time.py; tests/transforms/test_training.py |
 | 10 | not done | Floors and models on both desks registered in Unity Catalog; the plan hashed before any test month was scored | floors and models fit on the local run, plan hashed before scoring (DECISIONS.md); Unity Catalog registration waits on the workspace |
@@ -40,11 +40,46 @@ TabFormer: 24,386,900 transactions from 2,000 users and
 4,304,857 user ids, 12,541,442 of them successful; round trip time
 missing on 95.9% of rows; 141 attempts marked as
 account takeovers.
+One account id holds 14,025,899 attempts with
+4 successes: the bucket the service files sign ins against
+unknown accounts under. It is flagged in silver by a rule on counts, never by its id (DECISIONS.md).
 
 The replay delivers 24,386,900 payment rows in 439 drops
 and 31,269,264 login rows in 102 drops; the simulated label
 feed carries 29,512 chargeback rows.
 
+## The full open source run
+
+Every table of the open source run over every drop, on the Actions runner with the workspace salt,
+with its rows and its digest (the reconcile compares these with the workspace's export).
+
+| Table | Rows | Digest |
+|---|---:|---|
+| cards_history | 31,504 | 0da1ee0aeeca |
+| cdc_cards_bronze | 33,254 | 39b4ffdcffb2 |
+| labels_logins_bronze | 141 | c59efa59dcc7 |
+| labels_logins_history | 141 | 3885c57fd4df |
+| labels_payments_bronze | 29,512 | 45011ba048ca |
+| labels_payments_history | 28,448 | 9d3641d66659 |
+| login_account_stats | 4,304,857 | 08c75cf6f396 |
+| logins_bronze | 31,269,264 | 63ef89a5b16a |
+| logins_features | 31,267,738 | 9e3a9413c50a |
+| logins_silver | 31,267,738 | 9c9ad48eb61d |
+| mcc_fraud_rates | 32,836 | acad09ef94d2 |
+| payments_bronze | 24,392,482 | 8cef845aad25 |
+| payments_features | 24,383,185 | 8c543febdd29 |
+| payments_silver | 24,383,185 | 009abd3ed589 |
+| quarantine | 8,161 | 032ed41f8571 |
+
+Quarantine by rule:
+
+| Desk | Rule | Rows |
+|---|---|---:|
+| logins | L_UA | 1,526 |
+| payments | P_BUSINESS_KEY | 308 |
+| payments | P_FUTURE | 487 |
+| payments | P_MCC | 2,920 |
+| payments | P_RESCUED | 2,920 |
 
 
 ## What Free Edition allowed
@@ -85,9 +120,9 @@ feed carries 29,512 chargeback rows.
 
 ## Limitations
 
-- The graded numbers come from the local open source Spark run until the workspace runs; the two engines
-  run the same transforms, but the tokens differ because the build machine never holds the production
-  salt, so the attacker victims and the user bucket grain differ between them.
+- The build machine never holds the production salt. Runs that must match the workspace token for token
+  (the reconcile, the graded models and the served bundles) run on the Actions runner, which holds it as
+  a secret; the build machine's own runs use the public test salt and are labeled as such.
 - The payment labels are simulated chargebacks on TabFormer's fraud flag, with a lag drawn from a
   lognormal. TabFormer marks no fraud in two stretches of its calendar (DECISIONS.md names them); the
   modeling window ends before the second.

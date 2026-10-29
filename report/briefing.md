@@ -4,7 +4,7 @@
 
 ## Where it stands
 
-3 of the eighteen mandatory lines are done. Not done: 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 15, 16, 17, 18. The
+7 of the eighteen mandatory lines are done. Not done: 5, 6, 8, 10, 11, 12, 13, 15, 16, 17, 18. The
 Databricks workspace has run its probe; the deploy, the backfill, governance and the Unity Catalog
 registration wait on three GitHub Actions secrets. The graded numbers below come from the
 local run of the same transforms on open source Spark.

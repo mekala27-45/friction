@@ -3,9 +3,8 @@
 {% if v("checklist.missing") != "none" %}
 **Not complete.** {{ v("checklist.done") }} of the eighteen mandatory lines of the definition of done are
 done; lines {{ v("checklist.missing") }} are not, and RESULTS.md says for each what exists and what it
-waits on. The Databricks workspace has run its probe and nothing else yet: the deploy, the backfill,
-governance and the Unity Catalog registration wait on three GitHub Actions secrets. Every graded number
-below comes from the open source Spark run of the same code on the build machine, and says so.
+waits on. Every number below says which engine produced it: the Lakeflow pipeline in the
+Databricks workspace, or open source Spark running the same code.
 {% else %}
 Every mandatory line of the definition of done is done; RESULTS.md has the evidence for each.
 {% endif %}
@@ -48,7 +47,8 @@ precision are threshold free and sit in the last columns because they are not th
   chargebacks with a lag, card lifecycle changes as a CDC feed, and the attacker models of the RBA papers.
 - **Two engines, one set of transforms.** packages/transforms runs in a Lakeflow pipeline on Databricks
   Free Edition (Auto Loader, expectations, AUTO CDC) and in open source Spark Declarative Pipelines on
-  the build machine. The two are reconciled at the desk, month, day and user bucket grains.
+  a GitHub Actions runner, both with the workspace salt. The two are compared by table digest and at the
+  desk, month, day and user bucket grains (scripts/reconcile.py).
 - **Features as of the event.** State machines in packages/features compute every feature from strictly
   earlier events; the API imports the same code, so online and offline agree by construction and parity
   checks it.

@@ -2,7 +2,7 @@
  "as_of": "2026-10-29",
  "values": {
   "build.commits": {
-   "value": 34,
+   "value": 69,
    "fmt": "int",
    "provenance": {
     "origin": "git",
@@ -13,7 +13,7 @@
    }
   },
   "checklist.done": {
-   "value": 3,
+   "value": 7,
    "fmt": "int",
    "provenance": {
     "origin": "scripts/build_manifest.py",
@@ -24,7 +24,7 @@
    }
   },
   "checklist.missing": {
-   "value": "1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 15, 16, 17, 18",
+   "value": "5, 6, 8, 10, 11, 12, 13, 15, 16, 17, 18",
    "fmt": "text",
    "provenance": {
     "origin": "scripts/build_manifest.py",
@@ -78,6 +78,17 @@
     "note": null
    }
   },
+  "data.rba.known_users": {
+   "value": 4304856,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/summarize_lake.py over the full open source run",
+    "population": "user ids other than the unknown account",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
   "data.rba.rows": {
    "value": 31269264,
    "fmt": "int",
@@ -122,12 +133,45 @@
     "note": null
    }
   },
+  "data.rba.unknown_account_attempts": {
+   "value": 14025899,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/summarize_lake.py over the full open source run",
+    "population": "attempts filed under the unknown account",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "data.rba.unknown_account_successes": {
+   "value": 4,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/summarize_lake.py over the full open source run",
+    "population": "successful attempts on it",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
   "data.rba.users": {
    "value": 4304857,
    "fmt": "int",
    "provenance": {
     "origin": "scripts/profile_sources.py over the staged RBA file",
     "population": "distinct user ids",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "data.tabformer.accounts_in_silver": {
+   "value": 6139,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/summarize_lake.py over the full open source run",
+    "population": "card accounts in silver",
     "source": "local",
     "as_of": "2026-10-29",
     "note": null
@@ -172,6 +216,182 @@
    "provenance": {
     "origin": "scripts/profile_sources.py over the staged TabFormer file",
     "population": "distinct users",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "lake.local.cards_history.rows": {
+   "value": 31504,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/summarize_lake.py over the full open source run",
+    "population": "rows of cards_history",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "lake.local.cdc_cards_bronze.rows": {
+   "value": 33254,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/summarize_lake.py over the full open source run",
+    "population": "rows of cdc_cards_bronze",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "lake.local.labels_logins_bronze.rows": {
+   "value": 141,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/summarize_lake.py over the full open source run",
+    "population": "rows of labels_logins_bronze",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "lake.local.labels_logins_history.rows": {
+   "value": 141,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/summarize_lake.py over the full open source run",
+    "population": "rows of labels_logins_history",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "lake.local.labels_payments_bronze.rows": {
+   "value": 29512,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/summarize_lake.py over the full open source run",
+    "population": "rows of labels_payments_bronze",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "lake.local.labels_payments_history.rows": {
+   "value": 28448,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/summarize_lake.py over the full open source run",
+    "population": "rows of labels_payments_history",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "lake.local.login_account_stats.rows": {
+   "value": 4304857,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/summarize_lake.py over the full open source run",
+    "population": "rows of login_account_stats",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "lake.local.logins_bronze.rows": {
+   "value": 31269264,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/summarize_lake.py over the full open source run",
+    "population": "rows of logins_bronze",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "lake.local.logins_features.rows": {
+   "value": 31267738,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/summarize_lake.py over the full open source run",
+    "population": "rows of logins_features",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "lake.local.logins_silver.rows": {
+   "value": 31267738,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/summarize_lake.py over the full open source run",
+    "population": "rows of logins_silver",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "lake.local.mcc_fraud_rates.rows": {
+   "value": 32836,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/summarize_lake.py over the full open source run",
+    "population": "rows of mcc_fraud_rates",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "lake.local.payments_bronze.rows": {
+   "value": 24392482,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/summarize_lake.py over the full open source run",
+    "population": "rows of payments_bronze",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "lake.local.payments_features.rows": {
+   "value": 24383185,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/summarize_lake.py over the full open source run",
+    "population": "rows of payments_features",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "lake.local.payments_silver.rows": {
+   "value": 24383185,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/summarize_lake.py over the full open source run",
+    "population": "rows of payments_silver",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "lake.local.quarantine.rows": {
+   "value": 8161,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/summarize_lake.py over the full open source run",
+    "population": "rows of quarantine",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "lake.local.quarantine_rows": {
+   "value": 8161,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/summarize_lake.py over the full open source run",
+    "population": "rule violations in quarantine",
     "source": "local",
     "as_of": "2026-10-29",
     "note": null
@@ -580,33 +800,33 @@
    "rows": [
     [
      1,
-     "not done",
+     "done",
      "Both sources fetched with digests in Actions, profiled at full size, quarantine rules, contracts, provenance",
-     "fetched and profiled at full size on the build machine (results/profile); the Actions fetch waits on the workspace secrets"
+     "results/workspace/fetch_status_on_runner.json (fetched and verified in Actions), results/profile, contracts/, data/PROVENANCE.md"
     ],
     [
      2,
      "done",
      "The replay splitter, the lateness rule, the simulator and the incident config, deterministic with digests",
-     "data/replay.lock.json; tests/simulator"
+     "data/replay.lock.json, equal to the lock regenerated in Actions; tests/simulator"
     ],
     [
      3,
-     "not done",
+     "done",
      "The portable pipeline on open source Spark 4.2 with local tests and the full local run",
-     "the full local run has not finished"
+     "results/workspace/full_open_source.json: every drop on open source Spark, on the Actions runner (the build machine has 2 cores and 19 GB of disk); tests/transforms"
     ],
     [
      4,
-     "not done",
+     "done",
      "Terraform with state in Neon, the bundle, the workspace workflow, the results branch, reviewed promotion",
-     "written and validated in CI; apply waits on the Actions secrets FRICTION_SALT, TF_STATE_CONN and DATABASE_URL"
+     "requests/ and the results branch; terraform state in Neon (request 03c); results/provenance.json"
     ],
     [
      5,
      "not done",
      "The Lakeflow pipeline deployed to dev and run; the reconcile against the local run",
-     "requests 03 to 07 are committed and wait on the same secrets"
+     "the first month is equal on all nine tables (results/reconcile_first_month.json); over every row 8 of 9 are equal and the card age feature differs (results/reconcile_full.json)"
     ],
     [
      6,
@@ -616,9 +836,9 @@
     ],
     [
      7,
-     "not done",
+     "done",
      "Every row of both sources backfilled in the workspace",
-     "nothing is backfilled in the workspace yet; the full local run holds every row"
+     "results/workspace/full_export.json: 24,383,185 payments and 31,267,738 logins in silver"
     ],
     [
      8,
@@ -691,6 +911,148 @@
     "origin": "scripts/build_manifest.py",
     "population": "the definition of done",
     "source": "build",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "lake.local.quarantine": {
+   "columns": [
+    "Desk",
+    "Rule",
+    "Rows"
+   ],
+   "formats": [
+    "text",
+    "text",
+    "int"
+   ],
+   "rows": [
+    [
+     "logins",
+     "L_UA",
+     1526
+    ],
+    [
+     "payments",
+     "P_BUSINESS_KEY",
+     308
+    ],
+    [
+     "payments",
+     "P_FUTURE",
+     487
+    ],
+    [
+     "payments",
+     "P_MCC",
+     2920
+    ],
+    [
+     "payments",
+     "P_RESCUED",
+     2920
+    ]
+   ],
+   "provenance": {
+    "origin": "scripts/summarize_lake.py over the full open source run",
+    "population": "quarantined rows by the rule they broke",
+    "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "lake.local.tables": {
+   "columns": [
+    "Table",
+    "Rows",
+    "Digest"
+   ],
+   "formats": [
+    "text",
+    "int",
+    "text"
+   ],
+   "rows": [
+    [
+     "cards_history",
+     31504,
+     "0da1ee0aeeca"
+    ],
+    [
+     "cdc_cards_bronze",
+     33254,
+     "39b4ffdcffb2"
+    ],
+    [
+     "labels_logins_bronze",
+     141,
+     "c59efa59dcc7"
+    ],
+    [
+     "labels_logins_history",
+     141,
+     "3885c57fd4df"
+    ],
+    [
+     "labels_payments_bronze",
+     29512,
+     "45011ba048ca"
+    ],
+    [
+     "labels_payments_history",
+     28448,
+     "9d3641d66659"
+    ],
+    [
+     "login_account_stats",
+     4304857,
+     "08c75cf6f396"
+    ],
+    [
+     "logins_bronze",
+     31269264,
+     "63ef89a5b16a"
+    ],
+    [
+     "logins_features",
+     31267738,
+     "9e3a9413c50a"
+    ],
+    [
+     "logins_silver",
+     31267738,
+     "9c9ad48eb61d"
+    ],
+    [
+     "mcc_fraud_rates",
+     32836,
+     "acad09ef94d2"
+    ],
+    [
+     "payments_bronze",
+     24392482,
+     "8cef845aad25"
+    ],
+    [
+     "payments_features",
+     24383185,
+     "8c543febdd29"
+    ],
+    [
+     "payments_silver",
+     24383185,
+     "009abd3ed589"
+    ],
+    [
+     "quarantine",
+     8161,
+     "032ed41f8571"
+    ]
+   ],
+   "provenance": {
+    "origin": "scripts/summarize_lake.py over the full open source run",
+    "population": "every table of the full local run",
+    "source": "local",
     "as_of": "2026-10-29",
     "note": null
    }
