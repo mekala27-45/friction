@@ -1,0 +1,99 @@
+{% macro card(desk, model, name, kind, features) -%}
+{% set p = "eval." ~ desk ~ "." ~ model %}
+{% if not has(p ~ ".capture_usd.estimate") %}{{ missing(desk ~ " " ~ model ~ ": performance on test") }}{% endif %}
+# Model card: {{ name }}, {{ desk }} desk
+
+{{ statement() }}
+
+**What it is.** {{ kind }}
+
+**What it reads.** {{ features }}
+
+**Intended use.** Ranking {{ "transactions" if desk == "payments" else "successful sign ins" }} for the
+{{ desk }} desk's policy at the friction budget registered in evaluation/plan.yaml. Not for any decision
+about a real person: the data is synthetic.
+
+**Performance on test** ({{ v("eval.source") }} run, thresholds chosen on validation):
+
+| Measure | Value | Interval |
+|---|---:|---:|
+| Dollar capture | {{ v(p ~ ".capture_usd.estimate") }} | {{ v(p ~ ".capture_usd.low") }} to {{ v(p ~ ".capture_usd.high") }} |
+| Capture by count | {{ v(p ~ ".capture.estimate") }} | {{ v(p ~ ".capture.low") }} to {{ v(p ~ ".capture.high") }} |
+| Step ups of good events | {{ v(p ~ ".step_ups_per_1000.estimate") }} | {{ v(p ~ ".step_ups_per_1000.low") }} to {{ v(p ~ ".step_ups_per_1000.high") }} |
+| Declines of good events | {{ v(p ~ ".declines_per_1000.estimate") }} | {{ v(p ~ ".declines_per_1000.low") }} to {{ v(p ~ ".declines_per_1000.high") }} |
+| Precision over all decisions | {{ v(p ~ ".precision_all.estimate") }} | {{ v(p ~ ".precision_all.low") }} to {{ v(p ~ ".precision_all.high") }} |
+
+Threshold free: ROC AUC {{ v(p ~ ".roc_auc") }}, average precision {{ v(p ~ ".average_precision") }}.
+Calibration error: {{ v(p ~ ".ece") }}. Score stability from validation to test (PSI): {{ v(p ~ ".psi") }}.
+Reason code coverage of flagged events: {{ v(p ~ ".coverage") }}.
+
+**Limitations.** Trained and graded on synthetic data; see RESULTS.md, Limitations.
+{%- endmacro %}
+
+{% macro report(desk, model, name, design) -%}
+{% set p = "eval." ~ desk ~ "." ~ model %}
+{% if not has(p ~ ".capture_usd.estimate") %}{{ missing(desk ~ " " ~ model ~ ": performance") }}{% endif %}
+{% if not has("eval." ~ desk ~ ".gates") %}{{ missing(desk ~ ": the promotion gates") }}{% endif %}
+# Validation report: {{ name }}, {{ desk }} desk
+
+{{ statement() }}
+
+Sections in the order of SR 11-7 guidance on model risk management.
+
+## Purpose
+
+Rank {{ "card transactions" if desk == "payments" else "successful sign ins" }} so the desk's policy can
+step up or decline the riskiest within a friction budget registered before the test months were scored
+(plan {{ v("plan.sha256") }}).
+
+## Data
+
+{% if desk == "payments" %}TabFormer transactions with simulated chargeback labels, training months
+{{ v("plan.payments.train.start") }} to {{ v("plan.payments.train.end") }}, labels as known at the training
+cut. Test months {{ v("plan.payments.test.start") }} to {{ v("plan.payments.test.end") }}.
+{% else %}RBA sign ins, training months {{ v("plan.logins.train.start") }} to {{ v("plan.logins.train.end") }},
+with synthetic attackers for training users; test months {{ v("plan.logins.test.start") }} to
+{{ v("plan.logins.test.end") }} with synthetic attackers for held out users. The unknown account bucket is
+excluded.{% endif %}
+
+## Design
+
+{{ design }}
+
+## Performance on validation and test
+
+Validation dollar capture at the chosen thresholds: {{ v(p ~ ".validation_capture_usd") }}. Test dollar
+capture: {{ v(p ~ ".capture_usd.estimate") }} ({{ v(p ~ ".capture_usd.low") }} to {{ v(p ~ ".capture_usd.high") }}).
+
+{{ table("eval." ~ desk ~ ".comparisons") }}
+
+## Stability
+
+PSI of the score from validation to test: {{ v(p ~ ".psi") }}.
+
+## Sensitivity
+
+The interior test on the budget: {{ v("eval." ~ desk ~ ".interior.budget") }}.
+
+{{ table("eval." ~ desk ~ ".interior_budget") }}
+
+## Limitations
+
+Synthetic data; simulated labels; for the login desk, synthetic attackers built from the paper's
+definitions. The expected cost view rests on assumptions in config/costs.yaml.
+
+## Monitoring plan
+
+The monitor task after every scoring run: feature and score PSI against the training months, expectation
+rates, completeness, the clock, and label maturity at the checkpoints in config/monitor.yaml.
+
+## Effective challenges on record
+
+The promotion gates as the repository decided them:
+
+{{ table("eval." ~ desk ~ ".gates") }}
+
+The challenges recorded in DECISIONS.md: class weights reversed to sampling weights to keep the
+probabilities calibrated; the unknown account bucket removed from grading; the Freeman score is not a
+probability and cannot pass the calibration gate.
+{%- endmacro %}

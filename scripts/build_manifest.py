@@ -206,7 +206,9 @@ def evaluation(b: Builder) -> dict[str, Any] | None:
         return None
     src = "evaluation"
     o = f"scripts/grade.py over the scored sets of the {ev['source']} run"
-    b.v("eval.source", ev["source"], "text", o, "where the scored sets came from", src)
+    # "local" is the open source engine; the graded sets come from its run on the Actions runner.
+    label = {"local": "open source", "workspace": "workspace", "fixture": "fixture"}.get(ev["source"], ev["source"])
+    b.v("eval.source", label, "text", o, "where the scored sets came from", src)
     for desk, d in ev["desks"].items():
         pfx = f"eval.{desk}"
         t = d["test"]
@@ -594,8 +596,13 @@ def checklist(b: Builder, ev: dict[str, Any] | None) -> None:
             "config/monitor.yaml and the incident plant exist; the incident has not been replayed",
         )
     if exists("results/performance.json") and exists("results/compute_ledger.json"):
-        status[16] = ("done", "results/performance.json, results/compute_ledger.json (build machine timings; "
-                      "workspace DBUs wait on the workspace)")  # fmt: skip
+        billed = (
+            "with workspace usage from system.billing.usage"
+            if exists("results/workspace/billing.json")
+            else ("workspace usage from the billing table not read yet")
+        )
+        status[16] = ("done", f"results/performance.json (Actions runner, full data), results/compute_ledger.json "
+                              f"(wall seconds per request; {billed})")  # fmt: skip
     else:
         status[16] = ("not done", "no performance experiment has run")
     status[17] = ("not done", "the site is not built yet")

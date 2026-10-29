@@ -1,0 +1,44 @@
+{
+ "experiments": {
+  "buckets": {
+   "largest_group_by_buckets": {
+    "1024": 35244,
+    "256": 38858,
+    "64": 59927,
+    "8": 223852
+   },
+   "rows": 1493937,
+   "seconds_by_buckets": {
+    "1024": 13.07,
+    "256": 13.82,
+    "64": 12.93,
+    "8": 14.69
+   }
+  },
+  "file_sizing": {
+   "after_seconds": 1.0,
+   "before_seconds": 1.11,
+   "files_after": 13,
+   "files_before": 15,
+   "mb": 1689
+  },
+  "skew": {
+   "after_group_mb": 0.55,
+   "after_largest_group": 783,
+   "after_peak_python_mb": 107.0,
+   "after_seconds": 192.37,
+   "before_group_mb": 507.2,
+   "before_largest_group": 720476,
+   "before_peak_python_mb": 371.2,
+   "before_seconds": 28.98,
+   "note": "the unknown account's rows through the user state machine, one group against strangers in 1024 buckets",
+   "rows": 720476,
+   "serverless_udf_cap_mb": 1024
+  }
+ },
+ "machine": {
+  "cores": 4,
+  "python": "3.12.16",
+  "system": "Linux"
+ }
+}

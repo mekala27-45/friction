@@ -2,7 +2,7 @@
  "as_of": "2026-10-29",
  "values": {
   "build.commits": {
-   "value": 69,
+   "value": 71,
    "fmt": "int",
    "provenance": {
     "origin": "git",
@@ -13,7 +13,7 @@
    }
   },
   "checklist.done": {
-   "value": 7,
+   "value": 9,
    "fmt": "int",
    "provenance": {
     "origin": "scripts/build_manifest.py",
@@ -24,7 +24,7 @@
    }
   },
   "checklist.missing": {
-   "value": "5, 6, 8, 10, 11, 12, 13, 15, 16, 17, 18",
+   "value": "5, 6, 8, 10, 12, 13, 15, 17, 18",
    "fmt": "text",
    "provenance": {
     "origin": "scripts/build_manifest.py",
@@ -221,6 +221,2085 @@
     "note": null
    }
   },
+  "eval.logins.attackers.naive.count": {
+   "value": 20000,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "naive attacks in the test months",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.attackers.takeover.count": {
+   "value": 0,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "takeover attacks in the test months",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.attackers.targeted.count": {
+   "value": 20000,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "targeted attacks in the test months",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.attackers.vpn.count": {
+   "value": 20000,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "vpn attacks in the test months",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.champion": {
+   "value": "none",
+   "fmt": "text",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "the champion",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.cost.cheapest": {
+   "value": "the floor",
+   "fmt": "text",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "cheapest at the assumptions",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.cost.flips": {
+   "value": "none",
+   "fmt": "text",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "assumptions that change the cheapest",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.floor.average_precision": {
+   "value": 0.319703773468016,
+   "fmt": "float3",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.floor.capture.estimate": {
+   "value": 0.5849333333333333,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.floor.capture.high": {
+   "value": 0.5868494315213104,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.floor.capture.low": {
+   "value": 0.5829758602241514,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.floor.capture_usd.estimate": {
+   "value": 0.5849333333333333,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.floor.capture_usd.high": {
+   "value": 0.5868494315213104,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.floor.capture_usd.low": {
+   "value": 0.5829758602241514,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.floor.coverage": {
+   "value": 1.0,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "flagged logins test events, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.floor.declines_per_1000.estimate": {
+   "value": 0.0,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.floor.declines_per_1000.high": {
+   "value": 0.0,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.floor.declines_per_1000.low": {
+   "value": 0.0,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.floor.ece": {
+   "value": null,
+   "fmt": "float3",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.floor.friction_per_1000.estimate": {
+   "value": 0.05766714557786762,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.floor.friction_per_1000.high": {
+   "value": 0.05800415818920343,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.floor.friction_per_1000.low": {
+   "value": 0.05728707665360619,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.floor.precision_all.estimate": {
+   "value": 0.21329767837607877,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.floor.precision_all.high": {
+   "value": 0.2157589178466603,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.floor.precision_all.low": {
+   "value": 0.21089663971628042,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.floor.psi": {
+   "value": 0.0003389708707796533,
+   "fmt": "float3",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins validation to test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.floor.roc_auc": {
+   "value": 0.8631479084945483,
+   "fmt": "float3",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.floor.step_ups_per_1000.estimate": {
+   "value": 0.05766714557786762,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.floor.step_ups_per_1000.high": {
+   "value": 0.05800415818920343,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.floor.step_ups_per_1000.low": {
+   "value": 0.05728707665360619,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.floor.validation_capture_usd": {
+   "value": 0.5833333333333334,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins validation, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.freeman.average_precision": {
+   "value": 0.019975175816909434,
+   "fmt": "float3",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, freeman",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.freeman.capture.estimate": {
+   "value": 0.0,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, freeman",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.freeman.capture.high": {
+   "value": 0.0,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, freeman",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.freeman.capture.low": {
+   "value": 0.0,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, freeman",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.freeman.capture_usd.estimate": {
+   "value": 0.0,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, freeman",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.freeman.capture_usd.high": {
+   "value": 0.0,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, freeman",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.freeman.capture_usd.low": {
+   "value": 0.0,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, freeman",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.freeman.coverage": {
+   "value": 1.0,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "flagged logins test events, freeman",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.freeman.declines_per_1000.estimate": {
+   "value": 0.0,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, freeman",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.freeman.declines_per_1000.high": {
+   "value": 0.0,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, freeman",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.freeman.declines_per_1000.low": {
+   "value": 0.0,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, freeman",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.freeman.ece": {
+   "value": null,
+   "fmt": "float3",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, freeman",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.freeman.friction_per_1000.estimate": {
+   "value": 0.0,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, freeman",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.freeman.friction_per_1000.high": {
+   "value": 0.0,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, freeman",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.freeman.friction_per_1000.low": {
+   "value": 0.0,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, freeman",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.freeman.precision_all.estimate": {
+   "value": null,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, freeman",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.freeman.precision_all.high": {
+   "value": null,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, freeman",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.freeman.precision_all.low": {
+   "value": null,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, freeman",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.freeman.psi": {
+   "value": 0.02090149934242198,
+   "fmt": "float3",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins validation to test, freeman",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.freeman.roc_auc": {
+   "value": 0.3839409987154785,
+   "fmt": "float3",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, freeman",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.freeman.step_ups_per_1000.estimate": {
+   "value": 0.0,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, freeman",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.freeman.step_ups_per_1000.high": {
+   "value": 0.0,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, freeman",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.freeman.step_ups_per_1000.low": {
+   "value": 0.0,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, freeman",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.freeman.validation_capture_usd": {
+   "value": 0.0,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins validation, freeman",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.interior.budget": {
+   "value": "stable",
+   "fmt": "text",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "champion under half and double the budget",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm.average_precision": {
+   "value": 0.09605804081503322,
+   "fmt": "float3",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm.capture.estimate": {
+   "value": 0.2585,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm.capture.high": {
+   "value": 0.26088651179538125,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm.capture.low": {
+   "value": 0.2562476318669157,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm.capture_usd.estimate": {
+   "value": 0.2585,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm.capture_usd.high": {
+   "value": 0.26088651179538125,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm.capture_usd.low": {
+   "value": 0.2562476318669157,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm.coverage": {
+   "value": 1.0,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "flagged logins test events, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm.declines_per_1000.estimate": {
+   "value": 0.0008179357813491931,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm.declines_per_1000.high": {
+   "value": 0.0008560300186474091,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm.declines_per_1000.low": {
+   "value": 0.0007788076557459062,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm.ece": {
+   "value": 0.02602295599128895,
+   "fmt": "float3",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm.friction_per_1000.estimate": {
+   "value": 0.04211745575640126,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm.friction_per_1000.high": {
+   "value": 0.04244009048197148,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm.friction_per_1000.low": {
+   "value": 0.041784362090127966,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm.precision_all.estimate": {
+   "value": 0.14093593820990458,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm.precision_all.high": {
+   "value": 0.14300370660655062,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm.precision_all.low": {
+   "value": 0.1389161340718723,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm.psi": {
+   "value": 0.007600624471713971,
+   "fmt": "float3",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins validation to test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm.roc_auc": {
+   "value": 0.6360573903274788,
+   "fmt": "float3",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm.step_ups_per_1000.estimate": {
+   "value": 0.04129951997505207,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm.step_ups_per_1000.high": {
+   "value": 0.04163085313191589,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm.step_ups_per_1000.low": {
+   "value": 0.04097205181865419,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm.validation_capture_usd": {
+   "value": 0.5833333333333334,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins validation, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm_rep.average_precision": {
+   "value": 0.09539719573015328,
+   "fmt": "float3",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm_rep",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm_rep.capture.estimate": {
+   "value": 0.27541666666666664,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm_rep",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm_rep.capture.high": {
+   "value": 0.27753421082142177,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm_rep",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm_rep.capture.low": {
+   "value": 0.27335159245392215,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm_rep",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm_rep.capture_usd.estimate": {
+   "value": 0.27541666666666664,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm_rep",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm_rep.capture_usd.high": {
+   "value": 0.27753421082142177,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm_rep",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm_rep.capture_usd.low": {
+   "value": 0.27335159245392215,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm_rep",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm_rep.coverage": {
+   "value": 1.0,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "flagged logins test events, lightgbm_rep",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm_rep.declines_per_1000.estimate": {
+   "value": 0.0007404189916134853,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm_rep",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm_rep.declines_per_1000.high": {
+   "value": 0.0007778573135685899,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm_rep",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm_rep.declines_per_1000.low": {
+   "value": 0.0007062794268821662,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm_rep",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm_rep.ece": {
+   "value": 0.026025891079350414,
+   "fmt": "float3",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm_rep",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm_rep.friction_per_1000.estimate": {
+   "value": 0.061109069241649674,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm_rep",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm_rep.friction_per_1000.high": {
+   "value": 0.06150814148626352,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm_rep",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm_rep.friction_per_1000.low": {
+   "value": 0.06070882871380255,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm_rep",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm_rep.precision_all.estimate": {
+   "value": 0.10751813656917922,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm_rep",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm_rep.precision_all.high": {
+   "value": 0.10917120957903896,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm_rep",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm_rep.precision_all.low": {
+   "value": 0.10598469841226964,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm_rep",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm_rep.psi": {
+   "value": 0.005716168211964283,
+   "fmt": "float3",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins validation to test, lightgbm_rep",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm_rep.roc_auc": {
+   "value": 0.6130062229907076,
+   "fmt": "float3",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm_rep",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm_rep.step_ups_per_1000.estimate": {
+   "value": 0.060368650250036196,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm_rep",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm_rep.step_ups_per_1000.high": {
+   "value": 0.060770603890409274,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm_rep",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm_rep.step_ups_per_1000.low": {
+   "value": 0.05997378582874012,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, lightgbm_rep",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.lightgbm_rep.validation_capture_usd": {
+   "value": 0.5833333333333334,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins validation, lightgbm_rep",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.rba.users_in_band": {
+   "value": 94003,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "users with ten to fourteen earlier sign ins",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.test.events": {
+   "value": 2304675,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "graded logins test events",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.test.frauds": {
+   "value": 60000,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "positives among them",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.test.users": {
+   "value": 1046519,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "units of resampling",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.champion": {
+   "value": "LightGBM",
+   "fmt": "text",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "the champion",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.cost.cheapest": {
+   "value": "LightGBM",
+   "fmt": "text",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "cheapest at the assumptions",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.cost.flips": {
+   "value": "none",
+   "fmt": "text",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "assumptions that change the cheapest",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.floor.average_precision": {
+   "value": 0.0033852933902892408,
+   "fmt": "float3",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.floor.capture.estimate": {
+   "value": 0.002544529262086514,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.floor.capture.high": {
+   "value": 0.0065472398622419496,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.floor.capture.low": {
+   "value": 0.0,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.floor.capture_usd.estimate": {
+   "value": 0.017713381827292974,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.floor.capture_usd.high": {
+   "value": 0.04448462283620426,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.floor.capture_usd.low": {
+   "value": 0.0,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.floor.coverage": {
+   "value": 1.0,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "flagged payments test events, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.floor.declines_per_1000.estimate": {
+   "value": 0.0009762559377403987,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.floor.declines_per_1000.high": {
+   "value": 0.0011101765991232441,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.floor.declines_per_1000.low": {
+   "value": 0.0008484913741662616,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.floor.ece": {
+   "value": null,
+   "fmt": "float3",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.floor.friction_per_1000.estimate": {
+   "value": 0.010721566977021764,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.floor.friction_per_1000.high": {
+   "value": 0.011249046513172158,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.floor.friction_per_1000.low": {
+   "value": 0.010181065709880113,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.floor.precision_all.estimate": {
+   "value": 0.000321646831778707,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.floor.precision_all.high": {
+   "value": 0.0008169968019893037,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.floor.precision_all.low": {
+   "value": 0.0,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.floor.psi": {
+   "value": 4.5505466437146643e-05,
+   "fmt": "float3",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments validation to test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.floor.roc_auc": {
+   "value": 0.5967980751275989,
+   "fmt": "float3",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.floor.step_ups_per_1000.estimate": {
+   "value": 0.009745311039281366,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.floor.step_ups_per_1000.high": {
+   "value": 0.010230879638630069,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.floor.step_ups_per_1000.low": {
+   "value": 0.009260140940378157,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.floor.validation_capture_usd": {
+   "value": 0.06579575865080357,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments validation, floor",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.interior.budget": {
+   "value": "stable",
+   "fmt": "text",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "champion under half and double the budget",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.lightgbm.average_precision": {
+   "value": 0.8008197361196604,
+   "fmt": "float3",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.lightgbm.capture.estimate": {
+   "value": 0.8969465648854962,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.lightgbm.capture.high": {
+   "value": 0.92606008065217,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.lightgbm.capture.low": {
+   "value": 0.8630828945314747,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.lightgbm.capture_usd.estimate": {
+   "value": 0.9022662383985637,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.lightgbm.capture_usd.high": {
+   "value": 0.946352242407795,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.lightgbm.capture_usd.low": {
+   "value": 0.8496598294794899,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.lightgbm.coverage": {
+   "value": 1.0,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "flagged payments test events, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.lightgbm.declines_per_1000.estimate": {
+   "value": 0.0011832359952118614,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.lightgbm.declines_per_1000.high": {
+   "value": 0.001395715318532969,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.lightgbm.declines_per_1000.low": {
+   "value": 0.0009818630465135542,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.lightgbm.ece": {
+   "value": 7.578247038134699e-05,
+   "fmt": "float3",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.lightgbm.friction_per_1000.estimate": {
+   "value": 0.009831552729894475,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.lightgbm.friction_per_1000.high": {
+   "value": 0.010223168126273089,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.lightgbm.friction_per_1000.low": {
+   "value": 0.009457392119084768,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.lightgbm.precision_all.estimate": {
+   "value": 0.11007025761124122,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.lightgbm.precision_all.high": {
+   "value": 0.13033868487165823,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.lightgbm.precision_all.low": {
+   "value": 0.08940159907440186,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.lightgbm.psi": {
+   "value": 0.002077249368700659,
+   "fmt": "float3",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments validation to test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.lightgbm.roc_auc": {
+   "value": 0.9995142025317769,
+   "fmt": "float3",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.lightgbm.step_ups_per_1000.estimate": {
+   "value": 0.008648316734682613,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.lightgbm.step_ups_per_1000.high": {
+   "value": 0.008976586307072385,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.lightgbm.step_ups_per_1000.low": {
+   "value": 0.008345470911936975,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.lightgbm.validation_capture_usd": {
+   "value": 0.9266656146935619,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments validation, lightgbm",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.logistic.average_precision": {
+   "value": 0.5571361368224245,
+   "fmt": "float3",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, logistic",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.logistic.capture.estimate": {
+   "value": 0.7188295165394402,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, logistic",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.logistic.capture.high": {
+   "value": 0.7577211797734107,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, logistic",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.logistic.capture.low": {
+   "value": 0.6756716893885035,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, logistic",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.logistic.capture_usd.estimate": {
+   "value": 0.8121225843992713,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, logistic",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.logistic.capture_usd.high": {
+   "value": 0.8502051720835697,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, logistic",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.logistic.capture_usd.low": {
+   "value": 0.7647886767431084,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, logistic",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.logistic.coverage": {
+   "value": 1.0,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "flagged payments test events, logistic",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.logistic.declines_per_1000.estimate": {
+   "value": 0.0012056588347712698,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, logistic",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.logistic.declines_per_1000.high": {
+   "value": 0.0013809464000265998,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, logistic",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.logistic.declines_per_1000.low": {
+   "value": 0.0010437765745752862,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, logistic",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.logistic.ece": {
+   "value": 0.0002560165102835752,
+   "fmt": "float3",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, logistic",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.logistic.friction_per_1000.estimate": {
+   "value": 0.010650848790719014,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, logistic",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.logistic.friction_per_1000.high": {
+   "value": 0.011122679066363623,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, logistic",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.logistic.friction_per_1000.low": {
+   "value": 0.010166790399343024,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, logistic",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.logistic.precision_all.estimate": {
+   "value": 0.08382789317507418,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, logistic",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.logistic.precision_all.high": {
+   "value": 0.10096839931260082,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, logistic",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.logistic.precision_all.low": {
+   "value": 0.0674226205461192,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, logistic",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.logistic.psi": {
+   "value": 7.909147014037291e-05,
+   "fmt": "float3",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments validation to test, logistic",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.logistic.roc_auc": {
+   "value": 0.9989185094497062,
+   "fmt": "float3",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, logistic",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.logistic.step_ups_per_1000.estimate": {
+   "value": 0.009445189955947744,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, logistic",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.logistic.step_ups_per_1000.high": {
+   "value": 0.009851568945285577,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, logistic",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.logistic.step_ups_per_1000.low": {
+   "value": 0.009063612669856813,
+   "fmt": "per1k2",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, logistic",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.logistic.validation_capture_usd": {
+   "value": 0.7328236778628271,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments validation, logistic",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.test.events": {
+   "value": 580552,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "graded payments test events",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.test.fraud_usd": {
+   "value": 69205.87,
+   "fmt": "usd0",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "fraud dollars in the test months",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.test.frauds": {
+   "value": 786,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "positives among them",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.test.users": {
+   "value": 3897,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "units of resampling",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.source": {
+   "value": "open source",
+   "fmt": "text",
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "where the scored sets came from",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
   "lake.local.cards_history.rows": {
    "value": 31504,
    "fmt": "int",
@@ -393,6 +2472,72 @@
     "origin": "scripts/summarize_lake.py over the full open source run",
     "population": "rule violations in quarantine",
     "source": "local",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "parity.local.logins.compared": {
+   "value": 286,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/check_parity.py against local",
+    "population": "logins decisions compared",
+    "source": "build",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "parity.local.logins.equal": {
+   "value": 286,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/check_parity.py against local",
+    "population": "logins decisions equal",
+    "source": "build",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "parity.local.logins.worst": {
+   "value": 0.0,
+   "fmt": "float4",
+   "provenance": {
+    "origin": "scripts/check_parity.py against local",
+    "population": "largest score difference",
+    "source": "build",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "parity.local.payments.compared": {
+   "value": 1000,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/check_parity.py against local",
+    "population": "payments decisions compared",
+    "source": "build",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "parity.local.payments.equal": {
+   "value": 1000,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/check_parity.py against local",
+    "population": "payments decisions equal",
+    "source": "build",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "parity.local.payments.worst": {
+   "value": 0.0,
+   "fmt": "float4",
+   "provenance": {
+    "origin": "scripts/check_parity.py against local",
+    "population": "largest score difference",
+    "source": "build",
     "as_of": "2026-10-29",
     "note": null
    }
@@ -860,9 +3005,9 @@
     ],
     [
      11,
-     "not done",
+     "done",
      "The frontier, operating points, intervals, BH, interior tests, calibration, hypotheses, the RBA comparison",
-     "no scored sets graded yet"
+     "results/evaluation.json from the local run's scored sets"
     ],
     [
      12,
@@ -890,9 +3035,9 @@
     ],
     [
      16,
-     "not done",
+     "done",
      "Performance experiments and the compute ledger published",
-     "no performance experiment has run"
+     "results/performance.json (Actions runner, full data), results/compute_ledger.json (wall seconds per request; workspace usage from the billing table not read yet)"
     ],
     [
      17,
@@ -911,6 +3056,844 @@
     "origin": "scripts/build_manifest.py",
     "population": "the definition of done",
     "source": "build",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.hypotheses": {
+   "columns": [
+    "Id",
+    "Question",
+    "A",
+    "B",
+    "Adjusted p",
+    "Verdict"
+   ],
+   "formats": [
+    "text",
+    "text",
+    "float4",
+    "float4",
+    "float3",
+    "text"
+   ],
+   "rows": [
+    [
+     "H1",
+     "online purchases between midnight and six carry more fraud per dollar than chip purchases",
+     0.0,
+     0.0027378264439239046,
+     1.0,
+     "not supported"
+    ],
+    [
+     "H2",
+     "purchases on a card's first visit to a merchant are more often fraud than repeat visits",
+     0.0265630280500169,
+     0.0005760754767568037,
+     0.0012487512487512488,
+     "supported"
+    ],
+    [
+     "H3",
+     "purchases abroad are more often fraud than purchases at home",
+     0.17783891945972988,
+     0.0,
+     0.0012487512487512488,
+     "supported"
+    ],
+    [
+     "H4",
+     "a successful sign in from a new network (ASN) is more often an attack than one from a new city on a known network",
+     8.420485356775964e-05,
+     4.906711154181132e-06,
+     0.0012487512487512488,
+     "supported"
+    ],
+    [
+     "H5",
+     "sign ins from addresses on the attacker list fail more often than others",
+     0.45266467808224325,
+     0.25520791577736207,
+     0.0012487512487512488,
+     "supported"
+    ]
+   ],
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "validation months, one sided, Benjamini-Hochberg across the five",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.attackers": {
+   "columns": [
+    "Model",
+    "Naive",
+    "VPN",
+    "Targeted",
+    "Takeovers"
+   ],
+   "formats": [
+    "text",
+    "pct1",
+    "pct1",
+    "pct1",
+    "pct1"
+   ],
+   "rows": [
+    [
+     "the floor",
+     0.9996,
+     0.7552,
+     0.0,
+     null
+    ],
+    [
+     "Freeman RBA",
+     0.0,
+     0.0,
+     0.0,
+     null
+    ],
+    [
+     "LightGBM",
+     0.7286,
+     0.0189,
+     0.028,
+     null
+    ],
+    [
+     "LightGBM with the attack IP flag",
+     0.79305,
+     0.00695,
+     0.02625,
+     null
+    ]
+   ],
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "capture at the operating point, by attacker model",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.comparisons": {
+   "columns": [
+    "Model",
+    "Against",
+    "Difference",
+    "Low",
+    "High",
+    "p",
+    "Adjusted p",
+    "Rejected"
+   ],
+   "formats": [
+    "text",
+    "text",
+    "pts1",
+    "pts1",
+    "pts1",
+    "float3",
+    "float3",
+    "text"
+   ],
+   "rows": [
+    [
+     "Freeman RBA",
+     "the floor",
+     -0.5849333333333333,
+     -0.5868494315213104,
+     -0.5829758602241514,
+     0.001998001998001998,
+     0.001998001998001998,
+     "yes"
+    ],
+    [
+     "LightGBM",
+     "the floor",
+     -0.3264333333333333,
+     -0.32962556867166365,
+     -0.3231653404620947,
+     0.001998001998001998,
+     0.001998001998001998,
+     "yes"
+    ],
+    [
+     "LightGBM",
+     "Freeman RBA",
+     0.2585,
+     0.2562476318669157,
+     0.26088651179538125,
+     0.001998001998001998,
+     0.001998001998001998,
+     "yes"
+    ]
+   ],
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, dollar capture at the operating point",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.cost": {
+   "columns": [
+    "Model",
+    "Cost per 1,000 events"
+   ],
+   "formats": [
+    "text",
+    "usd2"
+   ],
+   "rows": [
+    [
+     "the floor",
+     4333.5779665245645
+    ],
+    [
+     "Freeman RBA",
+     10413.615802661981
+    ],
+    [
+     "LightGBM",
+     7729.900311323722
+    ],
+    [
+     "LightGBM with the attack IP flag",
+     7557.436081009253
+    ]
+   ],
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test, config/costs.yaml assumptions",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.gates": {
+   "columns": [
+    "Model",
+    "Gate",
+    "Result"
+   ],
+   "formats": [
+    "text",
+    "text",
+    "text"
+   ],
+   "rows": [
+    [
+     "Freeman RBA",
+     "expected calibration error under the bound",
+     "failed"
+    ],
+    [
+     "Freeman RBA",
+     "dollar capture above the floor, interval clear of zero",
+     "failed"
+    ],
+    [
+     "Freeman RBA",
+     "friction within the budget on test",
+     "passed"
+    ],
+    [
+     "Freeman RBA",
+     "reason code coverage of every step up and decline",
+     "passed"
+    ],
+    [
+     "Freeman RBA",
+     "score stability, PSI under the bound",
+     "passed"
+    ],
+    [
+     "LightGBM",
+     "expected calibration error under the bound",
+     "passed"
+    ],
+    [
+     "LightGBM",
+     "dollar capture above the floor, interval clear of zero",
+     "failed"
+    ],
+    [
+     "LightGBM",
+     "friction within the budget on test",
+     "passed"
+    ],
+    [
+     "LightGBM",
+     "reason code coverage of every step up and decline",
+     "passed"
+    ],
+    [
+     "LightGBM",
+     "score stability, PSI under the bound",
+     "passed"
+    ],
+    [
+     "LightGBM with the attack IP flag",
+     "expected calibration error under the bound",
+     "passed"
+    ],
+    [
+     "LightGBM with the attack IP flag",
+     "dollar capture above the floor, interval clear of zero",
+     "failed"
+    ],
+    [
+     "LightGBM with the attack IP flag",
+     "friction within the budget on test",
+     "passed"
+    ],
+    [
+     "LightGBM with the attack IP flag",
+     "reason code coverage of every step up and decline",
+     "passed"
+    ],
+    [
+     "LightGBM with the attack IP flag",
+     "score stability, PSI under the bound",
+     "passed"
+    ]
+   ],
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins promotion gates the repository decides",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.interior_budget": {
+   "columns": [
+    "Budget",
+    "Freeman RBA",
+    "LightGBM"
+   ],
+   "formats": [
+    "text",
+    "pct1",
+    "pct1"
+   ],
+   "rows": [
+    [
+     "double",
+     0.02505,
+     0.35736666666666667
+    ],
+    [
+     "half",
+     0.0,
+     0.2585
+    ],
+    [
+     "registered",
+     0.0,
+     0.2585
+    ]
+   ],
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test dollar capture, thresholds re-chosen on validation",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.rba_reauth": {
+   "columns": [
+    "Attacker",
+    "TPR",
+    "Ours",
+    "Published"
+   ],
+   "formats": [
+    "text",
+    "text",
+    "pct0",
+    "pct0"
+   ],
+   "rows": [
+    [
+     "naive",
+     "0.980",
+     1.0,
+     0.09
+    ],
+    [
+     "naive",
+     "0.990",
+     1.0,
+     0.17
+    ],
+    [
+     "naive",
+     "0.995",
+     1.0,
+     0.24
+    ],
+    [
+     "naive",
+     "0.999",
+     1.0,
+     0.56
+    ],
+    [
+     "targeted",
+     "0.980",
+     1.0,
+     0.17
+    ],
+    [
+     "targeted",
+     "0.990",
+     1.0,
+     0.31
+    ],
+    [
+     "targeted",
+     "0.995",
+     1.0,
+     0.38
+    ],
+    [
+     "targeted",
+     "0.999",
+     1.0,
+     0.69
+    ],
+    [
+     "vpn",
+     "0.970",
+     1.0,
+     0.16
+    ],
+    [
+     "vpn",
+     "0.980",
+     1.0,
+     0.19
+    ],
+    [
+     "vpn",
+     "0.990",
+     1.0,
+     0.26
+    ],
+    [
+     "vpn",
+     "0.995",
+     1.0,
+     0.31
+    ],
+    [
+     "vpn",
+     "0.999",
+     1.0,
+     0.62
+    ]
+   ],
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run; published read from figure rq1-general",
+    "population": "median re-authentication rate per user, history of ten to fourteen",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.rba_rsr": {
+   "columns": [
+    "Attacker",
+    "Ours",
+    "Published"
+   ],
+   "formats": [
+    "text",
+    "float2",
+    "float2"
+   ],
+   "rows": [
+    [
+     "naive",
+     0.00020571989672470148,
+     8.48
+    ],
+    [
+     "vpn",
+     5.4738419583360365,
+     5.05
+    ],
+    [
+     "targeted",
+     2.2982480248328883,
+     8.94
+    ]
+   ],
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run; published from evaluation/rba_published.yaml",
+    "population": "risk score relation of the Freeman model",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.logins.scorecard": {
+   "columns": [
+    "Model",
+    "Capture",
+    "Low",
+    "High",
+    "Step ups",
+    "Declines",
+    "Precision",
+    "ECE",
+    "ROC AUC",
+    "AP"
+   ],
+   "formats": [
+    "text",
+    "pct1",
+    "pct1",
+    "pct1",
+    "per1k2",
+    "per1k2",
+    "pct1",
+    "float3",
+    "float3",
+    "float3"
+   ],
+   "rows": [
+    [
+     "the floor",
+     0.5849333333333333,
+     0.5829758602241514,
+     0.5868494315213104,
+     0.05766714557786762,
+     0.0,
+     0.21329767837607877,
+     null,
+     0.8631479084945483,
+     0.319703773468016
+    ],
+    [
+     "Freeman RBA",
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     null,
+     null,
+     0.3839409987154785,
+     0.019975175816909434
+    ],
+    [
+     "LightGBM",
+     0.2585,
+     0.2562476318669157,
+     0.26088651179538125,
+     0.04129951997505207,
+     0.0008179357813491931,
+     0.14093593820990458,
+     0.02602295599128895,
+     0.6360573903274788,
+     0.09605804081503322
+    ],
+    [
+     "LightGBM with the attack IP flag",
+     0.27541666666666664,
+     0.27335159245392215,
+     0.27753421082142177,
+     0.060368650250036196,
+     0.0007404189916134853,
+     0.10751813656917922,
+     0.026025891079350414,
+     0.6130062229907076,
+     0.09539719573015328
+    ]
+   ],
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "logins test months at the operating point chosen on validation",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.comparisons": {
+   "columns": [
+    "Model",
+    "Against",
+    "Difference",
+    "Low",
+    "High",
+    "p",
+    "Adjusted p",
+    "Rejected"
+   ],
+   "formats": [
+    "text",
+    "text",
+    "pts1",
+    "pts1",
+    "pts1",
+    "float3",
+    "float3",
+    "text"
+   ],
+   "rows": [
+    [
+     "logistic regression",
+     "the floor",
+     0.7944092025719783,
+     0.7368525745249558,
+     0.8409268542763473,
+     0.001998001998001998,
+     0.001998001998001998,
+     "yes"
+    ],
+    [
+     "LightGBM",
+     "the floor",
+     0.8845528565712703,
+     0.8164019235813822,
+     0.9362212604892715,
+     0.001998001998001998,
+     0.001998001998001998,
+     "yes"
+    ],
+    [
+     "LightGBM",
+     "logistic regression",
+     0.09014365399929192,
+     0.03493425241746821,
+     0.14465179362333688,
+     0.001998001998001998,
+     0.001998001998001998,
+     "yes"
+    ]
+   ],
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, dollar capture at the operating point",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.cost": {
+   "columns": [
+    "Model",
+    "Cost per 1,000 events"
+   ],
+   "formats": [
+    "text",
+    "usd2"
+   ],
+   "rows": [
+    [
+     "the floor",
+     175.10066625900868
+    ],
+    [
+     "LightGBM",
+     39.349819943777646
+    ],
+    [
+     "logistic regression",
+     58.19871920861525
+    ]
+   ],
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test, config/costs.yaml assumptions",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.gates": {
+   "columns": [
+    "Model",
+    "Gate",
+    "Result"
+   ],
+   "formats": [
+    "text",
+    "text",
+    "text"
+   ],
+   "rows": [
+    [
+     "LightGBM",
+     "expected calibration error under the bound",
+     "passed"
+    ],
+    [
+     "LightGBM",
+     "dollar capture above the floor, interval clear of zero",
+     "passed"
+    ],
+    [
+     "LightGBM",
+     "friction within the budget on test",
+     "passed"
+    ],
+    [
+     "LightGBM",
+     "reason code coverage of every step up and decline",
+     "passed"
+    ],
+    [
+     "LightGBM",
+     "score stability, PSI under the bound",
+     "passed"
+    ],
+    [
+     "logistic regression",
+     "expected calibration error under the bound",
+     "passed"
+    ],
+    [
+     "logistic regression",
+     "dollar capture above the floor, interval clear of zero",
+     "passed"
+    ],
+    [
+     "logistic regression",
+     "friction within the budget on test",
+     "passed"
+    ],
+    [
+     "logistic regression",
+     "reason code coverage of every step up and decline",
+     "passed"
+    ],
+    [
+     "logistic regression",
+     "score stability, PSI under the bound",
+     "passed"
+    ]
+   ],
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments promotion gates the repository decides",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.interior_budget": {
+   "columns": [
+    "Budget",
+    "LightGBM",
+    "logistic regression"
+   ],
+   "formats": [
+    "text",
+    "pct1",
+    "pct1"
+   ],
+   "rows": [
+    [
+     "double",
+     0.9807590020904294,
+     0.9129110001796088
+    ],
+    [
+     "half",
+     0.7997321614481545,
+     0.6281816845883159
+    ],
+    [
+     "registered",
+     0.9022662383985633,
+     0.8121225843992712
+    ]
+   ],
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test dollar capture, thresholds re-chosen on validation",
+    "source": "evaluation",
+    "as_of": "2026-10-29",
+    "note": null
+   }
+  },
+  "eval.payments.scorecard": {
+   "columns": [
+    "Model",
+    "Capture",
+    "Low",
+    "High",
+    "Step ups",
+    "Declines",
+    "Precision",
+    "ECE",
+    "ROC AUC",
+    "AP"
+   ],
+   "formats": [
+    "text",
+    "pct1",
+    "pct1",
+    "pct1",
+    "per1k2",
+    "per1k2",
+    "pct1",
+    "float3",
+    "float3",
+    "float3"
+   ],
+   "rows": [
+    [
+     "the floor",
+     0.017713381827292974,
+     0.0,
+     0.04448462283620426,
+     0.009745311039281366,
+     0.0009762559377403987,
+     0.000321646831778707,
+     null,
+     0.5967980751275989,
+     0.0033852933902892408
+    ],
+    [
+     "LightGBM",
+     0.9022662383985637,
+     0.8496598294794899,
+     0.946352242407795,
+     0.008648316734682613,
+     0.0011832359952118614,
+     0.11007025761124122,
+     7.578247038134699e-05,
+     0.9995142025317769,
+     0.8008197361196604
+    ],
+    [
+     "logistic regression",
+     0.8121225843992713,
+     0.7647886767431084,
+     0.8502051720835697,
+     0.009445189955947744,
+     0.0012056588347712698,
+     0.08382789317507418,
+     0.0002560165102835752,
+     0.9989185094497062,
+     0.5571361368224245
+    ]
+   ],
+   "provenance": {
+    "origin": "scripts/grade.py over the scored sets of the local run",
+    "population": "payments test months at the operating point chosen on validation",
+    "source": "evaluation",
     "as_of": "2026-10-29",
     "note": null
    }

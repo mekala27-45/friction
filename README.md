@@ -1,7 +1,7 @@
 # friction
 
-**Not complete.** 7 of the eighteen mandatory lines of the definition of done are
-done; lines 5, 6, 8, 10, 11, 12, 13, 15, 16, 17, 18 are not, and RESULTS.md says for each what exists and what it
+**Not complete.** 9 of the eighteen mandatory lines of the definition of done are
+done; lines 5, 6, 8, 10, 12, 13, 15, 17, 18 are not, and RESULTS.md says for each what exists and what it
 waits on. Every number below says which engine produced it: the Lakeflow pipeline in the
 Databricks workspace, or open source Spark running the same code.
 
@@ -15,6 +15,32 @@ allows it, decline). The login desk decides sign ins (allow, re-authenticate, bl
 floor (the rules an analyst writes on the first day), models, and a registered friction budget, and
 every result is a point on the frontier of capture against friction at that budget.
 
+## The frontier at the registered budget
+
+Source: open source run, test months, thresholds chosen on validation and taken to test
+unchanged, cluster bootstrap intervals over 1,000 resamples.
+
+**Payments**, budget 10.0 per 1,000 step ups and 1.0 per 1,000
+declines of good transactions. Champion: LightGBM.
+
+| Model | Capture | Low | High | Step ups | Declines | Precision | ECE | ROC AUC | AP |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| the floor | 1.8% | 0.0% | 4.4% | 9.75 per 1,000 | 0.98 per 1,000 | 0.0% | not applicable | 0.597 | 0.003 |
+| LightGBM | 90.2% | 85.0% | 94.6% | 8.65 per 1,000 | 1.18 per 1,000 | 11.0% | 0.000 | 1.000 | 0.801 |
+| logistic regression | 81.2% | 76.5% | 85.0% | 9.45 per 1,000 | 1.21 per 1,000 | 8.4% | 0.000 | 0.999 | 0.557 |
+
+**Logins**, budget 100.0 per 1,000 re-authentications and 1.0 per 1,000
+blocks of legitimate sign ins. Champion: none.
+
+| Model | Capture | Low | High | Step ups | Declines | Precision | ECE | ROC AUC | AP |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| the floor | 58.5% | 58.3% | 58.7% | 57.67 per 1,000 | 0.00 per 1,000 | 21.3% | not applicable | 0.863 | 0.320 |
+| Freeman RBA | 0.0% | 0.0% | 0.0% | 0.00 per 1,000 | 0.00 per 1,000 | not applicable | not applicable | 0.384 | 0.020 |
+| LightGBM | 25.9% | 25.6% | 26.1% | 41.30 per 1,000 | 0.82 per 1,000 | 14.1% | 0.026 | 0.636 | 0.096 |
+| LightGBM with the attack IP flag | 27.5% | 27.3% | 27.8% | 60.37 per 1,000 | 0.74 per 1,000 | 10.8% | 0.026 | 0.613 | 0.095 |
+
+Capture is of fraud dollars on the payments desk and of attacks on the login desk. ROC AUC and average
+precision are threshold free and sit in the last columns because they are not the decision.
 
 ## How it is built
 
@@ -29,7 +55,7 @@ every result is a point on the frontier of capture against friction at that budg
 - **Features as of the event.** State machines in packages/features compute every feature from strictly
   earlier events; the API imports the same code, so online and offline agree by construction and parity
   checks it.
-- **Grading in the repository.** The workspace and the local run export scored sets; scripts/grade.py
+- **Grading in the repository.** The engines export scored sets; scripts/grade.py
   applies the registered plan (evaluation/plan.yaml, hashed in evaluation/plan.lock before any test
   month was scored).
 - **Serving.** A FastAPI container with an online store and a decision log in Postgres

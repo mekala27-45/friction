@@ -1,6 +1,87 @@
 {
  "promoted": [
   {
+   "file": "results/evaluation.json",
+   "sha256": "168194be83abe7526d245a113ab9473c10a420c7a47982342dba75c56c0a7512",
+   "request": "2026-10-29-12-portable-full-models",
+   "github_run_id": "40928231680",
+   "commit": "c48f3cd4ff9885ab26c25b75a039b4d0d10aa070",
+   "ran_at": "2026-10-29T21:16:28+00:00",
+   "promoted_at": "2026-10-29T21:21:15+00:00"
+  },
+  {
+   "file": "results/models/logins/bundle.json",
+   "sha256": "5b6b6416860c964be9aac6ec75f460b91b86f7127b34ce2dd9028d079ef8453e",
+   "request": "2026-10-29-12-portable-full-models",
+   "github_run_id": "40928231680",
+   "commit": "c48f3cd4ff9885ab26c25b75a039b4d0d10aa070",
+   "ran_at": "2026-10-29T21:16:28+00:00",
+   "promoted_at": "2026-10-29T21:21:15+00:00"
+  },
+  {
+   "file": "results/models/logins/unknown_accounts.json",
+   "sha256": "997daa72f058e1a91bdfaa560d0ee27c87e0463deebe38527f56911be08648f2",
+   "request": "2026-10-29-12-portable-full-models",
+   "github_run_id": "40928231680",
+   "commit": "c48f3cd4ff9885ab26c25b75a039b4d0d10aa070",
+   "ran_at": "2026-10-29T21:16:28+00:00",
+   "promoted_at": "2026-10-29T21:21:15+00:00"
+  },
+  {
+   "file": "results/models/payments/bundle.json",
+   "sha256": "ef23a1323091aa9d746e0bf34095cfd668f66ab168db4e13cc1514bd1a621d20",
+   "request": "2026-10-29-12-portable-full-models",
+   "github_run_id": "40928231680",
+   "commit": "c48f3cd4ff9885ab26c25b75a039b4d0d10aa070",
+   "ran_at": "2026-10-29T21:16:28+00:00",
+   "promoted_at": "2026-10-29T21:21:15+00:00"
+  },
+  {
+   "file": "results/models/payments/mcc_rates.json",
+   "sha256": "47720226b2c4c4b3e911595f932f9ac01343a2340c8afd44d319f7997f2b54bb",
+   "request": "2026-10-29-12-portable-full-models",
+   "github_run_id": "40928231680",
+   "commit": "c48f3cd4ff9885ab26c25b75a039b4d0d10aa070",
+   "ran_at": "2026-10-29T21:16:28+00:00",
+   "promoted_at": "2026-10-29T21:21:15+00:00"
+  },
+  {
+   "file": "results/models/payments/model.txt",
+   "sha256": "6570b08a40d88013dce1a0aa1b9024e7f300f90cc1c6a9b76cad73a7f8b23462",
+   "request": "2026-10-29-12-portable-full-models",
+   "github_run_id": "40928231680",
+   "commit": "c48f3cd4ff9885ab26c25b75a039b4d0d10aa070",
+   "ran_at": "2026-10-29T21:16:28+00:00",
+   "promoted_at": "2026-10-29T21:21:15+00:00"
+  },
+  {
+   "file": "results/parity/logins.json",
+   "sha256": "91d433ec539efb9a0dd31b9507b856b6d563455312129eb111f35ca42e28c0be",
+   "request": "2026-10-29-12-portable-full-models",
+   "github_run_id": "40928231680",
+   "commit": "c48f3cd4ff9885ab26c25b75a039b4d0d10aa070",
+   "ran_at": "2026-10-29T21:16:28+00:00",
+   "promoted_at": "2026-10-29T21:21:15+00:00"
+  },
+  {
+   "file": "results/parity/payments.json",
+   "sha256": "2a53b1e6995a999fc9d2a94f29ff5c1dcdbd45b1b82e06174a54cb99a8303ce4",
+   "request": "2026-10-29-12-portable-full-models",
+   "github_run_id": "40928231680",
+   "commit": "c48f3cd4ff9885ab26c25b75a039b4d0d10aa070",
+   "ran_at": "2026-10-29T21:16:28+00:00",
+   "promoted_at": "2026-10-29T21:21:15+00:00"
+  },
+  {
+   "file": "results/performance.json",
+   "sha256": "ae8b2c2011c38254a16095286767ab30310e3c2e171e5dbfe561daabcfeadb51",
+   "request": "2026-10-29-12-portable-full-models",
+   "github_run_id": "40928231680",
+   "commit": "c48f3cd4ff9885ab26c25b75a039b4d0d10aa070",
+   "ran_at": "2026-10-29T21:16:28+00:00",
+   "promoted_at": "2026-10-29T21:21:15+00:00"
+  },
+  {
    "file": "results/workspace/fetch_status_on_runner.json",
    "sha256": "aba925ed7e21b01e4b12789b32928ccf902fcb6527aacdece25d0965e5befca6",
    "request": "2026-10-29-04b-upload-sources",
@@ -44,6 +125,24 @@
    "commit": "bf4c4daea8ce551aa34f5d3a06c470fff8f6e546",
    "ran_at": "2026-10-29T19:02:42+00:00",
    "promoted_at": "2026-10-29T19:06:49+00:00"
+  },
+  {
+   "file": "results/workspace/full_open_source_models_run.json",
+   "sha256": "499bf20a2b7d391a4f079f27d42f97609db95a9f002b1b7fbefe5afd385fa913",
+   "request": "2026-10-29-12-portable-full-models",
+   "github_run_id": "40928231680",
+   "commit": "c48f3cd4ff9885ab26c25b75a039b4d0d10aa070",
+   "ran_at": "2026-10-29T21:16:28+00:00",
+   "promoted_at": "2026-10-29T21:21:15+00:00"
+  },
+  {
+   "file": "results/workspace/models_timings_runner.json",
+   "sha256": "c09d30d88ec33304e70a52541d831cf00a81c5de6d43af36277404b1358491e3",
+   "request": "2026-10-29-12-portable-full-models",
+   "github_run_id": "40928231680",
+   "commit": "c48f3cd4ff9885ab26c25b75a039b4d0d10aa070",
+   "ran_at": "2026-10-29T21:16:28+00:00",
+   "promoted_at": "2026-10-29T21:21:15+00:00"
   },
   {
    "file": "results/workspace/replay_lock_on_runner.json",

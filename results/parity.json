@@ -1,0 +1,27 @@
+{
+ "local": {
+  "at": "2026-10-29T21:22:45Z",
+  "logins": {
+   "codes_equal": 286,
+   "compared": 286,
+   "decisions_equal": 286,
+   "events_sent": 1000,
+   "max_abs_score_difference": 0.0,
+   "mismatches": [],
+   "model": "floor",
+   "seconds": 3.0
+  },
+  "payments": {
+   "codes_equal": 1000,
+   "compared": 1000,
+   "decisions_equal": 1000,
+   "events_sent": 1000,
+   "max_abs_score_difference": 0.0,
+   "mismatches": [],
+   "model": "lightgbm",
+   "seconds": 5.9
+  },
+  "target": "local",
+  "url": null
+ }
+}

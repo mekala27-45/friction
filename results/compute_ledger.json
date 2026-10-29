@@ -1,0 +1,81 @@
+{
+ "steps": [
+  {
+   "request": "2026-10-29-06-land-logins-month1",
+   "kind": "bundle_run",
+   "job": "land",
+   "where": "Databricks workspace",
+   "seconds": 84.3,
+   "github_run": "40915758090"
+  },
+  {
+   "request": "2026-10-29-07d-first-month",
+   "kind": "bundle_run",
+   "job": "backfill",
+   "where": "Databricks workspace",
+   "seconds": 432.0,
+   "github_run": "40924251985"
+  },
+  {
+   "request": "2026-10-29-08b-portable-first-month",
+   "kind": "portable",
+   "job": null,
+   "where": "Actions runner, open source Spark",
+   "seconds": 152.8,
+   "github_run": "40924251985"
+  },
+  {
+   "request": "2026-10-29-09-land-logins-full",
+   "kind": "bundle_run",
+   "job": "land",
+   "where": "Databricks workspace",
+   "seconds": 125.9,
+   "github_run": "40926791442"
+  },
+  {
+   "request": "2026-10-29-10-backfill-payments-full",
+   "kind": "bundle_run",
+   "job": "backfill",
+   "where": "Databricks workspace",
+   "seconds": 1547.3,
+   "github_run": "40926791442"
+  },
+  {
+   "request": "2026-10-29-10a-governance",
+   "kind": "bundle_run",
+   "job": "governance",
+   "where": "Databricks workspace",
+   "seconds": 138.2,
+   "github_run": "40928231680"
+  },
+  {
+   "request": "2026-10-29-11-portable-full",
+   "kind": "portable",
+   "job": null,
+   "where": "Actions runner, open source Spark",
+   "seconds": 1521.5,
+   "github_run": "40926791442"
+  },
+  {
+   "request": "2026-10-29-12-portable-full-models",
+   "kind": "portable",
+   "job": null,
+   "where": "Actions runner, open source Spark",
+   "seconds": 7250.2,
+   "github_run": "40928231680"
+  }
+ ],
+ "workspace_seconds": 2327.7,
+ "runner_seconds": 8924.5,
+ "runner_model_steps_seconds": {
+  "attacks": 330.8,
+  "features": 523.5,
+  "train": 335.2,
+  "score": 2853.2
+ },
+ "billing": null,
+ "machines": {
+  "Actions runner": "4 cores, 16 GB (GitHub hosted ubuntu-latest)",
+  "Databricks workspace": "Free Edition, serverless"
+ }
+}
