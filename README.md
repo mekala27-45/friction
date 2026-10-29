@@ -1,7 +1,7 @@
 # friction
 
-**Not complete.** 9 of the eighteen mandatory lines of the definition of done are
-done; lines 5, 6, 8, 10, 12, 13, 15, 17, 18 are not, and RESULTS.md says for each what exists and what it
+**Not complete.** 10 of the eighteen mandatory lines of the definition of done are
+done; lines 5, 6, 10, 12, 13, 15, 17, 18 are not, and RESULTS.md says for each what exists and what it
 waits on. Every number below says which engine produced it: the Lakeflow pipeline in the
 Databricks workspace, or open source Spark running the same code.
 

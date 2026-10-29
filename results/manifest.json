@@ -2,7 +2,7 @@
  "as_of": "2026-10-29",
  "values": {
   "build.commits": {
-   "value": 75,
+   "value": 77,
    "fmt": "int",
    "provenance": {
     "origin": "git",
@@ -13,7 +13,7 @@
    }
   },
   "checklist.done": {
-   "value": 9,
+   "value": 10,
    "fmt": "int",
    "provenance": {
     "origin": "scripts/build_manifest.py",
@@ -24,7 +24,7 @@
    }
   },
   "checklist.missing": {
-   "value": "5, 6, 8, 10, 12, 13, 15, 17, 18",
+   "value": "5, 6, 10, 12, 13, 15, 17, 18",
    "fmt": "text",
    "provenance": {
     "origin": "scripts/build_manifest.py",
@@ -3163,9 +3163,9 @@
     ],
     [
      8,
-     "not done",
+     "done",
      "Governance: tags, masks, the row filter, grants, lineage, the scan; the planted drift caught by the plan",
-     "the probe found masks and functions allowed (results/workspace_probe.json); nothing applied"
+     "results/workspace/governance.json (tags, masks, the row filter, grants, lineage, the scan); results/workspace/drift_terraform_plan.txt (the revoked grant caught as one change)"
     ],
     [
      9,

@@ -596,9 +596,26 @@ def checklist(b: Builder, ev: dict[str, Any] | None) -> None:
         if rows_full
         else ("not done", "nothing is backfilled in the workspace yet")
     )
+    gov = _load("results/workspace/governance.json") or {}
+    plan_text = (
+        (ROOT / "results/workspace/drift_terraform_plan.txt").read_text(encoding="utf-8")
+        if exists("results/workspace/drift_terraform_plan.txt")
+        else ""
+    )
+    drift_caught = "1 to change" in plan_text and exists("results/workspace/drift_terraform_apply.txt")
+    withdrawn = gov.get("read", {}).get("withdrawn", {}).get("visible")
+    lineage = gov.get("lineage")
+    scan = gov.get("scan") or {}
+    gov_ok = all([gov.get("tags"), gov.get("views"), withdrawn == 0, gov.get("row_filter"),
+                  isinstance(lineage, list) and lineage, scan, not any(scan.values())])  # fmt: skip
     status[8] = (
-        "not done",
-        "the probe found masks and functions allowed (results/workspace_probe.json); nothing applied",
+        (
+            "done",
+            "results/workspace/governance.json (tags, masks, the row filter, grants, lineage, the scan); "
+            "results/workspace/drift_terraform_plan.txt (the revoked grant caught as one change)",
+        )
+        if gov_ok and drift_caught
+        else ("not done", "governance has not run in full in the workspace")
     )
     status[9] = ("done", "tests/features/test_point_in_time.py; tests/transforms/test_training.py")
     status[10] = (

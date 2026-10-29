@@ -7,7 +7,7 @@ fails CI. Source of each block in its first line.
 
 ## The definition of done
 
-9 of eighteen lines done.
+10 of eighteen lines done.
 
 | Step | Status | Line | Evidence |
 |---:|---|---|---|
@@ -18,7 +18,7 @@ fails CI. Source of each block in its first line.
 | 5 | not done | The Lakeflow pipeline deployed to dev and run; the reconcile against the local run | the first month is equal on all nine tables (results/reconcile_first_month.json); over every row 8 of 9 are equal and the card age feature differs (results/reconcile_full.json) |
 | 6 | not done | Jobs with retries and the run ledger; idempotency, order and late label tests in the workspace | results/workspace/integration.json: re-landing, shuffled delivery and a repeat backfill leave every table identical; the out of order label test and the run ledger summary have not been read yet |
 | 7 | done | Every row of both sources backfilled in the workspace | results/workspace/full_export.json: 24,383,185 payments and 31,267,738 logins in silver |
-| 8 | not done | Governance: tags, masks, the row filter, grants, lineage, the scan; the planted drift caught by the plan | the probe found masks and functions allowed (results/workspace_probe.json); nothing applied |
+| 8 | done | Governance: tags, masks, the row filter, grants, lineage, the scan; the planted drift caught by the plan | results/workspace/governance.json (tags, masks, the row filter, grants, lineage, the scan); results/workspace/drift_terraform_plan.txt (the revoked grant caught as one change) |
 | 9 | done | Point in time features with the leakage test; training sets as of a cut with the two clocks test | tests/features/test_point_in_time.py; tests/transforms/test_training.py |
 | 10 | not done | Floors and models on both desks registered in Unity Catalog; the plan hashed before any test month was scored | floors and models fit on the local run, plan hashed before scoring (DECISIONS.md); Unity Catalog registration waits on the workspace |
 | 11 | done | The frontier, operating points, intervals, BH, interior tests, calibration, hypotheses, the RBA comparison | results/evaluation.json from the local run's scored sets |
