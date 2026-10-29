@@ -1,0 +1,40 @@
+# friction: the briefing
+
+{{ statement() }}
+
+## Where it stands
+
+{{ done() }} of the eighteen mandatory lines are done. Not done: {{ v("checklist.missing") }}. The
+Databricks workspace has run its probe; the deploy, the backfill, governance and the Unity Catalog
+registration wait on three GitHub Actions secrets. The graded numbers below come from the
+{{ v("eval.source") if has("eval.source") else "local" }} run of the same transforms on open source Spark.
+
+{% if has("eval.payments.champion") %}
+## The payments desk
+
+At the registered budget of {{ v("plan.payments.step_up_budget") }} step ups and
+{{ v("plan.payments.decline_budget") }} declines of good transactions, the champion,
+{{ v("eval.payments.champion") }}, captured the share of fraud dollars in the scorecard below; the floor of
+first day rules is beside it. Every threshold was chosen on validation.
+
+{{ table("eval.payments.scorecard") }}
+
+## The login desk
+
+At {{ v("plan.logins.step_up_budget") }} re-authentications and {{ v("plan.logins.decline_budget") }} blocks
+of legitimate sign ins, the champion is {{ v("eval.logins.champion") }}. No real takeover falls in the test
+months, so capture is of the attacker models built from the RBA papers.
+
+{{ table("eval.logins.scorecard") }}
+{% endif %}
+
+## What a platform engineer would push back on
+
+The data is synthetic and the payment labels carry a simulated delay. A file landing zone is not a
+message bus. Free Edition hides the cloud account. One workspace with prefixed schemas is not two
+workspaces. Takeover labels are rare. The RBA comparison is against figures read from a repository.
+
+## What a fraud lead would push back on
+
+The cost parameters are assumptions. The attacker models come from the paper and are not attackers. The
+attack IP flag is close to a label. A synthetic window of card behavior is not a real portfolio.

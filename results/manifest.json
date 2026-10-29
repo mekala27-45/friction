@@ -2,7 +2,7 @@
  "as_of": "2026-10-29",
  "values": {
   "build.commits": {
-   "value": 14,
+   "value": 22,
    "fmt": "int",
    "provenance": {
     "origin": "git",
@@ -641,7 +641,7 @@
     [
      11,
      "not done",
-     "The frontier, operating points, intervals, Benjamini-Hochberg, interior tests, calibration, hypotheses, RBA comparison",
+     "The frontier, operating points, intervals, BH, interior tests, calibration, hypotheses, the RBA comparison",
      "no scored sets graded yet"
     ],
     [
@@ -677,7 +677,7 @@
     [
      17,
      "not done",
-     "The site live on Pages; the live check; latency with the cold start; RESULTS, README, DECISIONS, notebooks, AGENTS",
+     "The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS",
      "the site is not built yet"
     ],
     [
