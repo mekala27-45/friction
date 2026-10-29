@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+/* The decision slip. Light first: cool thermal paper and black ink. Dark: card stock at night.
+   Every value comes from web/src/theme/palette.json, validated by scripts/validate_palette.js. */
+:root {
+  --surface: #F4F5F7;
+  --raised: #FFFFFF;
+  --hairline: #D7DAE0;
+  --ink: #14171C;
+  --ink2: #575E69;
+  --control: #6B7280;
+  --good: #1F5FAD;      /* slot one: the good customer, approvals */
+  --fraud: #C0306B;     /* slot two: the fraudster, declines */
+  --friction: #A15C00;  /* slot three: step ups, the intervention */
+  --m-logistic: #0B7A75;
+  --m-lightgbm: #6B3FC4;
+  --m-freeman: #667A12;
+  --m-rep: #075780;
+  --m-spare: #8C5A2E;
+  --s-good: #1E7F3F;
+  --s-warning: #8A6D00;
+  --s-serious: #C2410C;
+  --s-critical: #B42318;
+  --mid: #E6E8EC;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --surface: #12161C; --raised: #1A2028; --hairline: #2B323C; --ink: #E8EBF0; --ink2: #A1A9B5;
+    --control: #8A93A0; --good: #6AA6F0; --fraud: #F0679E; --friction: #E7A33C; --m-logistic: #36C2B4;
+    --m-lightgbm: #A88BF5; --m-freeman: #AFC04A; --m-rep: #4CB3E6; --m-spare: #D2A271; --s-good: #3FB950;
+    --s-warning: #D9B530; --s-serious: #F0883E; --s-critical: #F85149; --mid: #2A3038; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --surface: #12161C; --raised: #1A2028; --hairline: #2B323C; --ink: #E8EBF0; --ink2: #A1A9B5;
+  --control: #8A93A0; --good: #6AA6F0; --fraud: #F0679E; --friction: #E7A33C; --m-logistic: #36C2B4;
+  --m-lightgbm: #A88BF5; --m-freeman: #AFC04A; --m-rep: #4CB3E6; --m-spare: #D2A271; --s-good: #3FB950;
+  --s-warning: #D9B530; --s-serious: #F0883E; --s-critical: #F85149; --mid: #2A3038; color-scheme: dark;
+}
+
+@theme inline {
+  --font-sans: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-chivo), ui-monospace, monospace;
+  --color-surface: var(--surface);
+  --color-raised: var(--raised);
+  --color-hairline: var(--hairline);
+  --color-ink: var(--ink);
+  --color-ink2: var(--ink2);
+}
+
+html { background: var(--surface); color: var(--ink); }
+body { background: var(--surface); color: var(--ink); font-size: 16px; line-height: 1.5; }
+.measure { max-width: 70ch; }
+.num { font-family: var(--font-chivo), ui-monospace, monospace; font-variant-numeric: tabular-nums; text-align: right; }
+.doto { font-family: var(--font-doto), var(--font-chivo), monospace; font-variant-numeric: tabular-nums; }
+.perf { border-top: 1px dashed var(--hairline); }
+.slip { background: var(--raised); border: 1px solid var(--hairline); }
+table.dense { width: 100%; border-collapse: collapse; font-size: 14px; }
+table.dense th, table.dense td { padding: 6px 8px; border-bottom: 1px solid var(--hairline); }
+table.dense th { color: var(--ink2); font-weight: 500; text-align: left; }
+table.dense td.num, table.dense th.num { text-align: right; }
+a { text-decoration: underline; text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--good); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+@media print {
+  header nav, .no-print { display: none !important; }
+  body { background: #fff; color: #000; }
+  .slip { border-color: #999; }
+}

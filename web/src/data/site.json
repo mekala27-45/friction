@@ -1,0 +1,431 @@
+{
+ "as_of": "2026-10-29",
+ "classification": [
+  {
+   "classification": "restricted",
+   "column": "user",
+   "says": "as delivered, text",
+   "table": "cdc_cards_bronze"
+  },
+  {
+   "classification": "restricted",
+   "column": "user_key",
+   "says": "salted token of the user id",
+   "table": "login_account_stats"
+  },
+  {
+   "classification": "restricted",
+   "column": "user_id",
+   "says": "as delivered, text",
+   "table": "logins_bronze"
+  },
+  {
+   "classification": "restricted",
+   "column": "ip_address",
+   "says": "as delivered, text",
+   "table": "logins_bronze"
+  },
+  {
+   "classification": "restricted",
+   "column": "user_agent",
+   "says": "as delivered, text",
+   "table": "logins_bronze"
+  },
+  {
+   "classification": "restricted",
+   "column": "user_key",
+   "says": "salted token of the user id",
+   "table": "logins_silver"
+  },
+  {
+   "classification": "restricted",
+   "column": "ip_key",
+   "says": "salted token of the IP address",
+   "table": "logins_silver"
+  },
+  {
+   "classification": "sensitive",
+   "column": "ip_prefix16",
+   "says": "the /16 the address belongs to",
+   "table": "logins_silver"
+  },
+  {
+   "classification": "sensitive",
+   "column": "country",
+   "says": "country from the IP",
+   "table": "logins_silver"
+  },
+  {
+   "classification": "sensitive",
+   "column": "region",
+   "says": "region from the IP, null where the source wrote a dash",
+   "table": "logins_silver"
+  },
+  {
+   "classification": "sensitive",
+   "column": "city",
+   "says": "city from the IP, null where the source wrote a dash",
+   "table": "logins_silver"
+  },
+  {
+   "classification": "sensitive",
+   "column": "asn",
+   "says": "autonomous system number",
+   "table": "logins_silver"
+  },
+  {
+   "classification": "restricted",
+   "column": "ua_key",
+   "says": "salted token of the user agent string",
+   "table": "logins_silver"
+  },
+  {
+   "classification": "restricted",
+   "column": "user",
+   "says": "as delivered, text",
+   "table": "payments_bronze"
+  },
+  {
+   "classification": "restricted",
+   "column": "account_key",
+   "says": "salted token of user and card slot",
+   "table": "payments_silver"
+  },
+  {
+   "classification": "restricted",
+   "column": "user_key",
+   "says": "salted token of the user",
+   "table": "payments_silver"
+  },
+  {
+   "classification": "sensitive",
+   "column": "zip5",
+   "says": "merchant zip, five digits, leading zeros restored",
+   "table": "payments_silver"
+  }
+ ],
+ "frontier": null,
+ "monitor": null,
+ "parity": null,
+ "replay": {},
+ "statement": "friction is a portfolio demonstration built on two published synthetic data sets (the IBM TabFormer card transactions, and the RBA login data set under CC BY 4.0) and a simulator with known truth. No real person, card or account appears in it, its numbers describe synthetic data, and it must not be used to decide anything about anyone. It runs on Databricks Free Edition, which is for non commercial use.",
+ "tables": {
+  "checklist": {
+   "align": [
+    "right",
+    "left",
+    "left",
+    "left"
+   ],
+   "columns": [
+    "Step",
+    "Status",
+    "Line",
+    "Evidence"
+   ],
+   "origin": "scripts/build_manifest.py",
+   "rows": [
+    [
+     "1",
+     "not done",
+     "Both sources fetched with digests in Actions, profiled at full size, quarantine rules, contracts, provenance",
+     "fetched and profiled at full size on the build machine (results/profile); the Actions fetch waits on the workspace secrets"
+    ],
+    [
+     "2",
+     "done",
+     "The replay splitter, the lateness rule, the simulator and the incident config, deterministic with digests",
+     "data/replay.lock.json; tests/simulator"
+    ],
+    [
+     "3",
+     "not done",
+     "The portable pipeline on open source Spark 4.2 with local tests and the full local run",
+     "the full local run has not finished"
+    ],
+    [
+     "4",
+     "not done",
+     "Terraform with state in Neon, the bundle, the workspace workflow, the results branch, reviewed promotion",
+     "written and validated in CI; apply waits on the Actions secrets FRICTION_SALT, TF_STATE_CONN and DATABASE_URL"
+    ],
+    [
+     "5",
+     "not done",
+     "The Lakeflow pipeline deployed to dev and run; the reconcile against the local run",
+     "requests 03 to 07 are committed and wait on the same secrets"
+    ],
+    [
+     "6",
+     "not done",
+     "Jobs with retries and the run ledger; idempotency, order and late label tests in the workspace",
+     "the jobs are defined in databricks.yml; their workspace tests have not run"
+    ],
+    [
+     "7",
+     "not done",
+     "Every row of both sources backfilled in the workspace",
+     "nothing is backfilled in the workspace yet; the full local run holds every row"
+    ],
+    [
+     "8",
+     "not done",
+     "Governance: tags, masks, the row filter, grants, lineage, the scan; the planted drift caught by the plan",
+     "the probe found masks and functions allowed (results/workspace_probe.json); nothing applied"
+    ],
+    [
+     "9",
+     "done",
+     "Point in time features with the leakage test; training sets as of a cut with the two clocks test",
+     "tests/features/test_point_in_time.py; tests/transforms/test_training.py"
+    ],
+    [
+     "10",
+     "not done",
+     "Floors and models on both desks registered in Unity Catalog; the plan hashed before any test month was scored",
+     "floors and models fit on the local run, plan hashed before scoring (DECISIONS.md); Unity Catalog registration waits on the workspace"
+    ],
+    [
+     "11",
+     "not done",
+     "The frontier, operating points, intervals, Benjamini-Hochberg, interior tests, calibration, hypotheses, RBA comparison",
+     "no scored sets graded yet"
+    ],
+    [
+     "12",
+     "not done",
+     "Reason codes, model cards, validation reports, promotion gates and the champion aliases",
+     "codes, gates and cards are in the repository; the champion alias waits on Unity Catalog"
+    ],
+    [
+     "13",
+     "not done",
+     "The API live on Vercel with the online store and the decision log; parity exact against the live URL",
+     "the API runs and passes parity locally; Vercel and Neon are not connected yet"
+    ],
+    [
+     "14",
+     "done",
+     "Persistence: independent connection, audit before response, shared transaction, out of process check",
+     "tests/api/test_api.py and tests/api/test_out_of_process.py against Postgres"
+    ],
+    [
+     "15",
+     "not done",
+     "Monitoring with delayed label cohorts; the day 40 incident detected, handled by the runbook and written up",
+     "config/monitor.yaml and the incident plant exist; the monitor has not run"
+    ],
+    [
+     "16",
+     "not done",
+     "Performance experiments and the compute ledger published",
+     "no performance experiment has run"
+    ],
+    [
+     "17",
+     "not done",
+     "The site live on Pages; the live check; latency with the cold start; RESULTS, README, DECISIONS, notebooks, AGENTS",
+     "the site is not built yet"
+    ],
+    [
+     "18",
+     "not done",
+     "Coverage, mypy, ruff, gates, skills valid, forty to sixty commits, the rederive, v0.1.0 after the commits",
+     "the tag waits on every line above"
+    ]
+   ],
+   "source": "build"
+  },
+  "workspace.probe": {
+   "align": [
+    "left",
+    "left"
+   ],
+   "columns": [
+    "Check",
+    "Result"
+   ],
+   "origin": "requests/2026-10-29-probe.json",
+   "rows": [
+    [
+     "apps_list",
+     "allowed"
+    ],
+    [
+     "catalog_create",
+     "refused"
+    ],
+    [
+     "catalogs_visible",
+     "allowed"
+    ],
+    [
+     "create_mask_function",
+     "allowed"
+    ],
+    [
+     "create_table",
+     "allowed"
+    ],
+    [
+     "delta_sharing_shares",
+     "refused"
+    ],
+    [
+     "experiments_list",
+     "allowed"
+    ],
+    [
+     "groups_list",
+     "allowed"
+    ],
+    [
+     "identity",
+     "allowed"
+    ],
+    [
+     "jobs_list",
+     "allowed"
+    ],
+    [
+     "liquid_clustering",
+     "allowed"
+    ],
+    [
+     "pipelines_list",
+     "allowed"
+    ],
+    [
+     "read:system.access.audit",
+     "allowed"
+    ],
+    [
+     "read:system.access.column_lineage",
+     "allowed"
+    ],
+    [
+     "read:system.access.table_lineage",
+     "allowed"
+    ],
+    [
+     "read:system.billing.list_prices",
+     "allowed"
+    ],
+    [
+     "read:system.billing.usage",
+     "allowed"
+    ],
+    [
+     "read:system.information_schema.tables",
+     "allowed"
+    ],
+    [
+     "read:system.lakeflow.jobs",
+     "allowed"
+    ],
+    [
+     "read:system.lakeflow.pipelines",
+     "allowed"
+    ],
+    [
+     "registered_models_list",
+     "allowed"
+    ],
+    [
+     "row_filter_function",
+     "allowed"
+    ],
+    [
+     "schema_create",
+     "allowed"
+    ],
+    [
+     "service_principals_list",
+     "allowed"
+    ],
+    [
+     "serving_endpoints_list",
+     "allowed"
+    ],
+    [
+     "set_column_mask",
+     "allowed"
+    ],
+    [
+     "set_row_filter",
+     "allowed"
+    ],
+    [
+     "set_tag",
+     "allowed"
+    ],
+    [
+     "sql_version",
+     "allowed"
+    ],
+    [
+     "volume_create",
+     "allowed"
+    ],
+    [
+     "warehouses",
+     "allowed"
+    ]
+   ],
+   "source": "workspace"
+  }
+ },
+ "values": {
+  "build.commits": "14",
+  "checklist.done": "3",
+  "checklist.missing": "1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 15, 16, 17, 18",
+  "data.rba.asn_unrealistic": "1,457,824",
+  "data.rba.attack_ip": "3,096,977",
+  "data.rba.digest": "ca1d974e97ae",
+  "data.rba.ip_private": "7,291,335",
+  "data.rba.rows": "31,269,264",
+  "data.rba.rtt_missing_share": "95.9%",
+  "data.rba.successes": "12,541,442",
+  "data.rba.takeovers": "141",
+  "data.rba.users": "4,304,857",
+  "data.tabformer.cards": "6,139",
+  "data.tabformer.digest": "e9f589a0958f",
+  "data.tabformer.rows": "24,386,900",
+  "data.tabformer.users": "2,000",
+  "plan.hypotheses_sha256": "2fa80e2d5af8",
+  "plan.logins.decline_budget": "1.0 per 1,000",
+  "plan.logins.gap_1.end": "2020-09-28",
+  "plan.logins.gap_1.start": "2020-09-21",
+  "plan.logins.gap_2.end": "2020-12-15",
+  "plan.logins.gap_2.start": "2020-12-08",
+  "plan.logins.step_up_budget": "100.0 per 1,000",
+  "plan.logins.test.end": "2021-03-01",
+  "plan.logins.test.start": "2020-12-15",
+  "plan.logins.train.end": "2020-09-21",
+  "plan.logins.train.start": "2020-02-03",
+  "plan.logins.validation.end": "2020-12-08",
+  "plan.logins.validation.start": "2020-09-28",
+  "plan.payments.decline_budget": "1.0 per 1,000",
+  "plan.payments.gap_1.end": "2019-01-01",
+  "plan.payments.gap_1.start": "2018-11-01",
+  "plan.payments.gap_2.end": "2019-07-01",
+  "plan.payments.gap_2.start": "2019-05-01",
+  "plan.payments.step_up_budget": "10.0 per 1,000",
+  "plan.payments.test.end": "2019-11-01",
+  "plan.payments.test.start": "2019-07-01",
+  "plan.payments.train.end": "2018-11-01",
+  "plan.payments.train.start": "2016-11-01",
+  "plan.payments.validation.end": "2019-05-01",
+  "plan.payments.validation.start": "2019-01-01",
+  "plan.resamples": "1,000",
+  "plan.sha256": "2ba61fcd4da0",
+  "replay.feeds.cdc_cards.rows": "33,254",
+  "replay.feeds.labels_logins.rows": "141",
+  "replay.feeds.labels_payments.rows": "29,512",
+  "replay.logins.drops": "102",
+  "replay.logins.rows": "31,269,264",
+  "replay.payments.drops": "439",
+  "replay.payments.rows": "24,386,900",
+  "static.statement": "friction is a portfolio demonstration built on two published synthetic data sets (the IBM TabFormer card transactions, and the RBA login data set under CC BY 4.0) and a simulator with known truth. No real person, card or account appears in it, its numbers describe synthetic data, and it must not be used to decide anything about anyone. It runs on Databricks Free Edition, which is for non commercial use."
+ }
+}
