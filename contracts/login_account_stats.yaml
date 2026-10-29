@@ -20,4 +20,4 @@ columns:
 - name: unknown_account
   type: boolean
   classification: internal
-  says: more than 1,000,000 attempts with fewer than one success per thousand
+  says: more than 100,000 attempts with fewer than one success per thousand
