@@ -1,0 +1,7 @@
+{
+ "id": "2026-10-29-03c-terraform-dev",
+ "kind": "terraform_apply",
+ "target": "dev",
+ "params": {"var_file": "env/dev.tfvars"},
+ "note": "Retry of 2026-10-29-03b-terraform-dev. The schemas and volumes were created; the two grants failed because the workspace group users is not an account principal. The reader group is now account users."
+}
