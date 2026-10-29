@@ -41,6 +41,12 @@ def choose() -> tuple[set[tuple[str, str]], set[str]]:
         f"""SELECT "user", card, count(*) n FROM read_parquet('{tf}')
             WHERE is_fraud = 'Yes' AND year = '2019' GROUP BY 1, 2 ORDER BY n DESC, 1, 2 LIMIT {ACCOUNTS_BY_FRAUD}"""
     ).fetchall()
+    # The accounts with the most fraud in the training months too, so the fixture trains a model.
+    fraud += con.execute(
+        f"""SELECT "user", card, count(*) n FROM read_parquet('{tf}')
+            WHERE is_fraud = 'Yes' AND CAST(year AS INT) * 100 + CAST(month AS INT) BETWEEN 201611 AND 201810
+            GROUP BY 1, 2 ORDER BY n DESC, 1, 2 LIMIT {ACCOUNTS_BY_FRAUD}"""
+    ).fetchall()
     accounts = con.execute(f"""SELECT DISTINCT "user", card FROM read_parquet('{tf}') ORDER BY 1, 2""").fetchall()
     keys = np.array([int(u) * 100 + int(c) for u, c in accounts], dtype=np.int64)
     u = draws.uniform(keys, 1, "fixture_accounts")

@@ -76,11 +76,10 @@ def main() -> int:
     }
     started = time.monotonic()
     proc = subprocess.run(
-        # The CLI's own default is --remote local, one thread; name the cores.
+        # The CLI's own default is --remote local, one thread; --cores names more. --cores 0 keeps the default.
         [
             str(venv_bin / "spark-pipelines"),
-            "--remote",
-            f"local[{args.cores}]",
+            *(["--remote", f"local[{args.cores}]"] if args.cores > 0 else []),
             "run",
             "--spec",
             str(spec_path),

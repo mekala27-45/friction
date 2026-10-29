@@ -408,6 +408,47 @@ def workspace(b: Builder) -> None:
     )
 
 
+def incident(b: Builder) -> None:
+    inc = _load("results/incident.json")
+    mon = _load("results/monitor.json")
+    if not inc:
+        return
+    o = "scripts/replay_incident.py over the drops around replay day 40"
+    b.v("incident.drop", inc["drop"], "text", o, "the incident drop", "local")
+    b.v("incident.truth_rows", inc["truth"]["rows"], "int", o, "rows of the day in the corrected redelivery", "local")
+    b.v("incident.truth_usd", inc["truth"]["amount_cents"] / 100, "usd2", o, "dollars of the day", "local")
+    for side in ("before", "after"):
+        s = inc[side]
+        b.v(
+            f"incident.{side}.rows",
+            s["day_totals"]["rows"],
+            "int",
+            o,
+            f"silver rows of the day, {side} the fix",
+            "local",
+        )
+        b.v(f"incident.{side}.usd", s["day_totals"]["amount_cents"] / 100, "usd2", o, f"dollars, {side}", "local")
+        comp = s["completeness"][0]["ratio"] if s["completeness"] else None
+        b.v(f"incident.{side}.completeness", comp, "pct2", o, f"completeness of the drop, {side}", "local")
+        b.m.table(f"incident.{side}.quarantine", ["Rule", "Rows"], ["text", "int"], sorted(s["quarantine"].items()),
+                  origin=o, population=f"quarantined rows of the drop, {side} the fix", source="local")  # fmt: skip
+    b.v("incident.other_days_unchanged", "yes" if inc["other_days_unchanged"] else "no", "text", o,
+        "digests of every other day equal before and after", "local")  # fmt: skip
+    b.v("incident.day_matches_truth", "yes" if inc["day_matches_truth"] else "no", "text", o,
+        "the day's totals equal the corrected source", "local")  # fmt: skip
+    b.m.table("incident.timeline", ["When (UTC)", "What", "Seconds"], ["text", "text", "float1"],
+              [[r["at"], r["what"], r["seconds"]] for r in inc["timeline"]], origin=o,
+              population="the runs of the replay", source="local")  # fmt: skip
+    if mon:
+        rows = [[a["severity"], a["check"], a["scope"], a["note"]] for a in mon["alerts"] if inc["drop"] in a["scope"]]
+        b.m.table("incident.alerts", ["Severity", "Check", "Scope", "Note"], ["text"] * 4, rows,
+                  origin="scripts/monitor.py over the full local run", population="alerts on the incident drop",
+                  source="local")  # fmt: skip
+        b.v(
+            "monitor.alerts", len(mon["alerts"]), "int", "scripts/monitor.py", "alerts over the full local run", "local"
+        )
+
+
 def live(b: Builder) -> None:
     parity = _load("results/parity.json")
     if parity:
@@ -559,6 +600,7 @@ def main() -> int:
     plan(b)
     ev = evaluation(b)
     workspace(b)
+    incident(b)
     live(b)
     checklist(b, ev)
     out = ROOT / "results" / "manifest.json"
