@@ -31,8 +31,9 @@ def payments_set(
     features: DataFrame, silver: DataFrame, history: DataFrame, start: str, end: str, cut: str | None
 ) -> DataFrame:
     """Features and context of the transactions in [start, end), labelled as known at ``cut``."""
+    # channel and is_refund are features too; they come from the feature table, once.
     events = silver.where((F.col("event_ts") >= F.lit(start)) & (F.col("event_ts") < F.lit(end))).select(
-        "txn_ref", "account_key", "event_ts", "amount_cents", "channel", "is_refund"
+        "txn_ref", "account_key", "event_ts", "amount_cents"
     )
     lab = label_as_of(history, cut).select(F.col("event_ref").alias("txn_ref"), F.col("is_fraud").alias("_y"))
     return (
@@ -45,8 +46,6 @@ def payments_set(
             "account_key",
             "event_ts",
             "amount_cents",
-            "channel",
-            "is_refund",
             "label",
             "labelled",
             *payment_features.FEATURES,
@@ -92,7 +91,8 @@ def logins_set(
     )
     lab = label_as_of(history, cut).select(F.col("event_ref").alias("login_ref"), F.col("is_fraud").alias("_y"))
     real = real.join(lab, "login_ref", "left").withColumn("label", F.coalesce(F.col("_y"), F.lit(False)))
-    real = real.withColumn("labelled", F.lit(True)).select(*[c for c in real.columns if c != "_y"])
+    real = real.withColumn("labelled", F.lit(True))
+    real = real.select(*[c for c in real.columns if c != "_y"])
     parts = [real]
     if attacks is not None and purpose is not None:
         att = attacks.where(F.col("purpose") == purpose).select(

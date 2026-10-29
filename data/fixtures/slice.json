@@ -1,20 +1,24 @@
 {
  "accounts": [
+  "1083:0",
   "1191:3",
+  "1204:0",
   "1218:0",
   "1324:0",
   "1477:2",
+  "2:1",
   "319:4",
   "410:0",
   "44:0",
-  "557:3"
+  "557:3",
+  "780:0"
  ],
  "users": 538,
  "rows": {
-  "payments": 32369,
+  "payments": 65864,
   "logins": 4897,
-  "cdc_cards": 54,
-  "labels_payments": 101,
+  "cdc_cards": 88,
+  "labels_payments": 203,
   "labels_logins": 141
  }
 }

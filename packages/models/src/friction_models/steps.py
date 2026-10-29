@@ -164,7 +164,8 @@ def score_payments(pdf: pd.DataFrame, folder: Path) -> pd.DataFrame:
     x = pdf[PAY_FEATURES].to_numpy(np.float64)
     logistic = Logistic.from_dict(json.loads((folder / "payments_logistic.json").read_text(encoding="utf-8")))
     gbm = Gbm.from_text((folder / "payments_lightgbm.txt").read_text(encoding="utf-8"))
-    out = pdf[["txn_ref", "account_key", "event_ts", "amount_cents", "channel", "label", "labelled"]].copy()
+    out = pdf[["txn_ref", "account_key", "event_ts", "amount_cents", "label", "labelled"]].copy()
+    out.insert(4, "channel", pdf["channel"].astype("int32"))
     for name in HYPOTHESIS_COLUMNS:
         out[name] = pdf[name].astype(float)
     out["score_floor"] = floors.payment_scores(x)

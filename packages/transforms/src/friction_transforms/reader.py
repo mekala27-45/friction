@@ -18,6 +18,23 @@ from friction_transforms.bronze import TEXT_COLUMNS
 WIDTH = 24  # wide enough for every drop, with room for columns nobody expected
 
 
+def _local_headers(spark: SparkSession, path: str) -> DataFrame | None:
+    """drop/file -> header columns for every file under a local path, or None for a remote one."""
+    import csv
+    import gzip
+    from pathlib import Path
+
+    root = Path(path.removeprefix("file:"))
+    if not root.is_dir():
+        return None
+    rows = []
+    for f in sorted(root.rglob("*.csv.gz")):
+        with gzip.open(f, "rt", encoding="utf-8", newline="") as fh:
+            header = next(csv.reader(fh), [])
+        rows.append((f"{f.parent.name}/{f.name}", header))
+    return spark.createDataFrame(rows, "_rel string, _header array<string>")
+
+
 def read_drops(spark: SparkSession, path: str, feed: str) -> DataFrame:
     expected = TEXT_COLUMNS[feed]
     schema = ", ".join(f"_c{i} STRING" for i in range(WIDTH))
@@ -35,10 +52,17 @@ def read_drops(spark: SparkSession, path: str, feed: str) -> DataFrame:
     values = F.array(*[F.col(f"_c{i}") for i in range(WIDTH)])
     rows = raw.withColumn("_values", values)
     first = expected[0]
-    headers = rows.where(F.col("_c0") == first).select(
-        "source_file", F.filter("_values", lambda x: x.isNotNull()).alias("_header")
-    )
-    data = rows.where(F.col("_c0") != first).join(headers, "source_file", "left")
+    local = _local_headers(spark, path)
+    if local is not None:
+        # The header of each file is its first line, read on the driver without decompressing the rest,
+        # and broadcast, so the rows are read once and never shuffled to meet their header.
+        rel = F.regexp_extract(F.col("source_file"), r"([^/]+/[^/]+)$", 1)
+        data = rows.where(F.col("_c0") != first).withColumn("_rel", rel).join(F.broadcast(local), "_rel", "left")
+    else:
+        headers = rows.where(F.col("_c0") == first).select(
+            "source_file", F.filter("_values", lambda x: x.isNotNull()).alias("_header")
+        )
+        data = rows.where(F.col("_c0") != first).join(F.broadcast(headers), "source_file", "left")
     # Pairs of (name, value) for every header column the contract does not expect.
     zipped = F.arrays_zip(F.col("_header").alias("k"), F.slice("_values", 1, F.size("_header")).alias("v"))
     extra = F.filter(zipped, lambda p: ~p["k"].isin(*expected))
