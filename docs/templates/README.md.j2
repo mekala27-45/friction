@@ -52,7 +52,7 @@ precision are threshold free and sit in the last columns because they are not th
 - **Features as of the event.** State machines in packages/features compute every feature from strictly
   earlier events; the API imports the same code, so online and offline agree by construction and parity
   checks it.
-- **Grading in the repository.** The workspace and the local run export scored sets; scripts/grade.py
+- **Grading in the repository.** The engines export scored sets; scripts/grade.py
   applies the registered plan (evaluation/plan.yaml, hashed in evaluation/plan.lock before any test
   month was scored).
 - **Serving.** A FastAPI container with an online store and a decision log in Postgres

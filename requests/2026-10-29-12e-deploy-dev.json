@@ -1,0 +1,7 @@
+{
+ "id": "2026-10-29-12e-deploy-dev",
+ "kind": "bundle_deploy",
+ "target": "dev",
+ "params": {"stop_on_failure": false},
+ "note": "Deploy the monitor that computes its months in Python and both jobs writing plain JSON files, and governance with the row filter, lineage and scan evidence."
+}

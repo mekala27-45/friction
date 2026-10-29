@@ -1,0 +1,7 @@
+{
+ "id": "2026-10-29-12k-billing",
+ "kind": "sql",
+ "target": "dev",
+ "params": {"file": "sql/billing.sql", "vars": {}, "stop_on_failure": false},
+ "note": "Usage from system.billing.usage for the compute ledger."
+}

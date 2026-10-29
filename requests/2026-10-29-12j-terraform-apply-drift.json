@@ -1,0 +1,7 @@
+{
+ "id": "2026-10-29-12j-terraform-apply-drift",
+ "kind": "terraform_apply",
+ "target": "dev",
+ "params": {"var_file": "env/dev.tfvars", "stop_on_failure": false},
+ "note": "Apply restores the grant the drift removed."
+}

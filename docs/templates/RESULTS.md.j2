@@ -130,6 +130,9 @@ validation, the five corrected together.
 - The build machine never holds the production salt. Runs that must match the workspace token for token
   (the reconcile, the graded models and the served bundles) run on the Actions runner, which holds it as
   a secret; the build machine's own runs use the public test salt and are labeled as such.
+- TabFormer's fraud is far easier to separate than real card fraud: the payments LightGBM reaches a
+  ROC AUC near one on the test months. The point of the payments desk here is the friction frontier
+  and the gates, not the size of that number.
 - The payment labels are simulated chargebacks on TabFormer's fraud flag, with a lag drawn from a
   lognormal. TabFormer marks no fraud in two stretches of its calendar (DECISIONS.md names them); the
   modeling window ends before the second.

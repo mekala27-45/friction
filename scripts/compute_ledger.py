@@ -1,39 +1,48 @@
-"""The compute ledger: what each step of the build cost in machine time.
+"""The compute ledger: what each step of the build cost, where it ran.
 
     python scripts/compute_ledger.py
 
-Reads the timings the steps leave behind (the pipeline's run log, the model step's timings, the
-summaries of the lake, the grade, the export and the experiments) and writes results/compute_ledger.json.
-On the build machine the cost is wall clock seconds on a stated number of cores; the workspace's
-ledger adds DBUs from system.billing.usage through the export job once the workspace runs.
+Reads the records the workspace workflow left on the results branch (every request's done.json,
+with its wall seconds), the model step's timings from the runner's open source run, and the
+workspace's billing usage when a request has read system.billing.usage (results/workspace/
+billing.json). Writes results/compute_ledger.json.
 """
 
 from __future__ import annotations
 
 import json
-import os
-import re
+import subprocess
 import sys
-from datetime import datetime
 from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
-FLOW = re.compile(r"^(\d{4}-\d\d-\d\d \d\d:\d\d:\d\d): Flow spark_catalog\.default\.(\w+) is (RUNNING|COMPLETED)")
+BRANCH = "origin/results"
 
 
-def pipeline_flows(log: Path) -> dict[str, float]:
-    starts: dict[str, datetime] = {}
-    out: dict[str, float] = {}
-    for line in log.read_text(encoding="utf-8", errors="replace").splitlines():
-        m = FLOW.match(line)
-        if not m:
+def _git(*args: str) -> str:
+    return subprocess.run(["git", *args], cwd=ROOT, capture_output=True, text=True, check=True).stdout
+
+
+def records() -> list[dict[str, Any]]:
+    names = [n for n in _git("ls-tree", "--name-only", "-r", BRANCH, "runs").splitlines() if n.endswith("/done.json")]
+    out = []
+    for name in sorted(names):
+        d = json.loads(_git("show", f"{BRANCH}:{name}"))
+        result = d.get("result") or {}
+        if d.get("status") != "succeeded" or "wall_seconds" not in result:
             continue
-        ts = datetime.strptime(m.group(1), "%Y-%m-%d %H:%M:%S")
-        if m.group(3) == "RUNNING":
-            starts[m.group(2)] = ts
-        elif m.group(2) in starts:
-            out[m.group(2)] = (ts - starts[m.group(2)]).total_seconds()
+        req = d["request"]
+        out.append(
+            {
+                "request": req["id"],
+                "kind": req["kind"],
+                "job": req.get("job"),
+                "where": "Actions runner, open source Spark" if req["kind"] == "portable" else "Databricks workspace",
+                "seconds": float(result["wall_seconds"]),
+                "github_run": d.get("github_run_id"),
+            }
+        )
     return out
 
 
@@ -43,29 +52,20 @@ def _json(rel: str) -> Any:
 
 
 def main() -> int:
-    ledger: dict[str, Any] = {"machine": {"cores": os.cpu_count()}, "steps": []}
-    log = ROOT / "data" / "lake" / "full" / "run.log"
-    if log.exists():
-        flows = pipeline_flows(log)
-        ledger["pipeline_flows_seconds"] = dict(sorted(flows.items(), key=lambda kv: -kv[1]))
-        run = (ROOT / "data" / "lake" / "full_run.out").read_text(encoding="utf-8", errors="replace")
-        m = re.search(r"portable pipeline exited (\d+) after ([\d.]+) s", run)
-        if m:
-            ledger["steps"].append({"step": "portable pipeline, full", "seconds": float(m.group(2))})
-    timings = _json("data/work/models/full/timings.json")
-    for name, secs in (timings or {}).items():
-        ledger["steps"].append({"step": f"models: {name}", "seconds": secs})
-    for rel, name in (("results/evaluation.json", "grade"), ("results/monitor.json", "monitor")):
-        doc = _json(rel)
-        if doc and "seconds" in doc:
-            ledger["steps"].append({"step": name, "seconds": doc["seconds"]})
-    rec = _json("results/reconcile.json")
-    if rec and "local" in rec:
-        ledger["steps"].append({"step": "summarize the lake", "seconds": rec["local"]["seconds"]})
-    ledger["total_seconds"] = round(sum(s["seconds"] for s in ledger["steps"]), 1)
-    ledger["workspace"] = _json("results/workspace/compute.json")
+    steps = records()
+    ledger: dict[str, Any] = {
+        "steps": steps,
+        "workspace_seconds": round(sum(s["seconds"] for s in steps if s["where"] == "Databricks workspace"), 1),
+        "runner_seconds": round(sum(s["seconds"] for s in steps if s["where"].startswith("Actions")), 1),
+        "runner_model_steps_seconds": _json("results/workspace/models_timings_runner.json"),
+        "billing": _json("results/workspace/billing.json"),
+        "machines": {
+            "Actions runner": "4 cores, 16 GB (GitHub hosted ubuntu-latest)",
+            "Databricks workspace": "Free Edition, serverless",
+        },
+    }
     (ROOT / "results" / "compute_ledger.json").write_text(json.dumps(ledger, indent=1) + "\n", encoding="utf-8")
-    print(json.dumps({k: ledger[k] for k in ("steps", "total_seconds")}, indent=1))
+    print(json.dumps({k: ledger[k] for k in ("workspace_seconds", "runner_seconds")}, indent=1))
     return 0
 
 

@@ -71,11 +71,18 @@ def luhn_valid(digits: str) -> bool:
     return total % 10 == 0
 
 
+def epoch_millis(digits: str) -> bool:
+    """A 13 digit run starting with 1 is a Unix time in milliseconds (2001 to 2033). The only 13 digit
+    card numbers are Visa's, which start with 4, so this never hides a card number. The login state
+    snapshots hold such times, and one in ten passes Luhn by chance."""
+    return len(digits) == 13 and digits[0] == "1"
+
+
 def find_card_numbers(text: str) -> list[str]:
     found: list[str] = []
     for match in PAN.finditer(text):
         digits = re.sub(r"[ -]", "", match.group(0))
-        if 13 <= len(digits) <= 19 and len(set(digits)) > 1 and luhn_valid(digits):
+        if 13 <= len(digits) <= 19 and len(set(digits)) > 1 and not epoch_millis(digits) and luhn_valid(digits):
             found.append(digits)
     return found
 

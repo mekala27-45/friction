@@ -251,3 +251,20 @@ pipeline, features, models, grade and model export there. Every salted table can
 by digest: the first month matched on all nine exported tables, and over every row eight of nine
 matched (the card age feature differs and is being traced). The build machine keeps the fixture
 runs, the tests and the gates, with the public test salt.
+
+## 2026-10-29 What the Freeman grade shows, and why the model stays as the paper wrote it
+
+On the full data the Freeman reimplementation fails the login gates: ROC AUC 0.384 on the test
+months, and no threshold meets the budget, because every first sign in of a user gets the same
+score (the user terms fall back to the global ones and p(u | legit) is at its smallest), and those
+sign ins are a large share of the good traffic. Against the published figures the risk score
+relation for the vpn attacker reproduces (5.47 against 5.05) and the targeted one is lower (2.30
+against 8.94). The naive attacker is the outlier (0.0002 against 8.48): the simulator picks its
+country uniformly from the countries in the attack pool, so it signs in from places almost no
+legitimate user signs in from, and Freeman uses the global share of a value as its attack
+likelihood, which makes those sign ins look unlikely for an attacker too.
+
+The histories hold successful sign ins only, as the evaluation paper does (Wiefling et al. 2022,
+Sections 11.1 and 12.1). The model is not refit after reading the test months; the result is
+published as it came out, the login desk serves its floor, and the naive attacker's country draw
+is the first thing to change in a version two, registered before any test month is read again.

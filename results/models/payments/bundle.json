@@ -1,0 +1,39 @@
+{
+ "desk": "payments",
+ "files": {
+  "mcc_rates.json": "47720226b2c4c4b3e911595f932f9ac01343a2340c8afd44d319f7997f2b54bb",
+  "model.txt": "6570b08a40d88013dce1a0aa1b9024e7f300f90cc1c6a9b76cad73a7f8b23462"
+ },
+ "model": "lightgbm",
+ "reason_map": {
+  "amount_usd": "P01",
+  "amount_z": "P01",
+  "channel": "P12",
+  "channel_new": "P12",
+  "cnt_1h": "P03",
+  "cnt_24h": "P04",
+  "cnt_7d": "P05",
+  "days_since_issue": "P10",
+  "errors_24h": "P12",
+  "foreign": "P08",
+  "hour": "P11",
+  "hour_share": "P11",
+  "is_refund": "P02",
+  "location_new": "P08",
+  "log_amount_to_median": "P01",
+  "log_n_prior": "P10",
+  "log_secs_since_prev": "P06",
+  "mcc_fraud_rate": "P09",
+  "mcc_new": "P09",
+  "merchant_new": "P07",
+  "merchant_seen": "P07",
+  "sum_1h_usd": "P03",
+  "sum_24h_usd": "P04",
+  "sum_7d_usd": "P05"
+ },
+ "status": "champion",
+ "thresholds": {
+  "decline": 0.11926939851484392,
+  "step_up": 0.00028501947797312534
+ }
+}
