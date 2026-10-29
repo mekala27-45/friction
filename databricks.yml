@@ -116,6 +116,75 @@ resources:
             dependencies:
               - pyyaml
               - pydantic>=2.10
+    monitor:
+      name: friction-monitor-${bundle.target}
+      max_concurrent_runs: 1
+      tasks:
+        - task_key: monitor
+          environment_key: default
+          spark_python_task:
+            python_file: ./jobs/monitor.py
+            parameters: ["--root", "${workspace.file_path}", "--catalog", "${var.catalog}", "--prefix", "${var.prefix}",
+                         "--job", "monitor", "--run-id", "{{job.run_id}}"]
+      environments:
+        - environment_key: default
+          spec:
+            environment_version: "3"
+            dependencies:
+              - pyyaml
+              - pydantic>=2.10
+    daily:
+      name: friction-daily-${bundle.target}
+      max_concurrent_runs: 1
+      parameters:
+        - name: desk
+          default: payments
+        - name: through
+          default: "1"
+        - name: from
+          default: "1"
+      tasks:
+        - task_key: land
+          environment_key: default
+          spark_python_task:
+            python_file: ./jobs/land.py
+            parameters: ["--root", "${workspace.file_path}", "--catalog", "${var.catalog}", "--prefix", "${var.prefix}", "--job", "daily", "--run-id", "{{job.run_id}}", "--desk", "{{job.parameters.desk}}",
+                         "--through", "{{job.parameters.through}}", "--from", "{{job.parameters.from}}"]
+          max_retries: 2
+          min_retry_interval_millis: 60000
+        - task_key: pipeline_update
+          depends_on: [{task_key: land}]
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.friction.id}
+            full_refresh: false
+          max_retries: 1
+        - task_key: features
+          depends_on: [{task_key: pipeline_update}]
+          environment_key: default
+          spark_python_task:
+            python_file: ./jobs/features.py
+            parameters: ["--root", "${workspace.file_path}", "--catalog", "${var.catalog}", "--prefix", "${var.prefix}", "--job", "daily", "--run-id", "{{job.run_id}}"]
+          max_retries: 1
+        - task_key: monitor
+          depends_on: [{task_key: features}]
+          environment_key: default
+          spark_python_task:
+            python_file: ./jobs/monitor.py
+            parameters: ["--root", "${workspace.file_path}", "--catalog", "${var.catalog}", "--prefix", "${var.prefix}", "--job", "daily", "--run-id", "{{job.run_id}}"]
+        - task_key: export
+          depends_on: [{task_key: monitor}]
+          run_if: ALL_DONE
+          environment_key: default
+          spark_python_task:
+            python_file: ./jobs/export.py
+            parameters: ["--root", "${workspace.file_path}", "--catalog", "${var.catalog}", "--prefix", "${var.prefix}", "--job", "daily", "--run-id", "{{job.run_id}}", "--tag", "daily"]
+      environments:
+        - environment_key: default
+          spec:
+            environment_version: "3"
+            dependencies:
+              - pyyaml
+              - pydantic>=2.10
     backfill:
       name: friction-backfill-${bundle.target}
       max_concurrent_runs: 1
