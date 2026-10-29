@@ -9,8 +9,10 @@ pipeline update and digests every bronze, silver, CDC and gold table:
 2. Order: days 11 to 13 landed in order, one update each, digest; reset; the same days landed
    13, 11, 12 (the late events and the later label versions first), digest; identical.
 3. A backfill over a processed range: land days 11 to 13 again and run; nothing changes.
-4. Labels out of order: covered by test 2, whose label and card histories are among the digests,
-   validity columns included.
+4. Labels out of order: the payment months the replay window's chargebacks point back to (August
+   to November 2019), then the label drops 0345 to 0359 at once, digest; reset; the same months,
+   then the label drops in three groups delivered latest first; the label history must be identical
+   and not empty.
 
 Writes integration.json to the exports volume and fails the task if any test failed.
 """
@@ -30,6 +32,7 @@ args = _boot.parse(
         ("--pipeline-id", {"required": True}),
         ("--source-outbox", {"required": True}),
         ("--day", {"type": int, "default": 10}),
+        ("--tests", {"default": "all", "help": "all, or a comma list of: relanding, order, labels"}),
     ]
 )
 spark = _boot.session()
@@ -96,6 +99,21 @@ def land(day: int, overwrite: bool = False) -> list[str]:
     return copied
 
 
+def land_feed(feed: str, low: int, high: int) -> list[str]:
+    """Every drop of one feed with a sequence number in [low, high]."""
+    base = f"{args.source_outbox}/{feed}/drops"
+    names = sorted(n for n in os.listdir(base) if n[:4].isdigit() and low <= int(n[:4]) <= high)
+    for name in names:
+        shutil.copytree(f"{base}/{name}", f"{landing}/{feed}/drops/{name}", dirs_exist_ok=True)
+    note("landed feed", feed=feed, drops=len(names), low=low, high=high)
+    return names
+
+
+def label_digests() -> dict[str, dict[str, Any]]:
+    return {t: digests.table_digest(spark.read.table(_boot.fq(args, layer, t)))
+            for layer, t in (("cdc", "labels_payments_history"), ("silver", "payments_silver"))}  # fmt: skip
+
+
 def digest_all() -> dict[str, dict[str, Any]]:
     out = {}
     for layer, tables in it.TABLES.items():
@@ -105,8 +123,32 @@ def digest_all() -> dict[str, dict[str, Any]]:
 
 
 tests: dict[str, dict[str, Any]] = {}
+wanted = {"relanding", "order", "labels"} if args.tests == "all" else set(args.tests.split(","))
 try:
     d = args.day
+    if "labels" in wanted:
+        reset()
+        land_feed("payments", 344, 347)
+        labels = land_feed("labels_payments", 345, 359)
+        update()
+        at_once = label_digests()
+        reset()
+        land_feed("payments", 344, 347)
+        third = max(1, len(labels) // 3)
+        groups = [labels[2 * third :], labels[:third], labels[third : 2 * third]]
+        for group in groups:
+            for name in group:
+                seq = int(name[:4])
+                land_feed("labels_payments", seq, seq)
+            update()
+        late_first = label_digests()
+        rows = at_once["labels_payments_history"]["rows"]
+        tests["labels_out_of_order"] = {
+            "label_drops": labels, "delivered": groups, "history_rows": rows,
+            "differences": it.differences(at_once, late_first) + ([] if rows > 0 else ["empty label history"]),
+        }  # fmt: skip
+    if "relanding" not in wanted and "order" not in wanted:
+        raise StopIteration
     reset()
     land(d)
     update()
@@ -140,6 +182,8 @@ try:
     update()
     tests["backfill_over_a_processed_range"] = {"days": [d + 1, d + 2, d + 3],
                                                 "differences": it.differences(shuffled, digest_all())}  # fmt: skip
+    status = "succeeded" if all(not t["differences"] for t in tests.values()) else "failed"
+except StopIteration:
     status = "succeeded" if all(not t["differences"] for t in tests.values()) else "failed"
 except Exception as exc:
     status = "failed"

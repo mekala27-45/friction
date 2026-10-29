@@ -7,7 +7,7 @@ SELECT typeof(account_ref) AS account_ref_type, typeof(card_generation) AS gener
 FROM ${cdc}.cards_history GROUP BY 1, 2, 3, 4
 -- statement
 -- save: history_sample
-SELECT account_ref, card_generation, op, __START_AT, __END_AT
+SELECT account_ref, card_generation, status, __START_AT, __END_AT
 FROM ${cdc}.cards_history ORDER BY account_ref, card_generation LIMIT 8
 -- statement
 -- save: issue_times
@@ -30,3 +30,8 @@ SELECT count(DISTINCT s.account_ref) AS silver_accounts,
        count(DISTINCT CASE WHEN h.account_ref IS NOT NULL THEN s.account_ref END) AS with_history
 FROM (SELECT DISTINCT account_ref FROM ${silver}.payments_silver) s
 LEFT JOIN (SELECT DISTINCT account_ref FROM ${cdc}.cards_history) h ON s.account_ref = h.account_ref
+-- statement
+-- save: run_ledger
+SELECT job, task, status, count(*) AS runs, sum(rows_out) AS rows_out, round(sum(compute_seconds), 1) AS seconds,
+       min(recorded_at) AS first, max(recorded_at) AS last
+FROM ${ops}.run_ledger GROUP BY job, task, status ORDER BY first

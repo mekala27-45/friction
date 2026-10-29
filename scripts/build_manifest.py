@@ -549,7 +549,23 @@ def checklist(b: Builder, ev: dict[str, Any] | None) -> None:
                                  "card age feature differs (results/reconcile_full.json)")  # fmt: skip
     else:
         status[5] = ("not done", "the pipeline has not been reconciled against the open source run")
-    status[6] = ("not done", "the jobs are defined in databricks.yml; their workspace tests have not run")
+    integ = _load("results/workspace/integration.json") or {}
+    labels_run = (_load("results/workspace/integration_labels.json") or {}).get("tests", {}).get("labels_out_of_order")
+    ledger_rows = _load("results/workspace/run_ledger.json")
+    clean = integ.get("status") == "succeeded" and all(
+        not t.get("differences") for t in integ.get("tests", {}).values()
+    )
+    labels_ok = bool(labels_run) and not labels_run.get("differences") and labels_run.get("history_rows", 0) > 0
+    if clean and labels_ok and ledger_rows:
+        status[6] = ("done", "results/workspace/integration.json and integration_labels.json (every table "
+                             "digest identical after re-landing, shuffled delivery, a repeat backfill and out of "
+                             "order labels); retries in databricks.yml; results/workspace/run_ledger.json")  # fmt: skip
+    elif clean:
+        status[6] = ("not done", "results/workspace/integration.json: re-landing, shuffled delivery and a repeat "
+                                 "backfill leave every table identical; the out of order label test and the run "
+                                 "ledger summary have not been read yet")  # fmt: skip
+    else:
+        status[6] = ("not done", "the jobs are defined in databricks.yml; their workspace tests have not run")
     rows_full = {k: v["rows"] for k, v in full_export.get("digests", {}).items()}
     status[7] = (
         (
