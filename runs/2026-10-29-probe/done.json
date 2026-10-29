@@ -1,0 +1,31 @@
+{
+ "request": {
+  "id": "2026-10-29-probe",
+  "kind": "probe",
+  "target": "dev",
+  "job": null,
+  "params": {},
+  "note": "What Free Edition allows this account today: catalogs, volumes, masks, tags, row filters, groups, system tables, serving. Read by every deploy step."
+ },
+ "github_run_id": "40809751055",
+ "commit": "dc8373b3d08cc08468bea9849803a06b51a14d61",
+ "started_at": "2026-10-29T03:01:35+00:00",
+ "result": {
+  "summary": {
+   "catalog_per_environment": false,
+   "masks": true,
+   "row_filter": true,
+   "tags": true,
+   "groups": true,
+   "billing_system_table": true,
+   "lineage_system_table": true,
+   "serving": true,
+   "sql_warehouse": true
+  }
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T03:02:35+00:00",
+ "files": {
+  "workspace_probe.json": "a0ce9a8a707f0b7664fddc6742d16562a12acd887218b1c542c090a9745ee948"
+ }
+}
