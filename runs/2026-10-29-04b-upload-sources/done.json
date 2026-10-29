@@ -1,0 +1,25 @@
+{
+ "request": {
+  "id": "2026-10-29-04b-upload-sources",
+  "kind": "upload_sources",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "outbox_volume": "/Volumes/workspace/friction_dev_raw/outbox"
+  },
+  "note": "Retry of 2026-10-29-04-upload-sources against the lock regenerated under the pinned pandas."
+ },
+ "github_run_id": "40915758090",
+ "commit": "9598aa02c0bb981038f2ee633d9d0f564f959bf3",
+ "started_at": "2026-10-29T16:53:23+00:00",
+ "result": {
+  "uploaded_to": "/Volumes/workspace/friction_dev_raw/outbox"
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T17:06:53+00:00",
+ "files": {
+  "fetch_status.json": "aba925ed7e21b01e4b12789b32928ccf902fcb6527aacdece25d0965e5befca6",
+  "replay.lock.json": "51dda8943082c039c71534d828489a9774da44c0f0c5a6d6c3c48c5f583c2c66",
+  "run.log": "46957b228e68007c2e844e954d276d1a8579ffe313dacd74d673833c7fab4dc4"
+ }
+}

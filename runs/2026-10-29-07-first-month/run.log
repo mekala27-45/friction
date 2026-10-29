@@ -1,0 +1,235 @@
+$ databricks bundle run -t dev backfill --var catalog_mode=prefix --params desk=payments,from=1,tag=first-month,through=1
+ages/pyspark/sql/connect/client/core.py:1965[0m, in [0;36mSparkConnectClient._execute_and_fetch[0;34m(self, req, observations, extra_request_metadata, self_destruct)[0m
+[1;32m   1962[0m properties: Dict[[38;5;28mstr[39m, Any] [38;5;241m=[39m {}
+[1;32m   1964[0m [38;5;28;01mwith[39;00m Progress(handlers[38;5;241m=[39m[38;5;28mself[39m[38;5;241m.[39m_progress_handlers, operation_id[38;5;241m=[39mreq[38;5;241m.[39moperation_id) [38;5;28;01mas[39;00m progress:
+[0;32m-> 1965[0m     [38;5;28;01mfor[39;00m response [38;5;129;01min[39;00m [38;5;28mself[39m[38;5;241m.[39m_execute_and_fetch_as_iterator(
+[1;32m   1966[0m         req, observations, extra_request_metadata [38;5;129;01mor[39;00m [], progress[38;5;241m=[39mprogress
+[1;32m   1967[0m     ):
+[1;32m   1968[0m         [38;5;28;01mif[39;00m [38;5;28misinstance[39m(response, StructType):
+[1;32m   1969[0m             schema [38;5;241m=[39m response
+
+File [0;32m/databricks/python/lib/python3.12/site-packages/pyspark/sql/connect/client/core.py:1941[0m, in [0;36mSparkConnectClient._execute_and_fetch_as_iterator[0;34m(self, req, observations, extra_request_metadata, progress)[0m
+[1;32m   1939[0m     [38;5;28;01mraise[39;00m kb
+[1;32m   1940[0m [38;5;28;01mexcept[39;00m [38;5;167;01mException[39;00m [38;5;28;01mas[39;00m error:
+[0;32m-> 1941[0m     [38;5;28mself[39m[38;5;241m.[39m_handle_error(error)
+
+File [0;32m/databricks/python/lib/python3.12/site-packages/pyspark/sql/connect/client/core.py:2261[0m, in [0;36mSparkConnectClient._handle_error[0;34m(self, error)[0m
+[1;32m   2259[0m [38;5;28mself[39m[38;5;241m.[39mthread_local[38;5;241m.[39minside_error_handling [38;5;241m=[39m [38;5;28;01mTrue[39;00m
+[1;32m   2260[0m [38;5;28;01mif[39;00m [38;5;28misinstance[39m(error, grpc[38;5;241m.[39mRpcError):
+[0;32m-> 2261[0m     [38;5;28mself[39m[38;5;241m.[39m_handle_rpc_error(error)
+[1;32m   2262[0m [38;5;28;01melif[39;00m [38;5;28misinstance[39m(error, [38;5;167;01mValueError[39;00m):
+[1;32m   2263[0m     [38;5;28;01mif[39;00m [38;5;124m"[39m[38;5;124mCannot invoke RPC[39m[38;5;124m"[39m [38;5;129;01min[39;00m [38;5;28mstr[39m(error) [38;5;129;01mand[39;00m [38;5;124m"[39m[38;5;124mclosed[39m[38;5;124m"[39m [38;5;129;01min[39;00m [38;5;28mstr[39m(error):
+
+File [0;32m/databricks/python/lib/python3.12/site-packages/pyspark/sql/connect/client/core.py:2344[0m, in [0;36mSparkConnectClient._handle_rpc_error[0;34m(self, rpc_error)[0m
+[1;32m   2340[0m             logger[38;5;241m.[39mdebug([38;5;124mf[39m[38;5;124m"[39m[38;5;124mReceived ErrorInfo: [39m[38;5;132;01m{[39;00minfo[38;5;132;01m}[39;00m[38;5;124m"[39m)
+[1;32m   2342[0m             [38;5;28mself[39m[38;5;241m.[39m_handle_rpc_error_with_error_info(info, status[38;5;241m.[39mmessage, status_code)  [38;5;66;03m# EDGE[39;00m
+[0;32m-> 2344[0m             [38;5;28;01mraise[39;00m convert_exception(
+[1;32m   2345[0m                 info,
+[1;32m   2346[0m                 status[38;5;241m.[39mmessage,
+[1;32m   2347[0m                 [38;5;28mself[39m[38;5;241m.[39m_fetch_enriched_error(info),
+[1;32m   2348[0m                 [38;5;28mself[39m[38;5;241m.[39m_display_server_stack_trace(),
+[1;32m   2349[0m             ) [38;5;28;01mfrom[39;00m [38;5;28;01mNone[39;00m
+[1;32m   2351[0m     [38;5;28;01mraise[39;00m SparkConnectGrpcException(
+[1;32m   2352[0m         message[38;5;241m=[39mstatus[38;5;241m.[39mmessage,
+[1;32m   2353[0m         sql_state[38;5;241m=[39mErrorCode[38;5;241m.[39mCLIENT_UNEXPECTED_MISSING_SQL_STATE,  [38;5;66;03m# EDGE[39;00m
+[1;32m   2354[0m     ) [38;5;28;01mfrom[39;00m [38;5;28;01mNone[39;00m
+[1;32m   2355[0m [38;5;28;01melse[39;00m:
+
+File [0;32m/databricks/spark/python/_engine_pyspark.zip/_engine_pyspark/worker.py:5868[0m, in [0;36minvoke_udf[0;34m()[0m
+[1;32m   5866[0m 
+[1;32m   5867[0m 
+[0;32m-> 5868[0m func, profiler, deserializer, serializer = read_udfs(
+
+File [0;32m/databricks/spark/python/_engine_pyspark.zip/_engine_pyspark/worker.py:2691[0m, in [0;36mread_udfs[0;34m()[0m
+[1;32m   2689[0m 
+[1;32m   2690[0m 
+[0;32m-> 2691[0m read_single_udf(pickleSer, udf_info, eval_type, runner_conf, udf_index=udf_index)
+[1;32m   2692[0m 
+[1;32m   2693[0m 
+
+File [0;32m/databricks/spark/python/_engine_pyspark.zip/_engine_pyspark/worker.py:1049[0m, in [0;36mread_single_udf[0;34m()[0m
+[1;32m   1047[0m 
+[1;32m   1048[0m 
+[0;32m-> 1049[0m f, return_type = read_command(pickleSer, udf)
+[1;32m   1050[0m 
+[1;32m   1051[0m 
+
+File [0;32m/databricks/spark/python/_engine_pyspark.zip/_engine_pyspark/worker_util.py:101[0m, in [0;36mread_command[0;34m()[0m
+[0;32m--> 101[0m command = serializer.loads(file)
+
+File [0;32m/databricks/spark/python/_engine_pyspark.zip/_engine_pyspark/serializers.py:747[0m, in [0;36mloads[0;34m()[0m
+[0;32m--> 747[0m return cloudpickle.loads(obj, encoding=encoding)
+
+[0;31mPythonException[0m: 
+  An exception was thrown from the Python worker. Please see the stack trace below.
+[PYTHON_EXCEPTION] An exception was thrown from the Python worker: Traceback (most recent call last):
+  File "/databricks/spark/python/_engine_pyspark.zip/_engine_pyspark/worker.py", line 5868, in invoke_udf
+    func, profiler, deserializer, serializer = read_udfs(
+                                               ^^^^^^^^^^
+  File "/databricks/spark/python/_engine_pyspark.zip/_engine_pyspark/worker.py", line 2691, in read_udfs
+    read_single_udf(pickleSer, udf_info, eval_type, runner_conf, udf_index=udf_index)
+  File "/databricks/spark/python/_engine_pyspark.zip/_engine_pyspark/worker.py", line 1049, in read_single_udf
+    f, return_type = read_command(pickleSer, udf)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/databricks/spark/python/_engine_pyspark.zip/_engine_pyspark/worker_util.py", line 101, in read_command
+    command = serializer.loads(file)
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/databricks/spark/python/_engine_pyspark.zip/_engine_pyspark/serializers.py", line 747, in loads
+    return cloudpickle.loads(obj, encoding=encoding)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'dbruntime'
+ SQLSTATE: 38000
+
+Error: Task features failed!
+Error:
+PythonException: 
+  An exception was thrown from the Python worker. Please see the stack trace below.
+[PYTHON_EXCEPTION] An exception was thrown from the Python worker: Traceback (most recent call last):
+  File "/databricks/spark/python/_engine_pyspark.zip/_engine_pyspark/worker.py", line 5868, in invoke_udf
+    func, profiler, deserializer, serializer = read_udfs(
+                                               ^^^^^^^^^^
+  File "/databricks/spark/python/_engine_pyspark.zip/_engine_pyspark/worker.py", line 2691, in read_udfs
+    read_single_udf(pickleSer, udf_info, eval_type, runner_conf, udf_index=udf_index)
+  File "/databricks/spark/python/_engine_pyspark.zip/_engine_pyspark/worker.py", line 1049, in read_single_udf
+    f, return_type = read_command(pickleSer, udf)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/databricks/spark/python/_engine_pyspark.zip/_engine_pyspark/worker_util.py", line 101, in read_command
+    command = serializer.loads(file)
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/databricks/spark/python/_engine_pyspark.zip/_engine_pyspark/serializers.py", line 747, in loads
+    return cloudpickle.loads(obj, encoding=encoding)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'dbruntime'
+ SQLSTATE: 38000
+[Trace ID: 00-24aed39450dca7b2bdcee763035f200f-6c81d9b5a3a72f58-00]
+Trace:
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mPythonException[0m                           Traceback (most recent call last)
+File [0;32m~/.ipykernel/2793/command--1-933428676:8[0m
+[1;32m      5[0m [38;5;28;01mdel[39;00m sys
+[1;32m      7[0m [38;5;28;01mwith[39;00m [38;5;28mopen[39m(filename, [38;5;124m"[39m[38;5;124mrb[39m[38;5;124m"[39m) [38;5;28;01mas[39;00m f:
+[0;32m----> 8[0m   exec([38;5;28mcompile[39m(f[38;5;241m.[39mread(), filename, [38;5;124m'[39m[38;5;124mexec[39m[38;5;124m'[39m))
+
+File [0;32m/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files/jobs/features.py:33[0m
+[1;32m     31[0m attacks [38;5;241m=[39m spark[38;5;241m.[39mread[38;5;241m.[39mtable(attacks_table) [38;5;28;01mif[39;00m spark[38;5;241m.[39mcatalog[38;5;241m.[39mtableExists(attacks_table) [38;5;28;01melse[39;00m [38;5;28;01mNone[39;00m
+[1;32m     32[0m [38;5;28;01mtry[39;00m:
+[0;32m---> 33[0m     counts [38;5;241m=[39m gold[38;5;241m.[39mfeatures_step(spark, read, write, attacks[38;5;241m=[39mattacks)
+[1;32m     34[0m     rows_in [38;5;241m=[39m read([38;5;124m"[39m[38;5;124mpayment_feature_inputs[39m[38;5;124m"[39m)[38;5;241m.[39mcount() [38;5;241m+[39m read([38;5;124m"[39m[38;5;124mlogin_feature_inputs[39m[38;5;124m"[39m)[38;5;241m.[39mcount()
+[1;32m     35[0m     ledger[38;5;241m.[39mwrite(inputs[38;5;241m=[39m[[38;5;124m"[39m[38;5;124mpayment_feature_inputs[39m[38;5;124m"[39m, [38;5;124m"[39m[38;5;124mlogin_feature_inputs[39m[38;5;124m"[39m], outputs[38;5;241m=[39mcounts, rows_in[38;5;241m=[39mrows_in,
+[1;32m     36[0m                  rows_out[38;5;241m=[39m[38;5;28msum[39m(counts[38;5;241m.[39mvalues()), status[38;5;241m=[39m[38;5;124m"[39m[38;5;124msucceeded[39m[38;5;124m"[39m)  [38;5;66;03m# fmt: skip[39;00m
+
+File [0;32m/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files/packages/transforms/src/friction_transforms/gold.py:266[0m, in [0;36mfeatures_step[0;34m(spark, read, write, attacks)[0m
+[1;32m    258[0m [38;5;250m[39m[38;5;124;03m"""Run the state machines over the materialized inputs and write the feature tables.[39;00m
+[1;32m    259[0m 
+[1;32m    260[0m [38;5;124;03mThe same function runs on the build machine (reading and writing Parquet) and in the workspace[39;00m
+[0;32m   (...)[0m
+[1;32m    263[0m [38;5;124;03mWrites replace the tables whole, which is what makes a rerun leave them identical.[39;00m
+[1;32m    264[0m [38;5;124;03m"""[39;00m
+[1;32m    265[0m pay [38;5;241m=[39m payments_features(read([38;5;124m"[39m[38;5;124mpayment_feature_inputs[39m[38;5;124m"[39m))
+[0;32m--> 266[0m write([38;5;124m"[39m[38;5;124mpayments_features[39m[38;5;124m"[39m, pay)
+[1;32m    267[0m inputs [38;5;241m=[39m read([38;5;124m"[39m[38;5;124mlogin_feature_inputs[39m[38;5;124m"[39m)
+[1;32m    268[0m [38;5;28;01mif[39;00m attacks [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
+
+File [0;32m/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files/jobs/features.py:27[0m, in [0;36mwrite[0;34m(name, df)[0m
+[1;32m     26[0m [38;5;28;01mdef[39;00m [38;5;21mwrite[39m(name: [38;5;28mstr[39m, df) [38;5;241m-[39m[38;5;241m>[39m [38;5;28;01mNone[39;00m:  [38;5;66;03m# type: ignore[no-untyped-def][39;00m
+[0;32m---> 27[0m     df[38;5;241m.[39mwrite[38;5;241m.[39mmode([38;5;124m"[39m[38;5;124moverwrite[39m[38;5;124m"[39m)[38;5;241m.[39moption([38;5;124m"[39m[38;5;124moverwriteSchema[39m[38;5;124m"[39m, [38;5;124m"[39m[38;5;124mtrue[39m[38;5;124m"[39m)[38;5;241m.[39msaveAsTable(_boot[38;5;241m.[39mfq(args, [38;5;124m"[39m[38;5;124mgold[39m[38;5;124m"[39m, name))
+
+File [0;32m/databricks/python/lib/python3.12/site-packages/pyspark/sql/connect/readwriter.py:713[0m, in [0;36mDataFrameWriter.saveAsTable[0;34m(self, name, format, mode, partitionBy, **options)[0m
+[1;32m    711[0m [38;5;28mself[39m[38;5;241m.[39m_write[38;5;241m.[39mtable_name [38;5;241m=[39m name
+[1;32m    712[0m [38;5;28mself[39m[38;5;241m.[39m_write[38;5;241m.[39mtable_save_method [38;5;241m=[39m [38;5;124m"[39m[38;5;124msave_as_table[39m[38;5;124m"[39m
+[0;32m--> 713[0m _, _, ei [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39m_spark[38;5;241m.[39mclient[38;5;241m.[39mexecute_command(
+[1;32m    714[0m     [38;5;28mself[39m[38;5;241m.[39m_write[38;5;241m.[39mcommand([38;5;28mself[39m[38;5;241m.[39m_spark[38;5;241m.[39mclient), [38;5;28mself[39m[38;5;241m.[39m_write[38;5;241m.[39mobservations
+[1;32m    715[0m )
+[1;32m    716[0m [38;5;28mself[39m[38;5;241m.[39m_callback(ei)
+
+File [0;32m/databricks/python/lib/python3.12/site-packages/pyspark/sql/connect/client/core.py:1494[0m, in [0;36mSparkConnectClient.execute_command[0;34m(self, command, observations, extra_request_metadata)[0m
+[1;32m   1492[0m     req[38;5;241m.[39muser_context[38;5;241m.[39muser_id [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39m_user_id
+[1;32m   1493[0m req[38;5;241m.[39mplan[38;5;241m.[39mcommand[38;5;241m.[39mCopyFrom(command)
+[0;32m-> 1494[0m data, _, metrics, observed_metrics, properties [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39m_execute_and_fetch(
+[1;32m   1495[0m     req, observations [38;5;129;01mor[39;00m {}, extra_request_metadata
+[1;32m   1496[0m )
+[1;32m   1497[0m [38;5;66;03m# Create a query execution object.[39;00m
+[1;32m   1498[0m ei [38;5;241m=[39m ExecutionInfo(metrics, observed_metrics)
+
+File [0;32m/databricks/python/lib/python3.12/site-packages/pyspark/sql/connect/client/core.py:1965[0m, in [0;36mSparkConnectClient._execute_and_fetch[0;34m(self, req, observations, extra_request_metadata, self_destruct)[0m
+[1;32m   1962[0m properties: Dict[[38;5;28mstr[39m, Any] [38;5;241m=[39m {}
+[1;32m   1964[0m [38;5;28;01mwith[39;00m Progress(handlers[38;5;241m=[39m[38;5;28mself[39m[38;5;241m.[39m_progress_handlers, operation_id[38;5;241m=[39mreq[38;5;241m.[39moperation_id) [38;5;28;01mas[39;00m progress:
+[0;32m-> 1965[0m     [38;5;28;01mfor[39;00m response [38;5;129;01min[39;00m [38;5;28mself[39m[38;5;241m.[39m_execute_and_fetch_as_iterator(
+[1;32m   1966[0m         req, observations, extra_request_metadata [38;5;129;01mor[39;00m [], progress[38;5;241m=[39mprogress
+[1;32m   1967[0m     ):
+[1;32m   1968[0m         [38;5;28;01mif[39;00m [38;5;28misinstance[39m(response, StructType):
+[1;32m   1969[0m             schema [38;5;241m=[39m response
+
+File [0;32m/databricks/python/lib/python3.12/site-packages/pyspark/sql/connect/client/core.py:1941[0m, in [0;36mSparkConnectClient._execute_and_fetch_as_iterator[0;34m(self, req, observations, extra_request_metadata, progress)[0m
+[1;32m   1939[0m     [38;5;28;01mraise[39;00m kb
+[1;32m   1940[0m [38;5;28;01mexcept[39;00m [38;5;167;01mException[39;00m [38;5;28;01mas[39;00m error:
+[0;32m-> 1941[0m     [38;5;28mself[39m[38;5;241m.[39m_handle_error(error)
+
+File [0;32m/databricks/python/lib/python3.12/site-packages/pyspark/sql/connect/client/core.py:2261[0m, in [0;36mSparkConnectClient._handle_error[0;34m(self, error)[0m
+[1;32m   2259[0m [38;5;28mself[39m[38;5;241m.[39mthread_local[38;5;241m.[39minside_error_handling [38;5;241m=[39m [38;5;28;01mTrue[39;00m
+[1;32m   2260[0m [38;5;28;01mif[39;00m [38;5;28misinstance[39m(error, grpc[38;5;241m.[39mRpcError):
+[0;32m-> 2261[0m     [38;5;28mself[39m[38;5;241m.[39m_handle_rpc_error(error)
+[1;32m   2262[0m [38;5;28;01melif[39;00m [38;5;28misinstance[39m(error, [38;5;167;01mValueError[39;00m):
+[1;32m   2263[0m     [38;5;28;01mif[39;00m [38;5;124m"[39m[38;5;124mCannot invoke RPC[39m[38;5;124m"[39m [38;5;129;01min[39;00m [38;5;28mstr[39m(error) [38;5;129;01mand[39;00m [38;5;124m"[39m[38;5;124mclosed[39m[38;5;124m"[39m [38;5;129;01min[39;00m [38;5;28mstr[39m(error):
+
+File [0;32m/databricks/python/lib/python3.12/site-packages/pyspark/sql/connect/client/core.py:2344[0m, in [0;36mSparkConnectClient._handle_rpc_error[0;34m(self, rpc_error)[0m
+[1;32m   2340[0m             logger[38;5;241m.[39mdebug([38;5;124mf[39m[38;5;124m"[39m[38;5;124mReceived ErrorInfo: [39m[38;5;132;01m{[39;00minfo[38;5;132;01m}[39;00m[38;5;124m"[39m)
+[1;32m   2342[0m             [38;5;28mself[39m[38;5;241m.[39m_handle_rpc_error_with_error_info(info, status[38;5;241m.[39mmessage, status_code)  [38;5;66;03m# EDGE[39;00m
+[0;32m-> 2344[0m             [38;5;28;01mraise[39;00m convert_exception(
+[1;32m   2345[0m                 info,
+[1;32m   2346[0m                 status[38;5;241m.[39mmessage,
+[1;32m   2347[0m                 [38;5;28mself[39m[38;5;241m.[39m_fetch_enriched_error(info),
+[1;32m   2348[0m                 [38;5;28mself[39m[38;5;241m.[39m_display_server_stack_trace(),
+[1;32m   2349[0m             ) [38;5;28;01mfrom[39;00m [38;5;28;01mNone[39;00m
+[1;32m   2351[0m     [38;5;28;01mraise[39;00m SparkConnectGrpcException(
+[1;32m   2352[0m         message[38;5;241m=[39mstatus[38;5;241m.[39mmessage,
+[1;32m   2353[0m         sql_state[38;5;241m=[39mErrorCode[38;5;241m.[39mCLIENT_UNEXPECTED_MISSING_SQL_STATE,  [38;5;66;03m# EDGE[39;00m
+[1;32m   2354[0m     ) [38;5;28;01mfrom[39;00m [38;5;28;01mNone[39;00m
+[1;32m   2355[0m [38;5;28;01melse[39;00m:
+
+File [0;32m/databricks/spark/python/_engine_pyspark.zip/_engine_pyspark/worker.py:5868[0m, in [0;36minvoke_udf[0;34m()[0m
+[1;32m   5866[0m 
+[1;32m   5867[0m 
+[0;32m-> 5868[0m func, profiler, deserializer, serializer = read_udfs(
+
+File [0;32m/databricks/spark/python/_engine_pyspark.zip/_engine_pyspark/worker.py:2691[0m, in [0;36mread_udfs[0;34m()[0m
+[1;32m   2689[0m 
+[1;32m   2690[0m 
+[0;32m-> 2691[0m read_single_udf(pickleSer, udf_info, eval_type, runner_conf, udf_index=udf_index)
+[1;32m   2692[0m 
+[1;32m   2693[0m 
+
+File [0;32m/databricks/spark/python/_engine_pyspark.zip/_engine_pyspark/worker.py:1049[0m, in [0;36mread_single_udf[0;34m()[0m
+[1;32m   1047[0m 
+[1;32m   1048[0m 
+[0;32m-> 1049[0m f, return_type = read_command(pickleSer, udf)
+[1;32m   1050[0m 
+[1;32m   1051[0m 
+
+File [0;32m/databricks/spark/python/_engine_pyspark.zip/_engine_pyspark/worker_util.py:101[0m, in [0;36mread_command[0;34m()[0m
+[0;32m--> 101[0m command = serializer.loads(file)
+
+File [0;32m/databricks/spark/python/_engine_pyspark.zip/_engine_pyspark/serializers.py:747[0m, in [0;36mloads[0;34m()[0m
+[0;32m--> 747[0m return cloudpickle.loads(obj, encoding=encoding)
+
+[0;31mPythonException[0m: 
+  An exception was thrown from the Python worker. Please see the stack trace below.
+[PYTHON_EXCEPTION] An exception was thrown from the Python worker: Traceback (most recent call last):
+  File "/databricks/spark/python/_engine_pyspark.zip/_engine_pyspark/worker.py", line 5868, in invoke_udf
+    func, profiler, deserializer, serializer = read_udfs(
+                                               ^^^^^^^^^^
+  File "/databricks/spark/python/_engine_pyspark.zip/_engine_pyspark/worker.py", line 2691, in read_udfs
+    read_single_udf(pickleSer, udf_info, eval_type, runner_conf, udf_index=udf_index)
+  File "/databricks/spark/python/_engine_pyspark.zip/_engine_pyspark/worker.py", line 1049, in read_single_udf
+    f, return_type = read_command(pickleSer, udf)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/databricks/spark/python/_engine_pyspark.zip/_engine_pyspark/worker_util.py", line 101, in read_command
+    command = serializer.loads(file)
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/databricks/spark/python/_engine_pyspark.zip/_engine_pyspark/serializers.py", line 747, in loads
+    return cloudpickle.loads(obj, encoding=encoding)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'dbruntime'
+ SQLSTATE: 38000
+Error: failed to reach TERMINATED or SKIPPED, got INTERNAL_ERROR: Task features failed with message: Workload failed, see run output for details. This caused all downstream tasks to get skipped.
+[exit 1]

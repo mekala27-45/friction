@@ -1,0 +1,27 @@
+{
+ "request": {
+  "id": "2026-10-29-07-first-month",
+  "kind": "bundle_run",
+  "target": "dev",
+  "job": "backfill",
+  "params": {
+   "job_params": {
+    "desk": "payments",
+    "through": "1",
+    "from": "1",
+    "tag": "first-month"
+   },
+   "export_from": "/Volumes/workspace/friction_dev_raw/exports/first-month"
+  },
+  "note": "Land the first payments drop, run the pipeline over both desks, export digests and reconcile statistics."
+ },
+ "github_run_id": "40915758090",
+ "commit": "9598aa02c0bb981038f2ee633d9d0f564f959bf3",
+ "started_at": "2026-10-29T17:09:52+00:00",
+ "status": "failed",
+ "error": "RuntimeError: databricks bundle exited 1",
+ "finished_at": "2026-10-29T17:16:42+00:00",
+ "files": {
+  "run.log": "e80901618d276dae605848de1837ee67072781c7d43f573bd9158c2d6ebe34bb"
+ }
+}

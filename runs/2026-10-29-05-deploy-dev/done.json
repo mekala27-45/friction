@@ -1,0 +1,22 @@
+{
+ "request": {
+  "id": "2026-10-29-05-deploy-dev",
+  "kind": "bundle_deploy",
+  "target": "dev",
+  "job": null,
+  "params": {},
+  "note": "Deploy the bundle to dev: the pipeline and the land and backfill jobs."
+ },
+ "github_run_id": "40915758090",
+ "commit": "9598aa02c0bb981038f2ee633d9d0f564f959bf3",
+ "started_at": "2026-10-29T17:06:53+00:00",
+ "result": {
+  "deployed": "dev"
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T17:08:28+00:00",
+ "files": {
+  "bundle_summary.json": "d05969e4bbc38222c6df60ca3277563d9f2eb16c76dc6338e7a4d6b3028a141b",
+  "run.log": "bd602ce216186e0a6e463efa24b909386282c0dd10adc4182bf1b8e45f29556e"
+ }
+}

@@ -1,0 +1,28 @@
+{
+ "request": {
+  "id": "2026-10-29-06-land-logins-month1",
+  "kind": "bundle_run",
+  "target": "dev",
+  "job": "land",
+  "params": {
+   "job_params": {
+    "desk": "logins",
+    "through": "1",
+    "from": "1"
+   }
+  },
+  "note": "Land the first logins drop (February 2020) and its takeover labels."
+ },
+ "github_run_id": "40915758090",
+ "commit": "9598aa02c0bb981038f2ee633d9d0f564f959bf3",
+ "started_at": "2026-10-29T17:08:28+00:00",
+ "result": {
+  "job": "land",
+  "wall_seconds": 84.3
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T17:09:52+00:00",
+ "files": {
+  "run.log": "90c5c6a5d50ee244ea76362849d880380ea72c711170f231651c0be6db3ce034"
+ }
+}

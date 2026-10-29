@@ -1,0 +1,131 @@
+$ /home/runner/work/friction/friction/.venv/bin/python scripts/fetch_sources.py
+tabformer: verified (https://media.githubusercontent.com/media/IBM/TabFormer/main/data/credit_card/transactions.tgz)
+rba: verified (https://github.com/das-group/rba-dataset/releases/download/v1.0.0/rba-dataset.zip)
+[exit 0]
+$ /home/runner/work/friction/friction/.venv/bin/python scripts/stage_sources.py --drop-csv
+{'source': 'tabformer', 'rows': 24386900, 'files': 6}
+{'source': 'rba', 'rows': 31269264, 'files': 8}
+[exit 0]
+$ /home/runner/work/friction/friction/.venv/bin/python scripts/replay.py --all
+payments: 24386900 rows in 439 drops, 91 s
+logins: 31269264 rows in 102 drops, 155 s
+feeds: 8 s
+/home/runner/work/friction/friction/scripts/replay.py:94: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  data_end = pd.Timestamp(pay["last_day"]) + pd.Timedelta(days=1)
+[exit 0]
+$ git diff --exit-code --stat data/replay.lock.json
+[exit 0]
+$ databricks fs cp -r --overwrite data/landing dbfs:/Volumes/workspace/friction_dev_raw/outbox
+ops/0331_2018-07/payments_2018-07.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0331_2018-07/payments_2018-07.csv.gz
+data/landing/payments/drops/0332_2018-08/payments_2018-08.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0332_2018-08/payments_2018-08.csv.gz
+data/landing/payments/drops/0333_2018-09/payments_2018-09.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0333_2018-09/payments_2018-09.csv.gz
+data/landing/payments/drops/0334_2018-10/payments_2018-10.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0334_2018-10/payments_2018-10.csv.gz
+data/landing/payments/drops/0335_2018-11/payments_2018-11.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0335_2018-11/payments_2018-11.csv.gz
+data/landing/payments/drops/0336_2018-12/payments_2018-12.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0336_2018-12/payments_2018-12.csv.gz
+data/landing/payments/drops/0337_2019-01/payments_2019-01.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0337_2019-01/payments_2019-01.csv.gz
+data/landing/payments/drops/0338_2019-02/payments_2019-02.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0338_2019-02/payments_2019-02.csv.gz
+data/landing/payments/drops/0339_2019-03/payments_2019-03.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0339_2019-03/payments_2019-03.csv.gz
+data/landing/payments/drops/0340_2019-04/payments_2019-04.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0340_2019-04/payments_2019-04.csv.gz
+data/landing/payments/drops/0341_2019-05/payments_2019-05.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0341_2019-05/payments_2019-05.csv.gz
+data/landing/payments/drops/0342_2019-06/payments_2019-06.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0342_2019-06/payments_2019-06.csv.gz
+data/landing/payments/drops/0343_2019-07/payments_2019-07.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0343_2019-07/payments_2019-07.csv.gz
+data/landing/payments/drops/0344_2019-08/payments_2019-08.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0344_2019-08/payments_2019-08.csv.gz
+data/landing/payments/drops/0345_2019-09/payments_2019-09.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0345_2019-09/payments_2019-09.csv.gz
+data/landing/payments/drops/0346_2019-10/payments_2019-10.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0346_2019-10/payments_2019-10.csv.gz
+data/landing/payments/drops/0347_2019-11/payments_2019-11.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0347_2019-11/payments_2019-11.csv.gz
+data/landing/payments/drops/0348_2019-11-29/payments_2019-11-29.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0348_2019-11-29/payments_2019-11-29.csv.gz
+data/landing/payments/drops/0349_2019-11-30/payments_2019-11-30.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0349_2019-11-30/payments_2019-11-30.csv.gz
+data/landing/payments/drops/0350_2019-12-01/payments_2019-12-01.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0350_2019-12-01/payments_2019-12-01.csv.gz
+data/landing/payments/drops/0351_2019-12-02/payments_2019-12-02.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0351_2019-12-02/payments_2019-12-02.csv.gz
+data/landing/payments/drops/0352_2019-12-03/payments_2019-12-03.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0352_2019-12-03/payments_2019-12-03.csv.gz
+data/landing/payments/drops/0353_2019-12-04/payments_2019-12-04.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0353_2019-12-04/payments_2019-12-04.csv.gz
+data/landing/payments/drops/0354_2019-12-05/payments_2019-12-05.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0354_2019-12-05/payments_2019-12-05.csv.gz
+data/landing/payments/drops/0355_2019-12-06/payments_2019-12-06.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0355_2019-12-06/payments_2019-12-06.csv.gz
+data/landing/payments/drops/0356_2019-12-07/payments_2019-12-07.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0356_2019-12-07/payments_2019-12-07.csv.gz
+data/landing/payments/drops/0357_2019-12-08/payments_2019-12-08.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0357_2019-12-08/payments_2019-12-08.csv.gz
+data/landing/payments/drops/0358_2019-12-09/payments_2019-12-09.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0358_2019-12-09/payments_2019-12-09.csv.gz
+data/landing/payments/drops/0359_2019-12-10/payments_2019-12-10.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0359_2019-12-10/payments_2019-12-10.csv.gz
+data/landing/payments/drops/0360_2019-12-11/payments_2019-12-11.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0360_2019-12-11/payments_2019-12-11.csv.gz
+data/landing/payments/drops/0361_2019-12-12/payments_2019-12-12.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0361_2019-12-12/payments_2019-12-12.csv.gz
+data/landing/payments/drops/0362_2019-12-13/payments_2019-12-13.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0362_2019-12-13/payments_2019-12-13.csv.gz
+data/landing/payments/drops/0363_2019-12-14/payments_2019-12-14.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0363_2019-12-14/payments_2019-12-14.csv.gz
+data/landing/payments/drops/0364_2019-12-15/payments_2019-12-15.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0364_2019-12-15/payments_2019-12-15.csv.gz
+data/landing/payments/drops/0365_2019-12-16/payments_2019-12-16.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0365_2019-12-16/payments_2019-12-16.csv.gz
+data/landing/payments/drops/0366_2019-12-17/payments_2019-12-17.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0366_2019-12-17/payments_2019-12-17.csv.gz
+data/landing/payments/drops/0367_2019-12-18/payments_2019-12-18.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0367_2019-12-18/payments_2019-12-18.csv.gz
+data/landing/payments/drops/0368_2019-12-19/payments_2019-12-19.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0368_2019-12-19/payments_2019-12-19.csv.gz
+data/landing/payments/drops/0369_2019-12-20/payments_2019-12-20.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0369_2019-12-20/payments_2019-12-20.csv.gz
+data/landing/payments/drops/0370_2019-12-21/payments_2019-12-21.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0370_2019-12-21/payments_2019-12-21.csv.gz
+data/landing/payments/drops/0371_2019-12-22/payments_2019-12-22.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0371_2019-12-22/payments_2019-12-22.csv.gz
+data/landing/payments/drops/0372_2019-12-23/payments_2019-12-23.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0372_2019-12-23/payments_2019-12-23.csv.gz
+data/landing/payments/drops/0373_2019-12-24/payments_2019-12-24.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0373_2019-12-24/payments_2019-12-24.csv.gz
+data/landing/payments/drops/0374_2019-12-25/payments_2019-12-25.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0374_2019-12-25/payments_2019-12-25.csv.gz
+data/landing/payments/drops/0375_2019-12-26/payments_2019-12-26.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0375_2019-12-26/payments_2019-12-26.csv.gz
+data/landing/payments/drops/0376_2019-12-27/payments_2019-12-27.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0376_2019-12-27/payments_2019-12-27.csv.gz
+data/landing/payments/drops/0377_2019-12-28/payments_2019-12-28.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0377_2019-12-28/payments_2019-12-28.csv.gz
+data/landing/payments/drops/0378_2019-12-29/payments_2019-12-29.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0378_2019-12-29/payments_2019-12-29.csv.gz
+data/landing/payments/drops/0379_2019-12-30/payments_2019-12-30.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0379_2019-12-30/payments_2019-12-30.csv.gz
+data/landing/payments/drops/0380_2019-12-31/payments_2019-12-31.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0380_2019-12-31/payments_2019-12-31.csv.gz
+data/landing/payments/drops/0381_2020-01-01/payments_2020-01-01.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0381_2020-01-01/payments_2020-01-01.csv.gz
+data/landing/payments/drops/0382_2020-01-02/payments_2020-01-02.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0382_2020-01-02/payments_2020-01-02.csv.gz
+data/landing/payments/drops/0383_2020-01-03/payments_2020-01-03.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0383_2020-01-03/payments_2020-01-03.csv.gz
+data/landing/payments/drops/0384_2020-01-04/payments_2020-01-04.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0384_2020-01-04/payments_2020-01-04.csv.gz
+data/landing/payments/drops/0385_2020-01-05/payments_2020-01-05.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0385_2020-01-05/payments_2020-01-05.csv.gz
+data/landing/payments/drops/0386_2020-01-06/payments_2020-01-06.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0386_2020-01-06/payments_2020-01-06.csv.gz
+data/landing/payments/drops/0387_2020-01-07/payments_2020-01-07_part1.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0387_2020-01-07/payments_2020-01-07_part1.csv.gz
+data/landing/payments/drops/0387_2020-01-07/payments_2020-01-07_part2.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0387_2020-01-07/payments_2020-01-07_part2.csv.gz
+data/landing/payments/drops/0387_2020-01-07/payments_2020-01-06_resend.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0387_2020-01-07/payments_2020-01-06_resend.csv.gz
+data/landing/payments/drops/0388_2020-01-08/payments_2020-01-08.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0388_2020-01-08/payments_2020-01-08.csv.gz
+data/landing/payments/drops/0389_2020-01-09/payments_2020-01-09.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0389_2020-01-09/payments_2020-01-09.csv.gz
+data/landing/payments/drops/0390_2020-01-10/payments_2020-01-10.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0390_2020-01-10/payments_2020-01-10.csv.gz
+data/landing/payments/drops/0391_2020-01-11/payments_2020-01-11.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0391_2020-01-11/payments_2020-01-11.csv.gz
+data/landing/payments/drops/0392_2020-01-12/payments_2020-01-12.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0392_2020-01-12/payments_2020-01-12.csv.gz
+data/landing/payments/drops/0393_2020-01-13/payments_2020-01-13.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0393_2020-01-13/payments_2020-01-13.csv.gz
+data/landing/payments/drops/0394_2020-01-14/payments_2020-01-14.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0394_2020-01-14/payments_2020-01-14.csv.gz
+data/landing/payments/drops/0395_2020-01-15/payments_2020-01-15.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0395_2020-01-15/payments_2020-01-15.csv.gz
+data/landing/payments/drops/0396_2020-01-16/payments_2020-01-16.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0396_2020-01-16/payments_2020-01-16.csv.gz
+data/landing/payments/drops/0397_2020-01-17/payments_2020-01-17.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0397_2020-01-17/payments_2020-01-17.csv.gz
+data/landing/payments/drops/0398_2020-01-18/payments_2020-01-18.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0398_2020-01-18/payments_2020-01-18.csv.gz
+data/landing/payments/drops/0399_2020-01-19/payments_2020-01-19.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0399_2020-01-19/payments_2020-01-19.csv.gz
+data/landing/payments/drops/0400_2020-01-20/payments_2020-01-20.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0400_2020-01-20/payments_2020-01-20.csv.gz
+data/landing/payments/drops/0401_2020-01-21/payments_2020-01-21.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0401_2020-01-21/payments_2020-01-21.csv.gz
+data/landing/payments/drops/0402_2020-01-22/payments_2020-01-22.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0402_2020-01-22/payments_2020-01-22.csv.gz
+data/landing/payments/drops/0403_2020-01-23/payments_2020-01-23.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0403_2020-01-23/payments_2020-01-23.csv.gz
+data/landing/payments/drops/0404_2020-01-24/payments_2020-01-24.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0404_2020-01-24/payments_2020-01-24.csv.gz
+data/landing/payments/drops/0405_2020-01-25/payments_2020-01-25.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0405_2020-01-25/payments_2020-01-25.csv.gz
+data/landing/payments/drops/0406_2020-01-26/payments_2020-01-26.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0406_2020-01-26/payments_2020-01-26.csv.gz
+data/landing/payments/drops/0407_2020-01-27/payments_2020-01-27.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0407_2020-01-27/payments_2020-01-27.csv.gz
+data/landing/payments/drops/0408_2020-01-28/payments_2020-01-28.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0408_2020-01-28/payments_2020-01-28.csv.gz
+data/landing/payments/drops/0409_2020-01-29/payments_2020-01-29.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0409_2020-01-29/payments_2020-01-29.csv.gz
+data/landing/payments/drops/0410_2020-01-30/payments_2020-01-30.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0410_2020-01-30/payments_2020-01-30.csv.gz
+data/landing/payments/drops/0411_2020-01-31/payments_2020-01-31.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0411_2020-01-31/payments_2020-01-31.csv.gz
+data/landing/payments/drops/0412_2020-02-01/payments_2020-02-01.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0412_2020-02-01/payments_2020-02-01.csv.gz
+data/landing/payments/drops/0413_2020-02-02/payments_2020-02-02.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0413_2020-02-02/payments_2020-02-02.csv.gz
+data/landing/payments/drops/0414_2020-02-03/payments_2020-02-03.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0414_2020-02-03/payments_2020-02-03.csv.gz
+data/landing/payments/drops/0415_2020-02-04/payments_2020-02-04.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0415_2020-02-04/payments_2020-02-04.csv.gz
+data/landing/payments/drops/0416_2020-02-05/payments_2020-02-05.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0416_2020-02-05/payments_2020-02-05.csv.gz
+data/landing/payments/drops/0417_2020-02-06/payments_2020-02-06.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0417_2020-02-06/payments_2020-02-06.csv.gz
+data/landing/payments/drops/0418_2020-02-07/payments_2020-02-07.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0418_2020-02-07/payments_2020-02-07.csv.gz
+data/landing/payments/drops/0419_2020-02-08/payments_2020-02-08.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0419_2020-02-08/payments_2020-02-08.csv.gz
+data/landing/payments/drops/0420_2020-02-09/payments_2020-02-09.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0420_2020-02-09/payments_2020-02-09.csv.gz
+data/landing/payments/drops/0421_2020-02-10/payments_2020-02-10.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0421_2020-02-10/payments_2020-02-10.csv.gz
+data/landing/payments/drops/0422_2020-02-11/payments_2020-02-11.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0422_2020-02-11/payments_2020-02-11.csv.gz
+data/landing/payments/drops/0423_2020-02-12/payments_2020-02-12.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0423_2020-02-12/payments_2020-02-12.csv.gz
+data/landing/payments/drops/0424_2020-02-13/payments_2020-02-13.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0424_2020-02-13/payments_2020-02-13.csv.gz
+data/landing/payments/drops/0425_2020-02-14/payments_2020-02-14.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0425_2020-02-14/payments_2020-02-14.csv.gz
+data/landing/payments/drops/0426_2020-02-15/payments_2020-02-15.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0426_2020-02-15/payments_2020-02-15.csv.gz
+data/landing/payments/drops/0427_2020-02-16/payments_2020-02-16.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0427_2020-02-16/payments_2020-02-16.csv.gz
+data/landing/payments/drops/0428_2020-02-17/payments_2020-02-17.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0428_2020-02-17/payments_2020-02-17.csv.gz
+data/landing/payments/drops/0429_2020-02-18/payments_2020-02-18.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0429_2020-02-18/payments_2020-02-18.csv.gz
+data/landing/payments/drops/0430_2020-02-19/payments_2020-02-19.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0430_2020-02-19/payments_2020-02-19.csv.gz
+data/landing/payments/drops/0431_2020-02-20/payments_2020-02-20.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0431_2020-02-20/payments_2020-02-20.csv.gz
+data/landing/payments/drops/0432_2020-02-21/payments_2020-02-21.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0432_2020-02-21/payments_2020-02-21.csv.gz
+data/landing/payments/drops/0433_2020-02-22/payments_2020-02-22.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0433_2020-02-22/payments_2020-02-22.csv.gz
+data/landing/payments/drops/0434_2020-02-23/payments_2020-02-23.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0434_2020-02-23/payments_2020-02-23.csv.gz
+data/landing/payments/drops/0435_2020-02-24/payments_2020-02-24.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0435_2020-02-24/payments_2020-02-24.csv.gz
+data/landing/payments/drops/0436_2020-02-25/payments_2020-02-25.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0436_2020-02-25/payments_2020-02-25.csv.gz
+data/landing/payments/drops/0437_2020-02-26/payments_2020-02-26.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0437_2020-02-26/payments_2020-02-26.csv.gz
+data/landing/payments/drops/0438_2020-02-27/payments_2020-02-27.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0438_2020-02-27/payments_2020-02-27.csv.gz
+data/landing/payments/drops/0439_2020-02-28/payments_2020-02-28.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0439_2020-02-28/payments_2020-02-28.csv.gz
+data/landing/payments/redelivery/0387_2020-01-07/payments_2020-01-07_corrected.csv.gz -> dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/redelivery/0387_2020-01-07/payments_2020-01-07_corrected.csv.gz
+[exit 0]
