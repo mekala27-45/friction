@@ -17,6 +17,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: workspace
@@ -111,6 +112,20 @@ jobs:
             git commit -q -m "results: requests run in ${GITHUB_RUN_ID} from ${GITHUB_SHA::7}"
             git push origin results
           fi
+
+      - name: Open an issue for each monitor breach
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd results-branch
+          for f in $(git diff --name-only HEAD~1 HEAD 2>/dev/null | grep '/alerts.json$' || true); do
+            id=$(basename "$(dirname "$f")")
+            body=$(python3 -c "import json,sys; rows=json.load(open(sys.argv[1])); print('\n'.join('- ' + r['severity'] + ' ' + r['check'] + ' ' + r['scope'] + ': ' + r['note'] for r in rows))" "$f")
+            [ -z "$body" ] && continue
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "monitor: ${id}" \
+              --body "$(printf '%s\n\nRun: %s/%s/actions/runs/%s\nRunbook: docs/runbooks/ingestion.md' "$body" "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID")"
+          done
 
       - name: Fail if a request failed
         if: steps.requests.outputs.status != '0'
