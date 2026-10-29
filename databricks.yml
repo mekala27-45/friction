@@ -197,6 +197,8 @@ resources:
           default: "1"
         - name: tag
           default: backfill
+        - name: redelivery
+          default: "false"
       tasks:
         - task_key: land
           environment_key: default
@@ -204,7 +206,8 @@ resources:
             python_file: ./jobs/land.py
             parameters: ["--root", "${workspace.file_path}", "--catalog", "${var.catalog}", "--prefix", "${var.prefix}",
                          "--job", "backfill", "--run-id", "{{job.run_id}}", "--desk", "{{job.parameters.desk}}",
-                         "--through", "{{job.parameters.through}}", "--from", "{{job.parameters.from}}"]
+                         "--through", "{{job.parameters.through}}", "--from", "{{job.parameters.from}}",
+                         "--redelivery", "{{job.parameters.redelivery}}"]
           max_retries: 2
           min_retry_interval_millis: 60000
           retry_on_timeout: true

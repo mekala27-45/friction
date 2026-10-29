@@ -194,6 +194,9 @@ def handle(request: Request, out: Path, log: Path) -> dict[str, Any]:
             for name in ("timings.json", "summary.json"):
                 if (work / name).exists():
                     (out / f"models_{name}").write_bytes((work / name).read_bytes())
+        if request.params.get("perf"):
+            _sh([sys.executable, "scripts/perf_experiments.py", "--lake", str(lake), "--out",
+                 str(out / "performance.json")], log, env=spark_env)  # fmt: skip
         return {"drops": request.params["drops"], "wall_seconds": round(time.monotonic() - started, 1)}
     if request.kind == "export":
         source = str(request.params["from"])

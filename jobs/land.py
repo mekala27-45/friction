@@ -4,7 +4,7 @@ Idempotent by construction: a file already in the landing zone with the same siz
 landing the same range twice changes nothing and Auto Loader sees no new file. Feeds follow their
 desk's calendar (labels and the card CDC feed with payments; takeover labels with logins).
 
-    land.py --desk payments --through 387 [--redelivery]
+    land.py --desk payments --through 387 [--redelivery true]
 """
 
 from __future__ import annotations
@@ -21,7 +21,8 @@ args = _boot.parse(
         ("--desk", {"choices": ["payments", "logins"], "required": True}),
         ("--through", {"type": int, "required": True}),
         ("--from", {"type": int, "default": 1, "dest": "start"}),
-        ("--redelivery", {"action": "store_true"}),
+        # true or false, so a job parameter can carry it.
+        ("--redelivery", {"choices": ["true", "false"], "default": "false"}),
     ]
 )
 spark = _boot.session()
@@ -50,7 +51,7 @@ try:
                 os.makedirs(os.path.dirname(dst), exist_ok=True)
                 shutil.copyfile(src, dst)
                 copied += 1
-    if args.redelivery:
+    if args.redelivery == "true":
         base = f"{outbox}/{args.desk}/redelivery"
         for drop in sorted(os.listdir(base)) if os.path.isdir(base) else []:
             for name in sorted(os.listdir(f"{base}/{drop}")):

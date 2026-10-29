@@ -4,9 +4,13 @@
  "target": "dev",
  "params": {
   "outbox_volume": "/Volumes/workspace/friction_dev_raw/outbox",
-  "drops": {"payments": "all", "logins": "all"},
+  "drops": {
+   "payments": "all",
+   "logins": "all"
+  },
   "models": true,
-  "memory": "10g"
+  "memory": "10g",
+  "perf": true
  },
- "note": "The open source engine over every drop with the workspace salt, then attacks, features, training, scoring, the grade, the served bundles and their parity sets. Only the small outputs leave the runner."
+ "note": "The open source engine over every drop with the workspace salt, then attacks, features, training, scoring, the grade, the served bundles and their parity sets. Then the performance experiments over the same lake. Only the small outputs leave the runner."
 }
