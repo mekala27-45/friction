@@ -23,6 +23,8 @@ def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item
     except ImportError:
         has_spark = False
     has_full = (ROOT / "data" / "raw" / "tabformer" / "staged").exists()
+    has_pg = _postgres_ok()
+    skip_pg = pytest.mark.skip(reason="needs FRICTION_TEST_DATABASE_URL pointing at a reachable Postgres")
     skip_spark = pytest.mark.skip(reason="needs pyspark and a JVM")
     skip_full = pytest.mark.skip(reason="needs the staged source files under data/raw")
     for item in items:
@@ -30,6 +32,22 @@ def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item
             item.add_marker(skip_spark)
         if "fullsize" in item.keywords and not has_full:
             item.add_marker(skip_full)
+        if "postgres" in item.keywords and not has_pg:
+            item.add_marker(skip_pg)
+
+
+def _postgres_ok() -> bool:
+    url = os.environ.get("FRICTION_TEST_DATABASE_URL")
+    if not url:
+        return False
+    try:
+        import psycopg
+
+        with psycopg.connect(url, connect_timeout=3) as conn:
+            conn.execute("SELECT 1")
+        return True
+    except Exception:
+        return False
 
 
 @pytest.fixture
