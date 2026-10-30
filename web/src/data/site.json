@@ -3823,7 +3823,7 @@
      "18",
      "not done",
      "Coverage, mypy, ruff, gates, skills valid, forty to sixty commits, the rederive, v0.1.0 after the commits",
-     "the tag waits on every line above"
+     "CI is green on coverage, mypy, ruff and the gates; results/rederive.json has no drift; missing: forty to sixty commits (main has 96), lines 12, 13, 17 done"
     ]
    ],
    "source": "build"
@@ -4879,6 +4879,52 @@
    ],
    "source": "local"
   },
+  "rederive.checks": {
+   "align": [
+    "left",
+    "left",
+    "left"
+   ],
+   "columns": [
+    "Part",
+    "Where",
+    "Result"
+   ],
+   "origin": "scripts/reset_and_rederive.py",
+   "rows": [
+    [
+     "The replay from the lock",
+     "build machine, clean worktree",
+     "byte identical"
+    ],
+    [
+     "The fixture slice through the open source pipeline",
+     "build machine, clean worktree",
+     "15 of 15 tables equal by digest"
+    ],
+    [
+     "Every drop and the model chain again (request 2026-10-30-19d-rederive-models-open-source)",
+     "Actions runner",
+     "grade within 1e-9, every decision equal; equal digest"
+    ],
+    [
+     "Every drop and the model chain again (request 2026-10-30-20-served-bundle-after-incident)",
+     "Actions runner",
+     "grade within 1e-9, every decision equal; largest difference 1.2e-11"
+    ],
+    [
+     "The served payments LightGBM from that rerun",
+     "Actions runner",
+     "byte identical"
+    ],
+    [
+     "The first month in a clean workspace environment against the open source engine",
+     "workspace and Actions runner",
+     "9 of 9 tables equal by digest, rows equal to the published first month"
+    ]
+   ],
+   "source": "build"
+  },
   "workspace.probe": {
    "align": [
     "left",
@@ -5019,7 +5065,7 @@
   }
  },
  "values": {
-  "build.commits": "95",
+  "build.commits": "96",
   "checklist.done": "14",
   "checklist.missing": "12, 13, 17, 18",
   "data.rba.asn_unrealistic": "1,457,824",
@@ -5296,6 +5342,8 @@
   "plan.payments.validation.start": "2019-01-01",
   "plan.resamples": "1,000",
   "plan.sha256": "2ba61fcd4da0",
+  "rederive.drift": "none",
+  "rederive.head": "83c9561",
   "registry.logins.floor.alias": "floor",
   "registry.logins.floor.name": "workspace.friction_dev_ml.logins_floor",
   "registry.logins.floor.sha256": "a8a2148ce537",

@@ -483,6 +483,42 @@ def incident(b: Builder) -> None:
             "the workspace's drop equals the corrected source", "workspace")  # fmt: skip
 
 
+def rederive(b: Builder) -> None:
+    r = _load("results/rederive.json")
+    if not r:
+        return
+    c = r["checks"]
+    rows = []
+    if "replay" in c:
+        rows.append(["The replay from the lock", "build machine, clean worktree",
+                     "byte identical" if c["replay"]["lock_unchanged"] else "differs"])  # fmt: skip
+    if "fixture_pipeline" in c:
+        t = c["fixture_pipeline"]["tables_equal"]
+        rows.append(["The fixture slice through the open source pipeline", "build machine, clean worktree",
+                     f"{sum(t.values())} of {len(t)} tables equal by digest"])  # fmt: skip
+    prov = {e["file"]: e["request"] for e in (_load("results/provenance.json") or {}).get("promoted", [])}
+    for run in c.get("evaluation", {}).get("runs", []):
+        worst = run["worst_relative_difference"]
+        what = "equal digest" if run["digest_equal"] else f"largest difference {worst:.1e}"
+        rows.append([f"Every drop and the model chain again (request {prov.get(run['file'], run['file'])})",
+                     "Actions runner", f"grade within 1e-9, every decision equal; {what}"])  # fmt: skip
+    if "served_model" in c:
+        rows.append(["The served payments LightGBM from that rerun", "Actions runner",
+                     "byte identical" if c["served_model"]["digest_equal"] else "differs"])  # fmt: skip
+    if "month" in c:
+        t = c["month"]["tables"]
+        rows.append(["The first month in a clean workspace environment against the open source engine",
+                     "workspace and Actions runner",
+                     f"{sum(v['digest_equal'] for v in t.values())} of {len(t)} tables equal by digest, rows "
+                     "equal to the published first month"])  # fmt: skip
+    b.m.table("rederive.checks", ["Part", "Where", "Result"], ["text", "text", "text"], rows,
+              origin="scripts/reset_and_rederive.py", population="the rederive before the tag",
+              source="build")  # fmt: skip
+    b.v("rederive.drift", "none" if not r["drift"] else "found", "text", "scripts/reset_and_rederive.py",
+        "drift found by the rederive", "build")  # fmt: skip
+    b.v("rederive.head", r["head"][:7], "text", "scripts/reset_and_rederive.py", "the commit rederived", "build")
+
+
 def registry(b: Builder) -> None:
     """The Unity Catalog versions and aliases the train job registered, one set per model."""
     reg = (_load("results/workspace/train_summary.json") or {}).get("registered") or {}
@@ -602,6 +638,25 @@ def api_live() -> tuple[str, str]:
                         "decision the browser printed read back by a separate client)")  # fmt: skip
     return ("not done", "the API passes parity against a local container and Postgres; the Vercel deployment "
                         "has not been checked yet")  # fmt: skip
+
+
+def release(status: dict[int, tuple[str, str]]) -> tuple[str, str]:
+    rederive = _load("results/rederive.json") or {}
+    commits = int(_git("rev-list", "--count", "HEAD") or 0)
+    open_lines = [str(n) for n in range(1, 18) if status.get(n, ("not done", ""))[0] != "done"]
+    have = {
+        "the rederive with no drift": rederive.get("complete") and not rederive.get("drift"),
+        f"forty to sixty commits (main has {commits})": 40 <= commits <= 60,
+        f"lines {', '.join(open_lines)} done": not open_lines,
+    }
+    missing = [k for k, ok in have.items() if not ok]
+    if not missing:
+        return ("done", f"results/rederive.json (replay, fixture pipeline, model rerun, month rerun: no drift); "
+                        f"{commits} commits; CI green on coverage, mypy, ruff and the gates; v0.1.0 tagged on "
+                        "this commit")  # fmt: skip
+    return ("not done", "CI is green on coverage, mypy, ruff and the gates; results/rederive.json "
+                        f"{'has no drift' if have['the rederive with no drift'] else 'is not complete'}; "
+                        "missing: " + ", ".join(missing))  # fmt: skip
 
 
 def site_and_documents(exists: Any) -> tuple[str, str]:
@@ -760,7 +815,7 @@ def checklist(b: Builder, ev: dict[str, Any] | None) -> None:
     else:
         status[16] = ("not done", "no performance experiment has run")
     status[17] = site_and_documents(exists)
-    status[18] = ("not done", "the tag waits on every line above")
+    status[18] = release(status)
     del probe
     rows = [[n, status[n][0], text, status[n][1]] for n, text in CHECKLIST]
     b.m.table(
@@ -799,6 +854,7 @@ def main() -> int:
     workspace(b)
     incident(b)
     registry(b)
+    rederive(b)
     live(b)
     checklist(b, ev)
     out = ROOT / "results" / "manifest.json"
