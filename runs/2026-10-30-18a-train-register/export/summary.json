@@ -1,0 +1,47 @@
+{
+ "tag": "default",
+ "payments": {
+  "rows": 1502582,
+  "positives": 2409,
+  "start": "2016-11-01",
+  "end": "2018-11-01"
+ },
+ "logins": {
+  "rows": 1499565,
+  "positives": 105,
+  "legit_logins": 7538057,
+  "users": 4304818
+ },
+ "registered": {
+  "workspace.friction_dev_ml.payments_floor": {
+   "version": "1",
+   "alias": "floor",
+   "sha256": "7a645f3b33dad13e71e843a4650b1172ef94c252a15f31be9b86bc3d31f1b074"
+  },
+  "workspace.friction_dev_ml.payments_logistic": {
+   "version": "1",
+   "alias": "challenger",
+   "sha256": "bf156afcb3144b412667ecc550c2696afce65b50be7f24b1dec046286b6d8a60"
+  },
+  "workspace.friction_dev_ml.payments_lightgbm": {
+   "version": "1",
+   "alias": "challenger",
+   "sha256": "6570b08a40d88013dce1a0aa1b9024e7f300f90cc1c6a9b76cad73a7f8b23462"
+  },
+  "workspace.friction_dev_ml.logins_floor": {
+   "version": "1",
+   "alias": "floor",
+   "sha256": "a8a2148ce537bc4b3f84a499d0af5ea71d7b3d96db32b0565d9a6e60707b856c"
+  },
+  "workspace.friction_dev_ml.logins_freeman": {
+   "version": "1",
+   "alias": "challenger",
+   "sha256": "8fd11ff831381cac2d664691b3e83f43a667eba4101e7c3d12b950428029b281"
+  },
+  "workspace.friction_dev_ml.logins_lightgbm": {
+   "version": "1",
+   "alias": "challenger",
+   "sha256": "ab03b015c9c51361635df622c572def68b1c80fc9cdd9b122c9c75480eff6ece"
+  }
+ }
+}

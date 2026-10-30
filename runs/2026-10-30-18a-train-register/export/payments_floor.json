@@ -1,0 +1,32 @@
+{
+ "desk": "payments",
+ "module": "friction_models.floors",
+ "module_sha256": "b18b7b98fbbc5f40ac41d0b0e02a1b660c6e67d2523c55c4371c611685ef34c7",
+ "rules": [
+  {
+   "code": "P03",
+   "description": "three or more purchases on the card within an hour",
+   "points": 2.0
+  },
+  {
+   "code": "P01",
+   "description": "amount at least five times the card's median",
+   "points": 2.0
+  },
+  {
+   "code": "P07",
+   "description": "first purchase at this merchant, online, between midnight and six",
+   "points": 2.0
+  },
+  {
+   "code": "P10",
+   "description": "card reissued less than a day ago",
+   "points": 1.0
+  },
+  {
+   "code": "P08",
+   "description": "first in person purchase in this state or country",
+   "points": 1.0
+  }
+ ]
+}

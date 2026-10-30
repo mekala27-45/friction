@@ -1,0 +1,222 @@
+$ databricks bundle run -t dev train --var catalog_mode=prefix
+Output:
+=======
+Task attacks:
+{('test', 'naive'): 20000, ('test', 'targeted'): 20000, ('test', 'vpn'): 20000}
+
+=======
+Task features:
+{'payments_features': 24386592, 'logins_features': 31327738}
+
+=======
+Task train:
+2026/10/30 02:17:40 INFO mlflow.tracking.fluent: Experiment with name '/Users/mekalaajayk@gmail.com/.bundle/friction/dev/friction_models' does not exist. Creating a new experiment.
+🔗 View Logged Model at: https://dbc-13dc0ff6-cde4.cloud.databricks.com/ml/experiments/2417633720069295/models/m-281b6a0f19464681ac865ecee3a6e9f6?o=4481510155994981
+/databricks/python/lib/python3.12/site-packages/mlflow/pyfunc/__init__.py:3285: UserWarning: [1;33mAn input example was not provided when logging the model. To ensure the model signature functions correctly, specify the `input_example` parameter. See https://mlflow.org/docs/latest/model/signatures.html#model-input-example for more details about the benefits of using input_example.[0m
+  color_warning(
+
+
+Downloading artifacts:   0%|          | 0/1 [00:00<?, ?it/s]
+
+2026/10/30 02:17:46 WARNING mlflow.utils.requirements_utils: Detected one or more mismatches between the model's dependencies and the current Python environment:
+ - scikit-learn (current: 1.6.1, required: scikit-learn==1.9.1)
+To fix the mismatches, call `mlflow.pyfunc.get_model_dependencies(model_uri)` to fetch the model's environment and install dependencies using the resulting environment file.
+
+
+🏃 View run friction-payments_floor at: https://dbc-13dc0ff6-cde4.cloud.databricks.com/ml/experiments/2417633720069295/runs/04afaf62c2a342be802eb3ef734e7d34
+🧪 View experiment at: https://dbc-13dc0ff6-cde4.cloud.databricks.com/ml/experiments/2417633720069295
+
+
+Successfully registered model 'workspace.friction_dev_ml.payments_floor'.
+
+
+Downloading artifacts:   0%|          | 0/23 [00:00<?, ?it/s]
+
+Uploading artifacts:   0%|          | 0/24 [00:00<?, ?it/s]
+
+🔗 Created version '1' of model 'workspace.friction_dev_ml.payments_floor': https://dbc-13dc0ff6-cde4.cloud.databricks.com/explore/data/models/workspace/friction_dev_ml/payments_floor/version/1?o=4481510155994981
+🔗 View Logged Model at: https://dbc-13dc0ff6-cde4.cloud.databricks.com/ml/experiments/2417633720069295/models/m-b366c3ebe5ca4a238333e08982851be6?o=4481510155994981
+/databricks/python/lib/python3.12/site-packages/mlflow/pyfunc/__init__.py:3285: UserWarning: [1;33mAn input example was not provided when logging the model. To ensure the model signature functions correctly, specify the `input_example` parameter. See https://mlflow.org/docs/latest/model/signatures.html#model-input-example for more details about the benefits of using input_example.[0m
+  color_warning(
+
+
+Downloading artifacts:   0%|          | 0/1 [00:00<?, ?it/s]
+
+2026/10/30 02:17:55 WARNING mlflow.utils.requirements_utils: Detected one or more mismatches between the model's dependencies and the current Python environment:
+ - scikit-learn (current: 1.6.1, required: scikit-learn==1.9.1)
+To fix the mismatches, call `mlflow.pyfunc.get_model_dependencies(model_uri)` to fetch the model's environment and install dependencies using the resulting environment file.
+
+
+🏃 View run friction-payments_logistic at: https://dbc-13dc0ff6-cde4.cloud.databricks.com/ml/experiments/2417633720069295/runs/0f1fa54efdf84716af4a33d3f025638b
+🧪 View experiment at: https://dbc-13dc0ff6-cde4.cloud.databricks.com/ml/experiments/2417633720069295
+
+
+Successfully registered model 'workspace.friction_dev_ml.payments_logistic'.
+
+
+Downloading artifacts:   0%|          | 0/23 [00:00<?, ?it/s]
+
+Uploading artifacts:   0%|          | 0/24 [00:00<?, ?it/s]
+
+🔗 Created version '1' of model 'workspace.friction_dev_ml.payments_logistic': https://dbc-13dc0ff6-cde4.cloud.databricks.com/explore/data/models/workspace/friction_dev_ml/payments_logistic/version/1?o=4481510155994981
+🔗 View Logged Model at: https://dbc-13dc0ff6-cde4.cloud.databricks.com/ml/experiments/2417633720069295/models/m-f16855bfa7e44ccb9d641071fbdc4cfa?o=4481510155994981
+/databricks/python/lib/python3.12/site-packages/mlflow/pyfunc/__init__.py:3285: UserWarning: [1;33mAn input example was not provided when logging the model. To ensure the model signature functions correctly, specify the `input_example` parameter. See https://mlflow.org/docs/latest/model/signatures.html#model-input-example for more details about the benefits of using input_example.[0m
+  color_warning(
+
+
+Downloading artifacts:   0%|          | 0/1 [00:00<?, ?it/s]
+
+2026/10/30 02:18:02 WARNING mlflow.utils.requirements_utils: Detected one or more mismatches between the model's dependencies and the current Python environment:
+ - scikit-learn (current: 1.6.1, required: scikit-learn==1.9.1)
+To fix the mismatches, call `mlflow.pyfunc.get_model_dependencies(model_uri)` to fetch the model's environment and install dependencies using the resulting environment file.
+
+
+🏃 View run friction-payments_lightgbm at: https://dbc-13dc0ff6-cde4.cloud.databricks.com/ml/experiments/2417633720069295/runs/9044c607a8214f14890ebe7b867ef22b
+🧪 View experiment at: https://dbc-13dc0ff6-cde4.cloud.databricks.com/ml/experiments/2417633720069295
+
+
+Successfully registered model 'workspace.friction_dev_ml.payments_lightgbm'.
+
+
+Downloading artifacts:   0%|          | 0/23 [00:00<?, ?it/s]
+
+Uploading artifacts:   0%|          | 0/24 [00:00<?, ?it/s]
+
+🔗 Created version '1' of model 'workspace.friction_dev_ml.payments_lightgbm': https://dbc-13dc0ff6-cde4.cloud.databricks.com/explore/data/models/workspace/friction_dev_ml/payments_lightgbm/version/1?o=4481510155994981
+🔗 View Logged Model at: https://dbc-13dc0ff6-cde4.cloud.databricks.com/ml/experiments/2417633720069295/models/m-cee653289e2243279203648d06844a9f?o=4481510155994981
+/databricks/python/lib/python3.12/site-packages/mlflow/pyfunc/__init__.py:3285: UserWarning: [1;33mAn input example was not provided when logging the model. To ensure the model signature functions correctly, specify the `input_example` parameter. See https://mlflow.org/docs/latest/model/signatures.html#model-input-example for more details about the benefits of using input_example.[0m
+  color_warning(
+
+
+Downloading artifacts:   0%|          | 0/1 [00:00<?, ?it/s]
+
+2026/10/30 02:18:10 WARNING mlflow.utils.requirements_utils: Detected one or more mismatches between the model's dependencies and the current Python environment:
+ - scikit-learn (current: 1.6.1, required: scikit-learn==1.9.1)
+To fix the mismatches, call `mlflow.pyfunc.get_model_dependencies(model_uri)` to fetch the model's environment and install dependencies using the resulting environment file.
+
+
+🏃 View run friction-logins_floor at: https://dbc-13dc0ff6-cde4.cloud.databricks.com/ml/experiments/2417633720069295/runs/cab0dd117843484fa256aa79e11774e7
+🧪 View experiment at: https://dbc-13dc0ff6-cde4.cloud.databricks.com/ml/experiments/2417633720069295
+
+
+Successfully registered model 'workspace.friction_dev_ml.logins_floor'.
+
+
+Downloading artifacts:   0%|          | 0/23 [00:00<?, ?it/s]
+
+Uploading artifacts:   0%|          | 0/24 [00:00<?, ?it/s]
+
+🔗 Created version '1' of model 'workspace.friction_dev_ml.logins_floor': https://dbc-13dc0ff6-cde4.cloud.databricks.com/explore/data/models/workspace/friction_dev_ml/logins_floor/version/1?o=4481510155994981
+🔗 View Logged Model at: https://dbc-13dc0ff6-cde4.cloud.databricks.com/ml/experiments/2417633720069295/models/m-41edc8a874964342b7693748c51aae3a?o=4481510155994981
+/databricks/python/lib/python3.12/site-packages/mlflow/pyfunc/__init__.py:3285: UserWarning: [1;33mAn input example was not provided when logging the model. To ensure the model signature functions correctly, specify the `input_example` parameter. See https://mlflow.org/docs/latest/model/signatures.html#model-input-example for more details about the benefits of using input_example.[0m
+  color_warning(
+
+
+Downloading artifacts:   0%|          | 0/1 [00:00<?, ?it/s]
+
+2026/10/30 02:18:17 WARNING mlflow.utils.requirements_utils: Detected one or more mismatches between the model's dependencies and the current Python environment:
+ - scikit-learn (current: 1.6.1, required: scikit-learn==1.9.1)
+To fix the mismatches, call `mlflow.pyfunc.get_model_dependencies(model_uri)` to fetch the model's environment and install dependencies using the resulting environment file.
+
+
+🏃 View run friction-logins_freeman at: https://dbc-13dc0ff6-cde4.cloud.databricks.com/ml/experiments/2417633720069295/runs/8977512fcc5e4755bfc3b56351e5dcdf
+🧪 View experiment at: https://dbc-13dc0ff6-cde4.cloud.databricks.com/ml/experiments/2417633720069295
+
+
+Successfully registered model 'workspace.friction_dev_ml.logins_freeman'.
+
+
+Downloading artifacts:   0%|          | 0/23 [00:00<?, ?it/s]
+
+Uploading artifacts:   0%|          | 0/24 [00:00<?, ?it/s]
+
+🔗 Created version '1' of model 'workspace.friction_dev_ml.logins_freeman': https://dbc-13dc0ff6-cde4.cloud.databricks.com/explore/data/models/workspace/friction_dev_ml/logins_freeman/version/1?o=4481510155994981
+🔗 View Logged Model at: https://dbc-13dc0ff6-cde4.cloud.databricks.com/ml/experiments/2417633720069295/models/m-f65d1572fbaf4ba28100e14d31625aaa?o=4481510155994981
+/databricks/python/lib/python3.12/site-packages/mlflow/pyfunc/__init__.py:3285: UserWarning: [1;33mAn input example was not provided when logging the model. To ensure the model signature functions correctly, specify the `input_example` parameter. See https://mlflow.org/docs/latest/model/signatures.html#model-input-example for more details about the benefits of using input_example.[0m
+  color_warning(
+
+
+Downloading artifacts:   0%|          | 0/1 [00:00<?, ?it/s]
+
+2026/10/30 02:18:26 WARNING mlflow.utils.requirements_utils: Detected one or more mismatches between the model's dependencies and the current Python environment:
+ - scikit-learn (current: 1.6.1, required: scikit-learn==1.9.1)
+To fix the mismatches, call `mlflow.pyfunc.get_model_dependencies(model_uri)` to fetch the model's environment and install dependencies using the resulting environment file.
+
+
+🏃 View run friction-logins_lightgbm at: https://dbc-13dc0ff6-cde4.cloud.databricks.com/ml/experiments/2417633720069295/runs/6d8e393dc7d24d53b243aa704aedb85f
+🧪 View experiment at: https://dbc-13dc0ff6-cde4.cloud.databricks.com/ml/experiments/2417633720069295
+
+
+Successfully registered model 'workspace.friction_dev_ml.logins_lightgbm'.
+
+
+Downloading artifacts:   0%|          | 0/23 [00:00<?, ?it/s]
+
+Uploading artifacts:   0%|          | 0/24 [00:00<?, ?it/s]
+
+🔗 Created version '1' of model 'workspace.friction_dev_ml.logins_lightgbm': https://dbc-13dc0ff6-cde4.cloud.databricks.com/explore/data/models/workspace/friction_dev_ml/logins_lightgbm/version/1?o=4481510155994981
+
+
+{
+ "tag": "default",
+ "payments": {
+  "rows": 1502582,
+  "positives": 2409,
+  "start": "2016-11-01",
+  "end": "2018-11-01"
+ },
+ "logins": {
+  "rows": 1499565,
+  "positives": 105,
+  "legit_logins": 7538057,
+  "users": 4304818
+ },
+ "registered": {
+  "workspace.friction_dev_ml.payments_floor": {
+   "version": "1",
+   "alias": "floor",
+   "sha256": "7a645f3b33dad13e71e843a4650b1172ef94c252a15f31be9b86bc3d31f1b074"
+  },
+  "workspace.friction_dev_ml.payments_logistic": {
+   "version": "1",
+   "alias": "challenger",
+   "sha256": "bf156afcb3144b412667ecc550c2696afce65b50be7f24b1dec046286b6d8a60"
+  },
+  "workspace.friction_dev_ml.payments_lightgbm": {
+   "version": "1",
+   "alias": "challenger",
+   "sha256": "6570b08a40d88013dce1a0aa1b9024e7f300f90cc1c6a9b76cad73a7f8b23462"
+  },
+  "workspace.friction_dev_ml.logins_floor": {
+   "version": "1",
+   "alias": "floor",
+   "sha256": "a8a2148ce537bc4b3f84a499d0af5ea71d7b3d96db32b0565d9a6e60707b856c"
+  },
+  "workspace.friction_dev_ml.logins_freeman": {
+   "version": "1",
+   "alias": "challenger",
+   "sha256": "8fd11ff831381cac2d664691b3e83f43a667eba4101e7c3d12b950428029b281"
+  },
+  "workspace.friction_dev_ml.logins_lightgbm": {
+   "version": "1",
+   "alias": "challenger",
+   "sha256": "ab03b015c9c51361635df622c572def68b1c80fc9cdd9b122c9c75480eff6ece"
+  }
+ }
+}
+
+Run URL: https://dbc-13dc0ff6-cde4.cloud.databricks.com/jobs/940878755530939/runs/124143164207514?o=4481510155994981
+
+2026-10-30 01:18:01 "[dev mekalaajayk] friction-train-dev" RUNNING
+2026-10-30 02:18:45 "[dev mekalaajayk] friction-train-dev" TERMINATED SUCCESS
+[exit 0]
+$ databricks fs cp -r --overwrite dbfs:/Volumes/workspace/friction_dev_raw/exports/models/default results-branch/runs/2026-10-30-18a-train-register/export
+dbfs:/Volumes/workspace/friction_dev_raw/exports/models/default/logins_floor.json -> results-branch/runs/2026-10-30-18a-train-register/export/logins_floor.json
+dbfs:/Volumes/workspace/friction_dev_raw/exports/models/default/payments_logistic.json -> results-branch/runs/2026-10-30-18a-train-register/export/payments_logistic.json
+dbfs:/Volumes/workspace/friction_dev_raw/exports/models/default/payments_floor.json -> results-branch/runs/2026-10-30-18a-train-register/export/payments_floor.json
+dbfs:/Volumes/workspace/friction_dev_raw/exports/models/default/summary.json -> results-branch/runs/2026-10-30-18a-train-register/export/summary.json
+dbfs:/Volumes/workspace/friction_dev_raw/exports/models/default/logins_lightgbm.txt -> results-branch/runs/2026-10-30-18a-train-register/export/logins_lightgbm.txt
+dbfs:/Volumes/workspace/friction_dev_raw/exports/models/default/payments_lightgbm.txt -> results-branch/runs/2026-10-30-18a-train-register/export/payments_lightgbm.txt
+dbfs:/Volumes/workspace/friction_dev_raw/exports/models/default/logins_lightgbm_rep.txt -> results-branch/runs/2026-10-30-18a-train-register/export/logins_lightgbm_rep.txt
+dbfs:/Volumes/workspace/friction_dev_raw/exports/models/default/logins_freeman.json -> results-branch/runs/2026-10-30-18a-train-register/export/logins_freeman.json
+[exit 0]

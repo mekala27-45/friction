@@ -1,0 +1,22 @@
+{
+ "request": {
+  "id": "2026-10-30-18-deploy-dev",
+  "kind": "bundle_deploy",
+  "target": "dev",
+  "job": null,
+  "params": {},
+  "note": "Deploy the model jobs on serverless environment 5 with only LightGBM pinned; request 17a failed at library installation."
+ },
+ "github_run_id": "40984691116",
+ "commit": "83fc951dfaeaac1fe5ba50e4c126557e4a30df16",
+ "started_at": "2026-10-30T01:16:46+00:00",
+ "result": {
+  "deployed": "dev"
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-30T01:18:00+00:00",
+ "files": {
+  "bundle_summary.json": "8a117789af78718b7b4d05194bbd627e6a9b453cb10e14f369b333c61bb9bac2",
+  "run.log": "024053e25c2bdfca87900cf79bdde5b3293b0f12a80d93e34758a0be294808c0"
+ }
+}

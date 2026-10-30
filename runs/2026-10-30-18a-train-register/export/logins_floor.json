@@ -1,0 +1,22 @@
+{
+ "desk": "logins",
+ "module": "friction_models.floors",
+ "module_sha256": "b18b7b98fbbc5f40ac41d0b0e02a1b660c6e67d2523c55c4371c611685ef34c7",
+ "rules": [
+  {
+   "code": "L02",
+   "description": "first sign in from this country",
+   "points": 2.0
+  },
+  {
+   "code": "L04",
+   "description": "first sign in from this device type, browser or operating system",
+   "points": 1.0
+  },
+  {
+   "code": "L03",
+   "description": "first sign in from this network (ASN)",
+   "points": 1.0
+  }
+ ]
+}

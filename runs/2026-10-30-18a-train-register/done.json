@@ -1,0 +1,33 @@
+{
+ "request": {
+  "id": "2026-10-30-18a-train-register",
+  "kind": "bundle_run",
+  "target": "dev",
+  "job": "train",
+  "params": {
+   "export_from": "/Volumes/workspace/friction_dev_raw/exports/models/default",
+   "stop_on_failure": false
+  },
+  "note": "Request 17a again on environment 5: the attacks, the features with them, the training and the Unity Catalog registration. The model files and summary.json come back for the digest comparison."
+ },
+ "github_run_id": "40984691116",
+ "commit": "83fc951dfaeaac1fe5ba50e4c126557e4a30df16",
+ "started_at": "2026-10-30T01:18:00+00:00",
+ "result": {
+  "job": "train",
+  "wall_seconds": 3648.9
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-30T02:18:49+00:00",
+ "files": {
+  "export/logins_floor.json": "a8a2148ce537bc4b3f84a499d0af5ea71d7b3d96db32b0565d9a6e60707b856c",
+  "export/logins_freeman.json": "8fd11ff831381cac2d664691b3e83f43a667eba4101e7c3d12b950428029b281",
+  "export/logins_lightgbm.txt": "ab03b015c9c51361635df622c572def68b1c80fc9cdd9b122c9c75480eff6ece",
+  "export/logins_lightgbm_rep.txt": "a7f63792ebc8e1c589085f85c33e03f3f6f0947f2e38dfe89cbcaba4f376356c",
+  "export/payments_floor.json": "7a645f3b33dad13e71e843a4650b1172ef94c252a15f31be9b86bc3d31f1b074",
+  "export/payments_lightgbm.txt": "6570b08a40d88013dce1a0aa1b9024e7f300f90cc1c6a9b76cad73a7f8b23462",
+  "export/payments_logistic.json": "bf156afcb3144b412667ecc550c2696afce65b50be7f24b1dec046286b6d8a60",
+  "export/summary.json": "515710ff31c9cd3b8d971c60c7f7e7187f5c0afd4e5e21c08fcac86a0d76ac20",
+  "run.log": "8465bc26c74492e70e66a10e8ba64ced93c393c874f5952d1bd32bf0d96deb6c"
+ }
+}
