@@ -1,0 +1,12 @@
+{
+ "id": "2026-10-30-19b-rederive-month-open-source",
+ "kind": "portable",
+ "target": "dev",
+ "params": {
+  "outbox_volume": "/Volumes/workspace/friction_dev_raw/outbox",
+  "drops": {"payments": [1, 1], "logins": [1, 1]},
+  "memory": "10g",
+  "stop_on_failure": false
+ },
+ "note": "The same month on the open source engine with the workspace salt, for the digest comparison with request 19a."
+}

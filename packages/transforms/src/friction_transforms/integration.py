@@ -24,6 +24,14 @@ TABLES = {
     "gold": ["debit_counts", "known_frauds", "mcc_fraud_rates", "payments_issue_age", "payment_feature_inputs",
              "login_feature_inputs"],
 }  # fmt: skip
+# The nine tables jobs/export.py digests, by the name the reconcile uses.
+EXPORTED = {
+    "payments_silver": ("silver", "payments_silver"), "logins_silver": ("silver", "logins_silver"),
+    "quarantine": ("silver", "quarantine"), "cards_history": ("cdc", "cards_history"),
+    "labels_payments_history": ("cdc", "labels_payments_history"),
+    "labels_logins_history": ("cdc", "labels_logins_history"), "mcc_fraud_rates": ("gold", "mcc_fraud_rates"),
+    "payments_features": ("gold", "payments_features"), "logins_features": ("gold", "logins_features"),
+}  # fmt: skip
 
 
 def daily_drops(names: Iterable[str]) -> list[str]:

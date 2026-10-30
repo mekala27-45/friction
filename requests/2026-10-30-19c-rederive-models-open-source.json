@@ -1,0 +1,13 @@
+{
+ "id": "2026-10-30-19c-rederive-models-open-source",
+ "kind": "portable",
+ "target": "dev",
+ "params": {
+  "outbox_volume": "/Volumes/workspace/friction_dev_raw/outbox",
+  "drops": {"payments": "all", "logins": "all"},
+  "models": true,
+  "memory": "10g",
+  "stop_on_failure": false
+ },
+ "note": "The rederive's model part: every drop again from the outbox, the attacks, features, training, scoring and the grade from the scored sets. The evaluation digest and the served model file must equal what main holds."
+}
