@@ -30,6 +30,12 @@ def write(name: str, df) -> None:  # type: ignore[no-untyped-def]
 attacks_table = _boot.fq(args, "gold", "login_attacks")
 attacks = spark.read.table(attacks_table) if spark.catalog.tableExists(attacks_table) else None
 try:
+    # A view refreshed from a stale snapshot once left the card age a step behind silver; the inputs
+    # must hold every silver row before any feature is computed from them.
+    silver_rows = spark.read.table(_boot.fq(args, "silver", "payments_silver")).count()
+    input_rows = read("payment_feature_inputs").count()
+    if silver_rows != input_rows:
+        raise RuntimeError(f"payment_feature_inputs holds {input_rows} rows and payments_silver {silver_rows}")
     counts = gold.features_step(spark, read, write, attacks=attacks)
     rows_in = read("payment_feature_inputs").count() + read("login_feature_inputs").count()
     ledger.write(inputs=["payment_feature_inputs", "login_feature_inputs"], outputs=counts, rows_in=rows_in,

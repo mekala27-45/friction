@@ -4,60 +4,60 @@
   "reconcile": {
    "feature_sums": {
     "logins_features": {
-     "asn_count": 86733.0,
-     "asn_distinct": 24192.0,
-     "browser_count": 43590.0,
-     "browser_distinct": 25564.0,
-     "city_count": 92803.0,
-     "city_distinct": 31445.0,
-     "country_count": 234818.0,
-     "country_distinct": 12154.0,
-     "device_count": 254513.0,
-     "device_distinct": 7438.0,
-     "device_type": 3316.0,
+     "asn_count": 85895.0,
+     "asn_distinct": 22682.0,
+     "browser_count": 42448.0,
+     "browser_distinct": 23371.0,
+     "city_count": 90640.0,
+     "city_distinct": 29479.0,
+     "country_count": 229412.0,
+     "country_distinct": 11354.0,
+     "device_count": 248344.0,
+     "device_distinct": 6761.0,
+     "device_type": 3054.0,
      "failed_1h_ip": 411.0,
      "failed_1h_user": 483.0,
-     "ip_count": 35998.0,
-     "ip_distinct": 100773.0,
-     "log_secs_since_success": 53370.878542509316,
+     "ip_count": 35982.0,
+     "ip_distinct": 96725.0,
+     "log_secs_since_success": 47671.69963012511,
      "logins_1h_ip": 1761.0,
-     "n_success_prior": 302524.0,
-     "os_count": 232941.0,
-     "os_distinct": 13044.0,
-     "region_count": 114341.0,
-     "region_distinct": 21976.0,
-     "rows": 5296.0,
-     "rtt_missing": 5102.0,
-     "rtt_z_user": 10.428939483072096,
-     "ua_count": 30169.0,
-     "ua_distinct": 36186.0
+     "n_success_prior": 293766.0,
+     "os_count": 228670.0,
+     "os_distinct": 11809.0,
+     "region_count": 111919.0,
+     "region_distinct": 20333.0,
+     "rows": 4897.0,
+     "rtt_missing": 4724.0,
+     "rtt_z_user": 10.450862657420515,
+     "ua_count": 29300.0,
+     "ua_distinct": 33509.0
     },
     "payments_features": {
-     "amount_usd": 2373869.7799999523,
-     "amount_z": 1590.1165250375238,
-     "channel": 42370.0,
+     "amount_usd": 2373720.329999952,
+     "amount_z": 1587.507046199963,
+     "channel": 42365.0,
      "channel_new": 34.0,
      "cnt_1h": 17609.0,
-     "cnt_24h": 178984.0,
-     "cnt_7d": 1242164.0,
-     "days_since_issue": 88706043.30009273,
+     "cnt_24h": 178976.0,
+     "cnt_7d": 1242135.0,
+     "days_since_issue": 88703314.84870386,
      "errors_24h": 3050.0,
-     "foreign": 410.0,
-     "hour": 771685.0,
-     "hour_share": 16584.23582875651,
+     "foreign": 411.0,
+     "hour": 771652.0,
+     "hour_share": 16584.988284328138,
      "is_refund": 2321.0,
      "location_new": 263.0,
-     "log_amount_to_median": 4134.88377534024,
-     "log_n_prior": 528430.4059283725,
-     "log_secs_since_prev": 634241.5143421139,
-     "mcc_fraud_rate": 133.6406210860945,
+     "log_amount_to_median": 4132.610168366814,
+     "log_n_prior": 528421.60100311,
+     "log_secs_since_prev": 634231.7288162322,
+     "mcc_fraud_rate": 133.6463295196614,
      "mcc_new": 743.0,
-     "merchant_new": 2440.0,
-     "merchant_seen": 314371.8765002173,
-     "rows": 65831.0,
+     "merchant_new": 2441.0,
+     "merchant_seen": 314353.37406031496,
+     "rows": 65830.0,
      "sum_1h_usd": 531548.4800000013,
-     "sum_24h_usd": 6458441.54000003,
-     "sum_7d_usd": 45777762.33000069
+     "sum_24h_usd": 6457944.820000031,
+     "sum_7d_usd": 45775382.990000665
     }
    },
    "histories": {
@@ -48723,11 +48723,11 @@
       "rows": 15
      },
      {
-      "amount_cents": 19743,
+      "amount_cents": 4798,
       "day": "2020-01-07",
-      "keys": 6,
+      "keys": 5,
       "refunds": 0,
-      "rows": 6
+      "rows": 5
      },
      {
       "amount_cents": 87084,
@@ -49096,11 +49096,11 @@
     ],
     "desk": [
      {
-      "amount_cents": 237386978,
+      "amount_cents": 237372033,
       "desk": "payments",
-      "keys": 65831,
+      "keys": 65830,
       "refunds": 2321,
-      "rows": 65831
+      "rows": 65830
      }
     ],
     "month": [
@@ -50603,11 +50603,11 @@
       "rows": 495
      },
      {
-      "amount_cents": 1821286,
-      "keys": 556,
+      "amount_cents": 1806341,
+      "keys": 555,
       "month": "2020-01",
       "refunds": 24,
-      "rows": 556
+      "rows": 555
      },
      {
       "amount_cents": 1690520,
@@ -50626,28 +50626,28 @@
       "rows": 3426
      },
      {
-      "amount_cents": 26191430,
+      "amount_cents": 26187230,
       "bucket": 5,
-      "keys": 8451,
+      "keys": 8450,
       "refunds": 316,
-      "rows": 8451
+      "rows": 8450
      },
      {
-      "amount_cents": 11034223,
+      "amount_cents": 11032798,
       "bucket": 7,
       "keys": 3388,
       "refunds": 154,
       "rows": 3388
      },
      {
-      "amount_cents": 81916767,
+      "amount_cents": 81912467,
       "bucket": 13,
       "keys": 22319,
       "refunds": 387,
       "rows": 22319
      },
      {
-      "amount_cents": 25007660,
+      "amount_cents": 25008634,
       "bucket": 14,
       "keys": 5987,
       "refunds": 554,
@@ -50668,14 +50668,14 @@
       "rows": 2406
      },
      {
-      "amount_cents": 15469925,
+      "amount_cents": 15469895,
       "bucket": 24,
       "keys": 6613,
       "refunds": 270,
       "rows": 6613
      },
      {
-      "amount_cents": 22907747,
+      "amount_cents": 22901783,
       "bucket": 25,
       "keys": 8101,
       "refunds": 246,
@@ -50692,18 +50692,13 @@
    },
    "quarantine": [
     {
-     "count": 5,
+     "count": 6,
      "desk": "payments",
-     "rule": "P_MCC"
-    },
-    {
-     "count": 5,
-     "desk": "payments",
-     "rule": "P_RESCUED"
+     "rule": "P_REJECTED_FILE"
     }
    ]
   },
-  "seconds": 22.3,
+  "seconds": 18.8,
   "tables": {
    "cards_history": {
     "digest": "85:a35f0261eaa81a4a:0e398a6092acc7d1",
@@ -50738,15 +50733,15 @@
     "rows": 4897
    },
    "logins_features": {
-    "digest": "5296:cbf85c210cfbc8e6:15f46a8ab391ac58",
-    "rows": 5296
+    "digest": "4897:37e8114ab62e5547:004597488b9bfdf2",
+    "rows": 4897
    },
    "logins_silver": {
     "digest": "4897:4bc5956a0495b978:04f53c40a27ef749",
     "rows": 4897
    },
    "mcc_fraud_rates": {
-    "digest": "7260:75fb686c2109c8eb:18e2abe82edbb0f4",
+    "digest": "7260:f7cfa96dc9e19748:07d8ca361d3a765c",
     "rows": 7260
    },
    "payments_bronze": {
@@ -50754,16 +50749,16 @@
     "rows": 65853
    },
    "payments_features": {
-    "digest": "65831:018fca3de10c7490:0061ffefbe123ca9",
-    "rows": 65831
+    "digest": "65830:8247b649140bf7bc:19a04427ae5108a9",
+    "rows": 65830
    },
    "payments_silver": {
-    "digest": "65831:0d8299e6949cfaf5:038dfab880edbe24",
-    "rows": 65831
+    "digest": "65830:83ba3c4dda17aa06:082aae9940c0e137",
+    "rows": 65830
    },
    "quarantine": {
-    "digest": "10:f83fedc210c32896:129def48eefcaea9",
-    "rows": 10
+    "digest": "6:4590ac6f1d58de4e:09beb14dbf9d10b5",
+    "rows": 6
    }
   },
   "unknown_account": {

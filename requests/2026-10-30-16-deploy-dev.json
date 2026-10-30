@@ -1,0 +1,7 @@
+{
+ "id": "2026-10-30-16-deploy-dev",
+ "kind": "bundle_deploy",
+ "target": "dev",
+ "params": {"stop_on_failure": false},
+ "note": "Deploy the card age computed inside payment_feature_inputs, the features job's row guard, and the monitor that leaves approved rejections out."
+}

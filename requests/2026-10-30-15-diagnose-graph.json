@@ -1,0 +1,7 @@
+{
+ "id": "2026-10-30-15-diagnose-graph",
+ "kind": "sql",
+ "target": "dev",
+ "params": {"file": "sql/diagnose_graph.sql", "vars": {"gold": "workspace.friction_dev_gold", "update": "bc7b7d16-c17a-47be-a2b7-ffd3766f3a84"}, "stop_on_failure": false},
+ "note": "The card age view lags one update behind silver. The flow order and the view's recorded inputs and refresh technique in the update that replayed drop 387."
+}

@@ -32,6 +32,10 @@ def main() -> int:
     args = parser.parse_args()
     started = time.monotonic()
     cfg = yaml.safe_load((ROOT / "config" / "monitor.yaml").read_text(encoding="utf-8"))
+    _active = (yaml.safe_load((ROOT / "contracts" / "approved_changes.yaml").read_text(encoding="utf-8")) or {}).get(
+        "active", {}
+    )
+    rejected = {desk: tuple((v or {}).get("rejected_files", [])) for desk, v in (_active or {}).items()}
     plan = yaml.safe_load((ROOT / "evaluation" / "plan.yaml").read_text(encoding="utf-8"))
     wh = (args.lake / "spark-warehouse").resolve()
     spark = session.get(shuffle_partitions=32)
@@ -50,11 +54,13 @@ def main() -> int:
         quarantine = read("quarantine")
         d = {
             "feature_drift": monitor.feature_drift(read(feats), silver, key, names, train),
-            "expectations": monitor.expectation_rates(quarantine, bronze, desk),
+            "expectations": monitor.expectation_rates(quarantine, bronze, desk, rejected.get(desk, ())),
             "completeness": monitor.completeness(
                 silver, bronze, key, "txn_ref" if desk == "payments" else "login_index"
             ),
-            "clock": monitor.clock(quarantine, bronze, desk, "P_FUTURE" if desk == "payments" else "L_FUTURE"),
+            "clock": monitor.clock(
+                quarantine, bronze, desk, "P_FUTURE" if desk == "payments" else "L_FUTURE", rejected.get(desk, ())
+            ),
         }
         report["desks"][desk] = d  # type: ignore[index]
     report["label_maturity"] = monitor.label_maturity(

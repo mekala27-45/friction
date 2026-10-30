@@ -80,11 +80,23 @@ def feature_drift(
     return out
 
 
-def expectation_rates(quarantine: DataFrame, bronze: DataFrame, desk: str) -> list[dict[str, Any]]:
+def _not_rejected(quarantine: DataFrame, rejected_files: tuple[str, ...]) -> DataFrame:
+    """Rows of a file an approved contract change rejected stay quarantined by design; they no longer
+    page. The rejection itself is the record (contracts/approved_changes.yaml)."""
+    if not rejected_files:
+        return quarantine
+    name = F.regexp_extract(F.col("source_file"), r"([^/]+)$", 1)
+    return quarantine.where(~name.isin(*rejected_files))
+
+
+def expectation_rates(
+    quarantine: DataFrame, bronze: DataFrame, desk: str, rejected_files: tuple[str, ...] = ()
+) -> list[dict[str, Any]]:
     """Share of each drop's rows quarantined by each rule."""
     delivered = {r["drop_id"]: int(r["count"]) for r in bronze.groupBy("drop_id").count().collect()}
     rows = (
-        quarantine.where(F.col("desk") == desk)
+        _not_rejected(quarantine, rejected_files)
+        .where(F.col("desk") == desk)
         .groupBy("drop_id", "rule")
         .agg(F.countDistinct("event_ref").alias("rows"))
         .collect()
@@ -120,11 +132,14 @@ def completeness(silver: DataFrame, bronze: DataFrame, key: str, source_key: str
     ]
 
 
-def clock(quarantine: DataFrame, bronze: DataFrame, desk: str, rule: str) -> list[dict[str, Any]]:
+def clock(
+    quarantine: DataFrame, bronze: DataFrame, desk: str, rule: str, rejected_files: tuple[str, ...] = ()
+) -> list[dict[str, Any]]:
     """Per file: share of events stamped at or after the drop that delivered them closed."""
     files = {r["source_file"]: int(r["count"]) for r in bronze.groupBy("source_file").count().collect()}
     late = (
-        quarantine.where((F.col("desk") == desk) & (F.col("rule") == rule))
+        _not_rejected(quarantine, rejected_files)
+        .where((F.col("desk") == desk) & (F.col("rule") == rule))
         .groupBy("drop_id", "source_file")
         .agg(F.countDistinct("event_ref").alias("rows"))
         .collect()

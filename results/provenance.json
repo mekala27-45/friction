@@ -154,6 +154,15 @@
    "promoted_at": "2026-10-29T19:06:49+00:00"
   },
   {
+   "file": "results/workspace/full_export_after_incident.json",
+   "sha256": "576ecea7cb73ad902eb8934d1ba8aab193cc001e345128c8ad679a484d41c268",
+   "request": "2026-10-29-14a-backfill-incident",
+   "github_run_id": "40970246424",
+   "commit": "7b9e02c76784e21f219bbf823c0f398a29e93340",
+   "ran_at": "2026-10-30T00:12:14+00:00",
+   "promoted_at": "2026-10-30T00:19:01+00:00"
+  },
+  {
    "file": "results/workspace/full_open_source.json",
    "sha256": "4735ad59af2c25ec27ec6a010dd2cfdd89c006e1776dacd0d61aaab96f7e9cfb",
    "request": "2026-10-29-11-portable-full",
@@ -161,6 +170,15 @@
    "commit": "bf4c4daea8ce551aa34f5d3a06c470fff8f6e546",
    "ran_at": "2026-10-29T19:02:42+00:00",
    "promoted_at": "2026-10-29T19:06:49+00:00"
+  },
+  {
+   "file": "results/workspace/full_open_source_after_incident.json",
+   "sha256": "ba233d72bd4b00dda59840f406edd93b9a92132996f0fd8b5fd834f6f6ac2e36",
+   "request": "2026-10-29-13e-portable-full",
+   "github_run_id": "40970246424",
+   "commit": "7b9e02c76784e21f219bbf823c0f398a29e93340",
+   "ran_at": "2026-10-29T23:55:39+00:00",
+   "promoted_at": "2026-10-30T00:19:01+00:00"
   },
   {
    "file": "results/workspace/full_open_source_models_run.json",
@@ -181,6 +199,15 @@
    "promoted_at": "2026-10-29T22:14:44+00:00"
   },
   {
+   "file": "results/workspace/incident_drop.json",
+   "sha256": "4ec3a57a990525d1146f769a0426305a939c41ab91a5403124c4bd5cb1ea5643",
+   "request": "2026-10-29-14b-incident-verify",
+   "github_run_id": "40970246424",
+   "commit": "7b9e02c76784e21f219bbf823c0f398a29e93340",
+   "ran_at": "2026-10-30T00:12:35+00:00",
+   "promoted_at": "2026-10-30T00:19:01+00:00"
+  },
+  {
    "file": "results/workspace/incident_drop_first_replay.json",
    "sha256": "8a436615930f097f662a71dea82aba2df2f44867ccf4f6507ddf93daff58c40a",
    "request": "2026-10-29-13b-incident-verify",
@@ -188,6 +215,15 @@
    "commit": "d97f00d4951ded1536a882ee50e2e4f3d6dc018c",
    "ran_at": "2026-10-29T22:47:46+00:00",
    "promoted_at": "2026-10-29T23:01:53+00:00"
+  },
+  {
+   "file": "results/workspace/incident_quarantine.json",
+   "sha256": "2b79a98d6b1d11a6804a457b31531b1bf9f5fbe57ffcdbdd9b5267c8e2a0967d",
+   "request": "2026-10-29-14b-incident-verify",
+   "github_run_id": "40970246424",
+   "commit": "7b9e02c76784e21f219bbf823c0f398a29e93340",
+   "ran_at": "2026-10-30T00:12:35+00:00",
+   "promoted_at": "2026-10-30T00:19:01+00:00"
   },
   {
    "file": "results/workspace/integration.json",
@@ -233,6 +269,17 @@
    "commit": "c48f3cd4ff9885ab26c25b75a039b4d0d10aa070",
    "ran_at": "2026-10-29T21:16:28+00:00",
    "promoted_at": "2026-10-29T21:21:15+00:00"
+  },
+  {
+   "file": "results/workspace/monitor_after_alerts.json",
+   "sha256": "f701b3ee22242d717eb3cf1844c59f23e804d3a8ac0fa4cd09d4aab949172538",
+   "request": "2026-10-29-14d-monitor",
+   "github_run_id": "40970246424",
+   "commit": "7b9e02c76784e21f219bbf823c0f398a29e93340",
+   "ran_at": "2026-10-30T00:17:04+00:00",
+   "promoted_at": "2026-10-30T00:19:17+00:00",
+   "request_status": "failed",
+   "failed_because": "the monitor fails its task on any alert: after the replay the completeness alert on drop 387 is gone, while the rejected part two still breaks the expectation and clock checks and the mcc_fraud_rate drift stands"
   },
   {
    "file": "results/workspace/monitor_alerts.json",
