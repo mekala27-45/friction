@@ -3743,9 +3743,9 @@
     ],
     [
      "5",
-     "not done",
+     "done",
      "The Lakeflow pipeline deployed to dev and run; the reconcile against the local run",
-     "the first month is equal on all nine tables (results/reconcile_first_month.json); over every row 8 of 9 are equal and the card age feature differs (results/reconcile_full.json)"
+     "results/reconcile_first_month.json and results/reconcile_full.json: every exported table equal by digest across the engines"
     ],
     [
      "6",
@@ -3757,7 +3757,7 @@
      "7",
      "done",
      "Every row of both sources backfilled in the workspace",
-     "results/workspace/full_export.json: 24,383,185 payments and 31,267,738 logins in silver"
+     "results/workspace/full_export.json: 24,386,592 payments and 31,267,738 logins in silver"
     ],
     [
      "8",
@@ -4740,7 +4740,7 @@
      "not applicable"
     ],
     [
-     "2026-10-30 00:17:04",
+     "2026-10-30 00:43:47",
      "workspace monitor after the replay",
      "not applicable"
     ]
@@ -4777,13 +4777,13 @@
     ],
     [
      "payments",
-     "P_MCC",
-     "2,920"
+     "P_KEY_CONFLICT",
+     "2,929"
     ],
     [
      "payments",
-     "P_RESCUED",
-     "2,920"
+     "P_REJECTED_FILE",
+     "2,929"
     ]
    ],
    "source": "local"
@@ -4804,7 +4804,7 @@
     [
      "cards_history",
      "31,504",
-     "0da1ee0aeeca"
+     "e98c431c119b"
     ],
     [
      "cdc_cards_bronze",
@@ -4819,7 +4819,7 @@
     [
      "labels_logins_history",
      "141",
-     "3885c57fd4df"
+     "14a63a5366b9"
     ],
     [
      "labels_payments_bronze",
@@ -4829,7 +4829,7 @@
     [
      "labels_payments_history",
      "28,448",
-     "9d3641d66659"
+     "99fd8ed2c18e"
     ],
     [
      "login_account_stats",
@@ -4854,27 +4854,27 @@
     [
      "mcc_fraud_rates",
      "32,836",
-     "acad09ef94d2"
+     "db4795f062ae"
     ],
     [
      "payments_bronze",
-     "24,392,482",
-     "8cef845aad25"
+     "24,398,331",
+     "dcb495b2d210"
     ],
     [
      "payments_features",
-     "24,383,185",
-     "8c543febdd29"
+     "24,386,592",
+     "1c8b7c9a8a25"
     ],
     [
      "payments_silver",
-     "24,383,185",
-     "009abd3ed589"
+     "24,386,592",
+     "654eac164853"
     ],
     [
      "quarantine",
-     "8,161",
-     "032ed41f8571"
+     "8,179",
+     "66b24b8bd9ad"
     ]
    ],
    "source": "local"
@@ -5019,9 +5019,9 @@
   }
  },
  "values": {
-  "build.commits": "83",
-  "checklist.done": "12",
-  "checklist.missing": "5, 10, 12, 13, 17, 18",
+  "build.commits": "84",
+  "checklist.done": "13",
+  "checklist.missing": "10, 12, 13, 17, 18",
   "data.rba.asn_unrealistic": "1,457,824",
   "data.rba.attack_ip": "3,096,977",
   "data.rba.digest": "ca1d974e97ae",
@@ -5255,11 +5255,11 @@
   "lake.local.logins_features.rows": "31,267,738",
   "lake.local.logins_silver.rows": "31,267,738",
   "lake.local.mcc_fraud_rates.rows": "32,836",
-  "lake.local.payments_bronze.rows": "24,392,482",
-  "lake.local.payments_features.rows": "24,383,185",
-  "lake.local.payments_silver.rows": "24,383,185",
-  "lake.local.quarantine.rows": "8,161",
-  "lake.local.quarantine_rows": "8,161",
+  "lake.local.payments_bronze.rows": "24,398,331",
+  "lake.local.payments_features.rows": "24,386,592",
+  "lake.local.payments_silver.rows": "24,386,592",
+  "lake.local.quarantine.rows": "8,179",
+  "lake.local.quarantine_rows": "8,179",
   "monitor.alerts": "16",
   "monitor.drift_features": "device_type, mcc_fraud_rate",
   "monitor.issue": "GitHub issue 1",

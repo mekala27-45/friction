@@ -120,7 +120,8 @@ def sources(b: Builder) -> None:
 def lake(b: Builder) -> None:
     # The full open source run happens on the Actions runner with the workspace salt (request kind
     # portable); its summary is promoted to results/workspace/full_open_source.json.
-    rec = _load("results/workspace/full_open_source.json") or _load("results/reconcile.json")
+    rec = (_load("results/workspace/full_open_source_after_incident.json")
+           or _load("results/workspace/full_open_source.json") or _load("results/reconcile.json"))  # fmt: skip
     if not rec or "local" not in rec:
         return
     loc = rec["local"]
@@ -540,7 +541,7 @@ def checklist(b: Builder, ev: dict[str, Any] | None) -> None:
     probe = _load("results/workspace_probe.json") or {}
     rec_first = _load("results/reconcile_first_month.json") or {}
     rec_full = _load("results/reconcile_full.json") or {}
-    full_export = _load("results/workspace/full_export.json") or {}
+    full_export = _load("results/workspace/full_export_fixed.json") or _load("results/workspace/full_export.json") or {}
     status[1] = (
         (
             "done",

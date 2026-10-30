@@ -7,7 +7,7 @@ fails CI. Source of each block in its first line.
 
 ## The definition of done
 
-12 of eighteen lines done.
+13 of eighteen lines done.
 
 | Step | Status | Line | Evidence |
 |---:|---|---|---|
@@ -15,9 +15,9 @@ fails CI. Source of each block in its first line.
 | 2 | done | The replay splitter, the lateness rule, the simulator and the incident config, deterministic with digests | data/replay.lock.json, equal to the lock regenerated in Actions; tests/simulator |
 | 3 | done | The portable pipeline on open source Spark 4.2 with local tests and the full local run | results/workspace/full_open_source.json: every drop on open source Spark, on the Actions runner (the build machine has 2 cores and 19 GB of disk); tests/transforms |
 | 4 | done | Terraform with state in Neon, the bundle, the workspace workflow, the results branch, reviewed promotion | requests/ and the results branch; terraform state in Neon (request 03c); results/provenance.json |
-| 5 | not done | The Lakeflow pipeline deployed to dev and run; the reconcile against the local run | the first month is equal on all nine tables (results/reconcile_first_month.json); over every row 8 of 9 are equal and the card age feature differs (results/reconcile_full.json) |
+| 5 | done | The Lakeflow pipeline deployed to dev and run; the reconcile against the local run | results/reconcile_first_month.json and results/reconcile_full.json: every exported table equal by digest across the engines |
 | 6 | done | Jobs with retries and the run ledger; idempotency, order and late label tests in the workspace | results/workspace/integration.json and integration_labels.json (every table digest identical after re-landing, shuffled delivery, a repeat backfill and out of order labels); retries in databricks.yml; results/workspace/run_ledger.json |
-| 7 | done | Every row of both sources backfilled in the workspace | results/workspace/full_export.json: 24,383,185 payments and 31,267,738 logins in silver |
+| 7 | done | Every row of both sources backfilled in the workspace | results/workspace/full_export.json: 24,386,592 payments and 31,267,738 logins in silver |
 | 8 | done | Governance: tags, masks, the row filter, grants, lineage, the scan; the planted drift caught by the plan | results/workspace/governance.json (tags, masks, the row filter, grants, lineage, the scan); results/workspace/drift_terraform_plan.txt (the revoked grant caught as one change) |
 | 9 | done | Point in time features with the leakage test; training sets as of a cut with the two clocks test | tests/features/test_point_in_time.py; tests/transforms/test_training.py |
 | 10 | not done | Floors and models on both desks registered in Unity Catalog; the plan hashed before any test month was scored | floors and models fit on the local run, plan hashed before scoring (DECISIONS.md); Unity Catalog registration waits on the workspace |
@@ -55,21 +55,21 @@ with its rows and its digest (the reconcile compares these with the workspace's 
 
 | Table | Rows | Digest |
 |---|---:|---|
-| cards_history | 31,504 | 0da1ee0aeeca |
+| cards_history | 31,504 | e98c431c119b |
 | cdc_cards_bronze | 33,254 | 39b4ffdcffb2 |
 | labels_logins_bronze | 141 | c59efa59dcc7 |
-| labels_logins_history | 141 | 3885c57fd4df |
+| labels_logins_history | 141 | 14a63a5366b9 |
 | labels_payments_bronze | 29,512 | 45011ba048ca |
-| labels_payments_history | 28,448 | 9d3641d66659 |
+| labels_payments_history | 28,448 | 99fd8ed2c18e |
 | login_account_stats | 4,304,857 | 08c75cf6f396 |
 | logins_bronze | 31,269,264 | 63ef89a5b16a |
 | logins_features | 31,267,738 | 9e3a9413c50a |
 | logins_silver | 31,267,738 | 9c9ad48eb61d |
-| mcc_fraud_rates | 32,836 | acad09ef94d2 |
-| payments_bronze | 24,392,482 | 8cef845aad25 |
-| payments_features | 24,383,185 | 8c543febdd29 |
-| payments_silver | 24,383,185 | 009abd3ed589 |
-| quarantine | 8,161 | 032ed41f8571 |
+| mcc_fraud_rates | 32,836 | db4795f062ae |
+| payments_bronze | 24,398,331 | dcb495b2d210 |
+| payments_features | 24,386,592 | 1c8b7c9a8a25 |
+| payments_silver | 24,386,592 | 654eac164853 |
+| quarantine | 8,179 | 66b24b8bd9ad |
 
 Quarantine by rule:
 
@@ -78,8 +78,8 @@ Quarantine by rule:
 | logins | L_UA | 1,526 |
 | payments | P_BUSINESS_KEY | 308 |
 | payments | P_FUTURE | 487 |
-| payments | P_MCC | 2,920 |
-| payments | P_RESCUED | 2,920 |
+| payments | P_KEY_CONFLICT | 2,929 |
+| payments | P_REJECTED_FILE | 2,929 |
 
 ## The payments desk
 
