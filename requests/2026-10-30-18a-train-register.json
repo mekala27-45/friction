@@ -1,0 +1,8 @@
+{
+ "id": "2026-10-30-18a-train-register",
+ "kind": "bundle_run",
+ "target": "dev",
+ "job": "train",
+ "params": {"export_from": "/Volumes/workspace/friction_dev_raw/exports/models/default", "stop_on_failure": false},
+ "note": "Request 17a again on environment 5: the attacks, the features with them, the training and the Unity Catalog registration. The model files and summary.json come back for the digest comparison."
+}
