@@ -13,6 +13,9 @@ pipeline update and digests every bronze, silver, CDC and gold table:
    to November 2019), then the label drops 0345 to 0359 at once, digest; reset; the same months,
    then the label drops in three groups delivered latest first; the label history must be identical
    and not empty.
+5. The month rerun (tests=month, part of the rederive, never part of all): reset, land the first
+   drop of every feed, run, compute the features, and digest the nine tables the export digests,
+   for comparison with the open source engine's run of the same month.
 
 Writes integration.json to the exports volume and fails the task if any test failed.
 """
@@ -32,7 +35,7 @@ args = _boot.parse(
         ("--pipeline-id", {"required": True}),
         ("--source-outbox", {"required": True}),
         ("--day", {"type": int, "default": 10}),
-        ("--tests", {"default": "all", "help": "all, or a comma list of: relanding, order, labels"}),
+        ("--tests", {"default": "all", "help": "all, or a comma list of: relanding, order, labels, month"}),
     ]
 )
 spark = _boot.session()
@@ -122,10 +125,37 @@ def digest_all() -> dict[str, dict[str, Any]]:
     return out
 
 
+def month_rerun() -> dict[str, Any]:
+    import friction_features
+    from friction_core.shipping import ship
+    from friction_transforms import gold
+
+    ship(friction_features)
+    reset()
+    for feeds in it.FEEDS.values():
+        for feed in feeds:
+            land_feed(feed, 1, 1)
+    update()
+
+    def read(name: str):  # type: ignore[no-untyped-def]
+        return spark.read.table(_boot.fq(args, "gold", name))
+
+    def write(name: str, df) -> None:  # type: ignore[no-untyped-def]
+        df.write.mode("overwrite").option("overwriteSchema", "true").saveAsTable(_boot.fq(args, "gold", name))
+
+    counts = gold.features_step(spark, read, write, attacks=None)
+    note("features", **counts)
+    found = {k: digests.table_digest(spark.read.table(_boot.fq(args, layer, t)))
+             for k, (layer, t) in it.EXPORTED.items()}  # fmt: skip
+    return {"digests": found, "differences": []}
+
+
 tests: dict[str, dict[str, Any]] = {}
 wanted = {"relanding", "order", "labels"} if args.tests == "all" else set(args.tests.split(","))
 try:
     d = args.day
+    if "month" in wanted:
+        tests["month_rerun"] = month_rerun()
     if "labels" in wanted:
         reset()
         land_feed("payments", 344, 347)

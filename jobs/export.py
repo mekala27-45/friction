@@ -14,20 +14,10 @@ import _boot
 args = _boot.parse([("--tag", {"default": "export"}), ("--tables", {"default": "all"})])
 spark = _boot.session()
 
-from friction_transforms import digests  # noqa: E402
+from friction_transforms import digests, integration  # noqa: E402
 
 ledger = _boot.Ledger(spark, args, "export")
-names = {
-    "payments_silver": ("silver", "payments_silver"),
-    "logins_silver": ("silver", "logins_silver"),
-    "quarantine": ("silver", "quarantine"),
-    "cards_history": ("cdc", "cards_history"),
-    "labels_payments_history": ("cdc", "labels_payments_history"),
-    "labels_logins_history": ("cdc", "labels_logins_history"),
-    "mcc_fraud_rates": ("gold", "mcc_fraud_rates"),
-    "payments_features": ("gold", "payments_features"),
-    "logins_features": ("gold", "logins_features"),
-}
+names = integration.EXPORTED
 tables = {k: spark.read.table(_boot.fq(args, layer, t)) for k, (layer, t) in names.items()}
 out = {
     "tag": args.tag,

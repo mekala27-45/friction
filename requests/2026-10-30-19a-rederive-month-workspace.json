@@ -1,0 +1,8 @@
+{
+ "id": "2026-10-30-19a-rederive-month-workspace",
+ "kind": "bundle_run",
+ "target": "it",
+ "job": "integration",
+ "params": {"job_params": {"tests": "month"}, "export_from": "/Volumes/workspace/friction_it_raw/exports/integration", "stop_on_failure": false},
+ "note": "The rederive's workspace part: a clean environment, the first drop of every feed landed again, the pipeline and the features, and the nine exported tables digested."
+}
