@@ -1,0 +1,100 @@
+{
+ "drift": true,
+ "inputs": {
+  "local": "results/workspace/full_open_source.json",
+  "workspace": "results/workspace/full_export.json"
+ },
+ "statistics": {
+  "feature_sums": {
+   "equal": false,
+   "first_difference": "/payments_features/days_since_issue: -24369704.440277778 against 39360326618.51733"
+  },
+  "histories": {
+   "equal": true,
+   "first_difference": null
+  },
+  "logins/day": {
+   "equal": true,
+   "first_difference": null
+  },
+  "logins/desk": {
+   "equal": true,
+   "first_difference": null
+  },
+  "logins/month": {
+   "equal": true,
+   "first_difference": null
+  },
+  "logins/user_bucket": {
+   "equal": true,
+   "first_difference": null
+  },
+  "payments/day": {
+   "equal": true,
+   "first_difference": null
+  },
+  "payments/desk": {
+   "equal": true,
+   "first_difference": null
+  },
+  "payments/month": {
+   "equal": true,
+   "first_difference": null
+  },
+  "payments/user_bucket": {
+   "equal": true,
+   "first_difference": null
+  },
+  "quarantine": {
+   "equal": true,
+   "first_difference": null
+  }
+ },
+ "tables": {
+  "cards_history": {
+   "digest_equal": true,
+   "rows_local": 31504,
+   "rows_workspace": 31504
+  },
+  "labels_logins_history": {
+   "digest_equal": true,
+   "rows_local": 141,
+   "rows_workspace": 141
+  },
+  "labels_payments_history": {
+   "digest_equal": true,
+   "rows_local": 28448,
+   "rows_workspace": 28448
+  },
+  "logins_features": {
+   "digest_equal": true,
+   "rows_local": 31267738,
+   "rows_workspace": 31267738
+  },
+  "logins_silver": {
+   "digest_equal": true,
+   "rows_local": 31267738,
+   "rows_workspace": 31267738
+  },
+  "mcc_fraud_rates": {
+   "digest_equal": true,
+   "rows_local": 32836,
+   "rows_workspace": 32836
+  },
+  "payments_features": {
+   "digest_equal": false,
+   "rows_local": 24383185,
+   "rows_workspace": 24383185
+  },
+  "payments_silver": {
+   "digest_equal": true,
+   "rows_local": 24383185,
+   "rows_workspace": 24383185
+  },
+  "quarantine": {
+   "digest_equal": true,
+   "rows_local": 8161,
+   "rows_workspace": 8161
+  }
+ }
+}

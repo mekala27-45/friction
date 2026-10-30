@@ -1,0 +1,19 @@
+{
+ "columns": [
+  "event_type",
+  "inputs",
+  "planning"
+ ],
+ "rows": [
+  [
+   "flow_definition",
+   "[\"workspace.friction_dev_cdc.cards_history\",\"workspace.friction_dev_silver.payments_silver\"]",
+   null
+  ],
+  [
+   "planning_information",
+   null,
+   "{\"technique_information\":[{\"maintenance_type\":\"MAINTENANCE_TYPE_NO_OP\",\"incrementalization_issues\":[{\"issue_type\":\"DATA_HAS_CHANGED\",\"prevent_incrementalization\":true}]},{\"incrementalization_issues\":[{\"issue_type\":\"INCREMENTAL_PLAN_REJECTED_BY_COST_MODEL\",\"prevent_incrementalization\":true,\"cost_model_rejection_subtype\":\"CHANGESET_SIZE_THRESHOLD_EXCEEDED\"}]},{\"maintenance_type\":\"MAINTENANCE_TYPE_COMPLETE_RECOMPUTE\",\"is_chosen\":true,\"is_applicable\":true},{\"maintenance_type\":\"MAINTENANCE_TYPE_WINDOW_FUNCTION\",\"is_chosen\":false,\"is_applicable\":true}],\"source_table_information\":[{\"table_name\":\"`workspace`.`friction_dev_silver`.`payments_silver`\",\"table_id\":\"7bd799bb-f0ee-426e-bab1-482fd0f13bcb\",\"instance_id\":\"0\",\"catalog_table_type\":\"MATERIALIZED_VIEW\",\"full_size\":1.292208754E9,\"num_rows\":24383663,\"num_files\":8,\"change_size\":2.584475341E9,\"num_changed_rows\":48766848,\"num_rows_in_changed_files\":48766848,\"num_changed_files\":16,\"change_file_read_size\":2.584475341E9,\"is_size_after_pruning\":true,\"is_row_id_enabled\":true,\"is_cdf_enabled\":true,\"is_deletion_vector_enabled\":true,\"is_change_from_legacy_cdf\":true},{\"table_name\":\"`workspace`.`friction_dev_cdc`.`__materialization_mat_a2f22aec_51e4_4a09_ac4e_d6b896b51a0e_cards_history_1`\",\"table_id\":\"1246fe6e-4e97-421a-abf5-9e11f3125ce2\",\"instance_id\":\"1\",\"catalog_table_type\":\"MANAGED\",\"full_size\":793312.0,\"num_rows\":31532,\"num_files\":1,\"change_size\":0.0,\"num_changed_rows\":0,\"num_rows_in_changed_files\":0,\"num_changed_files\":0,\"change_file_read_size\":0.0,\"is_size_after_pruning\":true,\"is_row_id_enabled\":true,\"is_cdf_enabled\":true,\"is_deletion_vector_enabled\":true,\"is_change_from_legacy_cdf\":false}],\"target_table_information\":{\"table_name\":\"`workspace`.`friction_dev_gold`.`payments_issue_age`\",\"table_id\":\"a127d25d-980b-4405-915f-a431bcc879eb\",\"full_size\":1.19275671E8,\"is_row_id_enabled\":true,\"is_cdf_enabled\":true,\"is_deletion_vector_enabled\":true},\"planning_wall_time_ms\":15043,\"fingerprint_info\":{\"primary_fingerprint_version\":4,\"dry_run_fingerprint_version\":5,\"dry_run_comparison_performed\":true},\"cost_model_decision_path\":\"TECHNIQUE_SPECIFIC_RECOMPUTE\",\"features\":[\"INCREMENTALIZATION_RULE_DEFAULT\"],\"incrementalization_status\":\"INCREMENTALIZATION_STATUS_FULL_RECOMPUTE\"}"
+  ]
+ ]
+}

@@ -296,3 +296,16 @@ accepted copy of their key, and a redelivery's drop id reads its date without th
 closes with the drop it corrects. The local replay now lands the redelivery as the land job does,
 and tests/transforms covers both. The first replay's count is kept in
 results/workspace/incident_drop_first_replay.json.
+
+## 2026-10-30 Card age is computed with the feature inputs, not read from its own view
+
+After the full backfill the workspace's card age view held the 55 rows of the first month; after the
+day 40 replay it held exactly the silver row count of the update before. The pipeline's event log
+for that update (results/workspace/issue_age_flow_times.json) shows why: the view's recorded inputs
+are payments_silver and cards_history, yet it ran from 00:00:29 to 00:01:14 while payments_silver
+ran until 00:01:57, so it read the previous snapshot of silver. payment_feature_inputs, which also
+reads silver, waited for it. The card age is now computed inside payment_feature_inputs from the
+same read of silver, payments_issue_age is a projection of it, and the features job fails if the
+inputs do not hold every silver row. On the fixture the new views equal the old computation; in
+the workspace the full reconcile is now nine tables of nine equal by digest over every row
+(results/reconcile_full.json; the run before the fix is kept in reconcile_full_before_fix.json).

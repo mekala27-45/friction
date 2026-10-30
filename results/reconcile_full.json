@@ -1,13 +1,13 @@
 {
- "drift": true,
+ "drift": false,
  "inputs": {
-  "local": "results/workspace/full_open_source.json",
-  "workspace": "results/workspace/full_export.json"
+  "local": "results/workspace/full_open_source_after_incident.json",
+  "workspace": "results/workspace/full_export_fixed.json"
  },
  "statistics": {
   "feature_sums": {
-   "equal": false,
-   "first_difference": "/payments_features/days_since_issue: -24369704.440277778 against 39360326618.51733"
+   "equal": true,
+   "first_difference": null
   },
   "histories": {
    "equal": true,
@@ -82,19 +82,19 @@
    "rows_workspace": 32836
   },
   "payments_features": {
-   "digest_equal": false,
-   "rows_local": 24383185,
-   "rows_workspace": 24383185
+   "digest_equal": true,
+   "rows_local": 24386592,
+   "rows_workspace": 24386592
   },
   "payments_silver": {
    "digest_equal": true,
-   "rows_local": 24383185,
-   "rows_workspace": 24383185
+   "rows_local": 24386592,
+   "rows_workspace": 24386592
   },
   "quarantine": {
    "digest_equal": true,
-   "rows_local": 8161,
-   "rows_workspace": 8161
+   "rows_local": 8179,
+   "rows_workspace": 8179
   }
  }
 }
