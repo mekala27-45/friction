@@ -1,0 +1,24 @@
+{
+ "request": {
+  "id": "2026-10-30-16-deploy-dev",
+  "kind": "bundle_deploy",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "stop_on_failure": false
+  },
+  "note": "Deploy the card age computed inside payment_feature_inputs, the features job's row guard, and the monitor that leaves approved rejections out."
+ },
+ "github_run_id": "40979618064",
+ "commit": "93d3857b98076f9d5213cd29a71d0d8c8e31827e",
+ "started_at": "2026-10-30T00:27:41+00:00",
+ "result": {
+  "deployed": "dev"
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-30T00:28:52+00:00",
+ "files": {
+  "bundle_summary.json": "24de89605cb937d3d8c30c084187d13e2963536fa64f7f486c37bdfc3b0f9857",
+  "run.log": "b0a940ba1d8b298ee5514b7781efcb69079dc64d35487b484d5b6815ef5c969e"
+ }
+}

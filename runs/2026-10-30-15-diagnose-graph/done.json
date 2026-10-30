@@ -1,0 +1,32 @@
+{
+ "request": {
+  "id": "2026-10-30-15-diagnose-graph",
+  "kind": "sql",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "file": "sql/diagnose_graph.sql",
+   "vars": {
+    "gold": "workspace.friction_dev_gold",
+    "update": "bc7b7d16-c17a-47be-a2b7-ffd3766f3a84"
+   },
+   "stop_on_failure": false
+  },
+  "note": "The card age view lags one update behind silver. The flow order and the view's recorded inputs and refresh technique in the update that replayed drop 387."
+ },
+ "github_run_id": "40979618064",
+ "commit": "93d3857b98076f9d5213cd29a71d0d8c8e31827e",
+ "started_at": "2026-10-30T00:27:26+00:00",
+ "result": {
+  "saved": [
+   "flow_times",
+   "issue_age_definition"
+  ]
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-30T00:27:41+00:00",
+ "files": {
+  "flow_times.json": "c5a911467938960a8fdaf68442ce7dea53a3db478d83ef8f964085a40dfd9bf1",
+  "issue_age_definition.json": "fe28d129508d3a39951b11e7385fbe24221b19ba1bfdedcdd9dddb2401980d9e"
+ }
+}

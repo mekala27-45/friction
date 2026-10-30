@@ -1,0 +1,173 @@
+[
+ {
+  "check": "feature_psi",
+  "scope": "payments/days_since_issue/2019-01",
+  "value": 0.4897589670625837,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "feature_psi",
+  "scope": "payments/days_since_issue/2019-02",
+  "value": 0.4951423477033189,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "feature_psi",
+  "scope": "payments/days_since_issue/2019-03",
+  "value": 0.5153553245163182,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "feature_psi",
+  "scope": "payments/days_since_issue/2019-04",
+  "value": 0.5033152047344147,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "feature_psi",
+  "scope": "payments/days_since_issue/2019-07",
+  "value": 0.3945887411647981,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "feature_psi",
+  "scope": "payments/days_since_issue/2019-08",
+  "value": 0.37368806307675484,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "feature_psi",
+  "scope": "payments/days_since_issue/2019-09",
+  "value": 0.36972214307384604,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "feature_psi",
+  "scope": "payments/days_since_issue/2019-10",
+  "value": 0.3738855115424123,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "feature_psi",
+  "scope": "payments/mcc_fraud_rate/2019-01",
+  "value": 2.790429576656423,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "feature_psi",
+  "scope": "payments/mcc_fraud_rate/2019-02",
+  "value": 2.786807132510404,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "feature_psi",
+  "scope": "payments/mcc_fraud_rate/2019-03",
+  "value": 2.926205485256044,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "feature_psi",
+  "scope": "payments/mcc_fraud_rate/2019-04",
+  "value": 2.937395412253969,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "feature_psi",
+  "scope": "payments/mcc_fraud_rate/2019-07",
+  "value": 2.8236894984187018,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "feature_psi",
+  "scope": "payments/mcc_fraud_rate/2019-08",
+  "value": 2.8736555379486783,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "feature_psi",
+  "scope": "payments/mcc_fraud_rate/2019-09",
+  "value": 2.8745640913314983,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "feature_psi",
+  "scope": "payments/mcc_fraud_rate/2019-10",
+  "value": 2.948364367125501,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "feature_psi",
+  "scope": "logins/device_type/2020-11",
+  "value": 0.5812321851230325,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "feature_psi",
+  "scope": "logins/device_type/2020-12",
+  "value": 0.5464014355567084,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ },
+ {
+  "check": "feature_psi",
+  "scope": "logins/device_type/2021-01",
+  "value": 0.37247690532358974,
+  "threshold": 0.25,
+  "severity": "serious",
+  "note": "drift against the training months",
+  "runbook": "docs/runbooks/ingestion.md"
+ }
+]

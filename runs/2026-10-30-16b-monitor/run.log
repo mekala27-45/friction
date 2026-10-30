@@ -1,0 +1,28 @@
+$ databricks bundle run -t dev monitor --var catalog_mode=prefix
+Run URL: https://dbc-13dc0ff6-cde4.cloud.databricks.com/jobs/91393393400617/runs/1077611652911876?o=4481510155994981
+
+2026-10-30 00:39:34 "[dev mekalaajayk] friction-monitor-dev" RUNNING
+2026-10-30 00:43:45 "[dev mekalaajayk] friction-monitor-dev" INTERNAL_ERROR FAILED Task monitor failed with message: Workload failed, see run output for details.
+Task monitor FAILED:
+SystemExit: 19 monitor alerts; see /Volumes/workspace/friction_dev_raw/exports/monitor/alerts.json and docs/runbooks/ingestion.md
+[Trace ID: 00-e27882bd13f38292fb2f50c52afece38-257aea27eb9eac0d-00]
+An exception has occurred, use %tb to see the full traceback.
+
+[0;31mSystemExit[0m[0;31m:[0m 19 monitor alerts; see /Volumes/workspace/friction_dev_raw/exports/monitor/alerts.json and docs/runbooks/ingestion.md
+
+
+Error: Task monitor failed!
+Error:
+SystemExit: 19 monitor alerts; see /Volumes/workspace/friction_dev_raw/exports/monitor/alerts.json and docs/runbooks/ingestion.md
+[Trace ID: 00-e27882bd13f38292fb2f50c52afece38-257aea27eb9eac0d-00]
+Trace:
+An exception has occurred, use %tb to see the full traceback.
+
+[0;31mSystemExit[0m[0;31m:[0m 19 monitor alerts; see /Volumes/workspace/friction_dev_raw/exports/monitor/alerts.json and docs/runbooks/ingestion.md
+
+Error: failed to reach TERMINATED or SKIPPED, got INTERNAL_ERROR: Task monitor failed with message: Workload failed, see run output for details.
+[exit 1]
+$ databricks fs cp -r --overwrite dbfs:/Volumes/workspace/friction_dev_raw/exports/monitor results-branch/runs/2026-10-30-16b-monitor/export
+dbfs:/Volumes/workspace/friction_dev_raw/exports/monitor/alerts.json -> results-branch/runs/2026-10-30-16b-monitor/export/alerts.json
+dbfs:/Volumes/workspace/friction_dev_raw/exports/monitor/report.json -> results-branch/runs/2026-10-30-16b-monitor/export/report.json
+[exit 0]

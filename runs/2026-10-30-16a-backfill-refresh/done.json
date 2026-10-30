@@ -1,0 +1,32 @@
+{
+ "request": {
+  "id": "2026-10-30-16a-backfill-refresh",
+  "kind": "bundle_run",
+  "target": "dev",
+  "job": "backfill",
+  "params": {
+   "job_params": {
+    "desk": "payments",
+    "from": "439",
+    "through": "439",
+    "tag": "after-fix"
+   },
+   "export_from": "/Volumes/workspace/friction_dev_raw/exports/after-fix",
+   "stop_on_failure": false
+  },
+  "note": "A pipeline update over what has landed (the last drop again, skipped), the features with the row guard, and the export for the full reconcile against request 13e."
+ },
+ "github_run_id": "40979618064",
+ "commit": "93d3857b98076f9d5213cd29a71d0d8c8e31827e",
+ "started_at": "2026-10-30T00:28:52+00:00",
+ "result": {
+  "job": "backfill",
+  "wall_seconds": 640.8
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-30T00:39:33+00:00",
+ "files": {
+  "export/export.json": "a063f99524241961ef2220438fde262d235f429d89f90367a2c9ea574f8522cb",
+  "run.log": "c11eb35692c6236743abe45759ad28b21056919305f40c71fb2c7262a71d9444"
+ }
+}

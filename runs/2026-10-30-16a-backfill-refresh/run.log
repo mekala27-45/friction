@@ -1,0 +1,59 @@
+$ databricks bundle run -t dev backfill --var catalog_mode=prefix --params desk=payments,from=439,tag=after-fix,through=439
+Output:
+=======
+Task land:
+landed 0 files, 1 already there, through drop 439
+
+=======
+Task features:
+{'payments_features': 24386592, 'logins_features': 31267738}
+
+=======
+Task export:
+{
+ "payments_silver": {
+  "rows": 24386592,
+  "digest": "24386592:654eac164853cc98:0f21613a37a1f480"
+ },
+ "logins_silver": {
+  "rows": 31267738,
+  "digest": "31267738:9c9ad48eb61d1328:1bc65f77af9377ef"
+ },
+ "quarantine": {
+  "rows": 8179,
+  "digest": "8179:66b24b8bd9ad955c:04f4712ba25152b9"
+ },
+ "cards_history": {
+  "rows": 31504,
+  "digest": "31504:e98c431c119b50f7:122c07e2fd3c95f2"
+ },
+ "labels_payments_history": {
+  "rows": 28448,
+  "digest": "28448:99fd8ed2c18e32f1:0479cd4f98467727"
+ },
+ "labels_logins_history": {
+  "rows": 141,
+  "digest": "141:14a63a5366b9253a:001c770fc5e4a0b3"
+ },
+ "mcc_fraud_rates": {
+  "rows": 32836,
+  "digest": "32836:db4795f062aed8c2:0bc8e5190d6f8036"
+ },
+ "payments_features": {
+  "rows": 24386592,
+  "digest": "24386592:1c8b7c9a8a257ba6:089fd743782d3929"
+ },
+ "logins_features": {
+  "rows": 31267738,
+  "digest": "31267738:9e3a9413c50a8e24:11592ffdcb1b1e7a"
+ }
+}
+
+Run URL: https://dbc-13dc0ff6-cde4.cloud.databricks.com/jobs/21009286863114/runs/64356281183887?o=4481510155994981
+
+2026-10-30 00:28:54 "[dev mekalaajayk] friction-backfill-dev" RUNNING
+2026-10-30 00:39:30 "[dev mekalaajayk] friction-backfill-dev" TERMINATED SUCCESS
+[exit 0]
+$ databricks fs cp -r --overwrite dbfs:/Volumes/workspace/friction_dev_raw/exports/after-fix results-branch/runs/2026-10-30-16a-backfill-refresh/export
+dbfs:/Volumes/workspace/friction_dev_raw/exports/after-fix/export.json -> results-branch/runs/2026-10-30-16a-backfill-refresh/export/export.json
+[exit 0]
