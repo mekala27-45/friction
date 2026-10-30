@@ -309,3 +309,16 @@ same read of silver, payments_issue_age is a projection of it, and the features 
 inputs do not hold every silver row. On the fixture the new views equal the old computation; in
 the workspace the full reconcile is now nine tables of nine equal by digest over every row
 (results/reconcile_full.json; the run before the fix is kept in reconcile_full_before_fix.json).
+
+## 2026-10-30 Every model is registered in Unity Catalog as a pyfunc with a signature
+
+Unity Catalog refuses a model version without an MLflow signature, so the train job's first
+registration code, which logged the bare model file as an artifact, would have failed on its first
+run. Each model is now wrapped in a small pyfunc whose predict calls the same scoring code the score
+job runs (friction_models.registry.score), with the models and features packages copied in as code
+paths so a version loads on its own. The floors are rules in code, not fitted files; they are
+registered as a JSON copy of their rule table with the digest of the module that applies them, under
+the alias floor. The learned models take the alias challenger; champion is set only by a committed
+promotion request. A separate train job runs the attacks, the features and the training without the
+scoring task, because the scored sets are graded from the open source run's export and scoring both
+desks again on Free Edition would spend the day's compute for no new evidence.

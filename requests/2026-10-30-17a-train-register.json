@@ -1,0 +1,8 @@
+{
+ "id": "2026-10-30-17a-train-register",
+ "kind": "bundle_run",
+ "target": "dev",
+ "job": "train",
+ "params": {"export_from": "/Volumes/workspace/friction_dev_raw/exports/models/default", "stop_on_failure": false},
+ "note": "The attacks, the features with them, the training and the Unity Catalog registration in the workspace. The model files and summary.json come back so their digests can be compared with the open source run's."
+}
