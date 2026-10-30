@@ -1,13 +1,14 @@
 """The train task: training sets as of the cut, the floors, logistic, LightGBM and Freeman.
 
-Model files go to the exports volume under models/<tag>/ and, for the default tag, each learned
-model is logged to MLflow and registered in Unity Catalog under the ml schema with the alias
-challenger. Promotion to champion is a separate, reviewed request (promote-a-model skill).
+Model files go to the exports volume under models/<tag>/ and, for the default tag, every model of
+both desks, the floors included, is logged to MLflow with a signature and registered in Unity
+Catalog under the ml schema (friction_models.registry): the learned models with the alias
+challenger, the floors with the alias floor. Promotion to champion is a separate, reviewed request
+(promote-a-model skill).
 """
 
 from __future__ import annotations
 
-import contextlib
 import json
 from pathlib import Path
 
@@ -37,31 +38,18 @@ try:
     summary = steps.train_step(
         spark, read, plan, out, label_table=args.label_table, train_months=args.train_months, tag=args.tag
     )
-    registered = {}
+    registered: dict[str, object] = {}
     if args.tag == "default":
-        try:
-            import mlflow
+        from friction_models import registry
 
-            mlflow.set_registry_uri("databricks-uc")
-            client = mlflow.MlflowClient()
-            for name in (
-                "payments_lightgbm.txt",
-                "payments_logistic.json",
-                "logins_freeman.json",
-                "logins_lightgbm.txt",
-            ):
-                model_name = f"{args.catalog}.{args.prefix}_ml.{name.split('.')[0]}"
-                with mlflow.start_run(run_name=f"friction-{name}") as run:
-                    mlflow.log_artifact(str(out / args.tag / name), artifact_path="model")
-                    mlflow.log_dict(summary, "summary.json")
-                    mlflow.log_dict(plan, "plan.json")
-                with contextlib.suppress(Exception):  # already registered
-                    client.create_registered_model(model_name)
-                mv = client.create_model_version(model_name, f"runs:/{run.info.run_id}/model", run.info.run_id)
-                client.set_registered_model_alias(model_name, "challenger", mv.version)
-                registered[model_name] = {"version": mv.version, "alias": "challenger"}
+        registry.write_floors(out / args.tag)
+        experiment = str(Path(args.root).parent / "friction_models").removeprefix("/Workspace")
+        tags = {"plan_sha256": steps.plan_hash(Path(args.root)), "job_run_id": str(args.run_id)}
+        try:
+            registered = dict(registry.register(out / args.tag, args.catalog, f"{args.prefix}_ml", experiment,
+                                                Path(args.root), tags))  # fmt: skip
         except Exception as exc:  # recorded, and the promotion gate refuses a model with no registration
-            registered["error"] = f"{type(exc).__name__}: {str(exc)[:300]}"
+            registered["error"] = f"{type(exc).__name__}: {str(exc)[:600]}"
     summary["registered"] = registered
     (out / args.tag / "summary.json").write_text(json.dumps(summary, indent=1, default=str), encoding="utf-8")
     ledger.write(inputs=summary, outputs=registered, rows_in=summary.get("payments", {}).get("rows", 0),

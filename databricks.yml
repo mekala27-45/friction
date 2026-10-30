@@ -324,3 +324,43 @@ resources:
               - scikit-learn==1.9.1
               - scipy==1.18.1
               - mlflow-skinny>=3.0
+
+    # The models job without the scoring task: the attacks, the features with them, the training and
+    # the Unity Catalog registration. The scored sets are graded from the open source run's export.
+    train:
+      name: friction-train-${bundle.target}
+      max_concurrent_runs: 1
+      tasks:
+        - task_key: attacks
+          environment_key: ml
+          spark_python_task:
+            python_file: ./jobs/attacks.py
+            parameters: ["--root", "${workspace.file_path}", "--catalog", "${var.catalog}", "--prefix", "${var.prefix}",
+                         "--job", "train", "--run-id", "{{job.run_id}}"]
+        - task_key: features
+          depends_on:
+            - task_key: attacks
+          environment_key: ml
+          spark_python_task:
+            python_file: ./jobs/features.py
+            parameters: ["--root", "${workspace.file_path}", "--catalog", "${var.catalog}", "--prefix", "${var.prefix}",
+                         "--job", "train", "--run-id", "{{job.run_id}}"]
+        - task_key: train
+          depends_on:
+            - task_key: features
+          environment_key: ml
+          spark_python_task:
+            python_file: ./jobs/train.py
+            parameters: ["--root", "${workspace.file_path}", "--catalog", "${var.catalog}", "--prefix", "${var.prefix}",
+                         "--job", "train", "--run-id", "{{job.run_id}}", "--tag", "default"]
+      environments:
+        - environment_key: ml
+          spec:
+            environment_version: "3"
+            dependencies:
+              - pyyaml
+              - pydantic>=2.10
+              - lightgbm==4.7.0
+              - scikit-learn==1.9.1
+              - scipy==1.18.1
+              - mlflow-skinny>=3.0

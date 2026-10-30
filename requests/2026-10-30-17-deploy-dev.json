@@ -1,0 +1,7 @@
+{
+ "id": "2026-10-30-17-deploy-dev",
+ "kind": "bundle_deploy",
+ "target": "dev",
+ "params": {},
+ "note": "Deploy the train job and the registration of every model of both desks, the floors included, as MLflow models with a signature."
+}
