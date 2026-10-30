@@ -1,0 +1,24 @@
+{
+ "request": {
+  "id": "2026-10-29-14d-monitor",
+  "kind": "bundle_run",
+  "target": "dev",
+  "job": "monitor",
+  "params": {
+   "export_from": "/Volumes/workspace/friction_dev_raw/exports/monitor",
+   "stop_on_failure": false
+  },
+  "note": "The monitor after the replay: no alert may remain on drop 387."
+ },
+ "github_run_id": "40970246424",
+ "commit": "7b9e02c76784e21f219bbf823c0f398a29e93340",
+ "started_at": "2026-10-30T00:12:41+00:00",
+ "status": "failed",
+ "error": "RuntimeError: databricks bundle exited 1",
+ "finished_at": "2026-10-30T00:17:04+00:00",
+ "files": {
+  "export/alerts.json": "f701b3ee22242d717eb3cf1844c59f23e804d3a8ac0fa4cd09d4aab949172538",
+  "export/report.json": "fdf2ffe83c949a999ceac493415cee0fba1aa2026a6cd7d18d04ac133fb4ae97",
+  "run.log": "7f15f6ed5a1b084c5346b6bca6335e1569f9db4b21e6ef92d3d7043ef6496ec5"
+ }
+}

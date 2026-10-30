@@ -1,0 +1,31 @@
+{
+ "request": {
+  "id": "2026-10-29-14c-diagnose-mv-refresh",
+  "kind": "sql",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "file": "sql/diagnose_mv_refresh.sql",
+   "vars": {
+    "gold": "workspace.friction_dev_gold"
+   },
+   "stop_on_failure": false
+  },
+  "note": "The card age view's event log and row count after this update."
+ },
+ "github_run_id": "40970246424",
+ "commit": "7b9e02c76784e21f219bbf823c0f398a29e93340",
+ "started_at": "2026-10-30T00:12:35+00:00",
+ "result": {
+  "saved": [
+   "issue_age_events",
+   "issue_age_now"
+  ]
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-30T00:12:41+00:00",
+ "files": {
+  "issue_age_events.json": "89c509a637d08f911e0667a97f715769e2153ab5af8c4cae393ed3287e99c113",
+  "issue_age_now.json": "ecd0d7bbdf4dd95251a1d43b6bbece24c9b7cac91f503bd1a9159c6825bbc943"
+ }
+}

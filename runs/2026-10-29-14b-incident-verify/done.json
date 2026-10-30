@@ -1,0 +1,31 @@
+{
+ "request": {
+  "id": "2026-10-29-14b-incident-verify",
+  "kind": "sql",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "file": "sql/incident_verify.sql",
+   "vars": {
+    "silver": "workspace.friction_dev_silver"
+   },
+   "stop_on_failure": false
+  },
+  "note": "Verify again: the silver rows of drop 387 against the corrected source."
+ },
+ "github_run_id": "40970246424",
+ "commit": "7b9e02c76784e21f219bbf823c0f398a29e93340",
+ "started_at": "2026-10-30T00:12:14+00:00",
+ "result": {
+  "saved": [
+   "incident_drop",
+   "incident_quarantine"
+  ]
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-30T00:12:35+00:00",
+ "files": {
+  "incident_drop.json": "4ec3a57a990525d1146f769a0426305a939c41ab91a5403124c4bd5cb1ea5643",
+  "incident_quarantine.json": "2b79a98d6b1d11a6804a457b31531b1bf9f5fbe57ffcdbdd9b5267c8e2a0967d"
+ }
+}

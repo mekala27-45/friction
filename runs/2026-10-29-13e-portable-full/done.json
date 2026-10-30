@@ -1,0 +1,34 @@
+{
+ "request": {
+  "id": "2026-10-29-13e-portable-full",
+  "kind": "portable",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "outbox_volume": "/Volumes/workspace/friction_dev_raw/outbox",
+   "drops": {
+    "payments": "all",
+    "logins": "all"
+   },
+   "memory": "10g",
+   "redelivery": true
+  },
+  "note": "The open source run over every drop with the approved day 40 change and the redelivery, for the reconcile against the workspace after its replay."
+ },
+ "github_run_id": "40970246424",
+ "commit": "7b9e02c76784e21f219bbf823c0f398a29e93340",
+ "started_at": "2026-10-29T23:03:14+00:00",
+ "result": {
+  "drops": {
+   "payments": "all",
+   "logins": "all"
+  },
+  "wall_seconds": 2750.6
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T23:55:39+00:00",
+ "files": {
+  "run.log": "996862c71a2c86a094fa52077300921a3653cdfa86e98d686ad40c6853bb6503",
+  "summary.json": "ba233d72bd4b00dda59840f406edd93b9a92132996f0fd8b5fd834f6f6ac2e36"
+ }
+}

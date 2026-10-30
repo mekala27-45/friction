@@ -1,0 +1,33 @@
+{
+ "request": {
+  "id": "2026-10-29-14a-backfill-incident",
+  "kind": "bundle_run",
+  "target": "dev",
+  "job": "backfill",
+  "params": {
+   "job_params": {
+    "desk": "payments",
+    "from": "387",
+    "through": "387",
+    "redelivery": "true",
+    "tag": "incident"
+   },
+   "export_from": "/Volumes/workspace/friction_dev_raw/exports/incident",
+   "stop_on_failure": false
+  },
+  "note": "Retry of 2026-10-29-13a. The workspace kept only part one: the rejected part two ranked first and the corrected redelivery, its own later drop, was quarantined as a key conflict."
+ },
+ "github_run_id": "40970246424",
+ "commit": "7b9e02c76784e21f219bbf823c0f398a29e93340",
+ "started_at": "2026-10-29T23:56:51+00:00",
+ "result": {
+  "job": "backfill",
+  "wall_seconds": 923.0
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-30T00:12:14+00:00",
+ "files": {
+  "export/export.json": "576ecea7cb73ad902eb8934d1ba8aab193cc001e345128c8ad679a484d41c268",
+  "run.log": "f27d3cdf8d3e43ebc4c35781e4fe957da9d21213229799b3ff08ec6f45f57cd3"
+ }
+}

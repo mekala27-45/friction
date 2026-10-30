@@ -1,0 +1,24 @@
+{
+ "request": {
+  "id": "2026-10-29-14-deploy-dev",
+  "kind": "bundle_deploy",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "stop_on_failure": false
+  },
+  "note": "Deploy silver where a rejected file's rows never win a key and a redelivery closes with the drop it corrects."
+ },
+ "github_run_id": "40970246424",
+ "commit": "7b9e02c76784e21f219bbf823c0f398a29e93340",
+ "started_at": "2026-10-29T23:55:39+00:00",
+ "result": {
+  "deployed": "dev"
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-29T23:56:51+00:00",
+ "files": {
+  "bundle_summary.json": "4741a2789b3ea0bc26642dd0abfe18dd99deda0dccdd25dfe2d8740ffa3e2a5d",
+  "run.log": "a247d1ccbba446c84dfc3c6ae60dd4e64dc4f2b2601083555225f2bf0168920f"
+ }
+}
