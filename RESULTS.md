@@ -28,7 +28,7 @@ fails CI. Source of each block in its first line.
 | 15 | done | Monitoring with delayed label cohorts; the day 40 incident detected, handled by the runbook and written up | results/workspace/monitor_alerts.json (GitHub issue 1), results/incident.json, results/workspace/incident_drop.json, docs/incidents/2026-10-29-day-40.md |
 | 16 | done | Performance experiments and the compute ledger published | results/performance.json (Actions runner, full data), results/compute_ledger.json (wall seconds per request; with workspace usage from system.billing.usage) |
 | 17 | not done | The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS | the site deploys to Pages from CI and every route passes its test; missing: the live check awake, the live check asleep, the latency with the cold start |
-| 18 | not done | Coverage, mypy, ruff, gates, skills valid, forty to sixty commits, the rederive, v0.1.0 after the commits | the tag waits on every line above |
+| 18 | not done | Coverage, mypy, ruff, gates, skills valid, forty to sixty commits, the rederive, v0.1.0 after the commits | CI is green on coverage, mypy, ruff and the gates; results/rederive.json has no drift; missing: forty to sixty commits (main has 96), lines 12, 13, 17 done |
 
 Stretch items (the sequence challenger, a workspace endpoint, the dashboard and Genie space, the
 readback warehouse, BI exports, hardening): not started, and not counted.
@@ -234,6 +234,19 @@ validation, the five corrected together.
 | H3 | purchases abroad are more often fraud than purchases at home | 0.1778 | 0.0000 | 0.001 | supported |
 | H4 | a successful sign in from a new network (ASN) is more often an attack than one from a new city on a known network | 0.0001 | 0.0000 | 0.001 | supported |
 | H5 | sign ins from addresses on the attacker list fail more often than others | 0.4527 | 0.2552 | 0.001 | supported |
+
+## The rederive
+
+Run before the tag from commit 83c9561; drift: none.
+
+| Part | Where | Result |
+|---|---|---|
+| The replay from the lock | build machine, clean worktree | byte identical |
+| The fixture slice through the open source pipeline | build machine, clean worktree | 15 of 15 tables equal by digest |
+| Every drop and the model chain again (request 2026-10-30-19d-rederive-models-open-source) | Actions runner | grade within 1e-9, every decision equal; equal digest |
+| Every drop and the model chain again (request 2026-10-30-20-served-bundle-after-incident) | Actions runner | grade within 1e-9, every decision equal; largest difference 1.2e-11 |
+| The served payments LightGBM from that rerun | Actions runner | byte identical |
+| The first month in a clean workspace environment against the open source engine | workspace and Actions runner | 9 of 9 tables equal by digest, rows equal to the published first month |
 
 ## What Free Edition allowed
 

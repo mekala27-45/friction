@@ -2,7 +2,7 @@
  "as_of": "2026-10-30",
  "values": {
   "build.commits": {
-   "value": 95,
+   "value": 96,
    "fmt": "int",
    "provenance": {
     "origin": "git",
@@ -3048,6 +3048,28 @@
     "note": null
    }
   },
+  "rederive.drift": {
+   "value": "none",
+   "fmt": "text",
+   "provenance": {
+    "origin": "scripts/reset_and_rederive.py",
+    "population": "drift found by the rederive",
+    "source": "build",
+    "as_of": "2026-10-30",
+    "note": null
+   }
+  },
+  "rederive.head": {
+   "value": "83c9561",
+   "fmt": "text",
+   "provenance": {
+    "origin": "scripts/reset_and_rederive.py",
+    "population": "the commit rederived",
+    "source": "build",
+    "as_of": "2026-10-30",
+    "note": null
+   }
+  },
   "registry.logins.floor.alias": {
    "value": "floor",
    "fmt": "text",
@@ -3522,7 +3544,7 @@
      18,
      "not done",
      "Coverage, mypy, ruff, gates, skills valid, forty to sixty commits, the rederive, v0.1.0 after the commits",
-     "the tag waits on every line above"
+     "CI is green on coverage, mypy, ruff and the gates; results/rederive.json has no drift; missing: forty to sixty commits (main has 96), lines 12, 13, 17 done"
     ]
    ],
    "provenance": {
@@ -4680,6 +4702,57 @@
     "origin": "scripts/summarize_lake.py over the full open source run",
     "population": "every table of the full local run",
     "source": "local",
+    "as_of": "2026-10-30",
+    "note": null
+   }
+  },
+  "rederive.checks": {
+   "columns": [
+    "Part",
+    "Where",
+    "Result"
+   ],
+   "formats": [
+    "text",
+    "text",
+    "text"
+   ],
+   "rows": [
+    [
+     "The replay from the lock",
+     "build machine, clean worktree",
+     "byte identical"
+    ],
+    [
+     "The fixture slice through the open source pipeline",
+     "build machine, clean worktree",
+     "15 of 15 tables equal by digest"
+    ],
+    [
+     "Every drop and the model chain again (request 2026-10-30-19d-rederive-models-open-source)",
+     "Actions runner",
+     "grade within 1e-9, every decision equal; equal digest"
+    ],
+    [
+     "Every drop and the model chain again (request 2026-10-30-20-served-bundle-after-incident)",
+     "Actions runner",
+     "grade within 1e-9, every decision equal; largest difference 1.2e-11"
+    ],
+    [
+     "The served payments LightGBM from that rerun",
+     "Actions runner",
+     "byte identical"
+    ],
+    [
+     "The first month in a clean workspace environment against the open source engine",
+     "workspace and Actions runner",
+     "9 of 9 tables equal by digest, rows equal to the published first month"
+    ]
+   ],
+   "provenance": {
+    "origin": "scripts/reset_and_rederive.py",
+    "population": "the rederive before the tag",
+    "source": "build",
     "as_of": "2026-10-30",
     "note": null
    }

@@ -119,6 +119,14 @@ validation, the five corrected together.
 {{ table("eval.hypotheses") }}
 {% endif %}
 
+{% if has("rederive.checks") %}
+## The rederive
+
+Run before the tag from commit {{ v("rederive.head") }}; drift: {{ v("rederive.drift") }}.
+
+{{ table("rederive.checks") }}
+{% endif %}
+
 {% if has("workspace.probe") %}
 ## What Free Edition allowed
 

@@ -1,0 +1,111 @@
+{
+ "at": "2026-10-30T06:40:40Z",
+ "checks": {
+  "evaluation": {
+   "all_equal": true,
+   "runs": [
+    {
+     "digest_equal": true,
+     "file": "results/workspace/rederive_evaluation.json",
+     "other_differences": [],
+     "worst_relative_difference": 0.0
+    },
+    {
+     "digest_equal": false,
+     "file": "results/workspace/rederive_evaluation_after_incident.json",
+     "other_differences": [],
+     "worst_relative_difference": 1.1554142801106542e-11
+    }
+   ],
+   "where": "Actions runner, every drop again"
+  },
+  "fixture_pipeline": {
+   "all_equal": true,
+   "exit": [
+    0,
+    0,
+    0
+   ],
+   "tables_equal": {
+    "cards_history": true,
+    "cdc_cards_bronze": true,
+    "labels_logins_bronze": true,
+    "labels_logins_history": true,
+    "labels_payments_bronze": true,
+    "labels_payments_history": true,
+    "login_account_stats": true,
+    "logins_bronze": true,
+    "logins_features": true,
+    "logins_silver": true,
+    "mcc_fraud_rates": true,
+    "payments_bronze": true,
+    "payments_features": true,
+    "payments_silver": true,
+    "quarantine": true
+   }
+  },
+  "month": {
+   "all_equal": true,
+   "rows_equal_to_published": {
+    "cards_history": true,
+    "labels_logins_history": true,
+    "labels_payments_history": true,
+    "logins_features": true,
+    "logins_silver": true,
+    "mcc_fraud_rates": true,
+    "payments_features": true,
+    "payments_silver": true,
+    "quarantine": true
+   },
+   "tables": {
+    "cards_history": {
+     "digest_equal": true,
+     "rows": 4
+    },
+    "labels_logins_history": {
+     "digest_equal": true,
+     "rows": 10
+    },
+    "labels_payments_history": {
+     "digest_equal": true,
+     "rows": 0
+    },
+    "logins_features": {
+     "digest_equal": true,
+     "rows": 2001941
+    },
+    "logins_silver": {
+     "digest_equal": true,
+     "rows": 2001941
+    },
+    "mcc_fraud_rates": {
+     "digest_equal": true,
+     "rows": 18
+    },
+    "payments_features": {
+     "digest_equal": true,
+     "rows": 55
+    },
+    "payments_silver": {
+     "digest_equal": true,
+     "rows": 55
+    },
+    "quarantine": {
+     "digest_equal": true,
+     "rows": 104
+    }
+   }
+  },
+  "replay": {
+   "exit": 0,
+   "lock_unchanged": true
+  },
+  "served_model": {
+   "digest_equal": true
+  }
+ },
+ "complete": true,
+ "drift": false,
+ "head": "83c9561654b2e76c0eec7b051738a122f9438692",
+ "seconds": 303.5
+}
