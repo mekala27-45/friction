@@ -1,0 +1,112 @@
+{
+ "status": "succeeded",
+ "tests": {
+  "month_rerun": {
+   "digests": {
+    "payments_silver": {
+     "rows": 55,
+     "digest": "55:ad31707777c45884:1010890e9e53793f"
+    },
+    "logins_silver": {
+     "rows": 2001941,
+     "digest": "2001941:69801a1a864b1316:1e78cbeb43090432"
+    },
+    "quarantine": {
+     "rows": 104,
+     "digest": "104:f839a98827afaf50:089216a5937679f8"
+    },
+    "cards_history": {
+     "rows": 4,
+     "digest": "4:3b23991f10034aaf:097bf2f370034261"
+    },
+    "labels_payments_history": {
+     "rows": 0,
+     "digest": "0:0000000000000000:0000000000000000"
+    },
+    "labels_logins_history": {
+     "rows": 10,
+     "digest": "10:714e57dcec1b97cc:1f73a2c6fabfea7f"
+    },
+    "mcc_fraud_rates": {
+     "rows": 18,
+     "digest": "18:90dae476df882c6a:1906a40a3a1ac814"
+    },
+    "payments_features": {
+     "rows": 55,
+     "digest": "55:731c546e07a4754f:1045db5235469617"
+    },
+    "logins_features": {
+     "rows": 2001941,
+     "digest": "2001941:b47de55ffe620647:0987265adf019ecb"
+    }
+   },
+   "differences": []
+  }
+ },
+ "log": [
+  {
+   "at": "2026-10-30T02:23:02Z",
+   "what": "landing cleared"
+  },
+  {
+   "at": "2026-10-30T02:26:51Z",
+   "what": "pipeline update",
+   "full_refresh": true,
+   "update_id": "5f30f8ef-3754-4192-9383-cf5016af0331",
+   "seconds": 228.1
+  },
+  {
+   "at": "2026-10-30T02:26:52Z",
+   "what": "landed feed",
+   "feed": "payments",
+   "drops": 1,
+   "low": 1,
+   "high": 1
+  },
+  {
+   "at": "2026-10-30T02:26:52Z",
+   "what": "landed feed",
+   "feed": "labels_payments",
+   "drops": 0,
+   "low": 1,
+   "high": 1
+  },
+  {
+   "at": "2026-10-30T02:26:53Z",
+   "what": "landed feed",
+   "feed": "cdc_cards",
+   "drops": 1,
+   "low": 1,
+   "high": 1
+  },
+  {
+   "at": "2026-10-30T02:26:55Z",
+   "what": "landed feed",
+   "feed": "logins",
+   "drops": 1,
+   "low": 1,
+   "high": 1
+  },
+  {
+   "at": "2026-10-30T02:26:55Z",
+   "what": "landed feed",
+   "feed": "labels_logins",
+   "drops": 1,
+   "low": 1,
+   "high": 1
+  },
+  {
+   "at": "2026-10-30T02:29:58Z",
+   "what": "pipeline update",
+   "full_refresh": false,
+   "update_id": "02cd50a4-b342-4ee6-9daa-0a382e32f912",
+   "seconds": 182.4
+  },
+  {
+   "at": "2026-10-30T02:30:55Z",
+   "what": "features",
+   "payments_features": 55,
+   "logins_features": 2001941
+  }
+ ]
+}

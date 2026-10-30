@@ -1,0 +1,11 @@
+$ databricks fs cp -r dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops /home/runner/work/friction/friction/data/work/landing_2026-10-30-19c-rederive-models-open-source/logins/drops
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0001_2020-02/logins_2020-02.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19c-rederive-models-open-source/logins/drops/0001_2020-02/logins_2020-02.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0003_2020-04/logins_2020-04.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19c-rederive-models-open-source/logins/drops/0003_2020-04/logins_2020-04.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0004_2020-05/logins_2020-05.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19c-rederive-models-open-source/logins/drops/0004_2020-05/logins_2020-05.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0005_2020-06/logins_2020-06.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19c-rederive-models-open-source/logins/drops/0005_2020-06/logins_2020-06.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0006_2020-07/logins_2020-07.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19c-rederive-models-open-source/logins/drops/0006_2020-07/logins_2020-07.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0007_2020-08/logins_2020-08.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19c-rederive-models-open-source/logins/drops/0007_2020-08/logins_2020-08.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0008_2020-09/logins_2020-09.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19c-rederive-models-open-source/logins/drops/0008_2020-09/logins_2020-09.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0009_2020-10/logins_2020-10.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19c-rederive-models-open-source/logins/drops/0009_2020-10/logins_2020-10.csv.gz
+Error: Get "https://dbc-13dc0ff6-cde4.cloud.databricks.com/api/2.0/fs/directories/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0011_2020-11-29": context canceled
+[exit 1]

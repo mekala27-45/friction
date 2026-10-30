@@ -1,0 +1,46 @@
+{
+ "request": {
+  "id": "2026-10-30-19b-rederive-month-open-source",
+  "kind": "portable",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "outbox_volume": "/Volumes/workspace/friction_dev_raw/outbox",
+   "drops": {
+    "payments": [
+     1,
+     1
+    ],
+    "logins": [
+     1,
+     1
+    ]
+   },
+   "memory": "10g",
+   "stop_on_failure": false
+  },
+  "note": "The same month on the open source engine with the workspace salt, for the digest comparison with request 19a."
+ },
+ "github_run_id": "40985289640",
+ "commit": "25191523e8e1efd95d32e4006e222de1c2445245",
+ "started_at": "2026-10-30T02:31:28+00:00",
+ "result": {
+  "drops": {
+   "payments": [
+    1,
+    1
+   ],
+   "logins": [
+    1,
+    1
+   ]
+  },
+  "wall_seconds": 160.9
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-30T02:34:17+00:00",
+ "files": {
+  "run.log": "46125e4c4e0eacd8599bb6d27cae4c8f4d1963bc4cd1b7a6781f09e4f24c0671",
+  "summary.json": "ea4c388f011b1a30ea3566fc7254d861e99a01d7f4aa94f705f88dedd9625ecb"
+ }
+}

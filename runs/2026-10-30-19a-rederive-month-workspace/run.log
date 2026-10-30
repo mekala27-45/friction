@@ -1,0 +1,18 @@
+$ databricks bundle run -t it integration --var catalog_mode=prefix --params tests=month
+landing cleared {}
+pipeline update {'full_refresh': True, 'update_id': '5f30f8ef-3754-4192-9383-cf5016af0331', 'seconds': 228.1}
+landed feed {'feed': 'payments', 'drops': 1, 'low': 1, 'high': 1}
+landed feed {'feed': 'labels_payments', 'drops': 0, 'low': 1, 'high': 1}
+landed feed {'feed': 'cdc_cards', 'drops': 1, 'low': 1, 'high': 1}
+landed feed {'feed': 'logins', 'drops': 1, 'low': 1, 'high': 1}
+landed feed {'feed': 'labels_logins', 'drops': 1, 'low': 1, 'high': 1}
+pipeline update {'full_refresh': False, 'update_id': '02cd50a4-b342-4ee6-9daa-0a382e32f912', 'seconds': 182.4}
+features {'payments_features': 55, 'logins_features': 2001941}
+Run URL: https://dbc-13dc0ff6-cde4.cloud.databricks.com/jobs/1018322509009542/runs/883199108175594?o=4481510155994981
+
+2026-10-30 02:22:35 "[dev mekalaajayk] friction-integration-it" RUNNING
+2026-10-30 02:31:26 "[dev mekalaajayk] friction-integration-it" TERMINATED SUCCESS
+[exit 0]
+$ databricks fs cp -r --overwrite dbfs:/Volumes/workspace/friction_it_raw/exports/integration results-branch/runs/2026-10-30-19a-rederive-month-workspace/export
+dbfs:/Volumes/workspace/friction_it_raw/exports/integration/integration.json -> results-branch/runs/2026-10-30-19a-rederive-month-workspace/export/integration.json
+[exit 0]

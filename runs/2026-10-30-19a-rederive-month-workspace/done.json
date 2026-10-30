@@ -1,0 +1,29 @@
+{
+ "request": {
+  "id": "2026-10-30-19a-rederive-month-workspace",
+  "kind": "bundle_run",
+  "target": "it",
+  "job": "integration",
+  "params": {
+   "job_params": {
+    "tests": "month"
+   },
+   "export_from": "/Volumes/workspace/friction_it_raw/exports/integration",
+   "stop_on_failure": false
+  },
+  "note": "The rederive's workspace part: a clean environment, the first drop of every feed landed again, the pipeline and the features, and the nine exported tables digested."
+ },
+ "github_run_id": "40985289640",
+ "commit": "25191523e8e1efd95d32e4006e222de1c2445245",
+ "started_at": "2026-10-30T02:22:34+00:00",
+ "result": {
+  "job": "integration",
+  "wall_seconds": 534.4
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-30T02:31:28+00:00",
+ "files": {
+  "export/integration.json": "5e524d7b1348dae1698c661045b686de6e151ec1189bf08355b5833f8e8daf8e",
+  "run.log": "4f083a159ab2ec57074f9aeb7b276ba49cd40a49071f012267c55471cbbcb999"
+ }
+}

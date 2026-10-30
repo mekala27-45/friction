@@ -1,0 +1,22 @@
+{
+ "request": {
+  "id": "2026-10-30-19-deploy-it",
+  "kind": "bundle_deploy",
+  "target": "it",
+  "job": null,
+  "params": {},
+  "note": "Deploy the integration environment with the month rerun of the rederive."
+ },
+ "github_run_id": "40985289640",
+ "commit": "25191523e8e1efd95d32e4006e222de1c2445245",
+ "started_at": "2026-10-30T02:21:16+00:00",
+ "result": {
+  "deployed": "it"
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-30T02:22:34+00:00",
+ "files": {
+  "bundle_summary.json": "30c9ba4753527af31bfe7bba9f29e568a06949d6115fc2f5e92212e506f01eb8",
+  "run.log": "8d35815bb26bda767c08a343df16a419d4edf977ca85576052ee650de7362050"
+ }
+}
