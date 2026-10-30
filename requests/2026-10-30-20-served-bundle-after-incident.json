@@ -1,0 +1,14 @@
+{
+ "id": "2026-10-30-20-served-bundle-after-incident",
+ "kind": "portable",
+ "target": "dev",
+ "params": {
+  "outbox_volume": "/Volumes/workspace/friction_dev_raw/outbox",
+  "drops": {"payments": "all", "logins": "all"},
+  "models": true,
+  "redelivery": true,
+  "memory": "10g",
+  "stop_on_failure": false
+ },
+ "note": "The served bundles rebuilt from the lake as it stands after the day 40 incident: the approved change and the corrected redelivery. The bundle in main was exported before the incident and carries the old merchant category rates for January and February 2020."
+}

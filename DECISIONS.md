@@ -326,3 +326,13 @@ before any code ran: pinning scikit-learn 1.9.1 and scipy 1.18.1 on serverless e
 numpy 2.5 over the core 1.26.4 and the kernel would not start. The model jobs now run on environment
 5 with its own scikit-learn 1.6.1 and only LightGBM pinned to 4.7.0, the version of the open source
 run, so the LightGBM files can be compared by digest; the logistic fit may differ in the last bits.
+
+## 2026-10-30 The served bundle is rebuilt from the lake after the incident
+
+The model rerun of the rederive (request 19d) reproduced the evaluation digest and the served
+LightGBM file byte for byte, but not the payments bundle: its merchant category rate table differs
+for January and February 2020. The bundle in main came from request 12, which ran before the day 40
+change was approved; 19d ran with the change and without the redelivery. Neither is the lake as it
+stands. The test months end in October 2019, so no graded number and no parity event moves, but an
+API that scores a January event would read a rate from a lake that no longer exists. Request 20
+rebuilds the bundles with the approved change and the redelivery, and they replace the ones in main.

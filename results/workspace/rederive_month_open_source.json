@@ -1,0 +1,788 @@
+{
+ "local": {
+  "engine": "local",
+  "reconcile": {
+   "feature_sums": {
+    "logins_features": {
+     "asn_count": 1943387.0,
+     "asn_distinct": 629898.0,
+     "browser_count": 1625456.0,
+     "browser_distinct": 714645.0,
+     "city_count": 1541811.0,
+     "city_distinct": 742533.0,
+     "country_count": 2309036.0,
+     "country_distinct": 554557.0,
+     "device_count": 2092970.0,
+     "device_distinct": 614607.0,
+     "device_type": 609598.0,
+     "failed_1h_ip": 1564844.0,
+     "failed_1h_user": 285004.0,
+     "ip_count": 1231023.0,
+     "ip_distinct": 859295.0,
+     "log_secs_since_success": 3251478.704728741,
+     "logins_1h_ip": 2543010.0,
+     "n_success_prior": 2344189.0,
+     "os_count": 1933711.0,
+     "os_distinct": 652594.0,
+     "region_count": 1601256.0,
+     "region_distinct": 713186.0,
+     "rows": 2001941.0,
+     "rtt_missing": 1908740.0,
+     "rtt_z_user": -833.2784479071804,
+     "ua_count": 1460450.0,
+     "ua_distinct": 759356.0
+    },
+    "payments_features": {
+     "amount_usd": 3087.89,
+     "amount_z": -4.064825816184079,
+     "channel": 0.0,
+     "channel_new": 1.0,
+     "cnt_1h": 25.0,
+     "cnt_24h": 111.0,
+     "cnt_7d": 633.0,
+     "days_since_issue": 13425.559722222222,
+     "errors_24h": 0.0,
+     "foreign": 0.0,
+     "hour": 542.0,
+     "hour_share": 18.34372686195575,
+     "is_refund": 6.0,
+     "location_new": 2.0,
+     "log_amount_to_median": -13.629313405242046,
+     "log_n_prior": 168.32744544842768,
+     "log_secs_since_prev": 498.96042601445066,
+     "mcc_fraud_rate": 0.0,
+     "mcc_new": 18.0,
+     "merchant_new": 21.0,
+     "merchant_seen": 43.66070766373765,
+     "rows": 55.0,
+     "sum_1h_usd": 605.08,
+     "sum_24h_usd": 4982.640000000002,
+     "sum_7d_usd": 33282.6
+    }
+   },
+   "histories": {
+    "cards_history": {
+     "digest": "4:3b23991f10034aaf:097bf2f370034261",
+     "rows": 4
+    },
+    "labels_logins_history": {
+     "digest": "10:714e57dcec1b97cc:1f73a2c6fabfea7f",
+     "rows": 10
+    },
+    "labels_payments_history": {
+     "digest": "0:0000000000000000:0000000000000000",
+     "rows": 0
+    }
+   },
+   "logins": {
+    "day": [
+     {
+      "attack_ip": 3403,
+      "day": "2020-02-03",
+      "keys": 43354,
+      "rows": 43354,
+      "successes": 22147
+     },
+     {
+      "attack_ip": 7500,
+      "day": "2020-02-04",
+      "keys": 78048,
+      "rows": 78048,
+      "successes": 37723
+     },
+     {
+      "attack_ip": 7124,
+      "day": "2020-02-05",
+      "keys": 75145,
+      "rows": 75145,
+      "successes": 36229
+     },
+     {
+      "attack_ip": 6609,
+      "day": "2020-02-06",
+      "keys": 76191,
+      "rows": 76191,
+      "successes": 37508
+     },
+     {
+      "attack_ip": 6773,
+      "day": "2020-02-07",
+      "keys": 70782,
+      "rows": 70782,
+      "successes": 34400
+     },
+     {
+      "attack_ip": 6716,
+      "day": "2020-02-08",
+      "keys": 63231,
+      "rows": 63231,
+      "successes": 28568
+     },
+     {
+      "attack_ip": 6436,
+      "day": "2020-02-09",
+      "keys": 66975,
+      "rows": 66975,
+      "successes": 31229
+     },
+     {
+      "attack_ip": 8607,
+      "day": "2020-02-10",
+      "keys": 88244,
+      "rows": 88244,
+      "successes": 43686
+     },
+     {
+      "attack_ip": 8478,
+      "day": "2020-02-11",
+      "keys": 86015,
+      "rows": 86015,
+      "successes": 42633
+     },
+     {
+      "attack_ip": 7864,
+      "day": "2020-02-12",
+      "keys": 80372,
+      "rows": 80372,
+      "successes": 38826
+     },
+     {
+      "attack_ip": 8036,
+      "day": "2020-02-13",
+      "keys": 77124,
+      "rows": 77124,
+      "successes": 37016
+     },
+     {
+      "attack_ip": 7507,
+      "day": "2020-02-14",
+      "keys": 73638,
+      "rows": 73638,
+      "successes": 34193
+     },
+     {
+      "attack_ip": 7758,
+      "day": "2020-02-15",
+      "keys": 69301,
+      "rows": 69301,
+      "successes": 30422
+     },
+     {
+      "attack_ip": 8156,
+      "day": "2020-02-16",
+      "keys": 73362,
+      "rows": 73362,
+      "successes": 32996
+     },
+     {
+      "attack_ip": 7702,
+      "day": "2020-02-17",
+      "keys": 82418,
+      "rows": 82418,
+      "successes": 40467
+     },
+     {
+      "attack_ip": 7407,
+      "day": "2020-02-18",
+      "keys": 81352,
+      "rows": 81352,
+      "successes": 39624
+     },
+     {
+      "attack_ip": 7152,
+      "day": "2020-02-19",
+      "keys": 76477,
+      "rows": 76477,
+      "successes": 36799
+     },
+     {
+      "attack_ip": 7799,
+      "day": "2020-02-20",
+      "keys": 79141,
+      "rows": 79141,
+      "successes": 38016
+     },
+     {
+      "attack_ip": 7264,
+      "day": "2020-02-21",
+      "keys": 66905,
+      "rows": 66905,
+      "successes": 30218
+     },
+     {
+      "attack_ip": 7147,
+      "day": "2020-02-22",
+      "keys": 71240,
+      "rows": 71240,
+      "successes": 33192
+     },
+     {
+      "attack_ip": 6980,
+      "day": "2020-02-23",
+      "keys": 68575,
+      "rows": 68575,
+      "successes": 31883
+     },
+     {
+      "attack_ip": 7036,
+      "day": "2020-02-24",
+      "keys": 78961,
+      "rows": 78961,
+      "successes": 38859
+     },
+     {
+      "attack_ip": 6949,
+      "day": "2020-02-25",
+      "keys": 77759,
+      "rows": 77759,
+      "successes": 38104
+     },
+     {
+      "attack_ip": 7148,
+      "day": "2020-02-26",
+      "keys": 75613,
+      "rows": 75613,
+      "successes": 36413
+     },
+     {
+      "attack_ip": 7001,
+      "day": "2020-02-27",
+      "keys": 78243,
+      "rows": 78243,
+      "successes": 37159
+     },
+     {
+      "attack_ip": 7497,
+      "day": "2020-02-28",
+      "keys": 76527,
+      "rows": 76527,
+      "successes": 36786
+     },
+     {
+      "attack_ip": 7547,
+      "day": "2020-02-29",
+      "keys": 66948,
+      "rows": 66948,
+      "successes": 30519
+     }
+    ],
+    "desk": [
+     {
+      "attack_ip": 195596,
+      "desk": "logins",
+      "keys": 2001941,
+      "rows": 2001941,
+      "successes": 955615
+     }
+    ],
+    "month": [
+     {
+      "attack_ip": 195596,
+      "keys": 2001941,
+      "month": "2020-02",
+      "rows": 2001941,
+      "successes": 955615
+     }
+    ],
+    "user_bucket": [
+     {
+      "attack_ip": 3215,
+      "bucket": 0,
+      "keys": 39531,
+      "rows": 39531,
+      "successes": 29376
+     },
+     {
+      "attack_ip": 2990,
+      "bucket": 1,
+      "keys": 40240,
+      "rows": 40240,
+      "successes": 30147
+     },
+     {
+      "attack_ip": 3019,
+      "bucket": 2,
+      "keys": 40234,
+      "rows": 40234,
+      "successes": 29745
+     },
+     {
+      "attack_ip": 2970,
+      "bucket": 3,
+      "keys": 39316,
+      "rows": 39316,
+      "successes": 29134
+     },
+     {
+      "attack_ip": 3067,
+      "bucket": 4,
+      "keys": 40084,
+      "rows": 40084,
+      "successes": 29869
+     },
+     {
+      "attack_ip": 3051,
+      "bucket": 5,
+      "keys": 40747,
+      "rows": 40747,
+      "successes": 30363
+     },
+     {
+      "attack_ip": 3290,
+      "bucket": 6,
+      "keys": 40791,
+      "rows": 40791,
+      "successes": 30730
+     },
+     {
+      "attack_ip": 3108,
+      "bucket": 7,
+      "keys": 40619,
+      "rows": 40619,
+      "successes": 30434
+     },
+     {
+      "attack_ip": 3169,
+      "bucket": 8,
+      "keys": 39609,
+      "rows": 39609,
+      "successes": 29395
+     },
+     {
+      "attack_ip": 3164,
+      "bucket": 9,
+      "keys": 39839,
+      "rows": 39839,
+      "successes": 29491
+     },
+     {
+      "attack_ip": 2962,
+      "bucket": 10,
+      "keys": 39931,
+      "rows": 39931,
+      "successes": 30220
+     },
+     {
+      "attack_ip": 3321,
+      "bucket": 11,
+      "keys": 39357,
+      "rows": 39357,
+      "successes": 29273
+     },
+     {
+      "attack_ip": 3020,
+      "bucket": 12,
+      "keys": 40348,
+      "rows": 40348,
+      "successes": 29897
+     },
+     {
+      "attack_ip": 3042,
+      "bucket": 13,
+      "keys": 39363,
+      "rows": 39363,
+      "successes": 29276
+     },
+     {
+      "attack_ip": 99019,
+      "bucket": 14,
+      "keys": 760053,
+      "rows": 760053,
+      "successes": 29391
+     },
+     {
+      "attack_ip": 3008,
+      "bucket": 15,
+      "keys": 39896,
+      "rows": 39896,
+      "successes": 29581
+     },
+     {
+      "attack_ip": 3232,
+      "bucket": 16,
+      "keys": 40349,
+      "rows": 40349,
+      "successes": 30236
+     },
+     {
+      "attack_ip": 3052,
+      "bucket": 17,
+      "keys": 39616,
+      "rows": 39616,
+      "successes": 29551
+     },
+     {
+      "attack_ip": 3231,
+      "bucket": 18,
+      "keys": 40871,
+      "rows": 40871,
+      "successes": 30434
+     },
+     {
+      "attack_ip": 3057,
+      "bucket": 19,
+      "keys": 39539,
+      "rows": 39539,
+      "successes": 29307
+     },
+     {
+      "attack_ip": 3049,
+      "bucket": 20,
+      "keys": 39680,
+      "rows": 39680,
+      "successes": 29784
+     },
+     {
+      "attack_ip": 3210,
+      "bucket": 21,
+      "keys": 39555,
+      "rows": 39555,
+      "successes": 29261
+     },
+     {
+      "attack_ip": 3058,
+      "bucket": 22,
+      "keys": 40347,
+      "rows": 40347,
+      "successes": 30203
+     },
+     {
+      "attack_ip": 3018,
+      "bucket": 23,
+      "keys": 39237,
+      "rows": 39237,
+      "successes": 29313
+     },
+     {
+      "attack_ip": 3155,
+      "bucket": 24,
+      "keys": 40534,
+      "rows": 40534,
+      "successes": 30321
+     },
+     {
+      "attack_ip": 3199,
+      "bucket": 25,
+      "keys": 39572,
+      "rows": 39572,
+      "successes": 29433
+     },
+     {
+      "attack_ip": 3103,
+      "bucket": 26,
+      "keys": 40702,
+      "rows": 40702,
+      "successes": 30434
+     },
+     {
+      "attack_ip": 3122,
+      "bucket": 27,
+      "keys": 39862,
+      "rows": 39862,
+      "successes": 29808
+     },
+     {
+      "attack_ip": 3157,
+      "bucket": 28,
+      "keys": 40652,
+      "rows": 40652,
+      "successes": 30531
+     },
+     {
+      "attack_ip": 3298,
+      "bucket": 29,
+      "keys": 40497,
+      "rows": 40497,
+      "successes": 29929
+     },
+     {
+      "attack_ip": 3059,
+      "bucket": 30,
+      "keys": 40258,
+      "rows": 40258,
+      "successes": 30080
+     },
+     {
+      "attack_ip": 3181,
+      "bucket": 31,
+      "keys": 40712,
+      "rows": 40712,
+      "successes": 30668
+     }
+    ]
+   },
+   "payments": {
+    "day": [
+     {
+      "amount_cents": 22835,
+      "day": "1991-01-02",
+      "keys": 4,
+      "refunds": 1,
+      "rows": 4
+     },
+     {
+      "amount_cents": 43999,
+      "day": "1991-01-03",
+      "keys": 3,
+      "refunds": 0,
+      "rows": 3
+     },
+     {
+      "amount_cents": 4363,
+      "day": "1991-01-04",
+      "keys": 2,
+      "refunds": 0,
+      "rows": 2
+     },
+     {
+      "amount_cents": 22857,
+      "day": "1991-01-05",
+      "keys": 2,
+      "refunds": 0,
+      "rows": 2
+     },
+     {
+      "amount_cents": 1842,
+      "day": "1991-01-07",
+      "keys": 1,
+      "refunds": 0,
+      "rows": 1
+     },
+     {
+      "amount_cents": 4216,
+      "day": "1991-01-09",
+      "keys": 2,
+      "refunds": 0,
+      "rows": 2
+     },
+     {
+      "amount_cents": 13377,
+      "day": "1991-01-10",
+      "keys": 1,
+      "refunds": 0,
+      "rows": 1
+     },
+     {
+      "amount_cents": 1358,
+      "day": "1991-01-13",
+      "keys": 1,
+      "refunds": 0,
+      "rows": 1
+     },
+     {
+      "amount_cents": 19295,
+      "day": "1991-01-14",
+      "keys": 1,
+      "refunds": 0,
+      "rows": 1
+     },
+     {
+      "amount_cents": 23229,
+      "day": "1991-01-15",
+      "keys": 1,
+      "refunds": 0,
+      "rows": 1
+     },
+     {
+      "amount_cents": 27912,
+      "day": "1991-01-17",
+      "keys": 5,
+      "refunds": 1,
+      "rows": 5
+     },
+     {
+      "amount_cents": 1552,
+      "day": "1991-01-18",
+      "keys": 1,
+      "refunds": 0,
+      "rows": 1
+     },
+     {
+      "amount_cents": 1659,
+      "day": "1991-01-19",
+      "keys": 1,
+      "refunds": 0,
+      "rows": 1
+     },
+     {
+      "amount_cents": 9763,
+      "day": "1991-01-20",
+      "keys": 4,
+      "refunds": 1,
+      "rows": 4
+     },
+     {
+      "amount_cents": 15385,
+      "day": "1991-01-21",
+      "keys": 3,
+      "refunds": 0,
+      "rows": 3
+     },
+     {
+      "amount_cents": 12832,
+      "day": "1991-01-22",
+      "keys": 6,
+      "refunds": 1,
+      "rows": 6
+     },
+     {
+      "amount_cents": 17282,
+      "day": "1991-01-24",
+      "keys": 1,
+      "refunds": 0,
+      "rows": 1
+     },
+     {
+      "amount_cents": 4171,
+      "day": "1991-01-25",
+      "keys": 2,
+      "refunds": 0,
+      "rows": 2
+     },
+     {
+      "amount_cents": 13079,
+      "day": "1991-01-26",
+      "keys": 6,
+      "refunds": 1,
+      "rows": 6
+     },
+     {
+      "amount_cents": 1163,
+      "day": "1991-01-27",
+      "keys": 1,
+      "refunds": 0,
+      "rows": 1
+     },
+     {
+      "amount_cents": 31009,
+      "day": "1991-01-29",
+      "keys": 5,
+      "refunds": 1,
+      "rows": 5
+     },
+     {
+      "amount_cents": 1431,
+      "day": "1991-01-30",
+      "keys": 1,
+      "refunds": 0,
+      "rows": 1
+     },
+     {
+      "amount_cents": 14180,
+      "day": "1991-01-31",
+      "keys": 1,
+      "refunds": 0,
+      "rows": 1
+     }
+    ],
+    "desk": [
+     {
+      "amount_cents": 308789,
+      "desk": "payments",
+      "keys": 55,
+      "refunds": 6,
+      "rows": 55
+     }
+    ],
+    "month": [
+     {
+      "amount_cents": 308789,
+      "keys": 55,
+      "month": "1991-01",
+      "refunds": 6,
+      "rows": 55
+     }
+    ],
+    "user_bucket": [
+     {
+      "amount_cents": 308789,
+      "bucket": 10,
+      "keys": 55,
+      "refunds": 6,
+      "rows": 55
+     }
+    ]
+   },
+   "quarantine": [
+    {
+     "count": 104,
+     "desk": "logins",
+     "rule": "L_UA"
+    }
+   ]
+  },
+  "seconds": 29.7,
+  "tables": {
+   "cards_history": {
+    "digest": "4:3b23991f10034aaf:097bf2f370034261",
+    "rows": 4
+   },
+   "cdc_cards_bronze": {
+    "digest": "4:623a5098684eceeb:1ef5cf6fdfc1a61b",
+    "rows": 4
+   },
+   "labels_logins_bronze": {
+    "digest": "10:d1a714611f26bdd1:1547067ad3495b2d",
+    "rows": 10
+   },
+   "labels_logins_history": {
+    "digest": "10:714e57dcec1b97cc:1f73a2c6fabfea7f",
+    "rows": 10
+   },
+   "labels_payments_bronze": {
+    "digest": "0:0000000000000000:0000000000000000",
+    "rows": 0
+   },
+   "labels_payments_history": {
+    "digest": "0:0000000000000000:0000000000000000",
+    "rows": 0
+   },
+   "login_account_stats": {
+    "digest": "605824:04f688626705f8d1:0c64a151be3ed767",
+    "rows": 605824
+   },
+   "logins_bronze": {
+    "digest": "2002045:d42b6c4f8a3aefd1:131d89ba2cf043fa",
+    "rows": 2002045
+   },
+   "logins_features": {
+    "digest": "2001941:b47de55ffe620647:0987265adf019ecb",
+    "rows": 2001941
+   },
+   "logins_silver": {
+    "digest": "2001941:69801a1a864b1316:1e78cbeb43090432",
+    "rows": 2001941
+   },
+   "mcc_fraud_rates": {
+    "digest": "18:90dae476df882c6a:1906a40a3a1ac814",
+    "rows": 18
+   },
+   "payments_bronze": {
+    "digest": "55:42d8ad18adf60493:02cadf317599b7ff",
+    "rows": 55
+   },
+   "payments_features": {
+    "digest": "55:731c546e07a4754f:1045db5235469617",
+    "rows": 55
+   },
+   "payments_silver": {
+    "digest": "55:ad31707777c45884:1010890e9e53793f",
+    "rows": 55
+   },
+   "quarantine": {
+    "digest": "104:f839a98827afaf50:089216a5937679f8",
+    "rows": 104
+   }
+  },
+  "unknown_account": {
+   "accounts": 1,
+   "attempts": 720476,
+   "successes": 1
+  },
+  "users": {
+   "logins_all": 605824,
+   "logins_known": 605823,
+   "payments_accounts": 1
+  }
+ }
+}
