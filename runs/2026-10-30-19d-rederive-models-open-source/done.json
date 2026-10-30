@@ -1,0 +1,44 @@
+{
+ "request": {
+  "id": "2026-10-30-19d-rederive-models-open-source",
+  "kind": "portable",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "outbox_volume": "/Volumes/workspace/friction_dev_raw/outbox",
+   "drops": {
+    "payments": "all",
+    "logins": "all"
+   },
+   "models": true,
+   "memory": "10g",
+   "stop_on_failure": false
+  },
+  "note": "Request 19c again, its outbox copy now retried after a dropped connection. The rederive's model part: every drop again from the outbox, the attacks, features, training, scoring and the grade from the scored sets. The evaluation digest and the served model file must equal what main holds."
+ },
+ "github_run_id": "40992670268",
+ "commit": "1a45926679f9203d18f80be76e7717807740d48c",
+ "started_at": "2026-10-30T02:38:14+00:00",
+ "result": {
+  "drops": {
+   "payments": "all",
+   "logins": "all"
+  },
+  "wall_seconds": 7529.5
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-30T04:49:11+00:00",
+ "files": {
+  "evaluation.json": "6aaa3d6fc937f7d3a231dc38ac13cb09225664a6db9d5f5a93a751e03c9cb5f1",
+  "models/logins/bundle.json": "5b6b6416860c964be9aac6ec75f460b91b86f7127b34ce2dd9028d079ef8453e",
+  "models/logins/unknown_accounts.json": "997daa72f058e1a91bdfaa560d0ee27c87e0463deebe38527f56911be08648f2",
+  "models/payments/bundle.json": "e5f355ac212fdbadada1490b3760f22447c3af1507cf402d512afc93ffa9d8a2",
+  "models/payments/mcc_rates.json": "a1612d7e16e143e1c80494f7a862dd231caa761f98da4415f2da04f1fb0d4852",
+  "models/payments/model.txt": "6570b08a40d88013dce1a0aa1b9024e7f300f90cc1c6a9b76cad73a7f8b23462",
+  "models_timings.json": "2d20067bc626fa7e88bebfb30822b92e6702ba2ee105c849a51552fdbab30d07",
+  "parity/logins.json": "91d433ec539efb9a0dd31b9507b856b6d563455312129eb111f35ca42e28c0be",
+  "parity/payments.json": "895d47a662003876568a5f30964f2869c6ec3bf465afaf553b96d7b76a382e52",
+  "run.log": "cba6d427c1c86a4d112c659838e4b38eb1192e527ce1429719feb29795f62edf",
+  "summary.json": "7802300fc9b8b26462cd1def095b86a2ce302c13703e5e4b26e49be91deb6846"
+ }
+}

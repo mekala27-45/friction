@@ -1,0 +1,1709 @@
+$ databricks fs cp -r --overwrite dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops
+-12-12/logins_2020-12-12.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0025_2020-12-13/logins_2020-12-13.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0025_2020-12-13/logins_2020-12-13.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0026_2020-12-14/logins_2020-12-14.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0026_2020-12-14/logins_2020-12-14.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0027_2020-12-15/logins_2020-12-15.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0027_2020-12-15/logins_2020-12-15.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0028_2020-12-16/logins_2020-12-16.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0028_2020-12-16/logins_2020-12-16.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0029_2020-12-17/logins_2020-12-17.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0029_2020-12-17/logins_2020-12-17.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0030_2020-12-18/logins_2020-12-18.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0030_2020-12-18/logins_2020-12-18.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0031_2020-12-19/logins_2020-12-19.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0031_2020-12-19/logins_2020-12-19.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0032_2020-12-20/logins_2020-12-20.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0032_2020-12-20/logins_2020-12-20.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0033_2020-12-21/logins_2020-12-21.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0033_2020-12-21/logins_2020-12-21.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0034_2020-12-22/logins_2020-12-22.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0034_2020-12-22/logins_2020-12-22.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0035_2020-12-23/logins_2020-12-23.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0035_2020-12-23/logins_2020-12-23.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0036_2020-12-24/logins_2020-12-24.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0036_2020-12-24/logins_2020-12-24.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0037_2020-12-25/logins_2020-12-25.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0037_2020-12-25/logins_2020-12-25.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0038_2020-12-26/logins_2020-12-26.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0038_2020-12-26/logins_2020-12-26.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0039_2020-12-27/logins_2020-12-27.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0039_2020-12-27/logins_2020-12-27.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0040_2020-12-28/logins_2020-12-28.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0040_2020-12-28/logins_2020-12-28.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0041_2020-12-29/logins_2020-12-29.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0041_2020-12-29/logins_2020-12-29.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0042_2020-12-30/logins_2020-12-30.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0042_2020-12-30/logins_2020-12-30.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0043_2020-12-31/logins_2020-12-31.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0043_2020-12-31/logins_2020-12-31.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0044_2021-01-01/logins_2021-01-01.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0044_2021-01-01/logins_2021-01-01.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0045_2021-01-02/logins_2021-01-02.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0045_2021-01-02/logins_2021-01-02.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0046_2021-01-03/logins_2021-01-03.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0046_2021-01-03/logins_2021-01-03.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0047_2021-01-04/logins_2021-01-04.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0047_2021-01-04/logins_2021-01-04.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0048_2021-01-05/logins_2021-01-05.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0048_2021-01-05/logins_2021-01-05.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0049_2021-01-06/logins_2021-01-06.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0049_2021-01-06/logins_2021-01-06.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0050_2021-01-07/logins_2021-01-07.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0050_2021-01-07/logins_2021-01-07.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0051_2021-01-08/logins_2021-01-08.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0051_2021-01-08/logins_2021-01-08.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0052_2021-01-09/logins_2021-01-09.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0052_2021-01-09/logins_2021-01-09.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0053_2021-01-10/logins_2021-01-10.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0053_2021-01-10/logins_2021-01-10.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0054_2021-01-11/logins_2021-01-11.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0054_2021-01-11/logins_2021-01-11.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0055_2021-01-12/logins_2021-01-12.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0055_2021-01-12/logins_2021-01-12.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0056_2021-01-13/logins_2021-01-13.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0056_2021-01-13/logins_2021-01-13.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0057_2021-01-14/logins_2021-01-14.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0057_2021-01-14/logins_2021-01-14.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0058_2021-01-15/logins_2021-01-15.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0058_2021-01-15/logins_2021-01-15.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0059_2021-01-16/logins_2021-01-16.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0059_2021-01-16/logins_2021-01-16.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0060_2021-01-17/logins_2021-01-17.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0060_2021-01-17/logins_2021-01-17.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0061_2021-01-18/logins_2021-01-18.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0061_2021-01-18/logins_2021-01-18.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0062_2021-01-19/logins_2021-01-19.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0062_2021-01-19/logins_2021-01-19.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0063_2021-01-20/logins_2021-01-20.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0063_2021-01-20/logins_2021-01-20.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0064_2021-01-21/logins_2021-01-21.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0064_2021-01-21/logins_2021-01-21.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0065_2021-01-22/logins_2021-01-22.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0065_2021-01-22/logins_2021-01-22.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0066_2021-01-23/logins_2021-01-23.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0066_2021-01-23/logins_2021-01-23.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0067_2021-01-24/logins_2021-01-24.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0067_2021-01-24/logins_2021-01-24.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0068_2021-01-25/logins_2021-01-25.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0068_2021-01-25/logins_2021-01-25.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0069_2021-01-26/logins_2021-01-26.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0069_2021-01-26/logins_2021-01-26.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0070_2021-01-27/logins_2021-01-27.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0070_2021-01-27/logins_2021-01-27.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0071_2021-01-28/logins_2021-01-28.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0071_2021-01-28/logins_2021-01-28.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0072_2021-01-29/logins_2021-01-29.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0072_2021-01-29/logins_2021-01-29.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0073_2021-01-30/logins_2021-01-30.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0073_2021-01-30/logins_2021-01-30.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0074_2021-01-31/logins_2021-01-31.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0074_2021-01-31/logins_2021-01-31.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0075_2021-02-01/logins_2021-02-01.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0075_2021-02-01/logins_2021-02-01.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0076_2021-02-02/logins_2021-02-02.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0076_2021-02-02/logins_2021-02-02.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0077_2021-02-03/logins_2021-02-03.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0077_2021-02-03/logins_2021-02-03.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0078_2021-02-04/logins_2021-02-04.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0078_2021-02-04/logins_2021-02-04.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0079_2021-02-05/logins_2021-02-05.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0079_2021-02-05/logins_2021-02-05.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0080_2021-02-06/logins_2021-02-06.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0080_2021-02-06/logins_2021-02-06.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0081_2021-02-07/logins_2021-02-07.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0081_2021-02-07/logins_2021-02-07.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0082_2021-02-08/logins_2021-02-08.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0082_2021-02-08/logins_2021-02-08.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0083_2021-02-09/logins_2021-02-09.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0083_2021-02-09/logins_2021-02-09.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0084_2021-02-10/logins_2021-02-10.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0084_2021-02-10/logins_2021-02-10.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0085_2021-02-11/logins_2021-02-11.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0085_2021-02-11/logins_2021-02-11.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0086_2021-02-12/logins_2021-02-12.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0086_2021-02-12/logins_2021-02-12.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0087_2021-02-13/logins_2021-02-13.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0087_2021-02-13/logins_2021-02-13.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0088_2021-02-14/logins_2021-02-14.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0088_2021-02-14/logins_2021-02-14.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0089_2021-02-15/logins_2021-02-15.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0089_2021-02-15/logins_2021-02-15.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0090_2021-02-16/logins_2021-02-16.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0090_2021-02-16/logins_2021-02-16.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0091_2021-02-17/logins_2021-02-17.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0091_2021-02-17/logins_2021-02-17.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0092_2021-02-18/logins_2021-02-18.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0092_2021-02-18/logins_2021-02-18.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0093_2021-02-19/logins_2021-02-19.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0093_2021-02-19/logins_2021-02-19.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0094_2021-02-20/logins_2021-02-20.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0094_2021-02-20/logins_2021-02-20.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0095_2021-02-21/logins_2021-02-21.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0095_2021-02-21/logins_2021-02-21.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0096_2021-02-22/logins_2021-02-22.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0096_2021-02-22/logins_2021-02-22.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0097_2021-02-23/logins_2021-02-23.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0097_2021-02-23/logins_2021-02-23.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0098_2021-02-24/logins_2021-02-24.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0098_2021-02-24/logins_2021-02-24.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0099_2021-02-25/logins_2021-02-25.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0099_2021-02-25/logins_2021-02-25.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0100_2021-02-26/logins_2021-02-26.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0100_2021-02-26/logins_2021-02-26.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0101_2021-02-27/logins_2021-02-27.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0101_2021-02-27/logins_2021-02-27.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/logins/drops/0102_2021-02-28/logins_2021-02-28.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/logins/drops/0102_2021-02-28/logins_2021-02-28.csv.gz
+[exit 0]
+$ databricks fs cp -r --overwrite dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_logins/drops /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_logins/drops
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_logins/drops/0001_2020-02/labels_logins_2020-02.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_logins/drops/0001_2020-02/labels_logins_2020-02.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_logins/drops/0002_2020-03/labels_logins_2020-03.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_logins/drops/0002_2020-03/labels_logins_2020-03.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_logins/drops/0003_2020-04/labels_logins_2020-04.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_logins/drops/0003_2020-04/labels_logins_2020-04.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_logins/drops/0004_2020-05/labels_logins_2020-05.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_logins/drops/0004_2020-05/labels_logins_2020-05.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_logins/drops/0005_2020-06/labels_logins_2020-06.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_logins/drops/0005_2020-06/labels_logins_2020-06.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_logins/drops/0006_2020-07/labels_logins_2020-07.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_logins/drops/0006_2020-07/labels_logins_2020-07.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_logins/drops/0007_2020-08/labels_logins_2020-08.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_logins/drops/0007_2020-08/labels_logins_2020-08.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_logins/drops/0008_2020-09/labels_logins_2020-09.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_logins/drops/0008_2020-09/labels_logins_2020-09.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_logins/drops/0009_2020-10/labels_logins_2020-10.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_logins/drops/0009_2020-10/labels_logins_2020-10.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_logins/drops/0010_2020-11/labels_logins_2020-11.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_logins/drops/0010_2020-11/labels_logins_2020-11.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_logins/drops/0014_2020-12-02/labels_logins_2020-12-02.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_logins/drops/0014_2020-12-02/labels_logins_2020-12-02.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_logins/drops/0016_2020-12-04/labels_logins_2020-12-04.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_logins/drops/0016_2020-12-04/labels_logins_2020-12-04.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_logins/drops/0018_2020-12-06/labels_logins_2020-12-06.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_logins/drops/0018_2020-12-06/labels_logins_2020-12-06.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_logins/drops/0020_2020-12-08/labels_logins_2020-12-08.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_logins/drops/0020_2020-12-08/labels_logins_2020-12-08.csv.gz
+[exit 0]
+$ databricks fs cp -r --overwrite dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops
+.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0366_2019-12-17/payments_2019-12-17.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0367_2019-12-18/payments_2019-12-18.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0367_2019-12-18/payments_2019-12-18.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0368_2019-12-19/payments_2019-12-19.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0368_2019-12-19/payments_2019-12-19.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0369_2019-12-20/payments_2019-12-20.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0369_2019-12-20/payments_2019-12-20.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0370_2019-12-21/payments_2019-12-21.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0370_2019-12-21/payments_2019-12-21.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0371_2019-12-22/payments_2019-12-22.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0371_2019-12-22/payments_2019-12-22.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0372_2019-12-23/payments_2019-12-23.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0372_2019-12-23/payments_2019-12-23.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0373_2019-12-24/payments_2019-12-24.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0373_2019-12-24/payments_2019-12-24.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0374_2019-12-25/payments_2019-12-25.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0374_2019-12-25/payments_2019-12-25.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0375_2019-12-26/payments_2019-12-26.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0375_2019-12-26/payments_2019-12-26.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0376_2019-12-27/payments_2019-12-27.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0376_2019-12-27/payments_2019-12-27.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0377_2019-12-28/payments_2019-12-28.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0377_2019-12-28/payments_2019-12-28.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0378_2019-12-29/payments_2019-12-29.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0378_2019-12-29/payments_2019-12-29.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0379_2019-12-30/payments_2019-12-30.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0379_2019-12-30/payments_2019-12-30.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0380_2019-12-31/payments_2019-12-31.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0380_2019-12-31/payments_2019-12-31.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0381_2020-01-01/payments_2020-01-01.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0381_2020-01-01/payments_2020-01-01.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0382_2020-01-02/payments_2020-01-02.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0382_2020-01-02/payments_2020-01-02.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0383_2020-01-03/payments_2020-01-03.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0383_2020-01-03/payments_2020-01-03.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0384_2020-01-04/payments_2020-01-04.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0384_2020-01-04/payments_2020-01-04.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0385_2020-01-05/payments_2020-01-05.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0385_2020-01-05/payments_2020-01-05.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0386_2020-01-06/payments_2020-01-06.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0386_2020-01-06/payments_2020-01-06.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0387_2020-01-07/payments_2020-01-06_resend.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0387_2020-01-07/payments_2020-01-06_resend.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0387_2020-01-07/payments_2020-01-07_part2.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0387_2020-01-07/payments_2020-01-07_part2.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0387_2020-01-07/payments_2020-01-07_part1.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0387_2020-01-07/payments_2020-01-07_part1.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0388_2020-01-08/payments_2020-01-08.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0388_2020-01-08/payments_2020-01-08.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0389_2020-01-09/payments_2020-01-09.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0389_2020-01-09/payments_2020-01-09.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0390_2020-01-10/payments_2020-01-10.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0390_2020-01-10/payments_2020-01-10.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0391_2020-01-11/payments_2020-01-11.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0391_2020-01-11/payments_2020-01-11.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0392_2020-01-12/payments_2020-01-12.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0392_2020-01-12/payments_2020-01-12.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0393_2020-01-13/payments_2020-01-13.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0393_2020-01-13/payments_2020-01-13.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0394_2020-01-14/payments_2020-01-14.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0394_2020-01-14/payments_2020-01-14.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0395_2020-01-15/payments_2020-01-15.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0395_2020-01-15/payments_2020-01-15.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0396_2020-01-16/payments_2020-01-16.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0396_2020-01-16/payments_2020-01-16.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0397_2020-01-17/payments_2020-01-17.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0397_2020-01-17/payments_2020-01-17.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0398_2020-01-18/payments_2020-01-18.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0398_2020-01-18/payments_2020-01-18.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0399_2020-01-19/payments_2020-01-19.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0399_2020-01-19/payments_2020-01-19.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0400_2020-01-20/payments_2020-01-20.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0400_2020-01-20/payments_2020-01-20.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0401_2020-01-21/payments_2020-01-21.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0401_2020-01-21/payments_2020-01-21.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0402_2020-01-22/payments_2020-01-22.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0402_2020-01-22/payments_2020-01-22.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0403_2020-01-23/payments_2020-01-23.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0403_2020-01-23/payments_2020-01-23.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0404_2020-01-24/payments_2020-01-24.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0404_2020-01-24/payments_2020-01-24.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0405_2020-01-25/payments_2020-01-25.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0405_2020-01-25/payments_2020-01-25.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0406_2020-01-26/payments_2020-01-26.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0406_2020-01-26/payments_2020-01-26.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0407_2020-01-27/payments_2020-01-27.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0407_2020-01-27/payments_2020-01-27.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0408_2020-01-28/payments_2020-01-28.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0408_2020-01-28/payments_2020-01-28.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0409_2020-01-29/payments_2020-01-29.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0409_2020-01-29/payments_2020-01-29.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0410_2020-01-30/payments_2020-01-30.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0410_2020-01-30/payments_2020-01-30.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0411_2020-01-31/payments_2020-01-31.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0411_2020-01-31/payments_2020-01-31.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0412_2020-02-01/payments_2020-02-01.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0412_2020-02-01/payments_2020-02-01.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0413_2020-02-02/payments_2020-02-02.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0413_2020-02-02/payments_2020-02-02.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0414_2020-02-03/payments_2020-02-03.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0414_2020-02-03/payments_2020-02-03.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0415_2020-02-04/payments_2020-02-04.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0415_2020-02-04/payments_2020-02-04.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0416_2020-02-05/payments_2020-02-05.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0416_2020-02-05/payments_2020-02-05.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0417_2020-02-06/payments_2020-02-06.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0417_2020-02-06/payments_2020-02-06.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0418_2020-02-07/payments_2020-02-07.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0418_2020-02-07/payments_2020-02-07.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0419_2020-02-08/payments_2020-02-08.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0419_2020-02-08/payments_2020-02-08.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0420_2020-02-09/payments_2020-02-09.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0420_2020-02-09/payments_2020-02-09.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0421_2020-02-10/payments_2020-02-10.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0421_2020-02-10/payments_2020-02-10.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0422_2020-02-11/payments_2020-02-11.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0422_2020-02-11/payments_2020-02-11.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0423_2020-02-12/payments_2020-02-12.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0423_2020-02-12/payments_2020-02-12.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0424_2020-02-13/payments_2020-02-13.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0424_2020-02-13/payments_2020-02-13.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0425_2020-02-14/payments_2020-02-14.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0425_2020-02-14/payments_2020-02-14.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0426_2020-02-15/payments_2020-02-15.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0426_2020-02-15/payments_2020-02-15.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0427_2020-02-16/payments_2020-02-16.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0427_2020-02-16/payments_2020-02-16.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0428_2020-02-17/payments_2020-02-17.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0428_2020-02-17/payments_2020-02-17.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0429_2020-02-18/payments_2020-02-18.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0429_2020-02-18/payments_2020-02-18.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0430_2020-02-19/payments_2020-02-19.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0430_2020-02-19/payments_2020-02-19.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0431_2020-02-20/payments_2020-02-20.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0431_2020-02-20/payments_2020-02-20.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0432_2020-02-21/payments_2020-02-21.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0432_2020-02-21/payments_2020-02-21.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0433_2020-02-22/payments_2020-02-22.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0433_2020-02-22/payments_2020-02-22.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0434_2020-02-23/payments_2020-02-23.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0434_2020-02-23/payments_2020-02-23.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0435_2020-02-24/payments_2020-02-24.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0435_2020-02-24/payments_2020-02-24.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0436_2020-02-25/payments_2020-02-25.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0436_2020-02-25/payments_2020-02-25.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0437_2020-02-26/payments_2020-02-26.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0437_2020-02-26/payments_2020-02-26.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0438_2020-02-27/payments_2020-02-27.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0438_2020-02-27/payments_2020-02-27.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/payments/drops/0439_2020-02-28/payments_2020-02-28.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/payments/drops/0439_2020-02-28/payments_2020-02-28.csv.gz
+[exit 0]
+$ databricks fs cp -r --overwrite dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops
+bels_payments/drops/0305_2016-05/labels_payments_2016-05.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0306_2016-06/labels_payments_2016-06.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0306_2016-06/labels_payments_2016-06.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0307_2016-07/labels_payments_2016-07.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0307_2016-07/labels_payments_2016-07.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0308_2016-08/labels_payments_2016-08.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0308_2016-08/labels_payments_2016-08.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0309_2016-09/labels_payments_2016-09.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0309_2016-09/labels_payments_2016-09.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0310_2016-10/labels_payments_2016-10.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0310_2016-10/labels_payments_2016-10.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0311_2016-11/labels_payments_2016-11.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0311_2016-11/labels_payments_2016-11.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0312_2016-12/labels_payments_2016-12.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0312_2016-12/labels_payments_2016-12.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0313_2017-01/labels_payments_2017-01.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0313_2017-01/labels_payments_2017-01.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0314_2017-02/labels_payments_2017-02.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0314_2017-02/labels_payments_2017-02.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0315_2017-03/labels_payments_2017-03.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0315_2017-03/labels_payments_2017-03.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0316_2017-04/labels_payments_2017-04.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0316_2017-04/labels_payments_2017-04.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0317_2017-05/labels_payments_2017-05.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0317_2017-05/labels_payments_2017-05.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0318_2017-06/labels_payments_2017-06.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0318_2017-06/labels_payments_2017-06.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0319_2017-07/labels_payments_2017-07.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0319_2017-07/labels_payments_2017-07.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0320_2017-08/labels_payments_2017-08.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0320_2017-08/labels_payments_2017-08.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0321_2017-09/labels_payments_2017-09.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0321_2017-09/labels_payments_2017-09.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0322_2017-10/labels_payments_2017-10.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0322_2017-10/labels_payments_2017-10.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0323_2017-11/labels_payments_2017-11.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0323_2017-11/labels_payments_2017-11.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0324_2017-12/labels_payments_2017-12.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0324_2017-12/labels_payments_2017-12.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0325_2018-01/labels_payments_2018-01.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0325_2018-01/labels_payments_2018-01.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0326_2018-02/labels_payments_2018-02.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0326_2018-02/labels_payments_2018-02.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0327_2018-03/labels_payments_2018-03.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0327_2018-03/labels_payments_2018-03.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0328_2018-04/labels_payments_2018-04.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0328_2018-04/labels_payments_2018-04.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0329_2018-05/labels_payments_2018-05.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0329_2018-05/labels_payments_2018-05.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0330_2018-06/labels_payments_2018-06.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0330_2018-06/labels_payments_2018-06.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0331_2018-07/labels_payments_2018-07.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0331_2018-07/labels_payments_2018-07.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0332_2018-08/labels_payments_2018-08.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0332_2018-08/labels_payments_2018-08.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0333_2018-09/labels_payments_2018-09.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0333_2018-09/labels_payments_2018-09.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0334_2018-10/labels_payments_2018-10.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0334_2018-10/labels_payments_2018-10.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0335_2018-11/labels_payments_2018-11.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0335_2018-11/labels_payments_2018-11.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0336_2018-12/labels_payments_2018-12.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0336_2018-12/labels_payments_2018-12.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0337_2019-01/labels_payments_2019-01.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0337_2019-01/labels_payments_2019-01.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0338_2019-02/labels_payments_2019-02.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0338_2019-02/labels_payments_2019-02.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0339_2019-03/labels_payments_2019-03.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0339_2019-03/labels_payments_2019-03.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0340_2019-04/labels_payments_2019-04.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0340_2019-04/labels_payments_2019-04.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0341_2019-05/labels_payments_2019-05.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0341_2019-05/labels_payments_2019-05.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0342_2019-06/labels_payments_2019-06.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0342_2019-06/labels_payments_2019-06.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0343_2019-07/labels_payments_2019-07.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0343_2019-07/labels_payments_2019-07.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0344_2019-08/labels_payments_2019-08.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0344_2019-08/labels_payments_2019-08.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0345_2019-09/labels_payments_2019-09.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0345_2019-09/labels_payments_2019-09.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0346_2019-10/labels_payments_2019-10.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0346_2019-10/labels_payments_2019-10.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0347_2019-11/labels_payments_2019-11.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0347_2019-11/labels_payments_2019-11.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0349_2019-11-30/labels_payments_2019-11-30.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0349_2019-11-30/labels_payments_2019-11-30.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0350_2019-12-01/labels_payments_2019-12-01.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0350_2019-12-01/labels_payments_2019-12-01.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0351_2019-12-02/labels_payments_2019-12-02.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0351_2019-12-02/labels_payments_2019-12-02.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0354_2019-12-05/labels_payments_2019-12-05.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0354_2019-12-05/labels_payments_2019-12-05.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0356_2019-12-07/labels_payments_2019-12-07.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0356_2019-12-07/labels_payments_2019-12-07.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0357_2019-12-08/labels_payments_2019-12-08.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0357_2019-12-08/labels_payments_2019-12-08.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0359_2019-12-10/labels_payments_2019-12-10.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0359_2019-12-10/labels_payments_2019-12-10.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0363_2019-12-14/labels_payments_2019-12-14.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0363_2019-12-14/labels_payments_2019-12-14.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0364_2019-12-15/labels_payments_2019-12-15.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0364_2019-12-15/labels_payments_2019-12-15.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0367_2019-12-18/labels_payments_2019-12-18.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0367_2019-12-18/labels_payments_2019-12-18.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0370_2019-12-21/labels_payments_2019-12-21.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0370_2019-12-21/labels_payments_2019-12-21.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0371_2019-12-22/labels_payments_2019-12-22.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0371_2019-12-22/labels_payments_2019-12-22.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0376_2019-12-27/labels_payments_2019-12-27.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0376_2019-12-27/labels_payments_2019-12-27.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0377_2019-12-28/labels_payments_2019-12-28.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0377_2019-12-28/labels_payments_2019-12-28.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0379_2019-12-30/labels_payments_2019-12-30.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0379_2019-12-30/labels_payments_2019-12-30.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0380_2019-12-31/labels_payments_2019-12-31.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0380_2019-12-31/labels_payments_2019-12-31.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0386_2020-01-06/labels_payments_2020-01-06.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0386_2020-01-06/labels_payments_2020-01-06.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0393_2020-01-13/labels_payments_2020-01-13.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0393_2020-01-13/labels_payments_2020-01-13.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0395_2020-01-15/labels_payments_2020-01-15.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0395_2020-01-15/labels_payments_2020-01-15.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0398_2020-01-18/labels_payments_2020-01-18.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0398_2020-01-18/labels_payments_2020-01-18.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0411_2020-01-31/labels_payments_2020-01-31.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0411_2020-01-31/labels_payments_2020-01-31.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0413_2020-02-02/labels_payments_2020-02-02.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0413_2020-02-02/labels_payments_2020-02-02.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0416_2020-02-05/labels_payments_2020-02-05.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0416_2020-02-05/labels_payments_2020-02-05.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0424_2020-02-13/labels_payments_2020-02-13.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0424_2020-02-13/labels_payments_2020-02-13.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0425_2020-02-14/labels_payments_2020-02-14.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0425_2020-02-14/labels_payments_2020-02-14.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0427_2020-02-16/labels_payments_2020-02-16.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0427_2020-02-16/labels_payments_2020-02-16.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0428_2020-02-17/labels_payments_2020-02-17.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0428_2020-02-17/labels_payments_2020-02-17.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/labels_payments/drops/0436_2020-02-25/labels_payments_2020-02-25.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/labels_payments/drops/0436_2020-02-25/labels_payments_2020-02-25.csv.gz
+[exit 0]
+$ databricks fs cp -r --overwrite dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops
+.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0364_2019-12-15/cdc_cards_2019-12-15.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0365_2019-12-16/cdc_cards_2019-12-16.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0365_2019-12-16/cdc_cards_2019-12-16.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0366_2019-12-17/cdc_cards_2019-12-17.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0366_2019-12-17/cdc_cards_2019-12-17.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0367_2019-12-18/cdc_cards_2019-12-18.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0367_2019-12-18/cdc_cards_2019-12-18.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0368_2019-12-19/cdc_cards_2019-12-19.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0368_2019-12-19/cdc_cards_2019-12-19.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0369_2019-12-20/cdc_cards_2019-12-20.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0369_2019-12-20/cdc_cards_2019-12-20.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0370_2019-12-21/cdc_cards_2019-12-21.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0370_2019-12-21/cdc_cards_2019-12-21.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0371_2019-12-22/cdc_cards_2019-12-22.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0371_2019-12-22/cdc_cards_2019-12-22.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0372_2019-12-23/cdc_cards_2019-12-23.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0372_2019-12-23/cdc_cards_2019-12-23.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0373_2019-12-24/cdc_cards_2019-12-24.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0373_2019-12-24/cdc_cards_2019-12-24.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0374_2019-12-25/cdc_cards_2019-12-25.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0374_2019-12-25/cdc_cards_2019-12-25.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0375_2019-12-26/cdc_cards_2019-12-26.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0375_2019-12-26/cdc_cards_2019-12-26.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0376_2019-12-27/cdc_cards_2019-12-27.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0376_2019-12-27/cdc_cards_2019-12-27.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0377_2019-12-28/cdc_cards_2019-12-28.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0377_2019-12-28/cdc_cards_2019-12-28.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0378_2019-12-29/cdc_cards_2019-12-29.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0378_2019-12-29/cdc_cards_2019-12-29.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0379_2019-12-30/cdc_cards_2019-12-30.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0379_2019-12-30/cdc_cards_2019-12-30.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0380_2019-12-31/cdc_cards_2019-12-31.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0380_2019-12-31/cdc_cards_2019-12-31.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0381_2020-01-01/cdc_cards_2020-01-01.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0381_2020-01-01/cdc_cards_2020-01-01.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0382_2020-01-02/cdc_cards_2020-01-02.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0382_2020-01-02/cdc_cards_2020-01-02.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0383_2020-01-03/cdc_cards_2020-01-03.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0383_2020-01-03/cdc_cards_2020-01-03.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0384_2020-01-04/cdc_cards_2020-01-04.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0384_2020-01-04/cdc_cards_2020-01-04.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0385_2020-01-05/cdc_cards_2020-01-05.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0385_2020-01-05/cdc_cards_2020-01-05.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0386_2020-01-06/cdc_cards_2020-01-06.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0386_2020-01-06/cdc_cards_2020-01-06.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0387_2020-01-07/cdc_cards_2020-01-07.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0387_2020-01-07/cdc_cards_2020-01-07.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0388_2020-01-08/cdc_cards_2020-01-08.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0388_2020-01-08/cdc_cards_2020-01-08.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0389_2020-01-09/cdc_cards_2020-01-09.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0389_2020-01-09/cdc_cards_2020-01-09.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0390_2020-01-10/cdc_cards_2020-01-10.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0390_2020-01-10/cdc_cards_2020-01-10.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0391_2020-01-11/cdc_cards_2020-01-11.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0391_2020-01-11/cdc_cards_2020-01-11.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0392_2020-01-12/cdc_cards_2020-01-12.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0392_2020-01-12/cdc_cards_2020-01-12.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0393_2020-01-13/cdc_cards_2020-01-13.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0393_2020-01-13/cdc_cards_2020-01-13.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0394_2020-01-14/cdc_cards_2020-01-14.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0394_2020-01-14/cdc_cards_2020-01-14.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0395_2020-01-15/cdc_cards_2020-01-15.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0395_2020-01-15/cdc_cards_2020-01-15.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0396_2020-01-16/cdc_cards_2020-01-16.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0396_2020-01-16/cdc_cards_2020-01-16.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0397_2020-01-17/cdc_cards_2020-01-17.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0397_2020-01-17/cdc_cards_2020-01-17.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0398_2020-01-18/cdc_cards_2020-01-18.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0398_2020-01-18/cdc_cards_2020-01-18.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0399_2020-01-19/cdc_cards_2020-01-19.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0399_2020-01-19/cdc_cards_2020-01-19.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0400_2020-01-20/cdc_cards_2020-01-20.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0400_2020-01-20/cdc_cards_2020-01-20.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0401_2020-01-21/cdc_cards_2020-01-21.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0401_2020-01-21/cdc_cards_2020-01-21.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0402_2020-01-22/cdc_cards_2020-01-22.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0402_2020-01-22/cdc_cards_2020-01-22.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0403_2020-01-23/cdc_cards_2020-01-23.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0403_2020-01-23/cdc_cards_2020-01-23.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0404_2020-01-24/cdc_cards_2020-01-24.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0404_2020-01-24/cdc_cards_2020-01-24.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0405_2020-01-25/cdc_cards_2020-01-25.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0405_2020-01-25/cdc_cards_2020-01-25.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0406_2020-01-26/cdc_cards_2020-01-26.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0406_2020-01-26/cdc_cards_2020-01-26.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0407_2020-01-27/cdc_cards_2020-01-27.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0407_2020-01-27/cdc_cards_2020-01-27.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0408_2020-01-28/cdc_cards_2020-01-28.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0408_2020-01-28/cdc_cards_2020-01-28.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0409_2020-01-29/cdc_cards_2020-01-29.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0409_2020-01-29/cdc_cards_2020-01-29.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0410_2020-01-30/cdc_cards_2020-01-30.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0410_2020-01-30/cdc_cards_2020-01-30.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0411_2020-01-31/cdc_cards_2020-01-31.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0411_2020-01-31/cdc_cards_2020-01-31.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0412_2020-02-01/cdc_cards_2020-02-01.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0412_2020-02-01/cdc_cards_2020-02-01.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0413_2020-02-02/cdc_cards_2020-02-02.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0413_2020-02-02/cdc_cards_2020-02-02.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0414_2020-02-03/cdc_cards_2020-02-03.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0414_2020-02-03/cdc_cards_2020-02-03.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0415_2020-02-04/cdc_cards_2020-02-04.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0415_2020-02-04/cdc_cards_2020-02-04.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0416_2020-02-05/cdc_cards_2020-02-05.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0416_2020-02-05/cdc_cards_2020-02-05.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0417_2020-02-06/cdc_cards_2020-02-06.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0417_2020-02-06/cdc_cards_2020-02-06.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0418_2020-02-07/cdc_cards_2020-02-07.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0418_2020-02-07/cdc_cards_2020-02-07.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0419_2020-02-08/cdc_cards_2020-02-08.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0419_2020-02-08/cdc_cards_2020-02-08.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0420_2020-02-09/cdc_cards_2020-02-09.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0420_2020-02-09/cdc_cards_2020-02-09.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0421_2020-02-10/cdc_cards_2020-02-10.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0421_2020-02-10/cdc_cards_2020-02-10.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0422_2020-02-11/cdc_cards_2020-02-11.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0422_2020-02-11/cdc_cards_2020-02-11.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0423_2020-02-12/cdc_cards_2020-02-12.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0423_2020-02-12/cdc_cards_2020-02-12.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0424_2020-02-13/cdc_cards_2020-02-13.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0424_2020-02-13/cdc_cards_2020-02-13.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0425_2020-02-14/cdc_cards_2020-02-14.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0425_2020-02-14/cdc_cards_2020-02-14.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0426_2020-02-15/cdc_cards_2020-02-15.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0426_2020-02-15/cdc_cards_2020-02-15.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0427_2020-02-16/cdc_cards_2020-02-16.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0427_2020-02-16/cdc_cards_2020-02-16.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0428_2020-02-17/cdc_cards_2020-02-17.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0428_2020-02-17/cdc_cards_2020-02-17.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0429_2020-02-18/cdc_cards_2020-02-18.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0429_2020-02-18/cdc_cards_2020-02-18.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0430_2020-02-19/cdc_cards_2020-02-19.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0430_2020-02-19/cdc_cards_2020-02-19.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0431_2020-02-20/cdc_cards_2020-02-20.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0431_2020-02-20/cdc_cards_2020-02-20.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0432_2020-02-21/cdc_cards_2020-02-21.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0432_2020-02-21/cdc_cards_2020-02-21.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0433_2020-02-22/cdc_cards_2020-02-22.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0433_2020-02-22/cdc_cards_2020-02-22.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0434_2020-02-23/cdc_cards_2020-02-23.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0434_2020-02-23/cdc_cards_2020-02-23.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0435_2020-02-24/cdc_cards_2020-02-24.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0435_2020-02-24/cdc_cards_2020-02-24.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0436_2020-02-25/cdc_cards_2020-02-25.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0436_2020-02-25/cdc_cards_2020-02-25.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0437_2020-02-26/cdc_cards_2020-02-26.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0437_2020-02-26/cdc_cards_2020-02-26.csv.gz
+dbfs:/Volumes/workspace/friction_dev_raw/outbox/cdc_cards/drops/0438_2020-02-27/cdc_cards_2020-02-27.csv.gz -> /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source/cdc_cards/drops/0438_2020-02-27/cdc_cards_2020-02-27.csv.gz
+[exit 0]
+$ /home/runner/work/friction/friction/.venv/bin/python scripts/run_portable.py --landing /home/runner/work/friction/friction/data/work/landing_2026-10-30-19d-rederive-models-open-source --out /home/runner/work/friction/friction/data/lake/2026-10-30-19d-rederive-models-open-source --memory 10g
+portable pipeline exited 0 after 2105.6 s; log in /home/runner/work/friction/friction/data/lake/2026-10-30-19d-rederive-models-open-source/run.log
+[exit 0]
+$ /home/runner/work/friction/friction/.venv/bin/python scripts/run_features.py --lake /home/runner/work/friction/friction/data/lake/2026-10-30-19d-rederive-models-open-source
+features: {'payments_features': 24383663, 'logins_features': 31267738} in 524.7 s
+WARNING: Using incubator modules: jdk.incubator.vector
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/30 03:18:50 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+
+[Stage 1:>                                                          (0 + 4) / 6]
+
+[Stage 1:=========>                                                 (1 + 4) / 6]
+
+[Stage 1:===================>                                       (2 + 4) / 6]
+
+[Stage 1:=============================>                             (3 + 3) / 6]
+
+[Stage 1:=======================================>                   (4 + 2) / 6]
+
+[Stage 1:=================================================>         (5 + 1) / 6]
+
+[Stage 3:>                                                         (0 + 4) / 16]
+
+[Stage 3:===>                                                      (1 + 4) / 16]
+
+[Stage 3:===>                                                      (1 + 5) / 16]
+
+[Stage 3:=======>                                                  (2 + 4) / 16]
+
+[Stage 3:==========>                                               (3 + 4) / 16]
+
+[Stage 3:==============>                                           (4 + 4) / 16]
+
+[Stage 3:==================>                                       (5 + 4) / 16]
+
+[Stage 3:=====================>                                    (6 + 4) / 16]
+
+[Stage 3:=========================>                                (7 + 4) / 16]
+
+[Stage 3:=============================>                            (8 + 4) / 16]
+
+[Stage 3:================================>                         (9 + 4) / 16]
+
+[Stage 3:===================================>                     (10 + 4) / 16]
+
+[Stage 3:=======================================>                 (11 + 4) / 16]
+
+[Stage 3:==========================================>              (12 + 4) / 16]
+
+[Stage 3:==============================================>          (13 + 3) / 16]
+
+[Stage 3:=================================================>       (14 + 2) / 16]
+
+[Stage 3:=====================================================>   (15 + 1) / 16]
+
+                                                                                
+
+[Stage 5:>                                                         (0 + 4) / 24]
+
+[Stage 5:====>                                                     (2 + 4) / 24]
+
+[Stage 5:=======>                                                  (3 + 4) / 24]
+
+[Stage 5:=========>                                                (4 + 4) / 24]
+
+[Stage 5:==============>                                           (6 + 4) / 24]
+
+[Stage 5:================>                                         (7 + 4) / 24]
+
+[Stage 5:===================>                                      (8 + 4) / 24]
+
+[Stage 5:=====================>                                    (9 + 4) / 24]
+
+[Stage 5:=======================>                                 (10 + 4) / 24]
+
+[Stage 5:============================>                            (12 + 4) / 24]
+
+[Stage 5:==============================>                          (13 + 4) / 24]
+
+[Stage 5:=================================>                       (14 + 4) / 24]
+
+[Stage 5:======================================>                  (16 + 4) / 24]
+
+[Stage 5:========================================>                (17 + 4) / 24]
+
+[Stage 5:==========================================>              (18 + 4) / 24]
+
+[Stage 5:=============================================>           (19 + 4) / 24]
+
+[Stage 5:===============================================>         (20 + 4) / 24]
+
+[Stage 5:=================================================>       (21 + 3) / 24]
+
+[Stage 5:====================================================>    (22 + 2) / 24]
+
+[Stage 5:======================================================>  (23 + 1) / 24]
+
+[Stage 7:>                                                         (0 + 4) / 16]
+
+[Stage 7:===>                                                      (1 + 4) / 16]
+
+[Stage 7:=======>                                                  (2 + 4) / 16]
+
+[Stage 7:==========>                                               (3 + 4) / 16]
+
+[Stage 7:==============>                                           (4 + 4) / 16]
+
+[Stage 7:==================>                                       (5 + 4) / 16]
+
+[Stage 7:=====================>                                    (6 + 4) / 16]
+
+[Stage 7:=========================>                                (7 + 4) / 16]
+
+[Stage 7:=============================>                            (8 + 4) / 16]
+
+[Stage 7:================================>                         (9 + 4) / 16]
+
+[Stage 7:===================================>                     (10 + 4) / 16]
+
+[Stage 7:===================================>                     (10 + 5) / 16]
+
+[Stage 7:=======================================>                 (11 + 4) / 16]
+
+[Stage 7:=======================================>                 (11 + 5) / 16]
+
+[Stage 7:==========================================>              (12 + 4) / 16]
+
+[Stage 7:==============================================>          (13 + 3) / 16]
+
+[Stage 7:=================================================>       (14 + 2) / 16]
+
+                                                                                
+
+[Stage 8:>                                                         (0 + 4) / 24]
+
+[Stage 8:=========>                                                (4 + 4) / 24]
+
+[Stage 8:===================>                                      (8 + 4) / 24]
+
+[Stage 8:============================>                            (12 + 4) / 24]
+
+[Stage 8:=================================>                       (14 + 4) / 24]
+
+[Stage 8:======================================>                  (16 + 4) / 24]
+
+[Stage 8:========================================>                (17 + 4) / 24]
+
+[Stage 8:=============================================>           (19 + 4) / 24]
+
+[Stage 8:===============================================>         (20 + 4) / 24]
+
+[Stage 8:====================================================>    (22 + 2) / 24]
+
+[Stage 10:>                                                        (0 + 4) / 16]
+
+[Stage 10:===>                                                     (1 + 4) / 16]
+
+[Stage 10:=======>                                                 (2 + 4) / 16]
+
+[Stage 10:==========>                                              (3 + 4) / 16]
+
+[Stage 10:==============>                                          (4 + 4) / 16]
+
+[Stage 10:=================>                                       (5 + 4) / 16]
+
+[Stage 10:=====================>                                   (6 + 4) / 16]
+
+[Stage 10:========================>                                (7 + 4) / 16]
+
+[Stage 10:============================>                            (8 + 4) / 16]
+
+[Stage 10:================================>                        (9 + 4) / 16]
+
+[Stage 10:===================================>                    (10 + 4) / 16]
+
+[Stage 10:======================================>                 (11 + 4) / 16]
+
+[Stage 10:==========================================>             (12 + 4) / 16]
+
+[Stage 10:=============================================>          (13 + 3) / 16]
+
+[Stage 10:=================================================>      (14 + 2) / 16]
+
+[Stage 10:====================================================>   (15 + 1) / 16]
+
+                                                                                
+26/10/30 03:26:44 WARN SparkStringUtils: Truncated the string representation of a plan since it was too large. This behavior can be adjusted by setting 'spark.sql.debug.maxToStringFields'.
+
+[Stage 13:>                                                         (0 + 4) / 5]
+
+[Stage 13:>                 (0 + 4) / 5][Stage 14:>                 (0 + 0) / 5]
+
+[Stage 13:===>              (1 + 4) / 5][Stage 14:>                 (0 + 0) / 5]
+
+[Stage 13:==========>       (3 + 2) / 5][Stage 14:>                 (0 + 2) / 5]
+
+[Stage 14:>                                                         (0 + 4) / 5]
+
+[Stage 14:===========>                                              (1 + 4) / 5]
+
+[Stage 14:=======================>                                  (2 + 3) / 5]
+
+[Stage 14:==================================>                       (3 + 2) / 5]
+
+[Stage 14:==============================================>           (4 + 1) / 5]
+
+[Stage 17:>                                                        (0 + 4) / 16]
+
+[Stage 17:===>                                                     (1 + 4) / 16]
+
+[Stage 17:=======>                                                 (2 + 4) / 16]
+
+[Stage 17:==========>                                              (3 + 4) / 16]
+
+[Stage 17:==============>                                          (4 + 4) / 16]
+
+[Stage 17:=====================>                                   (6 + 4) / 16]
+
+[Stage 17:========================>                                (7 + 4) / 16]
+
+[Stage 17:============================>                            (8 + 4) / 16]
+
+[Stage 17:================================>                        (9 + 4) / 16]
+
+[Stage 17:===================================>                    (10 + 4) / 16]
+
+[Stage 17:======================================>                 (11 + 4) / 16]
+
+[Stage 17:==========================================>             (12 + 4) / 16]
+
+[Stage 17:=============================================>          (13 + 3) / 16]
+
+[Stage 17:=================================================>      (14 + 2) / 16]
+
+[Stage 17:====================================================>   (15 + 1) / 16]
+
+                                                                                
+[exit 0]
+$ /home/runner/work/friction/friction/.venv/bin/python scripts/summarize_lake.py --lake /home/runner/work/friction/friction/data/lake/2026-10-30-19d-rederive-models-open-source --engine local --out results-branch/runs/2026-10-30-19d-rederive-models-open-source/summary.json
+summarized 15 tables in 284.7 s
+WARNING: Using incubator modules: jdk.incubator.vector
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/30 03:27:43 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+
+[Stage 1:>                                                          (0 + 4) / 5]
+
+[Stage 1:===========>                                               (1 + 4) / 5]
+
+[Stage 1:=======================>                                   (2 + 3) / 5]
+
+[Stage 1:===================================>                       (3 + 2) / 5]
+
+[Stage 1:===============================================>           (4 + 1) / 5]
+
+                                                                                
+
+[Stage 5:>                                                         (0 + 4) / 15]
+
+[Stage 5:=======>                                                  (2 + 4) / 15]
+
+[Stage 5:===========>                                              (3 + 4) / 15]
+
+[Stage 5:===============>                                          (4 + 4) / 15]
+
+[Stage 5:=======================>                                  (6 + 4) / 15]
+
+[Stage 5:==============================>                           (8 + 4) / 15]
+
+[Stage 5:==================================>                       (9 + 4) / 15]
+
+[Stage 5:======================================>                  (10 + 4) / 15]
+
+[Stage 5:=========================================>               (11 + 4) / 15]
+
+[Stage 5:=============================================>           (12 + 3) / 15]
+
+[Stage 5:=================================================>       (13 + 2) / 15]
+
+[Stage 5:=====================================================>   (14 + 1) / 15]
+
+                                                                                
+
+[Stage 21:>                                                        (0 + 4) / 18]
+
+[Stage 21:============>                                            (4 + 4) / 18]
+
+[Stage 21:===============>                                         (5 + 4) / 18]
+
+[Stage 21:======================>                                  (7 + 4) / 18]
+
+[Stage 21:=========================>                               (8 + 4) / 18]
+
+[Stage 21:============================>                            (9 + 4) / 18]
+
+[Stage 21:===============================>                        (10 + 4) / 18]
+
+[Stage 21:==================================>                     (11 + 4) / 18]
+
+[Stage 21:=====================================>                  (12 + 4) / 18]
+
+[Stage 21:========================================>               (13 + 4) / 18]
+
+[Stage 21:===========================================>            (14 + 4) / 18]
+
+[Stage 21:=================================================>      (16 + 2) / 18]
+
+[Stage 21:====================================================>   (17 + 1) / 18]
+
+                                                                                
+
+[Stage 25:>                                                        (0 + 4) / 32]
+
+[Stage 25:===>                                                     (2 + 4) / 32]
+
+[Stage 25:=======>                                                 (4 + 4) / 32]
+
+[Stage 25:============>                                            (7 + 4) / 32]
+
+[Stage 25:==============>                                          (8 + 4) / 32]
+
+[Stage 25:================>                                        (9 + 4) / 32]
+
+[Stage 25:===================>                                    (11 + 4) / 32]
+
+[Stage 25:=====================>                                  (12 + 4) / 32]
+
+[Stage 25:========================>                               (14 + 4) / 32]
+
+[Stage 25:==========================>                             (15 + 4) / 32]
+
+[Stage 25:============================>                           (16 + 4) / 32]
+
+[Stage 25:=============================>                          (17 + 4) / 32]
+
+[Stage 25:=================================>                      (19 + 4) / 32]
+
+[Stage 25:===================================>                    (20 + 4) / 32]
+
+[Stage 25:======================================>                 (22 + 4) / 32]
+
+[Stage 25:========================================>               (23 + 4) / 32]
+
+[Stage 25:==========================================>             (24 + 4) / 32]
+
+[Stage 25:===============================================>        (27 + 4) / 32]
+
+[Stage 25:=================================================>      (28 + 4) / 32]
+
+[Stage 25:==================================================>     (29 + 3) / 32]
+
+                                                                                
+
+[Stage 49:===========>                                              (1 + 4) / 5]
+
+[Stage 49:==============================================>           (4 + 1) / 5]
+
+                                                                                
+26/10/30 03:29:07 WARN SparkStringUtils: Truncated the string representation of a plan since it was too large. This behavior can be adjusted by setting 'spark.sql.debug.maxToStringFields'.
+
+[Stage 53:>                                                        (0 + 4) / 15]
+
+[Stage 53:=======>                                                 (2 + 4) / 15]
+
+[Stage 53:===========>                                             (3 + 4) / 15]
+
+[Stage 53:===============>                                         (4 + 4) / 15]
+
+[Stage 53:======================>                                  (6 + 4) / 15]
+
+[Stage 53:==========================>                              (7 + 4) / 15]
+
+[Stage 53:==============================>                          (8 + 4) / 15]
+
+[Stage 53:==================================>                      (9 + 4) / 15]
+
+[Stage 53:============================================>           (12 + 3) / 15]
+
+[Stage 53:================================================>       (13 + 2) / 15]
+
+[Stage 53:====================================================>   (14 + 1) / 15]
+
+                                                                                
+
+[Stage 57:>                                                         (0 + 4) / 6]
+
+[Stage 57:=========>                                                (1 + 4) / 6]
+
+[Stage 57:======================================>                   (4 + 2) / 6]
+
+[Stage 57:================================================>         (5 + 1) / 6]
+
+[Stage 60:>                                                        (0 + 4) / 18]
+
+[Stage 60:===>                                                     (1 + 4) / 18]
+
+[Stage 60:============>                                            (4 + 4) / 18]
+
+[Stage 60:===================>                                     (6 + 4) / 18]
+
+[Stage 60:=========================>                               (8 + 4) / 18]
+
+[Stage 60:============================>                            (9 + 4) / 18]
+
+[Stage 60:==================================>                     (11 + 4) / 18]
+
+[Stage 60:=====================================>                  (12 + 4) / 18]
+
+[Stage 60:========================================>               (13 + 4) / 18]
+
+[Stage 60:===========================================>            (14 + 4) / 18]
+
+[Stage 60:====================================================>   (17 + 1) / 18]
+
+[Stage 62:>                                                         (0 + 4) / 5]
+
+[Stage 62:==============================================>           (4 + 1) / 5]
+
+[Stage 66:>                                                        (0 + 4) / 18]
+
+[Stage 66:===>                                                     (1 + 4) / 18]
+
+[Stage 66:=========>                                               (3 + 4) / 18]
+
+[Stage 66:============>                                            (4 + 4) / 18]
+
+[Stage 66:===================>                                     (6 + 4) / 18]
+
+[Stage 66:=========================>                               (8 + 4) / 18]
+
+[Stage 66:============================>                            (9 + 4) / 18]
+
+[Stage 66:===============================>                        (10 + 4) / 18]
+
+[Stage 66:=====================================>                  (12 + 4) / 18]
+
+[Stage 66:===========================================>            (14 + 4) / 18]
+
+[Stage 66:==============================================>         (15 + 3) / 18]
+
+[Stage 66:====================================================>   (17 + 1) / 18]
+
+[Stage 68:>                                                         (0 + 4) / 7]
+
+[Stage 68:========================>                                 (3 + 4) / 7]
+
+[Stage 68:=================================>                        (4 + 3) / 7]
+
+[Stage 68:=========================================>                (5 + 2) / 7]
+
+                                                                                
+
+[Stage 79:>                                                        (0 + 4) / 18]
+
+[Stage 79:============>                                            (4 + 4) / 18]
+
+[Stage 79:======================>                                  (7 + 4) / 18]
+
+[Stage 79:=========================>                               (8 + 4) / 18]
+
+[Stage 79:==================================>                     (11 + 4) / 18]
+
+[Stage 79:=====================================>                  (12 + 4) / 18]
+
+[Stage 79:====================================================>   (17 + 1) / 18]
+
+[Stage 81:>                                                         (0 + 4) / 7]
+
+[Stage 81:========>                                                 (1 + 4) / 7]
+
+[Stage 81:=================================>                        (4 + 3) / 7]
+
+[Stage 81:=========================================>                (5 + 2) / 7]
+
+[Stage 81:=================================================>        (6 + 1) / 7]
+
+                                                                                
+
+[Stage 92:>                                                        (0 + 4) / 18]
+
+[Stage 92:======>                                                  (2 + 4) / 18]
+
+[Stage 92:=========>                                               (3 + 4) / 18]
+
+[Stage 92:============>                                            (4 + 4) / 18]
+
+[Stage 92:======================>                                  (7 + 4) / 18]
+
+[Stage 92:=========================>                               (8 + 4) / 18]
+
+[Stage 92:==================================>                     (11 + 4) / 18]
+
+[Stage 92:=====================================>                  (12 + 4) / 18]
+
+[Stage 92:=================================================>      (16 + 2) / 18]
+
+[Stage 92:====================================================>   (17 + 1) / 18]
+
+[Stage 94:>                                                         (0 + 4) / 6]
+
+[Stage 94:=========>                                                (1 + 4) / 6]
+
+[Stage 94:===================>                                      (2 + 4) / 6]
+
+[Stage 94:======================================>                   (4 + 2) / 6]
+
+[Stage 94:================================================>         (5 + 1) / 6]
+
+                                                                                
+
+[Stage 105:>                                                       (0 + 4) / 32]
+
+[Stage 105:=>                                                      (1 + 4) / 32]
+
+[Stage 105:=======>                                                (4 + 4) / 32]
+
+[Stage 105:========>                                               (5 + 4) / 32]
+
+[Stage 105:==============>                                         (8 + 4) / 32]
+
+[Stage 105:=================>                                     (10 + 4) / 32]
+
+[Stage 105:====================>                                  (12 + 4) / 32]
+
+[Stage 105:=========================>                             (15 + 4) / 32]
+
+[Stage 105:===========================>                           (16 + 4) / 32]
+
+[Stage 105:==================================>                    (20 + 4) / 32]
+
+[Stage 105:====================================>                  (21 + 5) / 32]
+
+[Stage 105:=========================================>             (24 + 4) / 32]
+
+[Stage 105:================================================>      (28 + 4) / 32]
+
+[Stage 105:=================================================>     (29 + 3) / 32]
+
+[Stage 107:>                                                        (0 + 4) / 5]
+
+[Stage 107:======================>                                  (2 + 3) / 5]
+
+[Stage 107:=============================================>           (4 + 1) / 5]
+
+[Stage 111:>                                                       (0 + 4) / 32]
+
+[Stage 111:=>                                                      (1 + 4) / 32]
+
+[Stage 111:=======>                                                (4 + 4) / 32]
+
+[Stage 111:==============>                                         (8 + 4) / 32]
+
+[Stage 111:=================>                                     (10 + 4) / 32]
+
+[Stage 111:====================>                                  (12 + 4) / 32]
+
+[Stage 111:========================>                              (14 + 4) / 32]
+
+[Stage 111:===========================>                           (16 + 4) / 32]
+
+[Stage 111:==============================>                        (18 + 4) / 32]
+
+[Stage 111:==================================>                    (20 + 4) / 32]
+
+[Stage 111:====================================>                  (21 + 4) / 32]
+
+[Stage 111:=======================================>               (23 + 4) / 32]
+
+[Stage 111:=========================================>             (24 + 4) / 32]
+
+[Stage 111:==========================================>            (25 + 4) / 32]
+
+[Stage 111:==============================================>        (27 + 4) / 32]
+
+[Stage 111:================================================>      (28 + 4) / 32]
+
+[Stage 111:=================================================>     (29 + 3) / 32]
+
+[Stage 111:=====================================================> (31 + 1) / 32]
+
+[Stage 113:>                                                        (0 + 4) / 5]
+
+[Stage 113:===========>                                             (1 + 4) / 5]
+
+[Stage 113:=============================================>           (4 + 1) / 5]
+
+                                                                                
+
+[Stage 124:>                                                       (0 + 4) / 32]
+
+[Stage 124:=>                                                      (1 + 4) / 32]
+
+[Stage 124:=======>                                                (4 + 4) / 32]
+
+[Stage 124:==============>                                         (8 + 4) / 32]
+
+[Stage 124:===============>                                        (9 + 4) / 32]
+
+[Stage 124:====================>                                  (12 + 4) / 32]
+
+[Stage 124:=========================>                             (15 + 4) / 32]
+
+[Stage 124:===========================>                           (16 + 4) / 32]
+
+[Stage 124:================================>                      (19 + 4) / 32]
+
+[Stage 124:==================================>                    (20 + 4) / 32]
+
+[Stage 124:=======================================>               (23 + 4) / 32]
+
+[Stage 124:=========================================>             (24 + 4) / 32]
+
+[Stage 124:================================================>      (28 + 4) / 32]
+
+[Stage 124:=================================================>     (29 + 3) / 32]
+
+[Stage 126:>                                                        (0 + 4) / 5]
+
+[Stage 126:======================>                                  (2 + 3) / 5]
+
+[Stage 126:=============================================>           (4 + 1) / 5]
+
+                                                                                
+
+[Stage 137:>                                                       (0 + 4) / 32]
+
+[Stage 137:=======>                                                (4 + 4) / 32]
+
+[Stage 137:==============>                                         (8 + 4) / 32]
+
+[Stage 137:====================>                                  (12 + 4) / 32]
+
+[Stage 137:========================>                              (14 + 4) / 32]
+
+[Stage 137:===========================>                           (16 + 4) / 32]
+
+[Stage 137:=============================>                         (17 + 4) / 32]
+
+[Stage 137:==================================>                    (20 + 4) / 32]
+
+[Stage 137:=======================================>               (23 + 4) / 32]
+
+[Stage 137:=========================================>             (24 + 4) / 32]
+
+[Stage 137:============================================>          (26 + 4) / 32]
+
+[Stage 137:================================================>      (28 + 4) / 32]
+
+[Stage 139:>                                                        (0 + 4) / 7]
+
+[Stage 139:================================>                        (4 + 3) / 7]
+
+[Stage 139:========================================>                (5 + 2) / 7]
+
+[Stage 139:================================================>        (6 + 1) / 7]
+
+                                                                                
+
+[Stage 150:>                                                       (0 + 4) / 15]
+
+[Stage 150:==============>                                         (4 + 4) / 15]
+
+[Stage 150:=============================>                          (8 + 4) / 15]
+
+[Stage 150:============================================>          (12 + 3) / 15]
+
+[Stage 150:===================================================>   (14 + 1) / 15]
+
+[Stage 153:>                                                        (0 + 4) / 6]
+
+[Stage 153:===================>                                     (2 + 4) / 6]
+
+[Stage 153:======================================>                  (4 + 2) / 6]
+
+[Stage 153:===============================================>         (5 + 1) / 6]
+
+                                                                                
+
+[Stage 183:>                                                       (0 + 4) / 18]
+
+[Stage 183:============>                                           (4 + 4) / 18]
+
+[Stage 183:=====================>                                  (7 + 4) / 18]
+
+[Stage 183:=================================>                     (11 + 4) / 18]
+
+[Stage 183:================================================>      (16 + 2) / 18]
+[exit 0]
+$ /home/runner/work/friction/friction/.venv/bin/python scripts/run_models.py --lake /home/runner/work/friction/friction/data/lake/2026-10-30-19d-rederive-models-open-source --out /home/runner/work/friction/friction/data/work/models/2026-10-30-19d-rederive-models-open-source
+{
+ "tag": "default",
+ "payments": {
+  "rows": 1502582,
+  "positives": 2409,
+  "start": "2016-11-01",
+  "end": "2018-11-01"
+ },
+ "logins": {
+  "rows": 1499565,
+  "positives": 105,
+  "legit_logins": 7538057,
+  "users": 4304818
+ }
+}
+{
+ "payments_payments_validation_code_cutoffs": {
+  "logistic": 0.0004265609742065284,
+  "lightgbm": 6.68847699493211e-05
+ },
+ "payments_validation": "/home/runner/work/friction/friction/data/work/models/2026-10-30-19d-rederive-models-open-source/scored/payments_validation",
+ "payments_payments_test_code_cutoffs": {
+  "logistic": 0.0004304115480728111,
+  "lightgbm": 6.0256914539000153e-05
+ },
+ "payments_test": "/home/runner/work/friction/friction/data/work/models/2026-10-30-19d-rederive-models-open-source/scored/payments_test",
+ "logins_logins_validation_code_cutoffs": {
+  "freeman": 0.5602295959405481,
+  "lightgbm": 3.1638641745475998e-06,
+  "lightgbm_rep": 2.5026106619941096e-06
+ },
+ "logins_validation": "/home/runner/work/friction/friction/data/work/models/2026-10-30-19d-rederive-models-open-source/scored/logins_validation",
+ "logins_logins_test_code_cutoffs": {
+  "freeman": 0.5602295959405481,
+  "lightgbm": 3.1638641745475998e-06,
+  "lightgbm_rep": 2.5026106619941096e-06
+ },
+ "logins_test": "/home/runner/work/friction/friction/data/work/models/2026-10-30-19d-rederive-models-open-source/scored/logins_test"
+}
+{'attacks': 349.4, 'features': 526.6, 'train': 347.9, 'score': 2880.2}
+============>  (5 + 1) / 6][Stage 311:===>            (6 + 3) / 32]
+
+[Stage 309:==============>  (5 + 1) / 6][Stage 311:====>           (8 + 3) / 32]
+
+[Stage 309:==============>  (5 + 1) / 6][Stage 311:====>           (9 + 3) / 32]
+
+[Stage 309:==============>  (5 + 1) / 6][Stage 311:=====>         (11 + 3) / 32]
+
+[Stage 309:==============>  (5 + 1) / 6][Stage 311:=====>         (12 + 3) / 32]
+
+[Stage 309:==============>  (5 + 1) / 6][Stage 311:======>        (14 + 3) / 32]
+
+[Stage 309:==============>  (5 + 1) / 6][Stage 311:=======>       (15 + 3) / 32]
+
+[Stage 309:==============>  (5 + 1) / 6][Stage 311:=======>       (16 + 3) / 32]
+
+[Stage 309:==============>  (5 + 1) / 6][Stage 311:=======>       (17 + 3) / 32]
+
+[Stage 309:==============>  (5 + 1) / 6][Stage 311:========>      (18 + 3) / 32]
+
+[Stage 309:==============>  (5 + 1) / 6][Stage 311:========>      (19 + 3) / 32]
+
+[Stage 309:==============>  (5 + 1) / 6][Stage 311:=========>     (20 + 3) / 32]
+
+[Stage 309:==============>  (5 + 1) / 6][Stage 311:==========>    (22 + 3) / 32]
+
+[Stage 309:==============>  (5 + 1) / 6][Stage 311:==========>    (23 + 3) / 32]
+
+[Stage 309:==============>  (5 + 1) / 6][Stage 311:===========>   (24 + 3) / 32]
+
+[Stage 311:==========================================>            (25 + 4) / 32]
+
+[Stage 311:============================================>          (26 + 3) / 32]
+
+[Stage 311:============================================>          (26 + 4) / 32]
+
+[Stage 311:================================================>      (28 + 4) / 32]
+
+[Stage 311:===================================================>   (30 + 2) / 32]
+26/10/30 03:56:07 WARN DAGScheduler: Broadcasting large task binary with size 22.2 MiB
+
+[Stage 314:>                                                       (0 + 4) / 16]
+
+[Stage 314:===>                                                    (1 + 4) / 16]
+
+[Stage 314:=======>                                                (2 + 4) / 16]
+
+[Stage 314:==========>                                             (3 + 4) / 16]
+
+[Stage 314:==============>                                         (4 + 4) / 16]
+
+[Stage 314:=================>                                      (5 + 4) / 16]
+
+[Stage 314:=====================>                                  (6 + 4) / 16]
+
+[Stage 314:============================>                           (8 + 4) / 16]
+
+[Stage 314:===============================>                        (9 + 4) / 16]
+
+[Stage 314:=========================================>             (12 + 4) / 16]
+
+[Stage 314:============================================>          (13 + 3) / 16]
+
+[Stage 314:================================================>      (14 + 2) / 16]
+
+[Stage 314:===================================================>   (15 + 1) / 16]
+
+                                                                                
+26/10/30 03:58:18 WARN DataSource: All paths were ignored:
+  file:/home/runner/work/friction/friction/data/work/models/2026-10-30-19d-rederive-models-open-source/scored/_logins_validation_scores
+
+[Stage 316:>                                                        (0 + 4) / 4]
+
+                                                                                
+
+[Stage 319:>                                                        (0 + 4) / 4]
+
+                                                                                
+
+[Stage 322:>                                                        (0 + 4) / 4]
+
+                                                                                
+
+[Stage 325:>  (0 + 4) / 4][Stage 326:>  (0 + 0) / 4][Stage 327:>  (0 + 0) / 6]
+
+[Stage 326:>  (0 + 4) / 4][Stage 327:>  (0 + 0) / 6][Stage 328:>  (0 + 0) / 3]
+
+[Stage 326:>  (1 + 3) / 4][Stage 327:>  (0 + 1) / 6][Stage 328:>  (0 + 0) / 3]
+
+[Stage 327:>                (0 + 4) / 6][Stage 328:>                (0 + 0) / 3]
+
+[Stage 327:==>              (1 + 4) / 6][Stage 328:>                (0 + 0) / 3]
+
+[Stage 327:========>        (3 + 3) / 6][Stage 328:=====>           (1 + 1) / 3]
+
+                                                                                
+
+[Stage 327:===========>     (4 + 2) / 6][Stage 329:>               (1 + 2) / 32]
+
+[Stage 327:===========>     (4 + 2) / 6][Stage 329:=>              (2 + 2) / 32]
+
+[Stage 327:===========>     (4 + 2) / 6][Stage 329:=>              (3 + 2) / 32]
+
+[Stage 327:===========>     (4 + 2) / 6][Stage 329:==>             (4 + 2) / 32]
+
+[Stage 327:===========>     (4 + 2) / 6][Stage 329:===>            (6 + 2) / 32]
+
+[Stage 327:===========>     (4 + 2) / 6][Stage 329:====>           (8 + 2) / 32]
+
+[Stage 327:==============>  (5 + 1) / 6][Stage 329:====>          (10 + 3) / 32]
+
+[Stage 327:==============>  (5 + 1) / 6][Stage 329:=====>         (12 + 3) / 32]
+
+[Stage 327:==============>  (5 + 1) / 6][Stage 329:======>        (13 + 3) / 32]
+
+[Stage 327:==============>  (5 + 1) / 6][Stage 329:=======>       (15 + 3) / 32]
+
+[Stage 327:==============>  (5 + 1) / 6][Stage 329:=======>       (16 + 3) / 32]
+
+[Stage 327:==============>  (5 + 1) / 6][Stage 329:=======>       (17 + 3) / 32]
+
+[Stage 327:==============>  (5 + 1) / 6][Stage 329:========>      (18 + 3) / 32]
+
+[Stage 327:==============>  (5 + 1) / 6][Stage 329:========>      (19 + 3) / 32]
+
+[Stage 327:==============>  (5 + 1) / 6][Stage 329:==========>    (22 + 3) / 32]
+
+[Stage 329:=========================================>             (24 + 4) / 32]
+
+[Stage 329:==========================================>            (25 + 4) / 32]
+
+[Stage 329:============================================>          (26 + 4) / 32]
+
+[Stage 329:=================================================>     (29 + 3) / 32]
+
+[Stage 329:===================================================>   (30 + 2) / 32]
+26/10/30 03:58:42 WARN DAGScheduler: Broadcasting large task binary with size 22.1 MiB
+
+[Stage 333:>                                                       (0 + 4) / 16]
+
+[Stage 333:>                                                       (0 + 4) / 16]
+
+[Stage 333:>                                                       (0 + 4) / 16]
+
+[Stage 333:>                                                       (0 + 4) / 16]
+
+[Stage 333:>                                                       (0 + 4) / 16]
+
+[Stage 333:===>                                                    (1 + 4) / 16]
+
+[Stage 333:=======>                                                (2 + 4) / 16]
+
+[Stage 333:==========>                                             (3 + 4) / 16]
+
+[Stage 333:==============>                                         (4 + 4) / 16]
+
+[Stage 333:==============>                                         (4 + 4) / 16]
+
+[Stage 333:==============>                                         (4 + 4) / 16]
+
+[Stage 333:==============>                                         (4 + 4) / 16]
+
+[Stage 333:==============>                                         (4 + 4) / 16]
+
+[Stage 333:=================>                                      (5 + 4) / 16]
+
+[Stage 333:=====================>                                  (6 + 4) / 16]
+
+[Stage 333:========================>                               (7 + 4) / 16]
+
+[Stage 333:============================>                           (8 + 4) / 16]
+
+[Stage 333:============================>                           (8 + 4) / 16]
+
+[Stage 333:============================>                           (8 + 4) / 16]
+
+[Stage 333:============================>                           (8 + 4) / 16]
+
+[Stage 333:============================>                           (8 + 4) / 16]
+
+[Stage 333:===============================>                        (9 + 4) / 16]
+
+[Stage 333:==================================>                    (10 + 4) / 16]
+
+[Stage 333:=========================================>             (12 + 4) / 16]
+
+[Stage 333:=========================================>             (12 + 4) / 16]
+
+[Stage 333:=========================================>             (12 + 4) / 16]
+
+[Stage 333:=========================================>             (12 + 4) / 16]
+
+[Stage 333:=========================================>             (12 + 4) / 16]
+
+[Stage 333:============================================>          (13 + 3) / 16]
+
+[Stage 333:================================================>      (14 + 2) / 16]
+26/10/30 04:17:36 WARN DAGScheduler: Broadcasting large task binary with size 22.1 MiB
+
+[Stage 339:>                                                        (0 + 4) / 4]
+
+[Stage 339:==========================================>              (3 + 1) / 4]
+
+                                                                                
+26/10/30 04:17:37 WARN DAGScheduler: Broadcasting large task binary with size 22.1 MiB
+
+[Stage 345:>                                                        (0 + 4) / 4]
+26/10/30 04:17:39 WARN DAGScheduler: Broadcasting large task binary with size 22.3 MiB
+
+[Stage 352:>                                                        (0 + 4) / 4]
+
+[Stage 352:============================>                            (2 + 2) / 4]
+
+[Stage 352:==========================================>              (3 + 1) / 4]
+
+                                                                                
+
+[Stage 357:>                (0 + 4) / 6][Stage 358:>                (0 + 0) / 3]
+
+[Stage 357:========>        (3 + 3) / 6][Stage 358:>                (0 + 1) / 3]
+
+[Stage 357:===========>     (4 + 2) / 6][Stage 358:=====>           (1 + 2) / 3]
+
+                                                                                
+
+[Stage 357:===========>     (4 + 2) / 6][Stage 359:>               (0 + 2) / 36]
+
+[Stage 357:===========>     (4 + 2) / 6][Stage 359:>               (2 + 2) / 36]
+
+[Stage 357:===========>     (4 + 2) / 6][Stage 359:=>              (4 + 2) / 36]
+
+[Stage 357:===========>     (4 + 2) / 6][Stage 359:==>             (5 + 2) / 36]
+
+[Stage 357:===========>     (4 + 2) / 6][Stage 359:==>             (6 + 2) / 36]
+
+[Stage 357:===========>     (4 + 2) / 6][Stage 359:===>            (7 + 2) / 36]
+
+[Stage 357:===========>     (4 + 2) / 6][Stage 359:===>            (8 + 2) / 36]
+
+[Stage 357:===========>     (4 + 2) / 6][Stage 359:====>           (9 + 2) / 36]
+
+[Stage 357:===========>     (4 + 2) / 6][Stage 359:====>          (10 + 2) / 36]
+
+[Stage 357:==============>  (5 + 1) / 6][Stage 359:====>          (11 + 3) / 36]
+
+[Stage 357:==============>  (5 + 1) / 6][Stage 359:=====>         (12 + 3) / 36]
+
+[Stage 357:==============>  (5 + 1) / 6][Stage 359:======>        (15 + 3) / 36]
+
+[Stage 357:==============>  (5 + 1) / 6][Stage 359:======>        (16 + 3) / 36]
+
+[Stage 357:==============>  (5 + 1) / 6][Stage 359:=======>       (17 + 3) / 36]
+
+[Stage 357:==============>  (5 + 1) / 6][Stage 359:=======>       (18 + 3) / 36]
+
+[Stage 357:==============>  (5 + 1) / 6][Stage 359:=======>       (19 + 3) / 36]
+
+[Stage 357:==============>  (5 + 1) / 6][Stage 359:========>      (21 + 3) / 36]
+
+[Stage 357:==============>  (5 + 1) / 6][Stage 359:=========>     (22 + 3) / 36]
+
+[Stage 357:==============>  (5 + 1) / 6][Stage 359:==========>    (24 + 3) / 36]
+
+[Stage 357:==============>  (5 + 1) / 6][Stage 359:==========>    (25 + 3) / 36]
+
+[Stage 357:==============>  (5 + 1) / 6][Stage 359:===========>   (27 + 3) / 36]
+
+[Stage 357:==============>  (5 + 1) / 6][Stage 359:===========>   (28 + 3) / 36]
+
+[Stage 359:===============================================>       (31 + 4) / 36]
+
+[Stage 359:=====================================================> (35 + 1) / 36]
+26/10/30 04:18:03 WARN DAGScheduler: Broadcasting large task binary with size 22.3 MiB
+
+[Stage 362:>                                                       (0 + 4) / 16]
+
+[Stage 362:===>                                                    (1 + 4) / 16]
+
+[Stage 362:=======>                                                (2 + 4) / 16]
+
+[Stage 362:==========>                                             (3 + 4) / 16]
+
+[Stage 362:==============>                                         (4 + 4) / 16]
+
+[Stage 362:=====================>                                  (6 + 4) / 16]
+
+[Stage 362:========================>                               (7 + 4) / 16]
+
+[Stage 362:============================>                           (8 + 4) / 16]
+
+[Stage 362:==================================>                    (10 + 4) / 16]
+
+[Stage 362:=====================================>                 (11 + 4) / 16]
+
+[Stage 362:=========================================>             (12 + 4) / 16]
+
+[Stage 362:============================================>          (13 + 3) / 16]
+
+[Stage 362:================================================>      (14 + 2) / 16]
+
+                                                                                
+26/10/30 04:20:18 WARN DataSource: All paths were ignored:
+  file:/home/runner/work/friction/friction/data/work/models/2026-10-30-19d-rederive-models-open-source/scored/_logins_test_scores
+
+[Stage 364:>                                                        (0 + 4) / 4]
+
+                                                                                
+
+[Stage 367:>                                                        (0 + 4) / 4]
+
+                                                                                
+
+[Stage 370:>                                                        (0 + 4) / 4]
+
+                                                                                
+
+[Stage 373:>  (0 + 4) / 4][Stage 374:>  (0 + 0) / 6][Stage 375:>  (0 + 0) / 4]
+
+[Stage 374:>  (0 + 4) / 6][Stage 375:>  (0 + 0) / 4][Stage 376:>  (0 + 0) / 3]
+
+[Stage 374:>  (1 + 4) / 6][Stage 375:>  (0 + 0) / 4][Stage 376:>  (0 + 0) / 3]
+
+[Stage 374:=> (2 + 4) / 6][Stage 375:>  (0 + 0) / 4][Stage 376:>  (0 + 0) / 3]
+
+[Stage 374:==>(4 + 2) / 6][Stage 375:>  (0 + 2) / 4][Stage 376:>  (0 + 0) / 3]
+
+[Stage 374:==>(4 + 2) / 6][Stage 375:=> (2 + 2) / 4][Stage 376:>  (0 + 0) / 3]
+
+                                                                                
+
+[Stage 374:======================================>                  (4 + 2) / 6]
+
+[Stage 374:===========>     (4 + 2) / 6][Stage 377:>               (2 + 2) / 36]
+
+[Stage 374:===========>     (4 + 2) / 6][Stage 377:=>              (4 + 2) / 36]
+
+[Stage 374:===========>     (4 + 2) / 6][Stage 377:==>             (6 + 2) / 36]
+
+[Stage 374:==============>  (5 + 1) / 6][Stage 377:==>             (6 + 3) / 36]
+
+[Stage 374:==============>  (5 + 1) / 6][Stage 377:===>            (8 + 3) / 36]
+
+[Stage 374:==============>  (5 + 1) / 6][Stage 377:====>           (9 + 3) / 36]
+
+[Stage 374:==============>  (5 + 1) / 6][Stage 377:====>          (11 + 3) / 36]
+
+[Stage 374:==============>  (5 + 1) / 6][Stage 377:=====>         (12 + 3) / 36]
+
+[Stage 374:==============>  (5 + 1) / 6][Stage 377:=====>         (14 + 3) / 36]
+
+[Stage 374:==============>  (5 + 1) / 6][Stage 377:======>        (15 + 3) / 36]
+
+[Stage 374:==============>  (5 + 1) / 6][Stage 377:======>        (16 + 3) / 36]
+
+[Stage 374:==============>  (5 + 1) / 6][Stage 377:=======>       (17 + 3) / 36]
+
+[Stage 374:==============>  (5 + 1) / 6][Stage 377:=======>       (19 + 3) / 36]
+
+[Stage 374:==============>  (5 + 1) / 6][Stage 377:========>      (20 + 3) / 36]
+
+[Stage 374:==============>  (5 + 1) / 6][Stage 377:=========>     (22 + 3) / 36]
+
+[Stage 374:==============>  (5 + 1) / 6][Stage 377:=========>     (23 + 3) / 36]
+
+[Stage 374:==============>  (5 + 1) / 6][Stage 377:==========>    (25 + 3) / 36]
+
+[Stage 374:==============>  (5 + 1) / 6][Stage 377:==========>    (26 + 3) / 36]
+
+[Stage 374:==============>  (5 + 1) / 6][Stage 377:===========>   (27 + 3) / 36]
+
+[Stage 374:==============>  (5 + 1) / 6][Stage 377:===========>   (28 + 3) / 36]
+
+[Stage 377:==========================================>            (28 + 4) / 36]
+
+[Stage 377:============================================>          (29 + 4) / 36]
+
+[Stage 377:=====================================================> (35 + 1) / 36]
+26/10/30 04:20:42 WARN DAGScheduler: Broadcasting large task binary with size 22.1 MiB
+
+[Stage 381:>                                                       (0 + 4) / 16]
+
+[Stage 381:>                                                       (0 + 4) / 16]
+
+[Stage 381:>                                                       (0 + 4) / 16]
+
+[Stage 381:>                                                       (0 + 4) / 16]
+
+[Stage 381:>                                                       (0 + 4) / 16]
+
+[Stage 381:===>                                                    (1 + 4) / 16]
+
+[Stage 381:=======>                                                (2 + 4) / 16]
+
+[Stage 381:==========>                                             (3 + 4) / 16]
+
+[Stage 381:==============>                                         (4 + 4) / 16]
+
+[Stage 381:==============>                                         (4 + 4) / 16]
+
+[Stage 381:==============>                                         (4 + 4) / 16]
+
+[Stage 381:==============>                                         (4 + 4) / 16]
+
+[Stage 381:==============>                                         (4 + 4) / 16]
+
+[Stage 381:=================>                                      (5 + 4) / 16]
+
+[Stage 381:=====================>                                  (6 + 4) / 16]
+
+[Stage 381:========================>                               (7 + 4) / 16]
+
+[Stage 381:============================>                           (8 + 4) / 16]
+
+[Stage 381:============================>                           (8 + 4) / 16]
+
+[Stage 381:============================>                           (8 + 4) / 16]
+
+[Stage 381:============================>                           (8 + 4) / 16]
+
+[Stage 381:============================>                           (8 + 4) / 16]
+
+[Stage 381:===============================>                        (9 + 4) / 16]
+
+[Stage 381:==================================>                    (10 + 4) / 16]
+
+[Stage 381:=====================================>                 (11 + 4) / 16]
+
+[Stage 381:=========================================>             (12 + 4) / 16]
+
+[Stage 381:=========================================>             (12 + 4) / 16]
+
+[Stage 381:=========================================>             (12 + 4) / 16]
+
+[Stage 381:=========================================>             (12 + 4) / 16]
+
+[Stage 381:=========================================>             (12 + 4) / 16]
+
+[Stage 381:============================================>          (13 + 3) / 16]
+
+[Stage 381:================================================>      (14 + 2) / 16]
+
+[Stage 381:===================================================>   (15 + 1) / 16]
+26/10/30 04:40:47 WARN DAGScheduler: Broadcasting large task binary with size 22.1 MiB
+
+[Stage 387:>                                                        (0 + 4) / 6]
+
+[Stage 387:===================>                                     (2 + 4) / 6]
+
+[Stage 387:======================================>                  (4 + 2) / 6]
+
+[Stage 387:===============================================>         (5 + 1) / 6]
+
+                                                                                
+26/10/30 04:40:49 WARN DAGScheduler: Broadcasting large task binary with size 22.1 MiB
+
+[Stage 393:>                                                        (0 + 4) / 6]
+
+[Stage 393:=========>                                               (1 + 4) / 6]
+
+[Stage 393:======================================>                  (4 + 2) / 6]
+
+[Stage 393:===============================================>         (5 + 1) / 6]
+26/10/30 04:40:52 WARN DAGScheduler: Broadcasting large task binary with size 22.3 MiB
+
+[Stage 400:>                                                        (0 + 4) / 4]
+
+[Stage 400:============================>                            (2 + 2) / 4]
+
+[Stage 400:==========================================>              (3 + 1) / 4]
+
+                                                                                
+[exit 0]
+$ /home/runner/work/friction/friction/.venv/bin/python scripts/grade.py --scored /home/runner/work/friction/friction/data/work/models/2026-10-30-19d-rederive-models-open-source/scored --source local --out results-branch/runs/2026-10-30-19d-rederive-models-open-source/evaluation.json
+payments champion lightgbm {'floor': 0.0177, 'logistic': 0.8121, 'lightgbm': 0.9023}
+logins champion None {'floor': 0.5849, 'freeman': 0.0, 'lightgbm': 0.2585, 'lightgbm_rep': 0.2754}
+graded in 388.9 s; wrote results-branch/runs/2026-10-30-19d-rederive-models-open-source/evaluation.json
+[exit 0]
+$ /home/runner/work/friction/friction/.venv/bin/python scripts/export_models.py --lake /home/runner/work/friction/friction/data/lake/2026-10-30-19d-rederive-models-open-source --work /home/runner/work/friction/friction/data/work/models/2026-10-30-19d-rederive-models-open-source --evaluation results-branch/runs/2026-10-30-19d-rederive-models-open-source/evaluation.json --out results-branch/runs/2026-10-30-19d-rederive-models-open-source
+{
+ "payments": {
+  "model": "lightgbm",
+  "status": "champion",
+  "events": 1000,
+  "expected": 1000
+ },
+ "logins": {
+  "model": "floor",
+  "status": "floor: no model cleared every gate",
+  "events": 1000,
+  "expected": 286
+ }
+} in 98.7 s
+WARNING: Using incubator modules: jdk.incubator.vector
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/30 04:47:33 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+
+[Stage 1:===============================================>           (4 + 1) / 5]
+
+                                                                                
+
+[Stage 5:>                                                          (0 + 4) / 6]
+
+[Stage 5:=========>                                                 (1 + 4) / 6]
+
+[Stage 5:===================>                                       (2 + 4) / 6]
+
+[Stage 5:=============================>                             (3 + 3) / 6]
+
+[Stage 5:=================================================>         (5 + 1) / 6]
+
+                                                                                
+
+[Stage 8:>                                                          (0 + 4) / 6]
+
+[Stage 8:=============================>                             (3 + 3) / 6]
+
+[Stage 8:=======================================>                   (4 + 2) / 6]
+
+[Stage 8:=================================================>         (5 + 1) / 6]
+
+[Stage 10:>                                                         (0 + 4) / 5]
+
+[Stage 10:===========>                                              (1 + 4) / 5]
+
+[Stage 10:=======================>                                  (2 + 3) / 5]
+
+[Stage 10:==================================>                       (3 + 2) / 5]
+
+[Stage 10:==============================================>           (4 + 1) / 5]
+
+                                                                                
+
+[Stage 14:>                (0 + 4) / 18][Stage 15:>                 (0 + 0) / 3]
+
+[Stage 14:===>             (4 + 4) / 18][Stage 15:>                 (0 + 0) / 3]
+
+[Stage 14:====>            (5 + 4) / 18][Stage 15:>                 (0 + 0) / 3]
+
+[Stage 14:=======>         (8 + 4) / 18][Stage 15:>                 (0 + 0) / 3]
+
+[Stage 14:==========>     (12 + 4) / 18][Stage 15:>                 (0 + 0) / 3]
+
+[Stage 14:==============> (16 + 2) / 18][Stage 15:>                 (0 + 2) / 3]
+
+[Stage 14:====================================================>   (17 + 1) / 18]
+
+                                                                                
+
+[Stage 24:>                                                        (0 + 4) / 32]
+
+[Stage 24:===>                                                     (2 + 4) / 32]
+
+[Stage 24:=======>                                                 (4 + 4) / 32]
+
+[Stage 24:==============>                                          (8 + 4) / 32]
+
+[Stage 24:================>                                        (9 + 4) / 32]
+
+[Stage 24:=====================>                                  (12 + 4) / 32]
+
+[Stage 24:============================>                           (16 + 4) / 32]
+
+[Stage 24:=================================>                      (19 + 4) / 32]
+
+[Stage 24:===================================>                    (20 + 4) / 32]
+
+[Stage 24:========================================>               (23 + 4) / 32]
+
+[Stage 24:==========================================>             (24 + 4) / 32]
+
+[Stage 24:===============================================>        (27 + 4) / 32]
+
+[Stage 24:=================================================>      (28 + 4) / 32]
+
+                                                                                
+
+[Stage 28:>                                                        (0 + 4) / 24]
+
+[Stage 28:==>                                                      (1 + 4) / 24]
+
+[Stage 28:==>                                                      (1 + 5) / 24]
+
+[Stage 28:=======>                                                 (3 + 4) / 24]
+
+[Stage 28:=========>                                               (4 + 4) / 24]
+
+[Stage 28:===========>                                             (5 + 4) / 24]
+
+[Stage 28:================>                                        (7 + 4) / 24]
+
+[Stage 28:===================>                                     (8 + 4) / 24]
+
+[Stage 28:=====================>                                   (9 + 4) / 24]
+
+[Stage 28:=========================>                              (11 + 4) / 24]
+
+[Stage 28:============================>                           (12 + 4) / 24]
+
+[Stage 28:==============================>                         (13 + 4) / 24]
+
+[Stage 28:===================================>                    (15 + 4) / 24]
+
+[Stage 28:=======================================>                (17 + 4) / 24]
+
+[Stage 28:============================================>           (19 + 4) / 24]
+
+[Stage 28:==============================================>         (20 + 4) / 24]
+
+[Stage 28:=================================================>      (21 + 3) / 24]
+
+[Stage 28:=====================================================>  (23 + 1) / 24]
+
+[Stage 30:>                                                         (0 + 1) / 1]
+
+                                                                                
+
+[Stage 32:>                                                        (0 + 4) / 24]
+
+[Stage 32:==>                                                      (1 + 4) / 24]
+
+[Stage 32:=======>                                                 (3 + 4) / 24]
+
+[Stage 32:=========>                                               (4 + 4) / 24]
+
+[Stage 32:===========>                                             (5 + 4) / 24]
+
+[Stage 32:===================>                                     (8 + 4) / 24]
+
+[Stage 32:=====================>                                   (9 + 4) / 24]
+
+[Stage 32:=======================>                                (10 + 4) / 24]
+
+[Stage 32:============================>                           (12 + 4) / 24]
+
+[Stage 32:==============================>                         (13 + 4) / 24]
+
+[Stage 32:=====================================>                  (16 + 4) / 24]
+
+[Stage 32:==============================================>         (20 + 4) / 24]
+
+[Stage 32:===================================================>    (22 + 2) / 24]
+
+[Stage 34:>                                                         (0 + 4) / 5]
+
+[Stage 34:===========>                                              (1 + 4) / 5]
+
+[Stage 34:==================================>                       (3 + 2) / 5]
+
+[Stage 34:==============================================>           (4 + 1) / 5]
+[exit 0]
