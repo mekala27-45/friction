@@ -1,0 +1,22 @@
+{
+ "request": {
+  "id": "2026-10-30-17-deploy-dev",
+  "kind": "bundle_deploy",
+  "target": "dev",
+  "job": null,
+  "params": {},
+  "note": "Deploy the train job and the registration of every model of both desks, the floors included, as MLflow models with a signature."
+ },
+ "github_run_id": "40983225856",
+ "commit": "4a7294fc1715b0f24aec2274df2d903503371469",
+ "started_at": "2026-10-30T01:01:43+00:00",
+ "result": {
+  "deployed": "dev"
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-30T01:03:00+00:00",
+ "files": {
+  "bundle_summary.json": "5378b6cfffffe7a1090ae2a8fe4da0ad948f0b3dcf007cf7b90ef03d01365ac2",
+  "run.log": "67fb7e111104fe6fcb999e5df39abe959194dbe9b768149a144465422018896e"
+ }
+}

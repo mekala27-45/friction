@@ -1,0 +1,22 @@
+{
+ "request": {
+  "id": "2026-10-30-17a-train-register",
+  "kind": "bundle_run",
+  "target": "dev",
+  "job": "train",
+  "params": {
+   "export_from": "/Volumes/workspace/friction_dev_raw/exports/models/default",
+   "stop_on_failure": false
+  },
+  "note": "The attacks, the features with them, the training and the Unity Catalog registration in the workspace. The model files and summary.json come back so their digests can be compared with the open source run's."
+ },
+ "github_run_id": "40983225856",
+ "commit": "4a7294fc1715b0f24aec2274df2d903503371469",
+ "started_at": "2026-10-30T01:03:00+00:00",
+ "status": "failed",
+ "error": "RuntimeError: databricks bundle exited 1",
+ "finished_at": "2026-10-30T01:09:29+00:00",
+ "files": {
+  "run.log": "f2f0d7383492e158593b7e28380e708c201e173bcfa2358c87ffcf82bb7e08b8"
+ }
+}

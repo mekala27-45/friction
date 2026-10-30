@@ -1,0 +1,98 @@
+$ databricks bundle run -t dev train --var catalog_mode=prefix
+Run URL: https://dbc-13dc0ff6-cde4.cloud.databricks.com/jobs/940878755530939/runs/250127522350727?o=4481510155994981
+
+2026-10-30 01:03:01 "[dev mekalaajayk] friction-train-dev" RUNNING
+2026-10-30 01:09:27 "[dev mekalaajayk] friction-train-dev" INTERNAL_ERROR FAILED Task attacks failed with message: Library installation failed: Library installation attempted on serverless compute and failed. Installed package is incompatible with Databricks core packages. Please align the package versions with the preinstalled library versions, and retry the installations.
+Description: Occurs when a Databricks core dependency (e.g., pyspark) version is changed.
+Suggested Action: Align the installed package versions with the preinstalled libraries and retry the installation. Error code: ERROR_CORE_PACKAGE_VERSION_CHANGE, error message: Python restart failed:
+
+Summary: RuntimeException: Kernel exited while we were waiting for the kernel_info_reply message. 
+Unable to start python kernel for ReplId-1a18a-57d7c-f, kernel exited.
+Please check your Python dependencies. Some core package versions have changed (numpy: 1.26.4 -> 2.5.4).
+----- stdout -----
+NOTE: When using th ...
+***WARNING: message truncated. Skipped 152 bytes of output**
+
+
+Task attacks FAILED:
+Run failed with error message
+ Library installation failed: Library installation attempted on serverless compute and failed. Installed package is incompatible with Databricks core packages. Please align the package versions with the preinstalled library versions, and retry the installations.
+Description: Occurs when a Databricks core dependency (e.g., pyspark) version is changed.
+Suggested Action: Align the installed package versions with the preinstalled libraries and retry the installation. Error code: ERROR_CORE_PACKAGE_VERSION_CHANGE, error message: Python restart failed:
+
+Summary: RuntimeException: Kernel exited while we were waiting for the kernel_info_reply message. 
+Unable to start python kernel for ReplId-1a18a-54f3c-c, kernel exited.
+Please check your Python dependencies. Some core package versions have changed (numpy: 1.26.4 -> 2.5.4).
+----- stdout -----
+NOTE: When using the `ipython kernel` entry point, Ct ...
+***WARNING: message truncated. Skipped 9372 bytes of output**
+
+
+
+
+Error: Task attacks failed!
+Error:
+Run failed with error message
+ Library installation failed: Library installation attempted on serverless compute and failed. Installed package is incompatible with Databricks core packages. Please align the package versions with the preinstalled library versions, and retry the installations.
+Description: Occurs when a Databricks core dependency (e.g., pyspark) version is changed.
+Suggested Action: Align the installed package versions with the preinstalled libraries and retry the installation. Error code: ERROR_CORE_PACKAGE_VERSION_CHANGE, error message: Python restart failed:
+
+Summary: RuntimeException: Kernel exited while we were waiting for the kernel_info_reply message. 
+Unable to start python kernel for ReplId-1a18a-54f3c-c, kernel exited.
+Please check your Python dependencies. Some core package versions have changed (numpy: 1.26.4 -> 2.5.4).
+----- stdout -----
+NOTE: When using the `ipython kernel` entry point, Ct ...
+***WARNING: message truncated. Skipped 9372 bytes of output**
+
+
+Trace:
+
+Task attacks FAILED:
+Run failed with error message
+ Library installation failed: Library installation attempted on serverless compute and failed. Installed package is incompatible with Databricks core packages. Please align the package versions with the preinstalled library versions, and retry the installations.
+Description: Occurs when a Databricks core dependency (e.g., pyspark) version is changed.
+Suggested Action: Align the installed package versions with the preinstalled libraries and retry the installation. Error code: ERROR_CORE_PACKAGE_VERSION_CHANGE, error message: Python restart failed:
+
+Summary: RuntimeException: Kernel exited while we were waiting for the kernel_info_reply message. 
+Unable to start python kernel for ReplId-1a18a-57d7c-f, kernel exited.
+Please check your Python dependencies. Some core package versions have changed (numpy: 1.26.4 -> 2.5.4).
+----- stdout -----
+NOTE: When using the `ipython kernel` entry point, Ct ...
+***WARNING: message truncated. Skipped 9372 bytes of output**
+
+
+
+
+Error: Task attacks failed!
+Error:
+Run failed with error message
+ Library installation failed: Library installation attempted on serverless compute and failed. Installed package is incompatible with Databricks core packages. Please align the package versions with the preinstalled library versions, and retry the installations.
+Description: Occurs when a Databricks core dependency (e.g., pyspark) version is changed.
+Suggested Action: Align the installed package versions with the preinstalled libraries and retry the installation. Error code: ERROR_CORE_PACKAGE_VERSION_CHANGE, error message: Python restart failed:
+
+Summary: RuntimeException: Kernel exited while we were waiting for the kernel_info_reply message. 
+Unable to start python kernel for ReplId-1a18a-57d7c-f, kernel exited.
+Please check your Python dependencies. Some core package versions have changed (numpy: 1.26.4 -> 2.5.4).
+----- stdout -----
+NOTE: When using the `ipython kernel` entry point, Ct ...
+***WARNING: message truncated. Skipped 9372 bytes of output**
+
+
+Trace:
+
+Error: failed to reach TERMINATED or SKIPPED, got INTERNAL_ERROR: Task attacks failed with message: Library installation failed: Library installation attempted on serverless compute and failed. Installed package is incompatible with Databricks core packages. Please align the package versions with the preinstalled library versions, and retry the installations.
+Description: Occurs when a Databricks core dependency (e.g., pyspark) version is changed.
+Suggested Action: Align the installed package versions with the preinstalled libraries and retry the installation. Error code: ERROR_CORE_PACKAGE_VERSION_CHANGE, error message: Python restart failed:
+
+Summary: RuntimeException: Kernel exited while we were waiting for the kernel_info_reply message. 
+Unable to start python kernel for ReplId-1a18a-57d7c-f, kernel exited.
+Please check your Python dependencies. Some core package versions have changed (numpy: 1.26.4 -> 2.5.4).
+----- stdout -----
+NOTE: When using th ...
+***WARNING: message truncated. Skipped 152 bytes of output**
+
+
+[exit 1]
+$ databricks fs cp -r --overwrite dbfs:/Volumes/workspace/friction_dev_raw/exports/models/default results-branch/runs/2026-10-30-17a-train-register/export
+Error: file does not exist: /Volumes/workspace/friction_dev_raw/exports/models/default
+[exit 1]
