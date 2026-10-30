@@ -24,4 +24,6 @@ Threshold free: ROC AUC 0.613, average precision 0.095.
 Calibration error: 0.026. Score stability from validation to test (PSI): 0.006.
 Reason code coverage of flagged events: 100.0%.
 
+**In Unity Catalog.** Not registered: this variant is printed for comparison only.
+
 **Limitations.** Trained and graded on synthetic data; see RESULTS.md, Limitations.

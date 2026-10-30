@@ -24,4 +24,7 @@ Threshold free: ROC AUC 0.863, average precision 0.320.
 Calibration error: not applicable. Score stability from validation to test (PSI): 0.000.
 Reason code coverage of flagged events: 100.0%.
 
+**In Unity Catalog.** workspace.friction_dev_ml.logins_floor, version 1, alias
+floor; the registered file's digest begins a8a2148ce537.
+
 **Limitations.** Trained and graded on synthetic data; see RESULTS.md, Limitations.

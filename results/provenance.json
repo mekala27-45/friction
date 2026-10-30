@@ -360,6 +360,15 @@
    "promoted_at": "2026-10-29T22:34:01+00:00"
   },
   {
+   "file": "results/workspace/train_summary.json",
+   "sha256": "515710ff31c9cd3b8d971c60c7f7e7187f5c0afd4e5e21c08fcac86a0d76ac20",
+   "request": "2026-10-30-18a-train-register",
+   "github_run_id": "40984691116",
+   "commit": "83fc951dfaeaac1fe5ba50e4c126557e4a30df16",
+   "ran_at": "2026-10-30T02:18:49+00:00",
+   "promoted_at": "2026-10-30T02:20:22+00:00"
+  },
+  {
    "file": "results/workspace_probe.json",
    "sha256": "a0ce9a8a707f0b7664fddc6742d16562a12acd887218b1c542c090a9745ee948",
    "request": "2026-10-29-probe",
