@@ -33,6 +33,9 @@ jobs:
       FRICTION_SALT: ${{ secrets.FRICTION_SALT }}
       TF_STATE_CONN: ${{ secrets.TF_STATE_CONN }}
       PG_CONN_STR: ${{ secrets.TF_STATE_CONN }}
+      # The live API checks (request kind api_check): the replay key is a secret, the URL is not.
+      FRICTION_REPLAY_KEY: ${{ secrets.FRICTION_REPLAY_KEY }}
+      FRICTION_API_URL: ${{ vars.FRICTION_API_URL }}
       PYTHONHASHSEED: "0"
     steps:
       - uses: actions/checkout@v4

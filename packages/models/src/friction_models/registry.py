@@ -54,6 +54,11 @@ SPECS: tuple[Spec, ...] = (
 BY_NAME = {s.name: s for s in SPECS}
 
 
+def plan_hash(root: Path) -> str:
+    """The registered plan's digest, as evaluation/plan.lock holds it; every version is tagged with it."""
+    return str(json.loads((root / "evaluation" / "plan.lock").read_text(encoding="utf-8"))["sha256"])
+
+
 def sha256_file(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 

@@ -12,8 +12,9 @@ from typing import Any
 import numpy as np
 import pandas as pd
 import pytest
+import yaml
 from friction_features import logins
-from friction_models import floors, registry, steps
+from friction_models import floors, registry
 from friction_models.freeman import Freeman
 from friction_models.learners import Gbm, Logistic
 
@@ -26,7 +27,7 @@ def close(a: np.ndarray, b: np.ndarray) -> None:
 
 
 def test_every_planned_model_of_both_desks_is_registered() -> None:
-    plan = steps.load_plan(ROOT)
+    plan = yaml.safe_load((ROOT / "evaluation" / "plan.yaml").read_text(encoding="utf-8"))
     for desk in ("payments", "logins"):
         planned = set(plan["desks"][desk]["models"])
         assert {s.family for s in registry.SPECS if s.desk == desk} == planned
@@ -76,7 +77,7 @@ def test_registered_scores_equal_the_score_job(tmp_path: Path) -> None:
 def test_code_paths_point_at_the_packages_score_imports() -> None:
     for p in registry.code_paths(ROOT):
         assert (Path(p) / "__init__.py").exists()
-    assert steps.plan_hash(ROOT) == json.loads((ROOT / "evaluation" / "plan.lock").read_text())["sha256"]
+    assert registry.plan_hash(ROOT) == json.loads((ROOT / "evaluation" / "plan.lock").read_text())["sha256"]
 
 
 def test_register_logs_each_model_with_a_signature_and_sets_the_aliases(

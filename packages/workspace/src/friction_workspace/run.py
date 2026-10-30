@@ -31,6 +31,15 @@ ROOT = Path(__file__).resolve().parents[4]
 FEEDS = {"payments": ["payments", "labels_payments", "cdc_cards"], "logins": ["logins", "labels_logins"]}
 
 
+PAGES = "https://mekala27-45.github.io/friction"
+# Vercel scales a container function down after five minutes without traffic in production.
+IDLE_SECONDS = 420
+
+
+def _sleep(seconds: int) -> None:
+    time.sleep(seconds)
+
+
 SECRET_ENV = ("DATABRICKS_TOKEN", "FRICTION_SALT", "TF_STATE_CONN", "PG_CONN_STR", "DATABASE_URL",
               "FRICTION_REPLAY_KEY")  # fmt: skip
 
@@ -243,6 +252,39 @@ def handle(request: Request, out: Path, log: Path) -> dict[str, Any]:
             a.alias_name: a.version_num for a in (w.registered_models.get(name, include_aliases=True).aliases or [])
         }
         return {"model": name, "aliases_before": before, "aliases_after": after}
+    if request.kind == "api_check":
+        # The live API and the published site, checked from this runner, which holds the replay key:
+        # the live check in a real browser after the API has been idle long enough to scale down
+        # (asleep) and straight after (awake), parity against the live URL, and the load test with
+        # its cold start after another idle wait. Every step runs; the request fails if any did.
+        api = str(request.params.get("api") or os.environ.get("FRICTION_API_URL", "")).rstrip("/")
+        site = str(request.params.get("site", PAGES)).rstrip("/")
+        if not api.startswith("https://"):
+            raise ValueError("no https API URL: set the FRICTION_API_URL repository variable")
+        if not os.environ.get("FRICTION_REPLAY_KEY"):
+            raise ValueError("the FRICTION_REPLAY_KEY Actions secret is missing")
+        idle = int(request.params.get("idle_seconds", IDLE_SECONDS))
+        tools = ["uv", "run", "--no-sync", "--with", "playwright==1.63.0", "--with", "httpx"]
+        _sh([*tools, "playwright", "install", "--with-deps", "chromium"], log)
+        failed: list[str] = []
+
+        def step(name: str, cmd: list[str]) -> None:
+            try:
+                _sh(cmd, log)
+            except RuntimeError:
+                failed.append(name)
+
+        _sleep(idle)
+        for name in ("asleep", "awake"):
+            step(f"live check {name}", [*tools, "python", "scripts/live_check.py", "--site", site, "--api", api,
+                                        "--name", name, "--out", str(out / "live_check.json")])  # fmt: skip
+        step("parity", [*tools, "python", "scripts/check_parity.py", "--url", api, "--name", "live",
+                        "--out", str(out / "parity.json")])  # fmt: skip
+        _sleep(idle)
+        step("load test", [*tools, "python", "scripts/load_test.py", "--url", api, "--out", str(out / "latency.json")])
+        if failed:
+            raise RuntimeError(f"api check steps failed: {', '.join(failed)}")
+        return {"api_checked": True, "idle_seconds": idle}
     if request.kind == "export":
         source = str(request.params["from"])
         _sh(["databricks", "fs", "cp", "-r", "--overwrite", f"dbfs:{source}", str(out / "export")], log)
