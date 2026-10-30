@@ -342,6 +342,15 @@
    "failed_because": "the monitor fails its task when an alert fires; the day 40 drops were in the backfill"
   },
   {
+   "file": "results/workspace/rederive_evaluation.json",
+   "sha256": "6aaa3d6fc937f7d3a231dc38ac13cb09225664a6db9d5f5a93a751e03c9cb5f1",
+   "request": "2026-10-30-19d-rederive-models-open-source",
+   "github_run_id": "40992670268",
+   "commit": "1a45926679f9203d18f80be76e7717807740d48c",
+   "ran_at": "2026-10-30T04:49:11+00:00",
+   "promoted_at": "2026-10-30T04:50:50+00:00"
+  },
+  {
    "file": "results/workspace/rederive_month_open_source.json",
    "sha256": "ea4c388f011b1a30ea3566fc7254d861e99a01d7f4aa94f705f88dedd9625ecb",
    "request": "2026-10-30-19b-rederive-month-open-source",
@@ -358,6 +367,15 @@
    "commit": "25191523e8e1efd95d32e4006e222de1c2445245",
    "ran_at": "2026-10-30T02:31:28+00:00",
    "promoted_at": "2026-10-30T02:36:12+00:00"
+  },
+  {
+   "file": "results/workspace/rederive_payments_model.txt",
+   "sha256": "6570b08a40d88013dce1a0aa1b9024e7f300f90cc1c6a9b76cad73a7f8b23462",
+   "request": "2026-10-30-19d-rederive-models-open-source",
+   "github_run_id": "40992670268",
+   "commit": "1a45926679f9203d18f80be76e7717807740d48c",
+   "ran_at": "2026-10-30T04:49:11+00:00",
+   "promoted_at": "2026-10-30T04:50:50+00:00"
   },
   {
    "file": "results/workspace/replay_lock_on_runner.json",
