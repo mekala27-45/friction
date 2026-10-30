@@ -24,4 +24,7 @@ Threshold free: ROC AUC 1.000, average precision 0.801.
 Calibration error: 0.000. Score stability from validation to test (PSI): 0.002.
 Reason code coverage of flagged events: 100.0%.
 
+**In Unity Catalog.** workspace.friction_dev_ml.payments_lightgbm, version 1, alias
+challenger; the registered file's digest begins 6570b08a40d8.
+
 **Limitations.** Trained and graded on synthetic data; see RESULTS.md, Limitations.

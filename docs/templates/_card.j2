@@ -27,6 +27,12 @@ Threshold free: ROC AUC {{ v(p ~ ".roc_auc") }}, average precision {{ v(p ~ ".av
 Calibration error: {{ v(p ~ ".ece") }}. Score stability from validation to test (PSI): {{ v(p ~ ".psi") }}.
 Reason code coverage of flagged events: {{ v(p ~ ".coverage") }}.
 
+{% set r = "registry." ~ desk ~ "." ~ model %}
+{% if has(r ~ ".version") %}**In Unity Catalog.** {{ v(r ~ ".name") }}, version {{ v(r ~ ".version") }}, alias
+{{ v(r ~ ".alias") }}; the registered file's digest begins {{ v(r ~ ".sha256") }}.
+{% else %}**In Unity Catalog.** Not registered: this variant is printed for comparison only.
+{% endif %}
+
 **Limitations.** Trained and graded on synthetic data; see RESULTS.md, Limitations.
 {%- endmacro %}
 

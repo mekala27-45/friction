@@ -483,6 +483,24 @@ def incident(b: Builder) -> None:
             "the workspace's drop equals the corrected source", "workspace")  # fmt: skip
 
 
+def registry(b: Builder) -> None:
+    """The Unity Catalog versions and aliases the train job registered, one set per model."""
+    reg = (_load("results/workspace/train_summary.json") or {}).get("registered") or {}
+    promo = _load("results/workspace/promotion_payments.json") or {}
+    champion = (promo.get("aliases_after") or {}).get("champion")
+    o = "jobs/train.py in the workspace (request 2026-10-30-18a-train-register)"
+    for full, r in sorted(reg.items()):
+        if full == "error":
+            continue
+        desk, model = full.rsplit(".", 1)[1].split("_", 1)
+        alias = "champion" if full == promo.get("model") and str(champion) == str(r["version"]) else r["alias"]
+        p = f"registry.{desk}.{model}"
+        b.v(f"{p}.name", full, "text", o, "registered model", "workspace")
+        b.v(f"{p}.version", int(r["version"]), "int", o, "version", "workspace")
+        b.v(f"{p}.alias", alias, "text", o, "alias", "workspace")
+        b.v(f"{p}.sha256", r["sha256"][:12], "text", o, "digest of the registered file", "workspace")
+
+
 def live(b: Builder) -> None:
     parity = _load("results/parity.json")
     if parity:
@@ -780,6 +798,7 @@ def main() -> int:
     ev = evaluation(b)
     workspace(b)
     incident(b)
+    registry(b)
     live(b)
     checklist(b, ev)
     out = ROOT / "results" / "manifest.json"

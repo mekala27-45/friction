@@ -7,7 +7,7 @@ fails CI. Source of each block in its first line.
 
 ## The definition of done
 
-13 of eighteen lines done.
+14 of eighteen lines done.
 
 | Step | Status | Line | Evidence |
 |---:|---|---|---|
@@ -20,7 +20,7 @@ fails CI. Source of each block in its first line.
 | 7 | done | Every row of both sources backfilled in the workspace | results/workspace/full_export.json: 24,386,592 payments and 31,267,738 logins in silver |
 | 8 | done | Governance: tags, masks, the row filter, grants, lineage, the scan; the planted drift caught by the plan | results/workspace/governance.json (tags, masks, the row filter, grants, lineage, the scan); results/workspace/drift_terraform_plan.txt (the revoked grant caught as one change) |
 | 9 | done | Point in time features with the leakage test; training sets as of a cut with the two clocks test | tests/features/test_point_in_time.py; tests/transforms/test_training.py |
-| 10 | not done | Floors and models on both desks registered in Unity Catalog; the plan hashed before any test month was scored | floors and models fit on the open source run, plan hashed before scoring (evaluation/plan.lock); Unity Catalog registration has not run |
+| 10 | done | Floors and models on both desks registered in Unity Catalog; the plan hashed before any test month was scored | results/workspace/train_summary.json: 6 models of both desks, the floors included, registered in Unity Catalog; the registered payments LightGBM is byte identical to the served file; plan hashed before scoring (evaluation/plan.lock) |
 | 11 | done | The frontier, operating points, intervals, BH, interior tests, calibration, hypotheses, the RBA comparison | results/evaluation.json from the local run's scored sets |
 | 12 | not done | Reason codes, model cards, validation reports, promotion gates and the champion aliases | codes, gates, cards and validation reports are in the repository; the champion alias is set by a promotion request after the live parity and latency gates |
 | 13 | not done | The API live on Vercel with the online store and the decision log; parity exact against the live URL | the API passes parity against a local container and Postgres; the Vercel deployment has not been checked yet |
