@@ -1,0 +1,7 @@
+{
+ "id": "2026-10-30-18-deploy-dev",
+ "kind": "bundle_deploy",
+ "target": "dev",
+ "params": {},
+ "note": "Deploy the model jobs on serverless environment 5 with only LightGBM pinned; request 17a failed at library installation."
+}

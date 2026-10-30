@@ -321,4 +321,8 @@ registered as a JSON copy of their rule table with the digest of the module that
 the alias floor. The learned models take the alias challenger; champion is set only by a committed
 promotion request. A separate train job runs the attacks, the features and the training without the
 scoring task, because the scored sets are graded from the open source run's export and scoring both
-desks again on Free Edition would spend the day's compute for no new evidence.
+desks again on Free Edition would spend the day's compute for no new evidence. Its first run failed
+before any code ran: pinning scikit-learn 1.9.1 and scipy 1.18.1 on serverless environment 3 pulled
+numpy 2.5 over the core 1.26.4 and the kernel would not start. The model jobs now run on environment
+5 with its own scikit-learn 1.6.1 and only LightGBM pinned to 4.7.0, the version of the open source
+run, so the LightGBM files can be compared by digest; the logistic fit may differ in the last bits.

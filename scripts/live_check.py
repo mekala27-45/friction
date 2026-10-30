@@ -7,7 +7,8 @@ events through the live API the way a visitor does. A separate client, with no b
 key, reads each decision the browser printed back from GET /v1/decisions/{id} and compares the
 verdict and the score. Run once after the API has been idle long enough to scale down (asleep)
 and once straight after (awake). Writes the result under its name in results/live_check.json and
-exits non zero on any failure. Without --api only the routes are checked.
+exits non zero on any failure. Without --api only the routes are checked. With --video the session
+is recorded, which is the demo recording.
 """
 
 from __future__ import annotations
@@ -62,14 +63,17 @@ def failures(result: dict[str, Any], api: bool) -> list[str]:
     return bad
 
 
-def check(site: str, api: str | None) -> dict[str, Any]:
+def check(site: str, api: str | None, video: Path | None = None) -> dict[str, Any]:
     import httpx
     from playwright.sync_api import sync_playwright
 
     result: dict[str, Any] = {"routes": []}
     with sync_playwright() as pw:
         browser = pw.chromium.launch()
-        page = browser.new_page(viewport={"width": 390, "height": 844})
+        size = {"width": 390, "height": 844}
+        context = browser.new_context(viewport=size, **({"record_video_dir": str(video), "record_video_size": size}
+                                                        if video else {}))  # fmt: skip
+        page = context.new_page()
         for route in ROUTES:
             started = time.monotonic()
             response = page.goto(site.rstrip("/") + route, wait_until="networkidle")
@@ -107,6 +111,7 @@ def check(site: str, api: str | None) -> dict[str, Any]:
                 "seconds_to_mode": to_mode, "seconds_to_all_slips": to_all, "slips": slips.count(),
                 "live_slips": len(printed),
             }  # fmt: skip
+        context.close()  # writes the recording, when one was asked for
         browser.close()
     if api:
         # The other client: no browser, no key, no cookie; only the decision ids the page printed.
@@ -129,8 +134,10 @@ def main() -> int:
     parser.add_argument("--api")
     parser.add_argument("--name", required=True)
     parser.add_argument("--out", type=Path, default=ROOT / "results" / "live_check.json")
+    parser.add_argument("--video", type=Path, help="a folder for a recording of the session (the demo)")
     args = parser.parse_args()
-    result = {"at": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"), "site": args.site, **check(args.site, args.api)}
+    started = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
+    result = {"at": started, "site": args.site, **check(args.site, args.api, args.video)}
     result["failures"] = failures(result, bool(args.api))
     existing = json.loads(args.out.read_text(encoding="utf-8")) if args.out.exists() else {}
     existing[args.name] = result
