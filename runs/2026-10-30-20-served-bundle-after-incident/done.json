@@ -1,0 +1,45 @@
+{
+ "request": {
+  "id": "2026-10-30-20-served-bundle-after-incident",
+  "kind": "portable",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "outbox_volume": "/Volumes/workspace/friction_dev_raw/outbox",
+   "drops": {
+    "payments": "all",
+    "logins": "all"
+   },
+   "models": true,
+   "redelivery": true,
+   "memory": "10g",
+   "stop_on_failure": false
+  },
+  "note": "The served bundles rebuilt from the lake as it stands after the day 40 incident: the approved change and the corrected redelivery. The bundle in main was exported before the incident and carries the old merchant category rates for January and February 2020."
+ },
+ "github_run_id": "41005167795",
+ "commit": "c46bf88cffd7ccd592d36e83a18d24c2ed13ccde",
+ "started_at": "2026-10-30T04:54:21+00:00",
+ "result": {
+  "drops": {
+   "payments": "all",
+   "logins": "all"
+  },
+  "wall_seconds": 5387.4
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-30T06:29:57+00:00",
+ "files": {
+  "evaluation.json": "43d8ed17bc17d41e4323d53a68d065f152f8576a310000bf49ba93c28e18fa3b",
+  "models/logins/bundle.json": "5b6b6416860c964be9aac6ec75f460b91b86f7127b34ce2dd9028d079ef8453e",
+  "models/logins/unknown_accounts.json": "997daa72f058e1a91bdfaa560d0ee27c87e0463deebe38527f56911be08648f2",
+  "models/payments/bundle.json": "49a6d251b1e880e00db19ffd3070ebce9b39dfec7f3580ad284879f20f910dc5",
+  "models/payments/mcc_rates.json": "fd3657fe4c5d44b3587957b1674e754be5c6079abfd105cc5e4742c13c87f61c",
+  "models/payments/model.txt": "6570b08a40d88013dce1a0aa1b9024e7f300f90cc1c6a9b76cad73a7f8b23462",
+  "models_timings.json": "fd11f2c92c50870acbf41a22e272a904b15077cf588649f170070734bb813e09",
+  "parity/logins.json": "91d433ec539efb9a0dd31b9507b856b6d563455312129eb111f35ca42e28c0be",
+  "parity/payments.json": "add50e53edefaba8c407b752cc8147bfc1a6ef90cd8f2e9712ff46beb5ffc26f",
+  "run.log": "5e59493877c01e97ba6ee37df9a0c9f2a66768114f36e500b3aa920a15a4fc53",
+  "summary.json": "34f51d97da3ba894d01cad3e2aa8e95395a1cf89f8c8d9407a30011708d2c06e"
+ }
+}
