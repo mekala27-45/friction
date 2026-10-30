@@ -436,10 +436,19 @@ def incident(b: Builder) -> None:
         "digest of every row from every other drop equal before and after", "local")  # fmt: skip
     b.v("incident.drop_matches_truth", "yes" if inc["drop_matches_truth"] else "no", "text", o,
         "the drop's silver totals equal the corrected source", "local")  # fmt: skip
-    timeline = [[r["at"], r["what"], r["seconds"]] for r in inc["timeline"]]
+    timeline = [[str(r["at"])[:19].replace("T", " "), r["what"], r["seconds"]] for r in inc["timeline"]]
+    approved = subprocess.run(
+        ["git", "log", "--diff-filter=M", "--format=%cI", "-1", "--", "contracts/approved_changes.yaml"],
+        cwd=ROOT, capture_output=True, text=True,
+    ).stdout.strip()  # fmt: skip
+    if approved:
+        stamp = datetime.fromisoformat(approved).astimezone(UTC).strftime("%Y-%m-%d %H:%M:%S")
+        timeline.append([stamp, "approved contract change committed (contracts/approved_changes.yaml)", None])
     prov = {e["file"]: e for e in (_load("results/provenance.json") or {}).get("promoted", [])}
     for rel, what in (
         ("results/workspace/monitor_alerts.json", "workspace monitor raised the alerts; the issue opened"),
+        ("results/workspace/incident_drop_first_replay.json", "first workspace replay kept part one only; "
+         "deduplication fixed"),
         ("results/workspace/incident_drop.json", "workspace replay of drop 387 with the redelivery verified"),
         ("results/workspace/monitor_after_alerts.json", "workspace monitor after the replay"),
     ):  # fmt: skip

@@ -1,5 +1,5 @@
 {
- "as_of": "2026-10-29",
+ "as_of": "2026-10-30",
  "classification": [
   {
    "classification": "restricted",
@@ -3803,9 +3803,9 @@
     ],
     [
      "15",
-     "not done",
+     "done",
      "Monitoring with delayed label cohorts; the day 40 incident detected, handled by the runbook and written up",
-     "config/monitor.yaml and the incident plant exist; the incident has not been replayed"
+     "results/workspace/monitor_alerts.json (GitHub issue 1), results/incident.json, results/workspace/incident_drop.json, docs/incidents/2026-10-29-day-40.md"
     ],
     [
      "16",
@@ -4715,14 +4715,34 @@
      "not applicable"
     ],
     [
-     "2026-10-29T22:18:45Z",
-     "pipeline run over the drops around day 40, contract as it was",
-     "36.8"
+     "2026-10-29 22:22:49",
+     "approved contract change committed (contracts/approved_changes.yaml)",
+     "not applicable"
     ],
     [
-     "2026-10-29T22:19:24Z",
+     "2026-10-29 22:47:46",
+     "first workspace replay kept part one only; deduplication fixed",
+     "not applicable"
+    ],
+    [
+     "2026-10-29 22:59:56",
+     "pipeline run over the drops around day 40, contract as it was",
+     "37.4"
+    ],
+    [
+     "2026-10-29 23:00:35",
      "replay of the same drops with the approved change and the redelivery",
-     "39.0"
+     "38.9"
+    ],
+    [
+     "2026-10-30 00:12:35",
+     "workspace replay of drop 387 with the redelivery verified",
+     "not applicable"
+    ],
+    [
+     "2026-10-30 00:17:04",
+     "workspace monitor after the replay",
+     "not applicable"
     ]
    ],
    "source": "local"
@@ -4999,9 +5019,9 @@
   }
  },
  "values": {
-  "build.commits": "78",
-  "checklist.done": "11",
-  "checklist.missing": "5, 10, 12, 13, 15, 17, 18",
+  "build.commits": "83",
+  "checklist.done": "12",
+  "checklist.missing": "5, 10, 12, 13, 17, 18",
   "data.rba.asn_unrealistic": "1,457,824",
   "data.rba.attack_ip": "3,096,977",
   "data.rba.digest": "ca1d974e97ae",
@@ -5221,6 +5241,9 @@
   "incident.other_drops_unchanged": "yes",
   "incident.truth_rows": "5,849",
   "incident.truth_usd": "$275,274.70",
+  "incident.workspace.matches": "yes",
+  "incident.workspace.rows": "5,849",
+  "incident.workspace.usd": "$275,274.70",
   "lake.local.cards_history.rows": "31,504",
   "lake.local.cdc_cards_bronze.rows": "33,254",
   "lake.local.labels_logins_bronze.rows": "141",
