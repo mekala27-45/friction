@@ -342,6 +342,24 @@
    "failed_because": "the monitor fails its task when an alert fires; the day 40 drops were in the backfill"
   },
   {
+   "file": "results/workspace/rederive_month_open_source.json",
+   "sha256": "ea4c388f011b1a30ea3566fc7254d861e99a01d7f4aa94f705f88dedd9625ecb",
+   "request": "2026-10-30-19b-rederive-month-open-source",
+   "github_run_id": "40985289640",
+   "commit": "25191523e8e1efd95d32e4006e222de1c2445245",
+   "ran_at": "2026-10-30T02:34:17+00:00",
+   "promoted_at": "2026-10-30T02:36:12+00:00"
+  },
+  {
+   "file": "results/workspace/rederive_month_workspace.json",
+   "sha256": "5e524d7b1348dae1698c661045b686de6e151ec1189bf08355b5833f8e8daf8e",
+   "request": "2026-10-30-19a-rederive-month-workspace",
+   "github_run_id": "40985289640",
+   "commit": "25191523e8e1efd95d32e4006e222de1c2445245",
+   "ran_at": "2026-10-30T02:31:28+00:00",
+   "promoted_at": "2026-10-30T02:36:12+00:00"
+  },
+  {
    "file": "results/workspace/replay_lock_on_runner.json",
    "sha256": "51dda8943082c039c71534d828489a9774da44c0f0c5a6d6c3c48c5f583c2c66",
    "request": "2026-10-29-04b-upload-sources",

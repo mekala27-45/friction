@@ -77,7 +77,7 @@ def test_portable_copies_only_the_named_drops(monkeypatch: pytest.MonkeyPatch, t
     assert _main(monkeypatch, req, out) == 0
     copies = [c for c, _ in shell.calls if c[:3] == ["databricks", "fs", "cp"]]
     assert len(copies) == len(run.FEEDS["payments"])
-    assert all("/0001_1991-01" in c[4] for c in copies)
+    assert all("/0001_1991-01" in c[-2] for c in copies)
     scripts = [c[1] for c, _ in shell.calls if c[0].endswith("python") or "python" in c[0]]
     assert scripts == ["scripts/run_portable.py", "scripts/run_features.py", "scripts/summarize_lake.py"]
 
@@ -123,7 +123,7 @@ def test_portable_copies_a_whole_feed_in_one_call(monkeypatch: pytest.MonkeyPatc
              params={"outbox_volume": "/Volumes/x/outbox", "drops": {"logins": "all"}})  # fmt: skip
     assert _main(monkeypatch, req, out) == 0
     copies = [c for c, _ in shell.calls if c[:3] == ["databricks", "fs", "cp"]]
-    assert [c[4] for c in copies] == [f"dbfs:/Volumes/x/outbox/{f}/drops" for f in ("logins", "labels_logins")]
+    assert [c[-2] for c in copies] == [f"dbfs:/Volumes/x/outbox/{f}/drops" for f in ("logins", "labels_logins")]
     assert not [c for c, _ in shell.calls if c[:3] == ["databricks", "fs", "ls"]]
 
 
@@ -238,3 +238,30 @@ def test_api_check_refuses_without_a_url(monkeypatch: pytest.MonkeyPatch, tmp_pa
     _request(req, "2026-01-01-01-api", "api_check")
     assert _main(monkeypatch, req, out) == 1
     assert "FRICTION_API_URL" in json.loads((out / "2026-01-01-01-api" / "done.json").read_text())["error"]
+
+
+def test_a_cut_copy_is_tried_again(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    calls: list[list[str]] = []
+
+    def flaky(cmd: list[str], log: Path, **_: Any) -> str:
+        calls.append(cmd)
+        if len(calls) < 3:
+            raise RuntimeError("databricks fs exited 1")
+        return ""
+
+    monkeypatch.setattr(run, "_sh", flaky)
+    monkeypatch.setattr(run, "_sleep", lambda s: None)
+    run._copy("dbfs:/Volumes/x/outbox/logins/drops", tmp_path / "drops", tmp_path / "log")
+    assert len(calls) == 3 and all("--overwrite" in c for c in calls)
+    calls.clear()
+    monkeypatch.setattr(run, "_sh", lambda *a, **k: (calls.append([]), (_ for _ in ()).throw(RuntimeError("x"))))
+    with pytest.raises(RuntimeError):
+        run._copy("dbfs:/a", tmp_path / "b", tmp_path / "log", attempts=2)
+    assert len(calls) == 2
+
+
+def test_the_workspace_host_leaves_the_logs() -> None:
+    env = {"DATABRICKS_HOST": "https://dbc-0000aaaa-bbbb.cloud.databricks.com/"}
+    text = "Get https://dbc-0000aaaa-bbbb.cloud.databricks.com/api/2.0/fs and dbc-0000aaaa-bbbb again"
+    out = run.redact(text, env)
+    assert "dbc-0000aaaa-bbbb" not in out and out.count("<secret>") == 2

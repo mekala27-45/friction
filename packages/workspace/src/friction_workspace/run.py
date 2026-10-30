@@ -41,7 +41,7 @@ def _sleep(seconds: int) -> None:
 
 
 SECRET_ENV = ("DATABRICKS_TOKEN", "FRICTION_SALT", "TF_STATE_CONN", "PG_CONN_STR", "DATABASE_URL",
-              "FRICTION_REPLAY_KEY")  # fmt: skip
+              "FRICTION_REPLAY_KEY", "DATABRICKS_HOST")  # fmt: skip
 
 
 def redact(text: str, env: dict[str, str]) -> str:
@@ -52,6 +52,10 @@ def redact(text: str, env: dict[str, str]) -> str:
     """
     values = {v for k in SECRET_ENV if len(v := env.get(k, "")) >= 8}
     values |= {neon_endpoint(v) for v in set(values) if "://" in v}
+    # The workspace host is not a credential, but it names the account; it leaves the logs too.
+    host = env.get("DATABRICKS_HOST", "").split("://")[-1].strip("/")
+    if len(host) >= 8:
+        values |= {host, host.split(".")[0]}
     for value in sorted(values, key=len, reverse=True):
         text = text.replace(value, "<secret>")
     return text
@@ -68,6 +72,20 @@ def _sh(cmd: list[str], log: Path, *, cwd: Path = ROOT, env: dict[str, str] | No
     if proc.returncode != 0:
         raise RuntimeError(f"{cmd[0]} {cmd[1] if len(cmd) > 1 else ''} exited {proc.returncode}")
     return proc.stdout
+
+
+def _copy(source: str, target: Path, log: Path, attempts: int = 3) -> None:
+    """A recursive copy from a volume to the runner, tried again on a dropped connection; with
+    --overwrite a repeat attempt rewrites what the cut one left behind. One cut call over 64 login
+    drops ended a two hour request before it began (request 2026-10-30-19c)."""
+    for attempt in range(1, attempts + 1):
+        try:
+            _sh(["databricks", "fs", "cp", "-r", "--overwrite", source, str(target)], log)
+            return
+        except RuntimeError:
+            if attempt == attempts:
+                raise
+            _sleep(30 * attempt)
 
 
 def _probe_vars() -> dict[str, str]:
@@ -174,15 +192,13 @@ def handle(request: Request, out: Path, log: Path) -> dict[str, Any]:
                 (landing / feed / "drops").mkdir(parents=True, exist_ok=True)
                 if span == "all":
                     # Every drop of the feed in one recursive copy, not one call per drop.
-                    _sh(["databricks", "fs", "cp", "-r", f"dbfs:{outbox}/{feed}/drops", str(landing / feed / "drops")],
-                        log)  # fmt: skip
+                    _copy(f"dbfs:{outbox}/{feed}/drops", landing / feed / "drops", log)
                     continue
                 start, through = span
                 listing = _sh(["databricks", "fs", "ls", f"dbfs:{outbox}/{feed}/drops"], log)
                 for drop in sorted(n.strip().rstrip("/") for n in listing.split()):
                     if drop[:4].isdigit() and int(start) <= int(drop[:4]) <= int(through):
-                        _sh(["databricks", "fs", "cp", "-r", f"dbfs:{outbox}/{feed}/drops/{drop}",
-                             str(landing / feed / "drops" / drop)], log)  # fmt: skip
+                        _copy(f"dbfs:{outbox}/{feed}/drops/{drop}", landing / feed / "drops" / drop, log)
         if request.params.get("redelivery"):
             # Corrected redeliveries land beside the drop they correct, as jobs/land.py lands them.
             listing = _sh(["databricks", "fs", "ls", f"dbfs:{outbox}/payments/redelivery"], log)
