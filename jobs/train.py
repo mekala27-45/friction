@@ -44,7 +44,7 @@ try:
 
         registry.write_floors(out / args.tag)
         experiment = str(Path(args.root).parent / "friction_models").removeprefix("/Workspace")
-        tags = {"plan_sha256": steps.plan_hash(Path(args.root)), "job_run_id": str(args.run_id)}
+        tags = {"plan_sha256": registry.plan_hash(Path(args.root)), "job_run_id": str(args.run_id)}
         try:
             registered = dict(registry.register(out / args.tag, args.catalog, f"{args.prefix}_ml", experiment,
                                                 Path(args.root), tags))  # fmt: skip

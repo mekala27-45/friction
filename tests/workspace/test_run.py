@@ -211,3 +211,30 @@ def test_model_alias_promotes_and_demotes(monkeypatch: pytest.MonkeyPatch, tmp_p
     result = json.loads((out / "2026-01-01-01-promote" / "done.json").read_text())["result"]
     assert result["aliases_before"] == {"champion": 2}
     assert result["aliases_after"] == {"champion": 3, "challenger": 2}
+
+
+def test_api_check_runs_every_step_after_an_idle_wait(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    shell = FakeShell(fail_on="live_check.py --site https://site.example --api https://api.example --name asleep")
+    slept: list[int] = []
+    monkeypatch.setattr(run, "_sh", shell)
+    monkeypatch.setattr(run, "_sleep", slept.append)
+    monkeypatch.setenv("FRICTION_REPLAY_KEY", "k" * 48)
+    monkeypatch.setenv("FRICTION_API_URL", "https://api.example/")
+    req, out = tmp_path / "requests", tmp_path / "runs"
+    _request(req, "2026-01-01-01-api", "api_check", params={"site": "https://site.example", "idle_seconds": 3})
+    assert _main(monkeypatch, req, out) == 1
+    done = json.loads((out / "2026-01-01-01-api" / "done.json").read_text())
+    assert done["status"] == "failed" and "live check asleep" in done["error"]
+    scripts = [c[c.index("python") + 1] for c, _ in shell.calls if "python" in c]
+    assert scripts == ["scripts/live_check.py", "scripts/live_check.py", "scripts/check_parity.py",
+                       "scripts/load_test.py"]  # fmt: skip
+    assert slept == [3, 3]
+
+
+def test_api_check_refuses_without_a_url(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    monkeypatch.setattr(run, "_sh", FakeShell())
+    monkeypatch.delenv("FRICTION_API_URL", raising=False)
+    req, out = tmp_path / "requests", tmp_path / "runs"
+    _request(req, "2026-01-01-01-api", "api_check")
+    assert _main(monkeypatch, req, out) == 1
+    assert "FRICTION_API_URL" in json.loads((out / "2026-01-01-01-api" / "done.json").read_text())["error"]

@@ -40,11 +40,6 @@ def load_plan(root: Path) -> dict[str, Any]:
     return plan
 
 
-def plan_hash(root: Path) -> str:
-    """The registered plan's digest, as evaluation/plan.lock holds it."""
-    return str(json.loads((root / "evaluation" / "plan.lock").read_text(encoding="utf-8"))["sha256"])
-
-
 def attacks_step(spark: Any, read: Read, plan: dict[str, Any]) -> pd.DataFrame:
     """Synthetic attacks: held out users in the test months, other users in the training months."""
     p = plan["desks"]["logins"]

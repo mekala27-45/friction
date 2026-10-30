@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Slip } from "@/components/Slip";
 import { API, site, type Expected } from "@/lib/site";
 
-type Printed = Expected & { label: string; amount?: string; live: boolean };
+type Printed = Expected & { label: string; amount?: string; live: boolean; decision?: string };
 const PER_RUN = 20;
 
 async function probe(): Promise<boolean> {
@@ -47,7 +47,8 @@ export function Replay() {
           });
           if (r.ok) {
             const j = await r.json();
-            got = { event_ref: exp.event_ref, score: j.score, verdict: j.verdict, codes: j.codes, label: got.label, amount, live: true };
+            got = { event_ref: exp.event_ref, score: j.score, verdict: j.verdict, codes: j.codes, label: got.label, amount,
+              live: true, decision: j.decision_id };
           }
         } catch {
           // keep the recorded slip for this event
@@ -73,7 +74,7 @@ export function Replay() {
       <div className="mt-4 grid gap-2 sm:grid-cols-2" aria-live="polite">
         {slips.map((s) => (
           <Slip key={s.event_ref} verdict={s.verdict} score={s.score} codes={s.codes} amount={s.amount}
-            label={`${s.label}${s.live ? "" : " (recorded)"}`} />
+            label={`${s.label}${s.live ? "" : " (recorded)"}`} decision={s.decision} />
         ))}
       </div>
     </div>
