@@ -52,7 +52,8 @@ def main() -> int:
     if tree.exists():
         sh("git", "worktree", "remove", "--force", str(tree), cwd=ROOT)
         shutil.rmtree(tree, ignore_errors=True)
-    r = sh("git", "worktree", "add", "--detach", str(tree), "HEAD", cwd=ROOT)
+    head = sh("git", "rev-parse", "HEAD", cwd=ROOT).stdout.strip()  # the commit the worktree is made from
+    r = sh("git", "worktree", "add", "--detach", str(tree), head, cwd=ROOT)
     if r.returncode != 0:
         raise RuntimeError(r.stderr)
     (tree / "data" / "raw").mkdir(parents=True, exist_ok=True)
@@ -108,7 +109,6 @@ def main() -> int:
         for v in checks.values()
         if isinstance(v, dict)
     )
-    head = sh("git", "rev-parse", "HEAD", cwd=ROOT).stdout.strip()
     result = {
         "at": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "head": head,
