@@ -20,14 +20,14 @@ fails CI. Source of each block in its first line.
 | 7 | done | Every row of both sources backfilled in the workspace | results/workspace/full_export.json: 24,386,592 payments and 31,267,738 logins in silver |
 | 8 | done | Governance: tags, masks, the row filter, grants, lineage, the scan; the planted drift caught by the plan | results/workspace/governance.json (tags, masks, the row filter, grants, lineage, the scan); results/workspace/drift_terraform_plan.txt (the revoked grant caught as one change) |
 | 9 | done | Point in time features with the leakage test; training sets as of a cut with the two clocks test | tests/features/test_point_in_time.py; tests/transforms/test_training.py |
-| 10 | not done | Floors and models on both desks registered in Unity Catalog; the plan hashed before any test month was scored | floors and models fit on the local run, plan hashed before scoring (DECISIONS.md); Unity Catalog registration waits on the workspace |
+| 10 | not done | Floors and models on both desks registered in Unity Catalog; the plan hashed before any test month was scored | floors and models fit on the open source run, plan hashed before scoring (evaluation/plan.lock); Unity Catalog registration has not run |
 | 11 | done | The frontier, operating points, intervals, BH, interior tests, calibration, hypotheses, the RBA comparison | results/evaluation.json from the local run's scored sets |
-| 12 | not done | Reason codes, model cards, validation reports, promotion gates and the champion aliases | codes, gates and cards are in the repository; the champion alias waits on Unity Catalog |
-| 13 | not done | The API live on Vercel with the online store and the decision log; parity exact against the live URL | the API runs and passes parity locally; Vercel and Neon are not connected yet |
+| 12 | not done | Reason codes, model cards, validation reports, promotion gates and the champion aliases | codes, gates, cards and validation reports are in the repository; the champion alias is set by a promotion request after the live parity and latency gates |
+| 13 | not done | The API live on Vercel with the online store and the decision log; parity exact against the live URL | the API passes parity against a local container and Postgres; the Vercel deployment has not been checked yet |
 | 14 | done | Persistence: independent connection, audit before response, shared transaction, out of process check | tests/api/test_api.py and tests/api/test_out_of_process.py against Postgres |
 | 15 | done | Monitoring with delayed label cohorts; the day 40 incident detected, handled by the runbook and written up | results/workspace/monitor_alerts.json (GitHub issue 1), results/incident.json, results/workspace/incident_drop.json, docs/incidents/2026-10-29-day-40.md |
 | 16 | done | Performance experiments and the compute ledger published | results/performance.json (Actions runner, full data), results/compute_ledger.json (wall seconds per request; with workspace usage from system.billing.usage) |
-| 17 | not done | The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS | the site is not built yet |
+| 17 | not done | The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS | the site deploys to Pages from CI and every route passes its test; missing: the live check awake, the live check asleep, the latency with the cold start |
 | 18 | not done | Coverage, mypy, ruff, gates, skills valid, forty to sixty commits, the rederive, v0.1.0 after the commits | the tag waits on every line above |
 
 Stretch items (the sequence challenger, a workspace endpoint, the dashboard and Genie space, the

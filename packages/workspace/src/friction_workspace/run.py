@@ -276,8 +276,9 @@ def handle(request: Request, out: Path, log: Path) -> dict[str, Any]:
 
         _sleep(idle)
         for name in ("asleep", "awake"):
+            video = ["--video", str(out / "demo")] if name == "awake" else []
             step(f"live check {name}", [*tools, "python", "scripts/live_check.py", "--site", site, "--api", api,
-                                        "--name", name, "--out", str(out / "live_check.json")])  # fmt: skip
+                                        "--name", name, "--out", str(out / "live_check.json"), *video])  # fmt: skip
         step("parity", [*tools, "python", "scripts/check_parity.py", "--url", api, "--name", "live",
                         "--out", str(out / "parity.json")])  # fmt: skip
         _sleep(idle)

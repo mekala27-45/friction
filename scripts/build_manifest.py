@@ -535,6 +535,83 @@ CHECKLIST = [
 ]
 
 
+def _sha(rel: str) -> str | None:
+    import hashlib
+
+    p = ROOT / rel
+    return hashlib.sha256(p.read_bytes()).hexdigest() if p.exists() else None
+
+
+def models_registered(exists: Any) -> tuple[str, str]:
+    summary = _load("results/workspace/train_summary.json") or {}
+    reg = {k: v for k, v in (summary.get("registered") or {}).items() if k != "error"}
+    if len(reg) < 6 or not exists("evaluation/plan.lock"):
+        why = (summary.get("registered") or {}).get("error")
+        state = f"failed: {why}" if why else "has not run"
+        return ("not done", "floors and models fit on the open source run, plan hashed before scoring "
+                            f"(evaluation/plan.lock); Unity Catalog registration {state}")  # fmt: skip
+    served = _sha("results/models/payments/model.txt")
+    lgbm = next((v for k, v in reg.items() if k.endswith(".payments_lightgbm")), {})
+    same = "byte identical to" if served and lgbm.get("sha256") == served else "not byte identical to"
+    return ("done", f"results/workspace/train_summary.json: {len(reg)} models of both desks, the floors included, "
+                    f"registered in Unity Catalog; the registered payments LightGBM is {same} the served file; "
+                    "plan hashed before scoring (evaluation/plan.lock)")  # fmt: skip
+
+
+def champion_aliases(exists: Any) -> tuple[str, str]:
+    promo = _load("results/workspace/promotion_payments.json") or {}
+    after = promo.get("aliases_after") or {}
+    docs = exists("docs/models") and exists("docs/validation")
+    if docs and after.get("champion"):
+        return ("done", f"evaluation/reason_codes.yaml, docs/models, docs/validation, the gates in "
+                        f"results/evaluation.json; champion on {promo.get('model')} version {after['champion']} "
+                        "(results/workspace/promotion_payments.json); no login model cleared every gate, so that "
+                        "desk runs on its floor and holds no champion")  # fmt: skip
+    return ("not done", "codes, gates, cards and validation reports are in the repository; the champion alias "
+                        "is set by a promotion request after the live parity and latency gates")  # fmt: skip
+
+
+def api_live() -> tuple[str, str]:
+    live = (_load("results/parity.json") or {}).get("live") or {}
+    checks = _load("results/live_check.json") or {}
+    parity_ok = bool(live) and all(
+        live.get(d, {}).get("decisions_equal") == live.get(d, {}).get("compared") for d in ("payments", "logins")
+    )
+    read_back = (checks.get("awake") or {}).get("replay", {})
+    client_ok = read_back.get("decisions_read_back", 0) > 0 and not read_back.get("mismatches")
+    if parity_ok and client_ok:
+        return ("done", "results/parity.json (live: every decision equal) and results/live_check.json (each "
+                        "decision the browser printed read back by a separate client)")  # fmt: skip
+    return ("not done", "the API passes parity against a local container and Postgres; the Vercel deployment "
+                        "has not been checked yet")  # fmt: skip
+
+
+def site_and_documents(exists: Any) -> tuple[str, str]:
+    checks = _load("results/live_check.json") or {}
+    latency = _load("results/latency.json") or {}
+    decisions = (ROOT / "DECISIONS.md").read_text(encoding="utf-8")
+    dated = sum(line.startswith("## 20") for line in decisions.splitlines())
+    reversals = sum(line.startswith("## 20") and "revers" in line.lower() for line in decisions.splitlines())
+    have = {
+        "the live check awake": checks.get("awake") and not checks["awake"].get("failures"),
+        "the live check asleep": checks.get("asleep") and not checks["asleep"].get("failures"),
+        "the latency with the cold start": "cold_start_ms" in latency,
+        "twelve dated decisions and two reversals": dated >= 12 and reversals >= 2,
+        "three notebooks": len(list((ROOT / "notebooks").glob("0[1-3]_*.ipynb"))) == 3,
+        "AGENTS.md, the skills, SPEC and the ADRs": exists("AGENTS.md") and exists(".claude/skills")
+        and exists("docs/SPEC.md") and exists("docs/adr"),
+        "the README matrix and the RESULTS limitations": "## Skills" in (ROOT / "README.md").read_text(encoding="utf-8")
+        and "## Limitations" in (ROOT / "RESULTS.md").read_text(encoding="utf-8"),
+    }  # fmt: skip
+    missing = [k for k, ok in have.items() if not ok]
+    if not missing:
+        return ("done", f"results/live_check.json (every route, awake and asleep), results/latency.json; "
+                        f"DECISIONS.md ({dated} dated entries, {reversals} reversals), notebooks 01 to 03, "
+                        "AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr")  # fmt: skip
+    return ("not done", "the site deploys to Pages from CI and every route passes its test; missing: "
+                        + ", ".join(missing))  # fmt: skip
+
+
 def checklist(b: Builder, ev: dict[str, Any] | None) -> None:
     status: dict[int, tuple[str, str]] = {}
     exists = lambda rel: (ROOT / rel).exists()  # noqa: E731
@@ -628,22 +705,14 @@ def checklist(b: Builder, ev: dict[str, Any] | None) -> None:
         else ("not done", "governance has not run in full in the workspace")
     )
     status[9] = ("done", "tests/features/test_point_in_time.py; tests/transforms/test_training.py")
-    status[10] = (
-        "not done",
-        "floors and models fit on the local run, plan hashed before scoring (DECISIONS.md); "
-        "Unity Catalog registration waits on the workspace",
-    )
+    status[10] = models_registered(exists)
     status[11] = (
         ("done", f"results/evaluation.json from the {ev['source']} run's scored sets")
         if ev
         else ("not done", "no scored sets graded yet")
     )
-    status[12] = ("not done", "codes, gates and cards are in the repository; the champion alias waits on Unity Catalog")
-    status[13] = (
-        ("not done", "the API runs and passes parity locally; Vercel and Neon are not connected yet")
-        if not (_load("results/parity.json") or {}).get("live")
-        else ("done", "results/parity.json")
-    )
+    status[12] = champion_aliases(exists)
+    status[13] = api_live()
     status[14] = ("done", "tests/api/test_api.py and tests/api/test_out_of_process.py against Postgres")
     inc = _load("results/incident.json") or {}
     ws_inc = _load("results/workspace/incident_drop.json") or {}
@@ -672,7 +741,7 @@ def checklist(b: Builder, ev: dict[str, Any] | None) -> None:
                               f"(wall seconds per request; {billed})")  # fmt: skip
     else:
         status[16] = ("not done", "no performance experiment has run")
-    status[17] = ("not done", "the site is not built yet")
+    status[17] = site_and_documents(exists)
     status[18] = ("not done", "the tag waits on every line above")
     del probe
     rows = [[n, status[n][0], text, status[n][1]] for n, text in CHECKLIST]

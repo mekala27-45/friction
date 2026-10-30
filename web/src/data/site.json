@@ -3775,7 +3775,7 @@
      "10",
      "not done",
      "Floors and models on both desks registered in Unity Catalog; the plan hashed before any test month was scored",
-     "floors and models fit on the local run, plan hashed before scoring (DECISIONS.md); Unity Catalog registration waits on the workspace"
+     "floors and models fit on the open source run, plan hashed before scoring (evaluation/plan.lock); Unity Catalog registration has not run"
     ],
     [
      "11",
@@ -3787,13 +3787,13 @@
      "12",
      "not done",
      "Reason codes, model cards, validation reports, promotion gates and the champion aliases",
-     "codes, gates and cards are in the repository; the champion alias waits on Unity Catalog"
+     "codes, gates, cards and validation reports are in the repository; the champion alias is set by a promotion request after the live parity and latency gates"
     ],
     [
      "13",
      "not done",
      "The API live on Vercel with the online store and the decision log; parity exact against the live URL",
-     "the API runs and passes parity locally; Vercel and Neon are not connected yet"
+     "the API passes parity against a local container and Postgres; the Vercel deployment has not been checked yet"
     ],
     [
      "14",
@@ -3817,7 +3817,7 @@
      "17",
      "not done",
      "The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS",
-     "the site is not built yet"
+     "the site deploys to Pages from CI and every route passes its test; missing: the live check awake, the live check asleep, the latency with the cold start"
     ],
     [
      "18",
@@ -5019,7 +5019,7 @@
   }
  },
  "values": {
-  "build.commits": "84",
+  "build.commits": "88",
   "checklist.done": "13",
   "checklist.missing": "10, 12, 13, 17, 18",
   "data.rba.asn_unrealistic": "1,457,824",
