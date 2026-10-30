@@ -336,3 +336,15 @@ change was approved; 19d ran with the change and without the redelivery. Neither
 stands. The test months end in October 2019, so no graded number and no parity event moves, but an
 API that scores a January event would read a rate from a lake that no longer exists. Request 20
 rebuilds the bundles with the approved change and the redelivery, and they replace the ones in main.
+
+## 2026-10-30 The logistic fit runs on one thread; the rederive compares graded numbers to 1e-9
+
+Request 20 rebuilt the bundles over the same training set and its grade differed from main's in
+the eleventh significant digit, all of it from the logistic model's coefficients: the BLAS
+reduction inside the solver ran on several threads and summed in a different order. LightGBM,
+already single threaded, came back byte identical. The logistic fit now runs on one thread. The
+rederive no longer asks a rerun's grade for an equal digest alone: every graded number must be
+within the parity tolerance of 1e-9 relative, and every threshold, verdict, champion and gate must
+be identical. Request 19d matched main's digest exactly; request 20 matched within 1.2e-11. The
+served payments bundle now comes from request 20; its parity set changed only in the digest of the
+rate table, and parity against the local API is still every decision equal.

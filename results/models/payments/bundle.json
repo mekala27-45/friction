@@ -1,7 +1,7 @@
 {
  "desk": "payments",
  "files": {
-  "mcc_rates.json": "47720226b2c4c4b3e911595f932f9ac01343a2340c8afd44d319f7997f2b54bb",
+  "mcc_rates.json": "fd3657fe4c5d44b3587957b1674e754be5c6079abfd105cc5e4742c13c87f61c",
   "model.txt": "6570b08a40d88013dce1a0aa1b9024e7f300f90cc1c6a9b76cad73a7f8b23462"
  },
  "model": "lightgbm",
