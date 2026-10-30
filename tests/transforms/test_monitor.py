@@ -98,3 +98,20 @@ def test_feature_drift_is_zero_on_the_reference_and_positive_on_a_shift(spark) -
 def test_months_of_a_split() -> None:
     assert monitor.months("2019-01-01", "2019-05-01") == ["2019-01", "2019-02", "2019-03", "2019-04"]
     assert monitor.months("2019-11-15", "2020-02-02") == ["2019-11", "2019-12", "2020-01", "2020-02"]
+
+
+def test_an_approved_rejection_stops_paging(spark) -> None:  # type: ignore[no-untyped-def]
+    bronze = spark.createDataFrame(
+        [("d1", "/x/d1/a.csv.gz", "1"), ("d1", "/x/d1/bad.csv.gz", "2")],
+        "drop_id string, source_file string, txn_id string",
+    )
+    quarantine = spark.createDataFrame(
+        [
+            ("payments", "d1", "/x/d1/bad.csv.gz", "P_FUTURE", 2),
+            ("payments", "d1", "/x/d1/bad.csv.gz", "P_REJECTED_FILE", 2),
+        ],
+        "desk string, drop_id string, source_file string, rule string, event_ref bigint",
+    )
+    assert len(monitor.expectation_rates(quarantine, bronze, "payments")) == 2
+    assert monitor.expectation_rates(quarantine, bronze, "payments", ("bad.csv.gz",)) == []
+    assert monitor.clock(quarantine, bronze, "payments", "P_FUTURE", ("bad.csv.gz",)) == []

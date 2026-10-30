@@ -22,6 +22,11 @@ from friction_transforms import monitor  # noqa: E402
 
 root = args.root
 cfg = yaml.safe_load(Path(f"{root}/config/monitor.yaml").read_text(encoding="utf-8"))
+# Files an approved contract change rejected, per desk: their rows stay quarantined and stop paging.
+_active = (yaml.safe_load(Path(f"{root}/contracts/approved_changes.yaml").read_text(encoding="utf-8")) or {}).get(
+    "active", {}
+)
+rejected = {desk: tuple((v or {}).get("rejected_files", [])) for desk, v in (_active or {}).items()}
 plan = yaml.safe_load(Path(f"{root}/evaluation/plan.yaml").read_text(encoding="utf-8"))
 report: dict[str, object] = {"desks": {}}
 scored: set[str] = set()
@@ -43,9 +48,11 @@ for desk, key, src_key, names, feats in (
             names,
             (p["train"]["start"], p["train"]["end"]),
         ),
-        "expectations": monitor.expectation_rates(quarantine, bronze, desk),
+        "expectations": monitor.expectation_rates(quarantine, bronze, desk, rejected.get(desk, ())),
         "completeness": monitor.completeness(silver, bronze, key, src_key),
-        "clock": monitor.clock(quarantine, bronze, desk, "P_FUTURE" if desk == "payments" else "L_FUTURE"),
+        "clock": monitor.clock(
+            quarantine, bronze, desk, "P_FUTURE" if desk == "payments" else "L_FUTURE", rejected.get(desk, ())
+        ),
     }
 report["label_maturity"] = monitor.label_maturity(
     spark.read.table(_boot.fq(args, "cdc", "labels_payments_history")), cfg["label_maturity"]["checkpoints_days"]

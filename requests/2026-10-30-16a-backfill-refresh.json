@@ -1,0 +1,12 @@
+{
+ "id": "2026-10-30-16a-backfill-refresh",
+ "kind": "bundle_run",
+ "target": "dev",
+ "job": "backfill",
+ "params": {
+  "job_params": {"desk": "payments", "from": "439", "through": "439", "tag": "after-fix"},
+  "export_from": "/Volumes/workspace/friction_dev_raw/exports/after-fix",
+  "stop_on_failure": false
+ },
+ "note": "A pipeline update over what has landed (the last drop again, skipped), the features with the row guard, and the export for the full reconcile against request 13e."
+}

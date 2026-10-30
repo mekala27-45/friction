@@ -1,0 +1,20 @@
+{
+ "columns": [
+  "rule",
+  "rows"
+ ],
+ "rows": [
+  [
+   "P_FUTURE",
+   "487"
+  ],
+  [
+   "P_KEY_CONFLICT",
+   "2929"
+  ],
+  [
+   "P_REJECTED_FILE",
+   "2929"
+  ]
+ ]
+}

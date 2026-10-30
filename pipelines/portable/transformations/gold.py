@@ -25,20 +25,17 @@ def mcc_fraud_rates() -> DataFrame:
     return gold.mcc_rates(spark.read.table("debit_counts"), spark.read.table("known_frauds"))  # noqa: F821
 
 
-@dp.materialized_view(name="payments_issue_age", comment="Days since the card generation in effect was issued")
-def payments_issue_age() -> DataFrame:
-    issues = gold.card_issue_times(spark.read.table("cards_history"))  # noqa: F821
-    return gold.issue_age(spark.read.table("payments_silver"), issues)  # noqa: F821
-
-
 @dp.materialized_view(name="payment_feature_inputs", comment="What the payments state machine reads, per transaction")
 def payment_feature_inputs() -> DataFrame:
-    enriched = gold.enrich(
-        spark.read.table("payments_silver"),  # noqa: F821
-        spark.read.table("payments_issue_age"),  # noqa: F821
-        spark.read.table("mcc_fraud_rates"),  # noqa: F821
-    )
+    silver = spark.read.table("payments_silver")  # noqa: F821
+    issues = gold.card_issue_times(spark.read.table("cards_history"))  # noqa: F821
+    enriched = gold.enrich(silver, gold.issue_age(silver, issues), spark.read.table("mcc_fraud_rates"))  # noqa: F821
     return gold.payment_inputs(enriched)
+
+
+@dp.materialized_view(name="payments_issue_age", comment="Days since the card generation in effect was issued")
+def payments_issue_age() -> DataFrame:
+    return spark.read.table("payment_feature_inputs").select("txn_ref", "days_since_issue")  # noqa: F821
 
 
 @dp.materialized_view(name="login_feature_inputs", comment="What the login state machines read, per attempt")

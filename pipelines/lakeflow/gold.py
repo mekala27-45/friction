@@ -29,23 +29,22 @@ def mcc_fraud_rates():  # type: ignore[no-untyped-def]
 
 
 @dp.materialized_view(
-    name=fq("gold", "payments_issue_age"), comment="Days since the card generation in effect was issued"
-)
-def payments_issue_age():  # type: ignore[no-untyped-def]
-    issues = gold.card_issue_times(spark.read.table(fq("cdc", "cards_history")))
-    return gold.issue_age(spark.read.table(fq("silver", "payments_silver")), issues)
-
-
-@dp.materialized_view(
     name=fq("gold", "payment_feature_inputs"), comment="What the payments state machine reads", cluster_by=["_bucket"]
 )
 def payment_feature_inputs():  # type: ignore[no-untyped-def]
-    enriched = gold.enrich(
-        spark.read.table(fq("silver", "payments_silver")),
-        spark.read.table(fq("gold", "payments_issue_age")),
-        spark.read.table(fq("gold", "mcc_fraud_rates")),
-    )
+    # The card age is computed here, from the same read of silver, not read from a view of its own:
+    # in the workspace that view lagged one update behind silver (DECISIONS.md).
+    silver = spark.read.table(fq("silver", "payments_silver"))
+    issues = gold.card_issue_times(spark.read.table(fq("cdc", "cards_history")))
+    enriched = gold.enrich(silver, gold.issue_age(silver, issues), spark.read.table(fq("gold", "mcc_fraud_rates")))
     return gold.payment_inputs(enriched)
+
+
+@dp.materialized_view(
+    name=fq("gold", "payments_issue_age"), comment="Days since the card generation in effect was issued"
+)
+def payments_issue_age():  # type: ignore[no-untyped-def]
+    return spark.read.table(fq("gold", "payment_feature_inputs")).select("txn_ref", "days_since_issue")
 
 
 @dp.materialized_view(

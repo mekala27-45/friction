@@ -1,36 +1,36 @@
 {
- "as_of": "2026-10-29",
+ "as_of": "2026-10-30",
  "values": {
   "build.commits": {
-   "value": 78,
+   "value": 83,
    "fmt": "int",
    "provenance": {
     "origin": "git",
     "population": "commits on main",
     "source": "build",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
   "checklist.done": {
-   "value": 11,
+   "value": 12,
    "fmt": "int",
    "provenance": {
     "origin": "scripts/build_manifest.py",
     "population": "lines done",
     "source": "build",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
   "checklist.missing": {
-   "value": "5, 10, 12, 13, 15, 17, 18",
+   "value": "5, 10, 12, 13, 17, 18",
    "fmt": "text",
    "provenance": {
     "origin": "scripts/build_manifest.py",
     "population": "lines not done",
     "source": "build",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -41,7 +41,7 @@
     "origin": "scripts/profile_sources.py over the staged RBA file",
     "population": "rows with an ASN of 500,000 or more",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -52,7 +52,7 @@
     "origin": "scripts/profile_sources.py over the staged RBA file",
     "population": "rows from addresses on the attacker list",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -63,7 +63,7 @@
     "origin": "data/sources.lock.json",
     "population": "the archive",
     "source": "static",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -74,7 +74,7 @@
     "origin": "scripts/profile_sources.py over the staged RBA file",
     "population": "rows with an address in 10.0.0.0/8",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -85,7 +85,7 @@
     "origin": "scripts/summarize_lake.py over the full open source run",
     "population": "user ids other than the unknown account",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -96,7 +96,7 @@
     "origin": "scripts/profile_sources.py over the staged RBA file",
     "population": "every row of rba-dataset.csv",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -107,7 +107,7 @@
     "origin": "scripts/profile_sources.py over the staged RBA file",
     "population": "rows without a round trip time",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -118,7 +118,7 @@
     "origin": "scripts/profile_sources.py over the staged RBA file",
     "population": "successful sign ins",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -129,7 +129,7 @@
     "origin": "scripts/profile_sources.py over the staged RBA file",
     "population": "rows marked as account takeover",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -140,7 +140,7 @@
     "origin": "scripts/summarize_lake.py over the full open source run",
     "population": "attempts filed under the unknown account",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -151,7 +151,7 @@
     "origin": "scripts/summarize_lake.py over the full open source run",
     "population": "successful attempts on it",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -162,7 +162,7 @@
     "origin": "scripts/profile_sources.py over the staged RBA file",
     "population": "distinct user ids",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -173,7 +173,7 @@
     "origin": "scripts/summarize_lake.py over the full open source run",
     "population": "card accounts in silver",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -184,7 +184,7 @@
     "origin": "scripts/profile_sources.py over the staged TabFormer file",
     "population": "distinct user and card pairs",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -195,7 +195,7 @@
     "origin": "data/sources.lock.json",
     "population": "the archive",
     "source": "static",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -206,7 +206,7 @@
     "origin": "scripts/profile_sources.py over the staged TabFormer file",
     "population": "every row of card_transaction.v1.csv",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -217,7 +217,7 @@
     "origin": "scripts/profile_sources.py over the staged TabFormer file",
     "population": "distinct users",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -228,7 +228,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "naive attacks in the test months",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -239,7 +239,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "takeover attacks in the test months",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -250,7 +250,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "targeted attacks in the test months",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -261,7 +261,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "vpn attacks in the test months",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -272,7 +272,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "the champion",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -283,7 +283,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "cheapest at the assumptions",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -294,7 +294,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "assumptions that change the cheapest",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -305,7 +305,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -316,7 +316,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -327,7 +327,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -338,7 +338,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -349,7 +349,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -360,7 +360,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -371,7 +371,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -382,7 +382,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "flagged logins test events, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -393,7 +393,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -404,7 +404,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -415,7 +415,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -426,7 +426,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -437,7 +437,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -448,7 +448,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -459,7 +459,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -470,7 +470,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -481,7 +481,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -492,7 +492,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -503,7 +503,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins validation to test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -514,7 +514,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -525,7 +525,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -536,7 +536,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -547,7 +547,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -558,7 +558,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins validation, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -569,7 +569,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, freeman",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -580,7 +580,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, freeman",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -591,7 +591,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, freeman",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -602,7 +602,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, freeman",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -613,7 +613,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, freeman",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -624,7 +624,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, freeman",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -635,7 +635,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, freeman",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -646,7 +646,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "flagged logins test events, freeman",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -657,7 +657,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, freeman",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -668,7 +668,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, freeman",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -679,7 +679,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, freeman",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -690,7 +690,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, freeman",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -701,7 +701,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, freeman",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -712,7 +712,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, freeman",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -723,7 +723,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, freeman",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -734,7 +734,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, freeman",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -745,7 +745,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, freeman",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -756,7 +756,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, freeman",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -767,7 +767,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins validation to test, freeman",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -778,7 +778,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, freeman",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -789,7 +789,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, freeman",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -800,7 +800,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, freeman",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -811,7 +811,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, freeman",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -822,7 +822,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins validation, freeman",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -833,7 +833,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "champion under half and double the budget",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -844,7 +844,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -855,7 +855,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -866,7 +866,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -877,7 +877,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -888,7 +888,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -899,7 +899,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -910,7 +910,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -921,7 +921,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "flagged logins test events, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -932,7 +932,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -943,7 +943,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -954,7 +954,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -965,7 +965,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -976,7 +976,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -987,7 +987,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -998,7 +998,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1009,7 +1009,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1020,7 +1020,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1031,7 +1031,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1042,7 +1042,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins validation to test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1053,7 +1053,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1064,7 +1064,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1075,7 +1075,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1086,7 +1086,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1097,7 +1097,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins validation, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1108,7 +1108,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm_rep",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1119,7 +1119,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm_rep",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1130,7 +1130,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm_rep",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1141,7 +1141,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm_rep",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1152,7 +1152,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm_rep",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1163,7 +1163,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm_rep",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1174,7 +1174,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm_rep",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1185,7 +1185,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "flagged logins test events, lightgbm_rep",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1196,7 +1196,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm_rep",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1207,7 +1207,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm_rep",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1218,7 +1218,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm_rep",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1229,7 +1229,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm_rep",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1240,7 +1240,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm_rep",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1251,7 +1251,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm_rep",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1262,7 +1262,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm_rep",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1273,7 +1273,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm_rep",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1284,7 +1284,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm_rep",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1295,7 +1295,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm_rep",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1306,7 +1306,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins validation to test, lightgbm_rep",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1317,7 +1317,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm_rep",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1328,7 +1328,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm_rep",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1339,7 +1339,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm_rep",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1350,7 +1350,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, lightgbm_rep",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1361,7 +1361,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins validation, lightgbm_rep",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1372,7 +1372,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "users with ten to fourteen earlier sign ins",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1383,7 +1383,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "graded logins test events",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1394,7 +1394,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "positives among them",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1405,7 +1405,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "units of resampling",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1416,7 +1416,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "the champion",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1427,7 +1427,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "cheapest at the assumptions",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1438,7 +1438,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "assumptions that change the cheapest",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1449,7 +1449,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1460,7 +1460,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1471,7 +1471,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1482,7 +1482,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1493,7 +1493,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1504,7 +1504,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1515,7 +1515,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1526,7 +1526,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "flagged payments test events, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1537,7 +1537,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1548,7 +1548,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1559,7 +1559,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1570,7 +1570,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1581,7 +1581,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1592,7 +1592,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1603,7 +1603,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1614,7 +1614,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1625,7 +1625,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1636,7 +1636,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1647,7 +1647,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments validation to test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1658,7 +1658,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1669,7 +1669,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1680,7 +1680,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1691,7 +1691,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1702,7 +1702,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments validation, floor",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1713,7 +1713,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "champion under half and double the budget",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1724,7 +1724,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1735,7 +1735,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1746,7 +1746,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1757,7 +1757,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1768,7 +1768,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1779,7 +1779,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1790,7 +1790,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1801,7 +1801,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "flagged payments test events, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1812,7 +1812,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1823,7 +1823,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1834,7 +1834,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1845,7 +1845,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1856,7 +1856,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1867,7 +1867,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1878,7 +1878,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1889,7 +1889,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1900,7 +1900,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1911,7 +1911,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1922,7 +1922,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments validation to test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1933,7 +1933,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1944,7 +1944,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1955,7 +1955,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1966,7 +1966,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1977,7 +1977,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments validation, lightgbm",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1988,7 +1988,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, logistic",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -1999,7 +1999,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, logistic",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2010,7 +2010,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, logistic",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2021,7 +2021,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, logistic",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2032,7 +2032,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, logistic",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2043,7 +2043,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, logistic",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2054,7 +2054,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, logistic",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2065,7 +2065,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "flagged payments test events, logistic",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2076,7 +2076,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, logistic",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2087,7 +2087,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, logistic",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2098,7 +2098,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, logistic",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2109,7 +2109,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, logistic",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2120,7 +2120,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, logistic",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2131,7 +2131,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, logistic",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2142,7 +2142,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, logistic",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2153,7 +2153,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, logistic",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2164,7 +2164,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, logistic",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2175,7 +2175,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, logistic",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2186,7 +2186,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments validation to test, logistic",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2197,7 +2197,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, logistic",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2208,7 +2208,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, logistic",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2219,7 +2219,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, logistic",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2230,7 +2230,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, logistic",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2241,7 +2241,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments validation, logistic",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2252,7 +2252,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "graded payments test events",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2263,7 +2263,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "fraud dollars in the test months",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2274,7 +2274,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "positives among them",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2285,7 +2285,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "units of resampling",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2296,7 +2296,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "where the scored sets came from",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2307,7 +2307,7 @@
     "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
     "population": "completeness of the drop, after",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2318,7 +2318,7 @@
     "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
     "population": "silver rows from the drop, after",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2329,7 +2329,7 @@
     "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
     "population": "dollars, after",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2340,7 +2340,7 @@
     "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
     "population": "completeness of the drop, before",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2351,7 +2351,7 @@
     "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
     "population": "silver rows from the drop, before",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2362,7 +2362,7 @@
     "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
     "population": "dollars, before",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2373,7 +2373,7 @@
     "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
     "population": "transactions held out of silver until the replay",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2384,7 +2384,7 @@
     "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
     "population": "dollars of decisions delayed",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2395,7 +2395,7 @@
     "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
     "population": "the incident drop",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2406,7 +2406,7 @@
     "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
     "population": "the drop's silver totals equal the corrected source",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2417,7 +2417,7 @@
     "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
     "population": "digest of every row from every other drop equal before and after",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2428,7 +2428,7 @@
     "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
     "population": "rows in the corrected redelivery",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2439,7 +2439,40 @@
     "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
     "population": "dollars in the redelivery",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
+    "note": null
+   }
+  },
+  "incident.workspace.matches": {
+   "value": "yes",
+   "fmt": "text",
+   "provenance": {
+    "origin": "sql/incident_verify.sql",
+    "population": "the workspace's drop equals the corrected source",
+    "source": "workspace",
+    "as_of": "2026-10-30",
+    "note": null
+   }
+  },
+  "incident.workspace.rows": {
+   "value": 5849,
+   "fmt": "int",
+   "provenance": {
+    "origin": "sql/incident_verify.sql",
+    "population": "silver rows from drop 387 in the workspace after the replay",
+    "source": "workspace",
+    "as_of": "2026-10-30",
+    "note": null
+   }
+  },
+  "incident.workspace.usd": {
+   "value": 275274.7,
+   "fmt": "usd2",
+   "provenance": {
+    "origin": "sql/incident_verify.sql",
+    "population": "their dollars",
+    "source": "workspace",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2450,7 +2483,7 @@
     "origin": "scripts/summarize_lake.py over the full open source run",
     "population": "rows of cards_history",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2461,7 +2494,7 @@
     "origin": "scripts/summarize_lake.py over the full open source run",
     "population": "rows of cdc_cards_bronze",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2472,7 +2505,7 @@
     "origin": "scripts/summarize_lake.py over the full open source run",
     "population": "rows of labels_logins_bronze",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2483,7 +2516,7 @@
     "origin": "scripts/summarize_lake.py over the full open source run",
     "population": "rows of labels_logins_history",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2494,7 +2527,7 @@
     "origin": "scripts/summarize_lake.py over the full open source run",
     "population": "rows of labels_payments_bronze",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2505,7 +2538,7 @@
     "origin": "scripts/summarize_lake.py over the full open source run",
     "population": "rows of labels_payments_history",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2516,7 +2549,7 @@
     "origin": "scripts/summarize_lake.py over the full open source run",
     "population": "rows of login_account_stats",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2527,7 +2560,7 @@
     "origin": "scripts/summarize_lake.py over the full open source run",
     "population": "rows of logins_bronze",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2538,7 +2571,7 @@
     "origin": "scripts/summarize_lake.py over the full open source run",
     "population": "rows of logins_features",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2549,7 +2582,7 @@
     "origin": "scripts/summarize_lake.py over the full open source run",
     "population": "rows of logins_silver",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2560,7 +2593,7 @@
     "origin": "scripts/summarize_lake.py over the full open source run",
     "population": "rows of mcc_fraud_rates",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2571,7 +2604,7 @@
     "origin": "scripts/summarize_lake.py over the full open source run",
     "population": "rows of payments_bronze",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2582,7 +2615,7 @@
     "origin": "scripts/summarize_lake.py over the full open source run",
     "population": "rows of payments_features",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2593,7 +2626,7 @@
     "origin": "scripts/summarize_lake.py over the full open source run",
     "population": "rows of payments_silver",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2604,7 +2637,7 @@
     "origin": "scripts/summarize_lake.py over the full open source run",
     "population": "rows of quarantine",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2615,7 +2648,7 @@
     "origin": "scripts/summarize_lake.py over the full open source run",
     "population": "rule violations in quarantine",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2626,7 +2659,7 @@
     "origin": "jobs/monitor.py",
     "population": "alerts over the backfill",
     "source": "workspace",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2637,7 +2670,7 @@
     "origin": "jobs/monitor.py",
     "population": "features drifting against the training months",
     "source": "workspace",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2648,7 +2681,7 @@
     "origin": "gh api, issues",
     "population": "the issue the workflow opened from the monitor's alerts",
     "source": "workspace",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2659,7 +2692,7 @@
     "origin": "scripts/check_parity.py against local",
     "population": "logins decisions compared",
     "source": "build",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2670,7 +2703,7 @@
     "origin": "scripts/check_parity.py against local",
     "population": "logins decisions equal",
     "source": "build",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2681,7 +2714,7 @@
     "origin": "scripts/check_parity.py against local",
     "population": "largest score difference",
     "source": "build",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2692,7 +2725,7 @@
     "origin": "scripts/check_parity.py against local",
     "population": "payments decisions compared",
     "source": "build",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2703,7 +2736,7 @@
     "origin": "scripts/check_parity.py against local",
     "population": "payments decisions equal",
     "source": "build",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2714,7 +2747,7 @@
     "origin": "scripts/check_parity.py against local",
     "population": "largest score difference",
     "source": "build",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2725,7 +2758,7 @@
     "origin": "evaluation/plan.lock",
     "population": "the hypotheses",
     "source": "plan",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2736,7 +2769,7 @@
     "origin": "evaluation/plan.yaml",
     "population": "good events",
     "source": "plan",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2747,7 +2780,7 @@
     "origin": "evaluation/plan.yaml",
     "population": "gap_1",
     "source": "plan",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2758,7 +2791,7 @@
     "origin": "evaluation/plan.yaml",
     "population": "gap_1",
     "source": "plan",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2769,7 +2802,7 @@
     "origin": "evaluation/plan.yaml",
     "population": "gap_2",
     "source": "plan",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2780,7 +2813,7 @@
     "origin": "evaluation/plan.yaml",
     "population": "gap_2",
     "source": "plan",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2791,7 +2824,7 @@
     "origin": "evaluation/plan.yaml",
     "population": "good events",
     "source": "plan",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2802,7 +2835,7 @@
     "origin": "evaluation/plan.yaml",
     "population": "test",
     "source": "plan",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2813,7 +2846,7 @@
     "origin": "evaluation/plan.yaml",
     "population": "test",
     "source": "plan",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2824,7 +2857,7 @@
     "origin": "evaluation/plan.yaml",
     "population": "train",
     "source": "plan",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2835,7 +2868,7 @@
     "origin": "evaluation/plan.yaml",
     "population": "train",
     "source": "plan",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2846,7 +2879,7 @@
     "origin": "evaluation/plan.yaml",
     "population": "validation",
     "source": "plan",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2857,7 +2890,7 @@
     "origin": "evaluation/plan.yaml",
     "population": "validation",
     "source": "plan",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2868,7 +2901,7 @@
     "origin": "evaluation/plan.yaml",
     "population": "good events",
     "source": "plan",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2879,7 +2912,7 @@
     "origin": "evaluation/plan.yaml",
     "population": "gap_1",
     "source": "plan",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2890,7 +2923,7 @@
     "origin": "evaluation/plan.yaml",
     "population": "gap_1",
     "source": "plan",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2901,7 +2934,7 @@
     "origin": "evaluation/plan.yaml",
     "population": "gap_2",
     "source": "plan",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2912,7 +2945,7 @@
     "origin": "evaluation/plan.yaml",
     "population": "gap_2",
     "source": "plan",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2923,7 +2956,7 @@
     "origin": "evaluation/plan.yaml",
     "population": "good events",
     "source": "plan",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2934,7 +2967,7 @@
     "origin": "evaluation/plan.yaml",
     "population": "test",
     "source": "plan",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2945,7 +2978,7 @@
     "origin": "evaluation/plan.yaml",
     "population": "test",
     "source": "plan",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2956,7 +2989,7 @@
     "origin": "evaluation/plan.yaml",
     "population": "train",
     "source": "plan",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2967,7 +3000,7 @@
     "origin": "evaluation/plan.yaml",
     "population": "train",
     "source": "plan",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2978,7 +3011,7 @@
     "origin": "evaluation/plan.yaml",
     "population": "validation",
     "source": "plan",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -2989,7 +3022,7 @@
     "origin": "evaluation/plan.yaml",
     "population": "validation",
     "source": "plan",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -3000,7 +3033,7 @@
     "origin": "evaluation/plan.yaml",
     "population": "bootstrap resamples",
     "source": "plan",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -3011,7 +3044,7 @@
     "origin": "evaluation/plan.lock",
     "population": "the registered plan",
     "source": "plan",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -3022,7 +3055,7 @@
     "origin": "scripts/replay.py, digests in data/replay.lock.json",
     "population": "rows of the cdc_cards feed",
     "source": "simulator",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -3033,7 +3066,7 @@
     "origin": "scripts/replay.py, digests in data/replay.lock.json",
     "population": "rows of the labels_logins feed",
     "source": "simulator",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -3044,7 +3077,7 @@
     "origin": "scripts/replay.py, digests in data/replay.lock.json",
     "population": "rows of the labels_payments feed",
     "source": "simulator",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -3055,7 +3088,7 @@
     "origin": "scripts/replay.py, digests in data/replay.lock.json",
     "population": "drops of the logins desk",
     "source": "simulator",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -3066,7 +3099,7 @@
     "origin": "scripts/replay.py, digests in data/replay.lock.json",
     "population": "rows the logins desk delivers",
     "source": "simulator",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -3077,7 +3110,7 @@
     "origin": "scripts/replay.py, digests in data/replay.lock.json",
     "population": "drops of the payments desk",
     "source": "simulator",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -3088,7 +3121,7 @@
     "origin": "scripts/replay.py, digests in data/replay.lock.json",
     "population": "rows the payments desk delivers",
     "source": "simulator",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -3099,7 +3132,7 @@
     "origin": "friction_core.statements",
     "population": "every surface",
     "source": "static",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   }
@@ -3205,9 +3238,9 @@
     ],
     [
      15,
-     "not done",
+     "done",
      "Monitoring with delayed label cohorts; the day 40 incident detected, handled by the runbook and written up",
-     "config/monitor.yaml and the incident plant exist; the incident has not been replayed"
+     "results/workspace/monitor_alerts.json (GitHub issue 1), results/incident.json, results/workspace/incident_drop.json, docs/incidents/2026-10-29-day-40.md"
     ],
     [
      16,
@@ -3232,7 +3265,7 @@
     "origin": "scripts/build_manifest.py",
     "population": "the definition of done",
     "source": "build",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -3299,7 +3332,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "validation months, one sided, Benjamini-Hochberg across the five",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -3352,7 +3385,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "capture at the operating point, by attacker model",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -3413,7 +3446,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, dollar capture at the operating point",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -3448,7 +3481,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test, config/costs.yaml assumptions",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -3544,7 +3577,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins promotion gates the repository decides",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -3580,7 +3613,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test dollar capture, thresholds re-chosen on validation",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -3681,7 +3714,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run; published read from figure rq1-general",
     "population": "median re-authentication rate per user, history of ten to fourteen",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -3717,7 +3750,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run; published from evaluation/rba_published.yaml",
     "population": "risk score relation of the Freeman model",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -3800,7 +3833,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "logins test months at the operating point chosen on validation",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -3861,7 +3894,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, dollar capture at the operating point",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -3892,7 +3925,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test, config/costs.yaml assumptions",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -3963,7 +3996,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments promotion gates the repository decides",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -3999,7 +4032,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test dollar capture, thresholds re-chosen on validation",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -4070,7 +4103,7 @@
     "origin": "scripts/grade.py over the scored sets of the local run",
     "population": "payments test months at the operating point chosen on validation",
     "source": "evaluation",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -4101,7 +4134,7 @@
     "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
     "population": "quarantined rows of the drop, after the fix",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -4154,7 +4187,7 @@
     "origin": "jobs/monitor.py in the workspace (request 2026-10-29-12g-monitor)",
     "population": "alerts on the incident drop",
     "source": "workspace",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -4185,7 +4218,7 @@
     "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
     "population": "quarantined rows of the drop, before the fix",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -4207,21 +4240,41 @@
      null
     ],
     [
-     "2026-10-29T22:18:45Z",
-     "pipeline run over the drops around day 40, contract as it was",
-     36.8
+     "2026-10-29 22:22:49",
+     "approved contract change committed (contracts/approved_changes.yaml)",
+     null
     ],
     [
-     "2026-10-29T22:19:24Z",
+     "2026-10-29 22:47:46",
+     "first workspace replay kept part one only; deduplication fixed",
+     null
+    ],
+    [
+     "2026-10-29 22:59:56",
+     "pipeline run over the drops around day 40, contract as it was",
+     37.4
+    ],
+    [
+     "2026-10-29 23:00:35",
      "replay of the same drops with the approved change and the redelivery",
-     39.0
+     38.9
+    ],
+    [
+     "2026-10-30 00:12:35",
+     "workspace replay of drop 387 with the redelivery verified",
+     null
+    ],
+    [
+     "2026-10-30 00:17:04",
+     "workspace monitor after the replay",
+     null
     ]
    ],
    "provenance": {
     "origin": "scripts/replay_incident.py over the drops around replay day 40 (open source, build machine)",
     "population": "the runs that found and fixed the incident",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -4267,7 +4320,7 @@
     "origin": "scripts/summarize_lake.py over the full open source run",
     "population": "quarantined rows by the rule they broke",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -4363,7 +4416,7 @@
     "origin": "scripts/summarize_lake.py over the full open source run",
     "population": "every table of the full local run",
     "source": "local",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   },
@@ -4506,7 +4559,7 @@
     "origin": "requests/2026-10-29-probe.json",
     "population": "what Free Edition allowed the API on 29 October 2026",
     "source": "workspace",
-    "as_of": "2026-10-29",
+    "as_of": "2026-10-30",
     "note": null
    }
   }
