@@ -127,10 +127,42 @@
    "where": "Databricks workspace",
    "seconds": 3648.9,
    "github_run": "40984691116"
+  },
+  {
+   "request": "2026-10-30-19a-rederive-month-workspace",
+   "kind": "bundle_run",
+   "job": "integration",
+   "where": "Databricks workspace",
+   "seconds": 534.4,
+   "github_run": "40985289640"
+  },
+  {
+   "request": "2026-10-30-19b-rederive-month-open-source",
+   "kind": "portable",
+   "job": null,
+   "where": "Actions runner, open source Spark",
+   "seconds": 160.9,
+   "github_run": "40985289640"
+  },
+  {
+   "request": "2026-10-30-19d-rederive-models-open-source",
+   "kind": "portable",
+   "job": null,
+   "where": "Actions runner, open source Spark",
+   "seconds": 7529.5,
+   "github_run": "40992670268"
+  },
+  {
+   "request": "2026-10-30-20-served-bundle-after-incident",
+   "kind": "portable",
+   "job": null,
+   "where": "Actions runner, open source Spark",
+   "seconds": 5387.4,
+   "github_run": "41005167795"
   }
  ],
- "workspace_seconds": 11788.5,
- "runner_seconds": 11675.1,
+ "workspace_seconds": 12322.9,
+ "runner_seconds": 24752.9,
  "runner_model_steps_seconds": {
   "attacks": 330.8,
   "features": 523.5,

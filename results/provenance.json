@@ -29,21 +29,21 @@
   },
   {
    "file": "results/models/payments/bundle.json",
-   "sha256": "ef23a1323091aa9d746e0bf34095cfd668f66ab168db4e13cc1514bd1a621d20",
-   "request": "2026-10-29-12-portable-full-models",
-   "github_run_id": "40928231680",
-   "commit": "c48f3cd4ff9885ab26c25b75a039b4d0d10aa070",
-   "ran_at": "2026-10-29T21:16:28+00:00",
-   "promoted_at": "2026-10-29T21:21:15+00:00"
+   "sha256": "49a6d251b1e880e00db19ffd3070ebce9b39dfec7f3580ad284879f20f910dc5",
+   "request": "2026-10-30-20-served-bundle-after-incident",
+   "github_run_id": "41005167795",
+   "commit": "c46bf88cffd7ccd592d36e83a18d24c2ed13ccde",
+   "ran_at": "2026-10-30T06:29:57+00:00",
+   "promoted_at": "2026-10-30T06:33:57+00:00"
   },
   {
    "file": "results/models/payments/mcc_rates.json",
-   "sha256": "47720226b2c4c4b3e911595f932f9ac01343a2340c8afd44d319f7997f2b54bb",
-   "request": "2026-10-29-12-portable-full-models",
-   "github_run_id": "40928231680",
-   "commit": "c48f3cd4ff9885ab26c25b75a039b4d0d10aa070",
-   "ran_at": "2026-10-29T21:16:28+00:00",
-   "promoted_at": "2026-10-29T21:21:15+00:00"
+   "sha256": "fd3657fe4c5d44b3587957b1674e754be5c6079abfd105cc5e4742c13c87f61c",
+   "request": "2026-10-30-20-served-bundle-after-incident",
+   "github_run_id": "41005167795",
+   "commit": "c46bf88cffd7ccd592d36e83a18d24c2ed13ccde",
+   "ran_at": "2026-10-30T06:29:57+00:00",
+   "promoted_at": "2026-10-30T06:33:57+00:00"
   },
   {
    "file": "results/models/payments/model.txt",
@@ -65,12 +65,12 @@
   },
   {
    "file": "results/parity/payments.json",
-   "sha256": "2a53b1e6995a999fc9d2a94f29ff5c1dcdbd45b1b82e06174a54cb99a8303ce4",
-   "request": "2026-10-29-12-portable-full-models",
-   "github_run_id": "40928231680",
-   "commit": "c48f3cd4ff9885ab26c25b75a039b4d0d10aa070",
-   "ran_at": "2026-10-29T21:16:28+00:00",
-   "promoted_at": "2026-10-29T21:21:15+00:00"
+   "sha256": "add50e53edefaba8c407b752cc8147bfc1a6ef90cd8f2e9712ff46beb5ffc26f",
+   "request": "2026-10-30-20-served-bundle-after-incident",
+   "github_run_id": "41005167795",
+   "commit": "c46bf88cffd7ccd592d36e83a18d24c2ed13ccde",
+   "ran_at": "2026-10-30T06:29:57+00:00",
+   "promoted_at": "2026-10-30T06:33:58+00:00"
   },
   {
    "file": "results/performance.json",
@@ -349,6 +349,15 @@
    "commit": "1a45926679f9203d18f80be76e7717807740d48c",
    "ran_at": "2026-10-30T04:49:11+00:00",
    "promoted_at": "2026-10-30T04:50:50+00:00"
+  },
+  {
+   "file": "results/workspace/rederive_evaluation_after_incident.json",
+   "sha256": "43d8ed17bc17d41e4323d53a68d065f152f8576a310000bf49ba93c28e18fa3b",
+   "request": "2026-10-30-20-served-bundle-after-incident",
+   "github_run_id": "41005167795",
+   "commit": "c46bf88cffd7ccd592d36e83a18d24c2ed13ccde",
+   "ran_at": "2026-10-30T06:29:57+00:00",
+   "promoted_at": "2026-10-30T06:33:58+00:00"
   },
   {
    "file": "results/workspace/rederive_month_open_source.json",

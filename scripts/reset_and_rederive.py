@@ -30,8 +30,34 @@ import sys
 import time
 from datetime import UTC, datetime
 from pathlib import Path
+from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+TOLERANCE = 1e-9
+
+
+def differences(a: Any, b: Any, path: str = "") -> tuple[float, list[str]]:
+    """The largest relative difference between two graded files' numbers, and every other difference.
+    Wall seconds and the digest are left out: they are not graded numbers."""
+    if isinstance(a, dict) and isinstance(b, dict):
+        worst, other = 0.0, []
+        for k in sorted(set(a) | set(b)):
+            if not path and k in ("seconds", "digest"):
+                continue
+            w, o = differences(a.get(k), b.get(k), f"{path}/{k}")
+            worst, other = max(worst, w), other + o
+        return worst, other
+    if isinstance(a, list) and isinstance(b, list) and len(a) == len(b):
+        worst, other = 0.0, []
+        for i, (x, y) in enumerate(zip(a, b, strict=True)):
+            w, o = differences(x, y, f"{path}[{i}]")
+            worst, other = max(worst, w), other + o
+        return worst, other
+    if isinstance(a, float) and isinstance(b, float):
+        return abs(a - b) / max(abs(a), abs(b), 1e-300), []
+    return (0.0, []) if a == b else (0.0, [path])
 
 
 def sh(*cmd: str, cwd: Path, env: dict[str, str] | None = None) -> subprocess.CompletedProcess[str]:
@@ -42,7 +68,13 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--scored", type=Path, default=ROOT / "data" / "work" / "models" / "full" / "scored")
     parser.add_argument("--skip-replay", action="store_true")
-    parser.add_argument("--evaluation", type=Path, help="the evaluation.json of the runner's rerun")
+    parser.add_argument(
+        "--evaluation",
+        type=Path,
+        action="append",
+        default=[],
+        help="the evaluation.json of a runner's rerun; may be given more than once",
+    )
     parser.add_argument("--model", type=Path, help="the served payments model.txt of the runner's rerun")
     parser.add_argument("--month-workspace", type=Path, help="integration.json of the workspace month rerun")
     parser.add_argument("--month-open-source", type=Path, help="summary.json of the open source month rerun")
@@ -81,9 +113,18 @@ def main() -> int:
                                   "all_equal": bool(same) and all(same.values())}  # fmt: skip
     ref_eval = json.loads((ROOT / "results" / "evaluation.json").read_text())
     if args.evaluation:
-        rerun = json.loads(args.evaluation.read_text())
-        checks["evaluation"] = {"where": "Actions runner, every drop again", "exit": 0,
-                                "digest_equal": rerun.get("digest") == ref_eval.get("digest")}  # fmt: skip
+        runs = []
+        for path in args.evaluation:
+            rerun = json.loads(path.read_text())
+            worst, other = differences(rerun, ref_eval)
+            runs.append({"file": str(path.relative_to(ROOT)) if path.is_relative_to(ROOT) else str(path),
+                         "digest_equal": rerun.get("digest") == ref_eval.get("digest"),
+                         "worst_relative_difference": worst, "other_differences": other[:10]})  # fmt: skip
+        # Every graded number within the parity tolerance and everything else identical: thresholds,
+        # verdicts, champions, gates. An equal digest is the stronger statement and is recorded too.
+        checks["evaluation"] = {"where": "Actions runner, every drop again", "runs": runs,
+                                "all_equal": all(r["worst_relative_difference"] <= TOLERANCE and not
+                                                    r["other_differences"] for r in runs)}  # fmt: skip
     elif args.scored.exists():
         out = tree / "results" / "evaluation.json"
         r = sh("uv", "run", "--no-sync", "python", "scripts/grade.py", "--scored", str(args.scored), "--source",

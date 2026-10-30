@@ -1,6 +1,6 @@
 {
  "local": {
-  "at": "2026-10-29T21:22:45Z",
+  "at": "2026-10-30T06:34:08Z",
   "logins": {
    "codes_equal": 286,
    "compared": 286,
@@ -9,7 +9,7 @@
    "max_abs_score_difference": 0.0,
    "mismatches": [],
    "model": "floor",
-   "seconds": 3.0
+   "seconds": 3.2
   },
   "payments": {
    "codes_equal": 1000,
@@ -19,7 +19,7 @@
    "max_abs_score_difference": 0.0,
    "mismatches": [],
    "model": "lightgbm",
-   "seconds": 5.9
+   "seconds": 6.2
   },
   "target": "local",
   "url": null

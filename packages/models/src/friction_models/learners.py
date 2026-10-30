@@ -3,7 +3,7 @@
 Negatives are subsampled on the training rows only and weighted back by the inverse of the sampling
 rate, so both models are fitted to the true base rate and their scores are probabilities, which the
 expected cost view multiplies by a dollar amount. Validation and test are never resampled or
-reweighted. LightGBM runs single threaded and deterministic so the same training set gives the same
+reweighted. LightGBM and the logistic fit run single threaded so the same training set gives the same
 model on any machine, which the rederive checks.
 """
 
@@ -49,13 +49,17 @@ class Logistic:
         weight: npt.NDArray[np.float64] | None = None,
     ) -> Logistic:
         from sklearn.linear_model import LogisticRegression
+        from threadpoolctl import threadpool_limits
 
         mean = x.mean(axis=0)
         scale = x.std(axis=0)
         scale[scale == 0] = 1.0
         z = (x - mean) / scale
         model = LogisticRegression(C=c, max_iter=1000, solver="lbfgs")
-        model.fit(z, y, sample_weight=weight)
+        # One BLAS thread, as LightGBM runs one: a threaded reduction moved the coefficients in the
+        # eleventh digit between two runs over the same training set (DECISIONS.md, 30 Oct 2026).
+        with threadpool_limits(limits=1):
+            model.fit(z, y, sample_weight=weight)
         return cls(mean=mean, scale=scale, coef=model.coef_[0].astype(np.float64), intercept=float(model.intercept_[0]))
 
     def margin(self, x: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
