@@ -7,7 +7,7 @@ fails CI. Source of each block in its first line.
 
 ## The definition of done
 
-15 of eighteen lines done.
+17 of eighteen lines done.
 
 | Step | Status | Line | Evidence |
 |---:|---|---|---|
@@ -22,13 +22,13 @@ fails CI. Source of each block in its first line.
 | 9 | done | Point in time features with the leakage test; training sets as of a cut with the two clocks test | tests/features/test_point_in_time.py; tests/transforms/test_training.py |
 | 10 | done | Floors and models on both desks registered in Unity Catalog; the plan hashed before any test month was scored | results/workspace/train_summary.json: 6 models of both desks, the floors included, registered in Unity Catalog; the registered payments LightGBM is byte identical to the served file; plan hashed before scoring (evaluation/plan.lock) |
 | 11 | done | The frontier, operating points, intervals, BH, interior tests, calibration, hypotheses, the RBA comparison | results/evaluation.json from the local run's scored sets |
-| 12 | not done | Reason codes, model cards, validation reports, promotion gates and the champion aliases | codes, gates, cards and validation reports are in the repository; the champion alias is set by a promotion request after the live parity and latency gates |
-| 13 | not done | The API live on Vercel with the online store and the decision log; parity exact against the live URL | the API passes parity against a local container and Postgres; the Vercel deployment has not been checked yet |
+| 12 | done | Reason codes, model cards, validation reports, promotion gates and the champion aliases | evaluation/reason_codes.yaml, docs/models, docs/validation, the gates in results/evaluation.json; champion on workspace.friction_dev_ml.payments_lightgbm version 1 (results/workspace/promotion_payments.json); no login model cleared every gate, so that desk runs on its floor and holds no champion |
+| 13 | done | The API live on Vercel with the online store and the decision log; parity exact against the live URL | results/parity.json (live: every decision equal) and results/live_check.json (each decision the browser printed read back by a separate client) |
 | 14 | done | Persistence: independent connection, audit before response, shared transaction, out of process check | tests/api/test_api.py and tests/api/test_out_of_process.py against Postgres |
 | 15 | done | Monitoring with delayed label cohorts; the day 40 incident detected, handled by the runbook and written up | results/workspace/monitor_alerts.json (GitHub issue 1), results/incident.json, results/workspace/incident_drop.json, docs/incidents/2026-10-29-day-40.md |
 | 16 | done | Performance experiments and the compute ledger published | results/performance.json (Actions runner, full data), results/compute_ledger.json (wall seconds per request; with workspace usage from system.billing.usage) |
-| 17 | done | The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS | results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (35 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr |
-| 18 | not done | Coverage, mypy, ruff, gates, skills valid, forty to sixty commits, the rederive, v0.1.0 after the commits | CI is green on coverage, mypy, ruff and the gates; results/rederive.json has no drift; missing: forty to sixty commits (main has 102), lines 12, 13 done |
+| 17 | done | The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS | results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (36 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr |
+| 18 | not done | Coverage, mypy, ruff, gates, skills valid, forty to sixty commits, the rederive, v0.1.0 after the commits | CI is green on coverage, mypy, ruff and the gates; results/rederive.json has no drift; missing: forty to sixty commits (main has 105) |
 
 Stretch items (the sequence challenger, a workspace endpoint, the dashboard and Genie space, the
 readback warehouse, BI exports, hardening): not started, and not counted.
@@ -242,6 +242,8 @@ static on Pages. Every check below ran from the Actions runner against the publi
 
 | Check | Result |
 |---|---|
+| Parity on the live URL, payments | 1,000 of 1,000 decisions equal, largest score difference 0.0e+00 |
+| Parity on the live URL, logins | 286 of 286 decisions equal, largest score difference 0.0e+00 |
 | Real browser, API asleep | 9 of 9 routes with the statement; 20 of 20 slips scored live, 20 read back by a separate client, 0 differences; first answer after 4.0 s |
 | Real browser, API awake | 9 of 9 routes with the statement; 20 of 20 slips scored live, 20 read back by a separate client, 0 differences; first answer after 0.2 s |
 | Cold start, first /health after the idle wait | 3,950 ms |

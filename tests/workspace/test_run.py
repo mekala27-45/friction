@@ -202,6 +202,9 @@ def test_model_alias_promotes_and_demotes(monkeypatch: pytest.MonkeyPatch, tmp_p
         def set_alias(self, full_name: str, alias: str, version_num: int) -> None:
             state[alias] = version_num
 
+        def delete_alias(self, full_name: str, alias: str) -> None:
+            state.pop(alias, None)
+
     fake = types.ModuleType("databricks.sdk")
     fake.WorkspaceClient = lambda: types.SimpleNamespace(registered_models=Models())  # type: ignore[attr-defined]
     monkeypatch.setitem(sys.modules, "databricks.sdk", fake)
@@ -213,6 +216,11 @@ def test_model_alias_promotes_and_demotes(monkeypatch: pytest.MonkeyPatch, tmp_p
     assert result["aliases_after"] == {"champion": 3, "challenger": 2}
     record = json.loads((out / "2026-01-01-01-promote" / "aliases.json").read_text())
     assert record["version"] == 3 and record["aliases_after"]["champion"] == 3
+    state.clear()
+    state["challenger"] = 4
+    _request(req, "2026-01-01-02-promote", "model_alias", params={"model": "w.ml.payments_lightgbm", "version": 4})
+    assert _main(monkeypatch, req, out) == 0
+    assert state == {"champion": 4}
 
 
 def test_api_check_runs_every_step_after_an_idle_wait(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:

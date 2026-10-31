@@ -1195,6 +1195,31 @@
  },
  "monitor": null,
  "parity": {
+  "live": {
+   "at": "2026-10-31T23:11:29Z",
+   "logins": {
+    "codes_equal": 286,
+    "compared": 286,
+    "decisions_equal": 286,
+    "events_sent": 1000,
+    "max_abs_score_difference": 0.0,
+    "mismatches": [],
+    "model": "floor",
+    "seconds": 72.2
+   },
+   "payments": {
+    "codes_equal": 1000,
+    "compared": 1000,
+    "decisions_equal": 1000,
+    "events_sent": 1000,
+    "max_abs_score_difference": 0.0,
+    "mismatches": [],
+    "model": "lightgbm",
+    "seconds": 81.0
+   },
+   "target": "live",
+   "url": "https://friction-rose.vercel.app"
+  },
   "local": {
    "at": "2026-10-31T23:04:31Z",
    "logins": {
@@ -3785,15 +3810,15 @@
     ],
     [
      "12",
-     "not done",
+     "done",
      "Reason codes, model cards, validation reports, promotion gates and the champion aliases",
-     "codes, gates, cards and validation reports are in the repository; the champion alias is set by a promotion request after the live parity and latency gates"
+     "evaluation/reason_codes.yaml, docs/models, docs/validation, the gates in results/evaluation.json; champion on workspace.friction_dev_ml.payments_lightgbm version 1 (results/workspace/promotion_payments.json); no login model cleared every gate, so that desk runs on its floor and holds no champion"
     ],
     [
      "13",
-     "not done",
+     "done",
      "The API live on Vercel with the online store and the decision log; parity exact against the live URL",
-     "the API passes parity against a local container and Postgres; the Vercel deployment has not been checked yet"
+     "results/parity.json (live: every decision equal) and results/live_check.json (each decision the browser printed read back by a separate client)"
     ],
     [
      "14",
@@ -3817,13 +3842,13 @@
      "17",
      "done",
      "The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS",
-     "results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (35 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr"
+     "results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (36 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr"
     ],
     [
      "18",
      "not done",
      "Coverage, mypy, ruff, gates, skills valid, forty to sixty commits, the rederive, v0.1.0 after the commits",
-     "CI is green on coverage, mypy, ruff and the gates; results/rederive.json has no drift; missing: forty to sixty commits (main has 102), lines 12, 13 done"
+     "CI is green on coverage, mypy, ruff and the gates; results/rederive.json has no drift; missing: forty to sixty commits (main has 105)"
     ]
    ],
    "source": "build"
@@ -4937,6 +4962,14 @@
    "origin": "scripts/check_parity.py, scripts/live_check.py, scripts/load_test.py (request kind api_check, on the Actions runner)",
    "rows": [
     [
+     "Parity on the live URL, payments",
+     "1,000 of 1,000 decisions equal, largest score difference 0.0e+00"
+    ],
+    [
+     "Parity on the live URL, logins",
+     "286 of 286 decisions equal, largest score difference 0.0e+00"
+    ],
+    [
      "Real browser, API asleep",
      "9 of 9 routes with the statement; 20 of 20 slips scored live, 20 read back by a separate client, 0 differences; first answer after 4.0 s"
     ],
@@ -5099,9 +5132,9 @@
   }
  },
  "values": {
-  "build.commits": "102",
-  "checklist.done": "15",
-  "checklist.missing": "12, 13, 18",
+  "build.commits": "105",
+  "checklist.done": "17",
+  "checklist.missing": "18",
   "data.rba.asn_unrealistic": "1,457,824",
   "data.rba.attack_ip": "3,096,977",
   "data.rba.digest": "ca1d974e97ae",
@@ -5343,6 +5376,12 @@
   "monitor.alerts": "16",
   "monitor.drift_features": "device_type, mcc_fraud_rate",
   "monitor.issue": "GitHub issue 1",
+  "parity.live.logins.compared": "286",
+  "parity.live.logins.equal": "286",
+  "parity.live.logins.worst": "0.0000",
+  "parity.live.payments.compared": "1,000",
+  "parity.live.payments.equal": "1,000",
+  "parity.live.payments.worst": "0.0000",
   "parity.local.logins.compared": "286",
   "parity.local.logins.equal": "286",
   "parity.local.logins.worst": "0.0000",
@@ -5394,7 +5433,7 @@
   "registry.payments.floor.name": "workspace.friction_dev_ml.payments_floor",
   "registry.payments.floor.sha256": "7a645f3b33da",
   "registry.payments.floor.version": "1",
-  "registry.payments.lightgbm.alias": "challenger",
+  "registry.payments.lightgbm.alias": "champion",
   "registry.payments.lightgbm.name": "workspace.friction_dev_ml.payments_lightgbm",
   "registry.payments.lightgbm.sha256": "6570b08a40d8",
   "registry.payments.lightgbm.version": "1",

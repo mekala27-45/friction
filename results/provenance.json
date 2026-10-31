@@ -375,6 +375,24 @@
    "failed_because": "the monitor fails its task when an alert fires; the day 40 drops were in the backfill"
   },
   {
+   "file": "results/workspace/parity_live.json",
+   "sha256": "949cea70004f4fd63cd097ba8bdc5700316642c46a2fe86d948db9ab08cef5f3",
+   "request": "2026-10-31-23-api-parity",
+   "github_run_id": "41251012290",
+   "commit": "5d647d8e72d01aaf33fb457790627782949f4b42",
+   "ran_at": "2026-10-31T23:14:12+00:00",
+   "promoted_at": "2026-10-31T23:14:48+00:00"
+  },
+  {
+   "file": "results/workspace/promotion_payments.json",
+   "sha256": "6f4b0363e3cf491d8a71022976fa322f913d39fb9ad7852c8516a5ac059c2a8e",
+   "request": "2026-10-31-25-promote-payments-lightgbm",
+   "github_run_id": "41251904623",
+   "commit": "ddff947a1e18f5f0ce99d13b1825d4bff4125c53",
+   "ran_at": "2026-10-31T23:18:49+00:00",
+   "promoted_at": "2026-10-31T23:19:18+00:00"
+  },
+  {
    "file": "results/workspace/rederive_evaluation.json",
    "sha256": "6aaa3d6fc937f7d3a231dc38ac13cb09225664a6db9d5f5a93a751e03c9cb5f1",
    "request": "2026-10-30-19d-rederive-models-open-source",

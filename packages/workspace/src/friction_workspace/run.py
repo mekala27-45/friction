@@ -272,6 +272,9 @@ def handle(request: Request, out: Path, log: Path) -> dict[str, Any]:
         w.registered_models.set_alias(full_name=name, alias=alias, version_num=version)
         if alias == "champion" and previous and previous != version:
             w.registered_models.set_alias(full_name=name, alias="challenger", version_num=previous)
+        elif alias == "champion" and before.get("challenger") == version:
+            # The champion is no longer a challenger of itself.
+            w.registered_models.delete_alias(full_name=name, alias="challenger")
         after = {
             a.alias_name: a.version_num for a in (w.registered_models.get(name, include_aliases=True).aliases or [])
         }

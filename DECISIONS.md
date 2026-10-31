@@ -348,3 +348,11 @@ within the parity tolerance of 1e-9 relative, and every threshold, verdict, cham
 be identical. Request 19d matched main's digest exactly; request 20 matched within 1.2e-11. The
 served payments bundle now comes from request 20; its parity set changed only in the digest of the
 rate table, and parity against the local API is still every decision equal.
+
+## 2026-10-31 The parity seed is sent in parts
+
+The first parity run against Vercel stopped at the seed: the payments snapshot of the online state is
+5.9 MB and Vercel refuses a request body over 4.5 MB. The seed endpoint takes a replace flag; the
+first part replaces the namespace and every later part adds to it, each under 2 MB. A test seeds a
+snapshot in parts and whole and compares the state. Parity on the live URL is then exact on both
+desks: 1,000 of 1,000 payment decisions and 286 of 286 login decisions, every score identical.

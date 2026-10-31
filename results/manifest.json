@@ -2,7 +2,7 @@
  "as_of": "2026-10-31",
  "values": {
   "build.commits": {
-   "value": 102,
+   "value": 105,
    "fmt": "int",
    "provenance": {
     "origin": "git",
@@ -13,7 +13,7 @@
    }
   },
   "checklist.done": {
-   "value": 15,
+   "value": 17,
    "fmt": "int",
    "provenance": {
     "origin": "scripts/build_manifest.py",
@@ -24,7 +24,7 @@
    }
   },
   "checklist.missing": {
-   "value": "12, 13, 18",
+   "value": "18",
    "fmt": "text",
    "provenance": {
     "origin": "scripts/build_manifest.py",
@@ -2685,6 +2685,72 @@
     "note": null
    }
   },
+  "parity.live.logins.compared": {
+   "value": 286,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/check_parity.py against live",
+    "population": "logins decisions compared",
+    "source": "live",
+    "as_of": "2026-10-31",
+    "note": null
+   }
+  },
+  "parity.live.logins.equal": {
+   "value": 286,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/check_parity.py against live",
+    "population": "logins decisions equal",
+    "source": "live",
+    "as_of": "2026-10-31",
+    "note": null
+   }
+  },
+  "parity.live.logins.worst": {
+   "value": 0.0,
+   "fmt": "float4",
+   "provenance": {
+    "origin": "scripts/check_parity.py against live",
+    "population": "largest score difference",
+    "source": "live",
+    "as_of": "2026-10-31",
+    "note": null
+   }
+  },
+  "parity.live.payments.compared": {
+   "value": 1000,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/check_parity.py against live",
+    "population": "payments decisions compared",
+    "source": "live",
+    "as_of": "2026-10-31",
+    "note": null
+   }
+  },
+  "parity.live.payments.equal": {
+   "value": 1000,
+   "fmt": "int",
+   "provenance": {
+    "origin": "scripts/check_parity.py against live",
+    "population": "payments decisions equal",
+    "source": "live",
+    "as_of": "2026-10-31",
+    "note": null
+   }
+  },
+  "parity.live.payments.worst": {
+   "value": 0.0,
+   "fmt": "float4",
+   "provenance": {
+    "origin": "scripts/check_parity.py against live",
+    "population": "largest score difference",
+    "source": "live",
+    "as_of": "2026-10-31",
+    "note": null
+   }
+  },
   "parity.local.logins.compared": {
    "value": 286,
    "fmt": "int",
@@ -3247,7 +3313,7 @@
    }
   },
   "registry.payments.lightgbm.alias": {
-   "value": "challenger",
+   "value": "champion",
    "fmt": "text",
    "provenance": {
     "origin": "jobs/train.py in the workspace (request 2026-10-30-18a-train-register)",
@@ -3506,15 +3572,15 @@
     ],
     [
      12,
-     "not done",
+     "done",
      "Reason codes, model cards, validation reports, promotion gates and the champion aliases",
-     "codes, gates, cards and validation reports are in the repository; the champion alias is set by a promotion request after the live parity and latency gates"
+     "evaluation/reason_codes.yaml, docs/models, docs/validation, the gates in results/evaluation.json; champion on workspace.friction_dev_ml.payments_lightgbm version 1 (results/workspace/promotion_payments.json); no login model cleared every gate, so that desk runs on its floor and holds no champion"
     ],
     [
      13,
-     "not done",
+     "done",
      "The API live on Vercel with the online store and the decision log; parity exact against the live URL",
-     "the API passes parity against a local container and Postgres; the Vercel deployment has not been checked yet"
+     "results/parity.json (live: every decision equal) and results/live_check.json (each decision the browser printed read back by a separate client)"
     ],
     [
      14,
@@ -3538,13 +3604,13 @@
      17,
      "done",
      "The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS",
-     "results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (35 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr"
+     "results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (36 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr"
     ],
     [
      18,
      "not done",
      "Coverage, mypy, ruff, gates, skills valid, forty to sixty commits, the rederive, v0.1.0 after the commits",
-     "CI is green on coverage, mypy, ruff and the gates; results/rederive.json has no drift; missing: forty to sixty commits (main has 102), lines 12, 13 done"
+     "CI is green on coverage, mypy, ruff and the gates; results/rederive.json has no drift; missing: forty to sixty commits (main has 105)"
     ]
    ],
    "provenance": {
@@ -4767,6 +4833,14 @@
     "text"
    ],
    "rows": [
+    [
+     "Parity on the live URL, payments",
+     "1,000 of 1,000 decisions equal, largest score difference 0.0e+00"
+    ],
+    [
+     "Parity on the live URL, logins",
+     "286 of 286 decisions equal, largest score difference 0.0e+00"
+    ],
     [
      "Real browser, API asleep",
      "9 of 9 routes with the statement; 20 of 20 slips scored live, 20 read back by a separate client, 0 differences; first answer after 4.0 s"

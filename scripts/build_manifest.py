@@ -10,6 +10,7 @@ the documents then print what is missing instead of a number.
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 from datetime import UTC, datetime
@@ -673,7 +674,8 @@ def api_live() -> tuple[str, str]:
 
 def release(status: dict[int, tuple[str, str]]) -> tuple[str, str]:
     rederive = _load("results/rederive.json") or {}
-    commits = int(_git("rev-list", "--count", "HEAD") or 0)
+    # Built for the release commit itself (FRICTION_RELEASE=1), the count includes that commit.
+    commits = int(_git("rev-list", "--count", "HEAD") or 0) + (1 if os.environ.get("FRICTION_RELEASE") == "1" else 0)
     open_lines = [str(n) for n in range(1, 18) if status.get(n, ("not done", ""))[0] != "done"]
     have = {
         "the rederive with no drift": rederive.get("complete") and not rederive.get("drift"),
