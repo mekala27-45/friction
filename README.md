@@ -1,9 +1,6 @@
 # friction
 
-**Not complete.** 17 of the eighteen mandatory lines of the definition of done are
-done; lines 18 are not, and RESULTS.md says for each what exists and what it
-waits on. Every number below says which engine produced it: the Lakeflow pipeline in the
-Databricks workspace, or open source Spark running the same code.
+Every mandatory line of the definition of done is done; RESULTS.md has the evidence for each.
 
 > friction is a portfolio demonstration built on two published synthetic data sets (the IBM TabFormer card transactions, and the RBA login data set under CC BY 4.0) and a simulator with known truth. No real person, card or account appears in it, its numbers describe synthetic data, and it must not be used to decide anything about anyone. It runs on Databricks Free Edition, which is for non commercial use.
 

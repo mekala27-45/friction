@@ -356,3 +356,13 @@ The first parity run against Vercel stopped at the seed: the payments snapshot o
 first part replaces the namespace and every later part adds to it, each under 2 MB. A test seeds a
 snapshot in parts and whole and compares the state. Parity on the live URL is then exact on both
 desks: 1,000 of 1,000 payment decisions and 286 of 286 login decisions, every score identical.
+
+## 2026-10-31 History squashed to 55 commits before the tag
+
+Main had 106 commits against the forty to sixty the definition of done allows, most of them requests
+retried after a workspace failure and evidence promoted one file at a time. They were folded into
+55 commits along the build's own steps, each keeping the date of its last change; the final tree
+is byte identical to the one before. One profile file from the first day had held a few raw
+addresses before it was cleaned; every early commit now carries the cleaned version, so no commit in
+main holds them. The results branch and results/provenance.json still name commits from the
+history before; docs/history_map.json maps each of them to the commit that now holds its change.

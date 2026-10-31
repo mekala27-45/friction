@@ -3842,13 +3842,13 @@
      "17",
      "done",
      "The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS",
-     "results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (36 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr"
+     "results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (37 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr"
     ],
     [
      "18",
-     "not done",
+     "done",
      "Coverage, mypy, ruff, gates, skills valid, forty to sixty commits, the rederive, v0.1.0 after the commits",
-     "CI is green on coverage, mypy, ruff and the gates; results/rederive.json has no drift; missing: forty to sixty commits (main has 105)"
+     "results/rederive.json (replay, fixture pipeline, model rerun, month rerun: no drift); 56 commits; CI green on coverage, mypy, ruff and the gates; v0.1.0 tagged on this commit"
     ]
    ],
    "source": "build"
@@ -4740,7 +4740,7 @@
      "not applicable"
     ],
     [
-     "2026-10-29 22:22:49",
+     "2026-10-29 22:23:30",
      "approved contract change committed (contracts/approved_changes.yaml)",
      "not applicable"
     ],
@@ -5132,9 +5132,9 @@
   }
  },
  "values": {
-  "build.commits": "105",
-  "checklist.done": "17",
-  "checklist.missing": "18",
+  "build.commits": "55",
+  "checklist.done": "18",
+  "checklist.missing": "none",
   "data.rba.asn_unrealistic": "1,457,824",
   "data.rba.attack_ip": "3,096,977",
   "data.rba.digest": "ca1d974e97ae",
@@ -5416,7 +5416,7 @@
   "plan.resamples": "1,000",
   "plan.sha256": "2ba61fcd4da0",
   "rederive.drift": "none",
-  "rederive.head": "83c9561",
+  "rederive.head": "886c025",
   "registry.logins.floor.alias": "floor",
   "registry.logins.floor.name": "workspace.friction_dev_ml.logins_floor",
   "registry.logins.floor.sha256": "a8a2148ce537",

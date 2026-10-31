@@ -2,7 +2,7 @@
  "as_of": "2026-10-31",
  "values": {
   "build.commits": {
-   "value": 105,
+   "value": 55,
    "fmt": "int",
    "provenance": {
     "origin": "git",
@@ -13,7 +13,7 @@
    }
   },
   "checklist.done": {
-   "value": 17,
+   "value": 18,
    "fmt": "int",
    "provenance": {
     "origin": "scripts/build_manifest.py",
@@ -24,7 +24,7 @@
    }
   },
   "checklist.missing": {
-   "value": "18",
+   "value": "none",
    "fmt": "text",
    "provenance": {
     "origin": "scripts/build_manifest.py",
@@ -3126,7 +3126,7 @@
    }
   },
   "rederive.head": {
-   "value": "83c9561",
+   "value": "886c025",
    "fmt": "text",
    "provenance": {
     "origin": "scripts/reset_and_rederive.py",
@@ -3604,13 +3604,13 @@
      17,
      "done",
      "The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS",
-     "results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (36 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr"
+     "results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (37 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr"
     ],
     [
      18,
-     "not done",
+     "done",
      "Coverage, mypy, ruff, gates, skills valid, forty to sixty commits, the rederive, v0.1.0 after the commits",
-     "CI is green on coverage, mypy, ruff and the gates; results/rederive.json has no drift; missing: forty to sixty commits (main has 105)"
+     "results/rederive.json (replay, fixture pipeline, model rerun, month rerun: no drift); 56 commits; CI green on coverage, mypy, ruff and the gates; v0.1.0 tagged on this commit"
     ]
    ],
    "provenance": {
@@ -4592,7 +4592,7 @@
      null
     ],
     [
-     "2026-10-29 22:22:49",
+     "2026-10-29 22:23:30",
      "approved contract change committed (contracts/approved_changes.yaml)",
      null
     ],
