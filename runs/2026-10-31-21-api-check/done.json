@@ -1,0 +1,23 @@
+{
+ "request": {
+  "id": "2026-10-31-21-api-check",
+  "kind": "api_check",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "stop_on_failure": false
+  },
+  "note": "The live API on Vercel and the site on Pages: the live check in a real browser asleep and awake with each decision read back by a separate client, parity against the live URL, and the load test with its cold start."
+ },
+ "github_run_id": "41247685944",
+ "commit": "a292fdea6074ce8034bda279acfb9a1f5aff94f1",
+ "started_at": "2026-10-31T22:20:58+00:00",
+ "status": "failed",
+ "error": "RuntimeError: api check steps failed: parity, load test",
+ "finished_at": "2026-10-31T22:35:49+00:00",
+ "files": {
+  "demo/page@3338af2449817222c723d82422ad152b.webm": "13bb6b9f7310701117fe6b3e3022e4eca11e563488d25b6a42e662c1a14d7ea1",
+  "live_check.json": "b51ac75a6aaf28705483e8be6ed092e29e796a4f48dc31a1b4b23812326cbf36",
+  "run.log": "42bb79bc2ca674e7344d7337554894b443c16bf0db6d95f0edd32917d9aad796"
+ }
+}
