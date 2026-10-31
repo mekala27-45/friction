@@ -1,0 +1,7 @@
+{
+ "id": "2026-10-31-21-api-check",
+ "kind": "api_check",
+ "target": "dev",
+ "params": {"stop_on_failure": false},
+ "note": "The live API on Vercel and the site on Pages: the live check in a real browser asleep and awake with each decision read back by a separate client, parity against the live URL, and the load test with its cold start."
+}

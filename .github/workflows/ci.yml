@@ -59,6 +59,22 @@ jobs:
         run: uv run pytest --cov --cov-report=term -p no:warnings
       - name: Notebooks, each with its dead end
         run: uv run pytest --nbmake notebooks -p no:warnings
+      # The image Vercel builds, started as Vercel starts it: the first deployment crashed on import
+      # while every in process test passed.
+      - name: The Vercel image starts and answers /health
+        run: |
+          docker build -f Dockerfile.vercel -t friction-api .
+          docker run -d --name api --network host -e PORT=8080 \
+            -e DATABASE_URL=postgresql://postgres@localhost:5432/friction_test friction-api
+          for i in $(seq 1 30); do
+            if curl -fsS localhost:8080/health > health.json; then
+              python3 -c "import json; m = json.load(open('health.json'))['models']; assert sorted(m) == ['logins', 'payments'], m"
+              exit 0
+            fi
+            sleep 2
+          done
+          docker logs api
+          exit 1
       - name: Every dependency the tests skip on was present
         run: uv run python scripts/check_test_dependencies.py
       - name: Gates
