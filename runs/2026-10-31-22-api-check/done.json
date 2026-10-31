@@ -1,0 +1,24 @@
+{
+ "request": {
+  "id": "2026-10-31-22-api-check",
+  "kind": "api_check",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "stop_on_failure": false
+  },
+  "note": "Request 21 again with the replay key replaced on both sides and set as a single line: the live check asleep and awake, parity against the live URL and the load test with its cold start."
+ },
+ "github_run_id": "41249609957",
+ "commit": "25dfc5ea3c8a47e42a1d93c255c13e7b3a2262b3",
+ "started_at": "2026-10-31T22:47:25+00:00",
+ "status": "failed",
+ "error": "RuntimeError: api check steps failed: parity",
+ "finished_at": "2026-10-31T23:03:24+00:00",
+ "files": {
+  "demo/page@7f7d6361010db6f1471e7996abfd0d2e.webm": "6481cb08353e2c3a2da8ecab4992d59d8c039f5dda6fc342527f13b99de8764d",
+  "latency.json": "f85e1ea3a803ad6e77aaf2832e25af483484eae77170faf82eead48055a26f29",
+  "live_check.json": "446f3fa1ce4687f8303c9cd069f0ad7a9336c4a0c3d48913b879d51701944922",
+  "run.log": "5e54552b09d93dceee53d9a83d80eac7fe833a64b6173f09636375e5dcd1c762"
+ }
+}
