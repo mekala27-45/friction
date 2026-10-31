@@ -111,9 +111,12 @@ def _bundle_vars(request: Request) -> list[str]:
 
 def handle(request: Request, out: Path, log: Path) -> dict[str, Any]:
     if request.kind == "probe":
-        from friction_workspace.probe import run as probe_run
+        from friction_workspace import probe
 
-        findings = probe_run(out / "workspace_probe.json")
+        if request.params.get("set") == "v2":
+            findings = probe.run_v2(out / "workspace_probe_v2.json", int(request.params.get("wait_minutes", 30)))
+        else:
+            findings = probe.run(out / "workspace_probe.json")
         return {"summary": findings["summary"]}
     if request.kind == "secrets":
         from databricks.sdk import WorkspaceClient

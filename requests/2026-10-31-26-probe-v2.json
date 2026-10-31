@@ -1,0 +1,7 @@
+{
+ "id": "2026-10-31-26-probe-v2",
+ "kind": "probe",
+ "target": "dev",
+ "params": {"set": "v2", "wait_minutes": 35, "stop_on_failure": false},
+ "note": "What the next stage can use: a serving endpoint built from the Unity Catalog champion (created, waited on, queried once, deleted), AI/BI dashboards, Genie spaces, Delta Sharing, feature tables with a timeseries key, online tables and Lakebase."
+}

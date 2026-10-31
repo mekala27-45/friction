@@ -182,3 +182,139 @@ if __name__ == "__main__":
     except Exception:
         traceback.print_exc()
         sys.exit(1)
+
+
+def run_v2(out_path: Path, wait_minutes: int = 30) -> dict[str, Any]:
+    """The second probe, for the work after v0.1.0: model serving from Unity Catalog, AI/BI
+    dashboards, Genie spaces, Delta Sharing, feature tables with a timeseries key, online tables and
+    Lakebase. Anything created is named with the probe prefix and removed before exit."""
+    from databricks.sdk import WorkspaceClient
+    from databricks.sdk.service.serving import EndpointCoreConfigInput, ServedEntityInput
+    from databricks.sdk.service.sql import StatementState
+
+    w = WorkspaceClient()
+    suffix = hashlib.sha256(str(time.time()).encode()).hexdigest()[:6]
+    findings: dict[str, Any] = {"probed_at": datetime.now(UTC).isoformat(timespec="seconds")}
+    warehouse_id = next((wh.id for wh in w.warehouses.list()), None)
+
+    def sql(statement: str) -> Callable[[], Any]:
+        def inner() -> Any:
+            if warehouse_id is None:
+                raise RuntimeError("no SQL warehouse")
+            resp = w.statement_execution.execute_statement(
+                statement=statement, warehouse_id=warehouse_id, wait_timeout="50s"
+            )
+            if not resp.status or resp.status.state != StatementState.SUCCEEDED:
+                err = resp.status.error.message if resp.status and resp.status.error else "no status"
+                raise RuntimeError(err)
+            return None
+
+        return inner
+
+    schema = f"workspace.{PROBE_PREFIX}_{suffix}"
+    findings["schema_create"] = _attempt(sql(f"CREATE SCHEMA {schema}"))
+    findings["feature_table_timeseries_key"] = _attempt(
+        sql(
+            f"CREATE TABLE {schema}.ft (k STRING NOT NULL, ts TIMESTAMP NOT NULL, v DOUBLE, "
+            "CONSTRAINT ft_pk PRIMARY KEY (k, ts TIMESERIES))"
+        )
+    )
+    findings["change_data_feed"] = _attempt(
+        sql(f"ALTER TABLE {schema}.ft SET TBLPROPERTIES (delta.enableChangeDataFeed = true)")
+    )
+
+    dashboard_id: list[str] = []
+
+    def lakeview() -> Any:
+        from databricks.sdk.service.dashboards import Dashboard
+
+        body = {"pages": [{"name": "p", "displayName": "probe", "layout": []}]}
+        d = w.lakeview.create(Dashboard(display_name=f"{PROBE_PREFIX}_{suffix}", serialized_dashboard=json.dumps(body),
+                                        warehouse_id=warehouse_id))  # fmt: skip
+        dashboard_id.append(str(d.dashboard_id))
+        return {"created": True}
+
+    findings["lakeview_create"] = _attempt(lakeview)
+
+    def publish() -> Any:
+        if not dashboard_id:
+            raise RuntimeError("no dashboard to publish")
+        w.lakeview.publish(dashboard_id[0], warehouse_id=warehouse_id, embed_credentials=True)
+        return None
+
+    findings["lakeview_publish"] = _attempt(publish)
+    findings["genie_list_spaces"] = _attempt(lambda: len(w.genie.list_spaces().spaces or []))
+    space_id: list[str] = []
+
+    def genie() -> Any:
+        space = {
+            "version": 1,
+            "data_sources": {"tables": [{"identifier": "workspace.friction_dev_gold.mcc_fraud_rates"}]},
+        }
+        s = w.genie.create_space(warehouse_id=str(warehouse_id), serialized_space=json.dumps(space),
+                                 title=f"{PROBE_PREFIX}_{suffix}")  # fmt: skip
+        space_id.append(str(s.space_id))
+        return {"created": True}
+
+    findings["genie_create_space"] = _attempt(genie)
+    findings["shares_list"] = _attempt(lambda: len(list(w.shares.list_shares())))
+    findings["database_instances_list"] = _attempt(lambda: len(list(w.database.list_database_instances())))
+    findings["online_table_get"] = _attempt(lambda: w.online_tables.get(f"{schema}.ft_online") and None)
+
+    endpoint = f"friction-probe-{suffix}"
+
+    def serving() -> Any:
+        started = time.monotonic()
+        entity = ServedEntityInput(entity_name="workspace.friction_dev_ml.payments_lightgbm", entity_version="1",
+                                   workload_size="Small", scale_to_zero_enabled=True)  # fmt: skip
+        w.serving_endpoints.create(
+            name=endpoint, config=EndpointCoreConfigInput(name=endpoint, served_entities=[entity])
+        )
+        state = "unknown"
+        while time.monotonic() - started < wait_minutes * 60:
+            e = w.serving_endpoints.get(endpoint)
+            ready = e.state.ready.value if e.state and e.state.ready else "unknown"
+            update = e.state.config_update.value if e.state and e.state.config_update else "unknown"
+            state = f"{ready}/{update}"
+            if ready == "READY" or update in ("UPDATE_FAILED", "UPDATE_CANCELED"):
+                break
+            time.sleep(30)
+        return {"state": state, "minutes_to_state": round((time.monotonic() - started) / 60, 1)}
+
+    findings["serving_create_from_uc"] = _attempt(serving)
+    if findings["serving_create_from_uc"].get("detail", {}).get("state", "").startswith("READY"):
+
+        def query() -> Any:
+            from friction_features import payments
+
+            row = dict.fromkeys(payments.FEATURES, 0.0)
+            started = time.monotonic()
+            r = w.serving_endpoints.query(name=endpoint, dataframe_records=[row])
+            return {"predictions": len(r.predictions or []), "seconds": round(time.monotonic() - started, 2)}
+
+        findings["serving_query"] = _attempt(query)
+
+    cleanup = [
+        f"endpoint: {_attempt(lambda: w.serving_endpoints.delete(endpoint))['status']}",
+        f"schema: {_attempt(sql(f'DROP SCHEMA IF EXISTS {schema} CASCADE'))['status']}",
+    ]
+    if dashboard_id:
+        cleanup.append(f"dashboard: {_attempt(lambda: w.lakeview.trash(dashboard_id[0]))['status']}")
+    if space_id:
+        cleanup.append(f"genie space: {_attempt(lambda: w.genie.trash_space(space_id[0]))['status']}")
+    findings["cleanup"] = cleanup
+    allowed = {k: v.get("status") == "allowed" for k, v in findings.items() if isinstance(v, dict) and "status" in v}
+    serving_state = findings["serving_create_from_uc"].get("detail", {}).get("state", "")
+    findings["summary"] = {
+        "serving_from_uc": serving_state.startswith("READY") and allowed.get("serving_query", False),
+        "lakeview": allowed.get("lakeview_create", False),
+        "lakeview_publish": allowed.get("lakeview_publish", False),
+        "genie": allowed.get("genie_create_space", False),
+        "sharing": allowed.get("shares_list", False),
+        "feature_tables": allowed.get("feature_table_timeseries_key", False),
+        "lakebase": allowed.get("database_instances_list", False),
+        "online_tables_api": findings["online_table_get"].get("error") in (None, "NotFound", "ResourceDoesNotExist"),
+    }
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(findings, indent=1, sort_keys=True, default=str) + "\n", encoding="utf-8")
+    return findings
