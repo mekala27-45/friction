@@ -275,7 +275,9 @@ def handle(request: Request, out: Path, log: Path) -> dict[str, Any]:
         after = {
             a.alias_name: a.version_num for a in (w.registered_models.get(name, include_aliases=True).aliases or [])
         }
-        return {"model": name, "aliases_before": before, "aliases_after": after}
+        record = {"model": name, "version": version, "aliases_before": before, "aliases_after": after}
+        (out / "aliases.json").write_text(json.dumps(record, indent=1, sort_keys=True) + "\n", encoding="utf-8")
+        return record
     if request.kind == "api_check":
         # The live API and the published site, checked from this runner, which holds the replay key:
         # the live check in a real browser after the API has been idle long enough to scale down
@@ -298,15 +300,20 @@ def handle(request: Request, out: Path, log: Path) -> dict[str, Any]:
             except RuntimeError:
                 failed.append(name)
 
-        _sleep(idle)
-        for name in ("asleep", "awake"):
-            video = ["--video", str(out / "demo")] if name == "awake" else []
-            step(f"live check {name}", [*tools, "python", "scripts/live_check.py", "--site", site, "--api", api,
-                                        "--name", name, "--out", str(out / "live_check.json"), *video])  # fmt: skip
-        step("parity", [*tools, "python", "scripts/check_parity.py", "--url", api, "--name", "live",
-                        "--out", str(out / "parity.json")])  # fmt: skip
-        _sleep(idle)
-        step("load test", [*tools, "python", "scripts/load_test.py", "--url", api, "--out", str(out / "latency.json")])
+        wanted = set(request.params.get("steps", ["live", "parity", "load"]))
+        if "live" in wanted:
+            _sleep(idle)
+            for name in ("asleep", "awake"):
+                video = ["--video", str(out / "demo")] if name == "awake" else []
+                step(f"live check {name}", [*tools, "python", "scripts/live_check.py", "--site", site, "--api", api,
+                                            "--name", name, "--out", str(out / "live_check.json"), *video])  # fmt: skip
+        if "parity" in wanted:
+            step("parity", [*tools, "python", "scripts/check_parity.py", "--url", api, "--name", "live",
+                            "--out", str(out / "parity.json")])  # fmt: skip
+        if "load" in wanted:
+            _sleep(idle)
+            step("load test", [*tools, "python", "scripts/load_test.py", "--url", api, "--out",
+                               str(out / "latency.json")])  # fmt: skip
         if failed:
             raise RuntimeError(f"api check steps failed: {', '.join(failed)}")
         return {"api_checked": True, "idle_seconds": idle}

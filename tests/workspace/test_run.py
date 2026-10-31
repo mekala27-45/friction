@@ -211,6 +211,8 @@ def test_model_alias_promotes_and_demotes(monkeypatch: pytest.MonkeyPatch, tmp_p
     result = json.loads((out / "2026-01-01-01-promote" / "done.json").read_text())["result"]
     assert result["aliases_before"] == {"champion": 2}
     assert result["aliases_after"] == {"champion": 3, "challenger": 2}
+    record = json.loads((out / "2026-01-01-01-promote" / "aliases.json").read_text())
+    assert record["version"] == 3 and record["aliases_after"]["champion"] == 3
 
 
 def test_api_check_runs_every_step_after_an_idle_wait(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
@@ -265,3 +267,17 @@ def test_the_workspace_host_leaves_the_logs() -> None:
     text = "Get https://dbc-0000aaaa-bbbb.cloud.databricks.com/api/2.0/fs and dbc-0000aaaa-bbbb again"
     out = run.redact(text, env)
     assert "dbc-0000aaaa-bbbb" not in out and out.count("<secret>") == 2
+
+
+def test_api_check_runs_only_the_steps_it_names(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    shell = FakeShell()
+    slept: list[int] = []
+    monkeypatch.setattr(run, "_sh", shell)
+    monkeypatch.setattr(run, "_sleep", slept.append)
+    monkeypatch.setenv("FRICTION_REPLAY_KEY", "k" * 48)
+    monkeypatch.setenv("FRICTION_API_URL", "https://api.example")
+    req, out = tmp_path / "requests", tmp_path / "runs"
+    _request(req, "2026-01-01-01-api", "api_check", params={"steps": ["parity"]})
+    assert _main(monkeypatch, req, out) == 0
+    scripts = [c[c.index("python") + 1] for c, _ in shell.calls if "python" in c]
+    assert scripts == ["scripts/check_parity.py"] and slept == []

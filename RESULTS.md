@@ -7,7 +7,7 @@ fails CI. Source of each block in its first line.
 
 ## The definition of done
 
-14 of eighteen lines done.
+15 of eighteen lines done.
 
 | Step | Status | Line | Evidence |
 |---:|---|---|---|
@@ -27,8 +27,8 @@ fails CI. Source of each block in its first line.
 | 14 | done | Persistence: independent connection, audit before response, shared transaction, out of process check | tests/api/test_api.py and tests/api/test_out_of_process.py against Postgres |
 | 15 | done | Monitoring with delayed label cohorts; the day 40 incident detected, handled by the runbook and written up | results/workspace/monitor_alerts.json (GitHub issue 1), results/incident.json, results/workspace/incident_drop.json, docs/incidents/2026-10-29-day-40.md |
 | 16 | done | Performance experiments and the compute ledger published | results/performance.json (Actions runner, full data), results/compute_ledger.json (wall seconds per request; with workspace usage from system.billing.usage) |
-| 17 | not done | The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS | the site deploys to Pages from CI and every route passes its test; missing: the live check awake, the live check asleep, the latency with the cold start |
-| 18 | not done | Coverage, mypy, ruff, gates, skills valid, forty to sixty commits, the rederive, v0.1.0 after the commits | CI is green on coverage, mypy, ruff and the gates; results/rederive.json has no drift; missing: forty to sixty commits (main has 96), lines 12, 13, 17 done |
+| 17 | done | The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS | results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (35 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr |
+| 18 | not done | Coverage, mypy, ruff, gates, skills valid, forty to sixty commits, the rederive, v0.1.0 after the commits | CI is green on coverage, mypy, ruff and the gates; results/rederive.json has no drift; missing: forty to sixty commits (main has 102), lines 12, 13 done |
 
 Stretch items (the sequence challenger, a workspace endpoint, the dashboard and Genie space, the
 readback warehouse, BI exports, hardening): not started, and not counted.
@@ -234,6 +234,19 @@ validation, the five corrected together.
 | H3 | purchases abroad are more often fraud than purchases at home | 0.1778 | 0.0000 | 0.001 | supported |
 | H4 | a successful sign in from a new network (ASN) is more often an attack than one from a new city on a known network | 0.0001 | 0.0000 | 0.001 | supported |
 | H5 | sign ins from addresses on the attacker list fail more often than others | 0.4527 | 0.2552 | 0.001 | supported |
+
+## Serving
+
+The API runs as a container on Vercel with its online store and decision log in Neon; the site is
+static on Pages. Every check below ran from the Actions runner against the public addresses.
+
+| Check | Result |
+|---|---|
+| Real browser, API asleep | 9 of 9 routes with the statement; 20 of 20 slips scored live, 20 read back by a separate client, 0 differences; first answer after 4.0 s |
+| Real browser, API awake | 9 of 9 routes with the statement; 20 of 20 slips scored live, 20 read back by a separate client, 0 differences; first answer after 0.2 s |
+| Cold start, first /health after the idle wait | 3,950 ms |
+| Latency, payments, warm | p50 149 ms, p99 193 ms over 200 requests |
+| Latency, logins, warm | p50 146 ms, p99 179 ms over 200 requests |
 
 ## The rederive
 

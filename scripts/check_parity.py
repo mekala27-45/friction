@@ -30,12 +30,31 @@ TOLERANCE = 1e-9
 ROUTES = {"payments": "/v1/payments/score", "logins": "/v1/logins/score"}
 
 
+PART_BYTES = 2_000_000  # well under the 4.5 MB body Vercel accepts
+
+
+def parts(snapshot: dict[str, dict[str, Any]], limit: int = PART_BYTES) -> list[dict[str, dict[str, Any]]]:
+    """The snapshot split into parts whose JSON stays under the limit, every entry in exactly one."""
+    out: list[dict[str, dict[str, Any]]] = [{}]
+    size = 0
+    for kind, entries in snapshot.items():
+        for key, value in entries.items():
+            n = len(json.dumps(value)) + len(key) + 8
+            if size and size + n > limit:
+                out.append({})
+                size = 0
+            out[-1].setdefault(kind, {})[key] = value
+            size += n
+    return out
+
+
 def replay(post: Any, desk: str, parity: dict[str, Any], key: str) -> dict[str, Any]:
     ns = f"parity-{desk}"
     auth = {"authorization": f"Bearer {key}"}
-    r = post("/v1/admin/seed", {"namespace": ns, "snapshot": parity["snapshot"]}, auth)
-    if r.status_code != 200:
-        raise RuntimeError(f"seed failed: {r.status_code} {r.text[:200]}")
+    for i, part in enumerate(parts(parity["snapshot"])):
+        r = post("/v1/admin/seed", {"namespace": ns, "snapshot": part, "replace": i == 0}, auth)
+        if r.status_code != 200:
+            raise RuntimeError(f"seed part {i} failed: {r.status_code} {r.text[:200]}")
     expected = {e["event_ref"]: e for e in parity["expected"]}
     headers = {**auth, "x-friction-namespace": ns}
     mismatches: list[dict[str, Any]] = []

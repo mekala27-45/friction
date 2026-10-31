@@ -1,5 +1,5 @@
 {
- "as_of": "2026-10-30",
+ "as_of": "2026-10-31",
  "classification": [
   {
    "classification": "restricted",
@@ -1196,7 +1196,7 @@
  "monitor": null,
  "parity": {
   "local": {
-   "at": "2026-10-30T06:34:08Z",
+   "at": "2026-10-31T23:04:31Z",
    "logins": {
     "codes_equal": 286,
     "compared": 286,
@@ -1205,7 +1205,7 @@
     "max_abs_score_difference": 0.0,
     "mismatches": [],
     "model": "floor",
-    "seconds": 3.2
+    "seconds": 3.1
    },
    "payments": {
     "codes_equal": 1000,
@@ -1215,7 +1215,7 @@
     "max_abs_score_difference": 0.0,
     "mismatches": [],
     "model": "lightgbm",
-    "seconds": 6.2
+    "seconds": 6.0
    },
    "target": "local",
    "url": null
@@ -3815,15 +3815,15 @@
     ],
     [
      "17",
-     "not done",
+     "done",
      "The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS",
-     "the site deploys to Pages from CI and every route passes its test; missing: the live check awake, the live check asleep, the latency with the cold start"
+     "results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (35 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr"
     ],
     [
      "18",
      "not done",
      "Coverage, mypy, ruff, gates, skills valid, forty to sixty commits, the rederive, v0.1.0 after the commits",
-     "CI is green on coverage, mypy, ruff and the gates; results/rederive.json has no drift; missing: forty to sixty commits (main has 96), lines 12, 13, 17 done"
+     "CI is green on coverage, mypy, ruff and the gates; results/rederive.json has no drift; missing: forty to sixty commits (main has 102), lines 12, 13 done"
     ]
    ],
    "source": "build"
@@ -4925,6 +4925,40 @@
    ],
    "source": "build"
   },
+  "serving.checks": {
+   "align": [
+    "left",
+    "left"
+   ],
+   "columns": [
+    "Check",
+    "Result"
+   ],
+   "origin": "scripts/check_parity.py, scripts/live_check.py, scripts/load_test.py (request kind api_check, on the Actions runner)",
+   "rows": [
+    [
+     "Real browser, API asleep",
+     "9 of 9 routes with the statement; 20 of 20 slips scored live, 20 read back by a separate client, 0 differences; first answer after 4.0 s"
+    ],
+    [
+     "Real browser, API awake",
+     "9 of 9 routes with the statement; 20 of 20 slips scored live, 20 read back by a separate client, 0 differences; first answer after 0.2 s"
+    ],
+    [
+     "Cold start, first /health after the idle wait",
+     "3,950 ms"
+    ],
+    [
+     "Latency, payments, warm",
+     "p50 149 ms, p99 193 ms over 200 requests"
+    ],
+    [
+     "Latency, logins, warm",
+     "p50 146 ms, p99 179 ms over 200 requests"
+    ]
+   ],
+   "source": "live"
+  },
   "workspace.probe": {
    "align": [
     "left",
@@ -5065,9 +5099,9 @@
   }
  },
  "values": {
-  "build.commits": "96",
-  "checklist.done": "14",
-  "checklist.missing": "12, 13, 17, 18",
+  "build.commits": "102",
+  "checklist.done": "15",
+  "checklist.missing": "12, 13, 18",
   "data.rba.asn_unrealistic": "1,457,824",
   "data.rba.attack_ip": "3,096,977",
   "data.rba.digest": "ca1d974e97ae",

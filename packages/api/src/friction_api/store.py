@@ -171,12 +171,14 @@ class Store:
         out["created_at"] = out["created_at"].isoformat()
         return out
 
-    def seed(self, namespace: str, snapshot: dict[str, Any]) -> dict[str, int]:
-        """Replace a namespace's state with a snapshot: {kind: {key: state}, "card_issues": {key: [..]}}."""
+    def seed(self, namespace: str, snapshot: dict[str, Any], replace: bool = True) -> dict[str, int]:
+        """Replace a namespace's state with a snapshot: {kind: {key: state}, "card_issues": {key: [..]}}.
+        With replace off the snapshot is one more part of the same seed and is added to what is there."""
         counts: dict[str, int] = {}
         with self.connect() as conn:
-            conn.execute("DELETE FROM online_state WHERE namespace = %s", (namespace,))
-            conn.execute("DELETE FROM card_issues WHERE namespace = %s", (namespace,))
+            if replace:
+                conn.execute("DELETE FROM online_state WHERE namespace = %s", (namespace,))
+                conn.execute("DELETE FROM card_issues WHERE namespace = %s", (namespace,))
             for kind, entries in snapshot.items():
                 if kind == "card_issues":
                     for key, issued in entries.items():

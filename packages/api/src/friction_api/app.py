@@ -32,6 +32,9 @@ BUDGET_PER_HOUR = 60
 class SeedIn(BaseModel):
     namespace: str
     snapshot: dict[str, dict[str, Any]]
+    # The first part of a snapshot replaces the namespace; the parts after it add to it. A host caps
+    # the request body (Vercel at 4.5 MB), so a large snapshot arrives in parts.
+    replace: bool = True
 
 
 def _version() -> str:
@@ -130,7 +133,7 @@ def create_app(store: Store, bundles: dict[str, Bundle], replay_key: str | None 
     def seed(body: SeedIn) -> dict[str, Any]:
         if body.namespace == PUBLIC:
             raise HTTPException(status_code=400, detail="the public namespace is never reseeded")
-        return {"namespace": body.namespace, "seeded": store.seed(body.namespace, body.snapshot)}
+        return {"namespace": body.namespace, "seeded": store.seed(body.namespace, body.snapshot, replace=body.replace)}
 
     @app.get("/v1/admin/state/{namespace}/{kind}/{key}", dependencies=[Depends(require_key)])
     def state(namespace: str, kind: str, key: str) -> dict[str, Any]:

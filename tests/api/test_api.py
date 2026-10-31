@@ -152,3 +152,25 @@ def test_the_image_reports_the_package_version() -> None:
     import friction_api
 
     assert friction_api.__version__ == version("friction-api")
+
+
+def test_a_snapshot_seeded_in_parts_equals_one_seeded_whole(client, store) -> None:  # type: ignore[no-untyped-def]
+    from scripts.check_parity import parts
+
+    snapshot = {"card": {f"c{i}": {"n": i, "pad": "x" * 50} for i in range(30)},
+                "card_issues": {f"c{i}": [1_600_000_000 + i] for i in range(30)}}  # fmt: skip
+    pieces = parts(snapshot, limit=400)
+    assert len(pieces) > 3
+    assert sum(len(p.get("card", {})) for p in pieces) == 30
+    ns = new_namespace()
+    for i, part in enumerate(pieces):
+        r = client.post("/v1/admin/seed", json={"namespace": ns, "snapshot": part, "replace": i == 0},
+                        headers=key_headers())  # fmt: skip
+        assert r.status_code == 200
+    assert store.state(ns, "card", "c29")["n"] == 29
+    whole = new_namespace()
+    client.post("/v1/admin/seed", json={"namespace": whole, "snapshot": snapshot}, headers=key_headers())
+    for i in (0, 15, 29):
+        assert store.state(ns, "card", f"c{i}") == store.state(whole, "card", f"c{i}")
+    client.post("/v1/admin/seed", json={"namespace": ns, "snapshot": pieces[0]}, headers=key_headers())
+    assert store.state(ns, "card", "c29") is None  # a first part replaces what was there

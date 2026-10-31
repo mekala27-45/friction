@@ -1,0 +1,7 @@
+{
+ "id": "2026-10-31-23-api-parity",
+ "kind": "api_check",
+ "target": "dev",
+ "params": {"steps": ["parity"], "stop_on_failure": false},
+ "note": "Parity against the live URL with the snapshot seeded in parts under the 4.5 MB body Vercel accepts. Request 22 passed the live checks and the load test."
+}

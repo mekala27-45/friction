@@ -119,6 +119,15 @@ validation, the five corrected together.
 {{ table("eval.hypotheses") }}
 {% endif %}
 
+{% if has("serving.checks") %}
+## Serving
+
+The API runs as a container on Vercel with its online store and decision log in Neon; the site is
+static on Pages. Every check below ran from the Actions runner against the public addresses.
+
+{{ table("serving.checks") }}
+{% endif %}
+
 {% if has("rederive.checks") %}
 ## The rederive
 

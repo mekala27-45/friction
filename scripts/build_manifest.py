@@ -557,6 +557,37 @@ def live(b: Builder) -> None:
                         src,
                     )
 
+    rows = []
+    live = (parity or {}).get("live") or {}
+    for desk in ("payments", "logins"):
+        if desk in live:
+            d = live[desk]
+            rows.append([f"Parity on the live URL, {desk}", f"{d['decisions_equal']:,} of {d['compared']:,} decisions "
+                         f"equal, largest score difference {d['max_abs_score_difference']:.1e}"])  # fmt: skip
+    checks = _load("results/live_check.json") or {}
+    for name in ("asleep", "awake"):
+        r = (checks.get(name) or {}).get("replay")
+        if r:
+            routes = checks[name]["routes"]
+            ok = sum(x["status"] == 200 and x["statement"] for x in routes)
+            rows.append([f"Real browser, API {name}", f"{ok} of {len(routes)} routes with the statement; "
+                         f"{r['live_slips']} of {r['slips']} slips scored live, {r['decisions_read_back']} read back "
+                         f"by a separate client, {len(r['mismatches'])} differences; first answer after "
+                         f"{r['seconds_to_mode']:.1f} s"])  # fmt: skip
+    latency = _load("results/latency.json") or {}
+    if "cold_start_ms" in latency:
+        rows.append(["Cold start, first /health after the idle wait", f"{latency['cold_start_ms']:,} ms"])
+        for desk in ("payments", "logins"):
+            if desk in latency:
+                d = latency[desk]
+                rows.append([f"Latency, {desk}, warm", f"p50 {d['p50_ms']} ms, p99 {d['p99_ms']} ms over "
+                             f"{d['n']} requests"])  # fmt: skip
+    if rows:
+        b.m.table("serving.checks", ["Check", "Result"], ["text", "text"], rows,
+                  origin="scripts/check_parity.py, scripts/live_check.py, scripts/load_test.py (request kind "
+                         "api_check, on the Actions runner)", population="the API on Vercel and the site on Pages",
+                  source="live")  # fmt: skip
+
 
 CHECKLIST = [
     (1, "Both sources fetched with digests in Actions, profiled at full size, quarantine rules, contracts, provenance"),
