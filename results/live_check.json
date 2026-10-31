@@ -1,0 +1,156 @@
+{
+ "asleep": {
+  "at": "2026-10-31T22:28:15Z",
+  "failures": [],
+  "health": {
+   "models": {
+    "logins": "floor",
+    "payments": "lightgbm"
+   },
+   "version": "0.1.0"
+  },
+  "replay": {
+   "decisions_read_back": 20,
+   "live_slips": 20,
+   "mismatches": [],
+   "mode": "live",
+   "seconds_to_all_slips": 7.0,
+   "seconds_to_mode": 3.99,
+   "slips": 20
+  },
+  "routes": [
+   {
+    "route": "/",
+    "seconds": 0.78,
+    "statement": true,
+    "status": 200
+   },
+   {
+    "route": "/payments/",
+    "seconds": 0.58,
+    "statement": true,
+    "status": 200
+   },
+   {
+    "route": "/logins/",
+    "seconds": 0.66,
+    "statement": true,
+    "status": 200
+   },
+   {
+    "route": "/platform/",
+    "seconds": 0.59,
+    "statement": true,
+    "status": 200
+   },
+   {
+    "route": "/governance/",
+    "seconds": 0.57,
+    "statement": true,
+    "status": 200
+   },
+   {
+    "route": "/operations/",
+    "seconds": 0.58,
+    "statement": true,
+    "status": 200
+   },
+   {
+    "route": "/replay/",
+    "seconds": 0.62,
+    "statement": true,
+    "status": 200
+   },
+   {
+    "route": "/models/",
+    "seconds": 0.61,
+    "statement": true,
+    "status": 200
+   },
+   {
+    "route": "/report/",
+    "seconds": 0.57,
+    "statement": true,
+    "status": 200
+   }
+  ],
+  "site": "https://mekala27-45.github.io/friction"
+ },
+ "awake": {
+  "at": "2026-10-31T22:28:33Z",
+  "failures": [],
+  "health": {
+   "models": {
+    "logins": "floor",
+    "payments": "lightgbm"
+   },
+   "version": "0.1.0"
+  },
+  "replay": {
+   "decisions_read_back": 20,
+   "live_slips": 20,
+   "mismatches": [],
+   "mode": "live",
+   "seconds_to_all_slips": 2.68,
+   "seconds_to_mode": 0.17,
+   "slips": 20
+  },
+  "routes": [
+   {
+    "route": "/",
+    "seconds": 0.62,
+    "statement": true,
+    "status": 200
+   },
+   {
+    "route": "/payments/",
+    "seconds": 0.55,
+    "statement": true,
+    "status": 200
+   },
+   {
+    "route": "/logins/",
+    "seconds": 0.55,
+    "statement": true,
+    "status": 200
+   },
+   {
+    "route": "/platform/",
+    "seconds": 0.54,
+    "statement": true,
+    "status": 200
+   },
+   {
+    "route": "/governance/",
+    "seconds": 0.54,
+    "statement": true,
+    "status": 200
+   },
+   {
+    "route": "/operations/",
+    "seconds": 0.54,
+    "statement": true,
+    "status": 200
+   },
+   {
+    "route": "/replay/",
+    "seconds": 0.55,
+    "statement": true,
+    "status": 200
+   },
+   {
+    "route": "/models/",
+    "seconds": 0.55,
+    "statement": true,
+    "status": 200
+   },
+   {
+    "route": "/report/",
+    "seconds": 0.54,
+    "statement": true,
+    "status": 200
+   }
+  ],
+  "site": "https://mekala27-45.github.io/friction"
+ }
+}

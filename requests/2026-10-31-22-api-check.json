@@ -1,0 +1,7 @@
+{
+ "id": "2026-10-31-22-api-check",
+ "kind": "api_check",
+ "target": "dev",
+ "params": {"stop_on_failure": false},
+ "note": "Request 21 again with the replay key replaced on both sides and set as a single line: the live check asleep and awake, parity against the live URL and the load test with its cold start."
+}

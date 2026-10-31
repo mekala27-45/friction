@@ -10,7 +10,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
 import statistics
 import sys
 import time
@@ -20,6 +19,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 import httpx
+from friction_core.secrets import single_line
 
 
 def pct(values: list[float], q: float) -> float:
@@ -33,7 +33,7 @@ def main() -> int:
     parser.add_argument("--requests", type=int, default=200)
     parser.add_argument("--out", type=Path, default=ROOT / "results" / "latency.json")
     args = parser.parse_args()
-    key = os.environ["FRICTION_REPLAY_KEY"]
+    key = single_line("FRICTION_REPLAY_KEY")
     headers = {"authorization": f"Bearer {key}", "x-friction-namespace": "loadtest"}
     client = httpx.Client(base_url=args.url, timeout=120)
     t = time.monotonic()

@@ -47,7 +47,7 @@ def client_hash(request: Request) -> str:
     """The client address, hashed with a key, so the budget table never holds an address."""
     forwarded = request.headers.get("x-forwarded-for", "")
     address = forwarded.split(",")[0].strip() or (request.client.host if request.client else "unknown")
-    key = os.environ.get("FRICTION_CLIENT_KEY") or os.environ.get("FRICTION_SALT") or "friction-client"
+    key = (os.environ.get("FRICTION_CLIENT_KEY") or os.environ.get("FRICTION_SALT") or "friction-client").strip()
     return hmac.new(key.encode(), address.encode(), hashlib.sha256).hexdigest()[:32]
 
 
@@ -151,4 +151,6 @@ def from_environment(loader: Callable[[Path], Bundle] = Bundle.load) -> FastAPI:
     store = Store(os.environ["DATABASE_URL"])
     store.migrate()
     origins = [o for o in os.environ.get("FRICTION_CORS_ORIGINS", "").split(",") if o]
-    return create_app(store, bundles, os.environ.get("FRICTION_REPLAY_KEY"), origins)
+    # A key pasted into a dashboard often brings a trailing newline with it.
+    replay_key = os.environ.get("FRICTION_REPLAY_KEY", "").strip() or None
+    return create_app(store, bundles, replay_key, origins)

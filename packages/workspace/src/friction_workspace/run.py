@@ -52,6 +52,11 @@ def redact(text: str, env: dict[str, str]) -> str:
     """
     values = {v for k in SECRET_ENV if len(v := env.get(k, "")) >= 8}
     values |= {neon_endpoint(v) for v in set(values) if "://" in v}
+    # A value pasted with a line break leaks in pieces, or escaped inside a printed bytes repr (an
+    # HTTP client refusing the header once printed the replay key that way): each form goes too.
+    for v in set(values):
+        values |= {line.strip() for line in v.splitlines() if len(line.strip()) >= 8}
+        values |= {v.encode("unicode_escape").decode("ascii"), repr(v)[1:-1]}
     # The workspace host is not a credential, but it names the account; it leaves the logs too.
     host = env.get("DATABRICKS_HOST", "").split("://")[-1].strip("/")
     if len(host) >= 8:

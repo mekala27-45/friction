@@ -1,6 +1,17 @@
 {
  "promoted": [
   {
+   "file": "results/demo/live_check_awake.webm",
+   "sha256": "13bb6b9f7310701117fe6b3e3022e4eca11e563488d25b6a42e662c1a14d7ea1",
+   "request": "2026-10-31-21-api-check",
+   "github_run_id": "41247685944",
+   "commit": "a292fdea6074ce8034bda279acfb9a1f5aff94f1",
+   "ran_at": "2026-10-31T22:35:49+00:00",
+   "promoted_at": "2026-10-31T22:39:21+00:00",
+   "request_status": "failed",
+   "failed_because": "the recording of the awake live check, which passed"
+  },
+  {
    "file": "results/evaluation.json",
    "sha256": "168194be83abe7526d245a113ab9473c10a420c7a47982342dba75c56c0a7512",
    "request": "2026-10-29-12-portable-full-models",
@@ -8,6 +19,17 @@
    "commit": "c48f3cd4ff9885ab26c25b75a039b4d0d10aa070",
    "ran_at": "2026-10-29T21:16:28+00:00",
    "promoted_at": "2026-10-29T21:21:15+00:00"
+  },
+  {
+   "file": "results/live_check.json",
+   "sha256": "b51ac75a6aaf28705483e8be6ed092e29e796a4f48dc31a1b4b23812326cbf36",
+   "request": "2026-10-31-21-api-check",
+   "github_run_id": "41247685944",
+   "commit": "a292fdea6074ce8034bda279acfb9a1f5aff94f1",
+   "ran_at": "2026-10-31T22:35:49+00:00",
+   "promoted_at": "2026-10-31T22:39:21+00:00",
+   "request_status": "failed",
+   "failed_because": "the live checks passed; parity and the load test were refused locally because the replay key secret held two lines"
   },
   {
    "file": "results/models/logins/bundle.json",

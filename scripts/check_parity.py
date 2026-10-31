@@ -24,6 +24,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if __package__ in {None, ""}:
     sys.path.insert(0, str(ROOT))
 
+from friction_core.secrets import single_line
+
 TOLERANCE = 1e-9
 ROUTES = {"payments": "/v1/payments/score", "logins": "/v1/logins/score"}
 
@@ -97,7 +99,7 @@ def main() -> int:
     else:
         import httpx
 
-        key = os.environ["FRICTION_REPLAY_KEY"]
+        key = single_line("FRICTION_REPLAY_KEY")
         http = httpx.Client(base_url=args.url, timeout=60)
 
         def post(path: str, body: Any, headers: dict[str, str]) -> Any:
