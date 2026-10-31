@@ -5,6 +5,11 @@ name: release
 on:
   push:
     tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "An existing tag whose release needs its assets"
+        required: true
 
 permissions:
   contents: write
@@ -15,6 +20,8 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || github.ref }}
       - uses: astral-sh/setup-uv@v6
         with:
           python-version: "3.12"
@@ -30,6 +37,12 @@ jobs:
       - name: Release
         env:
           GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag || github.ref_name }}
+        # A release published by hand from the tag already has its notes; it only needs the assets.
         run: |
-          gh release create "$GITHUB_REF_NAME" --title "friction $GITHUB_REF_NAME" --notes-file RESULTS.md \
-            results/manifest.json results/evaluation.json
+          if gh release view "$TAG" > /dev/null 2>&1; then
+            gh release upload "$TAG" results/manifest.json results/evaluation.json --clobber
+          else
+            gh release create "$TAG" --title "friction $TAG" --notes-file RESULTS.md \
+              results/manifest.json results/evaluation.json
+          fi
