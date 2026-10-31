@@ -1,0 +1,11 @@
+{
+ "aliases_after": {
+  "challenger": 1,
+  "champion": 1
+ },
+ "aliases_before": {
+  "challenger": 1
+ },
+ "model": "workspace.friction_dev_ml.payments_lightgbm",
+ "version": 1
+}

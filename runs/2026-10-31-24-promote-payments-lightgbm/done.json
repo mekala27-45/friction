@@ -1,0 +1,33 @@
+{
+ "request": {
+  "id": "2026-10-31-24-promote-payments-lightgbm",
+  "kind": "model_alias",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "model": "workspace.friction_dev_ml.payments_lightgbm",
+   "version": 1,
+   "alias": "champion"
+  },
+  "note": "Every gate holds for the payments LightGBM: dollar capture above the floor with the interval clear of zero, friction within the budget, calibration error 0.00008, PSI 0.002, reason code coverage 100 percent, parity on the live URL 1000 of 1000 decisions equal with score difference 0, warm p99 193 ms against a 3000 ms bound. Version 1 is the one the train job registered, byte identical to the served file. No login model cleared every gate; that desk keeps its floor."
+ },
+ "github_run_id": "41251721254",
+ "commit": "aaa953f50cebc2a0acdb4877e76622d7eee60fc0",
+ "started_at": "2026-10-31T23:16:54+00:00",
+ "result": {
+  "model": "workspace.friction_dev_ml.payments_lightgbm",
+  "version": 1,
+  "aliases_before": {
+   "challenger": 1
+  },
+  "aliases_after": {
+   "challenger": 1,
+   "champion": 1
+  }
+ },
+ "status": "succeeded",
+ "finished_at": "2026-10-31T23:16:56+00:00",
+ "files": {
+  "aliases.json": "c346c4851944621d5a43c52c8c0dbf737b9566045a77d547975f1556395fb1e9"
+ }
+}
