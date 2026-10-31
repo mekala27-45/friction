@@ -38,7 +38,9 @@ def _version() -> str:
     try:
         return version("friction-api")
     except PackageNotFoundError:
-        return "0.0.0"
+        from friction_api import __version__
+
+        return __version__
 
 
 def client_hash(request: Request) -> str:

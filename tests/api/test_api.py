@@ -144,3 +144,11 @@ def test_the_container_layout_starts(bundles, store, monkeypatch) -> None:  # ty
 
     health = TestClient(app_module.from_environment()).get("/health").json()
     assert sorted(health["models"]) == ["logins", "payments"]
+
+
+def test_the_image_reports_the_package_version() -> None:
+    from importlib.metadata import version
+
+    import friction_api
+
+    assert friction_api.__version__ == version("friction-api")
