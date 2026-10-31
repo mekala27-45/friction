@@ -287,7 +287,7 @@ Traceback (most recent call last):
     self.gen.throw(value)
   File "/home/runner/work/_temp/setup-uv-cache/archive-v0/7xCKnoi41VIVma40/lib/python3.12/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
     raise to_exc(exc) from exc
-httpcore.LocalProtocolError: Illegal header value b'Bearer k7Qm2xR9vT4bL8nW3pZ6cF1hJ5sD0gY2uE7aK9mN4qV8rB3x\nP3wN8fL1zQ6tY9kD2mH7cR4vB0xJ5sG8nA1eU6pW3qT9yZ2B\n'
+httpcore.LocalProtocolError: Illegal header value b'Bearer <secret>'
 
 The above exception was the direct cause of the following exception:
 
@@ -329,7 +329,7 @@ Traceback (most recent call last):
     self.gen.throw(value)
   File "/home/runner/work/_temp/setup-uv-cache/archive-v0/7xCKnoi41VIVma40/lib/python3.12/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
     raise mapped_exc(message) from exc
-httpx.LocalProtocolError: Illegal header value b'Bearer k7Qm2xR9vT4bL8nW3pZ6cF1hJ5sD0gY2uE7aK9mN4qV8rB3x\nP3wN8fL1zQ6tY9kD2mH7cR4vB0xJ5sG8nA1eU6pW3qT9yZ2B\n'
+httpx.LocalProtocolError: Illegal header value b'Bearer <secret>'
 [exit 1]
 $ uv run --no-sync --with playwright==1.63.0 --with httpx python scripts/load_test.py --url https://friction-rose.vercel.app --out results-branch/runs/2026-10-31-21-api-check/latency.json
 Traceback (most recent call last):
@@ -357,7 +357,7 @@ Traceback (most recent call last):
     self.gen.throw(value)
   File "/home/runner/work/_temp/setup-uv-cache/archive-v0/7xCKnoi41VIVma40/lib/python3.12/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
     raise to_exc(exc) from exc
-httpcore.LocalProtocolError: Illegal header value b'Bearer k7Qm2xR9vT4bL8nW3pZ6cF1hJ5sD0gY2uE7aK9mN4qV8rB3x\nP3wN8fL1zQ6tY9kD2mH7cR4vB0xJ5sG8nA1eU6pW3qT9yZ2B\n'
+httpcore.LocalProtocolError: Illegal header value b'Bearer <secret>'
 
 The above exception was the direct cause of the following exception:
 
@@ -393,5 +393,5 @@ Traceback (most recent call last):
     self.gen.throw(value)
   File "/home/runner/work/_temp/setup-uv-cache/archive-v0/7xCKnoi41VIVma40/lib/python3.12/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
     raise mapped_exc(message) from exc
-httpx.LocalProtocolError: Illegal header value b'Bearer k7Qm2xR9vT4bL8nW3pZ6cF1hJ5sD0gY2uE7aK9mN4qV8rB3x\nP3wN8fL1zQ6tY9kD2mH7cR4vB0xJ5sG8nA1eU6pW3qT9yZ2B\n'
+httpx.LocalProtocolError: Illegal header value b'Bearer <secret>'
 [exit 1]
