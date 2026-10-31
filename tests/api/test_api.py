@@ -127,3 +127,20 @@ def test_login_floor_steps_up_a_new_country_after_history(client) -> None:  # ty
         assert client.post("/v1/logins/score", json=login(300 + i, i)).json()["verdict"] == "approve"
     r = client.post("/v1/logins/score", json=login(310, 20, country="BR", asn=7738)).json()
     assert r["verdict"] == "step_up" and "L02" in r["codes"]
+
+
+def test_the_container_layout_starts(bundles, store, monkeypatch) -> None:  # type: ignore[no-untyped-def]
+    """In the image the module is three folders deep: /app/src/friction_api/app.py. The repository
+    fallback for the models folder must not be worked out when FRICTION_MODELS is set (the first
+    Vercel deployment failed on exactly that)."""
+    import os
+
+    from friction_api import app as app_module
+
+    monkeypatch.setattr(app_module, "__file__", "/app/src/friction_api/app.py")
+    monkeypatch.setenv("FRICTION_MODELS", str(next(iter(bundles.values())).parent))
+    monkeypatch.setenv("DATABASE_URL", os.environ["FRICTION_TEST_DATABASE_URL"])
+    from fastapi.testclient import TestClient
+
+    health = TestClient(app_module.from_environment()).get("/health").json()
+    assert sorted(health["models"]) == ["logins", "payments"]

@@ -141,7 +141,10 @@ def create_app(store: Store, bundles: dict[str, Bundle], replay_key: str | None 
 
 
 def from_environment(loader: Callable[[Path], Bundle] = Bundle.load) -> FastAPI:
-    root = Path(os.environ.get("FRICTION_MODELS", Path(__file__).resolve().parents[4] / "results" / "models"))
+    # The fallback is the repository layout and is worked out only when FRICTION_MODELS is unset: in
+    # the container the module sits three folders deep and a fourth parent does not exist.
+    models = os.environ.get("FRICTION_MODELS")
+    root = Path(models) if models else Path(__file__).resolve().parents[4] / "results" / "models"
     bundles = {p.parent.name: loader(p.parent) for p in sorted(root.glob("*/bundle.json"))}
     store = Store(os.environ["DATABASE_URL"])
     store.migrate()
