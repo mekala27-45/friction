@@ -1,0 +1,28 @@
+{
+ "request": {
+  "id": "2026-11-01-42-api-sequence-shadow",
+  "kind": "api_check",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "steps": [
+    "parity"
+   ],
+   "stop_on_failure": false
+  },
+  "note": "The live replay with the sequence model in shadow. results/parity/payments_shadow.json seeds each replayed card's last events beside its state, and the shadow's score, verdict and codes on every event are compared with the lake's. In process against Postgres: champion 1,000 of 1,000, shadow 1,000 of 1,000 with codes equal, worst score difference 3.0e-08, 3 shadow flags and 2 champion flags. The live shadow is bundle 8c05d97a."
+ },
+ "github_run_id": "41364286657",
+ "commit": "2feae4691eca48c37fa9a2f3e76b155e3b6d8ce8",
+ "started_at": "2026-11-01T23:55:04+00:00",
+ "result": {
+  "api_checked": true,
+  "idle_seconds": 420
+ },
+ "status": "succeeded",
+ "finished_at": "2026-11-01T23:59:47+00:00",
+ "files": {
+  "parity.json": "3ce81ad62cc42520b34be1c4436440a01589b7d1f5248e2e738d116855401487",
+  "run.log": "291408033768997aab3dcaa4cf9d3caf3e1b987a020f6c51fc32495266a358af"
+ }
+}
