@@ -1,0 +1,10 @@
+# The packages the scoring path imports; scripts/lock_serving.py pins them and their dependencies.
+numpy==2.5.4
+scipy==1.18.1
+lightgbm==4.7.0
+fastapi==0.162.0
+uvicorn==0.54.0
+psycopg[binary]==3.3.6
+pydantic==2.14.1
+pyyaml==6.0.3
+structlog==26.1.0

@@ -423,3 +423,14 @@ machine's proxy refuses, so it could not be locked. Scoring is a NumPy forward p
 arrays, tested equal to the JAX one, so the scoring path needs neither. Reason codes come from
 occlusion, each attribute set to its training mean on every step, because a recurrent network has no
 TreeSHAP and the coverage gate needs a code on every step up and decline.
+
+## 2026-11-01 The image installs by hash, and every workflow step is pinned
+
+The serving image now installs with pip's --require-hashes and --only-binary: all 22 packages of the
+scoring path, the dependencies included, pinned to the versions uv.lock resolved and to the hashes
+of their wheels (scripts/lock_serving.py, from packages/api/requirements-serving.in). A package
+swapped on the index, or a wheel built at install time, stops the build. Every action in the four
+workflows is pinned to a commit, with its tag in a comment, and every machine runs the uv that wrote
+the lock. A release carries the manifest, every evaluation, the BI extracts, a CycloneDX bill of
+materials exported from the lock, a SHA256SUMS file, and a build provenance attestation over all of
+them, so a reader can check where each asset was built and that it was not changed after.

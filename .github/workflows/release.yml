@@ -1,5 +1,7 @@
 # A release from a tag: the claim gate must pass on the tagged commit, then the release carries
-# RESULTS.md as its notes and the manifest and the evaluation as assets.
+# RESULTS.md as its notes and, as assets, the manifest, every evaluation, the BI extracts, a
+# CycloneDX bill of materials of the locked packages and a SHA256SUMS file, with a build provenance
+# attestation over all of them.
 name: release
 
 on:
@@ -13,17 +15,20 @@ on:
 
 permissions:
   contents: write
+  id-token: write
+  attestations: write
 
 jobs:
   release:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4
         with:
           ref: ${{ inputs.tag || github.ref }}
-      - uses: astral-sh/setup-uv@v6
+      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e  # v6
         with:
+          version: "0.11.32"
           python-version: "3.12"
       - run: uv sync --frozen --no-dev
       - name: The documents match the manifest on the tagged commit
@@ -34,6 +39,18 @@ jobs:
           uv run python scripts/check_no_em_dash.py
           uv run python scripts/check_tokens.py
           uv run python scripts/scan_for_planted_identifiers.py
+      - name: The assets, their bill of materials and their sums
+        run: |
+          mkdir -p dist
+          cp results/manifest.json results/evaluation.json dist/
+          for f in results/evaluation_v2.json results/evaluation_v3.json; do [ -f "$f" ] && cp "$f" dist/; done
+          if [ -d results/bi ]; then (cd results && zip -qr ../dist/bi.zip bi); fi
+          uv export --frozen --no-dev --format cyclonedx1.5 -o dist/sbom.cdx.json
+          (cd dist && sha256sum * > SHA256SUMS)
+          cat dist/SHA256SUMS
+      - uses: actions/attest-build-provenance@e8998f949152b193b063cb0ec769d69d929409be  # v2
+        with:
+          subject-path: dist/*
       - name: Release
         env:
           GH_TOKEN: ${{ github.token }}
@@ -41,8 +58,7 @@ jobs:
         # A release published by hand from the tag already has its notes; it only needs the assets.
         run: |
           if gh release view "$TAG" > /dev/null 2>&1; then
-            gh release upload "$TAG" results/manifest.json results/evaluation.json --clobber
+            gh release upload "$TAG" dist/* --clobber
           else
-            gh release create "$TAG" --title "friction $TAG" --notes-file RESULTS.md \
-              results/manifest.json results/evaluation.json
+            gh release create "$TAG" --title "friction $TAG" --notes-file RESULTS.md dist/*
           fi

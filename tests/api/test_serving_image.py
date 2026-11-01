@@ -16,10 +16,10 @@ def _locked() -> dict[str, str]:
 
 def test_serving_pins_match_the_lock() -> None:
     locked = _locked()
-    for line in (ROOT / "packages" / "api" / "requirements-serving.txt").read_text(encoding="utf-8").splitlines():
-        line = line.strip()
-        if not line or line.startswith("#"):
-            continue
+    text = (ROOT / "packages" / "api" / "requirements-serving.txt").read_text(encoding="utf-8")
+    pins = [line.strip().rstrip("\\").strip() for line in text.splitlines() if "==" in line and "--hash" not in line]
+    assert len(pins) >= 9 and text.count("--hash=sha256:") >= len(pins)
+    for line in pins:
         name, version = re.split(r"==", line)
         name = re.sub(r"\[.*\]", "", name).lower()
         assert locked[name] == version, f"{name}: image pins {version}, lock has {locked[name]}"
