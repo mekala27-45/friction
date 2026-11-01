@@ -5,7 +5,9 @@
 
 Fails when evaluation/plan.yaml hashes to something other than evaluation/plan.lock, or when no
 dated DECISIONS.md entry names the locked hash. The evaluate job checks the same lock before it
-scores a test month, so a plan cannot change after the fact without a dated record of it.
+scores a test month, so a plan cannot change after the fact without a dated record of it. An
+addendum (evaluation/plan_v2.yaml and later) is locked the same way, under addenda, and the
+challengers it registers are graded only when its hash matches too.
 """
 
 from __future__ import annotations
@@ -25,6 +27,7 @@ from friction_core.hashing import sha256_json
 PLAN = Path("evaluation/plan.yaml")
 HYPOTHESES = Path("evaluation/hypotheses.yaml")
 LOCK = Path("evaluation/plan.lock")
+ADDENDA = (Path("evaluation/plan_v2.yaml"),)
 
 
 def digest(root: Path, path: Path = PLAN) -> str:
@@ -35,6 +38,13 @@ def plan_digest(root: Path) -> str:
     return digest(root, PLAN)
 
 
+def addendum_hash(root: Path, path: Path) -> str:
+    """The locked hash of one addendum, after the whole registration checks."""
+    check(root)
+    lock = json.loads((root / LOCK).read_text(encoding="utf-8"))
+    return str(next(a["sha256"] for a in lock.get("addenda", []) if a["file"] == str(path)))
+
+
 def check(root: Path) -> str:
     if not (root / LOCK).exists():
         raise ValueError("evaluation/plan.lock does not exist")
@@ -43,6 +53,11 @@ def check(root: Path) -> str:
     entries = [(PLAN, lock["sha256"])]
     if "hypotheses" in lock:
         entries.append((HYPOTHESES, lock["hypotheses"]["sha256"]))
+    locked_addenda = {a["file"]: a["sha256"] for a in lock.get("addenda", [])}
+    for path in ADDENDA:
+        if (root / path).exists() and str(path) not in locked_addenda:
+            raise ValueError(f"{path} exists but evaluation/plan.lock does not lock it")
+    entries += [(Path(f), h) for f, h in sorted(locked_addenda.items())]
     for path, locked in entries:
         got = digest(root, path)
         if got != locked:
@@ -63,6 +78,10 @@ def main() -> int:
         lock.setdefault("file", str(PLAN))
         if (ROOT / HYPOTHESES).exists():
             lock.setdefault("hypotheses", {"sha256": digest(ROOT, HYPOTHESES), "file": str(HYPOTHESES)})
+        addenda = lock.setdefault("addenda", [])
+        for path in ADDENDA:
+            if (ROOT / path).exists() and str(path) not in {a["file"] for a in addenda}:
+                addenda.append({"sha256": digest(ROOT, path), "file": str(path)})
         (ROOT / LOCK).write_text(json.dumps(lock, indent=1) + "\n", encoding="utf-8")
         print(json.dumps(lock))
         return 0

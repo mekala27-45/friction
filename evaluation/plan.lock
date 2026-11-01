@@ -4,5 +4,11 @@
  "hypotheses": {
   "sha256": "2fa80e2d5af8ecb9c6256355daf59cadc6faf63533b9159a213c5af86772aab8",
   "file": "evaluation/hypotheses.yaml"
- }
+ },
+ "addenda": [
+  {
+   "sha256": "05221aecc25ae8f1334601436019bf738d9206516d2c3740f58dedb884ad9d04",
+   "file": "evaluation/plan_v2.yaml"
+  }
+ ]
 }

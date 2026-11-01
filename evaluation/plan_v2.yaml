@@ -1,0 +1,39 @@
+# The first addendum to the evaluation plan: challengers built on the graph features. Registered
+# before any challenger was scored on a validation or test month of either desk. The test months
+# were opened once already, for the models of evaluation/plan.yaml, so this comparison is not blind
+# to their base rates; it is blind to every challenger score. Everything not named here is as
+# evaluation/plan.yaml registers it: splits, label cuts, budgets, the operating point rule, the
+# intervals, the gates and their bounds. Its hash is in evaluation/plan.lock under addenda.
+registered_at: "2026-10-31"
+amends: evaluation/plan.yaml
+features:
+  source: packages/transforms/src/friction_transforms/graph.py
+  rule: every edge strictly before the event; a label only once the bank had it (its system time)
+  payments_structure: [m_cards_before, m_new_cards_7d, m_txn_7d]
+  payments_known_fraud: [m_fraud_cards_known, m_fraud_share, u_other_cards_known, card_known_fraud]
+  logins: [ip_users_before, ip_new_users_1d, ip_unknown_1h, asn_new_users_1h, ua_users_before]
+reason_codes: evaluation/reason_codes_v2.yaml
+desks:
+  payments:
+    challengers:
+      lightgbm_graph: the champion's learner and parameters on its features and every graph feature
+      lightgbm_structure: the same on its features and the structure features only (an ablation)
+    training: the champion's rows, sample and weights exactly (same seed, same keyed negative sample)
+    models: [floor, lightgbm, lightgbm_graph, lightgbm_structure]
+    family: [floor, lightgbm, lightgbm_graph]
+    primary: test dollar capture of lightgbm_graph minus lightgbm at the registered budget
+  logins:
+    challengers:
+      lightgbm_graph: the login LightGBM's learner and parameters on its features and every graph feature
+    training: the login LightGBM's rows, synthetic attacks and weights exactly
+    models: [floor, freeman, lightgbm, lightgbm_graph]
+    family: [floor, freeman, lightgbm, lightgbm_graph]
+    primary: test capture of attacks of lightgbm_graph minus lightgbm at the registered budget
+multiple_comparisons: {method: benjamini-hochberg, q: 0.05, family: every pair of the desk's family}
+promotion:
+  rule: >
+    A challenger replaces a desk's champion only if it clears every gate of evaluation/plan.yaml and
+    its difference in test capture against the champion has an interval clear of zero and above it.
+    A desk with no champion takes the challenger if it clears every gate. The ablation is graded and
+    reported and is never promoted.
+  serving: the API scores a promoted challenger in shadow first; it decides only after parity on the live URL

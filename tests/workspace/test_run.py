@@ -135,9 +135,27 @@ def test_portable_with_models_grades_and_exports(monkeypatch: pytest.MonkeyPatch
              params={"outbox_volume": "/Volumes/x/outbox", "drops": {"logins": "all"}, "models": True})  # fmt: skip
     assert _main(monkeypatch, req, out) == 0
     scripts = [c[1] for c, _ in shell.calls if "python" in c[0]]
-    assert scripts[-3:] == ["scripts/run_models.py", "scripts/grade.py", "scripts/export_models.py"]
+    assert scripts[-4:] == ["scripts/run_models.py", "scripts/summarize_lake.py", "scripts/grade.py",
+                            "scripts/export_models.py"]  # fmt: skip
     grade = next(c for c, _ in shell.calls if c[1:2] == ["scripts/grade.py"])
     assert grade[grade.index("--out") + 1].endswith("2026-01-01-01-portable/evaluation.json")
+    second = [c for c, _ in shell.calls if c[1:2] == ["scripts/summarize_lake.py"]][-1]
+    assert second[second.index("--out") + 1].endswith("summary_with_attacks.json")
+
+
+def test_portable_with_challengers_grades_them_after_the_first_plan(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    shell = FakeShell()
+    monkeypatch.setattr(run, "_sh", shell)
+    req, out = tmp_path / "requests", tmp_path / "runs"
+    params = {"outbox_volume": "/Volumes/x/outbox", "drops": {"logins": "all"}, "models": True, "challengers": True}
+    _request(req, "2026-01-01-01-portable", "portable", params=params)
+    assert _main(monkeypatch, req, out) == 0
+    scripts = [c[1] for c, _ in shell.calls if "python" in c[0]]
+    assert scripts[-3:] == ["scripts/export_models.py", "scripts/run_challengers.py", "scripts/grade_v2.py"]
+    v2 = next(c for c, _ in shell.calls if c[1:2] == ["scripts/grade_v2.py"])
+    assert v2[v2.index("--out") + 1].endswith("2026-01-01-01-portable/evaluation_v2.json")
 
 
 def test_a_failed_job_still_exports_its_evidence(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:

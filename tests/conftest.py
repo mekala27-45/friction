@@ -53,3 +53,11 @@ def _postgres_ok() -> bool:
 @pytest.fixture
 def root() -> Path:
     return ROOT
+
+
+@pytest.fixture(scope="session")
+def spark():  # type: ignore[no-untyped-def]
+    """One local Spark Connect session for every Spark test."""
+    from friction_transforms import session
+
+    return session.get(cores=2, shuffle_partitions=4)

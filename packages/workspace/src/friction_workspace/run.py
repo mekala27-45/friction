@@ -229,10 +229,25 @@ def handle(request: Request, out: Path, log: Path) -> dict[str, Any]:
             # the served bundles with their parity sets. Only small files leave the runner.
             work = ROOT / "data" / "work" / "models" / request.id
             _sh([sys.executable, "scripts/run_models.py", "--lake", str(lake), "--out", str(work)], log, env=spark_env)
+            # The workspace features task reads the attacks the train job wrote, so the reconcile of
+            # the login feature tables is against this second summary, taken with them.
+            _sh([sys.executable, "scripts/summarize_lake.py", "--lake", str(lake), "--engine", "local",
+                 "--out", str(out / "summary_with_attacks.json")], log, env=spark_env)  # fmt: skip
             _sh([sys.executable, "scripts/grade.py", "--scored", str(work / "scored"), "--source", "local",
                  "--out", str(out / "evaluation.json")], log, env=spark_env)  # fmt: skip
             _sh([sys.executable, "scripts/export_models.py", "--lake", str(lake), "--work", str(work),
                  "--evaluation", str(out / "evaluation.json"), "--out", str(out)], log, env=spark_env)  # fmt: skip
+            if request.params.get("challengers"):
+                # The challengers of evaluation/plan_v2.yaml on the same lake and the same v1 sets.
+                _sh([sys.executable, "scripts/run_challengers.py", "--lake", str(lake), "--out", str(work)], log,
+                    env=spark_env)  # fmt: skip
+                _sh([sys.executable, "scripts/grade_v2.py", "--scored", str(work / "scored"), "--scored-v2",
+                     str(work / "scored_v2"), "--models", str(work / "models"), "--source", "local",
+                     "--out", str(out / "evaluation_v2.json")], log, env=spark_env)  # fmt: skip
+                (out / "models_v2").mkdir(exist_ok=True)
+                v2 = work / "models" / "v2"
+                for path in sorted(v2.iterdir()) if v2.exists() else []:  # grade_v2 refuses a missing model
+                    (out / "models_v2" / path.name).write_bytes(path.read_bytes())
             for name in ("timings.json", "summary.json"):
                 if (work / name).exists():
                     (out / f"models_{name}").write_bytes((work / name).read_bytes())

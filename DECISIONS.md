@@ -367,6 +367,21 @@ addresses before it was cleaned; every early commit now carries the cleaned vers
 main holds them. The results branch and results/provenance.json still name commits from the
 history before; docs/history_map.json maps each of them to the commit that now holds its change.
 
+## 2026-10-31 The graph challengers are registered
+
+evaluation/plan_v2.yaml, sha256 05221aecc25ae8f1334601436019bf738d9206516d2c3740f58dedb884ad9d04,
+locked in evaluation/plan.lock under addenda before any challenger was scored on a validation or
+test month. The test months were opened once already, for the models of the first plan, so the
+addendum says so in its first lines: the comparison is blind to every challenger score, not to the
+base rates. Each challenger is the champion's learner with the same parameters, trained on the same
+rows with the same keyed negative sample, so the only difference is the columns. Four of the payment
+graph features read labels by the time the bank had them; a second payments challenger without them
+is graded beside the first, so the lift from structure and the lift from known fraud are measured
+apart. A challenger replaces a champion only with an interval of the difference clear of zero and
+above it, which is stricter than the first plan's rule of the best validation capture among the
+models that pass. The first plan, its hypotheses, its reason codes and every served v1 file are
+unchanged; the graph codes are in their own table (evaluation/reason_codes_v2.yaml).
+
 ## 2026-11-01 What the second probe found Free Edition allows
 
 results/workspace_probe_v2.json: a model serving endpoint created from the registered payments

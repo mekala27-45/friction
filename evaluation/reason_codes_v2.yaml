@@ -1,0 +1,10 @@
+# The codes of the graph features, added for the challengers of evaluation/plan_v2.yaml. The twelve
+# codes per desk in reason_codes.yaml are unchanged, so every served decision of the v1 models reads
+# exactly as before; a challenger's decision reads both tables (friction_models.challengers).
+payments:
+  P13: {says: other cards with known fraud have used this merchant, features: [m_fraud_cards_known, m_fraud_share]}
+  P14: {says: a burst of new cards or purchases at this merchant, features: [m_cards_before, m_new_cards_7d, m_txn_7d]}
+  P15: {says: this card or another card of the same customer already had a confirmed fraud, features: [u_other_cards_known, card_known_fraud]}
+logins:
+  L13: {says: many accounts or unknown account attempts from this address, features: [ip_users_before, ip_new_users_1d, ip_unknown_1h]}
+  L14: {says: many accounts new to this network or browser string, features: [asn_new_users_1h, ua_users_before]}

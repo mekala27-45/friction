@@ -35,6 +35,7 @@ Logins, per attempt (synthetic attacks are described against the real graph and 
 
 from __future__ import annotations
 
+from friction_features.graph import LOGIN_GRAPH, PAYMENT_GRAPH
 from pyspark.sql import Column, DataFrame, Window, WindowSpec
 from pyspark.sql import functions as F
 
@@ -42,9 +43,7 @@ DAY_S = 86_400
 HOUR_MS = 3_600_000
 DAY_MS = 86_400_000
 
-PAYMENT_GRAPH = ("m_cards_before", "m_new_cards_7d", "m_txn_7d", "m_fraud_cards_known", "m_fraud_share",
-                 "u_other_cards_known", "card_known_fraud")  # fmt: skip
-LOGIN_GRAPH = ("ip_users_before", "ip_new_users_1d", "ip_unknown_1h", "asn_new_users_1h", "ua_users_before")
+__all__ = ["DAY_MS", "DAY_S", "HOUR_MS", "LOGIN_GRAPH", "PAYMENT_GRAPH", "logins_graph", "payments_graph"]
 
 
 def _before(key: str, start: int | None = None) -> WindowSpec:
