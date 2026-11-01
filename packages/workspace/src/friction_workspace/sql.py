@@ -53,7 +53,12 @@ def run_file(path: Path, out: Path, values: dict[str, Any]) -> dict[str, Any]:
         if name:
             schema = resp.manifest.schema if resp.manifest else None
             columns = [c.name for c in (schema.columns or [])] if schema else []
-            rows = resp.result.data_array if resp.result and resp.result.data_array else []
+            rows = list(resp.result.data_array or []) if resp.result else []
+            chunk = resp.result.next_chunk_index if resp.result else None
+            while chunk is not None and resp.statement_id is not None:  # a result past one chunk
+                part = w.statement_execution.get_statement_result_chunk_n(resp.statement_id, chunk)
+                rows += list(part.data_array or [])
+                chunk = part.next_chunk_index
             (out / f"{name.group(1)}.json").write_text(
                 json.dumps({"columns": columns, "rows": rows}, indent=1) + "\n", encoding="utf-8"
             )
