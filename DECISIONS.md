@@ -434,3 +434,25 @@ workflows is pinned to a commit, with its tag in a comment, and every machine ru
 the lock. A release carries the manifest, every evaluation, the BI extracts, a CycloneDX bill of
 materials exported from the lock, a SHA256SUMS file, and a build provenance attestation over all of
 them, so a reader can check where each asset was built and that it was not changed after.
+
+## 2026-11-01 The graph challengers are graded, and no champion changes
+
+Request 27b ran the open source engine over every drop with the graph tables and graded
+evaluation/plan_v2.yaml against main's first evaluation, digest c75793821f76, unchanged. The graph
+tables reconcile with the workspace's: request 27a's export and the runner's summary agree on 11 of 11
+tables by digest, the two graph tables included (results/reconcile_v2.json).
+
+On payments the graph challenger cleared every gate and captured less than the champion on the test
+months, by 9.9 points with an interval of 14.4 to 5.1 below; the rule needs an interval above zero,
+so the champion stays. The ablation that keeps only the structure of the merchant graph captured
+more than the full challenger, which points at the counts of fraud already known; the addendum
+registered no test of that, so it stays a lead. The ablation sits outside the family, so it has no
+comparison with the floor and that gate reads as failed; it is never promoted in any case. On
+logins the graph challenger doubled the capture of the first LightGBM and stayed below the rules
+floor, so that desk stays on its floor.
+
+The same run graded the first evaluation again from its own fit. Every count, verdict, gate and
+threshold of the gradient boosted models is equal; the logistic's scores differ from the eighth
+significant digit, from a solver that adds in a different order on another machine. The largest
+relative difference anywhere in the file is 1.1e-8, and no count or verdict moves. That rerun is kept as
+results/workspace/evaluation_v1_rerun_27b.json; main's evaluation stays the record.

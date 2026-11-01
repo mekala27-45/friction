@@ -39,6 +39,13 @@ blocks of legitimate sign ins. Champion: none.
 Capture is of fraud dollars on the payments desk and of attacks on the login desk. ROC AUC and average
 precision are threshold free and sit in the last columns because they are not the decision.
 
+## After v0.1.0
+
+Graph features for fraud rings and a sequence model as registered challengers; the champion behind a
+Databricks serving endpoint; decisions streamed from bronze as each drop lands; drift that asks for a
+retrain only under a registered rule; a challenger in shadow behind the live API; feature tables with
+point in time lookups; an AI/BI dashboard, a graded Genie space, and Power BI and Tableau files whose
+measures reproduce the grade. RESULTS.md has every number.
 
 ## How it is built
 

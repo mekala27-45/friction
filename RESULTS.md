@@ -250,6 +250,30 @@ static on Pages. Every check below ran from the Actions runner against the publi
 | Latency, payments, warm | p50 149 ms, p99 193 ms over 200 requests |
 | Latency, logins, warm | p50 146 ms, p99 179 ms over 200 requests |
 
+## Challengers after v0.1.0
+
+Registered in two addenda before any challenger score existed: evaluation/plan_v2.yaml (the graph
+features) and evaluation/plan_v3.yaml (a sequence model). Each challenger is trained on its champion's
+rows and sample, graded on the same test months with the same code, and replaces a champion only
+with an interval of the difference clear of zero and above it.
+
+| Desk | Challenger | Test capture | Against the champion | Gates | Verdict |
+|---|---|---|---|---|---|
+| logins | lightgbm_graph (graph features) | 53.4% (53.0 to 53.7) | no champion | capture_above_floor | not promoted |
+| payments | lightgbm_graph (graph features) | 80.4% (75.9 to 84.8) | -9.9 points (-14.4 to -5.1), adjusted p 0.002 | every gate cleared | not promoted |
+| payments | lightgbm_structure (graph features) | 91.4% (88.0 to 94.2) | outside the family | capture_above_floor, friction_within_budget | ablation, never promoted |
+
+On payments the graph challenger cleared every gate and still captured less than the champion,
+80.4% of fraud dollars against
+90.2%, so the champion stays. The ablation with
+only the structure of the merchant graph, without the counts of fraud already known, captured
+91.4%. That points at the known fraud counts as
+what pulled the challenger down, but the addendum registered no test of it, so it is a lead and not
+a finding. The ablation sits outside the registered family, so it has no comparison with the floor
+and that gate reads as failed; its declines were also over the limit of the budget. On logins the
+graph features took the model from 25.9% to
+53.4%, still short of the rules floor at
+58.5%, so that desk stays on its floor.
 
 ## The platform after v0.1.0
 
@@ -260,6 +284,7 @@ graded on questions with known answers.
 | Piece | Result |
 |---|---|
 | Free Edition, second probe | allowed: feature tables, genie, lakebase, lakeview, lakeview publish, online tables api, serving from uc, sharing |
+| Two engine reconcile with the graph tables | 11 of 11 exported tables equal by digest |
 
 ## The rederive
 

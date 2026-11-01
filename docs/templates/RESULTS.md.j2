@@ -137,6 +137,20 @@ rows and sample, graded on the same test months with the same code, and replaces
 with an interval of the difference clear of zero and above it.
 
 {{ table("v2.challengers") }}
+{% if has("v2.payments.lightgbm_graph.capture.estimate") %}
+
+On payments the graph challenger cleared every gate and still captured less than the champion,
+{{ v("v2.payments.lightgbm_graph.capture.estimate") }} of fraud dollars against
+{{ v("eval.payments.lightgbm.capture_usd.estimate") }}, so the champion stays. The ablation with
+only the structure of the merchant graph, without the counts of fraud already known, captured
+{{ v("v2.payments.lightgbm_structure.capture.estimate") }}. That points at the known fraud counts as
+what pulled the challenger down, but the addendum registered no test of it, so it is a lead and not
+a finding. The ablation sits outside the registered family, so it has no comparison with the floor
+and that gate reads as failed; its declines were also over the limit of the budget. On logins the
+graph features took the model from {{ v("eval.logins.lightgbm.capture.estimate") }} to
+{{ v("v2.logins.lightgbm_graph.capture.estimate") }}, still short of the rules floor at
+{{ v("eval.logins.floor.capture.estimate") }}, so that desk stays on its floor.
+{% endif %}
 {% endif %}
 
 {% if has("v2.platform") %}

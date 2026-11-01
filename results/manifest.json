@@ -2,7 +2,7 @@
  "as_of": "2026-11-01",
  "values": {
   "build.commits": {
-   "value": 81,
+   "value": 86,
    "fmt": "int",
    "provenance": {
     "origin": "git",
@@ -3487,6 +3487,160 @@
     "as_of": "2026-11-01",
     "note": null
    }
+  },
+  "v2.logins.champion_after.graph": {
+   "value": "none",
+   "fmt": "text",
+   "provenance": {
+    "origin": "results/evaluation_v2.json",
+    "population": "logins champion after the addendum",
+    "source": "local",
+    "as_of": "2026-11-01",
+    "note": null
+   }
+  },
+  "v2.logins.lightgbm_graph.capture.estimate": {
+   "value": 0.5337666666666666,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "results/evaluation_v2.json",
+    "population": "logins test months",
+    "source": "local",
+    "as_of": "2026-11-01",
+    "note": null
+   }
+  },
+  "v2.logins.lightgbm_graph.capture.high": {
+   "value": 0.5372503919019193,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "results/evaluation_v2.json",
+    "population": "logins test months",
+    "source": "local",
+    "as_of": "2026-11-01",
+    "note": null
+   }
+  },
+  "v2.logins.lightgbm_graph.capture.low": {
+   "value": 0.530425464506943,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "results/evaluation_v2.json",
+    "population": "logins test months",
+    "source": "local",
+    "as_of": "2026-11-01",
+    "note": null
+   }
+  },
+  "v2.logins.lightgbm_graph.verdict": {
+   "value": "not promoted",
+   "fmt": "text",
+   "provenance": {
+    "origin": "results/evaluation_v2.json",
+    "population": "logins lightgbm_graph",
+    "source": "local",
+    "as_of": "2026-11-01",
+    "note": null
+   }
+  },
+  "v2.payments.champion_after.graph": {
+   "value": "lightgbm",
+   "fmt": "text",
+   "provenance": {
+    "origin": "results/evaluation_v2.json",
+    "population": "payments champion after the addendum",
+    "source": "local",
+    "as_of": "2026-11-01",
+    "note": null
+   }
+  },
+  "v2.payments.lightgbm_graph.capture.estimate": {
+   "value": 0.8037520516684495,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "results/evaluation_v2.json",
+    "population": "payments test months",
+    "source": "local",
+    "as_of": "2026-11-01",
+    "note": null
+   }
+  },
+  "v2.payments.lightgbm_graph.capture.high": {
+   "value": 0.8484590461981111,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "results/evaluation_v2.json",
+    "population": "payments test months",
+    "source": "local",
+    "as_of": "2026-11-01",
+    "note": null
+   }
+  },
+  "v2.payments.lightgbm_graph.capture.low": {
+   "value": 0.759324095215285,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "results/evaluation_v2.json",
+    "population": "payments test months",
+    "source": "local",
+    "as_of": "2026-11-01",
+    "note": null
+   }
+  },
+  "v2.payments.lightgbm_graph.verdict": {
+   "value": "not promoted",
+   "fmt": "text",
+   "provenance": {
+    "origin": "results/evaluation_v2.json",
+    "population": "payments lightgbm_graph",
+    "source": "local",
+    "as_of": "2026-11-01",
+    "note": null
+   }
+  },
+  "v2.payments.lightgbm_structure.capture.estimate": {
+   "value": 0.9138224835552246,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "results/evaluation_v2.json",
+    "population": "payments test months",
+    "source": "local",
+    "as_of": "2026-11-01",
+    "note": null
+   }
+  },
+  "v2.payments.lightgbm_structure.capture.high": {
+   "value": 0.9418797567938861,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "results/evaluation_v2.json",
+    "population": "payments test months",
+    "source": "local",
+    "as_of": "2026-11-01",
+    "note": null
+   }
+  },
+  "v2.payments.lightgbm_structure.capture.low": {
+   "value": 0.8802237266226317,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "results/evaluation_v2.json",
+    "population": "payments test months",
+    "source": "local",
+    "as_of": "2026-11-01",
+    "note": null
+   }
+  },
+  "v2.payments.lightgbm_structure.verdict": {
+   "value": "ablation, never promoted",
+   "fmt": "text",
+   "provenance": {
+    "origin": "results/evaluation_v2.json",
+    "population": "payments lightgbm_structure",
+    "source": "local",
+    "as_of": "2026-11-01",
+    "note": null
+   }
   }
  },
  "tables": {
@@ -4870,6 +5024,57 @@
     "note": null
    }
   },
+  "v2.challengers": {
+   "columns": [
+    "Desk",
+    "Challenger",
+    "Test capture",
+    "Against the champion",
+    "Gates",
+    "Verdict"
+   ],
+   "formats": [
+    "text",
+    "text",
+    "text",
+    "text",
+    "text",
+    "text"
+   ],
+   "rows": [
+    [
+     "logins",
+     "lightgbm_graph (graph features)",
+     "53.4% (53.0 to 53.7)",
+     "no champion",
+     "capture_above_floor",
+     "not promoted"
+    ],
+    [
+     "payments",
+     "lightgbm_graph (graph features)",
+     "80.4% (75.9 to 84.8)",
+     "-9.9 points (-14.4 to -5.1), adjusted p 0.002",
+     "every gate cleared",
+     "not promoted"
+    ],
+    [
+     "payments",
+     "lightgbm_structure (graph features)",
+     "91.4% (88.0 to 94.2)",
+     "outside the family",
+     "capture_above_floor, friction_within_budget",
+     "ablation, never promoted"
+    ]
+   ],
+   "provenance": {
+    "origin": "scripts/grade_v2.py over the scored sets of the open source run",
+    "population": "test months, thresholds chosen on validation",
+    "source": "local",
+    "as_of": "2026-11-01",
+    "note": null
+   }
+  },
   "v2.platform": {
    "columns": [
     "Piece",
@@ -4883,6 +5088,10 @@
     [
      "Free Edition, second probe",
      "allowed: feature tables, genie, lakebase, lakeview, lakeview publish, online tables api, serving from uc, sharing"
+    ],
+    [
+     "Two engine reconcile with the graph tables",
+     "11 of 11 exported tables equal by digest"
     ]
    ],
    "provenance": {

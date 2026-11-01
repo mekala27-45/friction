@@ -21,6 +21,15 @@
    "promoted_at": "2026-10-29T21:21:15+00:00"
   },
   {
+   "file": "results/evaluation_v2.json",
+   "sha256": "89442b4355292ca8cc49837e9f12f19e8e0581724f28b6216eb1d21e95dd301e",
+   "request": "2026-11-01-27b-portable-challengers",
+   "github_run_id": "41256057252",
+   "commit": "cd88a003b0e45d51e7be9234005f0c01dd9c5054",
+   "ran_at": "2026-11-01T03:39:58+00:00",
+   "promoted_at": "2026-11-01T03:41:57+00:00"
+  },
+  {
    "file": "results/latency.json",
    "sha256": "f85e1ea3a803ad6e77aaf2832e25af483484eae77170faf82eead48055a26f29",
    "request": "2026-10-31-22-api-check",
@@ -97,6 +106,42 @@
    "promoted_at": "2026-11-01T00:35:54+00:00"
   },
   {
+   "file": "results/models/v2/logins_lightgbm_graph.txt",
+   "sha256": "ab0a2205f167f446428e8a196d5d53a8d48abc78af3570cefefb254d3f120d61",
+   "request": "2026-11-01-27b-portable-challengers",
+   "github_run_id": "41256057252",
+   "commit": "cd88a003b0e45d51e7be9234005f0c01dd9c5054",
+   "ran_at": "2026-11-01T03:39:58+00:00",
+   "promoted_at": "2026-11-01T03:41:57+00:00"
+  },
+  {
+   "file": "results/models/v2/payments_lightgbm_graph.txt",
+   "sha256": "0cc6cd29924cc9dda0fbcbdcd6aa9bf1db6a42ca4baca181d4e5baf40ff75bb4",
+   "request": "2026-11-01-27b-portable-challengers",
+   "github_run_id": "41256057252",
+   "commit": "cd88a003b0e45d51e7be9234005f0c01dd9c5054",
+   "ran_at": "2026-11-01T03:39:58+00:00",
+   "promoted_at": "2026-11-01T03:41:57+00:00"
+  },
+  {
+   "file": "results/models/v2/payments_lightgbm_structure.txt",
+   "sha256": "e5fc2f7642def095cab070278d0a3f93737a28708b8641665fea2dd55fcc0740",
+   "request": "2026-11-01-27b-portable-challengers",
+   "github_run_id": "41256057252",
+   "commit": "cd88a003b0e45d51e7be9234005f0c01dd9c5054",
+   "ran_at": "2026-11-01T03:39:58+00:00",
+   "promoted_at": "2026-11-01T03:41:57+00:00"
+  },
+  {
+   "file": "results/models/v2/summary.json",
+   "sha256": "047171e7b7989ac7bf52cd1661dfcd693ac26342994843cc349bd556616edc08",
+   "request": "2026-11-01-27b-portable-challengers",
+   "github_run_id": "41256057252",
+   "commit": "cd88a003b0e45d51e7be9234005f0c01dd9c5054",
+   "ran_at": "2026-11-01T03:39:58+00:00",
+   "promoted_at": "2026-11-01T03:41:57+00:00"
+  },
+  {
    "file": "results/parity/logins.json",
    "sha256": "91d433ec539efb9a0dd31b9507b856b6d563455312129eb111f35ca42e28c0be",
    "request": "2026-10-29-12-portable-full-models",
@@ -160,6 +205,15 @@
    "promoted_at": "2026-10-29T22:14:45+00:00"
   },
   {
+   "file": "results/workspace/evaluation_v1_rerun_27b.json",
+   "sha256": "6ff82f03bc55bd6324c886ab47358a8f6a2535f1bc37e403b2e0fe84d061c41a",
+   "request": "2026-11-01-27b-portable-challengers",
+   "github_run_id": "41256057252",
+   "commit": "cd88a003b0e45d51e7be9234005f0c01dd9c5054",
+   "ran_at": "2026-11-01T03:39:58+00:00",
+   "promoted_at": "2026-11-01T03:41:57+00:00"
+  },
+  {
    "file": "results/workspace/fetch_status_on_runner.json",
    "sha256": "aba925ed7e21b01e4b12789b32928ccf902fcb6527aacdece25d0965e5befca6",
    "request": "2026-10-29-04b-upload-sources",
@@ -214,6 +268,15 @@
    "promoted_at": "2026-10-30T00:45:27+00:00"
   },
   {
+   "file": "results/workspace/full_export_v2.json",
+   "sha256": "a7405f09bbed0e8bbb7e650447e160701c40d57011da641c850005162747cc90",
+   "request": "2026-11-01-27a-backfill-graph",
+   "github_run_id": "41256057252",
+   "commit": "cd88a003b0e45d51e7be9234005f0c01dd9c5054",
+   "ran_at": "2026-11-01T00:31:40+00:00",
+   "promoted_at": "2026-11-01T03:41:57+00:00"
+  },
+  {
    "file": "results/workspace/full_open_source.json",
    "sha256": "4735ad59af2c25ec27ec6a010dd2cfdd89c006e1776dacd0d61aaab96f7e9cfb",
    "request": "2026-10-29-11-portable-full",
@@ -239,6 +302,15 @@
    "commit": "c48f3cd4ff9885ab26c25b75a039b4d0d10aa070",
    "ran_at": "2026-10-29T21:16:28+00:00",
    "promoted_at": "2026-10-29T21:21:15+00:00"
+  },
+  {
+   "file": "results/workspace/full_open_source_v2.json",
+   "sha256": "296a55ff362e9de0ae77c3e0fda57cb599a59467e3aed24bc22d6cfbdf1eb01b",
+   "request": "2026-11-01-27b-portable-challengers",
+   "github_run_id": "41256057252",
+   "commit": "cd88a003b0e45d51e7be9234005f0c01dd9c5054",
+   "ran_at": "2026-11-01T03:39:58+00:00",
+   "promoted_at": "2026-11-01T03:41:57+00:00"
   },
   {
    "file": "results/workspace/governance.json",
