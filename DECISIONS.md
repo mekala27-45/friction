@@ -476,3 +476,28 @@ and the summary counted the champion's flags over all of them. Each replay now s
 its own, and every count of the summary but the total is over the decisions the shadow scored, with
 a test. The failed requests run again under new ids (36 to 40); their first records stay on the
 results branch as they ran.
+
+## 2026-11-01 The drift rule asked for a retrain on its own, and the retrain changed nothing
+
+The platform batch ran again (requests 36 to 40) and every request passed. The decisions job read
+the payments bronze from the go live date in one micro batch, logged 1,216,998 rows and kept
+1,205,567 decisions after the merge by key, with 1,000 of 1,000 parity events decided as the API
+decides them. Run again with nothing new, it read nothing and added nothing. Genie answered 4 of 4
+graded questions with the reference value. The live replay with the shadow loaded now reports 2
+champion flags, the in process count. The BI extracts equal the champion's graded point estimates on
+all three measures.
+
+The drift check under config/drift.yaml asked for a retrain without the drill. The score held (PSI
+0.016 against a bound of 0.2), but two features crossed their bound: days_since_issue at 0.53 and
+mcc_fraud_rate at 2.14. Both move with the calendar by construction. A card is older every month,
+and the merchant fraud rate follows the label calendar of TabFormer, already noted on 2026-10-29. So
+the drill with the score bound at zero only ran the same retrain a second time. The retrain trains on
+the window the plan fixes, so it registered models byte identical to the ones before it, under the
+challenger and floor aliases, and promoted nothing.
+
+What this shows is the loop working end to end: check, flag, retrain, register, never promote
+without the gates. What it does not show is a useful trigger. A rule that counts card age will fire
+every month. The rule stays as written for this release, because it was set before the check ran,
+and changing it after seeing which features crossed would be fitting the rule to the result. A later
+version should compare days_since_issue within bands of card age, or leave it out of the count, and
+should retrain on a window that moves with the check.

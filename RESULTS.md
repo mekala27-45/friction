@@ -27,7 +27,7 @@ fails CI. Source of each block in its first line.
 | 14 | done | Persistence: independent connection, audit before response, shared transaction, out of process check | tests/api/test_api.py and tests/api/test_out_of_process.py against Postgres |
 | 15 | done | Monitoring with delayed label cohorts; the day 40 incident detected, handled by the runbook and written up | results/workspace/monitor_alerts.json (GitHub issue 1), results/incident.json, results/workspace/incident_drop.json, docs/incidents/2026-10-29-day-40.md |
 | 16 | done | Performance experiments and the compute ledger published | results/performance.json (Actions runner, full data), results/compute_ledger.json (wall seconds per request; with workspace usage from system.billing.usage) |
-| 17 | done | The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS | results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (44 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr |
+| 17 | done | The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS | results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (45 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr |
 | 18 | done | Coverage, mypy, ruff, gates, skills valid, forty to sixty commits, the rederive, v0.1.0 after the commits | results/rederive.json (replay, fixture pipeline, model rerun, month rerun: no drift); 56 commits; CI green on coverage, mypy, ruff and the gates; v0.1.0 tagged on commit 7e9a1c8 |
 
 The stretch steps, listed here and never counted toward the eighteen:
@@ -36,9 +36,9 @@ The stretch steps, listed here and never counted toward the eighteen:
 |---:|---|---|---|
 | 19 | not done | A sequence challenger over the last 20 events of each card, graded and promoted through the same gates | registered in evaluation/plan_v3.yaml; not graded yet |
 | 20 | done | A workspace serving endpoint for the payments champion, with latency against the Vercel API | results/workspace/serving.json: parity on the parity events and latency from the runner |
-| 21 | not done | An AI/BI dashboard and a Genie space over the gold tables, screenshots committed, definitions exported | the dashboard is in the bundle; the Genie space is not graded |
-| 22 | not done | friction as a fourth warehouse for readback, through its lock file and catalog alone | the extracts readback would read are not checked yet |
-| 23 | not done | Power BI and Tableau extracts of the gold metric tables with their measures | the extracts are not checked against the grade yet |
+| 21 | not done | An AI/BI dashboard and a Genie space over the gold tables, screenshots committed, definitions exported | the dashboard is in the bundle; the screenshots are not committed |
+| 22 | after the tag | friction as a fourth warehouse for readback, through its lock file and catalog alone | readback locks results/bi/csv at this tag (its data/warehouses.lock.json) |
+| 23 | done | Power BI and Tableau extracts of the gold metric tables with their measures | results/bi: CSV extracts, a Power BI project, a Tableau source and checks.json, every measure equal |
 | 24 | done | Dockerfile hardening, release workflow hardening, docs | Dockerfile.vercel with hashed requirements, actions pinned to commits, release assets attested |
 
 ## The sources
@@ -294,8 +294,16 @@ graded on questions with known answers.
 | Free Edition, second probe | allowed: a feature table with a TIMESERIES key, a Genie space, listing database instances, a dashboard, publishing it, the online tables API answering, a serving endpoint from Unity Catalog, listing shares |
 | Two engine reconcile with the graph tables | 11 of 11 exported tables equal by digest |
 | Serving endpoint from the champion alias | version 1, ready in 1.4 min; 1,000 of 1,000 parity scores equal; single row p50 75.8 ms, p99 144.1 ms from the runner |
+| Streaming decisions, first run | 1,205,567 events decided in 1 micro batch, 0 by the catch up, 0 left; parity 1,000 of 1,000 |
+| Streaming decisions, rerun with nothing new | 0 rows read, 0 decisions added |
+| Drift under the registered rule | score PSI 0.016, features over their bound: days_since_issue, mcc_fraud_rate; retrain asked |
+| Drift drill, bound at zero | score PSI 0.016, features over their bound: days_since_issue, mcc_fraud_rate; retrain asked |
+| Retrain the rule asked for | the last retrain registered 6 models as version 3 under the challenger and floor aliases, none promoted; the payments LightGBM is byte identical to the champion that decided |
+| Shadow challenger on the live URL | logistic on 1,000 replayed decisions: 988 same verdicts, 10 flagged by the shadow, 2 by the champion, 0 by both |
 | Feature tables with a TIMESERIES key | fs_card_daily 11,269,310 rows, fs_merchant_daily 7,747,399 rows |
 | Feature store lookup against friction's | 146,597 of 146,597 events of 2019-07 equal on every feature |
+| BI extracts against the grade | 3 of 3 measures over the test months equal the champion's graded point estimates |
+| Genie space, graded | 4 of 4 questions answered with the reference value; instructions accepted |
 
 ## The rederive
 

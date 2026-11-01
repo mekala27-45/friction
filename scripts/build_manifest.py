@@ -657,8 +657,9 @@ def platform_v2(b: Builder) -> None:
     first, again = _load("results/workspace/decisions_first.json"), _load("results/workspace/decisions_rerun.json")
     if first:
         par = first["parity"]
-        rows.append(["Streaming decisions, first run", f"{first['decisions']:,} events decided in {first['batches']} "
-                     f"micro batches, {first['caught_up']:,} by the catch up, {first['pending_after']} left; parity "
+        batches = f"{first['batches']} micro batch{'' if first['batches'] == 1 else 'es'}"
+        rows.append(["Streaming decisions, first run", f"{first['decisions']:,} events decided in {batches}, "
+                     f"{first['caught_up']:,} by the catch up, {first['pending_after']} left; parity "
                      f"{par['decided'] - par['differ']:,} of {par['events']:,}"])  # fmt: skip
     if again:
         rows.append(["Streaming decisions, rerun with nothing new", f"{again['logged']} rows read, "
@@ -672,8 +673,14 @@ def platform_v2(b: Builder) -> None:
                          f"retrain {'asked' if d['retrain'] else 'not asked'}"])  # fmt: skip
     retrained = _load("results/workspace/retrained_summary.json")
     if retrained:
-        reg = retrained.get("registered", {})
-        rows.append(["Retrain the drill ran", f"{len(reg)} versions registered under the challenger alias"])
+        reg = {k: v for k, v in (retrained.get("registered") or {}).items() if k != "error"}
+        served = (first or {}).get("model_sha256")
+        lgbm = reg.get("workspace.friction_dev_ml.payments_lightgbm", {})
+        same = "byte identical to" if served and lgbm.get("sha256") == served else "different from"
+        aliases = sorted({v["alias"] for v in reg.values()})
+        rows.append(["Retrain the rule asked for", f"the last retrain registered {len(reg)} models as version "
+                     f"{', '.join(sorted({v['version'] for v in reg.values()}))} under the {' and '.join(aliases)} "
+                     f"aliases, none promoted; the payments LightGBM is {same} the champion that decided"])  # fmt: skip
     shadow = _load("results/parity_shadow.json")
     sh = ((shadow or {}).get("live") or {}).get("payments", {}).get("shadow")
     if sh:
