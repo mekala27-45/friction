@@ -1,0 +1,37 @@
+{
+ "request": {
+  "id": "2026-11-01-41-sequence-parity",
+  "kind": "portable",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "outbox_volume": "/Volumes/workspace/friction_dev_raw/outbox",
+   "drops": {
+    "payments": "all",
+    "logins": "all"
+   },
+   "redelivery": true,
+   "sequence_parity": true,
+   "memory": "10g",
+   "stop_on_failure": false
+  },
+  "note": "The sequence shadow's parity set. The open source build as request 20 built the lake behind the committed results/parity/payments.json, with no model run, then each replayed card's last events and the lake's score of every replay event from the promoted network in results/models/payments/shadow. The replay then seeds the history beside the card state and compares what the shadow says on each event with the lake."
+ },
+ "github_run_id": "41354321137",
+ "commit": "bdf5f6995f854bd35e32b5a38582071d85481816",
+ "started_at": "2026-11-01T21:55:49+00:00",
+ "result": {
+  "drops": {
+   "payments": "all",
+   "logins": "all"
+  },
+  "wall_seconds": 2974.4
+ },
+ "status": "succeeded",
+ "finished_at": "2026-11-01T22:51:22+00:00",
+ "files": {
+  "parity_shadow_payments.json": "5ed4934f95f09e5edc0f460e1b6d4c478e930bb1666c76d8f364159785f23950",
+  "run.log": "3b5c9c64b9280aa4ee5600d1e0f727881e3b7ca4a04202c718fa2c53c8d07805",
+  "summary.json": "0626c4b5a190291fb8d45bd4fb2529b71459371ec1b33cce71d83c860ad5a37a"
+ }
+}
