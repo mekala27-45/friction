@@ -411,3 +411,43 @@ resources:
               - pydantic>=2.10
               - lightgbm==4.7.0
               - mlflow-skinny>=3.0
+
+    # Drift on the decisions, and a retrain only when the registered rule asks for one: the condition
+    # task reads the drift task's value and runs the train job, which registers challengers and
+    # changes no champion (friction_models.drift, config/drift.yaml).
+    drift:
+      name: friction-drift-${bundle.target}
+      max_concurrent_runs: 1
+      parameters:
+        - name: tag
+          default: drift
+        - name: score_bound
+          default: ""
+      tasks:
+        - task_key: drift
+          environment_key: default
+          spark_python_task:
+            python_file: ./jobs/drift.py
+            parameters: ["--root", "${workspace.file_path}", "--catalog", "${var.catalog}", "--prefix", "${var.prefix}",
+                         "--job", "drift", "--run-id", "{{job.run_id}}", "--tag", "{{job.parameters.tag}}",
+                         "--score-bound", "{{job.parameters.score_bound}}"]
+        - task_key: retrain_needed
+          depends_on:
+            - task_key: drift
+          condition_task:
+            op: EQUAL_TO
+            left: "{{tasks.drift.values.retrain}}"
+            right: "true"
+        - task_key: retrain
+          depends_on:
+            - task_key: retrain_needed
+              outcome: "true"
+          run_job_task:
+            job_id: ${resources.jobs.train.id}
+      environments:
+        - environment_key: default
+          spec:
+            environment_version: "3"
+            dependencies:
+              - pyyaml
+              - pydantic>=2.10

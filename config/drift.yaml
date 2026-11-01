@@ -1,0 +1,9 @@
+# When the drift job asks for a retrain (friction_models.drift). The score bound is the stability
+# bound of evaluation/plan.yaml; a feature bound a little looser, and two features must cross it, so
+# one noisy column cannot retrain the desk. Windows of 28 days: the first after the thresholds went
+# live, and the latest the decisions table holds.
+window_days: 28
+score_bound: 0.2
+feature_bound: 0.25
+features_over: 2
+features: [amount_usd, mcc_fraud_rate, cnt_24h, sum_24h_usd, log_secs_since_prev, days_since_issue, hour]
