@@ -88,7 +88,8 @@ def ask(client: Any, space_id: str, question: str) -> dict[str, Any]:
     for att in msg.attachments or []:
         if att.query is not None:
             out["sql"] = att.query.query
-            result = client.genie.get_message_attachment_query_result(space_id, msg.conversation_id, msg.message_id,
+            message_id = msg.message_id or getattr(msg, "id", None)
+            result = client.genie.get_message_attachment_query_result(space_id, msg.conversation_id, message_id,
                                                                       att.attachment_id)  # fmt: skip
             sr = result.statement_response
             out["value"] = first_value(sr.result.data_array if sr and sr.result else None)

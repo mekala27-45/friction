@@ -121,7 +121,9 @@ def run(client: Any, params: dict[str, Any], root: Path, out: Path) -> dict[str,
     features = list(payments.FEATURES)
     columns, rows = _rows(client, warehouse, feature_sql(str(params["features_table"]), "txn_ref", features,
                                                          sorted(expected)))  # fmt: skip
-    vectors = {int(r[0]): {c: float(v) for c, v in zip(columns[1:], r[1:], strict=True)} for r in rows}
+    vectors = {int(r[0]): {c: float(v) for c, v in zip(columns[1:], r[1:], strict=True)} for r in rows
+               if all(v is not None for v in r[1:])}  # fmt: skip
+    record["vectors"] = {"asked": len(expected), "found": len(rows), "complete": len(vectors)}
     refs = sorted(vectors)
 
     def query(batch: list[int]) -> list[float]:

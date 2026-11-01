@@ -2,6 +2,9 @@
  "id": "2026-11-01-30-genie",
  "kind": "genie",
  "target": "dev",
- "params": {"spec": "dashboards/genie.yaml", "stop_on_failure": false},
- "note": "The Genie space over the decisions, replaced from the committed file, then graded: each question asked in a new conversation and Genie's first value compared with the reference SQL run on the warehouse."
+ "params": {
+  "spec": "dashboards/genie.yaml",
+  "stop_on_failure": false
+ },
+ "note": "The Genie space over the decisions, replaced from the committed file, then graded: each question asked in a new conversation and Genie's first value compared with the reference SQL run on the warehouse. The record keeps the SQL Genie wrote for each question."
 }

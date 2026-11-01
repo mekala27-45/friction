@@ -56,8 +56,9 @@ def champion() -> tuple[str, str, str]:
     files = [p for p in (local / "artifacts").iterdir() if p.is_file()]
     if len(files) != 1:
         raise RuntimeError(f"the champion holds {len(files)} artifact files")
-    text = files[0].read_text(encoding="utf-8")
-    sha = hashlib.sha256(text.encode("utf-8")).hexdigest()
+    data = files[0].read_bytes()
+    sha = hashlib.sha256(data).hexdigest()  # of the bytes, as the registry tagged it
+    text = data.decode("utf-8")
     served = stream.load_bundle(root)["files"]["model.txt"]
     if sha != served or sha != mv.tags.get("sha256"):
         raise RuntimeError(f"the champion file {sha[:12]} is not the served file {served[:12]}")
