@@ -128,6 +128,27 @@ static on Pages. Every check below ran from the Actions runner against the publi
 {{ table("serving.checks") }}
 {% endif %}
 
+{% if has("v2.challengers") %}
+## Challengers after v0.1.0
+
+Registered in two addenda before any challenger score existed: evaluation/plan_v2.yaml (the graph
+features) and evaluation/plan_v3.yaml (a sequence model). Each challenger is trained on its champion's
+rows and sample, graded on the same test months with the same code, and replaces a champion only
+with an interval of the difference clear of zero and above it.
+
+{{ table("v2.challengers") }}
+{% endif %}
+
+{% if has("v2.platform") %}
+## The platform after v0.1.0
+
+Serving, decisions as events arrive, drift with a retrain the rule asks for, a challenger in shadow,
+feature tables with point in time lookups, BI extracts checked against the grade, and a Genie space
+graded on questions with known answers.
+
+{{ table("v2.platform") }}
+{% endif %}
+
 {% if has("rederive.checks") %}
 ## The rederive
 

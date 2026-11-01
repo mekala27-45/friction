@@ -39,6 +39,7 @@ blocks of legitimate sign ins. Champion: none.
 Capture is of fraud dollars on the payments desk and of attacks on the login desk. ROC AUC and average
 precision are threshold free and sit in the last columns because they are not the decision.
 
+
 ## How it is built
 
 - **Sources.** The IBM TabFormer card transactions and the RBA login data set, fetched against digests

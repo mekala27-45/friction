@@ -590,6 +590,117 @@ def live(b: Builder) -> None:
                   source="live")  # fmt: skip
 
 
+def _pct(d: dict[str, float]) -> str:
+    return f"{100 * d['estimate']:.1f}% ({100 * d['low']:.1f} to {100 * d['high']:.1f})"
+
+
+def challengers(b: Builder) -> None:
+    """The addenda's challengers (evaluation/plan_v2.yaml and plan_v3.yaml), graded against their champions."""
+    rows = []
+    for rel, label in (("results/evaluation_v2.json", "graph features"), ("results/evaluation_v3.json", "sequence")):
+        ev = _load(rel)
+        if not ev:
+            continue
+        for desk, d in sorted(ev["desks"].items()):
+            promo = d["promotion"]
+            for m, e in sorted(promo["challengers"].items()):
+                test = d["models"][m]["test"]
+                vs = e.get("against_champion")
+                diff = "no champion" if not promo["champion_before"] else (
+                    "outside the family" if vs is None else
+                    f"{100 * vs['difference']['estimate']:+.1f} points ({100 * vs['difference']['low']:+.1f} to "
+                    f"{100 * vs['difference']['high']:+.1f}), adjusted p {vs['p_adjusted']:.3g}")  # fmt: skip
+                gates = ", ".join(e["failed_gates"]) or "every gate cleared"
+                verdict = (
+                    "ablation, never promoted" if e["ablation"] else ("promoted" if e["promote"] else "not promoted")
+                )
+                capture = test["capture_usd"] if desk == "payments" else test["capture"]
+                rows.append([desk, f"{m} ({label})", _pct(capture), diff, gates, verdict])
+                key = f"v2.{desk}.{m}"
+                b.iv(f"{key}.capture", capture, "pct1", rel,
+                     f"{desk} test months", "local")  # fmt: skip
+                b.v(f"{key}.verdict", verdict, "text", rel, f"{desk} {m}", "local")
+            b.v(f"v2.{desk}.champion_after.{label.split()[0]}", promo["champion_after"] or "none", "text", rel,
+                f"{desk} champion after the addendum", "local")  # fmt: skip
+    if rows:
+        b.m.table("v2.challengers", ["Desk", "Challenger", "Test capture", "Against the champion", "Gates", "Verdict"],
+                  ["text"] * 6, rows, origin="scripts/grade_v2.py over the scored sets of the open source run",
+                  population="test months, thresholds chosen on validation", source="local")  # fmt: skip
+
+
+def platform_v2(b: Builder) -> None:
+    """Serving, streaming decisions, drift, the shadow, feature tables, BI and Genie: one row each."""
+    rows: list[list[str]] = []
+    probe = (_load("results/workspace_probe_v2.json") or {}).get("summary")
+    if probe:
+        allowed = [k.replace("_", " ") for k, ok in sorted(probe.items()) if ok]
+        rows.append(["Free Edition, second probe", f"allowed: {', '.join(allowed)}"])
+    rec = _load("results/reconcile_v2.json")
+    if rec:
+        n = len(rec.get("tables", {}))
+        same = sum(1 for t in rec.get("tables", {}).values() if t.get("equal"))
+        rows.append(["Two engine reconcile with the graph tables", f"{same} of {n} exported tables equal by digest"])
+    srv = _load("results/workspace/serving.json")
+    if srv:
+        lat = srv["latency_single_row"]
+        par = srv["parity"]
+        rows.append(["Serving endpoint from the champion alias", f"version {srv['version']}, ready in "
+                     f"{srv['deploy']['minutes_to_ready']} min; {par['equal']:,} of {par['events']:,} parity scores "
+                     f"equal; single row p50 {lat['p50_ms']} ms, p99 {lat['p99_ms']} ms from the runner"])  # fmt: skip
+        b.v("v2.serving.p99_ms", lat["p99_ms"], "float1", "results/workspace/serving.json", "single row queries",
+            "workspace")  # fmt: skip
+    first, again = _load("results/workspace/decisions_first.json"), _load("results/workspace/decisions_rerun.json")
+    if first:
+        par = first["parity"]
+        rows.append(["Streaming decisions, first run", f"{first['decisions']:,} events decided in {first['batches']} "
+                     f"micro batches, {first['caught_up']:,} by the catch up, {first['pending_after']} left; parity "
+                     f"{par['decided'] - par['differ']:,} of {par['events']:,}"])  # fmt: skip
+    if again:
+        rows.append(["Streaming decisions, rerun with nothing new", f"{again['logged']} rows read, "
+                     f"{again['streamed'] + again['caught_up']} decisions added"])  # fmt: skip
+    for rel, label in (("results/workspace/drift.json", "Drift under the registered rule"),
+                       ("results/workspace/drift_drill.json", "Drift drill, bound at zero")):  # fmt: skip
+        d = _load(rel)
+        if d:
+            over = ", ".join(d["features_over"]) or "none"
+            rows.append([label, f"score PSI {d['score_psi']:.3f}, features over their bound: {over}; "
+                         f"retrain {'asked' if d['retrain'] else 'not asked'}"])  # fmt: skip
+    retrained = _load("results/workspace/retrained_summary.json")
+    if retrained:
+        reg = retrained.get("registered", {})
+        rows.append(["Retrain the drill ran", f"{len(reg)} versions registered under the challenger alias"])
+    shadow = _load("results/parity_shadow.json")
+    sh = ((shadow or {}).get("live") or {}).get("payments", {}).get("shadow")
+    if sh:
+        rows.append(["Shadow challenger on the live URL", f"{sh['shadow_model']} on {sh['shadowed']:,} replayed "
+                     f"decisions: {sh['same_verdict']:,} same verdicts, {sh['shadow_flagged']} flagged by the "
+                     f"shadow, {sh['champion_flagged']} by the champion, {sh['both_flagged']} by both"])  # fmt: skip
+    pub, chk = (
+        _load("results/workspace/feature_tables_publish.json"),
+        _load("results/workspace/feature_tables_check.json"),
+    )
+    if pub:
+        rows.append(
+            ["Feature tables with a TIMESERIES key", ", ".join(f"{k} {v:,} rows" for k, v in sorted(pub.items()))]
+        )
+    if chk:
+        rows.append(["Feature store lookup against friction's", f"{chk['equal']:,} of {chk['compared']:,} events of "
+                     f"{chk['month']} equal on every feature"])  # fmt: skip
+    bi = _load("results/bi/checks.json")
+    if bi:
+        same = sum(m["equal"] for m in bi["measures"].values())
+        rows.append(["BI extracts against the grade", f"{same} of {len(bi['measures'])} measures over the test months "
+                     "equal the champion's graded point estimates"])  # fmt: skip
+    genie = _load("results/workspace/genie.json")
+    if genie:
+        rows.append(["Genie space, graded", f"{genie['correct']} of {genie['asked']} questions answered with the "
+                     f"reference value; instructions {genie['instructions'].split(':')[0]}"])  # fmt: skip
+    if rows:
+        b.m.table("v2.platform", ["Piece", "Result"], ["text", "text"], rows,
+                  origin="the v0.2 requests (requests/2026-11-01-*), promoted with provenance",
+                  population="the workspace, the runner and the live API", source="workspace")  # fmt: skip
+
+
 CHECKLIST = [
     (1, "Both sources fetched with digests in Actions, profiled at full size, quarantine rules, contracts, provenance"),
     (2, "The replay splitter, the lateness rule, the simulator and the incident config, deterministic with digests"),
@@ -674,8 +785,15 @@ def api_live() -> tuple[str, str]:
 
 def release(status: dict[int, tuple[str, str]]) -> tuple[str, str]:
     rederive = _load("results/rederive.json") or {}
+    # The line is about v0.1.0: once that tag exists, its commits are counted, not those after it.
     # Built for the release commit itself (FRICTION_RELEASE=1), the count includes that commit.
-    commits = int(_git("rev-list", "--count", "HEAD") or 0) + (1 if os.environ.get("FRICTION_RELEASE") == "1" else 0)
+    tagged = _git("rev-list", "--count", "v0.1.0")
+    if tagged:
+        commits = int(tagged)
+    else:
+        commits = int(_git("rev-list", "--count", "HEAD") or 0) + (
+            1 if os.environ.get("FRICTION_RELEASE") == "1" else 0
+        )
     open_lines = [str(n) for n in range(1, 18) if status.get(n, ("not done", ""))[0] != "done"]
     have = {
         "the rederive with no drift": rederive.get("complete") and not rederive.get("drift"),
@@ -684,9 +802,10 @@ def release(status: dict[int, tuple[str, str]]) -> tuple[str, str]:
     }
     missing = [k for k, ok in have.items() if not ok]
     if not missing:
-        return ("done", f"results/rederive.json (replay, fixture pipeline, model rerun, month rerun: no drift); "
-                        f"{commits} commits; CI green on coverage, mypy, ruff and the gates; v0.1.0 tagged on "
-                        "this commit")  # fmt: skip
+        where = f"on commit {_git('rev-parse', '--short', 'v0.1.0^{commit}')}" if tagged else "on this commit"
+        return ("done", "results/rederive.json (replay, fixture pipeline, model rerun, month rerun: no drift); "
+                        f"{commits} commits; CI green on coverage, mypy, ruff and the gates; "
+                        f"v0.1.0 tagged {where}")  # fmt: skip
     return ("not done", "CI is green on coverage, mypy, ruff and the gates; results/rederive.json "
                         f"{'has no drift' if have['the rederive with no drift'] else 'is not complete'}; "
                         "missing: " + ", ".join(missing))  # fmt: skip
@@ -889,6 +1008,8 @@ def main() -> int:
     registry(b)
     rederive(b)
     live(b)
+    challengers(b)
+    platform_v2(b)
     checklist(b, ev)
     out = ROOT / "results" / "manifest.json"
     write(b.m.build(), out)

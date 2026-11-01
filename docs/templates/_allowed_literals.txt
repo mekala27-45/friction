@@ -41,3 +41,5 @@ p99
 03
 Java 21
 rq1-general
+evaluation/plan_v2.yaml
+evaluation/plan_v3.yaml

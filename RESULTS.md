@@ -27,8 +27,8 @@ fails CI. Source of each block in its first line.
 | 14 | done | Persistence: independent connection, audit before response, shared transaction, out of process check | tests/api/test_api.py and tests/api/test_out_of_process.py against Postgres |
 | 15 | done | Monitoring with delayed label cohorts; the day 40 incident detected, handled by the runbook and written up | results/workspace/monitor_alerts.json (GitHub issue 1), results/incident.json, results/workspace/incident_drop.json, docs/incidents/2026-10-29-day-40.md |
 | 16 | done | Performance experiments and the compute ledger published | results/performance.json (Actions runner, full data), results/compute_ledger.json (wall seconds per request; with workspace usage from system.billing.usage) |
-| 17 | done | The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS | results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (37 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr |
-| 18 | done | Coverage, mypy, ruff, gates, skills valid, forty to sixty commits, the rederive, v0.1.0 after the commits | results/rederive.json (replay, fixture pipeline, model rerun, month rerun: no drift); 56 commits; CI green on coverage, mypy, ruff and the gates; v0.1.0 tagged on this commit |
+| 17 | done | The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS | results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (42 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr |
+| 18 | done | Coverage, mypy, ruff, gates, skills valid, forty to sixty commits, the rederive, v0.1.0 after the commits | results/rederive.json (replay, fixture pipeline, model rerun, month rerun: no drift); 56 commits; CI green on coverage, mypy, ruff and the gates; v0.1.0 tagged on commit 7e9a1c8 |
 
 Stretch items (the sequence challenger, a workspace endpoint, the dashboard and Genie space, the
 readback warehouse, BI exports, hardening): not started, and not counted.
@@ -249,6 +249,17 @@ static on Pages. Every check below ran from the Actions runner against the publi
 | Cold start, first /health after the idle wait | 3,950 ms |
 | Latency, payments, warm | p50 149 ms, p99 193 ms over 200 requests |
 | Latency, logins, warm | p50 146 ms, p99 179 ms over 200 requests |
+
+
+## The platform after v0.1.0
+
+Serving, decisions as events arrive, drift with a retrain the rule asks for, a challenger in shadow,
+feature tables with point in time lookups, BI extracts checked against the grade, and a Genie space
+graded on questions with known answers.
+
+| Piece | Result |
+|---|---|
+| Free Edition, second probe | allowed: feature tables, genie, lakebase, lakeview, lakeview publish, online tables api, serving from uc, sharing |
 
 ## The rederive
 

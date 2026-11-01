@@ -1,5 +1,5 @@
 {
- "as_of": "2026-10-31",
+ "as_of": "2026-11-01",
  "classification": [
   {
    "classification": "restricted",
@@ -3842,13 +3842,13 @@
      "17",
      "done",
      "The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS",
-     "results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (37 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr"
+     "results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (42 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr"
     ],
     [
      "18",
      "done",
      "Coverage, mypy, ruff, gates, skills valid, forty to sixty commits, the rederive, v0.1.0 after the commits",
-     "results/rederive.json (replay, fixture pipeline, model rerun, month rerun: no drift); 56 commits; CI green on coverage, mypy, ruff and the gates; v0.1.0 tagged on this commit"
+     "results/rederive.json (replay, fixture pipeline, model rerun, month rerun: no drift); 56 commits; CI green on coverage, mypy, ruff and the gates; v0.1.0 tagged on commit 7e9a1c8"
     ]
    ],
    "source": "build"
@@ -4992,6 +4992,24 @@
    ],
    "source": "live"
   },
+  "v2.platform": {
+   "align": [
+    "left",
+    "left"
+   ],
+   "columns": [
+    "Piece",
+    "Result"
+   ],
+   "origin": "the v0.2 requests (requests/2026-11-01-*), promoted with provenance",
+   "rows": [
+    [
+     "Free Edition, second probe",
+     "allowed: feature tables, genie, lakebase, lakeview, lakeview publish, online tables api, serving from uc, sharing"
+    ]
+   ],
+   "source": "workspace"
+  },
   "workspace.probe": {
    "align": [
     "left",
@@ -5132,7 +5150,7 @@
   }
  },
  "values": {
-  "build.commits": "55",
+  "build.commits": "81",
   "checklist.done": "18",
   "checklist.missing": "none",
   "data.rba.asn_unrealistic": "1,457,824",
