@@ -117,3 +117,26 @@ def test_lags_read_only_earlier_events_of_the_same_card(spark) -> None:  # type:
         for k in range(1, sq.LAGS + 1):
             want = float(same[-k]) if len(same) >= k else None
             assert got[i][f"amount_usd__{k}"] == want, (i, k)
+
+
+@pytest.mark.spark
+def test_the_sample_through_parquet_is_the_champions_sample(spark, tmp_path: Path) -> None:  # type: ignore[no-untyped-def]
+    from friction_models import steps as v1
+
+    rng = np.random.default_rng(3)
+    frame, y = _sequences(3000, seed=3)
+    frame["txn_ref"] = rng.permutation(len(frame)).astype(np.int64)
+    frame["label"] = y.astype(bool)
+    frame["unused"] = 1.0
+    rows = spark.createDataFrame(frame)
+    old, n = v1.NEGATIVES_FOR_TRAINING, int((~frame["label"]).sum())
+    v1.NEGATIVES_FOR_TRAINING = n // 2  # a real sample, not every row
+    try:
+        got = sq.collect(rows, tmp_path / "spill")
+        want = v1._collect_training(rows.drop("unused"), "txn_ref")
+    finally:
+        v1.NEGATIVES_FOR_TRAINING = old
+    assert not (tmp_path / "spill").exists()
+    assert 0 < len(got) < len(frame) and "unused" not in got
+    pd.testing.assert_frame_equal(got, want[got.columns], check_dtype=False)
+    assert np.array_equal(sq.steps(got), sq.steps(want))

@@ -70,16 +70,25 @@ def attacks_step(spark: Any, read: Read, plan: dict[str, Any]) -> pd.DataFrame:
     return pd.concat(out, ignore_index=True)
 
 
-def _collect_training(frame: DataFrame, key: str) -> pd.DataFrame:
-    """All positives and a keyed sample of negatives, with weights that restore the negative count."""
+def _training_sample(frame: DataFrame, key: str) -> tuple[DataFrame, float]:
+    """All positives and a keyed sample of negatives, and the rate the negatives were kept at."""
     counts = frame.groupBy("label").count().collect()
     negatives = next((int(r["count"]) for r in counts if not r["label"]), 0)
     rate = min(1.0, NEGATIVES_FOR_TRAINING / max(negatives, 1))
     u = (F.abs(F.xxhash64(F.lit(SEED), F.col(key))) % 1_000_000) / 1_000_000.0
-    kept = frame.where(F.col("label") | (u < F.lit(rate)))
-    pdf = kept.toPandas()
+    return frame.where(F.col("label") | (u < F.lit(rate))), rate
+
+
+def _weighted(pdf: pd.DataFrame, key: str, rate: float) -> pd.DataFrame:
+    """The weights that restore the negative count, rows in key order."""
     pdf["weight"] = np.where(pdf["label"], 1.0, 1.0 / rate if rate > 0 else 1.0)
     return pdf.sort_values(key, kind="mergesort").reset_index(drop=True)
+
+
+def _collect_training(frame: DataFrame, key: str) -> pd.DataFrame:
+    """All positives and a keyed sample of negatives, with weights that restore the negative count."""
+    kept, rate = _training_sample(frame, key)
+    return _weighted(kept.toPandas(), key, rate)
 
 
 def train_step(

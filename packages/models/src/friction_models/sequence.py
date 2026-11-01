@@ -79,15 +79,18 @@ def _one(values: dict[str, npt.NDArray[np.float64]], present: npt.NDArray[np.boo
 
 
 def steps(frame: pd.DataFrame) -> F32:
-    """rows x 21 x WIDTH: the 20 lags oldest first, then the event itself."""
-    seq = []
-    for k in range(LAGS, 0, -1):
+    """rows x 21 x WIDTH: the 20 lags oldest first, then the event itself.
+
+    Filled in place, one step at a time: on the full training sample the array is two gigabytes,
+    and a list of steps stacked at the end would need twice that."""
+    seq = np.empty((len(frame), LAGS + 1, WIDTH), np.float32)
+    for i, k in enumerate(range(LAGS, 0, -1)):
         cols = {c: frame[f"{c}__{k}"].to_numpy(np.float64) for c in STEP}
         present = ~np.isnan(cols["amount_usd"])
-        seq.append(_one({c: np.nan_to_num(v) for c, v in cols.items()}, present))
+        seq[:, i, :] = _one({c: np.nan_to_num(v) for c, v in cols.items()}, present)
     now = {c: frame[c].to_numpy(np.float64) for c in STEP}
-    seq.append(_one(now, np.ones(len(frame), dtype=bool)))
-    return np.stack(seq, axis=1)
+    seq[:, LAGS, :] = _one(now, np.ones(len(frame), dtype=bool))
+    return seq
 
 
 def attribute_slices() -> dict[str, slice]:
@@ -236,22 +239,44 @@ def frame(read: Callable[[str], Any], start: str, end: str, cut: str | None) -> 
     return base.join(read(LAG_TABLE), "txn_ref")
 
 
-def train_step(read: Callable[[str], Any], plan: dict[str, Any], out: Path) -> dict[str, Any]:
+def collect(rows: Any, spill: Path) -> pd.DataFrame:
+    """The champion's sample of the training rows, only the columns the network reads.
+
+    The rows go through Parquet on local disk rather than toPandas: with the 200 lag columns the
+    full sample is over a gigabyte, more than the driver hands back in one result."""
+    import shutil
+
+    import pyarrow.parquet as pq
+
     from friction_models import steps as v1
 
+    kept, rate = v1._training_sample(rows, "txn_ref")
+    cols = ["txn_ref", "label", *STEP, *lag_columns()]
+    shutil.rmtree(spill, ignore_errors=True)
+    try:
+        kept.select(*cols).write.mode("overwrite").parquet(str(spill))
+        pdf = pq.read_table(str(spill)).to_pandas()
+    finally:
+        shutil.rmtree(spill, ignore_errors=True)
+    return v1._weighted(pdf, "txn_ref", rate)
+
+
+def train_step(read: Callable[[str], Any], plan: dict[str, Any], out: Path) -> dict[str, Any]:
     pay = plan["desks"]["payments"]
     train = pay["splits"]["train"]
     start = str((pd.Timestamp(train["end"]) - pd.DateOffset(months=24)).date())
-    pdf = v1._collect_training(frame(read, start, train["end"], pay["label_cuts"]["train"]), "txn_ref")
+    pdf = collect(frame(read, start, train["end"], pay["label_cuts"]["train"]), out / f"_{TAG}_training_rows")
     seq = steps(pdf)
     y = pdf["label"].to_numpy(bool).astype(int)
     w = pdf["weight"].to_numpy(np.float64)
+    rows = len(pdf)
+    del pdf  # the steps array holds what the fit needs; the frame is another gigabyte
     params = fit(seq, y, w)
     means = training_means(seq)
     path = save(out / TAG, params, means)
     z = logits(params, seq[:50_000])
     loss = float(np.average(np.logaddexp(0, z) - y[:50_000] * z, weights=w[:50_000]))
-    summary = {"tag": TAG, "rows": len(pdf), "positives": int(y.sum()), "file": path.name, "train_logloss": loss}
+    summary = {"tag": TAG, "rows": rows, "positives": int(y.sum()), "file": path.name, "train_logloss": loss}
     (out / TAG / "summary.json").write_text(json.dumps(summary, indent=1) + "\n", encoding="utf-8")
     return summary
 
