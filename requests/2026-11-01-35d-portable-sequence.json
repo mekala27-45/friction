@@ -1,0 +1,18 @@
+{
+ "id": "2026-11-01-35d-portable-sequence",
+ "kind": "portable",
+ "target": "dev",
+ "params": {
+  "outbox_volume": "/Volumes/workspace/friction_dev_raw/outbox",
+  "drops": {
+   "payments": "all",
+   "logins": "all"
+  },
+  "models": true,
+  "sequence": true,
+  "redelivery": true,
+  "memory": "10g",
+  "stop_on_failure": false
+ },
+ "note": "The sequence challenger graded again. 35b and 35c finished with byte identical models and grades, but grade_v2 knew probabilities by model name only, so the GRU's calibration gate had no value and read as failed. The grader now counts the addendum's registered logistic output as a probability, the bound unchanged. Everything else is as in 35c, so the model should come back byte identical."
+}
