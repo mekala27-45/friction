@@ -340,6 +340,7 @@ resources:
               - pydantic>=2.10
               - lightgbm==4.7.0
               - mlflow-skinny>=3.0
+              - structlog>=25.1
 
     # The models job without the scoring task: the attacks, the features with them, the training and
     # the Unity Catalog registration. The scored sets are graded from the open source run's export.
@@ -411,6 +412,7 @@ resources:
               - pydantic>=2.10
               - lightgbm==4.7.0
               - mlflow-skinny>=3.0
+              - structlog>=25.1
 
     # Drift on the decisions, and a retrain only when the registered rule asks for one: the condition
     # task reads the drift task's value and runs the train job, which registers challengers and
