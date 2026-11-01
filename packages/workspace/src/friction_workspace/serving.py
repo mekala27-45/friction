@@ -51,8 +51,9 @@ def compare(scores: dict[int, float], expected: dict[int, float]) -> dict[str, A
         worst = max(worst, diff)
         if diff > TOLERANCE:
             differ.append(ref)
-    return {"events": len(expected), "scored": len(expected) - len(missing), "equal": len(expected) - len(missing)
-            - len(differ), "missing": len(missing), "differ": len(differ), "max_relative_difference": worst}  # fmt: skip
+    scored = len(expected) - len(missing)
+    return {"events": len(expected), "scored": scored, "equal": scored - len(differ), "missing": len(missing),
+            "differ": len(differ), "max_relative_difference": worst}  # fmt: skip
 
 
 def _rows(client: Any, warehouse: str, sql: str) -> tuple[list[str], list[list[Any]]]:
@@ -87,8 +88,8 @@ def deploy(client: Any, endpoint: str, model: str, version: str, wait_minutes: i
         client.serving_endpoints.update_config(name=endpoint, served_entities=[entity])
         action = "updated"
     else:
-        client.serving_endpoints.create(name=endpoint, config=EndpointCoreConfigInput(name=endpoint,
-                                                                                      served_entities=[entity]))  # fmt: skip
+        config = EndpointCoreConfigInput(name=endpoint, served_entities=[entity])
+        client.serving_endpoints.create(name=endpoint, config=config)
         action = "created"
     state = "unknown"
     while time.monotonic() - started < wait_minutes * 60:
@@ -147,8 +148,8 @@ def run(client: Any, params: dict[str, Any], root: Path, out: Path) -> dict[str,
     vercel = root / "results" / "latency.json"
     if vercel.exists():
         v = json.loads(vercel.read_text(encoding="utf-8"))
-        record["vercel_payments"] = {**v.get("payments", {}), "measured_at": v.get("at"), "work": "builds the "
-                                     "vector from its online state, scores it, codes it and stores the decision"}  # fmt: skip
+        work = "builds the vector from its online state, scores it, codes it and stores the decision"
+        record["vercel_payments"] = {**v.get("payments", {}), "measured_at": v.get("at"), "work": work}
     record["work"] = "scores a vector it is given"
     if not params.get("keep", True):
         client.serving_endpoints.delete(endpoint)
