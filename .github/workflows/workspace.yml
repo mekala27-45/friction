@@ -73,6 +73,23 @@ jobs:
           sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL || true
           df -h / | tail -1
 
+      # The full open source run holds a 10 GB Spark heap beside the Python side on a 16 GB runner.
+      # Request 35b lost its runner at the start of the model step with no log; swap absorbs a peak
+      # instead of starving the runner process. Never fatal: a runner without room keeps its own.
+      - name: Swap for the memory peaks
+        run: |
+          have=$(swapon --show=SIZE --noheadings --bytes | awk '{s += $1} END {print s + 0}')
+          if [ "$have" -lt 8000000000 ]; then
+            for f in /mnt/friction.swap /friction.swap; do
+              if sudo fallocate -l 8G "$f" 2>/dev/null && sudo chmod 600 "$f" && sudo mkswap "$f" >/dev/null \
+                && sudo swapon "$f"; then
+                break
+              fi
+              sudo rm -f "$f"
+            done
+          fi
+          free -h
+
       - name: Which optional secrets are set (names only)
         env:
           HAS_SALT: ${{ secrets.FRICTION_SALT != '' }}
