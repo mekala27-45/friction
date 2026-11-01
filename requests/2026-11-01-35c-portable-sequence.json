@@ -1,0 +1,18 @@
+{
+ "id": "2026-11-01-35c-portable-sequence",
+ "kind": "portable",
+ "target": "dev",
+ "params": {
+  "outbox_volume": "/Volumes/workspace/friction_dev_raw/outbox",
+  "drops": {
+   "payments": "all",
+   "logins": "all"
+  },
+  "models": true,
+  "sequence": true,
+  "redelivery": true,
+  "memory": "10g",
+  "stop_on_failure": false
+ },
+ "note": "Request 35b again: its runner lost contact with the server about 1 hour 42 minutes in, at the start of the model step, before the sequence step ran, and left no log. The workflow now adds 8 GB of swap before the requests run. Nothing else changes from 35b."
+}
