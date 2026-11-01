@@ -1,0 +1,86 @@
+{
+ "change_data_feed": {
+  "seconds": 1.5,
+  "status": "allowed"
+ },
+ "cleanup": [
+  "endpoint: allowed",
+  "schema: allowed",
+  "dashboard: allowed",
+  "genie space: allowed"
+ ],
+ "database_instances_list": {
+  "detail": 0,
+  "seconds": 0.07,
+  "status": "allowed"
+ },
+ "feature_table_timeseries_key": {
+  "seconds": 4.06,
+  "status": "allowed"
+ },
+ "genie_create_space": {
+  "detail": {
+   "created": true
+  },
+  "seconds": 0.26,
+  "status": "allowed"
+ },
+ "genie_list_spaces": {
+  "detail": 1,
+  "seconds": 0.29,
+  "status": "allowed"
+ },
+ "lakeview_create": {
+  "detail": {
+   "created": true
+  },
+  "seconds": 0.26,
+  "status": "allowed"
+ },
+ "lakeview_publish": {
+  "seconds": 0.23,
+  "status": "allowed"
+ },
+ "online_table_get": {
+  "error": "NotFound",
+  "message": "Not Found",
+  "seconds": 0.02,
+  "status": "refused"
+ },
+ "probed_at": "2026-10-31T23:55:53+00:00",
+ "schema_create": {
+  "seconds": 6.76,
+  "status": "allowed"
+ },
+ "serving_create_from_uc": {
+  "detail": {
+   "minutes_to_state": 8.5,
+   "state": "READY/NOT_UPDATING"
+  },
+  "seconds": 512.88,
+  "status": "allowed"
+ },
+ "serving_query": {
+  "detail": {
+   "predictions": 1,
+   "seconds": 0.9
+  },
+  "seconds": 0.91,
+  "status": "allowed"
+ },
+ "shares_list": {
+  "detail": 0,
+  "seconds": 0.22,
+  "status": "allowed"
+ },
+ "summary": {
+  "feature_tables": true,
+  "genie": true,
+  "lakebase": true,
+  "lakeview": true,
+  "lakeview_publish": true,
+  "online_tables_api": true,
+  "serving_from_uc": true,
+  "sharing": true
+ }
+}
