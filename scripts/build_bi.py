@@ -69,7 +69,13 @@ SAYS = {
     ("quarantine", "rule"): "the contract rule that refused them",
     ("quarantine", "rows_refused"): "rows refused by the rule, a row counted once per rule",
 }
-SOURCE = "friction gold tables, payments decisions since 1 July 2019, synthetic data (TabFormer)"
+DECIDED = "friction gold tables, payments decisions since 1 July 2019, synthetic data (TabFormer)"
+SOURCE = {
+    "decisions_daily": DECIDED,
+    "codes_daily": DECIDED,
+    "reason_codes": "friction gold reason codes, from evaluation/reason_codes.yaml and reason_codes_v2.yaml",
+    "quarantine": "friction silver quarantine of both desks, synthetic data (TabFormer and RBA)",
+}
 TMDL_TYPE = {"date": "dateTime", "int": "int64", "text": "string"}
 M_TYPE = {"date": "type date", "int": "Int64.Type", "text": "type text"}
 TABLEAU_TYPE = {"date": "date", "int": "integer", "text": "string"}
@@ -220,13 +226,13 @@ def powerbi(out: Path, spec: dict[str, Any]) -> list[Path]:
 
 def dictionary(spec: dict[str, Any]) -> tuple[str, str]:
     """The data dictionary (file, column, format, source) and the metric definitions over the mart."""
-    fmt = {"date": "text", "int": "int", "text": "text"}
+    fmt = {"date": "date", "int": "int", "text": "text"}
     d = io.StringIO()
     w = csv.writer(d, lineterminator="\n")
     w.writerow(["file", "column", "format", "source"])
     for name, cols in TABLES.items():
         for c, kind in cols:
-            w.writerow([f"{name}.csv", c, fmt[kind], f"{SAYS[(name, c)]}. Source: {SOURCE}."])
+            w.writerow([f"{name}.csv", c, fmt[kind], f"{SAYS[(name, c)]}. Source: {SOURCE[name]}."])
     m = io.StringIO()
     w = csv.writer(m, lineterminator="\n")
     w.writerow(["Metric", "Over the events", "Over the mart"])
