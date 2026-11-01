@@ -1,0 +1,16 @@
+{
+ "id": "2026-11-01-36b-decisions-rerun",
+ "kind": "bundle_run",
+ "target": "dev",
+ "job": "decisions",
+ "params": {
+  "job_params": {
+   "tag": "decisions-rerun",
+   "live_from": "2019-07-01",
+   "reset": "false"
+  },
+  "export_from": "/Volumes/workspace/friction_dev_raw/exports/decisions-rerun",
+  "stop_on_failure": false
+ },
+ "note": "The same job again with nothing new landed: the stream must read no row and the merge and the catch up must add none."
+}

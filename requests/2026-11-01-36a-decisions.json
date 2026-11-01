@@ -1,0 +1,16 @@
+{
+ "id": "2026-11-01-36a-decisions",
+ "kind": "bundle_run",
+ "target": "dev",
+ "job": "decisions",
+ "params": {
+  "job_params": {
+   "tag": "decisions-first",
+   "live_from": "2019-07-01",
+   "reset": "true"
+  },
+  "export_from": "/Volumes/workspace/friction_dev_raw/exports/decisions-first",
+  "stop_on_failure": false
+ },
+ "note": "Request 29a again after the environment fix. The first streaming run from an empty checkpoint: every bronze row read once, every live event since 1 July 2019 decided, the parity events compared with the API's decisions."
+}

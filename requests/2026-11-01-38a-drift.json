@@ -1,0 +1,14 @@
+{
+ "id": "2026-11-01-38a-drift",
+ "kind": "bundle_run",
+ "target": "dev",
+ "job": "drift",
+ "params": {
+  "job_params": {
+   "tag": "drift"
+  },
+  "export_from": "/Volumes/workspace/friction_dev_raw/exports/drift",
+  "stop_on_failure": false
+ },
+ "note": "The drift check under the registered rule: the first 28 days after go live against the latest 28 days of decisions."
+}

@@ -1,0 +1,12 @@
+{
+ "id": "2026-11-01-39-api-shadow",
+ "kind": "api_check",
+ "target": "dev",
+ "params": {
+  "steps": [
+   "parity"
+  ],
+  "stop_on_failure": false
+ },
+ "note": "Request 32 again, after two fixes: each replay seeds a namespace of its own, and the shadow summary counts the champion's flags only over the decisions the shadow scored. Request 32 counted the earlier replay's decisions too and gave four champion flags for two. The counts must equal the in process replay: 988 same verdicts, 10 shadow flags, 2 champion flags, none shared."
+}

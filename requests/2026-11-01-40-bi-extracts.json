@@ -1,0 +1,10 @@
+{
+ "id": "2026-11-01-40-bi-extracts",
+ "kind": "sql",
+ "target": "dev",
+ "params": {
+  "file": "sql/bi_extracts.sql",
+  "stop_on_failure": false
+ },
+ "note": "The BI extracts from the decisions: day, channel and verdict grain with fraud counts and cents, the codes on flagged decisions, the code table and the refused rows."
+}

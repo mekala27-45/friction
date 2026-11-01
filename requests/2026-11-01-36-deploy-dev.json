@@ -1,0 +1,9 @@
+{
+ "id": "2026-11-01-36-deploy-dev",
+ "kind": "bundle_deploy",
+ "target": "dev",
+ "params": {
+  "stop_on_failure": false
+ },
+ "note": "Deploy again with structlog in the environments of the decisions and models jobs: ship() imports every module of friction_core, and request 29a stopped on friction_core.log."
+}
