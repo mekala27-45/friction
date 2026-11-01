@@ -1,0 +1,32 @@
+{
+ "request": {
+  "id": "2026-11-01-27a-backfill-graph",
+  "kind": "bundle_run",
+  "target": "dev",
+  "job": "backfill",
+  "params": {
+   "job_params": {
+    "desk": "payments",
+    "from": "439",
+    "through": "439",
+    "tag": "v2-graph"
+   },
+   "export_from": "/Volumes/workspace/friction_dev_raw/exports/v2-graph",
+   "stop_on_failure": false
+  },
+  "note": "A pipeline update over what has landed (the last drop again, skipped), the features task with the graph tables, and the export for the reconcile of every exported table against request 27b."
+ },
+ "github_run_id": "41256057252",
+ "commit": "cd88a003b0e45d51e7be9234005f0c01dd9c5054",
+ "started_at": "2026-11-01T00:20:12+00:00",
+ "result": {
+  "job": "backfill",
+  "wall_seconds": 688.1
+ },
+ "status": "succeeded",
+ "finished_at": "2026-11-01T00:31:40+00:00",
+ "files": {
+  "export/export.json": "a7405f09bbed0e8bbb7e650447e160701c40d57011da641c850005162747cc90",
+  "run.log": "55a34b0f5c10b6621c48369b991211710e9085c3ae9380146ea9b44bbf0d2aaf"
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "desk": "logins",
+ "files": {
+  "unknown_accounts.json": "997daa72f058e1a91bdfaa560d0ee27c87e0463deebe38527f56911be08648f2"
+ },
+ "model": "floor",
+ "reason_map": {
+  "asn_count": "L03",
+  "asn_distinct": "L07",
+  "browser_count": "L04",
+  "browser_distinct": "L07",
+  "city_count": "L06",
+  "city_distinct": "L07",
+  "country_count": "L02",
+  "country_distinct": "L07",
+  "device_count": "L04",
+  "device_distinct": "L07",
+  "device_type": "L04",
+  "failed_1h_ip": "L10",
+  "failed_1h_user": "L09",
+  "ip_count": "L01",
+  "ip_distinct": "L07",
+  "is_attack_ip": "L12",
+  "log_secs_since_success": "L08",
+  "logins_1h_ip": "L10",
+  "n_success_prior": "L07",
+  "os_count": "L04",
+  "os_distinct": "L07",
+  "region_count": "L06",
+  "region_distinct": "L07",
+  "rtt_missing": "L11",
+  "rtt_z_user": "L11",
+  "ua_count": "L05",
+  "ua_distinct": "L07"
+ },
+ "status": "floor: no model cleared every gate",
+ "thresholds": {
+  "decline": 4.000000000000001,
+  "step_up": 1.0000000000000002
+ }
+}

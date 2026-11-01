@@ -1,0 +1,119 @@
+{
+ "tag": "v2",
+ "payments": {
+  "rows": 1502582,
+  "positives": 2409,
+  "models": {
+   "lightgbm_graph": {
+    "features": 31,
+    "gain_share": {
+     "hour": 0.330831,
+     "mcc_fraud_rate": 0.325288,
+     "amount_usd": 0.098714,
+     "m_cards_before": 0.084378,
+     "foreign": 0.069323,
+     "merchant_seen": 0.027912,
+     "m_fraud_share": 0.017861,
+     "m_txn_7d": 0.012259,
+     "m_fraud_cards_known": 0.008497,
+     "sum_1h_usd": 0.005707,
+     "hour_share": 0.004143,
+     "log_n_prior": 0.001821,
+     "days_since_issue": 0.001675,
+     "channel": 0.001648,
+     "merchant_new": 0.001606,
+     "log_secs_since_prev": 0.001524,
+     "amount_z": 0.001122,
+     "sum_24h_usd": 0.000828,
+     "sum_7d_usd": 0.000748,
+     "m_new_cards_7d": 0.00073,
+     "log_amount_to_median": 0.000715,
+     "is_refund": 0.000648,
+     "cnt_7d": 0.000515,
+     "location_new": 0.000499,
+     "u_other_cards_known": 0.000307,
+     "mcc_new": 0.000231,
+     "cnt_1h": 0.000199,
+     "card_known_fraud": 0.000139,
+     "cnt_24h": 0.000117,
+     "errors_24h": 1.7e-05,
+     "channel_new": 0.0
+    }
+   },
+   "lightgbm_structure": {
+    "features": 27,
+    "gain_share": {
+     "amount_usd": 0.187336,
+     "mcc_fraud_rate": 0.172295,
+     "foreign": 0.159358,
+     "hour": 0.133748,
+     "log_n_prior": 0.129522,
+     "hour_share": 0.106317,
+     "m_cards_before": 0.025148,
+     "merchant_seen": 0.02,
+     "m_txn_7d": 0.013287,
+     "channel": 0.010318,
+     "days_since_issue": 0.008405,
+     "amount_z": 0.007719,
+     "log_secs_since_prev": 0.00454,
+     "sum_24h_usd": 0.003826,
+     "log_amount_to_median": 0.003476,
+     "sum_7d_usd": 0.00331,
+     "cnt_7d": 0.002603,
+     "merchant_new": 0.002181,
+     "m_new_cards_7d": 0.001753,
+     "mcc_new": 0.001581,
+     "sum_1h_usd": 0.001449,
+     "cnt_24h": 0.000637,
+     "is_refund": 0.000548,
+     "location_new": 0.000443,
+     "cnt_1h": 0.000123,
+     "errors_24h": 7.9e-05,
+     "channel_new": 0.0
+    }
+   }
+  }
+ },
+ "logins": {
+  "rows": 1499565,
+  "positives": 105,
+  "models": {
+   "lightgbm_graph": {
+    "features": 31,
+    "gain_share": {
+     "ua_users_before": 0.243277,
+     "asn_new_users_1h": 0.204412,
+     "device_type": 0.098643,
+     "log_secs_since_success": 0.08446,
+     "country_count": 0.072925,
+     "ip_users_before": 0.051133,
+     "n_success_prior": 0.031168,
+     "logins_1h_ip": 0.029794,
+     "ua_distinct": 0.022522,
+     "ip_new_users_1d": 0.017644,
+     "os_count": 0.013873,
+     "failed_1h_ip": 0.011753,
+     "device_count": 0.011605,
+     "asn_count": 0.010857,
+     "browser_distinct": 0.010538,
+     "ip_count": 0.01048,
+     "ua_count": 0.009765,
+     "browser_count": 0.008372,
+     "os_distinct": 0.007984,
+     "failed_1h_user": 0.007488,
+     "ip_distinct": 0.007415,
+     "ip_unknown_1h": 0.006751,
+     "city_count": 0.006655,
+     "region_count": 0.005454,
+     "region_distinct": 0.003822,
+     "city_distinct": 0.003765,
+     "device_distinct": 0.003328,
+     "asn_distinct": 0.002051,
+     "country_distinct": 0.001865,
+     "rtt_missing": 0.0002,
+     "rtt_z_user": 0.0
+    }
+   }
+  }
+ }
+}
