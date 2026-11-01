@@ -366,3 +366,33 @@ resources:
               - pydantic>=2.10
               - lightgbm==4.7.0
               - mlflow-skinny>=3.0
+
+    # The decisions: payments bronze as a stream to static join with the live features, decided by
+    # the version the champion alias names, merged into gold.payments_decisions (jobs/decisions.py).
+    decisions:
+      name: friction-decisions-${bundle.target}
+      max_concurrent_runs: 1
+      parameters:
+        - name: tag
+          default: decisions
+        - name: live_from
+          default: "2019-07-01"
+        - name: reset
+          default: "false"
+      tasks:
+        - task_key: decisions
+          environment_key: ml
+          spark_python_task:
+            python_file: ./jobs/decisions.py
+            parameters: ["--root", "${workspace.file_path}", "--catalog", "${var.catalog}", "--prefix", "${var.prefix}",
+                         "--job", "decisions", "--run-id", "{{job.run_id}}", "--tag", "{{job.parameters.tag}}",
+                         "--live-from", "{{job.parameters.live_from}}", "--reset", "{{job.parameters.reset}}"]
+      environments:
+        - environment_key: ml
+          spec:
+            environment_version: "5"
+            dependencies:
+              - pyyaml
+              - pydantic>=2.10
+              - lightgbm==4.7.0
+              - mlflow-skinny>=3.0

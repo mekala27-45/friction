@@ -1,0 +1,7 @@
+{
+ "id": "2026-11-01-29-deploy-dev",
+ "kind": "bundle_deploy",
+ "target": "dev",
+ "params": {"stop_on_failure": false},
+ "note": "Deploy the decisions job: payments bronze as a stream, decided by the champion alias, merged into gold.payments_decisions."
+}
