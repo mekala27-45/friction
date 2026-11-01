@@ -1,0 +1,12 @@
+{
+ "id": "2026-11-01-34a-feature-tables",
+ "kind": "bundle_run",
+ "target": "dev",
+ "job": "feature_tables",
+ "params": {
+  "job_params": {"tag": "feature-tables", "month": "2019-07"},
+  "export_from": "/Volumes/workspace/friction_dev_raw/exports/feature-tables",
+  "stop_on_failure": false
+ },
+ "note": "Publish both feature tables, then build a training set for July 2019 with the feature engineering client and compare every value with friction's point in time lookup."
+}
