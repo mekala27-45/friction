@@ -1,0 +1,15 @@
+{
+ "id": "2026-11-01-27b-portable-challengers",
+ "kind": "portable",
+ "target": "dev",
+ "params": {
+  "outbox_volume": "/Volumes/workspace/friction_dev_raw/outbox",
+  "drops": {"payments": "all", "logins": "all"},
+  "models": true,
+  "challengers": true,
+  "redelivery": true,
+  "memory": "10g",
+  "stop_on_failure": false
+ },
+ "note": "The open source run over every drop with the approved change and the redelivery, as request 20 ran it, then the challengers of evaluation/plan_v2.yaml on the same lake and the same v1 scored sets. The v1 grade must equal main's; the second summary, taken with the attacks, is the open source side of the graph reconcile."
+}
