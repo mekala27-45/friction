@@ -1,0 +1,7 @@
+{
+ "tag": "v3",
+ "rows": 1502582,
+ "positives": 2409,
+ "file": "payments_gru.json",
+ "train_logloss": 0.001225084752477252
+}

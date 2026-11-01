@@ -1,0 +1,50 @@
+{
+ "request": {
+  "id": "2026-11-01-35c-portable-sequence",
+  "kind": "portable",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "outbox_volume": "/Volumes/workspace/friction_dev_raw/outbox",
+   "drops": {
+    "payments": "all",
+    "logins": "all"
+   },
+   "models": true,
+   "sequence": true,
+   "redelivery": true,
+   "memory": "10g",
+   "stop_on_failure": false
+  },
+  "note": "Request 35b again: its runner lost contact with the server about 1 hour 42 minutes in, at the start of the model step, before the sequence step ran, and left no log. The workflow now adds 8 GB of swap before the requests run. Nothing else changes from 35b."
+ },
+ "github_run_id": "41305351364",
+ "commit": "5f08da785a557782aaf57c57d2d206d5e8b8bed5",
+ "started_at": "2026-11-01T15:02:46+00:00",
+ "result": {
+  "drops": {
+   "payments": "all",
+   "logins": "all"
+  },
+  "wall_seconds": 9293.3
+ },
+ "status": "succeeded",
+ "finished_at": "2026-11-01T17:43:10+00:00",
+ "files": {
+  "evaluation.json": "9a67f83807f8c52f2c29f2dbc6b71c60e2e8aa971fa2f9d372ab8dff54ed2f84",
+  "evaluation_v3.json": "ec37d85f13baad2848b65ca49012756254476d8fe6e2d64202697423b865f38d",
+  "models/logins/bundle.json": "5b6b6416860c964be9aac6ec75f460b91b86f7127b34ce2dd9028d079ef8453e",
+  "models/logins/unknown_accounts.json": "997daa72f058e1a91bdfaa560d0ee27c87e0463deebe38527f56911be08648f2",
+  "models/payments/bundle.json": "49a6d251b1e880e00db19ffd3070ebce9b39dfec7f3580ad284879f20f910dc5",
+  "models/payments/mcc_rates.json": "fd3657fe4c5d44b3587957b1674e754be5c6079abfd105cc5e4742c13c87f61c",
+  "models/payments/model.txt": "6570b08a40d88013dce1a0aa1b9024e7f300f90cc1c6a9b76cad73a7f8b23462",
+  "models_timings.json": "fd6096e778a3ce5b3a1c3a5b8ab6c5e983d1f191cd7e57ba816932cdfa2750ce",
+  "models_v3/payments_gru.json": "ba2bfd3ab3184c4d6fdb595185fb6766fb3c845d1e53f052e81c74bdae6636fc",
+  "models_v3/summary.json": "cda0a08237ead61130e21e48cb520022cb6677c294d79018a399dd6c1b239179",
+  "parity/logins.json": "91d433ec539efb9a0dd31b9507b856b6d563455312129eb111f35ca42e28c0be",
+  "parity/payments.json": "add50e53edefaba8c407b752cc8147bfc1a6ef90cd8f2e9712ff46beb5ffc26f",
+  "run.log": "7cc167ca952c8c3162d50c7452e2300e2eaff4c785733bf1f53672efc7e9f4c2",
+  "summary.json": "fd0a582f65352ed3e327ee56ea8b09ed3b9f90ed08cdefed0bce9fb01a896c06",
+  "summary_with_attacks.json": "30edea373b61fc3b674506b5d130636a31c57a3315a1b12c3adee7bbc3b5e56e"
+ }
+}
