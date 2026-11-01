@@ -176,12 +176,15 @@ class Store:
         return out
 
     def shadow_summary(self, namespace: str, desk: str) -> dict[str, Any]:
-        """How the shadow would have decided against the champion, over the namespace's decisions."""
+        """How the shadow would have decided against the champion, over the namespace's decisions.
+
+        Every count but the first is over the decisions the shadow scored: a namespace can hold
+        decisions logged before a shadow was loaded, and those have nothing to compare."""
         with self.connect() as conn:
             row = conn.execute(
                 "SELECT count(*), count(shadow), "
                 "count(*) FILTER (WHERE shadow->>'verdict' = verdict), "
-                "count(*) FILTER (WHERE verdict <> 'approve'), "
+                "count(*) FILTER (WHERE shadow IS NOT NULL AND verdict <> 'approve'), "
                 "count(*) FILTER (WHERE shadow->>'verdict' <> 'approve'), "
                 "count(*) FILTER (WHERE verdict <> 'approve' AND shadow->>'verdict' <> 'approve'), "
                 "avg(abs((shadow->>'score')::double precision - score)), "

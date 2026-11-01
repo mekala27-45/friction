@@ -205,6 +205,20 @@ def test_the_shadow_scores_the_champions_vector_and_never_decides(store, bundles
     assert client.get("/health").json()["shadows"]["payments"]["model"] == "logistic"
 
 
+def test_the_shadow_summary_counts_only_the_decisions_the_shadow_scored(store) -> None:  # type: ignore[no-untyped-def]
+    ns = new_namespace()
+    with store.transaction(ns) as tx:
+        for i in range(3):  # logged before a shadow was loaded
+            tx.log("payments", i, "c", 0.9, "decline", ["P01"], "lightgbm", "d")
+        tx.log("payments", 10, "c", 0.9, "decline", ["P01"], "lightgbm", "d",
+               shadow={"model": "logistic", "score": 0.1, "verdict": "approve"})  # fmt: skip
+        tx.log("payments", 11, "c", 0.1, "approve", [], "lightgbm", "d",
+               shadow={"model": "logistic", "score": 0.1, "verdict": "approve"})  # fmt: skip
+    s = store.shadow_summary(ns, "payments")
+    assert (s["decisions"], s["shadowed"], s["champion_flagged"], s["shadow_flagged"]) == (5, 2, 1, 0)
+    assert s["same_verdict"] == 1 and s["both_flagged"] == 0
+
+
 def test_a_shadow_that_reads_another_vector_refuses_to_load(store, bundles) -> None:  # type: ignore[no-untyped-def]
     from friction_api.app import create_app
     from friction_api.bundle import Bundle

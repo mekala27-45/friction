@@ -16,6 +16,7 @@ import json
 import os
 import sys
 import time
+import uuid
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -49,7 +50,9 @@ def parts(snapshot: dict[str, dict[str, Any]], limit: int = PART_BYTES) -> list[
 
 
 def replay(post: Any, desk: str, parity: dict[str, Any], key: str, get: Any = None) -> dict[str, Any]:
-    ns = f"parity-{desk}"
+    # A namespace of its own per replay: the decision log keeps every earlier replay, and the shadow
+    # counts must be over this one only.
+    ns = f"parity-{desk}-{uuid.uuid4().hex[:8]}"
     auth = {"authorization": f"Bearer {key}"}
     for i, part in enumerate(parts(parity["snapshot"])):
         r = post("/v1/admin/seed", {"namespace": ns, "snapshot": part, "replace": i == 0}, auth)
