@@ -1,6 +1,6 @@
 import { DataTable } from "@/components/DataTable";
 import { Pushback } from "@/components/Pushback";
-import { table, v } from "@/lib/site";
+import { has, table, v } from "@/lib/site";
 
 const LAYERS: [string, string][] = [
   ["bronze", "every drop as it landed, text, with its file and rescued data"],
@@ -22,6 +22,9 @@ export default function Platform() {
       <DataTable t={table("lake.local.tables")} caption="Every table of the full local run, with its digest" />
       <DataTable t={table("lake.local.quarantine")} caption={`Quarantine by rule, ${v("lake.local.quarantine_rows")} violations`} />
       <DataTable t={table("workspace.probe")} caption="What Free Edition allowed the API" />
+      {has("v2.platform") ? (
+        <DataTable t={table("v2.platform")} caption="After v0.1.0: serving, streaming decisions, drift, the shadow, feature tables, BI and Genie" />
+      ) : null}
       <Pushback who="a platform engineer">
         A file landing zone read with Auto Loader is not a message bus. Free Edition hides the cloud account, so no
         bucket, role or key owned by the build is shown. One workspace with prefixed schemas stands in for two.

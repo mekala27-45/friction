@@ -638,7 +638,7 @@ def platform_v2(b: Builder) -> None:
     rec = _load("results/reconcile_v2.json")
     if rec:
         n = len(rec.get("tables", {}))
-        same = sum(1 for t in rec.get("tables", {}).values() if t.get("equal"))
+        same = sum(1 for t in rec.get("tables", {}).values() if t.get("digest_equal"))
         rows.append(["Two engine reconcile with the graph tables", f"{same} of {n} exported tables equal by digest"])
     srv = _load("results/workspace/serving.json")
     if srv:
