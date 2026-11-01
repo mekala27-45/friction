@@ -1,0 +1,18 @@
+{
+ "id": "2026-11-01-35b-portable-sequence",
+ "kind": "portable",
+ "target": "dev",
+ "params": {
+  "outbox_volume": "/Volumes/workspace/friction_dev_raw/outbox",
+  "drops": {
+   "payments": "all",
+   "logins": "all"
+  },
+  "models": true,
+  "sequence": true,
+  "redelivery": true,
+  "memory": "10g",
+  "stop_on_failure": false
+ },
+ "note": "Request 35 again after its sequence step failed: the training sample with its 200 lag columns was over the 1 GB the driver hands back from toPandas. The sample now goes through Parquet on local disk (sequence.collect), the same rows and weights; on the fixture the network and its scores are byte identical to before."
+}
