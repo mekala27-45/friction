@@ -223,6 +223,15 @@
    "promoted_at": "2026-10-30T06:33:58+00:00"
   },
   {
+   "file": "results/parity/payments_shadow.json",
+   "sha256": "5ed4934f95f09e5edc0f460e1b6d4c478e930bb1666c76d8f364159785f23950",
+   "request": "2026-11-01-41-sequence-parity",
+   "github_run_id": "41354321137",
+   "commit": "bdf5f6995f854bd35e32b5a38582071d85481816",
+   "ran_at": "2026-11-01T22:51:22+00:00",
+   "promoted_at": "2026-11-01T23:52:39+00:00"
+  },
+  {
    "file": "results/parity_shadow.json",
    "sha256": "f9b8ae6dfc5b7819bd1391cbce7131a8c6a6b6c69e6067f96554a23894a202b4",
    "request": "2026-11-01-39-api-shadow",
