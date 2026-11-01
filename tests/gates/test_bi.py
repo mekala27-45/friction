@@ -86,3 +86,22 @@ def test_the_python_of_each_measure_reads_only_the_sums() -> None:
                                "goods__decline")}  # fmt: skip
     for m in spec["measures"]:
         assert build_bi.evaluate(m["python"], values) > 0
+
+
+def test_the_sql_of_each_measure_equals_its_python_over_the_extract(tmp_path: Path) -> None:
+    import duckdb
+
+    raw = _raw(tmp_path)
+    spec = yaml.safe_load((ROOT / "dashboards" / "measures.yaml").read_text())
+    data = build_bi.load(raw)
+    path = tmp_path / "decisions_daily.csv"
+    path.write_text(build_bi.to_csv(data["decisions_daily"], build_bi.TABLES["decisions_daily"]))
+    values = build_bi.sums(data["decisions_daily"], "0000", "9999")
+    con = duckdb.connect()
+    con.execute(f"create view decisions_daily as select * from read_csv('{path}', header = true)")
+    for m in spec["measures"]:
+        got = con.execute(f"select {m['sql']} from decisions_daily").fetchone()[0]
+        assert float(got) == pytest.approx(build_bi.evaluate(m["python"], values), rel=1e-12), m["name"]
+    words, metrics = build_bi.dictionary(spec)
+    assert len(words.splitlines()) == 1 + sum(len(c) for c in build_bi.TABLES.values())
+    assert metrics.splitlines()[0] == "Metric,Over the events,Over the mart"

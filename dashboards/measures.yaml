@@ -1,5 +1,6 @@
-# The measures of the BI extracts, written once and rendered three ways: Python (to check them
-# against the graded numbers), DAX for the Power BI semantic model, and a Tableau calculated field.
+# The measures of the BI extracts, written once and rendered four ways: Python (to check them
+# against the graded numbers), SQL over the extract (the metric definitions readback reads), DAX for
+# the Power BI semantic model, and a Tableau calculated field.
 # Every measure reads the decisions_daily extract; a good is a decision whose label is not fraud.
 # Amounts are in cents in the extract and in dollars in the measures.
 table: decisions_daily
@@ -8,36 +9,42 @@ measures:
     unit: count
     says: payment decisions
     python: decisions
+    sql: sum(decisions)
     dax: SUM(decisions_daily[decisions])
     tableau: SUM([decisions])
   - name: Fraud dollars
     unit: USD
     says: dollars of confirmed fraud, labels as eventually reported, refunds as zero
     python: fraud_cents / 100
+    sql: sum(fraud_cents) / 100
     dax: SUM(decisions_daily[fraud_cents]) / 100
     tableau: SUM([fraud_cents]) / 100
   - name: Fraud dollars stopped
     unit: USD
     says: fraud dollars on a step up or a decline
     python: fraud_cents[flagged] / 100
+    sql: sum(fraud_cents) filter (where verdict <> 'approve') / 100
     dax: CALCULATE(SUM(decisions_daily[fraud_cents]), decisions_daily[verdict] <> "approve") / 100
     tableau: SUM(IF [verdict] <> "approve" THEN [fraud_cents] END) / 100
   - name: Capture of fraud dollars
     unit: share
     says: fraud dollars stopped over fraud dollars
     python: fraud_cents[flagged] / fraud_cents
+    sql: sum(fraud_cents) filter (where verdict <> 'approve') / sum(fraud_cents)
     dax: DIVIDE(CALCULATE(SUM(decisions_daily[fraud_cents]), decisions_daily[verdict] <> "approve"), SUM(decisions_daily[fraud_cents]))
     tableau: SUM(IF [verdict] <> "approve" THEN [fraud_cents] END) / SUM([fraud_cents])
   - name: Step ups per 1,000 good
     unit: per 1,000 good decisions
     says: good customers asked for a one time code, per thousand good decisions
     python: 1000 * goods[step_up] / goods
+    sql: 1000 * sum(decisions - frauds) filter (where verdict = 'step_up') / sum(decisions - frauds)
     dax: DIVIDE(1000 * CALCULATE(SUM(decisions_daily[decisions]) - SUM(decisions_daily[frauds]), decisions_daily[verdict] = "step_up"), SUM(decisions_daily[decisions]) - SUM(decisions_daily[frauds]))
     tableau: 1000 * SUM(IF [verdict] = "step_up" THEN [decisions] - [frauds] END) / (SUM([decisions]) - SUM([frauds]))
   - name: Declines per 1,000 good
     unit: per 1,000 good decisions
     says: good customers declined, per thousand good decisions
     python: 1000 * goods[decline] / goods
+    sql: 1000 * sum(decisions - frauds) filter (where verdict = 'decline') / sum(decisions - frauds)
     dax: DIVIDE(1000 * CALCULATE(SUM(decisions_daily[decisions]) - SUM(decisions_daily[frauds]), decisions_daily[verdict] = "decline"), SUM(decisions_daily[decisions]) - SUM(decisions_daily[frauds]))
     tableau: 1000 * SUM(IF [verdict] = "decline" THEN [decisions] - [frauds] END) / (SUM([decisions]) - SUM([frauds]))
 # The graded numbers the extract must reproduce over the test months (results/evaluation.json,

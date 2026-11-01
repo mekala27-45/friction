@@ -25,6 +25,7 @@ DOCUMENTS = (
     "docs/governance.md",
     "docs/evaluation.md",
     "docs/serving.md",
+    "docs/definitions.md",
 )
 GLOBS = ("docs/models/*.md", "web/out/**/*.html")
 

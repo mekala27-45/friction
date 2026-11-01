@@ -45,6 +45,29 @@ TABLES: dict[str, list[tuple[str, str]]] = {
     "reason_codes": [("desk", "text"), ("code", "text"), ("says", "text"), ("features", "text"), ("source", "text")],
     "quarantine": [("desk", "text"), ("rule", "text"), ("rows_refused", "int")],
 }
+# What each column says, for the data dictionary readback and a BI team read.
+SAYS = {
+    ("decisions_daily", "day"): "the day of the decided events, in UTC",
+    ("decisions_daily", "channel"): "0 swipe, 1 chip, 2 online; only online can be stepped up",
+    ("decisions_daily", "verdict"): "approve, step_up or decline, at the thresholds the grade chose",
+    ("decisions_daily", "decisions"): "payment decisions of the day, channel and verdict",
+    ("decisions_daily", "amount_cents"): "the amount of those decisions in cents, a refund as zero",
+    ("decisions_daily", "frauds"): "those decisions whose label as eventually reported is fraud",
+    ("decisions_daily", "fraud_cents"): "the amount of those frauds in cents, a refund as zero",
+    ("codes_daily", "day"): "the day of the flagged events, in UTC",
+    ("codes_daily", "verdict"): "step_up or decline",
+    ("codes_daily", "code"): "a reason code carried by the decision (reason_codes.code)",
+    ("codes_daily", "decisions"): "flagged decisions carrying the code",
+    ("reason_codes", "desk"): "payments or logins",
+    ("reason_codes", "code"): "the code",
+    ("reason_codes", "says"): "the code in plain words",
+    ("reason_codes", "features"): "the features that map to the code, comma separated",
+    ("reason_codes", "source"): "the code table it comes from",
+    ("quarantine", "desk"): "the feed the refused rows came from",
+    ("quarantine", "rule"): "the contract rule that refused them",
+    ("quarantine", "rows_refused"): "rows refused by the rule, a row counted once per rule",
+}
+SOURCE = "friction gold tables, payments decisions since 1 July 2019, synthetic data (TabFormer)"
 TMDL_TYPE = {"date": "dateTime", "int": "int64", "text": "string"}
 M_TYPE = {"date": "type date", "int": "Int64.Type", "text": "type text"}
 TABLEAU_TYPE = {"date": "date", "int": "integer", "text": "string"}
@@ -188,6 +211,23 @@ def powerbi(out: Path, spec: dict[str, Any]) -> list[Path]:
     return sorted(files)
 
 
+def dictionary(spec: dict[str, Any]) -> tuple[str, str]:
+    """The data dictionary (file, column, format, source) and the metric definitions over the mart."""
+    fmt = {"date": "text", "int": "int", "text": "text"}
+    d = io.StringIO()
+    w = csv.writer(d, lineterminator="\n")
+    w.writerow(["file", "column", "format", "source"])
+    for name, cols in TABLES.items():
+        for c, kind in cols:
+            w.writerow([f"{name}.csv", c, fmt[kind], f"{SAYS[(name, c)]}. Source: {SOURCE}."])
+    m = io.StringIO()
+    w = csv.writer(m, lineterminator="\n")
+    w.writerow(["Metric", "Over the events", "Over the mart"])
+    for measure in spec["measures"]:
+        w.writerow([measure["name"].lower(), measure["says"], measure["sql"]])
+    return d.getvalue(), m.getvalue()
+
+
 def tableau(out: Path, spec: dict[str, Any]) -> Path:
     named, relations = [], []
     for i, (name, cols) in enumerate(TABLES.items(), start=1):
@@ -242,6 +282,9 @@ def main() -> int:
         (args.out / "csv" / f"{name}.csv").write_text(to_csv(data[name], cols), encoding="utf-8")
     powerbi(args.out, spec)
     tableau(args.out, spec)
+    words, metrics = dictionary(spec)
+    (args.out / "dictionary.csv").write_text(words, encoding="utf-8")
+    (args.out / "metrics_definitions.csv").write_text(metrics, encoding="utf-8")
     result = checks(data["decisions_daily"], spec, json.loads(args.evaluation.read_text(encoding="utf-8")))
     (args.out / "checks.json").write_text(json.dumps(result, indent=1, sort_keys=True) + "\n", encoding="utf-8")
     for name, m in result["measures"].items():
