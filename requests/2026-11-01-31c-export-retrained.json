@@ -1,0 +1,7 @@
+{
+ "id": "2026-11-01-31c-export-retrained",
+ "kind": "export",
+ "target": "dev",
+ "params": {"from": "/Volumes/workspace/friction_dev_raw/exports/models/default", "stop_on_failure": false},
+ "note": "The model files and the registration summary the drill's retrain wrote, to compare each new version's sha256 with the version before it."
+}

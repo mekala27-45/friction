@@ -1,0 +1,9 @@
+{
+ "id": "2026-11-01-31-deploy-dev",
+ "kind": "bundle_deploy",
+ "target": "dev",
+ "params": {
+  "stop_on_failure": false
+ },
+ "note": "Deploy the drift job: the indices on the decisions, the registered rule, and the condition task that runs the train job only when the rule asks."
+}
