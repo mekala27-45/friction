@@ -1,6 +1,42 @@
 {
  "promoted": [
   {
+   "file": "results/bi/raw/bi_codes_daily.json",
+   "sha256": "b39489cdf28082cb58d8351e7d776e26fa41120454269da413912ffac476acf5",
+   "request": "2026-11-01-40-bi-extracts",
+   "github_run_id": "41271607995",
+   "commit": "4cdc03a5717e6df1643a6bf8502161c445973e11",
+   "ran_at": "2026-11-01T06:14:31+00:00",
+   "promoted_at": "2026-11-01T06:15:53+00:00"
+  },
+  {
+   "file": "results/bi/raw/bi_decisions_daily.json",
+   "sha256": "ee95ea26fdccaa1a5ff0f78715243469279f95538817038466f23cc4804c85e7",
+   "request": "2026-11-01-40-bi-extracts",
+   "github_run_id": "41271607995",
+   "commit": "4cdc03a5717e6df1643a6bf8502161c445973e11",
+   "ran_at": "2026-11-01T06:14:31+00:00",
+   "promoted_at": "2026-11-01T06:15:53+00:00"
+  },
+  {
+   "file": "results/bi/raw/bi_quarantine.json",
+   "sha256": "cd67fa0b17d0c32903e3957e00e3b4fe93c43c352ec0c8bc56841a13e7a6937e",
+   "request": "2026-11-01-40-bi-extracts",
+   "github_run_id": "41271607995",
+   "commit": "4cdc03a5717e6df1643a6bf8502161c445973e11",
+   "ran_at": "2026-11-01T06:14:31+00:00",
+   "promoted_at": "2026-11-01T06:15:53+00:00"
+  },
+  {
+   "file": "results/bi/raw/bi_reason_codes.json",
+   "sha256": "0ae20da65db2cc2e5b17e1a9f065dde3b8c4144d796ea163c429ece36c38bbb7",
+   "request": "2026-11-01-40-bi-extracts",
+   "github_run_id": "41271607995",
+   "commit": "4cdc03a5717e6df1643a6bf8502161c445973e11",
+   "ran_at": "2026-11-01T06:14:31+00:00",
+   "promoted_at": "2026-11-01T06:15:53+00:00"
+  },
+  {
    "file": "results/demo/live_check_awake.webm",
    "sha256": "6481cb08353e2c3a2da8ecab4992d59d8c039f5dda6fc342527f13b99de8764d",
    "request": "2026-10-31-22-api-check",
@@ -160,6 +196,15 @@
    "promoted_at": "2026-10-30T06:33:58+00:00"
   },
   {
+   "file": "results/parity_shadow.json",
+   "sha256": "f9b8ae6dfc5b7819bd1391cbce7131a8c6a6b6c69e6067f96554a23894a202b4",
+   "request": "2026-11-01-39-api-shadow",
+   "github_run_id": "41271607995",
+   "commit": "4cdc03a5717e6df1643a6bf8502161c445973e11",
+   "ran_at": "2026-11-01T06:14:11+00:00",
+   "promoted_at": "2026-11-01T06:15:53+00:00"
+  },
+  {
    "file": "results/performance.json",
    "sha256": "ae8b2c2011c38254a16095286767ab30310e3c2e171e5dbfe561daabcfeadb51",
    "request": "2026-10-29-12-portable-full-models",
@@ -176,6 +221,42 @@
    "commit": "6c8790c3b4762bd78b0efd93a3d06fd67ceb503c",
    "ran_at": "2026-10-29T22:13:19+00:00",
    "promoted_at": "2026-10-29T22:14:45+00:00"
+  },
+  {
+   "file": "results/workspace/decisions_first.json",
+   "sha256": "74a574cb731545577c055cab7157118254a02f16ea0432dfcf6f6e4336a5a6b7",
+   "request": "2026-11-01-36a-decisions",
+   "github_run_id": "41271607995",
+   "commit": "4cdc03a5717e6df1643a6bf8502161c445973e11",
+   "ran_at": "2026-11-01T04:09:55+00:00",
+   "promoted_at": "2026-11-01T06:15:53+00:00"
+  },
+  {
+   "file": "results/workspace/decisions_rerun.json",
+   "sha256": "d705f6c14bca83853b775dd0740ab836de15b930e31efe3c83ae426947d578e9",
+   "request": "2026-11-01-36b-decisions-rerun",
+   "github_run_id": "41271607995",
+   "commit": "4cdc03a5717e6df1643a6bf8502161c445973e11",
+   "ran_at": "2026-11-01T04:11:18+00:00",
+   "promoted_at": "2026-11-01T06:15:53+00:00"
+  },
+  {
+   "file": "results/workspace/drift.json",
+   "sha256": "f89f67be54525c0db0886676be78593a8915635fcdf83970f2b666015a1cc718",
+   "request": "2026-11-01-38a-drift",
+   "github_run_id": "41271607995",
+   "commit": "4cdc03a5717e6df1643a6bf8502161c445973e11",
+   "ran_at": "2026-11-01T05:11:45+00:00",
+   "promoted_at": "2026-11-01T06:15:53+00:00"
+  },
+  {
+   "file": "results/workspace/drift_drill.json",
+   "sha256": "6e4fb27193711ffbf7566ab5c734ba043b6f74cd4d4f5831ac1cbd7b9d3df0ef",
+   "request": "2026-11-01-38b-drift-drill",
+   "github_run_id": "41271607995",
+   "commit": "4cdc03a5717e6df1643a6bf8502161c445973e11",
+   "ran_at": "2026-11-01T06:11:20+00:00",
+   "promoted_at": "2026-11-01T06:15:53+00:00"
   },
   {
    "file": "results/workspace/drift_grants_after_revoke.json",
@@ -329,6 +410,15 @@
    "commit": "cd88a003b0e45d51e7be9234005f0c01dd9c5054",
    "ran_at": "2026-11-01T03:39:58+00:00",
    "promoted_at": "2026-11-01T03:41:57+00:00"
+  },
+  {
+   "file": "results/workspace/genie.json",
+   "sha256": "d542f93c18fc83774ab7ac389021947e856f47befd7fdb2215527cfa97e369e0",
+   "request": "2026-11-01-37-genie",
+   "github_run_id": "41271607995",
+   "commit": "4cdc03a5717e6df1643a6bf8502161c445973e11",
+   "ran_at": "2026-11-01T04:12:44+00:00",
+   "promoted_at": "2026-11-01T06:15:53+00:00"
   },
   {
    "file": "results/workspace/governance.json",
@@ -544,6 +634,15 @@
    "commit": "9598aa02c0bb981038f2ee633d9d0f564f959bf3",
    "ran_at": "2026-10-29T17:06:53+00:00",
    "promoted_at": "2026-10-29T17:59:13+00:00"
+  },
+  {
+   "file": "results/workspace/retrained_summary.json",
+   "sha256": "9bd362b160b1d7341be93b40c42574047107afc91615510a639a11245df20151",
+   "request": "2026-11-01-38c-export-retrained",
+   "github_run_id": "41271607995",
+   "commit": "4cdc03a5717e6df1643a6bf8502161c445973e11",
+   "ran_at": "2026-11-01T06:11:22+00:00",
+   "promoted_at": "2026-11-01T06:15:53+00:00"
   },
   {
    "file": "results/workspace/run_ledger.json",

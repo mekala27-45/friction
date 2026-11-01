@@ -1,0 +1,30 @@
+desk,code,says,features,source
+logins,L01,first sign in from this IP address,ip_count,reason_codes.yaml
+logins,L02,first sign in from this country,country_count,reason_codes.yaml
+logins,L03,first sign in from this network,asn_count,reason_codes.yaml
+logins,L04,first sign in from this device,"device_count,browser_count,os_count,device_type",reason_codes.yaml
+logins,L05,first sign in with this exact browser string,ua_count,reason_codes.yaml
+logins,L06,first sign in from this region or city,"region_count,city_count",reason_codes.yaml
+logins,L07,an account with little sign in history,"n_success_prior,ip_distinct,asn_distinct,country_distinct,region_distinct,city_distinct,ua_distinct,browser_distinct,os_distinct,device_distinct",reason_codes.yaml
+logins,L08,a long time since the last successful sign in,log_secs_since_success,reason_codes.yaml
+logins,L09,recent failed sign ins on this account,failed_1h_user,reason_codes.yaml
+logins,L10,many sign ins or failures from this address in the last hour,"logins_1h_ip,failed_1h_ip",reason_codes.yaml
+logins,L11,unusual network latency for this account,"rtt_z_user,rtt_missing",reason_codes.yaml
+logins,L12,the address is on a known attacker list,is_attack_ip,reason_codes.yaml
+logins,L13,many accounts or unknown account attempts from this address,"ip_users_before,ip_new_users_1d,ip_unknown_1h",reason_codes_v2.yaml
+logins,L14,many accounts new to this network or browser string,"asn_new_users_1h,ua_users_before",reason_codes_v2.yaml
+payments,P01,the amount is far above what this card usually spends,"log_amount_to_median,amount_z,amount_usd",reason_codes.yaml
+payments,P02,a refund or credit on the card,is_refund,reason_codes.yaml
+payments,P03,several purchases on this card within an hour,"cnt_1h,sum_1h_usd",reason_codes.yaml
+payments,P04,unusual spending on this card over the last day,"cnt_24h,sum_24h_usd",reason_codes.yaml
+payments,P05,unusual spending on this card over the last week,"cnt_7d,sum_7d_usd",reason_codes.yaml
+payments,P06,purchases in quick succession,log_secs_since_prev,reason_codes.yaml
+payments,P07,first purchase at this merchant,"merchant_seen,merchant_new",reason_codes.yaml
+payments,P08,first purchase in this state or country,"location_new,foreign",reason_codes.yaml
+payments,P09,a merchant category new to this card or with recent fraud,"mcc_new,mcc_fraud_rate",reason_codes.yaml
+payments,P10,a new card or one reissued recently,"days_since_issue,log_n_prior",reason_codes.yaml
+payments,P11,an unusual time of day for this card,"hour,hour_share",reason_codes.yaml
+payments,P12,a new channel for this card or recent card errors,"channel,channel_new,errors_24h",reason_codes.yaml
+payments,P13,other cards with known fraud have used this merchant,"m_fraud_cards_known,m_fraud_share",reason_codes_v2.yaml
+payments,P14,a burst of new cards or purchases at this merchant,"m_cards_before,m_new_cards_7d,m_txn_7d",reason_codes_v2.yaml
+payments,P15,this card or another card of the same customer already had a confirmed fraud,"u_other_cards_known,card_known_fraud",reason_codes_v2.yaml

@@ -1,0 +1,31 @@
+table codes_daily
+
+	column day
+		dataType: dateTime
+		sourceColumn: day
+		summarizeBy: none
+
+	column verdict
+		dataType: string
+		sourceColumn: verdict
+		summarizeBy: none
+
+	column code
+		dataType: string
+		sourceColumn: code
+		summarizeBy: none
+
+	column decisions
+		dataType: int64
+		sourceColumn: decisions
+		summarizeBy: sum
+
+	partition codes_daily = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(CsvFolder & "codes_daily.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"day", type date}, {"verdict", type text}, {"code", type text}, {"decisions", Int64.Type}})
+				in
+				    Typed

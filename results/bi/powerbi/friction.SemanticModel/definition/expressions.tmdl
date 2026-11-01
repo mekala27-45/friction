@@ -1,0 +1,1 @@
+expression CsvFolder = "C:\friction\bi\csv\" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]

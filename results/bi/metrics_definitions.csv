@@ -1,0 +1,7 @@
+Metric,Over the events,Over the mart
+decisions,payment decisions,sum(decisions)
+fraud dollars,"dollars of confirmed fraud, labels as eventually reported, refunds as zero",sum(fraud_cents) / 100
+fraud dollars stopped,fraud dollars on a step up or a decline,sum(fraud_cents) filter (where verdict <> 'approve') / 100
+capture of fraud dollars,fraud dollars stopped over fraud dollars,sum(fraud_cents) filter (where verdict <> 'approve') / sum(fraud_cents)
+"step ups per 1,000 good","good customers asked for a one time code, per thousand good decisions",1000 * sum(decisions - frauds) filter (where verdict = 'step_up') / sum(decisions - frauds)
+"declines per 1,000 good","good customers declined, per thousand good decisions",1000 * sum(decisions - frauds) filter (where verdict = 'decline') / sum(decisions - frauds)

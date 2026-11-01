@@ -1,0 +1,36 @@
+table reason_codes
+
+	column desk
+		dataType: string
+		sourceColumn: desk
+		summarizeBy: none
+
+	column code
+		dataType: string
+		sourceColumn: code
+		summarizeBy: none
+
+	column says
+		dataType: string
+		sourceColumn: says
+		summarizeBy: none
+
+	column features
+		dataType: string
+		sourceColumn: features
+		summarizeBy: none
+
+	column source
+		dataType: string
+		sourceColumn: source
+		summarizeBy: none
+
+	partition reason_codes = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(CsvFolder & "reason_codes.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"desk", type text}, {"code", type text}, {"says", type text}, {"features", type text}, {"source", type text}})
+				in
+				    Typed

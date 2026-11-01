@@ -1,0 +1,25 @@
+{
+ "all_equal": true,
+ "measures": {
+  "Capture of fraud dollars": {
+   "equal": true,
+   "extract": 0.9022662383985636,
+   "graded": 0.9022662383985637
+  },
+  "Declines per 1,000 good": {
+   "equal": true,
+   "extract": 1.1832359952118614,
+   "graded": 1.1832359952118614
+  },
+  "Step ups per 1,000 good": {
+   "equal": true,
+   "extract": 8.648316734682613,
+   "graded": 8.648316734682613
+  }
+ },
+ "model": "lightgbm",
+ "window": [
+  "2019-07-01",
+  "2019-11-01"
+ ]
+}

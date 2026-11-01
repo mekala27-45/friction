@@ -1,0 +1,26 @@
+table quarantine
+
+	column desk
+		dataType: string
+		sourceColumn: desk
+		summarizeBy: none
+
+	column rule
+		dataType: string
+		sourceColumn: rule
+		summarizeBy: none
+
+	column rows_refused
+		dataType: int64
+		sourceColumn: rows_refused
+		summarizeBy: sum
+
+	partition quarantine = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(CsvFolder & "quarantine.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"desk", type text}, {"rule", type text}, {"rows_refused", Int64.Type}})
+				in
+				    Typed

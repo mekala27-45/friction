@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<datasource formatted-name='friction payments' inline='true' version='18.1'>
+  <connection class='federated'>
+    <named-connections>
+      <named-connection caption="decisions_daily" name="textscan.1">
+        <connection class='textscan' directory='csv' filename="decisions_daily.csv" />
+      </named-connection>
+      <named-connection caption="codes_daily" name="textscan.2">
+        <connection class='textscan' directory='csv' filename="codes_daily.csv" />
+      </named-connection>
+      <named-connection caption="reason_codes" name="textscan.3">
+        <connection class='textscan' directory='csv' filename="reason_codes.csv" />
+      </named-connection>
+      <named-connection caption="quarantine" name="textscan.4">
+        <connection class='textscan' directory='csv' filename="quarantine.csv" />
+      </named-connection>
+    </named-connections>
+    <relation connection="textscan.1" name="decisions_daily" table="[decisions_daily#csv]" type='table'>
+      <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+          <column datatype="date" name="day" ordinal='0' />
+          <column datatype="string" name="channel" ordinal='1' />
+          <column datatype="string" name="verdict" ordinal='2' />
+          <column datatype="integer" name="decisions" ordinal='3' />
+          <column datatype="integer" name="amount_cents" ordinal='4' />
+          <column datatype="integer" name="frauds" ordinal='5' />
+          <column datatype="integer" name="fraud_cents" ordinal='6' />
+      </columns>
+    </relation>
+    <relation connection="textscan.2" name="codes_daily" table="[codes_daily#csv]" type='table'>
+      <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+          <column datatype="date" name="day" ordinal='0' />
+          <column datatype="string" name="verdict" ordinal='1' />
+          <column datatype="string" name="code" ordinal='2' />
+          <column datatype="integer" name="decisions" ordinal='3' />
+      </columns>
+    </relation>
+    <relation connection="textscan.3" name="reason_codes" table="[reason_codes#csv]" type='table'>
+      <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+          <column datatype="string" name="desk" ordinal='0' />
+          <column datatype="string" name="code" ordinal='1' />
+          <column datatype="string" name="says" ordinal='2' />
+          <column datatype="string" name="features" ordinal='3' />
+          <column datatype="string" name="source" ordinal='4' />
+      </columns>
+    </relation>
+    <relation connection="textscan.4" name="quarantine" table="[quarantine#csv]" type='table'>
+      <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+          <column datatype="string" name="desk" ordinal='0' />
+          <column datatype="string" name="rule" ordinal='1' />
+          <column datatype="integer" name="rows_refused" ordinal='2' />
+      </columns>
+    </relation>
+  </connection>
+  <column caption="Decisions" datatype='real' name="[Decisions]" role='measure' type='quantitative'>
+    <calculation class='tableau' formula="SUM([decisions])" />
+  </column>
+  <column caption="Fraud dollars" datatype='real' name="[Fraud dollars]" role='measure' type='quantitative'>
+    <calculation class='tableau' formula="SUM([fraud_cents]) / 100" />
+  </column>
+  <column caption="Fraud dollars stopped" datatype='real' name="[Fraud dollars stopped]" role='measure' type='quantitative'>
+    <calculation class='tableau' formula='SUM(IF [verdict] &lt;&gt; "approve" THEN [fraud_cents] END) / 100' />
+  </column>
+  <column caption="Capture of fraud dollars" datatype='real' name="[Capture of fraud dollars]" role='measure' type='quantitative'>
+    <calculation class='tableau' formula='SUM(IF [verdict] &lt;&gt; "approve" THEN [fraud_cents] END) / SUM([fraud_cents])' />
+  </column>
+  <column caption="Step ups per 1,000 good" datatype='real' name="[Step ups per 1,000 good]" role='measure' type='quantitative'>
+    <calculation class='tableau' formula='1000 * SUM(IF [verdict] = "step_up" THEN [decisions] - [frauds] END) / (SUM([decisions]) - SUM([frauds]))' />
+  </column>
+  <column caption="Declines per 1,000 good" datatype='real' name="[Declines per 1,000 good]" role='measure' type='quantitative'>
+    <calculation class='tableau' formula='1000 * SUM(IF [verdict] = "decline" THEN [decisions] - [frauds] END) / (SUM([decisions]) - SUM([frauds]))' />
+  </column>
+</datasource>

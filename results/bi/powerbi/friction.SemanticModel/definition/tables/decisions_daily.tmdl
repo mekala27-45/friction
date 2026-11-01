@@ -1,0 +1,70 @@
+table decisions_daily
+
+	measure 'Decisions' = SUM(decisions_daily[decisions])
+		formatString: #,0.00
+		description: payment decisions
+
+	measure 'Fraud dollars' = SUM(decisions_daily[fraud_cents]) / 100
+		formatString: #,0.00
+		description: dollars of confirmed fraud, labels as eventually reported, refunds as zero
+
+	measure 'Fraud dollars stopped' = CALCULATE(SUM(decisions_daily[fraud_cents]), decisions_daily[verdict] <> "approve") / 100
+		formatString: #,0.00
+		description: fraud dollars on a step up or a decline
+
+	measure 'Capture of fraud dollars' = DIVIDE(CALCULATE(SUM(decisions_daily[fraud_cents]), decisions_daily[verdict] <> "approve"), SUM(decisions_daily[fraud_cents]))
+		formatString: 0.0%
+		description: fraud dollars stopped over fraud dollars
+
+	measure 'Step ups per 1,000 good' = DIVIDE(1000 * CALCULATE(SUM(decisions_daily[decisions]) - SUM(decisions_daily[frauds]), decisions_daily[verdict] = "step_up"), SUM(decisions_daily[decisions]) - SUM(decisions_daily[frauds]))
+		formatString: #,0.00
+		description: good customers asked for a one time code, per thousand good decisions
+
+	measure 'Declines per 1,000 good' = DIVIDE(1000 * CALCULATE(SUM(decisions_daily[decisions]) - SUM(decisions_daily[frauds]), decisions_daily[verdict] = "decline"), SUM(decisions_daily[decisions]) - SUM(decisions_daily[frauds]))
+		formatString: #,0.00
+		description: good customers declined, per thousand good decisions
+
+	column day
+		dataType: dateTime
+		sourceColumn: day
+		summarizeBy: none
+
+	column channel
+		dataType: string
+		sourceColumn: channel
+		summarizeBy: none
+
+	column verdict
+		dataType: string
+		sourceColumn: verdict
+		summarizeBy: none
+
+	column decisions
+		dataType: int64
+		sourceColumn: decisions
+		summarizeBy: sum
+
+	column amount_cents
+		dataType: int64
+		sourceColumn: amount_cents
+		summarizeBy: sum
+
+	column frauds
+		dataType: int64
+		sourceColumn: frauds
+		summarizeBy: sum
+
+	column fraud_cents
+		dataType: int64
+		sourceColumn: fraud_cents
+		summarizeBy: sum
+
+	partition decisions_daily = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(CsvFolder & "decisions_daily.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"day", type date}, {"channel", type text}, {"verdict", type text}, {"decisions", Int64.Type}, {"amount_cents", Int64.Type}, {"frauds", Int64.Type}, {"fraud_cents", Int64.Type}})
+				in
+				    Typed
