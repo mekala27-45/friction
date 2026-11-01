@@ -36,8 +36,19 @@ from scripts.grade import GATE_BOUNDS, clean, read
 ADDENDUM = Path("evaluation/plan_v2.yaml")
 
 
+def logistic_output(addendum: dict[str, Any]) -> set[str]:
+    """The addendum's own model when its registration ends the network in a logistic output.
+
+    Fitted on weighted binary cross entropy like LightGBM, its score is a probability in the same
+    sense, so the calibration gate applies to it. Before this, probabilities were known by name only,
+    which left the sequence model's calibration gate with no value (DECISIONS.md, 2026-11-01)."""
+    model = addendum.get("model") or {}
+    return {str(model["name"])} if "logistic output" in str(model.get("network", "")) else set()
+
+
 def desks_v2(plan: dict[str, Any], addendum: dict[str, Any]) -> dict[str, grade.Desk]:
     out = {}
+    logistic = logistic_output(addendum)
     for name, desk in grade.desks(plan).items():
         if name not in addendum["desks"]:  # an addendum may challenge one desk only
             continue
@@ -47,7 +58,7 @@ def desks_v2(plan: dict[str, Any], addendum: dict[str, Any]) -> dict[str, grade.
             desk,
             models=models,
             family=family,
-            probabilities=frozenset(m for m in models if m.startswith("lightgbm") or m == "logistic"),
+            probabilities=frozenset(m for m in models if m.startswith("lightgbm") or m == "logistic" or m in logistic),
             extra=tuple(m for m in models if m not in family),
         )
     return out

@@ -46,6 +46,15 @@ def test_the_addendum_names_the_desks_it_grades() -> None:
     assert "freeman" not in desks["logins"].probabilities
 
 
+def test_a_registered_logistic_output_is_graded_for_calibration() -> None:
+    plan = yaml.safe_load((ROOT / "evaluation" / "plan.yaml").read_text())
+    addendum = yaml.safe_load((ROOT / "evaluation" / "plan_v3.yaml").read_text())
+    desk = grade_v2.desks_v2(plan, addendum)["payments"]
+    assert desk.models == ("floor", "lightgbm", "gru")
+    assert desk.probabilities == frozenset({"lightgbm", "gru"})
+    assert grade_v2.logistic_output({"model": {"name": "x", "network": "a tree ensemble"}}) == set()
+
+
 @pytest.mark.parametrize("flip", [False, True])
 def test_a_challenger_needs_every_gate_and_an_interval_above_the_champion(flip: bool) -> None:
     desk = _desks()["payments"]
