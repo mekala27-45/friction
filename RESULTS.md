@@ -291,7 +291,7 @@ zero, so the registered rule promotes it. Its first grade failed
 the calibration gate with no value at all, because the grader knew probabilities by model name only;
 the grader now reads the logistic output the addendum registered, the bound unchanged, and both grades
 are kept (DECISIONS.md). The addendum also registered that a promoted sequence model runs in shadow
-before it decides, because the API keeps no event history, so the live API still decides with
+before it decides, because the API kept no event history, so the live API still decides with
 LightGBM.
 
 ## The platform after v0.1.0

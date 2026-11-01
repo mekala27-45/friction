@@ -687,6 +687,16 @@ def platform_v2(b: Builder) -> None:
         rows.append(["Shadow challenger on the live URL", f"{sh['shadow_model']} on {sh['shadowed']:,} replayed "
                      f"decisions: {sh['same_verdict']:,} same verdicts, {sh['shadow_flagged']} flagged by the "
                      f"shadow, {sh['champion_flagged']} by the champion, {sh['both_flagged']} by both"])  # fmt: skip
+    seq = ((_load("results/parity_sequence.json") or {}).get("live") or {}).get("payments", {})
+    sp, ss = seq.get("shadow_parity"), seq.get("shadow")
+    if sp and ss:
+        rows.append(["Sequence model in shadow on the live URL", f"{sp['decisions_equal']:,} of {sp['compared']:,} "
+                     f"replayed events scored and decided as the lake scores them after the seeded histories, worst "
+                     f"score difference {sp['max_abs_score_difference']:.1e}, codes equal on {sp['codes_equal']:,}; "
+                     f"{ss['shadow_flagged']} flagged by the shadow, {ss['champion_flagged']} by the champion, "
+                     f"{ss['both_flagged']} by both"])  # fmt: skip
+        b.v("v2.sequence_shadow.equal", sp["decisions_equal"], "int", "results/parity_sequence.json",
+            "replayed payments events", "live")  # fmt: skip
     pub, chk = (
         _load("results/workspace/feature_tables_publish.json"),
         _load("results/workspace/feature_tables_check.json"),
@@ -1022,8 +1032,12 @@ def stretch(b: Builder) -> None:
     if v3:
         promo = v3["desks"]["payments"]["promotion"]
         won = promo["champion_after"] != promo["champion_before"]
-        verdict = "promoted on the grade; the addendum has it run in shadow before it decides live" if won else (
-            "graded, not promoted")  # fmt: skip
+        live = ((_load("results/parity_sequence.json") or {}).get("live") or {}).get("payments", {})
+        exact = bool(live.get("shadow_parity")) and live["shadow_parity"]["decisions_equal"] == live[
+            "shadow_parity"]["compared"]  # fmt: skip
+        shadow = "now in shadow behind the live API with replay parity exact" if exact else (
+            "the addendum has it run in shadow before it decides live")  # fmt: skip
+        verdict = f"promoted on the grade; {shadow}" if won else "graded, not promoted"
         status[19] = ("done", f"results/evaluation_v3.json under evaluation/plan_v3.yaml: {verdict}")
     srv = _load("results/workspace/serving.json")
     status[20] = (

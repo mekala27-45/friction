@@ -161,8 +161,12 @@ zero, so the registered rule promotes it. Its first grade failed
 the calibration gate with no value at all, because the grader knew probabilities by model name only;
 the grader now reads the logistic output the addendum registered, the bound unchanged, and both grades
 are kept (DECISIONS.md). The addendum also registered that a promoted sequence model runs in shadow
-before it decides, because the API keeps no event history, so the live API still decides with
+before it decides, because the API kept no event history, so the live API still decides with
 LightGBM.
+{% if has("v2.sequence_shadow.equal") %}
+The API now keeps each card's last events beside its state, and the sequence model runs in shadow
+behind the live URL; the platform table below has its replay against the lake.
+{% endif %}
 {% endif %}
 {% endif %}
 
