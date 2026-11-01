@@ -1,0 +1,17 @@
+{
+ "id": "2026-11-01-41-sequence-parity",
+ "kind": "portable",
+ "target": "dev",
+ "params": {
+  "outbox_volume": "/Volumes/workspace/friction_dev_raw/outbox",
+  "drops": {
+   "payments": "all",
+   "logins": "all"
+  },
+  "redelivery": true,
+  "sequence_parity": true,
+  "memory": "10g",
+  "stop_on_failure": false
+ },
+ "note": "The sequence shadow's parity set. The open source build as request 20 built the lake behind the committed results/parity/payments.json, with no model run, then each replayed card's last events and the lake's score of every replay event from the promoted network in results/models/payments/shadow. The replay then seeds the history beside the card state and compares what the shadow says on each event with the lake."
+}
