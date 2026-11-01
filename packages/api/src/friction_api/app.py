@@ -150,6 +150,11 @@ def create_app(store: Store, bundles: dict[str, Bundle], replay_key: str | None 
             raise HTTPException(status_code=400, detail="the public namespace is never reseeded")
         return {"namespace": body.namespace, "seeded": store.seed(body.namespace, body.snapshot, replace=body.replace)}
 
+    @app.get("/v1/admin/shadow/{namespace}/{desk}", dependencies=[Depends(require_key)])
+    def shadow_decisions(namespace: str, desk: str) -> dict[str, Any]:
+        """What the shadow said on each decision of a replay, for the parity check to compare by event."""
+        return {"namespace": namespace, "desk": desk, "decisions": store.shadow_decisions(namespace, desk)}
+
     @app.get("/v1/admin/state/{namespace}/{kind}/{key}", dependencies=[Depends(require_key)])
     def state(namespace: str, kind: str, key: str) -> dict[str, Any]:
         found = store.state(namespace, kind, key)

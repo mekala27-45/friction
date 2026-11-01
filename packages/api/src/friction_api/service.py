@@ -15,10 +15,13 @@ from friction_core import tokens
 from friction_core.units import parse_amount_cents
 from friction_features import logins as login_features
 from friction_features import payments as payment_features
+from friction_models.sequence import LAGS
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from friction_api.bundle import Bundle
 from friction_api.store import Tx
+
+SEQUENCE_STATE = "card_steps"  # a card's last step values, kept only while a sequence model is loaded
 
 CHANNELS = {"swipe": 0, "chip": 1, "online": 2}
 
@@ -134,6 +137,21 @@ def shadow_of(shadow: Bundle | None, x: list[float], channel: int | None, values
             "codes": codes if verdict != "approve" else [], "bundle_digest": shadow.digest}  # fmt: skip
 
 
+def sequence_shadow(tx: Tx, shadow: Bundle, account: str, x: list[float], channel: int) -> dict[str, Any]:
+    """The sequence model in shadow: the card's earlier step values from the online store, the score of
+    this event after them, then this event's values appended, the last LAGS kept.
+
+    The history is its own kind of state beside the card's, locked after it in the same transaction,
+    so the v1 state and its snapshot are untouched and the history commits or rolls back with them."""
+    saved = tx.lock_state(SEQUENCE_STATE, account)
+    history: list[list[float]] = list(saved["steps"]) if saved else []
+    score, codes = shadow.sequence_score(x, history, channel)
+    verdict = shadow.decide(score, channel)
+    tx.put_state(SEQUENCE_STATE, account, {"steps": [*history, shadow.step(x)][-LAGS:]})
+    return {"model": shadow.model, "score": score, "verdict": verdict,
+            "codes": codes if verdict != "approve" else [], "bundle_digest": shadow.digest}  # fmt: skip
+
+
 def score_payment(tx: Tx, bundle: Bundle, e: PaymentIn, shadow: Bundle | None = None) -> DecisionOut:
     account = e.account_key or tokens.token("account", f"{e.user}:{e.card}")
     saved = tx.lock_state("card", account)
@@ -145,7 +163,11 @@ def score_payment(tx: Tx, bundle: Bundle, e: PaymentIn, shadow: Bundle | None = 
     state.update(ev)
     tx.put_state("card", account, state.snapshot())
     carried = codes if verdict != "approve" else []
-    in_shadow = shadow_of(shadow, x, ev.channel)
+    in_shadow: dict[str, Any] | None
+    if shadow is not None and shadow.network is not None:
+        in_shadow = sequence_shadow(tx, shadow, account, x, ev.channel)
+    else:
+        in_shadow = shadow_of(shadow, x, ev.channel)
     did = tx.log("payments", e.event_ref, account, score, verdict, carried, bundle.model, bundle.digest, in_shadow)
     return DecisionOut(decision_id=did, desk="payments", event_ref=e.event_ref, verdict=verdict, score=score,
                        codes=carried, model=bundle.model)  # fmt: skip

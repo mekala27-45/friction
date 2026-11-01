@@ -12,13 +12,15 @@ contribution, mapped to the v1 code of the feature it comes from.
 from __future__ import annotations
 
 import json
-from collections.abc import Callable
+from collections.abc import Callable, Sequence
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import numpy as np
 import numpy.typing as npt
-import pandas as pd
+
+if TYPE_CHECKING:  # the serving image has NumPy and no pandas; only the lakehouse side needs it
+    import pandas as pd
 
 F32 = npt.NDArray[np.float32]
 LAGS = 20
@@ -93,6 +95,37 @@ def steps(frame: pd.DataFrame) -> F32:
     return seq
 
 
+def step_values(x: Sequence[float], names: Sequence[str]) -> list[float]:
+    """The ten step features of one event, out of a champion's vector, as the lag columns hold them.
+
+    The lag columns are Spark floats, so each value is rounded to float32 here too; JSON keeps such a
+    value exactly, which is what lets the online store hold a card's history without drift."""
+    at = {n: i for i, n in enumerate(names)}
+    return [float(np.float32(x[at[c]])) for c in STEP]
+
+
+def row_steps(x: Sequence[float], names: Sequence[str], history: Sequence[Sequence[float]]) -> F32:
+    """1 x 21 x WIDTH for one event: what steps() builds for the same row, without a frame.
+
+    ``history`` is the card's earlier step values, oldest first, at most LAGS of them (step_values of
+    each); the event's own values are taken from its vector unrounded, as the frame carries them."""
+    recent = list(history)[-LAGS:]
+    pad = LAGS - len(recent)
+    seq = np.zeros((1, LAGS + 1, WIDTH), np.float32)
+    absent = {c: np.zeros(1) for c in STEP}
+    for i in range(LAGS):
+        if i < pad:
+            seq[:, i, :] = _one(absent, np.zeros(1, dtype=bool))
+        else:
+            values = recent[i - pad]
+            seq[:, i, :] = _one({c: np.asarray([values[j]], np.float64) for j, c in enumerate(STEP)},
+                                np.ones(1, dtype=bool))  # fmt: skip
+    at = {n: i for i, n in enumerate(names)}
+    now = {c: np.asarray([x[at[c]]], np.float64) for c in STEP}
+    seq[:, LAGS, :] = _one(now, np.ones(1, dtype=bool))
+    return seq
+
+
 def attribute_slices() -> dict[str, slice]:
     out, i = {}, 0
     for name, (_, n) in ATTRIBUTES.items():
@@ -137,8 +170,11 @@ def _cell(p: dict[str, Any], h: Any, x: Any, xp: Any) -> Any:
 
 def logits(p: dict[str, F32], seq: F32) -> npt.NDArray[np.float64]:
     h = np.zeros((seq.shape[0], HIDDEN), np.float32)
-    for t in range(seq.shape[1]):
-        h = _cell(p, h, seq[:, t, :], np)
+    # A gate far past either side overflows exp in float32 and still gives 0 or 1, the right value;
+    # the warning would only fill the API's log.
+    with np.errstate(over="ignore"):
+        for t in range(seq.shape[1]):
+            h = _cell(p, h, seq[:, t, :], np)
     return np.asarray(h @ p["wo"] + p["bo"], dtype=np.float64)
 
 
@@ -262,6 +298,8 @@ def collect(rows: Any, spill: Path) -> pd.DataFrame:
 
 
 def train_step(read: Callable[[str], Any], plan: dict[str, Any], out: Path) -> dict[str, Any]:
+    import pandas as pd
+
     pay = plan["desks"]["payments"]
     train = pay["splits"]["train"]
     start = str((pd.Timestamp(train["end"]) - pd.DateOffset(months=24)).date())

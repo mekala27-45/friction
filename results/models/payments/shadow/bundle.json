@@ -1,10 +1,10 @@
 {
  "desk": "payments",
- "evaluation_digest": "c75793821f7653c7c2667d02fa95c46980630964eb191b04833b1b85f68f106f",
+ "evaluation_digest": "845a7a5acb7fded77ec78515f663539495f18bef69751bf9031bdb3e80603dc6",
  "files": {
-  "model.json": "bf156afcb3144b412667ecc550c2696afce65b50be7f24b1dec046286b6d8a60"
+  "payments_gru.json": "fef26f00788c3ef7725ff787a47d8dd9c94174f1f67bc32fbbe6057baf928d29"
  },
- "model": "logistic",
+ "model": "gru",
  "reason_map": {
   "amount_usd": "P01",
   "amount_z": "P01",
@@ -31,14 +31,13 @@
   "sum_24h_usd": "P04",
   "sum_7d_usd": "P05"
  },
- "registered": {
-  "name": "workspace.friction_dev_ml.payments_logistic",
-  "sha256": "bf156afcb3144b412667ecc550c2696afce65b50be7f24b1dec046286b6d8a60",
-  "version": "1"
- },
  "status": "shadow",
  "thresholds": {
-  "decline": 0.1402454139997337,
-  "step_up": 0.0010620420808067404
+  "decline": 0.11999546341700677,
+  "step_up": 0.0008090370905185934
+ },
+ "trained": {
+  "github_run_id": "41335644482",
+  "request": "2026-11-01-35d-portable-sequence"
  }
 }

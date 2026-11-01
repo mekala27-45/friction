@@ -263,6 +263,12 @@ def handle(request: Request, out: Path, log: Path) -> dict[str, Any]:
             for name in ("timings.json", "summary.json"):
                 if (work / name).exists():
                     (out / f"models_{name}").write_bytes((work / name).read_bytes())
+        if request.params.get("sequence_parity"):
+            # The sequence shadow's parity set: each replayed card's history and the lake's score of every
+            # replay event, from the lag columns of this lake. Needs no model run: the network is the
+            # promoted one in results/models/payments/shadow.
+            _sh([sys.executable, "scripts/export_sequence_parity.py", "--lake", str(lake), "--out",
+                 str(out / "parity_shadow_payments.json")], log, env=spark_env)  # fmt: skip
         if request.params.get("perf"):
             _sh([sys.executable, "scripts/perf_experiments.py", "--lake", str(lake), "--out",
                  str(out / "performance.json")], log, env=spark_env)  # fmt: skip

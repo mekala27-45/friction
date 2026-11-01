@@ -7,6 +7,11 @@ For each desk: seed a namespace of its own with the snapshot of the state just b
 event, send every event in order, and compare each decision the lakehouse made with the API's:
 the verdict exactly, the score within 1e-9. Writes the result under its name in results/parity.json
 and exits non zero on any difference.
+
+When results/parity/payments_shadow.json exists the payments shadow is the sequence model: its
+history is seeded beside the champion's state, and what the shadow said on each event is compared
+with the lake's score of the same event, the verdict and the codes exactly and the score within
+1e-6, since its float32 network scores one row online and a batch in the lake.
 """
 
 from __future__ import annotations
@@ -25,9 +30,11 @@ ROOT = Path(__file__).resolve().parents[1]
 if __package__ in {None, ""}:
     sys.path.insert(0, str(ROOT))
 
+from friction_core.hashing import sha256_bytes
 from friction_core.secrets import single_line
 
 TOLERANCE = 1e-9
+SHADOW_TOLERANCE = 1e-6
 ROUTES = {"payments": "/v1/payments/score", "logins": "/v1/logins/score"}
 
 
@@ -49,12 +56,37 @@ def parts(snapshot: dict[str, dict[str, Any]], limit: int = PART_BYTES) -> list[
     return out
 
 
-def replay(post: Any, desk: str, parity: dict[str, Any], key: str, get: Any = None) -> dict[str, Any]:
+def shadow_against(got: list[dict[str, Any]], expected: list[dict[str, Any]]) -> dict[str, Any]:
+    """The shadow's decisions in a replay against the lake's, event by event."""
+    said = {int(d["event_ref"]): d["shadow"] for d in got}
+    compared = equal = codes_equal = 0
+    worst = 0.0
+    mismatches: list[dict[str, Any]] = []
+    for exp in expected:
+        s = said.get(int(exp["event_ref"]))
+        compared += 1
+        if s is None:
+            mismatches.append({"event_ref": exp["event_ref"], "expected": exp, "got": None})
+            continue
+        diff = abs(float(s["score"]) - float(exp["score"]))
+        worst = max(worst, diff)
+        same = s["verdict"] == exp["verdict"] and diff <= SHADOW_TOLERANCE
+        equal += int(same)
+        codes_equal += int(list(s.get("codes") or []) == list(exp["codes"]))
+        if not same and len(mismatches) < 5:
+            mismatches.append({"event_ref": exp["event_ref"], "expected": exp, "got": s})
+    return {"model": "gru", "compared": compared, "decisions_equal": equal, "codes_equal": codes_equal,
+            "max_abs_score_difference": worst, "tolerance": SHADOW_TOLERANCE, "mismatches": mismatches}  # fmt: skip
+
+
+def replay(post: Any, desk: str, parity: dict[str, Any], key: str, get: Any = None,
+           sequence: dict[str, Any] | None = None) -> dict[str, Any]:  # fmt: skip
     # A namespace of its own per replay: the decision log keeps every earlier replay, and the shadow
     # counts must be over this one only.
     ns = f"parity-{desk}-{uuid.uuid4().hex[:8]}"
     auth = {"authorization": f"Bearer {key}"}
-    for i, part in enumerate(parts(parity["snapshot"])):
+    snapshot = {**parity["snapshot"], **(sequence or {}).get("snapshot", {})}
+    for i, part in enumerate(parts(snapshot)):
         r = post("/v1/admin/seed", {"namespace": ns, "snapshot": part, "replace": i == 0}, auth)
         if r.status_code != 200:
             raise RuntimeError(f"seed part {i} failed: {r.status_code} {r.text[:200]}")
@@ -87,8 +119,15 @@ def replay(post: Any, desk: str, parity: dict[str, Any], key: str, get: Any = No
         r = get(f"/v1/shadow/{desk}", headers)
         body = r.json() if r.status_code == 200 else {}
         shadow = body if body.get("shadowed") else None
+    by_event = None
+    if sequence is not None and get is not None:
+        r = get(f"/v1/admin/shadow/{ns}/{desk}", auth)
+        if r.status_code != 200:
+            raise RuntimeError(f"shadow decisions: {r.status_code} {r.text[:200]}")
+        by_event = shadow_against(r.json()["decisions"], sequence["expected"])
     return {
         "shadow": shadow,
+        "shadow_parity": by_event,
         "events_sent": len(parity["events"]),
         "compared": compared,
         "decisions_equal": equal,
@@ -149,11 +188,25 @@ def main() -> int:
     ok = True
     for desk in ("payments", "logins"):
         parity = json.loads((args.parity / f"{desk}.json").read_text(encoding="utf-8"))
-        r = replay(post, desk, parity, key, get)
+        path = args.parity / f"{desk}_shadow.json"
+        sequence = json.loads(path.read_text(encoding="utf-8")) if path.exists() else None
+        if sequence is not None:
+            # The set was made for one shadow bundle and one replay; anything else is not a comparison.
+            loaded = (get("/health", {}).json().get("shadows") or {}).get(desk, {})
+            if loaded.get("bundle_digest") != sequence["bundle_digest"]:
+                raise SystemExit(f"the {desk} shadow loaded is not the one {path.name} was made for")
+            if sha256_bytes(json.dumps(parity["events"], sort_keys=True).encode()) != sequence["parity_events_sha256"]:
+                raise SystemExit(f"{path.name} was made for another replay than {desk}.json")
+        r = replay(post, desk, parity, key, get, sequence)
         result[desk] = r
         ok &= r["decisions_equal"] == r["compared"] and r["compared"] > 0
         print(f"{desk}: {r['decisions_equal']} of {r['compared']} decisions equal, worst score difference "
               f"{r['max_abs_score_difference']:.3g}, {r['events_sent']} events sent")  # fmt: skip
+        sp = r["shadow_parity"]
+        if sp is not None:
+            ok &= sp["decisions_equal"] == sp["compared"] and sp["codes_equal"] == sp["compared"]
+            print(f"{desk} shadow {sp['model']}: {sp['decisions_equal']} of {sp['compared']} equal, codes "
+                  f"{sp['codes_equal']}, worst score difference {sp['max_abs_score_difference']:.3g}")  # fmt: skip
     existing = json.loads(args.out.read_text(encoding="utf-8")) if args.out.exists() else {}
     existing[name] = result
     args.out.write_text(json.dumps(existing, indent=1, sort_keys=True) + "\n", encoding="utf-8")

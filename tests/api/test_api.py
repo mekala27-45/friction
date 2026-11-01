@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 from typing import Any
 
+import numpy as np
 import pytest
 from friction_features import payments as payment_features
 
@@ -226,3 +227,66 @@ def test_a_shadow_that_reads_another_vector_refuses_to_load(store, bundles) -> N
     loaded = {k: Bundle.load(v) for k, v in bundles.items()}
     with pytest.raises(ValueError, match="does not read the vector"):
         create_app(store, loaded, REPLAY_KEY, shadows={"payments": loaded["logins"]})
+
+
+def _sequence_client(store, bundles, tmp_path):  # type: ignore[no-untyped-def]
+    from fastapi.testclient import TestClient
+    from friction_api.app import create_app
+    from friction_api.bundle import Bundle
+    from friction_models import sequence
+
+    from tests.api.conftest import write_bundle
+
+    p = sequence.init()
+    p["bo"] = p["bo"] + 3.0  # every score high, so every online event is stepped up and carries codes
+    gru = sequence.to_json(p, np.zeros(sequence.WIDTH, np.float32)).encode()
+    shadow = write_bundle(tmp_path / "gru", "payments", "gru", {"payments_gru.json": gru},
+                          {"step_up": 0.5, "decline": 0.999})  # fmt: skip
+    loaded = {k: Bundle.load(v) for k, v in bundles.items()}
+    return TestClient(create_app(store, loaded, REPLAY_KEY, budget=100, shadows={"payments": Bundle.load(shadow)}))
+
+
+def test_the_sequence_shadow_keeps_the_last_events_of_each_card(store, bundles, tmp_path) -> None:  # type: ignore[no-untyped-def]
+    from friction_models import sequence
+
+    client = _sequence_client(store, bundles, tmp_path)
+    ns = new_namespace()
+    amounts = [1000 + 37 * i for i in range(sequence.LAGS + 4)]
+    scores = []
+    for i, cents in enumerate(amounts):
+        o = client.post("/v1/payments/score", json=payment(900 + i, i, amount_cents=cents), headers=key_headers(ns))
+        assert o.status_code == 200, o.text
+        row = client.get(f"/v1/decisions/{o.json()['decision_id']}").json()
+        assert row["verdict"] == o.json()["verdict"] and row["model"] != "gru"  # the champion decides
+        assert row["shadow"]["model"] == "gru" and row["shadow"]["verdict"] == "step_up" and row["shadow"]["codes"]
+        scores.append(row["shadow"]["score"])
+    steps = store.state(ns, "card_steps", "a_card_one")["steps"]
+    assert len(steps) == sequence.LAGS  # the oldest four fell off
+    amount, hour, channel = (sequence.STEP.index(c) for c in ("amount_usd", "hour", "channel"))
+    assert [s[amount] for s in steps] == [float(np.float32(c / 100)) for c in amounts[-sequence.LAGS :]]
+    assert {s[hour] for s in steps} == {10.0} and {s[channel] for s in steps} == {2.0}
+    assert len(set(scores)) > 1  # the same network, another history, another score
+    said = client.get(f"/v1/admin/shadow/{ns}/payments", headers=key_headers()).json()["decisions"]
+    assert [d["event_ref"] for d in said] == [900 + i for i in range(len(amounts))]
+    assert [d["shadow"]["score"] for d in said] == scores
+    assert client.get(f"/v1/admin/shadow/{ns}/payments").status_code == 403
+    # A card's history is its own: another card starts from nothing.
+    other = client.post("/v1/payments/score", json=payment(990, 0, account_key="a_card_two"), headers=key_headers(ns))
+    assert other.status_code == 200
+    assert len(store.state(ns, "card_steps", "a_card_two")["steps"]) == 1
+
+
+def test_the_sequence_history_rolls_back_with_the_decision(store, bundles, tmp_path, monkeypatch) -> None:  # type: ignore[no-untyped-def]
+    from friction_api import store as store_module
+
+    client = _sequence_client(store, bundles, tmp_path)
+    assert client.post("/v1/payments/score", json=payment(950)).status_code == 200
+    before = store.state("public", "card_steps", "a_card_one")
+
+    def broken(self: Any, *a: Any, **k: Any) -> str:
+        raise RuntimeError("the decision log is down")
+
+    monkeypatch.setattr(store_module.Tx, "log", broken)
+    with pytest.raises(RuntimeError):
+        client.post("/v1/payments/score", json=payment(951, minute=3))
+    assert store.state("public", "card_steps", "a_card_one") == before

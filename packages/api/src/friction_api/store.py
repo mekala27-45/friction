@@ -198,6 +198,16 @@ class Store:
                 "same_verdict": int(agree), "champion_flagged": int(champ), "shadow_flagged": int(shadow),
                 "both_flagged": int(both), "mean_abs_score_gap": None if gap is None else float(gap)}  # fmt: skip
 
+    def shadow_decisions(self, namespace: str, desk: str) -> list[dict[str, Any]]:
+        """Each decision the shadow scored in the namespace, with what the shadow said, by event."""
+        with self.connect() as conn:
+            rows = conn.execute(
+                "SELECT event_ref, shadow FROM decision_log WHERE namespace = %s AND desk = %s AND shadow IS NOT NULL "
+                "ORDER BY created_at, event_ref",
+                (namespace, desk),
+            ).fetchall()
+        return [{"event_ref": int(r[0]), "shadow": r[1]} for r in rows]
+
     def seed(self, namespace: str, snapshot: dict[str, Any], replace: bool = True) -> dict[str, int]:
         """Replace a namespace's state with a snapshot: {kind: {key: state}, "card_issues": {key: [..]}}.
         With replace off the snapshot is one more part of the same seed and is added to what is there."""

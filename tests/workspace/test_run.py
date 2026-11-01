@@ -323,3 +323,16 @@ def test_portable_with_the_sequence_challenger_grades_it_under_its_own_addendum(
     v3 = next(c for c, _ in shell.calls if c[1:2] == ["scripts/grade_v2.py"])
     assert v3[v3.index("--addendum") + 1] == "evaluation/plan_v3.yaml"
     assert v3[v3.index("--out") + 1].endswith("evaluation_v3.json")
+
+
+def test_portable_with_the_sequence_parity_needs_no_model_run(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    shell = FakeShell()
+    monkeypatch.setattr(run, "_sh", shell)
+    req, out = tmp_path / "requests", tmp_path / "runs"
+    params = {"outbox_volume": "/Volumes/x/outbox", "drops": {"payments": "all"}, "sequence_parity": True}
+    _request(req, "2026-01-01-01-portable", "portable", params=params)
+    assert _main(monkeypatch, req, out) == 0
+    scripts = [c[1] for c, _ in shell.calls if "python" in c[0]]
+    assert "scripts/run_models.py" not in scripts and scripts[-1] == "scripts/export_sequence_parity.py"
+    call = next(c for c, _ in shell.calls if c[1:2] == ["scripts/export_sequence_parity.py"])
+    assert call[call.index("--out") + 1].endswith("parity_shadow_payments.json")

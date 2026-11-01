@@ -140,3 +140,89 @@ def test_the_sample_through_parquet_is_the_champions_sample(spark, tmp_path: Pat
     assert 0 < len(got) < len(frame) and "unused" not in got
     pd.testing.assert_frame_equal(got, want[got.columns], check_dtype=False)
     assert np.array_equal(sq.steps(got), sq.steps(want))
+
+
+def test_one_row_built_from_a_history_is_the_row_the_lake_scores() -> None:
+    from friction_features import payments as payment_features
+
+    rng = np.random.default_rng(5)
+    names = list(payment_features.FEATURES)
+    n = 60
+    frame = _rows(n, rng)
+    held = rng.integers(0, sq.LAGS + 1, n)  # how many earlier events each card has, the most recent ones
+    for k in range(sq.LAGS, 0, -1):
+        lag = _rows(n, rng)
+        for c in sq.STEP:  # the lag columns are Spark floats
+            frame[f"{c}__{k}"] = np.where(k <= held, lag[c].to_numpy(np.float32).astype(np.float64), np.nan)
+    whole = sq.steps(frame)
+    p = sq.init()
+    batch = sq.predict(p, whole)
+    for r in range(n):
+        x = [0.0] * len(names)
+        for c in sq.STEP:
+            x[names.index(c)] = float(frame[c].iloc[r])
+        history = [[float(frame[f"{c}__{k}"].iloc[r]) for c in sq.STEP] for k in range(sq.LAGS, 0, -1) if k <= held[r]]
+        one = sq.row_steps(x, names, history)
+        assert np.array_equal(one[0], whole[r]), r
+        assert abs(float(sq.predict(p, one)[0]) - float(batch[r])) < 1e-6
+        assert sq.step_values(x, names) == [float(np.float32(frame[c].iloc[r])) for c in sq.STEP]
+    longer = [[1.0] * len(sq.STEP)] * (sq.LAGS + 5)
+    assert np.array_equal(sq.row_steps(x, names, longer), sq.row_steps(x, names, longer[-sq.LAGS :]))
+
+
+@pytest.mark.spark
+def test_the_seeded_history_and_the_online_appends_rebuild_the_lake_lags(spark, tmp_path: Path) -> None:  # type: ignore[no-untyped-def]
+    """The parity set's history, then each event's values appended as the API appends them, gives
+    every event of the window the lag columns the lake gave it: the scores agree, one row against a
+    batch, and so do the verdicts."""
+    import json
+
+    from friction_core.hashing import sha256_bytes
+    from friction_features import payments as payment_features
+    from pyspark.sql import functions as F
+
+    from scripts import export_sequence_parity as esp
+
+    lake = ROOT / "data" / "lake" / "fixture" / "spark-warehouse"
+    if not (lake / "payments_features").exists():
+        pytest.skip("needs the fixture lake: scripts/run_portable.py then scripts/run_features.py")
+
+    def read(name: str):  # type: ignore[no-untyped-def]
+        return spark.read.parquet(str(lake / name))
+
+    from friction_models import steps as v1
+
+    start = v1.load_plan(ROOT)["desks"]["payments"]["splits"]["test"]["start"]
+    since = F.unix_timestamp(F.to_timestamp(F.lit(start)))
+    first = read("payment_feature_inputs").where(F.col("event_ts_s") >= since).orderBy("event_ts_s", "txn_ref")
+    window = first.limit(300).select("txn_ref", "account_key", "channel").collect()
+    events = [{"event_ref": int(r["txn_ref"]), "account_key": r["account_key"], "channel": int(r["channel"])}
+              for r in window]  # fmt: skip
+    p = sq.init()
+    p["bo"] = p["bo"] - 1.0
+    shadow = tmp_path / "shadow"
+    shadow.mkdir()
+    gru = sq.to_json(p, np.zeros(sq.WIDTH, np.float32)).encode()
+    (shadow / "payments_gru.json").write_bytes(gru)
+    from friction_reasons.reasons import feature_to_code, load_table
+
+    reasons = feature_to_code(load_table(ROOT / "evaluation" / "reason_codes.yaml"), "payments")
+    meta = {"desk": "payments", "model": "gru", "status": "shadow", "thresholds": {"step_up": 0.3, "decline": 0.6},
+            "files": {"payments_gru.json": sha256_bytes(gru)}, "reason_map": reasons}  # fmt: skip
+    (shadow / "bundle.json").write_text(json.dumps(meta), encoding="utf-8")
+    out = esp.build(read, spark, {"events": events}, shadow)
+    assert out["cards"] == len({e["account_key"] for e in events}) and len(out["expected"]) == len(events)
+    assert out["cards"] < len(events)  # some card comes back within the window, so the appends are tested
+    names = list(payment_features.FEATURES)
+    refs = spark.createDataFrame([(e["event_ref"],) for e in events], "txn_ref long")
+    vectors = {int(r["txn_ref"]): [float(r[c]) for c in names] for r in read("payments_features").join(refs, "txn_ref")
+               .collect()}  # fmt: skip
+    history = {k: list(v["steps"]) for k, v in out["snapshot"]["card_steps"].items()}
+    worst = 0.0
+    for e, want in zip(events, out["expected"], strict=True):
+        x = vectors[e["event_ref"]]
+        got = float(sq.predict(p, sq.row_steps(x, names, history[e["account_key"]]))[0])
+        worst = max(worst, abs(got - want["score"]))
+        history[e["account_key"]] = [*history[e["account_key"]], sq.step_values(x, names)][-sq.LAGS :]
+    assert worst < 1e-6
+    assert any(len(v["steps"]) == sq.LAGS for v in out["snapshot"]["card_steps"].values())
