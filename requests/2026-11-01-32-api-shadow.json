@@ -1,0 +1,7 @@
+{
+ "id": "2026-11-01-32-api-shadow",
+ "kind": "api_check",
+ "target": "dev",
+ "params": {"steps": ["parity"], "stop_on_failure": false},
+ "note": "The parity replay on the live URL with the payments logistic in shadow: every champion decision must still equal the lakehouse, and the shadow counts must equal the in process replay (988 same verdicts, 10 shadow flags, 2 champion flags, none shared)."
+}
