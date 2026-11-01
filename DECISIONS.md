@@ -456,3 +456,23 @@ threshold of the gradient boosted models is equal; the logistic's scores differ 
 significant digit, from a solver that adds in a different order on another machine. The largest
 relative difference anywhere in the file is 1.1e-8, and no count or verdict moves. That rerun is kept as
 results/workspace/evaluation_v1_rerun_27b.json; main's evaluation stays the record.
+
+## 2026-11-01 The first platform batch stopped on an import, and the shadow counted one replay twice
+
+Requests 28 to 34 ran in one Actions run. The serving endpoint came up from the champion alias in
+1.4 minutes and scored the 1,000 parity vectors exactly as the API does, and the feature tables and
+their lookup check passed. The decisions job stopped before reading a row: ship() imports every
+module of friction_core so the workers can unpickle the scoring function, and friction_core.log
+imports structlog, which the job's environment did not list. Everything that reads the decisions
+then failed on the missing table: both drift runs, the Genie space and the BI extracts. The models
+job carried the same gap in its score task, unseen because that task has not run in the workspace
+since the logging module was added. Both environments list structlog now, and a bundle test reads
+each task's ship() call and fails when an environment lacks what a shipped package imports.
+
+The live replay with the shadow (request 32) matched the champion on 1,000 of 1,000 decisions and
+the shadow on 988 same verdicts and 10 shadow flags, but reported 4 champion flags where the in
+process replay gives 2. The replay reused one namespace, the decision log keeps every earlier replay,
+and the summary counted the champion's flags over all of them. Each replay now seeds a namespace of
+its own, and every count of the summary but the total is over the decisions the shadow scored, with
+a test. The failed requests run again under new ids (36 to 40); their first records stay on the
+results branch as they ran.

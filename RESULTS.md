@@ -27,7 +27,7 @@ fails CI. Source of each block in its first line.
 | 14 | done | Persistence: independent connection, audit before response, shared transaction, out of process check | tests/api/test_api.py and tests/api/test_out_of_process.py against Postgres |
 | 15 | done | Monitoring with delayed label cohorts; the day 40 incident detected, handled by the runbook and written up | results/workspace/monitor_alerts.json (GitHub issue 1), results/incident.json, results/workspace/incident_drop.json, docs/incidents/2026-10-29-day-40.md |
 | 16 | done | Performance experiments and the compute ledger published | results/performance.json (Actions runner, full data), results/compute_ledger.json (wall seconds per request; with workspace usage from system.billing.usage) |
-| 17 | done | The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS | results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (42 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr |
+| 17 | done | The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS | results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (43 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr |
 | 18 | done | Coverage, mypy, ruff, gates, skills valid, forty to sixty commits, the rederive, v0.1.0 after the commits | results/rederive.json (replay, fixture pipeline, model rerun, month rerun: no drift); 56 commits; CI green on coverage, mypy, ruff and the gates; v0.1.0 tagged on commit 7e9a1c8 |
 
 Stretch items (the sequence challenger, a workspace endpoint, the dashboard and Genie space, the
@@ -283,8 +283,11 @@ graded on questions with known answers.
 
 | Piece | Result |
 |---|---|
-| Free Edition, second probe | allowed: feature tables, genie, lakebase, lakeview, lakeview publish, online tables api, serving from uc, sharing |
+| Free Edition, second probe | allowed: a feature table with a TIMESERIES key, a Genie space, listing database instances, a dashboard, publishing it, the online tables API answering, a serving endpoint from Unity Catalog, listing shares |
 | Two engine reconcile with the graph tables | 11 of 11 exported tables equal by digest |
+| Serving endpoint from the champion alias | version 1, ready in 1.4 min; 1,000 of 1,000 parity scores equal; single row p50 75.8 ms, p99 144.1 ms from the runner |
+| Feature tables with a TIMESERIES key | fs_card_daily 11,269,310 rows, fs_merchant_daily 7,747,399 rows |
+| Feature store lookup against friction's | 146,597 of 146,597 events of 2019-07 equal on every feature |
 
 ## The rederive
 

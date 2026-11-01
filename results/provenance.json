@@ -214,6 +214,24 @@
    "promoted_at": "2026-11-01T03:41:57+00:00"
   },
   {
+   "file": "results/workspace/feature_tables_check.json",
+   "sha256": "54a5c1cae2454f4b5a518eb840736da44f060299475fb855f3106f2b812c179a",
+   "request": "2026-11-01-34a-feature-tables",
+   "github_run_id": "41268716947",
+   "commit": "88ef14b9ea3ecbeb1fc48b1d211baacf0d9e5c8f",
+   "ran_at": "2026-11-01T03:56:31+00:00",
+   "promoted_at": "2026-11-01T04:03:26+00:00"
+  },
+  {
+   "file": "results/workspace/feature_tables_publish.json",
+   "sha256": "60d4b2f0021995f144697fe92ca80c31d3c442cc293f646c17387e42e78e3495",
+   "request": "2026-11-01-34a-feature-tables",
+   "github_run_id": "41268716947",
+   "commit": "88ef14b9ea3ecbeb1fc48b1d211baacf0d9e5c8f",
+   "ran_at": "2026-11-01T03:56:31+00:00",
+   "promoted_at": "2026-11-01T04:03:26+00:00"
+  },
+  {
    "file": "results/workspace/fetch_status_on_runner.json",
    "sha256": "aba925ed7e21b01e4b12789b32928ccf902fcb6527aacdece25d0965e5befca6",
    "request": "2026-10-29-04b-upload-sources",
@@ -535,6 +553,15 @@
    "commit": "2b50b6ee36470fee2a385128c443f53bb5b74713",
    "ran_at": "2026-10-29T22:14:56+00:00",
    "promoted_at": "2026-10-29T22:34:01+00:00"
+  },
+  {
+   "file": "results/workspace/serving.json",
+   "sha256": "e12e489eebe4bacb8b9a3eea118f4911f0ce55aaeaf2431c826eb502b3b2dd6c",
+   "request": "2026-11-01-28-serving-payments",
+   "github_run_id": "41268716947",
+   "commit": "88ef14b9ea3ecbeb1fc48b1d211baacf0d9e5c8f",
+   "ran_at": "2026-11-01T03:44:11+00:00",
+   "promoted_at": "2026-11-01T04:03:26+00:00"
   },
   {
    "file": "results/workspace/train_summary.json",

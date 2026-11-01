@@ -1,0 +1,41 @@
+{
+ "alias": "champion",
+ "deploy": {
+  "action": "created",
+  "minutes_to_ready": 1.4,
+  "state": "READY/NOT_UPDATING"
+ },
+ "endpoint": "friction-payments",
+ "first_query_ms": 1089.5,
+ "latency_single_row": {
+  "mean_ms": 84.5,
+  "n": 200,
+  "p50_ms": 75.8,
+  "p95_ms": 133.5,
+  "p99_ms": 144.1
+ },
+ "model": "workspace.friction_dev_ml.payments_lightgbm",
+ "parity": {
+  "differ": 0,
+  "equal": 1000,
+  "events": 1000,
+  "max_relative_difference": 0.0,
+  "missing": 0,
+  "scored": 1000
+ },
+ "vectors": {
+  "asked": 1000,
+  "complete": 1000,
+  "found": 1000
+ },
+ "vercel_payments": {
+  "mean_ms": 153,
+  "measured_at": "2026-10-31T23:02:23Z",
+  "n": 200,
+  "p50_ms": 149,
+  "p99_ms": 193,
+  "work": "builds the vector from its online state, scores it, codes it and stores the decision"
+ },
+ "version": "1",
+ "work": "scores a vector it is given"
+}

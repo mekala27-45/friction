@@ -1,0 +1,15 @@
+{
+ "month": "2019-07",
+ "events": 146597,
+ "compared": 146597,
+ "equal": 146597,
+ "without_history": 248,
+ "features": [
+  "merchant_cards_seen",
+  "merchant_fraud_cards_known",
+  "merchant_txn_total",
+  "merchant_fraud_share",
+  "card_txn_total",
+  "card_known_fraud"
+ ]
+}

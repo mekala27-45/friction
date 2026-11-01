@@ -633,7 +633,12 @@ def platform_v2(b: Builder) -> None:
     rows: list[list[str]] = []
     probe = (_load("results/workspace_probe_v2.json") or {}).get("summary")
     if probe:
-        allowed = [k.replace("_", " ") for k, ok in sorted(probe.items()) if ok]
+        # What each probe call did, in words: listing database instances is not creating one.
+        said = {"lakebase": "listing database instances", "online_tables_api": "the online tables API answering",
+                "serving_from_uc": "a serving endpoint from Unity Catalog", "lakeview": "a dashboard",
+                "lakeview_publish": "publishing it", "genie": "a Genie space", "sharing": "listing shares",
+                "feature_tables": "a feature table with a TIMESERIES key"}  # fmt: skip
+        allowed = [said.get(k, k.replace("_", " ")) for k, ok in sorted(probe.items()) if ok]
         rows.append(["Free Edition, second probe", f"allowed: {', '.join(allowed)}"])
     rec = _load("results/reconcile_v2.json")
     if rec:

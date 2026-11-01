@@ -2,7 +2,7 @@
  "as_of": "2026-11-01",
  "values": {
   "build.commits": {
-   "value": 86,
+   "value": 87,
    "fmt": "int",
    "provenance": {
     "origin": "git",
@@ -3641,6 +3641,17 @@
     "as_of": "2026-11-01",
     "note": null
    }
+  },
+  "v2.serving.p99_ms": {
+   "value": 144.1,
+   "fmt": "float1",
+   "provenance": {
+    "origin": "results/workspace/serving.json",
+    "population": "single row queries",
+    "source": "workspace",
+    "as_of": "2026-11-01",
+    "note": null
+   }
   }
  },
  "tables": {
@@ -3758,7 +3769,7 @@
      17,
      "done",
      "The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS",
-     "results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (42 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr"
+     "results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (43 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr"
     ],
     [
      18,
@@ -5087,11 +5098,23 @@
    "rows": [
     [
      "Free Edition, second probe",
-     "allowed: feature tables, genie, lakebase, lakeview, lakeview publish, online tables api, serving from uc, sharing"
+     "allowed: a feature table with a TIMESERIES key, a Genie space, listing database instances, a dashboard, publishing it, the online tables API answering, a serving endpoint from Unity Catalog, listing shares"
     ],
     [
      "Two engine reconcile with the graph tables",
      "11 of 11 exported tables equal by digest"
+    ],
+    [
+     "Serving endpoint from the champion alias",
+     "version 1, ready in 1.4 min; 1,000 of 1,000 parity scores equal; single row p50 75.8 ms, p99 144.1 ms from the runner"
+    ],
+    [
+     "Feature tables with a TIMESERIES key",
+     "fs_card_daily 11,269,310 rows, fs_merchant_daily 7,747,399 rows"
+    ],
+    [
+     "Feature store lookup against friction's",
+     "146,597 of 146,597 events of 2019-07 equal on every feature"
     ]
    ],
    "provenance": {
