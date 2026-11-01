@@ -88,6 +88,15 @@
    "promoted_at": "2026-10-29T21:21:15+00:00"
   },
   {
+   "file": "results/models/payments/shadow/model.json",
+   "sha256": "bf156afcb3144b412667ecc550c2696afce65b50be7f24b1dec046286b6d8a60",
+   "request": "2026-10-30-18a-train-register",
+   "github_run_id": "40984691116",
+   "commit": "83fc951dfaeaac1fe5ba50e4c126557e4a30df16",
+   "ran_at": "2026-10-30T02:18:49+00:00",
+   "promoted_at": "2026-11-01T00:35:54+00:00"
+  },
+  {
    "file": "results/parity/logins.json",
    "sha256": "91d433ec539efb9a0dd31b9507b856b6d563455312129eb111f35ca42e28c0be",
    "request": "2026-10-29-12-portable-full-models",

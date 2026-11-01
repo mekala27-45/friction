@@ -123,7 +123,18 @@ def payment_event(e: PaymentIn, bundle: Bundle, issued: list[int]) -> tuple[str,
     return account, ev
 
 
-def score_payment(tx: Tx, bundle: Bundle, e: PaymentIn) -> DecisionOut:
+def shadow_of(shadow: Bundle | None, x: list[float], channel: int | None, values: tuple[str, ...] | None = None
+              ) -> dict[str, Any] | None:  # fmt: skip
+    """The shadow's decision on the champion's own vector, as the decision log records it."""
+    if shadow is None:
+        return None
+    score, codes = shadow.score(x, values)
+    verdict = shadow.decide(score, channel)
+    return {"model": shadow.model, "score": score, "verdict": verdict,
+            "codes": codes if verdict != "approve" else [], "bundle_digest": shadow.digest}  # fmt: skip
+
+
+def score_payment(tx: Tx, bundle: Bundle, e: PaymentIn, shadow: Bundle | None = None) -> DecisionOut:
     account = e.account_key or tokens.token("account", f"{e.user}:{e.card}")
     saved = tx.lock_state("card", account)
     state = payment_features.CardState.restore(saved) if saved else payment_features.CardState()
@@ -134,7 +145,8 @@ def score_payment(tx: Tx, bundle: Bundle, e: PaymentIn) -> DecisionOut:
     state.update(ev)
     tx.put_state("card", account, state.snapshot())
     carried = codes if verdict != "approve" else []
-    did = tx.log("payments", e.event_ref, account, score, verdict, carried, bundle.model, bundle.digest)
+    in_shadow = shadow_of(shadow, x, ev.channel)
+    did = tx.log("payments", e.event_ref, account, score, verdict, carried, bundle.model, bundle.digest, in_shadow)
     return DecisionOut(decision_id=did, desk="payments", event_ref=e.event_ref, verdict=verdict, score=score,
                        codes=carried, model=bundle.model)  # fmt: skip
 
@@ -150,7 +162,7 @@ def login_values(e: LoginIn) -> tuple[str, str, tuple[str, ...]]:
     return user, ip, values
 
 
-def score_login(tx: Tx, bundle: Bundle, e: LoginIn) -> DecisionOut:
+def score_login(tx: Tx, bundle: Bundle, e: LoginIn, shadow: Bundle | None = None) -> DecisionOut:
     user, ip, values = login_values(e)
     stranger = user in bundle.unknown_accounts
     # Lock in a fixed order so two requests for the same user and address cannot deadlock.
@@ -171,6 +183,7 @@ def score_login(tx: Tx, bundle: Bundle, e: LoginIn) -> DecisionOut:
         tx.put_state("user", user, ustate.snapshot())
     tx.put_state("ip", ip, istate.snapshot())
     carried = codes if verdict != "approve" else []
-    did = tx.log("logins", e.event_ref, user, score, verdict, carried, bundle.model, bundle.digest)
+    in_shadow = shadow_of(shadow, x, None, values)
+    did = tx.log("logins", e.event_ref, user, score, verdict, carried, bundle.model, bundle.digest, in_shadow)
     return DecisionOut(decision_id=did, desk="logins", event_ref=e.event_ref, verdict=verdict, score=score,
                        codes=carried, model=bundle.model)  # fmt: skip

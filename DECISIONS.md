@@ -394,3 +394,17 @@ latency beside the Vercel API, the feature tables in Unity Catalog with point in
 published dashboard and a Genie space over the gold tables. The online store stays on Neon, which
 the API already reads, because a database instance is a paid feature outside the free tier and the
 probe only listed them.
+
+## 2026-11-01 The payments logistic runs in shadow behind the live API
+
+The API now loads an optional second bundle per desk, results/models/<desk>/shadow, and scores it on
+the champion's own feature vector inside the same transaction. Its score, verdict and codes go to
+the decision log beside the decision and are never returned as it; GET /v1/shadow/<desk> counts how
+the two would have differed. The shadow is the payments logistic, the second model that cleared
+every gate of the first plan, as registered in Unity Catalog (version 1, its sha256 checked against
+the file), with the thresholds the grade chose for it on validation. The graph challenger cannot
+run in shadow yet: the API keeps card state, not the merchant and user graph, and a shadow that read
+features computed differently online would measure the gap between two feature paths, not between
+two models. On the 1,000 parity events replayed in process the shadow agreed on 988 verdicts and
+flagged 10 events where the champion flagged 2, none of them the same; the live replay must give the
+same counts, since the state and the code are the same.

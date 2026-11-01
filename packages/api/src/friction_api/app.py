@@ -55,7 +55,13 @@ def client_hash(request: Request) -> str:
 
 
 def create_app(store: Store, bundles: dict[str, Bundle], replay_key: str | None = None,
-               origins: list[str] | None = None, budget: int = BUDGET_PER_HOUR) -> FastAPI:  # fmt: skip
+               origins: list[str] | None = None, budget: int = BUDGET_PER_HOUR,
+               shadows: dict[str, Bundle] | None = None) -> FastAPI:  # fmt: skip
+    shadows = shadows or {}
+    for name, s in shadows.items():
+        # A shadow scores the champion's own vector, so it must read the same columns in the same order.
+        if name not in bundles or s.desk != name or s.names() != bundles[name].names():
+            raise ValueError(f"the {name} shadow does not read the vector its champion reads")
     app = FastAPI(title="friction", version=_version(), docs_url=None, redoc_url=None)
     if origins:
         app.add_middleware(
@@ -105,19 +111,28 @@ def create_app(store: Store, bundles: dict[str, Bundle], replay_key: str | None 
                 }
                 for k, b in sorted(bundles.items())
             },
+            "shadows": {
+                k: {"model": b.model, "status": b.status, "bundle_digest": b.digest} for k, b in sorted(shadows.items())
+            },
         }
 
     @app.post("/v1/payments/score", response_model=DecisionOut)
     def score_payment(event: PaymentIn, namespace: str = Depends(gate)) -> DecisionOut:
         b = desk("payments")
         with store.transaction(namespace) as tx:
-            return service.score_payment(tx, b, event)
+            return service.score_payment(tx, b, event, shadows.get("payments"))
 
     @app.post("/v1/logins/score", response_model=DecisionOut)
     def score_login(event: LoginIn, namespace: str = Depends(gate)) -> DecisionOut:
         b = desk("logins")
         with store.transaction(namespace) as tx:
-            return service.score_login(tx, b, event)
+            return service.score_login(tx, b, event, shadows.get("logins"))
+
+    @app.get("/v1/shadow/{name}")
+    def shadow(name: str, namespace: str = Depends(gate)) -> dict[str, Any]:
+        """How the shadow challenger would have decided, against the champion, in this namespace."""
+        desk(name)
+        return {"desk": name, "namespace": namespace, **store.shadow_summary(namespace, name)}
 
     @app.get("/v1/decisions/{decision_id}")
     def decision(decision_id: str) -> dict[str, Any]:
@@ -151,9 +166,10 @@ def from_environment(loader: Callable[[Path], Bundle] = Bundle.load) -> FastAPI:
     models = os.environ.get("FRICTION_MODELS")
     root = Path(models) if models else Path(__file__).resolve().parents[4] / "results" / "models"
     bundles = {p.parent.name: loader(p.parent) for p in sorted(root.glob("*/bundle.json"))}
+    shadows = {p.parent.parent.name: loader(p.parent) for p in sorted(root.glob("*/shadow/bundle.json"))}
     store = Store(os.environ["DATABASE_URL"])
     store.migrate()
     origins = [o for o in os.environ.get("FRICTION_CORS_ORIGINS", "").split(",") if o]
     # A key pasted into a dashboard often brings a trailing newline with it.
     replay_key = os.environ.get("FRICTION_REPLAY_KEY", "").strip() or None
-    return create_app(store, bundles, replay_key, origins)
+    return create_app(store, bundles, replay_key, origins, shadows=shadows)

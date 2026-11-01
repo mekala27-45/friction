@@ -48,7 +48,7 @@ def parts(snapshot: dict[str, dict[str, Any]], limit: int = PART_BYTES) -> list[
     return out
 
 
-def replay(post: Any, desk: str, parity: dict[str, Any], key: str) -> dict[str, Any]:
+def replay(post: Any, desk: str, parity: dict[str, Any], key: str, get: Any = None) -> dict[str, Any]:
     ns = f"parity-{desk}"
     auth = {"authorization": f"Bearer {key}"}
     for i, part in enumerate(parts(parity["snapshot"])):
@@ -77,7 +77,15 @@ def replay(post: Any, desk: str, parity: dict[str, Any], key: str) -> dict[str, 
         codes_equal += int(got["codes"] == exp["codes"])
         if not same and len(mismatches) < 5:
             mismatches.append({"event_ref": event["event_ref"], "expected": exp, "got": got})
+    shadow = None
+    if get is not None:
+        # The shadow's verdicts over the same replay, when a shadow is loaded: the same state and the
+        # same code give the same counts in process and on the live URL.
+        r = get(f"/v1/shadow/{desk}", headers)
+        body = r.json() if r.status_code == 200 else {}
+        shadow = body if body.get("shadowed") else None
     return {
+        "shadow": shadow,
         "events_sent": len(parity["events"]),
         "compared": compared,
         "decisions_equal": equal,
@@ -108,11 +116,17 @@ def main() -> int:
         store = Store(os.environ["FRICTION_TEST_DATABASE_URL"])
         store.migrate()
         bundles = {p.parent.name: Bundle.load(p.parent) for p in sorted(args.models.glob("*/bundle.json"))}
+        shadows = {
+            p.parent.parent.name: Bundle.load(p.parent) for p in sorted(args.models.glob("*/shadow/bundle.json"))
+        }
         # Entered once: a TestClient used without its context starts an event loop per request.
-        client = TestClient(create_app(store, bundles, key)).__enter__()
+        client = TestClient(create_app(store, bundles, key, shadows=shadows)).__enter__()
 
         def post(path: str, body: Any, headers: dict[str, str]) -> Any:
             return client.post(path, json=body, headers=headers)
+
+        def get(path: str, headers: dict[str, str]) -> Any:
+            return client.get(path, headers=headers)
 
         name = args.name or "local"
     else:
@@ -124,12 +138,15 @@ def main() -> int:
         def post(path: str, body: Any, headers: dict[str, str]) -> Any:
             return http.post(path, json=body, headers=headers)
 
+        def get(path: str, headers: dict[str, str]) -> Any:
+            return http.get(path, headers=headers)
+
         name = args.name or "live"
     result: dict[str, Any] = {"target": name, "url": args.url, "at": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")}
     ok = True
     for desk in ("payments", "logins"):
         parity = json.loads((args.parity / f"{desk}.json").read_text(encoding="utf-8"))
-        r = replay(post, desk, parity, key)
+        r = replay(post, desk, parity, key, get)
         result[desk] = r
         ok &= r["decisions_equal"] == r["compared"] and r["compared"] > 0
         print(f"{desk}: {r['decisions_equal']} of {r['compared']} decisions equal, worst score difference "

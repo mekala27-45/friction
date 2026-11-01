@@ -53,6 +53,9 @@ CREATE TABLE IF NOT EXISTS decision_log (
   created_at timestamptz NOT NULL DEFAULT now()
 );
 CREATE INDEX IF NOT EXISTS decision_log_event ON decision_log (namespace, desk, event_ref);
+-- The challenger scored in shadow on the same vector: recorded beside the decision, never returned
+-- as it, never deciding. Added after v0.1.0, so a database created before it gains the column.
+ALTER TABLE decision_log ADD COLUMN IF NOT EXISTS shadow jsonb;
 CREATE TABLE IF NOT EXISTS client_budget (
   client text NOT NULL,
   window_start timestamptz NOT NULL,
@@ -90,13 +93,14 @@ class Tx:
         return [] if row is None else [int(x) for x in row[0]]
 
     def log(self, desk: str, event_ref: int, entity: str, score: float, verdict: str, codes: list[str],
-            model: str, digest: str) -> str:  # fmt: skip
+            model: str, digest: str, shadow: dict[str, Any] | None = None) -> str:  # fmt: skip
         decision_id = str(uuid.uuid4())
         self.conn.execute(
             "INSERT INTO decision_log (id, namespace, desk, event_ref, entity, score, verdict, codes, model, "
-            "bundle_digest) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
-            (decision_id, self.ns, desk, event_ref, entity, score, verdict, ",".join(codes), model, digest),
-        )
+            "bundle_digest, shadow) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+            (decision_id, self.ns, desk, event_ref, entity, score, verdict, ",".join(codes), model, digest,
+             None if shadow is None else Jsonb(shadow)),
+        )  # fmt: skip
         return decision_id
 
 
@@ -158,18 +162,38 @@ class Store:
         with self.connect() as conn:
             row = conn.execute(
                 "SELECT id, namespace, desk, event_ref, entity, score, verdict, codes, model, bundle_digest, "
-                "created_at FROM decision_log WHERE id = %s",
+                "created_at, shadow FROM decision_log WHERE id = %s",
                 (decision_id,),
             ).fetchone()
         if row is None:
             return None
         keys = ("id", "namespace", "desk", "event_ref", "entity", "score", "verdict", "codes", "model",
-                "bundle_digest", "created_at")  # fmt: skip
+                "bundle_digest", "created_at", "shadow")  # fmt: skip
         out = dict(zip(keys, row, strict=True))
         out["id"] = str(out["id"])
         out["codes"] = [c for c in str(out["codes"]).split(",") if c]
         out["created_at"] = out["created_at"].isoformat()
         return out
+
+    def shadow_summary(self, namespace: str, desk: str) -> dict[str, Any]:
+        """How the shadow would have decided against the champion, over the namespace's decisions."""
+        with self.connect() as conn:
+            row = conn.execute(
+                "SELECT count(*), count(shadow), "
+                "count(*) FILTER (WHERE shadow->>'verdict' = verdict), "
+                "count(*) FILTER (WHERE verdict <> 'approve'), "
+                "count(*) FILTER (WHERE shadow->>'verdict' <> 'approve'), "
+                "count(*) FILTER (WHERE verdict <> 'approve' AND shadow->>'verdict' <> 'approve'), "
+                "avg(abs((shadow->>'score')::double precision - score)), "
+                "min(shadow->>'model') "
+                "FROM decision_log WHERE namespace = %s AND desk = %s",
+                (namespace, desk),
+            ).fetchone()
+        assert row is not None
+        n, shadowed, agree, champ, shadow, both, gap, model = row
+        return {"decisions": int(n), "shadowed": int(shadowed), "shadow_model": model,
+                "same_verdict": int(agree), "champion_flagged": int(champ), "shadow_flagged": int(shadow),
+                "both_flagged": int(both), "mean_abs_score_gap": None if gap is None else float(gap)}  # fmt: skip
 
     def seed(self, namespace: str, snapshot: dict[str, Any], replace: bool = True) -> dict[str, int]:
         """Replace a namespace's state with a snapshot: {kind: {key: state}, "card_issues": {key: [..]}}.

@@ -174,3 +174,41 @@ def test_a_snapshot_seeded_in_parts_equals_one_seeded_whole(client, store) -> No
         assert store.state(ns, "card", f"c{i}") == store.state(whole, "card", f"c{i}")
     client.post("/v1/admin/seed", json={"namespace": ns, "snapshot": pieces[0]}, headers=key_headers())
     assert store.state(ns, "card", "c29") is None  # a first part replaces what was there
+
+
+def _shadow_client(store, bundles, tmp_path, thresholds):  # type: ignore[no-untyped-def]
+    from fastapi.testclient import TestClient
+    from friction_api.app import create_app
+    from friction_api.bundle import Bundle
+
+    from tests.api.conftest import write_bundle
+
+    model = (bundles["payments"] / "model.json").read_bytes()
+    shadow = write_bundle(tmp_path / "shadow", "payments", "logistic", {"model.json": model}, thresholds)
+    loaded = {k: Bundle.load(v) for k, v in bundles.items()}
+    return TestClient(create_app(store, loaded, REPLAY_KEY, budget=50, shadows={"payments": Bundle.load(shadow)}))
+
+
+def test_the_shadow_scores_the_champions_vector_and_never_decides(store, bundles, tmp_path) -> None:  # type: ignore[no-untyped-def]
+    # The same model with a step up threshold of zero: the same score on every event, another verdict.
+    client = _shadow_client(store, bundles, tmp_path, {"step_up": 0.0, "decline": 2.0})
+    out = [client.post("/v1/payments/score", json=payment(500 + i, i, amount_cents=999 + 50_000 * i)).json()
+           for i in range(4)]  # fmt: skip
+    assert all("shadow" not in o for o in out)
+    for o in out:
+        row = client.get(f"/v1/decisions/{o['decision_id']}").json()
+        assert row["verdict"] == o["verdict"] and row["shadow"]["score"] == o["score"]
+        assert row["shadow"]["verdict"] == "step_up" and row["shadow"]["model"] == "logistic"
+    summary = client.get("/v1/shadow/payments").json()
+    assert summary["decisions"] == summary["shadowed"] == 4 and summary["shadow_flagged"] == 4
+    assert summary["mean_abs_score_gap"] == 0.0
+    assert client.get("/health").json()["shadows"]["payments"]["model"] == "logistic"
+
+
+def test_a_shadow_that_reads_another_vector_refuses_to_load(store, bundles) -> None:  # type: ignore[no-untyped-def]
+    from friction_api.app import create_app
+    from friction_api.bundle import Bundle
+
+    loaded = {k: Bundle.load(v) for k, v in bundles.items()}
+    with pytest.raises(ValueError, match="does not read the vector"):
+        create_app(store, loaded, REPLAY_KEY, shadows={"payments": loaded["logins"]})
