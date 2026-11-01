@@ -32,7 +32,7 @@ def main() -> int:
     def write(name: str, df) -> None:  # type: ignore[no-untyped-def]
         df.write.mode("overwrite").parquet(str(wh / name))
 
-    counts = gold.features_step(spark, read, write)
+    counts = gold.features_step(spark, read, write, source=read)
     print(f"features: {counts} in {round(time.monotonic() - started, 1)} s")
     return 0
 

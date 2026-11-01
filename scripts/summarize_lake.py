@@ -26,6 +26,7 @@ TABLES = (
     "payments_bronze", "logins_bronze", "labels_payments_bronze", "labels_logins_bronze", "cdc_cards_bronze",
     "payments_silver", "logins_silver", "quarantine", "cards_history", "labels_payments_history",
     "labels_logins_history", "mcc_fraud_rates", "login_account_stats", "payments_features", "logins_features",
+    "payments_graph_features", "logins_graph_features",
 )  # fmt: skip
 
 

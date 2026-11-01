@@ -143,7 +143,10 @@ def month_rerun() -> dict[str, Any]:
     def write(name: str, df) -> None:  # type: ignore[no-untyped-def]
         df.write.mode("overwrite").option("overwriteSchema", "true").saveAsTable(_boot.fq(args, "gold", name))
 
-    counts = gold.features_step(spark, read, write, attacks=None)
+    def source(name: str):  # type: ignore[no-untyped-def]
+        return spark.read.table(_boot.fq(args, "cdc" if name.endswith("_history") else "silver", name))
+
+    counts = gold.features_step(spark, read, write, attacks=None, source=source)
     note("features", **counts)
     found = {k: digests.table_digest(spark.read.table(_boot.fq(args, layer, t)))
              for k, (layer, t) in it.EXPORTED.items()}  # fmt: skip

@@ -44,7 +44,7 @@ def main() -> int:
         timings["attacks"] = round(time.monotonic() - t, 1)
     if "features" not in args.skip:
         t = time.monotonic()
-        gold.features_step(spark, read, write, attacks=read("login_attacks"))
+        gold.features_step(spark, read, write, attacks=read("login_attacks"), source=read)
         timings["features"] = round(time.monotonic() - t, 1)
     if "train" not in args.skip:
         t = time.monotonic()

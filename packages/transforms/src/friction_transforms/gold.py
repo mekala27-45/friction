@@ -257,13 +257,15 @@ def features_step(
     read: Callable[[str], DataFrame],
     write: Callable[[str, DataFrame], None],
     attacks: DataFrame | None = None,
+    source: Callable[[str], DataFrame] | None = None,
 ) -> dict[str, int]:
     """Run the state machines over the materialized inputs and write the feature tables.
 
     The same function runs on the build machine (reading and writing Parquet) and in the workspace
     features task (reading and writing Delta), so both engines compute features with one code path.
     Synthetic attacks, when given, are scored against each victim's state and never change it.
-    Writes replace the tables whole, which is what makes a rerun leave them identical.
+    Writes replace the tables whole, which is what makes a rerun leave them identical. With source
+    (a reader for the silver and CDC tables), the graph features are written too (graph.py).
     """
     pay = payments_features(read("payment_feature_inputs"))
     write("payments_features", pay)
@@ -273,4 +275,12 @@ def features_step(
     write("logins_user_features", logins_user_features(inputs))
     write("logins_ip_features", logins_ip_features(inputs))
     write("logins_features", logins_features(read("logins_user_features"), read("logins_ip_features")))
-    return {name: read(name).count() for name in ("payments_features", "logins_features")}
+    names = ["payments_features", "logins_features"]
+    if source is not None:
+        from friction_transforms import graph
+
+        write("payments_graph_features", graph.payments_graph(source("payments_silver"),
+                                                                source("labels_payments_history")))  # fmt: skip
+        write("logins_graph_features", graph.logins_graph(inputs))
+        names += ["payments_graph_features", "logins_graph_features"]
+    return {name: read(name).count() for name in names}

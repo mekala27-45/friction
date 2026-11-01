@@ -23,6 +23,11 @@ def read(name: str):  # type: ignore[no-untyped-def]
     return spark.read.table(_boot.fq(args, "gold", name))
 
 
+def source(name: str):  # type: ignore[no-untyped-def]
+    layer = "cdc" if name.endswith("_history") else "silver"
+    return spark.read.table(_boot.fq(args, layer, name))
+
+
 def write(name: str, df) -> None:  # type: ignore[no-untyped-def]
     df.write.mode("overwrite").option("overwriteSchema", "true").saveAsTable(_boot.fq(args, "gold", name))
 
@@ -36,7 +41,7 @@ try:
     input_rows = read("payment_feature_inputs").count()
     if silver_rows != input_rows:
         raise RuntimeError(f"payment_feature_inputs holds {input_rows} rows and payments_silver {silver_rows}")
-    counts = gold.features_step(spark, read, write, attacks=attacks)
+    counts = gold.features_step(spark, read, write, attacks=attacks, source=source)
     rows_in = read("payment_feature_inputs").count() + read("login_feature_inputs").count()
     ledger.write(inputs=["payment_feature_inputs", "login_feature_inputs"], outputs=counts, rows_in=rows_in,
                  rows_out=sum(counts.values()), status="succeeded")  # fmt: skip

@@ -31,6 +31,8 @@ EXPORTED = {
     "labels_payments_history": ("cdc", "labels_payments_history"),
     "labels_logins_history": ("cdc", "labels_logins_history"), "mcc_fraud_rates": ("gold", "mcc_fraud_rates"),
     "payments_features": ("gold", "payments_features"), "logins_features": ("gold", "logins_features"),
+    "payments_graph_features": ("gold", "payments_graph_features"),
+    "logins_graph_features": ("gold", "logins_graph_features"),
 }  # fmt: skip
 
 
