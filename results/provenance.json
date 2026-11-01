@@ -472,6 +472,15 @@
    "commit": "dc8373b3d08cc08468bea9849803a06b51a14d61",
    "ran_at": "2026-10-29T03:02:35+00:00",
    "promoted_at": "2026-10-29T03:04:01+00:00"
+  },
+  {
+   "file": "results/workspace_probe_v2.json",
+   "sha256": "5fd9f7dd7a421d25fc823c79fa2ccadaf99489c14a774c694879fb43f3037727",
+   "request": "2026-10-31-26-probe-v2",
+   "github_run_id": "41254424518",
+   "commit": "ee0cf9f1cbd19cdf37926114323330f3003f98f3",
+   "ran_at": "2026-11-01T00:04:42+00:00",
+   "promoted_at": "2026-11-01T00:14:53+00:00"
   }
  ]
 }

@@ -366,3 +366,16 @@ is byte identical to the one before. One profile file from the first day had hel
 addresses before it was cleaned; every early commit now carries the cleaned version, so no commit in
 main holds them. The results branch and results/provenance.json still name commits from the
 history before; docs/history_map.json maps each of them to the commit that now holds its change.
+
+## 2026-11-01 What the second probe found Free Edition allows
+
+results/workspace_probe_v2.json: a model serving endpoint created from the registered payments
+LightGBM reached ready in 8.5 minutes and answered a query in 0.9 seconds, then was deleted; an
+AI/BI dashboard was created, published and trashed; a Genie space was created and trashed; a table
+with a primary key and a TIMESERIES column was created with change data feed, which is what a Unity
+Catalog feature table needs; the database instance and online table APIs answer. So the v0.2 work
+stays inside the workspace where it can: the payments champion behind a serving endpoint with its
+latency beside the Vercel API, the feature tables in Unity Catalog with point in time lookups, a
+published dashboard and a Genie space over the gold tables. The online store stays on Neon, which
+the API already reads, because a database instance is a paid feature outside the free tier and the
+probe only listed them.
