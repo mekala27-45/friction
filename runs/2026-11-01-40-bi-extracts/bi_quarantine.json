@@ -1,0 +1,34 @@
+{
+ "columns": [
+  "desk",
+  "rule",
+  "rows_refused"
+ ],
+ "rows": [
+  [
+   "logins",
+   "L_UA",
+   "1526"
+  ],
+  [
+   "payments",
+   "P_BUSINESS_KEY",
+   "308"
+  ],
+  [
+   "payments",
+   "P_FUTURE",
+   "487"
+  ],
+  [
+   "payments",
+   "P_KEY_CONFLICT",
+   "2929"
+  ],
+  [
+   "payments",
+   "P_REJECTED_FILE",
+   "2929"
+  ]
+ ]
+}

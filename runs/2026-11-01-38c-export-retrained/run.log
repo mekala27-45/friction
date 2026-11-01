@@ -1,0 +1,10 @@
+$ databricks fs cp -r --overwrite dbfs:/Volumes/workspace/friction_dev_raw/exports/models/default results-branch/runs/2026-11-01-38c-export-retrained/export
+dbfs:/Volumes/workspace/friction_dev_raw/exports/models/default/logins_floor.json -> results-branch/runs/2026-11-01-38c-export-retrained/export/logins_floor.json
+dbfs:/Volumes/workspace/friction_dev_raw/exports/models/default/payments_floor.json -> results-branch/runs/2026-11-01-38c-export-retrained/export/payments_floor.json
+dbfs:/Volumes/workspace/friction_dev_raw/exports/models/default/payments_logistic.json -> results-branch/runs/2026-11-01-38c-export-retrained/export/payments_logistic.json
+dbfs:/Volumes/workspace/friction_dev_raw/exports/models/default/summary.json -> results-branch/runs/2026-11-01-38c-export-retrained/export/summary.json
+dbfs:/Volumes/workspace/friction_dev_raw/exports/models/default/payments_lightgbm.txt -> results-branch/runs/2026-11-01-38c-export-retrained/export/payments_lightgbm.txt
+dbfs:/Volumes/workspace/friction_dev_raw/exports/models/default/logins_lightgbm.txt -> results-branch/runs/2026-11-01-38c-export-retrained/export/logins_lightgbm.txt
+dbfs:/Volumes/workspace/friction_dev_raw/exports/models/default/logins_lightgbm_rep.txt -> results-branch/runs/2026-11-01-38c-export-retrained/export/logins_lightgbm_rep.txt
+dbfs:/Volumes/workspace/friction_dev_raw/exports/models/default/logins_freeman.json -> results-branch/runs/2026-11-01-38c-export-retrained/export/logins_freeman.json
+[exit 0]

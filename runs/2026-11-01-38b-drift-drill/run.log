@@ -1,0 +1,46 @@
+$ databricks bundle run -t dev drift --var catalog_mode=prefix --params score_bound=0.0,tag=drift-drill
+{
+ "reference": [
+  "2019-07-01",
+  "2019-07-29"
+ ],
+ "current": [
+  "2020-02-01",
+  "2020-02-29"
+ ],
+ "rows": {
+  "reference": 132994,
+  "current": 165765
+ },
+ "score_psi": 0.015645759118350443,
+ "feature_psi": {
+  "amount_usd": 9.090897779392832e-05,
+  "mcc_fraud_rate": 2.138761560284084,
+  "cnt_24h": 0.0006923880816538869,
+  "sum_24h_usd": 0.00047445208789804994,
+  "log_secs_since_prev": 0.00010778035396308373,
+  "days_since_issue": 0.5316374626565737,
+  "hour": 0.00020803319426918206
+ },
+ "features_over": [
+  "days_since_issue",
+  "mcc_fraud_rate"
+ ],
+ "retrain": true,
+ "rule": {
+  "score_bound": 0.0,
+  "feature_bound": 0.25,
+  "features_over": 2,
+  "window_days": 28
+ },
+ "drill": true,
+ "checked_at": "2026-11-01T05:12:35+00:00"
+}
+Run URL: <secret>/jobs/194226151618492/runs/59352893088821?o=4481510155994981
+
+2026-11-01 05:11:46 "[dev mekalaajayk] friction-drift-dev" RUNNING
+2026-11-01 06:11:18 "[dev mekalaajayk] friction-drift-dev" TERMINATED SUCCESS
+[exit 0]
+$ databricks fs cp -r --overwrite dbfs:/Volumes/workspace/friction_dev_raw/exports/drift-drill results-branch/runs/2026-11-01-38b-drift-drill/export
+dbfs:/Volumes/workspace/friction_dev_raw/exports/drift-drill/drift.json -> results-branch/runs/2026-11-01-38b-drift-drill/export/drift.json
+[exit 0]

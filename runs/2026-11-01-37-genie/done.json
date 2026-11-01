@@ -1,0 +1,26 @@
+{
+ "request": {
+  "id": "2026-11-01-37-genie",
+  "kind": "genie",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "spec": "dashboards/genie.yaml",
+   "stop_on_failure": false
+  },
+  "note": "Request 30 again, now that the gold decisions exist. The Genie space over the decisions, replaced from the committed file, then graded: each question asked in a new conversation and Genie's first value compared with the reference SQL run on the warehouse. The record keeps the SQL Genie wrote for each question."
+ },
+ "github_run_id": "41271607995",
+ "commit": "4cdc03a5717e6df1643a6bf8502161c445973e11",
+ "started_at": "2026-11-01T04:11:18+00:00",
+ "result": {
+  "asked": 4,
+  "correct": 4,
+  "instructions": "accepted"
+ },
+ "status": "succeeded",
+ "finished_at": "2026-11-01T04:12:44+00:00",
+ "files": {
+  "genie.json": "d542f93c18fc83774ab7ac389021947e856f47befd7fdb2215527cfa97e369e0"
+ }
+}

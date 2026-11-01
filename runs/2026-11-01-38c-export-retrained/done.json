@@ -1,0 +1,32 @@
+{
+ "request": {
+  "id": "2026-11-01-38c-export-retrained",
+  "kind": "export",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "from": "/Volumes/workspace/friction_dev_raw/exports/models/default",
+   "stop_on_failure": false
+  },
+  "note": "The model files and the registration summary the drill's retrain wrote, to compare each new version's sha256 with the version before it."
+ },
+ "github_run_id": "41271607995",
+ "commit": "4cdc03a5717e6df1643a6bf8502161c445973e11",
+ "started_at": "2026-11-01T06:11:20+00:00",
+ "result": {
+  "exported": "/Volumes/workspace/friction_dev_raw/exports/models/default"
+ },
+ "status": "succeeded",
+ "finished_at": "2026-11-01T06:11:22+00:00",
+ "files": {
+  "export/logins_floor.json": "a8a2148ce537bc4b3f84a499d0af5ea71d7b3d96db32b0565d9a6e60707b856c",
+  "export/logins_freeman.json": "8fd11ff831381cac2d664691b3e83f43a667eba4101e7c3d12b950428029b281",
+  "export/logins_lightgbm.txt": "ab03b015c9c51361635df622c572def68b1c80fc9cdd9b122c9c75480eff6ece",
+  "export/logins_lightgbm_rep.txt": "a7f63792ebc8e1c589085f85c33e03f3f6f0947f2e38dfe89cbcaba4f376356c",
+  "export/payments_floor.json": "7a645f3b33dad13e71e843a4650b1172ef94c252a15f31be9b86bc3d31f1b074",
+  "export/payments_lightgbm.txt": "6570b08a40d88013dce1a0aa1b9024e7f300f90cc1c6a9b76cad73a7f8b23462",
+  "export/payments_logistic.json": "bf156afcb3144b412667ecc550c2696afce65b50be7f24b1dec046286b6d8a60",
+  "export/summary.json": "9bd362b160b1d7341be93b40c42574047107afc91615510a639a11245df20151",
+  "run.log": "d305da9cf78ee255814fd44240764a511e32814f6b006c0517e5f53b491d003a"
+ }
+}

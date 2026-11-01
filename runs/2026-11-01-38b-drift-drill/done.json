@@ -1,0 +1,30 @@
+{
+ "request": {
+  "id": "2026-11-01-38b-drift-drill",
+  "kind": "bundle_run",
+  "target": "dev",
+  "job": "drift",
+  "params": {
+   "job_params": {
+    "tag": "drift-drill",
+    "score_bound": "0.0"
+   },
+   "export_from": "/Volumes/workspace/friction_dev_raw/exports/drift-drill",
+   "stop_on_failure": false
+  },
+  "note": "A drill: the score bound set to zero so the rule asks to retrain, and the condition task runs the train job, which registers new versions under the challenger alias and changes no champion."
+ },
+ "github_run_id": "41271607995",
+ "commit": "4cdc03a5717e6df1643a6bf8502161c445973e11",
+ "started_at": "2026-11-01T05:11:45+00:00",
+ "result": {
+  "job": "drift",
+  "wall_seconds": 3575.3
+ },
+ "status": "succeeded",
+ "finished_at": "2026-11-01T06:11:20+00:00",
+ "files": {
+  "export/drift.json": "6e4fb27193711ffbf7566ab5c734ba043b6f74cd4d4f5831ac1cbd7b9d3df0ef",
+  "run.log": "14b363fceec658d62b3adca5755bd2e8ba94d97c9b64c8bed77c1c9dc9b08b95"
+ }
+}

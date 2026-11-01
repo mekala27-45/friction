@@ -1,0 +1,40 @@
+{
+ "live": {
+  "at": "2026-11-01T06:11:39Z",
+  "logins": {
+   "codes_equal": 286,
+   "compared": 286,
+   "decisions_equal": 286,
+   "events_sent": 1000,
+   "max_abs_score_difference": 0.0,
+   "mismatches": [],
+   "model": "floor",
+   "seconds": 68.7,
+   "shadow": null
+  },
+  "payments": {
+   "codes_equal": 1000,
+   "compared": 1000,
+   "decisions_equal": 1000,
+   "events_sent": 1000,
+   "max_abs_score_difference": 0.0,
+   "mismatches": [],
+   "model": "lightgbm",
+   "seconds": 74.2,
+   "shadow": {
+    "both_flagged": 0,
+    "champion_flagged": 2,
+    "decisions": 1000,
+    "desk": "payments",
+    "mean_abs_score_gap": 0.0008815828973625981,
+    "namespace": "parity-payments-7643891a",
+    "same_verdict": 988,
+    "shadow_flagged": 10,
+    "shadow_model": "logistic",
+    "shadowed": 1000
+   }
+  },
+  "target": "live",
+  "url": "https://friction-rose.vercel.app"
+ }
+}

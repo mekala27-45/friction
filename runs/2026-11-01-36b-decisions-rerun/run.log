@@ -1,0 +1,35 @@
+$ databricks bundle run -t dev decisions --var catalog_mode=prefix --params live_from=2019-07-01,reset=false,tag=decisions-rerun
+Downloading artifacts:   0%|          | 0/24 [00:00<?, ?it/s]
+
+{
+ "model_version": "1",
+ "model_sha256": "6570b08a40d88013dce1a0aa1b9024e7f300f90cc1c6a9b76cad73a7f8b23462",
+ "live_from": "2019-07-01",
+ "batches": 1,
+ "logged": 0,
+ "streamed": 0,
+ "caught_up": 0,
+ "pending_after": 0,
+ "decisions": 1205567,
+ "by_verdict": {
+  "approve": 1193285,
+  "decline": 1910,
+  "step_up": 10372
+ },
+ "first_day": "2019-07-01",
+ "last_day": "2020-02-28",
+ "parity": {
+  "events": 1000,
+  "decided": 1000,
+  "differ": 0,
+  "codes_differ": 0
+ }
+}
+Run URL: <secret>/jobs/599740120339900/runs/933042839347108?o=4481510155994981
+
+2026-11-01 04:09:56 "[dev mekalaajayk] friction-decisions-dev" RUNNING
+2026-11-01 04:11:16 "[dev mekalaajayk] friction-decisions-dev" TERMINATED SUCCESS
+[exit 0]
+$ databricks fs cp -r --overwrite dbfs:/Volumes/workspace/friction_dev_raw/exports/decisions-rerun results-branch/runs/2026-11-01-36b-decisions-rerun/export
+dbfs:/Volumes/workspace/friction_dev_raw/exports/decisions-rerun/decisions.json -> results-branch/runs/2026-11-01-36b-decisions-rerun/export/decisions.json
+[exit 0]

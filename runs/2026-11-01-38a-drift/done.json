@@ -1,0 +1,29 @@
+{
+ "request": {
+  "id": "2026-11-01-38a-drift",
+  "kind": "bundle_run",
+  "target": "dev",
+  "job": "drift",
+  "params": {
+   "job_params": {
+    "tag": "drift"
+   },
+   "export_from": "/Volumes/workspace/friction_dev_raw/exports/drift",
+   "stop_on_failure": false
+  },
+  "note": "The drift check under the registered rule: the first 28 days after go live against the latest 28 days of decisions."
+ },
+ "github_run_id": "41271607995",
+ "commit": "4cdc03a5717e6df1643a6bf8502161c445973e11",
+ "started_at": "2026-11-01T04:12:44+00:00",
+ "result": {
+  "job": "drift",
+  "wall_seconds": 3541.1
+ },
+ "status": "succeeded",
+ "finished_at": "2026-11-01T05:11:45+00:00",
+ "files": {
+  "export/drift.json": "f89f67be54525c0db0886676be78593a8915635fcdf83970f2b666015a1cc718",
+  "run.log": "aa92a92fa9710f010bf6b46be76d17fbed1603f38c3ae02744694ccc9ebdd5c5"
+ }
+}

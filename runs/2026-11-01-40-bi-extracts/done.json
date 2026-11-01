@@ -1,0 +1,32 @@
+{
+ "request": {
+  "id": "2026-11-01-40-bi-extracts",
+  "kind": "sql",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "file": "sql/bi_extracts.sql",
+   "stop_on_failure": false
+  },
+  "note": "The BI extracts from the decisions: day, channel and verdict grain with fraud counts and cents, the codes on flagged decisions, the code table and the refused rows."
+ },
+ "github_run_id": "41271607995",
+ "commit": "4cdc03a5717e6df1643a6bf8502161c445973e11",
+ "started_at": "2026-11-01T06:14:11+00:00",
+ "result": {
+  "saved": [
+   "bi_decisions_daily",
+   "bi_codes_daily",
+   "bi_reason_codes",
+   "bi_quarantine"
+  ]
+ },
+ "status": "succeeded",
+ "finished_at": "2026-11-01T06:14:31+00:00",
+ "files": {
+  "bi_codes_daily.json": "b39489cdf28082cb58d8351e7d776e26fa41120454269da413912ffac476acf5",
+  "bi_decisions_daily.json": "ee95ea26fdccaa1a5ff0f78715243469279f95538817038466f23cc4804c85e7",
+  "bi_quarantine.json": "cd67fa0b17d0c32903e3957e00e3b4fe93c43c352ec0c8bc56841a13e7a6937e",
+  "bi_reason_codes.json": "0ae20da65db2cc2e5b17e1a9f065dde3b8c4144d796ea163c429ece36c38bbb7"
+ }
+}

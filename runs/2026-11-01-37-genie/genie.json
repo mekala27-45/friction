@@ -1,0 +1,47 @@
+{
+ "asked": 4,
+ "correct": 4,
+ "instructions": "accepted",
+ "questions": [
+  {
+   "correct": true,
+   "question": "How many payments were declined in total?",
+   "reference": "1910",
+   "sql": "SELECT COUNT(*) AS declined_payments_total FROM `workspace`.`friction_dev_gold`.`payments_decisions` WHERE `verdict` ILIKE '%decline%' AND `verdict` IS NOT NULL;",
+   "status": "COMPLETED",
+   "value": "1910"
+  },
+  {
+   "correct": true,
+   "question": "How many step ups were there in August 2019?",
+   "reference": "1332",
+   "sql": "SELECT COUNT(*) AS step_up_count\nFROM `workspace`.`friction_dev_gold`.`payments_decisions`\nWHERE `verdict` ILIKE '%step_up%'\n  AND `event_date` >= DATE('2019-08-01')\n  AND `event_date` < DATE('2019-09-01')\n  AND `verdict` IS NOT NULL\n  AND `event_date` IS NOT NULL",
+   "status": "COMPLETED",
+   "value": "1332"
+  },
+  {
+   "correct": true,
+   "question": "How many source rows did the quarantine refuse on the payments feed?",
+   "reference": "6653",
+   "sql": "SELECT COUNT(*) AS refused_rows_payments_feed\nFROM `workspace`.`friction_dev_silver`.`quarantine`\nWHERE `desk` ILIKE '%payments%' AND `desk` IS NOT NULL;",
+   "status": "COMPLETED",
+   "value": "6653"
+  },
+  {
+   "correct": true,
+   "question": "How many dollars of confirmed fraud were stopped by a step up or a decline in September 2019?",
+   "reference": "10870.150000",
+   "sql": "SELECT try_divide(SUM(CASE WHEN payments_decisions.amount_cents < 0 THEN 0 ELSE payments_decisions.amount_cents END),100) AS dollars_stopped_fraud\nFROM workspace.friction_dev_gold.payments_decisions\nJOIN workspace.friction_dev_cdc.labels_payments_history\n  ON payments_decisions.txn_ref = labels_payments_history.event_ref\nWHERE labels_payments_history.is_fraud = true\n  AND labels_payments_history.__END_AT IS NULL\n  AND payments_decisions.verdict IN ('step_up', 'decline')\n  AND payments_decisions.event_ts >= '2019-09-01' AND payments_decisions.event_ts < '2019-10-01'\n  AND payments_decisions.amount_cents IS NOT NULL",
+   "status": "COMPLETED",
+   "value": "10870.15"
+  }
+ ],
+ "tables": [
+  "workspace.friction_dev_cdc.labels_payments_history",
+  "workspace.friction_dev_gold.mcc_fraud_rates",
+  "workspace.friction_dev_gold.payments_decisions",
+  "workspace.friction_dev_gold.reason_codes",
+  "workspace.friction_dev_silver.quarantine"
+ ],
+ "title": "friction payments desk"
+}
