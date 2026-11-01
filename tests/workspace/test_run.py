@@ -307,3 +307,19 @@ def test_api_check_runs_only_the_steps_it_names(monkeypatch: pytest.MonkeyPatch,
     assert _main(monkeypatch, req, out) == 0
     scripts = [c[c.index("python") + 1] for c, _ in shell.calls if "python" in c]
     assert scripts == ["scripts/check_parity.py"] and slept == []
+
+
+def test_portable_with_the_sequence_challenger_grades_it_under_its_own_addendum(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    shell = FakeShell()
+    monkeypatch.setattr(run, "_sh", shell)
+    req, out = tmp_path / "requests", tmp_path / "runs"
+    params = {"outbox_volume": "/Volumes/x/outbox", "drops": {"logins": "all"}, "models": True, "sequence": True}
+    _request(req, "2026-01-01-01-portable", "portable", params=params)
+    assert _main(monkeypatch, req, out) == 0
+    scripts = [c[1] for c, _ in shell.calls if "python" in c[0]]
+    assert scripts[-2:] == ["scripts/run_sequence.py", "scripts/grade_v2.py"]
+    v3 = next(c for c, _ in shell.calls if c[1:2] == ["scripts/grade_v2.py"])
+    assert v3[v3.index("--addendum") + 1] == "evaluation/plan_v3.yaml"
+    assert v3[v3.index("--out") + 1].endswith("evaluation_v3.json")

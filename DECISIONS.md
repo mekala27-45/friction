@@ -408,3 +408,18 @@ features computed differently online would measure the gap between two feature p
 two models. On the 1,000 parity events replayed in process the shadow agreed on 988 verdicts and
 flagged 10 events where the champion flagged 2, none of them the same; the live replay must give the
 same counts, since the state and the code are the same.
+
+## 2026-11-01 The sequence challenger is registered, and fits on the runner, not on a GPU
+
+evaluation/plan_v3.yaml, sha256 8600be48be973c78f4173c14006b85ec7baea48cb0e44cdb6f04bb39c3925320,
+locked in evaluation/plan.lock under addenda before the network was fitted or scored. One GRU layer
+of 32 units over a card's last 20 events and the event itself, each step fourteen numbers from ten
+point in time features, trained on the champion's rows and weights for four fixed passes. The plan
+had said a free Colab or Kaggle GPU; a network this small fits on the Actions runner's CPU in
+minutes, and fitting where every other model is fitted keeps the run committed, logged and
+repeatable, with no notebook session and no account in between. It fits in JAX, which installs from
+the package index the build machine reaches; PyTorch's CPU wheels sit on an index the build
+machine's proxy refuses, so it could not be locked. Scoring is a NumPy forward pass of the same
+arrays, tested equal to the JAX one, so the scoring path needs neither. Reason codes come from
+occlusion, each attribute set to its training mean on every step, because a recurrent network has no
+TreeSHAP and the coverage gate needs a code on every step up and decline.

@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 def _copy(tmp: Path) -> Path:
     (tmp / "evaluation").mkdir()
-    for name in ("plan.yaml", "hypotheses.yaml", "plan_v2.yaml", "plan.lock"):
+    for name in ("plan.yaml", "hypotheses.yaml", "plan_v2.yaml", "plan_v3.yaml", "plan.lock"):
         shutil.copy(ROOT / "evaluation" / name, tmp / "evaluation" / name)
     shutil.copy(ROOT / "DECISIONS.md", tmp / "DECISIONS.md")
     return tmp

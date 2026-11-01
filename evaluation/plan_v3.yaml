@@ -1,0 +1,33 @@
+# The second addendum: a sequence challenger on the payments desk. Registered before the model was
+# fitted or scored on any month. As with the first addendum, the test months were opened once for
+# the models of evaluation/plan.yaml, so this comparison is blind to every challenger score and not
+# to the base rates. Everything not named here is as evaluation/plan.yaml registers it.
+registered_at: "2026-11-01"
+amends: evaluation/plan.yaml
+model:
+  name: gru
+  source: packages/models/src/friction_models/sequence.py
+  input: >
+    the card's last 20 events strictly before this one, oldest first, and this event, each as the same
+    fourteen numbers derived from ten of its point in time features; a card with fewer than 20 earlier
+    events since 1 November 2015 is padded and masked
+  network: one GRU layer of 32 units over the 21 steps, then one logistic output
+  training: >
+    the champion's rows, sample and weights exactly, weighted binary cross entropy, Adam at 0.003,
+    batches of 2,048, four passes, seed 20261029, nothing chosen on validation or test
+  reason_codes: >
+    each step attribute set to its training mean across all 21 steps in turn, the drop in the logit
+    is that attribute's contribution, mapped to the v1 code of the feature it comes from
+desks:
+  payments:
+    challengers:
+      gru: the sequence model above
+    models: [floor, lightgbm, gru]
+    family: [floor, lightgbm, gru]
+    primary: test dollar capture of gru minus lightgbm at the registered budget
+multiple_comparisons: {method: benjamini-hochberg, q: 0.05, family: every pair of the desk's family}
+promotion:
+  rule: >
+    The challenger replaces the champion only if it clears every gate of evaluation/plan.yaml and its
+    difference in test capture against the champion has an interval clear of zero and above it.
+  serving: a promoted sequence model runs in shadow first, since the API keeps no event history today

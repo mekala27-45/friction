@@ -95,7 +95,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install
-        run: uv sync --frozen --extra workspace --extra spark --no-dev
+        run: uv sync --frozen --extra workspace --extra spark --extra sequence --no-dev
 
       - uses: databricks/setup-cli@main
 

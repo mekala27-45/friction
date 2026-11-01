@@ -242,12 +242,24 @@ def handle(request: Request, out: Path, log: Path) -> dict[str, Any]:
                 _sh([sys.executable, "scripts/run_challengers.py", "--lake", str(lake), "--out", str(work)], log,
                     env=spark_env)  # fmt: skip
                 _sh([sys.executable, "scripts/grade_v2.py", "--scored", str(work / "scored"), "--scored-v2",
-                     str(work / "scored_v2"), "--models", str(work / "models"), "--source", "local",
-                     "--out", str(out / "evaluation_v2.json")], log, env=spark_env)  # fmt: skip
+                     str(work / "scored_v2"), "--models", str(work / "models" / "v2" / "summary.json"), "--source",
+                     "local", "--out", str(out / "evaluation_v2.json")], log, env=spark_env)  # fmt: skip
                 (out / "models_v2").mkdir(exist_ok=True)
                 v2 = work / "models" / "v2"
                 for path in sorted(v2.iterdir()) if v2.exists() else []:  # grade_v2 refuses a missing model
                     (out / "models_v2" / path.name).write_bytes(path.read_bytes())
+            if request.params.get("sequence"):
+                # The sequence challenger of evaluation/plan_v3.yaml, graded against the same v1 sets.
+                _sh([sys.executable, "scripts/run_sequence.py", "--lake", str(lake), "--out", str(work)], log,
+                    env=spark_env)  # fmt: skip
+                _sh([sys.executable, "scripts/grade_v2.py", "--addendum", "evaluation/plan_v3.yaml", "--scored",
+                     str(work / "scored"), "--scored-v2", str(work / "scored_v3"), "--models",
+                     str(work / "models" / "v3" / "summary.json"), "--source", "local", "--out",
+                     str(out / "evaluation_v3.json")], log, env=spark_env)  # fmt: skip
+                (out / "models_v3").mkdir(exist_ok=True)
+                v3 = work / "models" / "v3"
+                for path in sorted(v3.iterdir()) if v3.exists() else []:
+                    (out / "models_v3" / path.name).write_bytes(path.read_bytes())
             for name in ("timings.json", "summary.json"):
                 if (work / name).exists():
                     (out / f"models_{name}").write_bytes((work / name).read_bytes())

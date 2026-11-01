@@ -21,6 +21,11 @@ def main() -> int:
         import pyspark  # noqa: F401
     except ImportError:
         missing.append("pyspark (the Spark tests)")
+    try:
+        import jax  # noqa: F401
+        import optax  # noqa: F401
+    except ImportError:
+        missing.append("jax and optax (the sequence challenger's fit test)")
     url = os.environ.get("FRICTION_TEST_DATABASE_URL")
     try:
         import psycopg

@@ -27,7 +27,7 @@ from friction_core.hashing import sha256_json
 PLAN = Path("evaluation/plan.yaml")
 HYPOTHESES = Path("evaluation/hypotheses.yaml")
 LOCK = Path("evaluation/plan.lock")
-ADDENDA = (Path("evaluation/plan_v2.yaml"),)
+ADDENDA = (Path("evaluation/plan_v2.yaml"), Path("evaluation/plan_v3.yaml"))
 
 
 def digest(root: Path, path: Path = PLAN) -> str:

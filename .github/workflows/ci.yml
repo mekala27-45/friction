@@ -44,7 +44,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install
-        run: uv sync --frozen --extra spark
+        run: uv sync --frozen --extra spark --extra sequence
       - name: Lint
         run: |
           uv run ruff check .

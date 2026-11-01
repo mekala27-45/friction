@@ -1,7 +1,8 @@
-"""Grade the challengers of evaluation/plan_v2.yaml against the models they challenge.
+"""Grade the challengers of an addendum (evaluation/plan_v2.yaml, plan_v3.yaml) against the models they challenge.
 
     python scripts/grade_v2.py --scored data/work/models/full/scored --scored-v2 data/work/models/full/scored_v2 \
-        --models data/work/models/full/models --source local --out results/evaluation_v2.json
+        --models data/work/models/full/models/v2/summary.json --source local --out results/evaluation_v2.json
+    python scripts/grade_v2.py --addendum evaluation/plan_v3.yaml --scored-v2 data/work/models/full/scored_v3 ...
 
 Joins each challenger scored set to the v1 set of the same split on the event key (every row must
 match, one to one), grades the desk family the addendum registers with the same code that graded
@@ -38,6 +39,8 @@ ADDENDUM = Path("evaluation/plan_v2.yaml")
 def desks_v2(plan: dict[str, Any], addendum: dict[str, Any]) -> dict[str, grade.Desk]:
     out = {}
     for name, desk in grade.desks(plan).items():
+        if name not in addendum["desks"]:  # an addendum may challenge one desk only
+            continue
         a = addendum["desks"][name]
         models, family = tuple(a["models"]), tuple(a["family"])
         out[name] = dataclasses.replace(
@@ -97,20 +100,22 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--scored", type=Path, required=True)
     parser.add_argument("--scored-v2", type=Path, required=True)
-    parser.add_argument("--models", type=Path, help="the models folder, for the challengers' gain shares")
+    parser.add_argument("--models", type=Path, help="the challengers' training summary (models/v2/summary.json)")
     parser.add_argument("--source", choices=["workspace", "local", "fixture"], required=True)
     parser.add_argument("--champions", type=Path, default=ROOT / "results" / "evaluation.json")
     parser.add_argument("--out", type=Path, default=ROOT / "results" / "evaluation_v2.json")
     parser.add_argument("--resamples", type=int, default=bootstrap.RESAMPLES)
+    parser.add_argument("--addendum", type=Path, default=ADDENDUM)
     args = parser.parse_args()
     started = time.monotonic()
-    registered = addendum_hash(ROOT, ADDENDUM)
+    registered = addendum_hash(ROOT, args.addendum)
     plan = yaml.safe_load((ROOT / "evaluation" / "plan.yaml").read_text(encoding="utf-8"))
-    addendum = yaml.safe_load((ROOT / ADDENDUM).read_text(encoding="utf-8"))
+    addendum = yaml.safe_load((ROOT / args.addendum).read_text(encoding="utf-8"))
     first = json.loads(args.champions.read_text(encoding="utf-8"))
     result: dict[str, Any] = {
         "source": args.source,
-        "plan_v2_sha256": registered,
+        "addendum": str(args.addendum),
+        "addendum_sha256": registered,
         "plan_sha256": first.get("plan_sha256"),
         "first_evaluation_digest": first.get("digest"),
         "gate_bounds": GATE_BOUNDS,
@@ -133,10 +138,12 @@ def main() -> int:
                                        ablations)  # fmt: skip
         if name == "logins":
             entry["attackers"] = grade.per_attacker(graded, desk)
-        if args.models and (args.models / "v2" / "summary.json").exists():
-            trained = json.loads((args.models / "v2" / "summary.json").read_text(encoding="utf-8"))[name]
-            entry["training"] = {"rows": trained["rows"], "positives": trained["positives"],
-                                 "gain_share": {m: e["gain_share"] for m, e in trained["models"].items()}}  # fmt: skip
+        if args.models and args.models.exists():
+            trained = json.loads(args.models.read_text(encoding="utf-8"))
+            trained = trained.get(name, trained)
+            entry["training"] = {"rows": trained["rows"], "positives": trained["positives"]}
+            if "models" in trained:
+                entry["training"]["gain_share"] = {m: e["gain_share"] for m, e in trained["models"].items()}
         result["desks"][name] = entry
     result["seconds"] = round(time.monotonic() - started, 1)
     payload = clean(result)

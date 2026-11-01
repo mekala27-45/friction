@@ -9,6 +9,10 @@
   {
    "sha256": "05221aecc25ae8f1334601436019bf738d9206516d2c3740f58dedb884ad9d04",
    "file": "evaluation/plan_v2.yaml"
+  },
+  {
+   "sha256": "8600be48be973c78f4173c14006b85ec7baea48cb0e44cdb6f04bb39c3925320",
+   "file": "evaluation/plan_v3.yaml"
   }
  ]
 }

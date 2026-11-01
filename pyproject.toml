@@ -30,6 +30,11 @@ spark = [
 workspace = [
   "databricks-sdk>=0.157",
 ]
+# Only the sequence challenger fits with JAX; its scoring is NumPy (friction_models.sequence).
+sequence = [
+  "jax>=0.12",
+  "optax>=0.2.8",
+]
 
 [dependency-groups]
 dev = [
