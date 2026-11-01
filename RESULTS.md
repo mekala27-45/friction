@@ -27,14 +27,14 @@ fails CI. Source of each block in its first line.
 | 14 | done | Persistence: independent connection, audit before response, shared transaction, out of process check | tests/api/test_api.py and tests/api/test_out_of_process.py against Postgres |
 | 15 | done | Monitoring with delayed label cohorts; the day 40 incident detected, handled by the runbook and written up | results/workspace/monitor_alerts.json (GitHub issue 1), results/incident.json, results/workspace/incident_drop.json, docs/incidents/2026-10-29-day-40.md |
 | 16 | done | Performance experiments and the compute ledger published | results/performance.json (Actions runner, full data), results/compute_ledger.json (wall seconds per request; with workspace usage from system.billing.usage) |
-| 17 | done | The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS | results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (45 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr |
+| 17 | done | The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS | results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (46 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr |
 | 18 | done | Coverage, mypy, ruff, gates, skills valid, forty to sixty commits, the rederive, v0.1.0 after the commits | results/rederive.json (replay, fixture pipeline, model rerun, month rerun: no drift); 56 commits; CI green on coverage, mypy, ruff and the gates; v0.1.0 tagged on commit 7e9a1c8 |
 
 The stretch steps, listed here and never counted toward the eighteen:
 
 | Step | Status | Line | Evidence |
 |---:|---|---|---|
-| 19 | not done | A sequence challenger over the last 20 events of each card, graded and promoted through the same gates | registered in evaluation/plan_v3.yaml; not graded yet |
+| 19 | done | A sequence challenger over the last 20 events of each card, graded and promoted through the same gates | results/evaluation_v3.json under evaluation/plan_v3.yaml: promoted on the grade; the addendum has it run in shadow before it decides live |
 | 20 | done | A workspace serving endpoint for the payments champion, with latency against the Vercel API | results/workspace/serving.json: parity on the parity events and latency from the runner |
 | 21 | done | An AI/BI dashboard and a Genie space over the gold tables, screenshots committed, definitions exported | dashboards/friction.lvdash.json, results/workspace/genie.json, docs/screenshots |
 | 22 | after the tag | friction as a fourth warehouse for readback, through its lock file and catalog alone | readback locks results/bi/csv at this tag (its data/warehouses.lock.json) |
@@ -270,6 +270,7 @@ with an interval of the difference clear of zero and above it.
 | logins | lightgbm_graph (graph features) | 53.4% (53.0 to 53.7) | no champion | capture_above_floor | not promoted |
 | payments | lightgbm_graph (graph features) | 80.4% (75.9 to 84.8) | -9.9 points (-14.4 to -5.1), adjusted p 0.002 | every gate cleared | not promoted |
 | payments | lightgbm_structure (graph features) | 91.4% (88.0 to 94.2) | outside the family | capture_above_floor, friction_within_budget | ablation, never promoted |
+| payments | gru (sequence) | 98.1% (96.7 to 99.1) | +7.9 points (+3.0 to +13.5), adjusted p 0.002 | every gate cleared | promoted |
 
 On payments the graph challenger cleared every gate and still captured less than the champion,
 80.4% of fraud dollars against
@@ -282,6 +283,16 @@ and that gate reads as failed; its declines were also over the limit of the budg
 graph features took the model from 25.9% to
 53.4%, still short of the rules floor at
 58.5%, so that desk stays on its floor.
+
+The sequence challenger reads each card's earlier events as well as this one. It cleared every gate
+and captured 98.1% of fraud dollars against the champion's
+90.2%, with the interval of the difference clear of
+zero, so the registered rule promotes it. Its first grade failed
+the calibration gate with no value at all, because the grader knew probabilities by model name only;
+the grader now reads the logistic output the addendum registered, the bound unchanged, and both grades
+are kept (DECISIONS.md). The addendum also registered that a promoted sequence model runs in shadow
+before it decides, because the API keeps no event history, so the live API still decides with
+LightGBM.
 
 ## The platform after v0.1.0
 

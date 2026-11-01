@@ -2,7 +2,7 @@
  "as_of": "2026-11-01",
  "values": {
   "build.commits": {
-   "value": 99,
+   "value": 102,
    "fmt": "int",
    "provenance": {
     "origin": "git",
@@ -3554,6 +3554,61 @@
     "note": null
    }
   },
+  "v2.payments.champion_after.sequence": {
+   "value": "gru",
+   "fmt": "text",
+   "provenance": {
+    "origin": "results/evaluation_v3.json",
+    "population": "payments champion after the addendum",
+    "source": "local",
+    "as_of": "2026-11-01",
+    "note": null
+   }
+  },
+  "v2.payments.gru.capture.estimate": {
+   "value": 0.9809534942628423,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "results/evaluation_v3.json",
+    "population": "payments test months",
+    "source": "local",
+    "as_of": "2026-11-01",
+    "note": null
+   }
+  },
+  "v2.payments.gru.capture.high": {
+   "value": 0.9912392654754683,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "results/evaluation_v3.json",
+    "population": "payments test months",
+    "source": "local",
+    "as_of": "2026-11-01",
+    "note": null
+   }
+  },
+  "v2.payments.gru.capture.low": {
+   "value": 0.9674820812904199,
+   "fmt": "pct1",
+   "provenance": {
+    "origin": "results/evaluation_v3.json",
+    "population": "payments test months",
+    "source": "local",
+    "as_of": "2026-11-01",
+    "note": null
+   }
+  },
+  "v2.payments.gru.verdict": {
+   "value": "promoted",
+   "fmt": "text",
+   "provenance": {
+    "origin": "results/evaluation_v3.json",
+    "population": "payments gru",
+    "source": "local",
+    "as_of": "2026-11-01",
+    "note": null
+   }
+  },
   "v2.payments.lightgbm_graph.capture.estimate": {
    "value": 0.8037520516684495,
    "fmt": "pct1",
@@ -3769,7 +3824,7 @@
      17,
      "done",
      "The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS",
-     "results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (45 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr"
+     "results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (46 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr"
     ],
     [
      18,
@@ -5051,9 +5106,9 @@
    "rows": [
     [
      19,
-     "not done",
+     "done",
      "A sequence challenger over the last 20 events of each card, graded and promoted through the same gates",
-     "registered in evaluation/plan_v3.yaml; not graded yet"
+     "results/evaluation_v3.json under evaluation/plan_v3.yaml: promoted on the grade; the addendum has it run in shadow before it decides live"
     ],
     [
      20,
@@ -5135,6 +5190,14 @@
      "outside the family",
      "capture_above_floor, friction_within_budget",
      "ablation, never promoted"
+    ],
+    [
+     "payments",
+     "gru (sequence)",
+     "98.1% (96.7 to 99.1)",
+     "+7.9 points (+3.0 to +13.5), adjusted p 0.002",
+     "every gate cleared",
+     "promoted"
     ]
    ],
    "provenance": {

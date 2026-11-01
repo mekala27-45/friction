@@ -501,3 +501,41 @@ every month. The rule stays as written for this release, because it was set befo
 and changing it after seeing which features crossed would be fitting the rule to the result. A later
 version should compare days_since_issue within bands of card age, or leave it out of the count, and
 should retrain on a window that moves with the check.
+
+## 2026-11-01 The sequence challenger is promoted on the grade, after two runner failures and a grader fix
+
+Request 35 ran the open source build and then the sequence step, and failed at the first collect: the
+champion's training sample with its 200 lag columns came to 1.06 GB of serialized results, over the
+1 GB the Spark driver hands back. The sample now comes from the same keyed draw, is written to local
+Parquet with only the columns the network reads, and is read back with pyarrow; the steps array is
+filled in place. On the fixture the network and both scored sets came back byte identical, and a test
+checks the rows and weights against the v1 collect.
+
+Request 35b then lost its runner about an hour and three quarters in, at the start of the v1 model
+step, before any new code ran, and left no log. The run holds a 10 GB Spark heap beside the Python
+side on a 16 GB runner, so the workflow now adds 8 GB of swap before the requests run. The next job
+ran 35b and 35c back to back, because 35b had no record on the results branch, and both passed. On
+one runner the GRU, its summary and its grade were byte identical. The v1 grade beside it matched
+the promoted one to the last two digits of a float, with no verdict or interval changed.
+
+The first grade (results/workspace/evaluation_v3_first_grade.json) did not promote the GRU: every
+gate passed but calibration, and that gate had no value. grade_v2 knew which scores are
+probabilities by model name, a rule written for the graph challengers, and the GRU was not on it.
+plan_v3 registered one logistic output fitted on weighted binary cross entropy, a probability in the
+same sense as LightGBM's. This was found after the first grade, so the change is kept narrow: the
+grader now treats the addendum's own model as a probability when its registered network ends in a
+logistic output, and the 0.05 bound is unchanged. Request 35d ran everything again on another runner.
+
+The regrade promotes the GRU. Its calibration error is 0.00013 against the champion's 0.00008, every
+other gate passes as before, and its test dollar capture is 98.1% against 90.2%, a difference of 7.9
+points with an interval of 3.0 to 13.5 and an adjusted p of 0.002. Friction stays inside the budget:
+0.9 declines and 9.6 step ups per 1,000 against the champion's 1.2 and 8.6. Trained on another
+runner, the weights differ from 35c in the third decimal, yet capture, friction and the verdicts at
+the operating point are the same to every digit. Training in JAX is repeatable on one machine, not
+across machines.
+
+Promotion on the grade is not promotion in serving. The addendum registered that a promoted
+sequence model runs in shadow first, because the API keeps no event history, and the Unity Catalog
+alias moves only after exact parity and latency, as for every champion. Until the API carries each
+card's last events in its online state, the live API decides with LightGBM and this result is a
+challenger the rule has accepted, not a model customers meet.

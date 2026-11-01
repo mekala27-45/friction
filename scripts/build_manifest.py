@@ -1018,11 +1018,13 @@ def stretch(b: Builder) -> None:
     exists = lambda rel: (ROOT / rel).exists()  # noqa: E731
     status: dict[int, tuple[str, str]] = {}
     v3 = _load("results/evaluation_v3.json")
-    status[19] = (
-        ("done", "results/evaluation_v3.json, graded under evaluation/plan_v3.yaml with the same gates")
-        if v3
-        else ("not done", "registered in evaluation/plan_v3.yaml; not graded yet")
-    )
+    status[19] = ("not done", "registered in evaluation/plan_v3.yaml; not graded yet")
+    if v3:
+        promo = v3["desks"]["payments"]["promotion"]
+        won = promo["champion_after"] != promo["champion_before"]
+        verdict = "promoted on the grade; the addendum has it run in shadow before it decides live" if won else (
+            "graded, not promoted")  # fmt: skip
+        status[19] = ("done", f"results/evaluation_v3.json under evaluation/plan_v3.yaml: {verdict}")
     srv = _load("results/workspace/serving.json")
     status[20] = (
         ("done", "results/workspace/serving.json: parity on the parity events and latency from the runner")

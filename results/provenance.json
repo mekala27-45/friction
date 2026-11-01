@@ -66,6 +66,15 @@
    "promoted_at": "2026-11-01T03:41:57+00:00"
   },
   {
+   "file": "results/evaluation_v3.json",
+   "sha256": "6422373e445c5e2daeb24176af42c3c7a096386451af2c487ae99d93af2a7259",
+   "request": "2026-11-01-35d-portable-sequence",
+   "github_run_id": "41335644482",
+   "commit": "b7584d9cb465358116746525f5174f240bb105c4",
+   "ran_at": "2026-11-01T21:06:16+00:00",
+   "promoted_at": "2026-11-01T21:38:44+00:00"
+  },
+  {
    "file": "results/latency.json",
    "sha256": "f85e1ea3a803ad6e77aaf2832e25af483484eae77170faf82eead48055a26f29",
    "request": "2026-10-31-22-api-check",
@@ -176,6 +185,24 @@
    "commit": "cd88a003b0e45d51e7be9234005f0c01dd9c5054",
    "ran_at": "2026-11-01T03:39:58+00:00",
    "promoted_at": "2026-11-01T03:41:57+00:00"
+  },
+  {
+   "file": "results/models/v3/payments_gru.json",
+   "sha256": "fef26f00788c3ef7725ff787a47d8dd9c94174f1f67bc32fbbe6057baf928d29",
+   "request": "2026-11-01-35d-portable-sequence",
+   "github_run_id": "41335644482",
+   "commit": "b7584d9cb465358116746525f5174f240bb105c4",
+   "ran_at": "2026-11-01T21:06:16+00:00",
+   "promoted_at": "2026-11-01T21:38:44+00:00"
+  },
+  {
+   "file": "results/models/v3/summary.json",
+   "sha256": "879bff7c77b6367ce0748b4fda1aba945e865b81e77722883447fa97dc6ddc4d",
+   "request": "2026-11-01-35d-portable-sequence",
+   "github_run_id": "41335644482",
+   "commit": "b7584d9cb465358116746525f5174f240bb105c4",
+   "ran_at": "2026-11-01T21:06:16+00:00",
+   "promoted_at": "2026-11-01T21:38:44+00:00"
   },
   {
    "file": "results/parity/logins.json",
@@ -293,6 +320,15 @@
    "commit": "cd88a003b0e45d51e7be9234005f0c01dd9c5054",
    "ran_at": "2026-11-01T03:39:58+00:00",
    "promoted_at": "2026-11-01T03:41:57+00:00"
+  },
+  {
+   "file": "results/workspace/evaluation_v3_first_grade.json",
+   "sha256": "ec37d85f13baad2848b65ca49012756254476d8fe6e2d64202697423b865f38d",
+   "request": "2026-11-01-35c-portable-sequence",
+   "github_run_id": "41305351364",
+   "commit": "5f08da785a557782aaf57c57d2d206d5e8b8bed5",
+   "ran_at": "2026-11-01T17:43:10+00:00",
+   "promoted_at": "2026-11-01T21:38:44+00:00"
   },
   {
    "file": "results/workspace/feature_tables_check.json",
@@ -518,6 +554,15 @@
    "commit": "c48f3cd4ff9885ab26c25b75a039b4d0d10aa070",
    "ran_at": "2026-10-29T21:16:28+00:00",
    "promoted_at": "2026-10-29T21:21:15+00:00"
+  },
+  {
+   "file": "results/workspace/models_timings_v3.json",
+   "sha256": "0adaa039609b49eb5700c4bf28c37ffdb5c5abe726b9ecdb6210681f3a59b947",
+   "request": "2026-11-01-35d-portable-sequence",
+   "github_run_id": "41335644482",
+   "commit": "b7584d9cb465358116746525f5174f240bb105c4",
+   "ran_at": "2026-11-01T21:06:16+00:00",
+   "promoted_at": "2026-11-01T21:38:44+00:00"
   },
   {
    "file": "results/workspace/monitor_after_alerts.json",
