@@ -996,6 +996,70 @@ def checklist(b: Builder, ev: dict[str, Any] | None) -> None:
     )
 
 
+STRETCH = [
+    (19, "A sequence challenger over the last 20 events of each card, graded and promoted through the same gates"),
+    (20, "A workspace serving endpoint for the payments champion, with latency against the Vercel API"),
+    (21, "An AI/BI dashboard and a Genie space over the gold tables, screenshots committed, definitions exported"),
+    (22, "friction as a fourth warehouse for readback, through its lock file and catalog alone"),
+    (23, "Power BI and Tableau extracts of the gold metric tables with their measures"),
+    (24, "Dockerfile hardening, release workflow hardening, docs"),
+]
+
+
+def stretch(b: Builder) -> None:
+    """Listed under the checklist, done or not done, and never counted toward it (SPEC section 20)."""
+    exists = lambda rel: (ROOT / rel).exists()  # noqa: E731
+    status: dict[int, tuple[str, str]] = {}
+    v3 = _load("results/evaluation_v3.json")
+    status[19] = (
+        ("done", "results/evaluation_v3.json, graded under evaluation/plan_v3.yaml with the same gates")
+        if v3
+        else ("not done", "registered in evaluation/plan_v3.yaml; not graded yet")
+    )
+    srv = _load("results/workspace/serving.json")
+    status[20] = (
+        ("done", "results/workspace/serving.json: parity on the parity events and latency from the runner")
+        if srv
+        else ("not done", "the endpoint has not been checked")
+    )
+    shots = all(exists(f"docs/screenshots/{n}.png") for n in ("dashboard", "genie"))
+    genie = _load("results/workspace/genie.json")
+    missing = "the screenshots are not committed" if genie else "the Genie space is not graded"
+    status[21] = (
+        ("done", "dashboards/friction.lvdash.json, results/workspace/genie.json, docs/screenshots")
+        if genie and shots and exists("dashboards/friction.lvdash.json")
+        else ("not done", f"the dashboard is in the bundle; {missing}")
+    )
+    bi = _load("results/bi/checks.json")
+    equal = bool(bi) and all(m["equal"] for m in bi["measures"].values())
+    # readback locks the files of a tag, so it can only take this build once the tag exists.
+    status[22] = (
+        ("after the tag", "readback locks results/bi/csv at this tag (its data/warehouses.lock.json)")
+        if equal
+        else ("not done", "the extracts readback would read are not checked yet")
+    )
+    status[23] = (
+        ("done", "results/bi: CSV extracts, a Power BI project, a Tableau source and checks.json, every measure equal")
+        if equal
+        else ("not done", "the extracts are not checked against the grade yet")
+    )
+    status[24] = (
+        ("done", "Dockerfile.vercel with hashed requirements, actions pinned to commits, release assets attested")
+        if exists("packages/api/requirements-serving.txt")
+        else ("not done", "the serving requirements are not hashed")
+    )
+    rows = [[n, status[n][0], text, status[n][1]] for n, text in STRETCH]
+    b.m.table(
+        "stretch",
+        ["Step", "Status", "Line", "Evidence"],
+        ["int", "text", "text", "text"],
+        rows,
+        origin="scripts/build_manifest.py",
+        population="the stretch steps, not counted",
+        source="build",
+    )
+
+
 def static(b: Builder) -> None:
     b.v("static.statement", STATEMENT, "text", "friction_core.statements", "every surface", "static")
     b.v("build.commits", int(_git("rev-list", "--count", "HEAD") or 0), "int", "git", "commits on main", "build")
@@ -1016,6 +1080,7 @@ def main() -> int:
     challengers(b)
     platform_v2(b)
     checklist(b, ev)
+    stretch(b)
     out = ROOT / "results" / "manifest.json"
     write(b.m.build(), out)
     print(f"manifest: {len(b.m.build().values)} values, {len(b.m.build().tables)} tables -> {out}")

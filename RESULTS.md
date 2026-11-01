@@ -27,11 +27,19 @@ fails CI. Source of each block in its first line.
 | 14 | done | Persistence: independent connection, audit before response, shared transaction, out of process check | tests/api/test_api.py and tests/api/test_out_of_process.py against Postgres |
 | 15 | done | Monitoring with delayed label cohorts; the day 40 incident detected, handled by the runbook and written up | results/workspace/monitor_alerts.json (GitHub issue 1), results/incident.json, results/workspace/incident_drop.json, docs/incidents/2026-10-29-day-40.md |
 | 16 | done | Performance experiments and the compute ledger published | results/performance.json (Actions runner, full data), results/compute_ledger.json (wall seconds per request; with workspace usage from system.billing.usage) |
-| 17 | done | The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS | results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (43 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr |
+| 17 | done | The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS | results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (44 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr |
 | 18 | done | Coverage, mypy, ruff, gates, skills valid, forty to sixty commits, the rederive, v0.1.0 after the commits | results/rederive.json (replay, fixture pipeline, model rerun, month rerun: no drift); 56 commits; CI green on coverage, mypy, ruff and the gates; v0.1.0 tagged on commit 7e9a1c8 |
 
-Stretch items (the sequence challenger, a workspace endpoint, the dashboard and Genie space, the
-readback warehouse, BI exports, hardening): not started, and not counted.
+The stretch steps, listed here and never counted toward the eighteen:
+
+| Step | Status | Line | Evidence |
+|---:|---|---|---|
+| 19 | not done | A sequence challenger over the last 20 events of each card, graded and promoted through the same gates | registered in evaluation/plan_v3.yaml; not graded yet |
+| 20 | done | A workspace serving endpoint for the payments champion, with latency against the Vercel API | results/workspace/serving.json: parity on the parity events and latency from the runner |
+| 21 | not done | An AI/BI dashboard and a Genie space over the gold tables, screenshots committed, definitions exported | the dashboard is in the bundle; the Genie space is not graded |
+| 22 | not done | friction as a fourth warehouse for readback, through its lock file and catalog alone | the extracts readback would read are not checked yet |
+| 23 | not done | Power BI and Tableau extracts of the gold metric tables with their measures | the extracts are not checked against the grade yet |
+| 24 | done | Dockerfile hardening, release workflow hardening, docs | Dockerfile.vercel with hashed requirements, actions pinned to commits, release assets attested |
 
 ## The sources
 

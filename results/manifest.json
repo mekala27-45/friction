@@ -2,7 +2,7 @@
  "as_of": "2026-11-01",
  "values": {
   "build.commits": {
-   "value": 87,
+   "value": 91,
    "fmt": "int",
    "provenance": {
     "origin": "git",
@@ -3769,7 +3769,7 @@
      17,
      "done",
      "The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS",
-     "results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (43 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr"
+     "results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (44 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr"
     ],
     [
      18,
@@ -5031,6 +5031,65 @@
     "origin": "scripts/check_parity.py, scripts/live_check.py, scripts/load_test.py (request kind api_check, on the Actions runner)",
     "population": "the API on Vercel and the site on Pages",
     "source": "live",
+    "as_of": "2026-11-01",
+    "note": null
+   }
+  },
+  "stretch": {
+   "columns": [
+    "Step",
+    "Status",
+    "Line",
+    "Evidence"
+   ],
+   "formats": [
+    "int",
+    "text",
+    "text",
+    "text"
+   ],
+   "rows": [
+    [
+     19,
+     "not done",
+     "A sequence challenger over the last 20 events of each card, graded and promoted through the same gates",
+     "registered in evaluation/plan_v3.yaml; not graded yet"
+    ],
+    [
+     20,
+     "done",
+     "A workspace serving endpoint for the payments champion, with latency against the Vercel API",
+     "results/workspace/serving.json: parity on the parity events and latency from the runner"
+    ],
+    [
+     21,
+     "not done",
+     "An AI/BI dashboard and a Genie space over the gold tables, screenshots committed, definitions exported",
+     "the dashboard is in the bundle; the Genie space is not graded"
+    ],
+    [
+     22,
+     "not done",
+     "friction as a fourth warehouse for readback, through its lock file and catalog alone",
+     "the extracts readback would read are not checked yet"
+    ],
+    [
+     23,
+     "not done",
+     "Power BI and Tableau extracts of the gold metric tables with their measures",
+     "the extracts are not checked against the grade yet"
+    ],
+    [
+     24,
+     "done",
+     "Dockerfile hardening, release workflow hardening, docs",
+     "Dockerfile.vercel with hashed requirements, actions pinned to commits, release assets attested"
+    ]
+   ],
+   "provenance": {
+    "origin": "scripts/build_manifest.py",
+    "population": "the stretch steps, not counted",
+    "source": "build",
     "as_of": "2026-11-01",
     "note": null
    }
