@@ -2,7 +2,7 @@
  "as_of": "2026-11-01",
  "values": {
   "build.commits": {
-   "value": 93,
+   "value": 99,
    "fmt": "int",
    "provenance": {
     "origin": "git",
@@ -5063,9 +5063,9 @@
     ],
     [
      21,
-     "not done",
+     "done",
      "An AI/BI dashboard and a Genie space over the gold tables, screenshots committed, definitions exported",
-     "the dashboard is in the bundle; the screenshots are not committed"
+     "dashboards/friction.lvdash.json, results/workspace/genie.json, docs/screenshots"
     ],
     [
      22,

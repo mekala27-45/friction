@@ -36,7 +36,7 @@ The stretch steps, listed here and never counted toward the eighteen:
 |---:|---|---|---|
 | 19 | not done | A sequence challenger over the last 20 events of each card, graded and promoted through the same gates | registered in evaluation/plan_v3.yaml; not graded yet |
 | 20 | done | A workspace serving endpoint for the payments champion, with latency against the Vercel API | results/workspace/serving.json: parity on the parity events and latency from the runner |
-| 21 | not done | An AI/BI dashboard and a Genie space over the gold tables, screenshots committed, definitions exported | the dashboard is in the bundle; the screenshots are not committed |
+| 21 | done | An AI/BI dashboard and a Genie space over the gold tables, screenshots committed, definitions exported | dashboards/friction.lvdash.json, results/workspace/genie.json, docs/screenshots |
 | 22 | after the tag | friction as a fourth warehouse for readback, through its lock file and catalog alone | readback locks results/bi/csv at this tag (its data/warehouses.lock.json) |
 | 23 | done | Power BI and Tableau extracts of the gold metric tables with their measures | results/bi: CSV extracts, a Power BI project, a Tableau source and checks.json, every measure equal |
 | 24 | done | Dockerfile hardening, release workflow hardening, docs | Dockerfile.vercel with hashed requirements, actions pinned to commits, release assets attested |

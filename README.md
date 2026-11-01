@@ -47,6 +47,13 @@ retrain only under a registered rule; a challenger in shadow behind the live API
 point in time lookups; an AI/BI dashboard, a graded Genie space, and Power BI and Tableau files whose
 measures reproduce the grade. RESULTS.md has every number.
 
+The dashboard over the decision log, and Genie answering one of its graded questions with the query
+it ran:
+
+![The AI/BI dashboard over the payments decisions](docs/screenshots/dashboard.png)
+
+![The Genie space answering a graded question](docs/screenshots/genie.png)
+
 ## How it is built
 
 - **Sources.** The IBM TabFormer card transactions and the RBA login data set, fetched against digests
