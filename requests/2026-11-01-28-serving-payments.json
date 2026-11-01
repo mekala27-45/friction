@@ -1,0 +1,18 @@
+{
+ "id": "2026-11-01-28-serving-payments",
+ "kind": "serving",
+ "target": "dev",
+ "params": {
+  "model": "workspace.friction_dev_ml.payments_lightgbm",
+  "alias": "champion",
+  "endpoint": "friction-payments",
+  "parity": "results/parity/payments.json",
+  "features_table": "workspace.friction_dev_gold.payments_features",
+  "batch": 100,
+  "queries": 200,
+  "wait_minutes": 40,
+  "keep": true,
+  "stop_on_failure": false
+ },
+ "note": "The payments champion behind a serving endpoint that scales to zero: every parity event scored from its gold feature vector and compared with the lakehouse score, then 200 single row queries timed from the runner that timed the Vercel API."
+}

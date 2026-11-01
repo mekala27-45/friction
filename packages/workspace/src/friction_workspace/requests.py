@@ -30,6 +30,7 @@ Kind = Literal[
     "pipeline_refresh",
     "api_check",
     "model_alias",
+    "serving",
 ]
 
 
