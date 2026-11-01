@@ -1,0 +1,24 @@
+{
+ "request": {
+  "id": "2026-11-01-34-deploy-dev",
+  "kind": "bundle_deploy",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "stop_on_failure": false
+  },
+  "note": "Deploy the feature tables job: the daily merchant and card tables with a TIMESERIES key, and the check of the feature store lookup against friction's own."
+ },
+ "github_run_id": "41268716947",
+ "commit": "88ef14b9ea3ecbeb1fc48b1d211baacf0d9e5c8f",
+ "started_at": "2026-11-01T03:54:20+00:00",
+ "result": {
+  "deployed": "dev"
+ },
+ "status": "succeeded",
+ "finished_at": "2026-11-01T03:54:26+00:00",
+ "files": {
+  "bundle_summary.json": "5b832d9d2c743a0490bcfe7a85596debda42e964fa985b8f1c1ce4f8b09ade47",
+  "run.log": "4df529bfb661be53b3309808bf0225111ff13c7e2897a4713a812f8580e338c1"
+ }
+}

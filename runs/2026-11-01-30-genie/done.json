@@ -1,0 +1,20 @@
+{
+ "request": {
+  "id": "2026-11-01-30-genie",
+  "kind": "genie",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "spec": "dashboards/genie.yaml",
+   "stop_on_failure": false
+  },
+  "note": "The Genie space over the decisions, replaced from the committed file, then graded: each question asked in a new conversation and Genie's first value compared with the reference SQL run on the warehouse. The record keeps the SQL Genie wrote for each question."
+ },
+ "github_run_id": "41268716947",
+ "commit": "88ef14b9ea3ecbeb1fc48b1d211baacf0d9e5c8f",
+ "started_at": "2026-11-01T03:47:24+00:00",
+ "status": "failed",
+ "error": "PermissionDenied: An error occurred accessing the schema. Failed to fetch tables for the agent. Please resolve these errors to continue: Table 'workspace.friction_dev_gold.payments_decisions' does not exist, Table 'workspace.friction_dev_gold.reason_codes' does not exist. Config: host=<secret>, account_id=81c6bf61-8154-438e-acec-c5060a35aaed, workspace_id=4481510155994981, discovery_url=<secret>/oidc/.well-known/oauth-authorization-server",
+ "finished_at": "2026-11-01T03:47:25+00:00",
+ "files": {}
+}

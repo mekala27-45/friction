@@ -1,0 +1,27 @@
+{
+ "request": {
+  "id": "2026-11-01-29b-decisions-rerun",
+  "kind": "bundle_run",
+  "target": "dev",
+  "job": "decisions",
+  "params": {
+   "job_params": {
+    "tag": "decisions-rerun",
+    "live_from": "2019-07-01",
+    "reset": "false"
+   },
+   "export_from": "/Volumes/workspace/friction_dev_raw/exports/decisions-rerun",
+   "stop_on_failure": false
+  },
+  "note": "The same job again with nothing new landed: the stream must read no row and the merge and the catch up must add none."
+ },
+ "github_run_id": "41268716947",
+ "commit": "88ef14b9ea3ecbeb1fc48b1d211baacf0d9e5c8f",
+ "started_at": "2026-11-01T03:46:50+00:00",
+ "status": "failed",
+ "error": "RuntimeError: databricks bundle exited 1",
+ "finished_at": "2026-11-01T03:47:24+00:00",
+ "files": {
+  "run.log": "c6faa95d9fab8b0cb0b83dee6a0a1ed9a2197fdbcb1f0f239950f0ed9e0eb079"
+ }
+}

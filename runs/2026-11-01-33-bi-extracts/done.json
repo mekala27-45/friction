@@ -1,0 +1,20 @@
+{
+ "request": {
+  "id": "2026-11-01-33-bi-extracts",
+  "kind": "sql",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "file": "sql/bi_extracts.sql",
+   "stop_on_failure": false
+  },
+  "note": "The BI extracts from the decisions: day, channel and verdict grain with fraud counts and cents, the codes on flagged decisions, the code table and the refused rows."
+ },
+ "github_run_id": "41268716947",
+ "commit": "88ef14b9ea3ecbeb1fc48b1d211baacf0d9e5c8f",
+ "started_at": "2026-11-01T03:54:18+00:00",
+ "status": "failed",
+ "error": "RuntimeError: statement failed: [TABLE_OR_VIEW_NOT_FOUND] The table or view `workspace`.`friction_dev_gold`.`payments_decisions` cannot be found. Verify the spelling and correctness of the schema and catalog.\nSearch path: [`system`.`session`, `system`.`builtin`, `system`.`ai`, `workspace`.`default`].\nIf you did not qualify the name with a schema, verify the current_schema() output, or qualify the name with the correct schema and catalog.\nTo tolerate the error on drop use DROP VIEW IF EXISTS or DROP TABLE IF E",
+ "finished_at": "2026-11-01T03:54:20+00:00",
+ "files": {}
+}

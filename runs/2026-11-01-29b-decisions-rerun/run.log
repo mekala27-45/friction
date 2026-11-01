@@ -1,0 +1,121 @@
+$ databricks bundle run -t dev decisions --var catalog_mode=prefix --params live_from=2019-07-01,reset=false,tag=decisions-rerun
+Run URL: <secret>/jobs/599740120339900/runs/607946861993655?o=4481510155994981
+
+2026-11-01 03:46:51 "[dev mekalaajayk] friction-decisions-dev" RUNNING
+2026-11-01 03:47:23 "[dev mekalaajayk] friction-decisions-dev" INTERNAL_ERROR FAILED Task decisions failed with message: Workload failed, see run output for details.
+Task decisions FAILED:
+ModuleNotFoundError: No module named 'structlog'
+[Trace ID: 00-a6c13ee4196aa75b537c8379db5b043c-e15a7aff94bb4763-01]
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+File [0;32m~/.ipykernel/74/command--1-2293096471:9[0m
+[1;32m      6[0m [38;5;28;01mdel[39;00m sys
+[1;32m      8[0m [38;5;28;01mwith[39;00m [38;5;28mopen[39m(filename, [38;5;124m"[39m[38;5;124mrb[39m[38;5;124m"[39m) [38;5;28;01mas[39;00m f:
+[0;32m----> 9[0m   [43mexec[49m[43m([49m[38;5;28;43mcompile[39;49m[43m([49m[43mf[49m[38;5;241;43m.[39;49m[43mread[49m[43m([49m[43m)[49m[43m,[49m[43m [49m[43mfilename[49m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43mexec[39;49m[38;5;124;43m'[39;49m[43m)[49m[43m)[49m
+
+File [0;32m/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files/jobs/decisions.py:38[0m
+[1;32m     35[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mfriction_models[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m stream  [38;5;66;03m# noqa: E402[39;00m
+[1;32m     36[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpyspark[39;00m[38;5;21;01m.[39;00m[38;5;21;01msql[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m functions [38;5;28;01mas[39;00m F  [38;5;66;03m# noqa: E402[39;00m
+[0;32m---> 38[0m [43mship[49m[43m([49m[43mfriction_core[49m[43m,[49m[43m [49m[43mfriction_features[49m[43m,[49m[43m [49m[43mfriction_models[49m[43m,[49m[43m [49m[43mfriction_policy[49m[43m,[49m[43m [49m[43mfriction_reasons[49m[43m)[49m
+[1;32m     40[0m root [38;5;241m=[39m Path(args[38;5;241m.[39mroot)
+[1;32m     41[0m target [38;5;241m=[39m _boot[38;5;241m.[39mfq(args, [38;5;124m"[39m[38;5;124mgold[39m[38;5;124m"[39m, [38;5;124m"[39m[38;5;124mpayments_decisions[39m[38;5;124m"[39m)
+
+File [0;32m/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files/packages/core/src/friction_core/shipping.py:25[0m, in [0;36mship[0;34m(*packages)[0m
+[1;32m     23[0m [38;5;28;01mfor[39;00m package [38;5;129;01min[39;00m packages:
+[1;32m     24[0m     [38;5;28;01mfor[39;00m info [38;5;129;01min[39;00m pkgutil[38;5;241m.[39mwalk_packages(package[38;5;241m.[39m__path__, package[38;5;241m.[39m[38;5;18m__name__[39m [38;5;241m+[39m [38;5;124m"[39m[38;5;124m.[39m[38;5;124m"[39m):
+[0;32m---> 25[0m         [43mimportlib[49m[38;5;241;43m.[39;49m[43mimport_module[49m[43m([49m[43minfo[49m[38;5;241;43m.[39;49m[43mname[49m[43m)[49m
+[1;32m     26[0m     cloudpickle[38;5;241m.[39mregister_pickle_by_value(package)  [38;5;66;03m# type: ignore[no-untyped-call][39;00m
+[1;32m     27[0m names [38;5;241m=[39m [38;5;28mtuple[39m(p[38;5;241m.[39m[38;5;18m__name__[39m [38;5;28;01mfor[39;00m p [38;5;129;01min[39;00m packages)
+
+File [0;32m/usr/lib/python3.12/importlib/__init__.py:90[0m, in [0;36mimport_module[0;34m(name, package)[0m
+[1;32m     88[0m             [38;5;28;01mbreak[39;00m
+[1;32m     89[0m         level [38;5;241m+[39m[38;5;241m=[39m [38;5;241m1[39m
+[0;32m---> 90[0m [38;5;28;01mreturn[39;00m [43m_bootstrap[49m[38;5;241;43m.[39;49m[43m_gcd_import[49m[43m([49m[43mname[49m[43m[[49m[43mlevel[49m[43m:[49m[43m][49m[43m,[49m[43m [49m[43mpackage[49m[43m,[49m[43m [49m[43mlevel[49m[43m)[49m
+
+File [0;32m<frozen importlib._bootstrap>:1387[0m, in [0;36m_gcd_import[0;34m(name, package, level)[0m
+
+File [0;32m<frozen importlib._bootstrap>:1360[0m, in [0;36m_find_and_load[0;34m(name, import_)[0m
+
+File [0;32m<frozen importlib._bootstrap>:1331[0m, in [0;36m_find_and_load_unlocked[0;34m(name, import_)[0m
+
+File [0;32m<frozen importlib._bootstrap>:935[0m, in [0;36m_load_unlocked[0;34m(spec)[0m
+
+File [0;32m<frozen importlib._bootstrap_external>:995[0m, in [0;36mexec_module[0;34m(self, module)[0m
+
+File [0;32m<frozen importlib._bootstrap>:488[0m, in [0;36m_call_with_frames_removed[0;34m(f, *args, **kwds)[0m
+
+File [0;32m/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files/packages/core/src/friction_core/log.py:12[0m
+[1;32m      9[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mcollections[39;00m[38;5;21;01m.[39;00m[38;5;21;01mabc[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m MutableMapping
+[1;32m     10[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mtyping[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m Any
+[0;32m---> 12[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mstructlog[39;00m
+[1;32m     14[0m FORBIDDEN_KEYS [38;5;241m=[39m [38;5;28mfrozenset[39m(
+[1;32m     15[0m     {
+[1;32m     16[0m         [38;5;124m"[39m[38;5;124mip[39m[38;5;124m"[39m,
+[0;32m   (...)[0m
+[1;32m     26[0m     }
+[1;32m     27[0m )
+[1;32m     30[0m [38;5;28;01mdef[39;00m[38;5;250m [39m[38;5;21m_refuse_restricted[39m(_: Any, __: [38;5;28mstr[39m, event: MutableMapping[[38;5;28mstr[39m, Any]) [38;5;241m-[39m[38;5;241m>[39m MutableMapping[[38;5;28mstr[39m, Any]:
+
+[0;31mModuleNotFoundError[0m: No module named 'structlog'
+
+Error: Task decisions failed!
+Error:
+ModuleNotFoundError: No module named 'structlog'
+[Trace ID: 00-a6c13ee4196aa75b537c8379db5b043c-e15a7aff94bb4763-01]
+Trace:
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+File [0;32m~/.ipykernel/74/command--1-2293096471:9[0m
+[1;32m      6[0m [38;5;28;01mdel[39;00m sys
+[1;32m      8[0m [38;5;28;01mwith[39;00m [38;5;28mopen[39m(filename, [38;5;124m"[39m[38;5;124mrb[39m[38;5;124m"[39m) [38;5;28;01mas[39;00m f:
+[0;32m----> 9[0m   [43mexec[49m[43m([49m[38;5;28;43mcompile[39;49m[43m([49m[43mf[49m[38;5;241;43m.[39;49m[43mread[49m[43m([49m[43m)[49m[43m,[49m[43m [49m[43mfilename[49m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43mexec[39;49m[38;5;124;43m'[39;49m[43m)[49m[43m)[49m
+
+File [0;32m/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files/jobs/decisions.py:38[0m
+[1;32m     35[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mfriction_models[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m stream  [38;5;66;03m# noqa: E402[39;00m
+[1;32m     36[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpyspark[39;00m[38;5;21;01m.[39;00m[38;5;21;01msql[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m functions [38;5;28;01mas[39;00m F  [38;5;66;03m# noqa: E402[39;00m
+[0;32m---> 38[0m [43mship[49m[43m([49m[43mfriction_core[49m[43m,[49m[43m [49m[43mfriction_features[49m[43m,[49m[43m [49m[43mfriction_models[49m[43m,[49m[43m [49m[43mfriction_policy[49m[43m,[49m[43m [49m[43mfriction_reasons[49m[43m)[49m
+[1;32m     40[0m root [38;5;241m=[39m Path(args[38;5;241m.[39mroot)
+[1;32m     41[0m target [38;5;241m=[39m _boot[38;5;241m.[39mfq(args, [38;5;124m"[39m[38;5;124mgold[39m[38;5;124m"[39m, [38;5;124m"[39m[38;5;124mpayments_decisions[39m[38;5;124m"[39m)
+
+File [0;32m/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files/packages/core/src/friction_core/shipping.py:25[0m, in [0;36mship[0;34m(*packages)[0m
+[1;32m     23[0m [38;5;28;01mfor[39;00m package [38;5;129;01min[39;00m packages:
+[1;32m     24[0m     [38;5;28;01mfor[39;00m info [38;5;129;01min[39;00m pkgutil[38;5;241m.[39mwalk_packages(package[38;5;241m.[39m__path__, package[38;5;241m.[39m[38;5;18m__name__[39m [38;5;241m+[39m [38;5;124m"[39m[38;5;124m.[39m[38;5;124m"[39m):
+[0;32m---> 25[0m         [43mimportlib[49m[38;5;241;43m.[39;49m[43mimport_module[49m[43m([49m[43minfo[49m[38;5;241;43m.[39;49m[43mname[49m[43m)[49m
+[1;32m     26[0m     cloudpickle[38;5;241m.[39mregister_pickle_by_value(package)  [38;5;66;03m# type: ignore[no-untyped-call][39;00m
+[1;32m     27[0m names [38;5;241m=[39m [38;5;28mtuple[39m(p[38;5;241m.[39m[38;5;18m__name__[39m [38;5;28;01mfor[39;00m p [38;5;129;01min[39;00m packages)
+
+File [0;32m/usr/lib/python3.12/importlib/__init__.py:90[0m, in [0;36mimport_module[0;34m(name, package)[0m
+[1;32m     88[0m             [38;5;28;01mbreak[39;00m
+[1;32m     89[0m         level [38;5;241m+[39m[38;5;241m=[39m [38;5;241m1[39m
+[0;32m---> 90[0m [38;5;28;01mreturn[39;00m [43m_bootstrap[49m[38;5;241;43m.[39;49m[43m_gcd_import[49m[43m([49m[43mname[49m[43m[[49m[43mlevel[49m[43m:[49m[43m][49m[43m,[49m[43m [49m[43mpackage[49m[43m,[49m[43m [49m[43mlevel[49m[43m)[49m
+
+File [0;32m<frozen importlib._bootstrap>:1387[0m, in [0;36m_gcd_import[0;34m(name, package, level)[0m
+
+File [0;32m<frozen importlib._bootstrap>:1360[0m, in [0;36m_find_and_load[0;34m(name, import_)[0m
+
+File [0;32m<frozen importlib._bootstrap>:1331[0m, in [0;36m_find_and_load_unlocked[0;34m(name, import_)[0m
+
+File [0;32m<frozen importlib._bootstrap>:935[0m, in [0;36m_load_unlocked[0;34m(spec)[0m
+
+File [0;32m<frozen importlib._bootstrap_external>:995[0m, in [0;36mexec_module[0;34m(self, module)[0m
+
+File [0;32m<frozen importlib._bootstrap>:488[0m, in [0;36m_call_with_frames_removed[0;34m(f, *args, **kwds)[0m
+
+File [0;32m/Workspace/Users/mekalaajayk@gmail.com/.bundle/friction/dev/files/packages/core/src/friction_core/log.py:12[0m
+[1;32m      9[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mcollections[39;00m[38;5;21;01m.[39;00m[38;5;21;01mabc[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m MutableMapping
+[1;32m     10[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mtyping[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m Any
+[0;32m---> 12[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mstructlog[39;00m
+[1;32m     14[0m FORBIDDEN_KEYS [38;5;241m=[39m [38;5;28mfrozenset[39m(
+[1;32m     15[0m     {
+[1;32m     16[0m         [38;5;124m"[39m[38;5;124mip[39m[38;5;124m"[39m,
+[0;32m   (...)[0m
+[1;32m     26[0m     }
+[1;32m     27[0m )
+[1;32m     30[0m [38;5;28;01mdef[39;00m[38;5;250m [39m[38;5;21m_refuse_restricted[39m(_: Any, __: [38;5;28mstr[39m, event: MutableMapping[[38;5;28mstr[39m, Any]) [38;5;241m-[39m[38;5;241m>[39m MutableMapping[[38;5;28mstr[39m, Any]:
+
+[0;31mModuleNotFoundError[0m: No module named 'structlog'
+Error: failed to reach TERMINATED or SKIPPED, got INTERNAL_ERROR: Task decisions failed with message: Workload failed, see run output for details.
+[exit 1]
+$ databricks fs cp -r --overwrite dbfs:/Volumes/workspace/friction_dev_raw/exports/decisions-rerun results-branch/runs/2026-11-01-29b-decisions-rerun/export
+Error: file does not exist: /Volumes/workspace/friction_dev_raw/exports/decisions-rerun
+[exit 1]

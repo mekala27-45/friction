@@ -1,0 +1,24 @@
+{
+ "request": {
+  "id": "2026-11-01-31-deploy-dev",
+  "kind": "bundle_deploy",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "stop_on_failure": false
+  },
+  "note": "Deploy the drift job: the indices on the decisions, the registered rule, and the condition task that runs the train job only when the rule asks."
+ },
+ "github_run_id": "41268716947",
+ "commit": "88ef14b9ea3ecbeb1fc48b1d211baacf0d9e5c8f",
+ "started_at": "2026-11-01T03:47:25+00:00",
+ "result": {
+  "deployed": "dev"
+ },
+ "status": "succeeded",
+ "finished_at": "2026-11-01T03:47:29+00:00",
+ "files": {
+  "bundle_summary.json": "5b832d9d2c743a0490bcfe7a85596debda42e964fa985b8f1c1ce4f8b09ade47",
+  "run.log": "cfd975ab6e6a7fafa98b27c5ed21730b617c3c857206a503d566aef3ad21bed2"
+ }
+}

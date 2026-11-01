@@ -1,0 +1,25 @@
+{
+ "request": {
+  "id": "2026-11-01-31a-drift",
+  "kind": "bundle_run",
+  "target": "dev",
+  "job": "drift",
+  "params": {
+   "job_params": {
+    "tag": "drift"
+   },
+   "export_from": "/Volumes/workspace/friction_dev_raw/exports/drift",
+   "stop_on_failure": false
+  },
+  "note": "The drift check under the registered rule: the first 28 days after go live against the latest 28 days of decisions."
+ },
+ "github_run_id": "41268716947",
+ "commit": "88ef14b9ea3ecbeb1fc48b1d211baacf0d9e5c8f",
+ "started_at": "2026-11-01T03:47:29+00:00",
+ "status": "failed",
+ "error": "RuntimeError: databricks bundle exited 1",
+ "finished_at": "2026-11-01T03:49:04+00:00",
+ "files": {
+  "run.log": "d7fb9858fb8331ccda96937e04de9a362b44f99b22b55cb57a4e489f4e0a2069"
+ }
+}

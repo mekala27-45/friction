@@ -1,0 +1,26 @@
+{
+ "request": {
+  "id": "2026-11-01-31b-drift-drill",
+  "kind": "bundle_run",
+  "target": "dev",
+  "job": "drift",
+  "params": {
+   "job_params": {
+    "tag": "drift-drill",
+    "score_bound": "0.0"
+   },
+   "export_from": "/Volumes/workspace/friction_dev_raw/exports/drift-drill",
+   "stop_on_failure": false
+  },
+  "note": "A drill: the score bound set to zero so the rule asks to retrain, and the condition task runs the train job, which registers new versions under the challenger alias and changes no champion."
+ },
+ "github_run_id": "41268716947",
+ "commit": "88ef14b9ea3ecbeb1fc48b1d211baacf0d9e5c8f",
+ "started_at": "2026-11-01T03:49:04+00:00",
+ "status": "failed",
+ "error": "RuntimeError: databricks bundle exited 1",
+ "finished_at": "2026-11-01T03:50:28+00:00",
+ "files": {
+  "run.log": "53e488cb681774d5481aacdf2891b2096705ac4f93ffcfc1deb2854fb3d457ab"
+ }
+}

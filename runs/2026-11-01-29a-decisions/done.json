@@ -1,0 +1,27 @@
+{
+ "request": {
+  "id": "2026-11-01-29a-decisions",
+  "kind": "bundle_run",
+  "target": "dev",
+  "job": "decisions",
+  "params": {
+   "job_params": {
+    "tag": "decisions-first",
+    "live_from": "2019-07-01",
+    "reset": "true"
+   },
+   "export_from": "/Volumes/workspace/friction_dev_raw/exports/decisions-first",
+   "stop_on_failure": false
+  },
+  "note": "The first streaming run from an empty checkpoint: every bronze row read once, every live event since 1 July 2019 decided, the parity events compared with the API's decisions."
+ },
+ "github_run_id": "41268716947",
+ "commit": "88ef14b9ea3ecbeb1fc48b1d211baacf0d9e5c8f",
+ "started_at": "2026-11-01T03:45:37+00:00",
+ "status": "failed",
+ "error": "RuntimeError: databricks bundle exited 1",
+ "finished_at": "2026-11-01T03:46:50+00:00",
+ "files": {
+  "run.log": "8976f2e50db27fc9148e364eeab217b3a1cefc7ddad1a1a470a9099b7a0adc69"
+ }
+}

@@ -1,0 +1,31 @@
+{
+ "request": {
+  "id": "2026-11-01-34a-feature-tables",
+  "kind": "bundle_run",
+  "target": "dev",
+  "job": "feature_tables",
+  "params": {
+   "job_params": {
+    "tag": "feature-tables",
+    "month": "2019-07"
+   },
+   "export_from": "/Volumes/workspace/friction_dev_raw/exports/feature-tables",
+   "stop_on_failure": false
+  },
+  "note": "Publish both feature tables, then build a training set for July 2019 with the feature engineering client and compare every value with friction's point in time lookup."
+ },
+ "github_run_id": "41268716947",
+ "commit": "88ef14b9ea3ecbeb1fc48b1d211baacf0d9e5c8f",
+ "started_at": "2026-11-01T03:54:26+00:00",
+ "result": {
+  "job": "feature_tables",
+  "wall_seconds": 125.5
+ },
+ "status": "succeeded",
+ "finished_at": "2026-11-01T03:56:31+00:00",
+ "files": {
+  "export/check.json": "54a5c1cae2454f4b5a518eb840736da44f060299475fb855f3106f2b812c179a",
+  "export/publish.json": "60d4b2f0021995f144697fe92ca80c31d3c442cc293f646c17387e42e78e3495",
+  "run.log": "fa154823da386e2d521614b3b9fa78a7bb7fd4e00b3573d792050508ae230918"
+ }
+}
