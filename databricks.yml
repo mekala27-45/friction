@@ -451,3 +451,45 @@ resources:
             dependencies:
               - pyyaml
               - pydantic>=2.10
+
+    # The feature tables (primary key and TIMESERIES, so Unity Catalog serves them as feature tables)
+    # and the check that the feature store client's point in time lookup equals friction's own.
+    feature_tables:
+      name: friction-feature-tables-${bundle.target}
+      max_concurrent_runs: 1
+      parameters:
+        - name: tag
+          default: feature-tables
+        - name: month
+          default: "2019-07"
+      tasks:
+        - task_key: publish
+          environment_key: default
+          spark_python_task:
+            python_file: ./jobs/feature_tables.py
+            parameters: ["--root", "${workspace.file_path}", "--catalog", "${var.catalog}", "--prefix", "${var.prefix}",
+                         "--job", "feature_tables", "--run-id", "{{job.run_id}}", "--step", "publish",
+                         "--tag", "{{job.parameters.tag}}"]
+        - task_key: check
+          depends_on:
+            - task_key: publish
+          environment_key: fe
+          spark_python_task:
+            python_file: ./jobs/feature_tables.py
+            parameters: ["--root", "${workspace.file_path}", "--catalog", "${var.catalog}", "--prefix", "${var.prefix}",
+                         "--job", "feature_tables", "--run-id", "{{job.run_id}}", "--step", "check",
+                         "--tag", "{{job.parameters.tag}}", "--month", "{{job.parameters.month}}"]
+      environments:
+        - environment_key: default
+          spec:
+            environment_version: "3"
+            dependencies:
+              - pyyaml
+              - pydantic>=2.10
+        - environment_key: fe
+          spec:
+            environment_version: "3"
+            dependencies:
+              - pyyaml
+              - pydantic>=2.10
+              - databricks-feature-engineering>=0.12
