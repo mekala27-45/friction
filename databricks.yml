@@ -20,6 +20,9 @@ variables:
   catalog_mode:
     description: catalog or prefix, read from the probe by the runner
     default: prefix
+  warehouse_id:
+    description: the serverless SQL warehouse the dashboard runs on (results/workspace_probe.json)
+    default: af12645754a2c33a
 
 targets:
   dev:
@@ -27,6 +30,13 @@ targets:
     default: true
     variables:
       prefix: friction_dev
+    resources:
+      # Only dev has decisions to show; the queries name the dev schemas (scripts/build_dashboard.py).
+      dashboards:
+        friction:
+          display_name: friction payments and platform
+          file_path: ./dashboards/friction.lvdash.json
+          warehouse_id: ${var.warehouse_id}
   # The integration job's own environment: it resets its tables between tests, so it has schemas
   # and a pipeline of its own (jobs/integration.py refuses any other prefix).
   it:
@@ -49,7 +59,12 @@ sync:
     - web/**
     - .venv/**
     - notebooks/**
-    - results/**
+    # The results stay off the workspace except the served bundles and their parity sets, which the
+    # decisions job checks its model file and its verdicts against.
+    - results/workspace/**
+    - results/demo/**
+    - results/profile/**
+    - results/*.json
 
 resources:
   pipelines:

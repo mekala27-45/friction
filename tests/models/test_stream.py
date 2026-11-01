@@ -41,6 +41,8 @@ def test_a_decision_is_the_policy_at_the_served_thresholds_with_the_served_codes
     assert out.loc[~flagged, "codes"].eq("").all()
     assert set(",".join(out.loc[flagged, "codes"]).split(",")) <= set(bundle["reason_map"].values())
     assert stream.decide_frame(frame.iloc[:0], text, bundle, "1", "sha").empty
+    rows = stream.reason_rows(ROOT)
+    assert len({(d, c) for d, c, *_ in rows}) == len(rows) == 12 + 12 + 3 + 2
 
 
 @pytest.mark.spark

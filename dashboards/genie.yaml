@@ -1,0 +1,39 @@
+# The Genie space over the payments decisions, and the questions it is graded on. Each question has
+# the SQL that answers it; the genie request asks Genie each one, runs the reference SQL itself, and
+# records whether the first value Genie returned equals the reference value. Genie is graded, never
+# trusted, and no decision anywhere reads it.
+title: friction payments desk
+description: Ask about the payments decisions, their reason codes, the labels and the refused rows. Synthetic data.
+tables:
+  - workspace.friction_dev_gold.payments_decisions
+  - workspace.friction_dev_gold.reason_codes
+  - workspace.friction_dev_cdc.labels_payments_history
+  - workspace.friction_dev_silver.quarantine
+  - workspace.friction_dev_gold.mcc_fraud_rates
+instructions: |
+  payments_decisions holds one row per card transaction since 1 July 2019, decided by the champion model.
+  verdict is approve, step_up (a one time code, online purchases only) or decline. score is the model's
+  probability of fraud. codes lists up to three reason codes, comma separated, for a step up or decline.
+  amount_cents is in cents; divide by 100 for dollars and treat a negative amount (a refund) as zero dollars.
+  reason_codes explains each code: says is the plain words, desk is payments or logins.
+  labels_payments_history keeps every version of each transaction's label. The current label of an event
+  is the row with __END_AT null; join it on event_ref = txn_ref. is_fraud true means a confirmed fraud.
+  A fraud is stopped when its decision is a step up or a decline. TabFormer has no fraud labels after
+  31 October 2019, so fraud totals stop there.
+  quarantine has one row per refused source row and rule; desk names the feed.
+  Every key is salted and every row is synthetic.
+questions:
+  - question: How many payments were declined in total?
+    sql: SELECT COUNT(*) FROM workspace.friction_dev_gold.payments_decisions WHERE verdict = 'decline'
+  - question: How many step ups were there in August 2019?
+    sql: >-
+      SELECT COUNT(*) FROM workspace.friction_dev_gold.payments_decisions
+      WHERE verdict = 'step_up' AND event_date >= DATE'2019-08-01' AND event_date < DATE'2019-09-01'
+  - question: How many source rows did the quarantine refuse on the payments feed?
+    sql: SELECT COUNT(*) FROM workspace.friction_dev_silver.quarantine WHERE desk = 'payments'
+  - question: How many dollars of confirmed fraud were stopped by a step up or a decline in September 2019?
+    sql: >-
+      SELECT SUM(GREATEST(d.amount_cents, 0)) / 100.0 FROM workspace.friction_dev_gold.payments_decisions d
+      JOIN workspace.friction_dev_cdc.labels_payments_history l ON l.event_ref = d.txn_ref AND l.__END_AT IS NULL
+      WHERE l.is_fraud AND d.verdict <> 'approve' AND d.event_date >= DATE'2019-09-01'
+      AND d.event_date < DATE'2019-10-01'

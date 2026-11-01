@@ -31,6 +31,7 @@ Kind = Literal[
     "api_check",
     "model_alias",
     "serving",
+    "genie",
 ]
 
 

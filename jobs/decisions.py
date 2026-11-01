@@ -89,6 +89,9 @@ try:
         import shutil
 
         shutil.rmtree(checkpoint, ignore_errors=True)
+    codes = spark.createDataFrame(stream.reason_rows(root), "desk string, code string, says string, "
+                                  "features string, source string")  # fmt: skip
+    codes.write.mode("overwrite").option("overwriteSchema", "true").saveAsTable(_boot.fq(args, "gold", "reason_codes"))
     silver = spark.read.table(_boot.fq(args, "silver", "payments_silver"))
     features = spark.read.table(_boot.fq(args, "gold", "payments_features"))
     # Bronze is append only; a commit that changed rows would be skipped, never read as new events.

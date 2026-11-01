@@ -1,0 +1,720 @@
+{
+ "datasets": [
+  {
+   "name": "totals",
+   "displayName": "Decision totals",
+   "queryLines": [
+    "SELECT COUNT(*) AS decisions,\n",
+    "       SUM(CASE WHEN d.verdict = 'decline' THEN 1 ELSE 0 END) AS declines,\n",
+    "       SUM(CASE WHEN d.verdict = 'step_up' THEN 1 ELSE 0 END) AS step_ups,\n",
+    "       SUM(CASE WHEN l.is_fraud THEN GREATEST(d.amount_cents, 0) ELSE 0 END) / 100.0 AS fraud_usd,\n",
+    "       SUM(CASE WHEN l.is_fraud AND d.verdict <> 'approve' THEN GREATEST(d.amount_cents, 0) ELSE 0 END) / 100.0\n",
+    "         AS captured_usd,\n",
+    "       1000.0 * SUM(CASE WHEN NOT COALESCE(l.is_fraud, false) AND d.verdict <> 'approve' THEN 1 ELSE 0 END)\n",
+    "         / SUM(CASE WHEN NOT COALESCE(l.is_fraud, false) THEN 1 ELSE 0 END) AS friction_per_1000_good\n",
+    "FROM workspace.friction_dev_gold.payments_decisions d LEFT JOIN (SELECT event_ref, is_fraud FROM workspace.friction_dev_cdc.labels_payments_history WHERE __END_AT IS NULL) l ON l.event_ref = d.txn_ref\n",
+    "WHERE d.event_date < DATE'2019-11-01'\n"
+   ]
+  },
+  {
+   "name": "daily",
+   "displayName": "Decisions by day",
+   "queryLines": [
+    "SELECT event_date AS day, verdict, COUNT(*) AS decisions\n",
+    "FROM workspace.friction_dev_gold.payments_decisions WHERE verdict <> 'approve' GROUP BY ALL\n"
+   ]
+  },
+  {
+   "name": "weekly_capture",
+   "displayName": "Fraud dollars stopped by week",
+   "queryLines": [
+    "SELECT DATE_TRUNC('WEEK', d.event_date) AS week,\n",
+    "       SUM(CASE WHEN l.is_fraud THEN GREATEST(d.amount_cents, 0) ELSE 0 END) / 100.0 AS fraud_usd,\n",
+    "       SUM(CASE WHEN l.is_fraud AND d.verdict <> 'approve' THEN GREATEST(d.amount_cents, 0) ELSE 0 END) / 100.0\n",
+    "         AS captured_usd\n",
+    "FROM workspace.friction_dev_gold.payments_decisions d LEFT JOIN (SELECT event_ref, is_fraud FROM workspace.friction_dev_cdc.labels_payments_history WHERE __END_AT IS NULL) l ON l.event_ref = d.txn_ref\n",
+    "WHERE d.event_date < DATE'2019-11-01' GROUP BY ALL\n"
+   ]
+  },
+  {
+   "name": "codes",
+   "displayName": "Reason codes on step ups and declines",
+   "queryLines": [
+    "SELECT c.code, r.says, COUNT(*) AS decisions\n",
+    "FROM workspace.friction_dev_gold.payments_decisions d LATERAL VIEW EXPLODE(SPLIT(d.codes, ',')) c AS code\n",
+    "JOIN workspace.friction_dev_gold.reason_codes r ON r.code = c.code AND r.desk = 'payments'\n",
+    "WHERE d.verdict <> 'approve' AND d.codes <> '' GROUP BY ALL\n"
+   ]
+  },
+  {
+   "name": "quarantine",
+   "displayName": "Rows refused by rule",
+   "queryLines": [
+    "SELECT desk, rule, COUNT(*) AS rows_refused FROM workspace.friction_dev_silver.quarantine GROUP BY ALL\n"
+   ]
+  },
+  {
+   "name": "ledger",
+   "displayName": "Compute by job",
+   "queryLines": [
+    "SELECT job, task, COUNT(*) AS runs, SUM(compute_seconds) / 60.0 AS compute_minutes,\n",
+    "       SUM(CASE WHEN status = 'failed' THEN 1 ELSE 0 END) AS failed_runs\n",
+    "FROM workspace.friction_dev_ops.run_ledger GROUP BY ALL\n"
+   ]
+  },
+  {
+   "name": "accounts",
+   "displayName": "Sign in attempts by account kind",
+   "queryLines": [
+    "SELECT CASE WHEN unknown_account THEN 'unknown account' ELSE 'known account' END AS account,\n",
+    "       SUM(attempts) AS attempts, SUM(successes) AS successes\n",
+    "FROM workspace.friction_dev_silver.login_account_stats GROUP BY ALL\n"
+   ]
+  }
+ ],
+ "pages": [
+  {
+   "name": "payments",
+   "displayName": "Payments",
+   "layout": [
+    {
+     "widget": {
+      "name": "intro",
+      "multilineTextboxSpec": {
+       "lines": [
+        "## Payments desk, decided as each drop lands\n",
+        "Every event since 1 July 2019, scored by the version the champion alias names. Fraud dollars use labels as eventually reported; TabFormer marks no fraud after October 2019, so those totals stop there. Synthetic data.\n"
+       ]
+      }
+     },
+     "position": {
+      "x": 0,
+      "y": 0,
+      "width": 6,
+      "height": 2
+     }
+    },
+    {
+     "widget": {
+      "name": "c_decisions",
+      "queries": [
+       {
+        "name": "main_query",
+        "query": {
+         "datasetName": "totals",
+         "fields": [
+          {
+           "name": "sum(decisions)",
+           "expression": "SUM(`decisions`)"
+          }
+         ],
+         "disaggregated": false
+        }
+       }
+      ],
+      "spec": {
+       "version": 2,
+       "widgetType": "counter",
+       "encodings": {
+        "value": {
+         "fieldName": "sum(decisions)",
+         "displayName": "Decisions to 31 Oct 2019"
+        }
+       },
+       "frame": {
+        "showTitle": true,
+        "title": "Decisions to 31 Oct 2019"
+       }
+      }
+     },
+     "position": {
+      "x": 0,
+      "y": 2,
+      "width": 1,
+      "height": 3
+     }
+    },
+    {
+     "widget": {
+      "name": "c_declines",
+      "queries": [
+       {
+        "name": "main_query",
+        "query": {
+         "datasetName": "totals",
+         "fields": [
+          {
+           "name": "sum(declines)",
+           "expression": "SUM(`declines`)"
+          }
+         ],
+         "disaggregated": false
+        }
+       }
+      ],
+      "spec": {
+       "version": 2,
+       "widgetType": "counter",
+       "encodings": {
+        "value": {
+         "fieldName": "sum(declines)",
+         "displayName": "Declines"
+        }
+       },
+       "frame": {
+        "showTitle": true,
+        "title": "Declines"
+       }
+      }
+     },
+     "position": {
+      "x": 1,
+      "y": 2,
+      "width": 1,
+      "height": 3
+     }
+    },
+    {
+     "widget": {
+      "name": "c_steps",
+      "queries": [
+       {
+        "name": "main_query",
+        "query": {
+         "datasetName": "totals",
+         "fields": [
+          {
+           "name": "sum(step_ups)",
+           "expression": "SUM(`step_ups`)"
+          }
+         ],
+         "disaggregated": false
+        }
+       }
+      ],
+      "spec": {
+       "version": 2,
+       "widgetType": "counter",
+       "encodings": {
+        "value": {
+         "fieldName": "sum(step_ups)",
+         "displayName": "Step ups"
+        }
+       },
+       "frame": {
+        "showTitle": true,
+        "title": "Step ups"
+       }
+      }
+     },
+     "position": {
+      "x": 2,
+      "y": 2,
+      "width": 1,
+      "height": 3
+     }
+    },
+    {
+     "widget": {
+      "name": "c_fraud",
+      "queries": [
+       {
+        "name": "main_query",
+        "query": {
+         "datasetName": "totals",
+         "fields": [
+          {
+           "name": "sum(fraud_usd)",
+           "expression": "SUM(`fraud_usd`)"
+          }
+         ],
+         "disaggregated": false
+        }
+       }
+      ],
+      "spec": {
+       "version": 2,
+       "widgetType": "counter",
+       "encodings": {
+        "value": {
+         "fieldName": "sum(fraud_usd)",
+         "displayName": "Fraud dollars"
+        }
+       },
+       "frame": {
+        "showTitle": true,
+        "title": "Fraud dollars"
+       }
+      }
+     },
+     "position": {
+      "x": 3,
+      "y": 2,
+      "width": 1,
+      "height": 3
+     }
+    },
+    {
+     "widget": {
+      "name": "c_captured",
+      "queries": [
+       {
+        "name": "main_query",
+        "query": {
+         "datasetName": "totals",
+         "fields": [
+          {
+           "name": "sum(captured_usd)",
+           "expression": "SUM(`captured_usd`)"
+          }
+         ],
+         "disaggregated": false
+        }
+       }
+      ],
+      "spec": {
+       "version": 2,
+       "widgetType": "counter",
+       "encodings": {
+        "value": {
+         "fieldName": "sum(captured_usd)",
+         "displayName": "Fraud dollars stopped"
+        }
+       },
+       "frame": {
+        "showTitle": true,
+        "title": "Fraud dollars stopped"
+       }
+      }
+     },
+     "position": {
+      "x": 4,
+      "y": 2,
+      "width": 1,
+      "height": 3
+     }
+    },
+    {
+     "widget": {
+      "name": "c_friction",
+      "queries": [
+       {
+        "name": "main_query",
+        "query": {
+         "datasetName": "totals",
+         "fields": [
+          {
+           "name": "sum(friction_per_1000_good)",
+           "expression": "SUM(`friction_per_1000_good`)"
+          }
+         ],
+         "disaggregated": false
+        }
+       }
+      ],
+      "spec": {
+       "version": 2,
+       "widgetType": "counter",
+       "encodings": {
+        "value": {
+         "fieldName": "sum(friction_per_1000_good)",
+         "displayName": "Good customers asked, per 1,000"
+        }
+       },
+       "frame": {
+        "showTitle": true,
+        "title": "Good customers asked, per 1,000"
+       }
+      }
+     },
+     "position": {
+      "x": 5,
+      "y": 2,
+      "width": 1,
+      "height": 3
+     }
+    },
+    {
+     "widget": {
+      "name": "daily",
+      "queries": [
+       {
+        "name": "main_query",
+        "query": {
+         "datasetName": "daily",
+         "fields": [
+          {
+           "name": "day",
+           "expression": "`day`"
+          },
+          {
+           "name": "sum(decisions)",
+           "expression": "SUM(`decisions`)"
+          },
+          {
+           "name": "verdict",
+           "expression": "`verdict`"
+          }
+         ],
+         "disaggregated": false
+        }
+       }
+      ],
+      "spec": {
+       "version": 3,
+       "widgetType": "line",
+       "encodings": {
+        "x": {
+         "fieldName": "day",
+         "scale": {
+          "type": "temporal"
+         },
+         "displayName": "Day"
+        },
+        "y": {
+         "fieldName": "sum(decisions)",
+         "scale": {
+          "type": "quantitative"
+         },
+         "displayName": "Decisions"
+        },
+        "color": {
+         "fieldName": "verdict",
+         "scale": {
+          "type": "categorical"
+         },
+         "displayName": "Verdict"
+        }
+       },
+       "frame": {
+        "showTitle": true,
+        "title": "Step ups and declines per day"
+       }
+      }
+     },
+     "position": {
+      "x": 0,
+      "y": 5,
+      "width": 6,
+      "height": 6
+     }
+    },
+    {
+     "widget": {
+      "name": "weekly",
+      "queries": [
+       {
+        "name": "main_query",
+        "query": {
+         "datasetName": "weekly_capture",
+         "fields": [
+          {
+           "name": "week",
+           "expression": "`week`"
+          },
+          {
+           "name": "sum(captured_usd)",
+           "expression": "SUM(`captured_usd`)"
+          }
+         ],
+         "disaggregated": false
+        }
+       }
+      ],
+      "spec": {
+       "version": 3,
+       "widgetType": "bar",
+       "encodings": {
+        "x": {
+         "fieldName": "week",
+         "scale": {
+          "type": "temporal"
+         },
+         "displayName": "Week"
+        },
+        "y": {
+         "fieldName": "sum(captured_usd)",
+         "scale": {
+          "type": "quantitative"
+         },
+         "displayName": "Dollars stopped"
+        }
+       },
+       "frame": {
+        "showTitle": true,
+        "title": "Fraud dollars stopped per week"
+       }
+      }
+     },
+     "position": {
+      "x": 0,
+      "y": 11,
+      "width": 3,
+      "height": 6
+     }
+    },
+    {
+     "widget": {
+      "name": "codes",
+      "queries": [
+       {
+        "name": "main_query",
+        "query": {
+         "datasetName": "codes",
+         "fields": [
+          {
+           "name": "says",
+           "expression": "`says`"
+          },
+          {
+           "name": "sum(decisions)",
+           "expression": "SUM(`decisions`)"
+          }
+         ],
+         "disaggregated": false
+        }
+       }
+      ],
+      "spec": {
+       "version": 3,
+       "widgetType": "bar",
+       "encodings": {
+        "x": {
+         "fieldName": "says",
+         "scale": {
+          "type": "categorical"
+         },
+         "displayName": "Reason"
+        },
+        "y": {
+         "fieldName": "sum(decisions)",
+         "scale": {
+          "type": "quantitative"
+         },
+         "displayName": "Decisions"
+        }
+       },
+       "frame": {
+        "showTitle": true,
+        "title": "Why: reason codes on step ups and declines"
+       }
+      }
+     },
+     "position": {
+      "x": 3,
+      "y": 11,
+      "width": 3,
+      "height": 6
+     }
+    }
+   ]
+  },
+  {
+   "name": "platform",
+   "displayName": "Platform",
+   "layout": [
+    {
+     "widget": {
+      "name": "p_intro",
+      "multilineTextboxSpec": {
+       "lines": [
+        "## The platform under the desks\n",
+        "Rows the contracts refused, compute per job from the run ledger, and who signs in to the login desk.\n"
+       ]
+      }
+     },
+     "position": {
+      "x": 0,
+      "y": 0,
+      "width": 6,
+      "height": 2
+     }
+    },
+    {
+     "widget": {
+      "name": "quarantine",
+      "queries": [
+       {
+        "name": "main_query",
+        "query": {
+         "datasetName": "quarantine",
+         "fields": [
+          {
+           "name": "rule",
+           "expression": "`rule`"
+          },
+          {
+           "name": "sum(rows_refused)",
+           "expression": "SUM(`rows_refused`)"
+          },
+          {
+           "name": "desk",
+           "expression": "`desk`"
+          }
+         ],
+         "disaggregated": false
+        }
+       }
+      ],
+      "spec": {
+       "version": 3,
+       "widgetType": "bar",
+       "encodings": {
+        "x": {
+         "fieldName": "rule",
+         "scale": {
+          "type": "categorical"
+         },
+         "displayName": "Rule"
+        },
+        "y": {
+         "fieldName": "sum(rows_refused)",
+         "scale": {
+          "type": "quantitative"
+         },
+         "displayName": "Rows"
+        },
+        "color": {
+         "fieldName": "desk",
+         "scale": {
+          "type": "categorical"
+         },
+         "displayName": "Desk"
+        }
+       },
+       "frame": {
+        "showTitle": true,
+        "title": "Rows refused, by rule"
+       }
+      }
+     },
+     "position": {
+      "x": 0,
+      "y": 2,
+      "width": 3,
+      "height": 6
+     }
+    },
+    {
+     "widget": {
+      "name": "ledger",
+      "queries": [
+       {
+        "name": "main_query",
+        "query": {
+         "datasetName": "ledger",
+         "fields": [
+          {
+           "name": "job",
+           "expression": "`job`"
+          },
+          {
+           "name": "sum(compute_minutes)",
+           "expression": "SUM(`compute_minutes`)"
+          },
+          {
+           "name": "task",
+           "expression": "`task`"
+          }
+         ],
+         "disaggregated": false
+        }
+       }
+      ],
+      "spec": {
+       "version": 3,
+       "widgetType": "bar",
+       "encodings": {
+        "x": {
+         "fieldName": "job",
+         "scale": {
+          "type": "categorical"
+         },
+         "displayName": "Job"
+        },
+        "y": {
+         "fieldName": "sum(compute_minutes)",
+         "scale": {
+          "type": "quantitative"
+         },
+         "displayName": "Minutes"
+        },
+        "color": {
+         "fieldName": "task",
+         "scale": {
+          "type": "categorical"
+         },
+         "displayName": "Task"
+        }
+       },
+       "frame": {
+        "showTitle": true,
+        "title": "Compute minutes, by job"
+       }
+      }
+     },
+     "position": {
+      "x": 3,
+      "y": 2,
+      "width": 3,
+      "height": 6
+     }
+    },
+    {
+     "widget": {
+      "name": "accounts",
+      "queries": [
+       {
+        "name": "main_query",
+        "query": {
+         "datasetName": "accounts",
+         "fields": [
+          {
+           "name": "account",
+           "expression": "`account`"
+          },
+          {
+           "name": "sum(attempts)",
+           "expression": "SUM(`attempts`)"
+          }
+         ],
+         "disaggregated": false
+        }
+       }
+      ],
+      "spec": {
+       "version": 3,
+       "widgetType": "bar",
+       "encodings": {
+        "x": {
+         "fieldName": "account",
+         "scale": {
+          "type": "categorical"
+         },
+         "displayName": "Account"
+        },
+        "y": {
+         "fieldName": "sum(attempts)",
+         "scale": {
+          "type": "quantitative"
+         },
+         "displayName": "Attempts"
+        }
+       },
+       "frame": {
+        "showTitle": true,
+        "title": "Sign in attempts, known and unknown accounts"
+       }
+      }
+     },
+     "position": {
+      "x": 0,
+      "y": 8,
+      "width": 3,
+      "height": 6
+     }
+    }
+   ]
+  }
+ ]
+}

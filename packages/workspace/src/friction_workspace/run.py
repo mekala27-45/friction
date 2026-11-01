@@ -338,6 +338,12 @@ def handle(request: Request, out: Path, log: Path) -> dict[str, Any]:
         if failed:
             raise RuntimeError(f"api check steps failed: {', '.join(failed)}")
         return {"api_checked": True, "idle_seconds": idle}
+    if request.kind == "genie":
+        from databricks.sdk import WorkspaceClient
+
+        from friction_workspace import genie
+
+        return genie.run(WorkspaceClient(), request.params, ROOT, out)
     if request.kind == "serving":
         from databricks.sdk import WorkspaceClient
 

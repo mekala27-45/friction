@@ -106,6 +106,19 @@ def score(rows: DataFrame, model_text: str, bundle: dict[str, Any], version: str
     return rows.mapInPandas(run, schema())
 
 
+def reason_rows(root: Path) -> list[tuple[str, str, str, str, str]]:
+    """desk, code, says, features, table: both code tables as rows, for the dashboard and Genie."""
+    import yaml
+
+    out = []
+    for table in ("reason_codes.yaml", "reason_codes_v2.yaml"):
+        data = yaml.safe_load((root / "evaluation" / table).read_text(encoding="utf-8"))
+        for desk in ("payments", "logins"):
+            for code, entry in data[desk].items():
+                out.append((desk, code, entry["says"], ",".join(entry["features"]), table))
+    return sorted(out)
+
+
 def summary(decisions: DataFrame) -> dict[str, Any]:
     """Counts by verdict and the date range: what the job and the dashboard print."""
     by = {r["verdict"]: int(r["n"]) for r in decisions.groupBy("verdict").agg(F.count(F.lit(1)).alias("n")).collect()}
