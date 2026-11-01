@@ -71,6 +71,16 @@ def test_the_files_carry_every_measure_and_the_checks_hold(tmp_path: Path) -> No
     assert not build_bi.checks(data["decisions_daily"], spec, off)["all_equal"]
     header = build_bi.to_csv(data["quarantine"], build_bi.TABLES["quarantine"]).splitlines()[0]
     assert header == "desk,rule,rows_refused"
+    assert {r["channel"] for r in data["decisions_daily"]} == {"swipe", "online"}
+
+
+def test_a_channel_code_with_no_name_is_refused(tmp_path: Path) -> None:
+    raw = _raw(tmp_path)
+    doc = json.loads((raw / "bi_decisions_daily.json").read_text())
+    doc["rows"][0][1] = "7"
+    (raw / "bi_decisions_daily.json").write_text(json.dumps(doc))
+    with pytest.raises(ValueError, match="has no name"):
+        build_bi.load(raw)
 
 
 def test_an_extract_with_other_columns_is_refused(tmp_path: Path) -> None:

@@ -34,7 +34,7 @@ TOLERANCE = 1e-9
 TABLES: dict[str, list[tuple[str, str]]] = {
     "decisions_daily": [
         ("day", "date"),
-        ("channel", "int"),
+        ("channel", "text"),
         ("verdict", "text"),
         ("decisions", "int"),
         ("amount_cents", "int"),
@@ -45,10 +45,12 @@ TABLES: dict[str, list[tuple[str, str]]] = {
     "reason_codes": [("desk", "text"), ("code", "text"), ("says", "text"), ("features", "text"), ("source", "text")],
     "quarantine": [("desk", "text"), ("rule", "text"), ("rows_refused", "int")],
 }
+# A code column the gold table keeps as a number, written as its name (friction_features.payments).
+NAMES = {("decisions_daily", "channel"): {"0": "swipe", "1": "chip", "2": "online"}}
 # What each column says, for the data dictionary readback and a BI team read.
 SAYS = {
     ("decisions_daily", "day"): "the day of the decided events, in UTC",
-    ("decisions_daily", "channel"): "0 swipe, 1 chip, 2 online; only online can be stepped up",
+    ("decisions_daily", "channel"): "swipe, chip or online; only online can be stepped up",
     ("decisions_daily", "verdict"): "approve, step_up or decline, at the thresholds the grade chose",
     ("decisions_daily", "decisions"): "payment decisions of the day, channel and verdict",
     ("decisions_daily", "amount_cents"): "the amount of those decisions in cents, a refund as zero",
@@ -83,6 +85,11 @@ def load(raw: Path) -> dict[str, list[dict[str, Any]]]:
         for r in doc["rows"]:
             row: dict[str, Any] = {}
             for (c, kind), v in zip(cols, r, strict=True):
+                names = NAMES.get((name, c))
+                if names is not None:
+                    if str(v) not in names:
+                        raise ValueError(f"bi_{name}: {c} {v!r} has no name")
+                    v = names[str(v)]
                 row[c] = int(v) if kind == "int" and v is not None else v
             rows.append(row)
         out[name] = rows
