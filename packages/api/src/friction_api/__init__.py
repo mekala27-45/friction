@@ -2,4 +2,4 @@
 
 # The image copies the sources without installing the package, so its metadata is absent there; this
 # is the version /health reports then. tests/api checks it equals the package's own.
-__version__ = "0.1.0"
+__version__ = "0.2.0"

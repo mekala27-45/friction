@@ -1,6 +1,6 @@
 [project]
 name = "friction-api"
-version = "0.1.0"
+version = "0.2.0"
 description = "The scoring API with the online store, the decision log and the client budget"
 requires-python = ">=3.12,<3.13"
 license = "Apache-2.0"

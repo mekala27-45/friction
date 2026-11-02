@@ -1,6 +1,6 @@
 [project]
 name = "friction"
-version = "0.1.0"
+version = "0.2.0"
 description = "A fraud and identity risk lakehouse on Databricks Free Edition, graded on what it costs good customers"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"

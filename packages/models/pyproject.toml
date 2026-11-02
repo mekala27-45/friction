@@ -1,6 +1,6 @@
 [project]
 name = "friction-models"
-version = "0.1.0"
+version = "0.2.0"
 description = "The rules floors, logistic regression, LightGBM and the Freeman et al. RBA model"
 requires-python = ">=3.12,<3.13"
 license = "Apache-2.0"

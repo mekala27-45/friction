@@ -1,6 +1,6 @@
 [project]
 name = "friction-features"
-version = "0.1.0"
+version = "0.2.0"
 description = "Point in time features as one state machine, used by the lakehouse and by the API"
 requires-python = ">=3.12,<3.13"
 license = "Apache-2.0"
