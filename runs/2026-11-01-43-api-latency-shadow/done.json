@@ -1,0 +1,28 @@
+{
+ "request": {
+  "id": "2026-11-01-43-api-latency-shadow",
+  "kind": "api_check",
+  "target": "dev",
+  "job": null,
+  "params": {
+   "steps": [
+    "load"
+   ],
+   "stop_on_failure": false
+  },
+  "note": "The load test again with the sequence model in shadow: every payment now also reads and writes the card's last events and runs the network, ten more passes for codes when it would flag. Before the shadow, payments p99 was 193 ms warm against the registered bound of 3,000 ms."
+ },
+ "github_run_id": "41364826601",
+ "commit": "2cffda64fbcb645430497784a65497ecc51acef7",
+ "started_at": "2026-11-02T00:02:24+00:00",
+ "result": {
+  "api_checked": true,
+  "idle_seconds": 420
+ },
+ "status": "succeeded",
+ "finished_at": "2026-11-02T00:10:33+00:00",
+ "files": {
+  "latency.json": "81a503532f3d3b8e92bd4dc8e30abb135965fd3233d8a1dd947fcc63ce779fac",
+  "run.log": "2efb6f1a10c631d403226cb3c5e4cd0f00b7f001f1b542c2738493fb19667654"
+ }
+}
