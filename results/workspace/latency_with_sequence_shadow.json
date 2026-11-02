@@ -1,0 +1,18 @@
+{
+ "at": "2026-11-02T00:09:47Z",
+ "cold_start_ms": 4867,
+ "cold_status": 200,
+ "logins": {
+  "mean_ms": 106,
+  "n": 200,
+  "p50_ms": 101,
+  "p99_ms": 197
+ },
+ "payments": {
+  "mean_ms": 124,
+  "n": 200,
+  "p50_ms": 119,
+  "p99_ms": 206
+ },
+ "url": "https://friction-rose.vercel.app"
+}

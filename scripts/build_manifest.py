@@ -697,6 +697,12 @@ def platform_v2(b: Builder) -> None:
                      f"{ss['both_flagged']} by both"])  # fmt: skip
         b.v("v2.sequence_shadow.equal", sp["decisions_equal"], "int", "results/parity_sequence.json",
             "replayed payments events", "live")  # fmt: skip
+    lat = _load("results/workspace/latency_with_sequence_shadow.json")
+    if lat:
+        pay = lat["payments"]
+        rows.append(["Latency with the sequence shadow loaded", f"payments p50 {pay['p50_ms']} ms and p99 "
+                     f"{pay['p99_ms']} ms warm over {pay['n']} requests from the runner; cold start "
+                     f"{lat['cold_start_ms']:,} ms"])  # fmt: skip
     pub, chk = (
         _load("results/workspace/feature_tables_publish.json"),
         _load("results/workspace/feature_tables_check.json"),

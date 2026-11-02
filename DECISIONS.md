@@ -539,3 +539,33 @@ sequence model runs in shadow first, because the API keeps no event history, and
 alias moves only after exact parity and latency, as for every champion. Until the API carries each
 card's last events in its online state, the live API decides with LightGBM and this result is a
 challenger the rule has accepted, not a model customers meet.
+
+## 2026-11-01 The sequence model runs in shadow, and the API keeps each card's last events
+
+plan_v3 registered that a promoted sequence model runs in shadow first, because the API kept no
+event history. It now keeps one: each card's last 20 step values, ten numbers per event, as a state
+kind of their own beside the card's, locked after it in the same transaction. The v1 card state and
+its snapshot are untouched, and the history commits or rolls back with the decision. The values are
+rounded to float32 when they are stored, because the lake's lag columns are Spark floats; JSON keeps
+such a value exactly, so the online history and the lag columns hold the same numbers. The GRU
+replaced the logistic shadow, whose live replay stays on record in results/parity_shadow.json.
+
+The replay set came from request 41, a build of the same lake request 20 built (the payments feature
+sums equal), with no model run. For each of the 775 cards in the first 1,000 test events, the
+history is the lag columns of its first event in the window; 771 of them have all 20. The expected
+score of each event is the promoted network over the lake's lag columns in a batch. Replayed in
+process and then against the live URL, both gave the same result: the champion 1,000 of 1,000, the
+shadow 1,000 of 1,000 on score and verdict with codes equal, and a worst score difference of 3.0e-08,
+which is one float32 row online against a batch. The shadow flagged 3 of the 1,000 and the champion
+2, none in common. The same replay without the seeded histories flagged 156: a card with no history
+looks new to the network. That matters for the public namespace, where every card starts empty, so
+its shadow verdicts are not a measure of the model.
+
+Payments latency with the shadow loaded was p50 119 ms and p99 206 ms warm, against 149 ms and
+193 ms without it, inside the noise of a run from the runner and far under the registered 3,000 ms.
+The network costs about a millisecond per event, four when it would flag and works out its codes.
+
+What is left before it could decide: its Unity Catalog version (it was trained on the runner, not
+registered), a shadow period long enough to compare flags with labels, and the history of every card
+loaded into the public namespace rather than built from what visitors send. None of that is in this
+release.

@@ -27,14 +27,14 @@ fails CI. Source of each block in its first line.
 | 14 | done | Persistence: independent connection, audit before response, shared transaction, out of process check | tests/api/test_api.py and tests/api/test_out_of_process.py against Postgres |
 | 15 | done | Monitoring with delayed label cohorts; the day 40 incident detected, handled by the runbook and written up | results/workspace/monitor_alerts.json (GitHub issue 1), results/incident.json, results/workspace/incident_drop.json, docs/incidents/2026-10-29-day-40.md |
 | 16 | done | Performance experiments and the compute ledger published | results/performance.json (Actions runner, full data), results/compute_ledger.json (wall seconds per request; with workspace usage from system.billing.usage) |
-| 17 | done | The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS | results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (46 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr |
+| 17 | done | The site on Pages; the live check; latency with cold start; RESULTS, README, DECISIONS, notebooks, AGENTS | results/live_check.json (every route, awake and asleep), results/latency.json; DECISIONS.md (47 dated entries, 3 reversals), notebooks 01 to 03, AGENTS.md, .claude/skills, docs/SPEC.md, docs/adr |
 | 18 | done | Coverage, mypy, ruff, gates, skills valid, forty to sixty commits, the rederive, v0.1.0 after the commits | results/rederive.json (replay, fixture pipeline, model rerun, month rerun: no drift); 56 commits; CI green on coverage, mypy, ruff and the gates; v0.1.0 tagged on commit 7e9a1c8 |
 
 The stretch steps, listed here and never counted toward the eighteen:
 
 | Step | Status | Line | Evidence |
 |---:|---|---|---|
-| 19 | done | A sequence challenger over the last 20 events of each card, graded and promoted through the same gates | results/evaluation_v3.json under evaluation/plan_v3.yaml: promoted on the grade; the addendum has it run in shadow before it decides live |
+| 19 | done | A sequence challenger over the last 20 events of each card, graded and promoted through the same gates | results/evaluation_v3.json under evaluation/plan_v3.yaml: promoted on the grade; now in shadow behind the live API with replay parity exact |
 | 20 | done | A workspace serving endpoint for the payments champion, with latency against the Vercel API | results/workspace/serving.json: parity on the parity events and latency from the runner |
 | 21 | done | An AI/BI dashboard and a Genie space over the gold tables, screenshots committed, definitions exported | dashboards/friction.lvdash.json, results/workspace/genie.json, docs/screenshots |
 | 22 | after the tag | friction as a fourth warehouse for readback, through its lock file and catalog alone | readback locks results/bi/csv at this tag (its data/warehouses.lock.json) |
@@ -293,6 +293,8 @@ the grader now reads the logistic output the addendum registered, the bound unch
 are kept (DECISIONS.md). The addendum also registered that a promoted sequence model runs in shadow
 before it decides, because the API kept no event history, so the live API still decides with
 LightGBM.
+The API now keeps each card's last events beside its state, and the sequence model runs in shadow
+behind the live URL; the platform table below has its replay against the lake.
 
 ## The platform after v0.1.0
 
@@ -311,6 +313,8 @@ graded on questions with known answers.
 | Drift drill, bound at zero | score PSI 0.016, features over their bound: days_since_issue, mcc_fraud_rate; retrain asked |
 | Retrain the rule asked for | the last retrain registered 6 models as version 3 under the challenger and floor aliases, none promoted; the payments LightGBM is byte identical to the champion that decided |
 | Shadow challenger on the live URL | logistic on 1,000 replayed decisions: 988 same verdicts, 10 flagged by the shadow, 2 by the champion, 0 by both |
+| Sequence model in shadow on the live URL | 1,000 of 1,000 replayed events scored and decided as the lake scores them after the seeded histories, worst score difference 3.0e-08, codes equal on 1,000; 3 flagged by the shadow, 2 by the champion, 0 by both |
+| Latency with the sequence shadow loaded | payments p50 119 ms and p99 206 ms warm over 200 requests from the runner; cold start 4,867 ms |
 | Feature tables with a TIMESERIES key | fs_card_daily 11,269,310 rows, fs_merchant_daily 7,747,399 rows |
 | Feature store lookup against friction's | 146,597 of 146,597 events of 2019-07 equal on every feature |
 | BI extracts against the grade | 3 of 3 measures over the test months equal the champion's graded point estimates |

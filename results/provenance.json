@@ -232,6 +232,15 @@
    "promoted_at": "2026-11-01T23:52:39+00:00"
   },
   {
+   "file": "results/parity_sequence.json",
+   "sha256": "3ce81ad62cc42520b34be1c4436440a01589b7d1f5248e2e738d116855401487",
+   "request": "2026-11-01-42-api-sequence-shadow",
+   "github_run_id": "41364286657",
+   "commit": "2feae4691eca48c37fa9a2f3e76b155e3b6d8ce8",
+   "ran_at": "2026-11-01T23:59:47+00:00",
+   "promoted_at": "2026-11-02T00:00:16+00:00"
+  },
+  {
    "file": "results/parity_shadow.json",
    "sha256": "f9b8ae6dfc5b7819bd1391cbce7131a8c6a6b6c69e6067f96554a23894a202b4",
    "request": "2026-11-01-39-api-shadow",
@@ -554,6 +563,15 @@
    "commit": "2b50b6ee36470fee2a385128c443f53bb5b74713",
    "ran_at": "2026-10-29T22:14:56+00:00",
    "promoted_at": "2026-10-29T22:34:01+00:00"
+  },
+  {
+   "file": "results/workspace/latency_with_sequence_shadow.json",
+   "sha256": "81a503532f3d3b8e92bd4dc8e30abb135965fd3233d8a1dd947fcc63ce779fac",
+   "request": "2026-11-01-43-api-latency-shadow",
+   "github_run_id": "41364826601",
+   "commit": "2cffda64fbcb645430497784a65497ecc51acef7",
+   "ran_at": "2026-11-02T00:10:33+00:00",
+   "promoted_at": "2026-11-02T00:11:29+00:00"
   },
   {
    "file": "results/workspace/models_timings_runner.json",
